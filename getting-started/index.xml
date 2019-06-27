@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Getting Started on ResInsight</title>
+    <link>https://oystholl.github.io/hugohomepage/getting-started/</link>
+    <description>Recent content in Getting Started on ResInsight</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://oystholl.github.io/hugohomepage/getting-started/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ResInsight 2019.04</title>
+      <link>https://oystholl.github.io/hugohomepage/getting-started/introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/getting-started/introduction/</guid>
+      <description>ResInsight is an open source, cross-platform 3D visualization, curve plotting and post processing tool for Eclipse reservoir models and simulations. It can also be configured to visualize geomechanical simulations from ABAQUS.
+The system also constitutes a framework for further development and can be extended to support new data sources and visualization methods, e.g. additional solvers, seismic data, CSEM, and more.
+Efficient User Interface The user interface is tailored for efficient interpretation of reservoir simulation data with specialized visualizations of properties, faults and wells.</description>
+    </item>
+    
+    <item>
+      <title>Grid Import</title>
+      <link>https://oystholl.github.io/hugohomepage/getting-started/gridimportexport/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/getting-started/gridimportexport/</guid>
+      <description>Importing Eclipse Cases ResInsight supports the following type of Eclipse input data:
+ *.GRID and *.EGRID files along with their *.INIT and restart files *.XNNN and *.UNRST. Grid and Property data from *.GRDECL files.  Release 2018.11 supports import of simulations from Intersect. To be able to import into ResInsight, the Intersect simulation must be exported into Eclipse file format.
+Eclipse Results ResInsight offers several ways to import Eclipse (grid) files.</description>
+    </item>
+    
+    <item>
+      <title>Model Navigation</title>
+      <link>https://oystholl.github.io/hugohomepage/getting-started/modelnavigation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/getting-started/modelnavigation/</guid>
+      <description>ResInsight comes with four navigation modes. The active mode can be selected in the Preferences dialog (Edit -&amp;gt; Preferences).
+Note that changing the navigation mode applies to the currently active view only, and views created after the change.
+These abbreviations are used in the tables below:
+   Abbreviation Meaning     LMB Press the left mouse button   MMB Press the middle mouse button or scroll wheel button   RMB Press the right mouse button    The following applies to all navigation modes:</description>
+    </item>
+    
+  </channel>
+</rss>

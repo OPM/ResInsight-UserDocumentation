@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Appendix on ResInsight</title>
+    <link>https://oystholl.github.io/hugohomepage/appendix/</link>
+    <description>Recent content in Appendix on ResInsight</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://oystholl.github.io/hugohomepage/appendix/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title> Derived Results</title>
+      <link>https://oystholl.github.io/hugohomepage/appendix/derivedresults/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/appendix/derivedresults/</guid>
+      <description>ResInsight computes several derived results. In this section we will explain what they are, and briefly how they are calculated.
+Derived Results for Eclipse Cases ResInsight calculates several derived cell properties that is made available as Static or Dynamic cell properties. The derived results listed at the bottom of the Static result properties, are shown below.
+Transmissibility Normalized by Area The transmissibility for cells and Non-Neighbor Connections (NNCs) are dependent on both cell properties and geometry.</description>
+    </item>
+    
+    <item>
+      <title>Octave Interface Reference</title>
+      <link>https://oystholl.github.io/hugohomepage/appendix/octaveinterfacereference/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/appendix/octaveinterfacereference/</guid>
+      <description>Introduction To identify a ResInsight case uniquely in the Octave script, an integer Id (CaseId) is used. This Id can be retrieved in several ways, but there are two main modes of operation regarding this for a particular octave script: Either the script is designed to work on a single case (the &amp;ldquo;Current Case&amp;rdquo;), or the script is designed to access the selection and traverse the cases by itself.</description>
+    </item>
+    
+    <item>
+      <title>Build Instructions</title>
+      <link>https://oystholl.github.io/hugohomepage/appendix/buildinstructions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/appendix/buildinstructions/</guid>
+      <description>Source code The source code is hosted at GitHub
+In a git enabled shell do: git clone https://github.com/OPM/ResInsight.git
+Dependencies and Prerequisites Windows Compiler Visual Studio 2015 or later is supported.
+GCC Compiler GCC version 4.9 or later is supported. On RedHat Linux 6 you need to install devtoolset-3, and enable it with
+source /opt/rh/devtoolset-3/enable  Qt4 Qt Qt4 version 4.6.2 or later is supported. On Windows we recommend Qt-4.8.7, while the default installation will do under Linux.</description>
+    </item>
+    
+    <item>
+      <title>Regression Test System</title>
+      <link>https://oystholl.github.io/hugohomepage/appendix/regressiontestsystem/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/appendix/regressiontestsystem/</guid>
+      <description>A regression tool for QA is build into ResInsight. This tool will do the following:
+ Scan a directory for sub directories containing a RegressionTest.rsp files. Each found project file will be opened, and all views in this project will be exported as snapshot images to file. When snapshot images from all projects are completed, difference images based on generated and QA-approved images are computed. Based on these three sets of images, an HTML report is created and automatically displayed.</description>
+    </item>
+    
+  </channel>
+</rss>

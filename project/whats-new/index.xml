@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>What&#39;s New on ResInsight</title>
+    <link>https://oystholl.github.io/hugohomepage/project/whats-new/</link>
+    <description>Recent content in What&#39;s New on ResInsight</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://oystholl.github.io/hugohomepage/project/whats-new/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What&#39;s New in 2019.04</title>
+      <link>https://oystholl.github.io/hugohomepage/project/whats-new/releasenotes_2019_04/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/project/whats-new/releasenotes_2019_04/</guid>
+      <description>ResInsight 2019.04 is the latest version of ResInsight, the professional quality, open source 3D visualization, curve plotting and post-processing tool for Eclipse reservoir models. Version 2019.04 contains a larger number of new and exciting features, some of which are listed below.
+Grid Cross Plots ResInsight supports the creation of cross plots of two results against each other, with each cell in the grid representing one data point in the plot.</description>
+    </item>
+    
+    <item>
+      <title>What&#39;s New in 2018.11</title>
+      <link>https://oystholl.github.io/hugohomepage/project/whats-new/releasenotes_2018_11/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/project/whats-new/releasenotes_2018_11/</guid>
+      <description>ResInsight 2018.11 is the latest version of ResInsight, the professional quality, open source 3D visualization, curve plotting and post-processing tool for Eclipse reservoir models. Version 2018.11 contains a larger number of new and exciting features, some of which are listed below.
+Local Grid Refinement (LGR) Local Grid Refinement (LGR) can be created based on Eclipse simulations. The refined grids can also be visualised in 3D.
+See Completions LGR
+Well Path Creation ResInsight lets the user create new/custom well paths by clicking in the 3D view.</description>
+    </item>
+    
+  </channel>
+</rss>

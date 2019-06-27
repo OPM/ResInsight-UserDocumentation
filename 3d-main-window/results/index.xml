@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Results on ResInsight</title>
+    <link>https://oystholl.github.io/hugohomepage/3d-main-window/results/</link>
+    <description>Recent content in Results on ResInsight</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://oystholl.github.io/hugohomepage/3d-main-window/results/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cell Results</title>
+      <link>https://oystholl.github.io/hugohomepage/3d-main-window/results/cellresults/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/3d-main-window/results/cellresults/</guid>
+      <description>The main results to post process in ResInsight are Cell Results. A Cell Result is one value, or a small set of values per cell over a region of the grid. A Cell Result is also referred to as a Property.
+Cell Results are used in several operations and settings:
+ Cell Colors Cell Edge Result (Eclipse Only) Separate Fault Result (Eclipse Only) Property Filters Well Log Extraction Curves Cell Result Time History Curves  In the property panel of all those, the same options are used to define the Cell Result of interest.</description>
+    </item>
+    
+    <item>
+      <title>Result Color Legend</title>
+      <link>https://oystholl.github.io/hugohomepage/3d-main-window/results/resultcolorlegend/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/3d-main-window/results/resultcolorlegend/</guid>
+      <description>The color mapping of the displayed cell result is controlled by the Color Legend located below a result node in the Project Tree. The legend can be shown or hidden by checking or unchecking the box in front of the Legend Definition.
+ Number of levels &amp;ndash; Defines the number of tick marks displayed next to the color legend Significant digits &amp;ndash; Defines the number of significant digits in the number formatting Number format &amp;ndash; Defines how the numbers are formatted Colors &amp;ndash; Defines the color palette Mapping &amp;ndash; This option defines how the values are mapped onto the color distribution  Discrete Linear &amp;ndash; Legend divided into linear levels defined by Number of levels Continuous Linear &amp;ndash; Continuous linear legend with tick mark count defined by Number of levels Continuous Logarithmic &amp;ndash; Continuous logarithmic legend with tick mark count defined by Number of levels Discrete Logarithmic &amp;ndash; Logarithmic legend divided into levels defined by Number of levels Category &amp;ndash; Special legend with one level for each category, either integer values or formation names.</description>
+    </item>
+    
+    <item>
+      <title>Result Inspection</title>
+      <link>https://oystholl.github.io/hugohomepage/3d-main-window/results/resultinspection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/3d-main-window/results/resultinspection/</guid>
+      <description>The results mapped on the 3D model can be inspected in detail by left clicking cells in the 3D view. The selected cells will be highlighted, text information displayed in the Result Info docking window, and the time-history values plotted in the Result Plot, if available.
+Visibility of the docking widows can be controlled from the Windows menu.
+Result Info Clicking cells will display slightly different information text based on the case type as described in the following tables.</description>
+    </item>
+    
+    <item>
+      <title>Annotations</title>
+      <link>https://oystholl.github.io/hugohomepage/3d-main-window/results/annotations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://oystholl.github.io/hugohomepage/3d-main-window/results/annotations/</guid>
+      <description>ResInsight supports displaying a few types of annotations in 3D views and Contour Map view. - Text annotations - Reach circle annotations - Polyline annotations - User defined polylines - Polylines imported from file
+Global scope vs local scope annotations Global annotations may be displayed in all views and are located in the Annotations project tree node right below Grid Models (Global annotations sub tree). Local annotations are associated with a specific view and are located in the Annotations project tree node below the view node (Local annotations sub tree).</description>
+    </item>
+    
+  </channel>
+</rss>
