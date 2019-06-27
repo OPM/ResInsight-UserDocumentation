@@ -17,5 +17,11 @@ https://github.com/gohugoio/hugo/releases
   - Either : Copy content of folder public into branch `gh-pages` and push changes to github manually
   - Or : Use a script for linux `publish_to_ghpages.sh`, will automatically publish content of public to gh-pages branch on GitHub
 
-## See documentation online
+## See beta documentation online
 https://opm.github.io/ResInsight-UserDocumentation/
+
+## Publish to resinsight.org
+- In `config.toml`, set `baseURL = "https://resinsight.org/"`
+- Generate site by executing command `hugo.exe`
+- Make sure there is a file named CNAME with content resinsight.org
+- Publish to https://github.com/OPM/ResInsight/tree/gh-pages
