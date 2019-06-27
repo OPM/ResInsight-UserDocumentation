@@ -1,0 +1,10 @@
+{
+  "name": "hugohomepage",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "string": "^3.3.3",
+    "toml": "^3.0.0"
+  }
+}
