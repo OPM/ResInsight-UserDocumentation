@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Scripting on ResInsight</title>
-    <link>https://oystholl.github.io/hugohomepage/scripting/</link>
+    <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/</link>
     <description>Recent content in Scripting on ResInsight</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://oystholl.github.io/hugohomepage/scripting/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://opm.github.io/ResInsight-UserDocumentation/scripting/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Octave Interface</title>
-      <link>https://oystholl.github.io/hugohomepage/scripting/octaveinterface/</link>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/octaveinterface/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://oystholl.github.io/hugohomepage/scripting/octaveinterface/</guid>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/octaveinterface/</guid>
       <description>ResInsight provides a flexible interface to Octave including:
  Octave functions that communicates with a running ResInsight session Features to simplify management and editing of Octave scripts from ResInsight Commands to execute scripts using Octave.
   The Octave functions are documented in Octave Interface Reference.
@@ -25,10 +25,10 @@ Note: The Octave interface does not support Flow diagnostics and Injection flood
     
     <item>
       <title>Command Line Interface</title>
-      <link>https://oystholl.github.io/hugohomepage/scripting/commandlineinterface/</link>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/commandlineinterface/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://oystholl.github.io/hugohomepage/scripting/commandlineinterface/</guid>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/commandlineinterface/</guid>
       <description>ResInsight supports several command line parameters that can be used to automate some tasks using shell scripts.
 Command line parameters are prefixed using a double dash. This convention is used on all platforms to make it possible to reuse scripts across different platforms. See GNU Standards for Command Line Interfaces.
 Examples on how command line options are used are given below
@@ -37,10 +37,10 @@ Examples on how command line options are used are given below
     
     <item>
       <title>Command File</title>
-      <link>https://oystholl.github.io/hugohomepage/scripting/commandfile/</link>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/commandfile/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://oystholl.github.io/hugohomepage/scripting/commandfile/</guid>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/commandfile/</guid>
       <description>The command file interface allows a sequence of specified commands to be run in order from the command line. The interface is used by supplying the command file as a command line parameter. Once the command file is finished executing, ResInsight will exit.
 Command List Case Control Commands  openProject closeProject setStartDir loadCase replaceCase replaceSourceCases  Export Commands  exportMultiCaseSnapshots exportSnapshots exportProperty exportPropertyInViews exportWellPathCompletions exportSimWellFractureCompletions exportMsw exportWellPaths exportVisibleCells setExportFolder  Other Commands  runOctaveScript setMainWindowSize computeCaseGroupStatistics setTimeStep scaleFractureTemplate setFractureContainment createMultipleFractures createLgrForCompletions createSaturationPressurePlots  Syntax The command file is comprised of a set of commands to be executed in order.</description>
     </item>
