@@ -7,17 +7,17 @@ theme = "learn"
 disableSearch = false
 disableHomeIcon = true
 ordersectionsby = "weight"
-disableShortcutsTitle = true
+disableShortcutsTitle = false
 
 
 [[menu.shortcuts]]
-	name = "Download"
+	name = "<i class='fas fa-download'></i> Download"
 	identifier = "download"
 	url = "/project/download"
 	weight = 20
 
 [[menu.shortcuts]]
-	name = "About"
+	name = "<i class='fas fa-info-circle'></i> About"
 	identifier = "about"
 	url = "/project/about"
 	weight = 10
