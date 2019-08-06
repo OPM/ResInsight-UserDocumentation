@@ -11,14 +11,19 @@ disableShortcutsTitle = false
 
 
 [[menu.shortcuts]]
-	name = "<i class='fas fa-download'></i> Download"
-	identifier = "download"
-	url = "/project/download"
-	weight = 20
-
-[[menu.shortcuts]]
 	name = "<i class='fas fa-info-circle'></i> About"
 	identifier = "about"
 	url = "/project/about"
 	weight = 10
 
+[[menu.shortcuts]]
+	name = "<i class='fas fa-download'></i> Download and Install"
+	identifier = "download"
+	url = "/project/download"
+	weight = 20
+
+[[menu.shortcuts]]
+	name = "<i class='far fa-question-circle'></i> Support"
+	identifier = "support"
+	url = "/project/support"
+	weight = 20
