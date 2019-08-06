@@ -1,5 +1,5 @@
 +++
-title = "ResInsight • 3D viewer and post processing of reservoir models"
+title = "ResInsight"
 published = true
 +++
 <title>ResInsight • 3D viewer and post processing of reservoir models</title>
