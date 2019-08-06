@@ -25,3 +25,6 @@ https://opm.github.io/ResInsight-UserDocumentation/
 - Generate site by executing command `hugo.exe`
 - Make sure there is a file named CNAME with content resinsight.org
 - Publish to https://github.com/OPM/ResInsight/tree/gh-pages
+
+## Tips and trics
+- If you want to publish a page, but avoid having an entry in the menu, add `hidden = true` to the header of the MD file. See about.md for an example.

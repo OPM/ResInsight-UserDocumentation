@@ -1,7 +1,7 @@
 +++
 title = "About"
 published = true
-weight = 10
+hidden = true
 +++
 
 ### Project organization
