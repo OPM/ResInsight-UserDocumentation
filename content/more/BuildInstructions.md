@@ -1,6 +1,7 @@
 +++
 title = "Build Instructions"
 published = true
+hidden = true
 weight = 30
 +++
 

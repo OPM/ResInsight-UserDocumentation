@@ -17,3 +17,11 @@ For older versions, release notes and source code, please visit [ResInsight on G
 [ Linux Installation ]({{< ref "/more/linux-installation" >}})
 
 [ Windows Installation ]({{< ref "/more/windows-installation" >}})
+
+[ Build Instructions ]({{< ref "/more/buildinstructions" >}})
+
+## Releases
+
+[ ResInsight 2019.04 ]({{< ref "/more/whats-new/releasenotes_2019_04" >}})
+
+[ ResInsight 2018.11 ]({{< ref "/more/whats-new/releasenotes_2018_11" >}})

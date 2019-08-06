@@ -83,7 +83,7 @@ This is a Case based on the results of an Eclipse simulation, read from a grid f
 ##### Input Case {{< image-in-text src="images/getting-started/EclipseInput24x24.png" >}}
 This Case type is based on a _`*.GRDECL`_ file, or a part of an Eclipse *Input* file. This Case type supports loading single ASCII files defining Eclipse Cell Properties, and also to export modified property sets to ASCII files.
 Each of the Eclipse properties are listed as separate entities in the **Project Tree**, and can be renamed and exported.
-See [ Grid Import and Property Export ]({{< relref "gridimportexport" >}})
+See [ Grid Import and Property Export ]({{< relref "gridimport" >}})
 
 #####  Statistics Case {{< image-in-text src="images/getting-started/Histogram24x24.png" >}}
 This is a Case type that belongs to a *Grid Case Group* and makes statistical calculations based on the source cases in the Grid Case Group. See [ Grid Case Groups and Statistics ]({{< relref "casegroupsandstatistics" >}}).
