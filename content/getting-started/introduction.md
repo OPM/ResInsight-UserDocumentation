@@ -2,6 +2,7 @@
 title = "ResInsight 2019.04"
 published = true
 weight = 5
+hidden = true
 +++
 
 ResInsight is an open source, cross-platform 3D visualization, curve plotting and post processing tool for Eclipse reservoir models and simulations. It can also be configured to visualize geomechanical simulations from ABAQUS.
