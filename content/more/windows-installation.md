@@ -1,7 +1,7 @@
 +++
 title = "Windows Installation"
 published = true
-weight = 3
+hidden = true
 +++
 
 <small>Note: None of the binary distributions includes support for ABAQUS odb files.</small>
