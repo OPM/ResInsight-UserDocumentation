@@ -2,6 +2,7 @@
 title = "What's New in 2019.04"
 published = true
 weight = 10
+hidden = true
 +++
 
 ResInsight 2019.04 is the latest version of ResInsight, the professional quality, open source 3D visualization, curve plotting and post-processing tool for Eclipse reservoir models. Version 2019.04 contains a larger number of new and exciting features, some of which are listed below.
