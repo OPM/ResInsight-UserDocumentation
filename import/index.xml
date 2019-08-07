@@ -33,6 +33,17 @@ A couple of property names are recognized and treated specially:
     </item>
     
     <item>
+      <title>Grid Import</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/import/gridimport/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/import/gridimport/</guid>
+      <description>Importing Eclipse Cases ResInsight supports the following type of Eclipse input data:
+ *.GRID and *.EGRID files along with their *.INIT and restart files *.XNNN and *.UNRST. Grid and Property data from *.GRDECL files.  Release 2018.11 supports import of simulations from Intersect. To be able to import into ResInsight, the Intersect simulation must be exported into Eclipse file format.
+Eclipse Results ResInsight offers several ways to import Eclipse (grid) files.</description>
+    </item>
+    
+    <item>
       <title>Observed Time History Data</title>
       <link>https://opm.github.io/ResInsight-UserDocumentation/import/observeddata/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -11,25 +11,24 @@
     
     
     <item>
-      <title>ResInsight 2019.04</title>
+      <title>Introduction</title>
       <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/introduction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/introduction/</guid>
-      <description>ResInsight is an open source, cross-platform 3D visualization, curve plotting and post processing tool for Eclipse reservoir models and simulations. It can also be configured to visualize geomechanical simulations from ABAQUS.
-The system also constitutes a framework for further development and can be extended to support new data sources and visualization methods, e.g. additional solvers, seismic data, CSEM, and more.
-Efficient User Interface The user interface is tailored for efficient interpretation of reservoir simulation data with specialized visualizations of properties, faults and wells.</description>
+      <description>User Interface Overview ResInsight has two main windows. One for 3D related visualization, and one for 2D graphs and plots. These ares shown in the images below.
+3D Main Window Plot Main Window Switching Between the Two Main Windows The two main windows has a toolbar button each, that directly opens and raises the other window. Each of the windows can also be closed freely, but if both are closed, ResInsight exits.</description>
     </item>
     
     <item>
-      <title>Grid Import</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/gridimportexport/</link>
+      <title>obsolete about</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/obsolete-about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/gridimportexport/</guid>
-      <description>Importing Eclipse Cases ResInsight supports the following type of Eclipse input data:
- *.GRID and *.EGRID files along with their *.INIT and restart files *.XNNN and *.UNRST. Grid and Property data from *.GRDECL files.  Release 2018.11 supports import of simulations from Intersect. To be able to import into ResInsight, the Intersect simulation must be exported into Eclipse file format.
-Eclipse Results ResInsight offers several ways to import Eclipse (grid) files.</description>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/obsolete-about/</guid>
+      <description>ResInsight is an open source, cross-platform 3D visualization, curve plotting and post processing tool for Eclipse reservoir models and simulations. It can also be configured to visualize geomechanical simulations from ABAQUS.
+The system also constitutes a framework for further development and can be extended to support new data sources and visualization methods, e.g. additional solvers, seismic data, CSEM, and more.
+Efficient User Interface The user interface is tailored for efficient interpretation of reservoir simulation data with specialized visualizations of properties, faults and wells.</description>
     </item>
     
     <item>

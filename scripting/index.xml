@@ -36,6 +36,25 @@ Examples on how command line options are used are given below
     </item>
     
     <item>
+      <title>Octave Interface Reference</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/octaveinterfacereference/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/octaveinterfacereference/</guid>
+      <description>Introduction To identify a ResInsight case uniquely in the Octave script, an integer Id (CaseId) is used. This Id can be retrieved in several ways, but there are two main modes of operation regarding this for a particular octave script: Either the script is designed to work on a single case (the &amp;ldquo;Current Case&amp;rdquo;), or the script is designed to access the selection and traverse the cases by itself.</description>
+    </item>
+    
+    <item>
+      <title>Python API - rips</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</guid>
+      <description>ResInsight has a gRPC Remote Procedure Call interface with a Python Client interface. This interface, called rips, allows you to interact with a running ResInsight instance from a Python script.
+The Python client package is available for install via the Python PIP package system with pip install rips as admin user, or pip install --user rips as a regular user. On some systems the pip command may have to be replaced by python -m pip.</description>
+    </item>
+    
+    <item>
       <title>Command File</title>
       <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/commandfile/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

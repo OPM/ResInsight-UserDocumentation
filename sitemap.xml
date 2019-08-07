@@ -3,19 +3,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/installation/linux-installation/</loc>
-  </url>
-  
-  <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/installation/windows-installation/</loc>
-  </url>
-  
-  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/introduction/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/appendix/derivedresults/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/obsolete-about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/derivedresults/</loc>
   </url>
   
   <url>
@@ -27,11 +23,11 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/about/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/cellresults/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/results/cellresults/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/</loc>
   </url>
   
   <url>
@@ -39,7 +35,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/installation/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/linux-installation/</loc>
   </url>
   
   <url>
@@ -47,11 +43,11 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/customization/preferences/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/misc/preferences/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/wells-and-completions/simulationwells/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/simulationwells/</loc>
   </url>
   
   <url>
@@ -63,7 +59,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/whats-new/releasenotes_2019_04/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/whats-new/releasenotes_2019_04/</loc>
   </url>
   
   <url>
@@ -83,23 +79,23 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/gridimportexport/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/import/gridimport/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/customization/memorymanagement/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/misc/memorymanagement/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/appendix/octaveinterfacereference/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/octaveinterfacereference/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/results/resultcolorlegend/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/results/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/resultcolorlegend/</loc>
   </url>
   
   <url>
@@ -107,19 +103,23 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/testimonials/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/testimonials/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/wells-and-completions/wellpaths/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/wellpaths/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/whats-new/releasenotes_2018_11/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/whats-new/releasenotes_2018_11/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/appendix/buildinstructions/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/windows-installation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/buildinstructions/</loc>
   </url>
   
   <url>
@@ -127,7 +127,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/wells-and-completions/createnewwellpaths/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/createnewwellpaths/</loc>
   </url>
   
   <url>
@@ -139,7 +139,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/customization/keyboardshortcuts/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/misc/keyboardshortcuts/</loc>
   </url>
   
   <url>
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/results/resultinspection/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/resultinspection/</loc>
   </url>
   
   <url>
@@ -163,11 +163,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/support/</loc>
-  </url>
-  
-  <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/wells-and-completions/3dwelllogcurves/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/3dwelllogcurves/</loc>
   </url>
   
   <url>
@@ -187,11 +183,11 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/appendix/regressiontestsystem/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/misc/regressiontestsystem/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/releasenotification/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/releasenotification/</loc>
   </url>
   
   <url>
@@ -203,11 +199,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/wells-and-completions/completions/</loc>
-  </url>
-  
-  <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/download/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/completions/</loc>
   </url>
   
   <url>
@@ -223,7 +215,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/wells-and-completions/completionslgr/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/completionslgr/</loc>
   </url>
   
   <url>
@@ -243,15 +235,11 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/whats-new/</loc>
-  </url>
-  
-  <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/appendix/</loc>
-  </url>
-  
-  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/intersections/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/misc/</loc>
   </url>
   
   <url>
@@ -263,10 +251,6 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/project/</loc>
-  </url>
-  
-  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/plot-window/wellborestabilityplots/</loc>
   </url>
   
@@ -275,7 +259,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/wells-and-completions/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/</loc>
   </url>
   
   <url>
@@ -311,10 +295,6 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/customization/</loc>
-  </url>
-  
-  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/_footer/</loc>
   </url>
   
@@ -323,7 +303,15 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/results/annotations/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/annotations/</loc>
   </url>
   
   <url>
@@ -337,6 +325,10 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/search/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/support/</loc>
   </url>
   
   <url>
