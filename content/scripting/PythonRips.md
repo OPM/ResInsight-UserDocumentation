@@ -1,9 +1,9 @@
----
-layout: docs
-title: Python API - rips
-permalink: /docs/python/
-published: true
----
++++
+title = "Python API - rips"
+published = true
+weight = 20
++++
+
 
 ResInsight has a [gRPC Remote Procedure Call](https://www.grpc.io/) interface with a Python Client interface. This interface, called rips, allows you to interact with a running ResInsight instance from a Python script.
 
@@ -13,13 +13,13 @@ In order for the Python-gRPC connection to be available, ResInsight needs to be 
 
 
 
-![image](../images/AboutGrpc.png)
+![image]({{< relref "" >}}images/scripting/AboutGrpc.png)
 
 Furthermore, gRPC needs to be enabled in the Scripting tab of the Preference dialog:
 
 
 
-![image](../images/PrefGrpc.png)
+![image]({{< relref "" >}}images/scripting/PrefGrpc.png)
 
 It is actually possible to interact with ResInsight using a number of other programming languages, C++, C#, Web Javascript, Go, Node.js, PHP, Java, etc. This requires familiarity with gRPC and Protocol Buffers and is currently undocumented and unsupported from a ResInsight point of view.
 
