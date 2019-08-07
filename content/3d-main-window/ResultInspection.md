@@ -1,7 +1,7 @@
 +++
 title = "Result Inspection"
 published = true
-weight = 30
+weight = 60
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/ResultInspectionOverview.png)

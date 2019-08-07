@@ -1,7 +1,7 @@
 +++
 title = "Result Color Legend"
 published = true
-weight = 20
+weight = 30
 +++
 
 The color mapping of the displayed cell result is controlled by the **Color Legend** located below a result node in the **Project Tree**. The legend can be shown or hidden by checking or unchecking the box in front of the Legend Definition.

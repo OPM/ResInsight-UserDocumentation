@@ -1,7 +1,7 @@
 +++
 title = "Cell Filters"
 published = true
-weight = 80
+weight = 70
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/FiltersOverview.png)

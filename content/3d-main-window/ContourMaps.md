@@ -1,7 +1,7 @@
 +++
 title = "Contour Maps"
 published = true
-weight = 100
+weight = 40
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/ContourMaps.png)
