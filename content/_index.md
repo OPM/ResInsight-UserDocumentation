@@ -46,8 +46,8 @@ published = true
       <p>
         It's easy and free, both on Linux and Windows:
       </p>
-      <a href="{{< relref "more/download" >}}">Download and Install &rarr;</a><br>
-      <a href="{{< relref "getting-started" >}}">Getting Started &rarr;</a>
+      <a href="{{< ref "getting-started/Download-and-Install/" >}}">Download and Install &rarr;</a><br>
+      <a href="{{< ref "getting-started" >}}">Getting Started &rarr;</a>
       <p>Sign up to be notified of new releases:
         <br>
         <a href="{{< relref "releasenotification" >}}">Release Notification &rarr;</a>

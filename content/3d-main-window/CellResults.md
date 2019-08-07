@@ -102,7 +102,7 @@ The flow diagnostics results are only calculated when asked for, and only for re
 
 ### Injection Flooding
 
-This result type is used to plot derived results based on a selection of simulated tracers, typically seawater injection. Currently the only derived property available is **Water Flooded PV**. Please refer to [Derived Results]({{< relref "" >}}appendix/derivedresults) for more information.
+This result type is used to plot derived results based on a selection of simulated tracers, typically seawater injection. Currently the only derived property available is **Water Flooded PV**. Please refer to [Derived Results]({{< relref "derivedresults" >}}) for more information.
 
 ![]({{< relref "" >}}images/3d-main-window/InjectionFloodingPropertyPanel.png)
 

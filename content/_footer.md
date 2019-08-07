@@ -2,8 +2,8 @@
 published = true
 +++
 
-### [About]({{< relref "about" >}})
+### [About]({{< ref "about.md" >}})
 
 ### [Ceetron Solutions](http://www.ceetronsolutions.com) in collaboration with [Equinor ASA](https://www.equinor.com/)
 
-### [Support]({{< relref "support" >}})
+### [Support]({{< ref "support.md" >}})

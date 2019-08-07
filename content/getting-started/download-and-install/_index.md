@@ -1,8 +1,9 @@
 +++
-title = "Downloads"
+title = "Download and Install"
 published = true
-hidden = true
+weight = 10
 +++
+
 
 ## Downloads
 Windows : [ResInsight-2019.04_oct-4.0.0_souring_win64.zip](https://github.com/OPM/ResInsight/releases/download/v2019.04/ResInsight-2019.04.0_oct-4.0.0_souring_win64.zip)
@@ -14,9 +15,9 @@ For older versions, release notes and source code, please visit [ResInsight on G
 
 ## Installation
 
-[ Linux Installation ]({{< ref "/more/linux-installation" >}})
+[ Linux Installation ]({{< ref "linux-installation.md" >}})
 
-[ Windows Installation ]({{< ref "/more/windows-installation" >}})
+[ Windows Installation ]({{< ref "windows-installation.md" >}})
 
 [ Build Instructions ]({{< ref "/more/buildinstructions" >}})
 
