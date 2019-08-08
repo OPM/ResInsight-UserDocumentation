@@ -1,32 +1,31 @@
 +++
 title = "Python API - rips"
 published = true
-weight = 40
+weight = 20
 +++
 
+ResInsight has a [gRPC Remote Procedure Call](https://www.grpc.io/) interface with a Python Client interface. This interface allows you to interact with a running ResInsight instance from a Python script.
 
-ResInsight has a [gRPC Remote Procedure Call](https://www.grpc.io/) interface with a Python Client interface. This interface, called rips, allows you to interact with a running ResInsight instance from a Python script.
+The Python client package is available for install via the Python PIP package system with `pip install rips` as admin user, or `pip install --user rips` as a regular user.
 
-The Python client package is available for install via the Python PIP package system with `pip install rips` as admin user, or `pip install --user rips` as a regular user. On some systems the `pip` command may have to be replaced by `python -m pip`. See the [rips page on pypi.org](https://test.pypi.org/project/rips/) for more information about releases of the rips package.
+On some systems the `pip` command may have to be replaced by `python -m pip`.
 
-In order for the Python-gRPC connection to be available, ResInsight needs to be built with the `RESINSIGHT_ENABLE_GRPC` option set. A valid gRPC build will show a message in the About dialog confirming gRPC is available:
+In order for gRPC to be available, ResInsight needs to be built with the `RESINSIGHT_ENABLE_GRPC` option set. A valid gRPC build will show a message in the About dialog confirming gRPC is available:
 
 
 
-![image]({{< relref "" >}}images/scripting/AboutGrpc.png)
+![image]({{<relref"">}}images/scripting/AboutGrpc.png)
 
 Furthermore, gRPC needs to be enabled in the Scripting tab of the Preference dialog:
 
 
 
-![image]({{< relref "" >}}images/scripting/PrefGrpc.png)
-
-It is actually possible to interact with ResInsight using a number of other programming languages, C++, C#, Web Javascript, Go, Node.js, PHP, Java, etc. This requires familiarity with gRPC and Protocol Buffers and is currently undocumented and unsupported from a ResInsight point of view.
+![image]({{<relref"">}}images/scripting/PrefGrpc.png)
 
 # Instance Module
 
 
-#### class rips.Instance(port=50051)
+#### class rips.Instance(port=50051, launched=False)
 The ResInsight Instance class. Use to launch or find existing ResInsight instances
 
 
@@ -117,12 +116,12 @@ The RESINSIGHT_GRPC_PORT environment variable can be set to an alternative port 
 
 ## Example
 
-```python
-import rips
-
-resInsight  = rips.Instance.find()
-
-if resInsight is None:
+```
+import rips
+
+resInsight  = rips.Instance.find()
+
+if resInsight is None:
     print('ERROR: could not find ResInsight')
 ```
 
@@ -164,13 +163,13 @@ Get a full version string, i.e. 2019.04.01
 
 ## Example
 
-```python
-import rips
-
-resInsight  = rips.Instance.find()
-if resInsight is not None:
-    print(resInsight.app.versionString())
-    print("Is this a console run?", resInsight.app.isConsole())
+```
+import rips
+
+resInsight  = rips.Instance.find()
+if resInsight is not None:
+    print(resInsight.app.versionString())
+    print("Is this a console run?", resInsight.app.isConsole())
 ```
 
 # Case Module
@@ -293,9 +292,21 @@ Get a list of all rips Grid objects in the case
 #### timeSteps()
 Get a list containing time step strings for all time steps
 
+
+#### view(id)
+Get a particular view belonging to a case by providing view id
+:param id: view id
+:type id: int
+
+Returns: a view object
+
+
+#### views()
+Get a list of views belonging to a case
+
 ## Example
 
-```python
+```
 import rips
 
 resInsight  = rips.Instance.find()
@@ -305,6 +316,39 @@ if resInsight is not None:
     print ("Got " + str(len(cases)) + " cases: ")
     for case in cases:
         print(case.name)
+        assert(case.address() is not 0)
+        assert(case.classKeyword() == "EclipseCase")
+        print("\n#### Case ####")
+        for keyword in case.keywords():
+            print (keyword + ": " + str(case.getValue(keyword)))
+        print ("\n####Project#####")
+        pdmProject = case.ancestor(classKeyword="ResInsightProject")
+        assert(pdmProject)
+        assert(pdmProject.address() is not 0)
+        assert(pdmProject.address() == resInsight.project.address())
+
+        for keyword in resInsight.project.keywords():
+            print (keyword + ": " + str(resInsight.project.getValue(keyword)))
+        pdmViews = resInsight.project.views()
+        for view in pdmViews:
+            print ("\n####View####")
+            print(view.classKeyword(), view.address())
+            for viewKeyword in view.keywords():
+                print(viewKeyword + "-> " + str(view.getValue(viewKeyword)))
+            view.setShowGridBox(not view.showGridBox())
+            view.setBackgroundColor("#3388AA")
+            view.update()
+        
+        print ("\n####Cell Result####")
+        firstView  = case.view(id=0)
+        assert(firstView is not None)
+        cellResult = firstView.cellResult()
+        print(cellResult.classKeyword(), cellResult.address())
+        for resultKeyword in cellResult.keywords():
+            print(resultKeyword + "->" + str(cellResult.getValue(resultKeyword)))
+        cellResult.setValue("ResultVariable", "SOIL")
+        cellResult.setValue("ResultType", "DYNAMIC_NATIVE")
+        cellResult.update()
 ```
 
 # Commands Module
@@ -328,13 +372,33 @@ The differences are:
 Close the current project (and reopen empty one)
 
 
-#### computeCaseGroupStatistics(caseIds)
+#### computeCaseGroupStatistics(caseIds=[], caseGroupId=-1)
+
+#### createGridCaseGroup(casePaths)
+Create a Grid Case Group from a list of cases
+
+
+* **Parameters**
+
+    **casePaths** (*list*) -- list of file path strings
+
+
+
+* **Returns**
+
+    A case group id and name
+
+
 
 #### createLgrForCompletions(caseId, timeStep, wellPathNames, refinementI, refinementJ, refinementK, splitType)
 
 #### createMultipleFractures(caseId, templateId, wellPathNames, minDistFromWellTd, maxFracturesPerWell, topLayer, baseLayer, spacing, action)
 
 #### createSaturationPressurePlots(caseIds)
+
+#### createStatisticsCase(caseGroupId)
+
+#### exportFlowCharacteristics(caseId, timeSteps, injectors, producers, fileName, minimumCommunication=0.0, aquiferCellThreshold=0.1)
 
 #### exportMsw(caseId, wellPath)
 
@@ -463,7 +527,7 @@ Set current start directory
 #### setTimeStep(caseId, timeStep)
 ## Example
 
-```python
+```
 import rips
 
 # Load instance
@@ -514,7 +578,7 @@ The dimensions in i, j, k direction
 
 ## Example
 
-```python
+```
     case = rips_instance.project.loadCase(path=casePath)
 print (case.gridCount())
     if case.gridCount() > 0:
@@ -524,6 +588,12 @@ print (case.gridCount())
             print(dimensions.j)
             print(dimensions.k)
 ```
+
+# GridCaseGroup Module
+
+
+#### rips.GridCaseGroup()
+alias of `rips.GridCaseGroup`
 
 # Project Module
 
@@ -564,6 +634,30 @@ Get a list of all cases in the project
 Close the current project (and open new blank project)
 
 
+#### createGridCaseGroup(casePaths)
+Create a new grid case group from the provided case paths
+:param casePaths: a list of paths to the cases to be loaded and included in the group
+:type casePaths: list
+
+
+* **Returns**
+
+    A new grid case group object
+
+
+
+#### gridCaseGroup(groupId)
+Get a particular grid case group belonging to a project
+:param groupId: group id
+:type groupId: int
+
+Returns: a grid case group object
+
+
+#### gridCaseGroups()
+Get a list of all grid case groups in the project
+
+
 #### loadCase(path)
 Load a new case from the given file path
 
@@ -598,6 +692,18 @@ Get a list of all cases selected in the project tree
 
     A list of rips Case objects
 
+
+
+#### view(id)
+Get a particular view belonging to a case by providing view id
+:param id: view id
+:type id: int
+
+Returns: a view object
+
+
+#### views()
+Get a list of views belonging to a project
 
 # Properties Module
 
@@ -638,16 +744,15 @@ Get a list of available properties
     * **propertyType** (*str*) -- string corresponding to propertyType enum.
 
       Can be one of the following:
-
       'DYNAMIC_NATIVE'
 
-          'STATIC_NATIVE'
-          'SOURSIMRL'
-          'GENERATED'
-          'INPUT_PROPERTY'
-          'FORMATION_NAMES'
-          'FLOW_DIAGNOSTICS'
-          'INJECTION_FLOODING'
+      > 'STATIC_NATIVE'
+      > 'SOURSIMRL'
+      > 'GENERATED'
+      > 'INPUT_PROPERTY'
+      > 'FORMATION_NAMES'
+      > 'FLOW_DIAGNOSTICS'
+      > 'INJECTION_FLOODING'
 
 
     * **porosityModel** (*str*) -- 'MATRIX_MODEL' or 'FRACTURE_MODEL'.
@@ -734,41 +839,118 @@ Set a cell property for all grid cells.
     * **porosityModel** (*str*) -- string enum. See available()
 
 
-## Synchronous Example
+# View Module
 
-Read two properties, multiply them together and push the results back to ResInsight in a naïve way, by reading PORO into a list, then reading PERMX into a list, then multiplying them both in a resulting list and finally transferring back the list.
+
+#### class rips.View(pbmObject)
+ResInsight view class
+
+
+#### id()
+View Id corresponding to the View Id in ResInsight project.
+
+
+* **Type**
+
+    int
+
+
+Synchronous Example
+
+
+#### applyCellResult(resultType, resultVariable)
+Apply a regular cell result
+:param resultType [str]: String representing the result category
+
+> The valid values are: "DYNAMIC_NATIVE", "STATIC_NATIVE", "SOURSIMRL",
+
+>     "GENERATED", "INPUT_PROPERTY", "FORMATION_NAMES",
+>     "FLOW_DIAGNOSTICS" and "INJECTION_FLOODING"
+
+
+* **Parameters**
+
+    **[****str****]** (*resultVariable*) -- String representing the result value.
+
+
+
+#### applyFlowDiagnosticsCellResult(resultVariable='TOF', selectionMode='FLOW_TR_BY_SELECTION', injectors=[], producers=[])
+Apply a flow diagnostics cell result
+
+
+* **Parameters**
+
+    * **[****str****]** (*selectionMode*) -- String representing the result value
+      The valid values are 'TOF', 'Fraction', 'MaxFractionTracer' and 'Communication'.
+
+    * **[****str****]** -- String specifying which tracers to select.
+      The valid values are FLOW_TR_INJ_AND_PROD (all injector and producer tracers)
+
+      > FLOW_TR_PRODUCERS (all producers)
+      > FLOW_TR_INJECTORS (all injectors)
+      > FLOW_TR_BY_SELECTION (specify individual tracers in the
+
+      > > injectorTracers and producerTracers variables)
+
+
+    * **[****list****]** (*producerTracers*) -- List of injector names (strings) to select.
+      Requires selectionMode to be 'FLOW_TR_BY_SELECTION'.
+
+    * **[****list****]** -- List of producer tracers (strings) to select.
+      Requires selectionMode to be 'FLOW_TR_BY_SELECTION'.
+
+
+
+#### backgroundColor()
+Get the current background color in the view
+
+
+#### cellResult()
+Retrieve the current cell results
+
+
+#### setBackgroundColor(bgColor)
+Set the background color in the view
+
+
+#### setShowGridBox(value)
+Set if the grid box is meant to be shown in the view
+
+
+#### showGridBox()
+Check if the grid box is meant to be shown in the view
 
 This is slow and inefficient, but works.
 
-```python
-import rips
-import time
-
-resInsight     = rips.Instance.find()
-start = time.time()
-case = resInsight.project.case(id=0)
-
-poroChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
-poroResults = []
-for poroChunk in poroChunks:
-    for poro in poroChunk.values:
-        poroResults.append(poro)
-
-permxChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
-permxResults = []
-for permxChunk in permxChunks:
-    for permx in permxChunk.values:
-        permxResults.append(permx)
-
-results = []
-for (poro, permx) in zip(poroResults, permxResults):
-    results.append(poro * permx)
-
-case.properties.setActiveCellProperty(results, 'GENERATED', 'POROPERMXSY', 0)
-
-end = time.time()
-print("Time elapsed: ", end - start)
-
+```
+import rips
+import time
+
+resInsight     = rips.Instance.find()
+start = time.time()
+case = resInsight.project.case(id=0)
+
+poroChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
+poroResults = []
+for poroChunk in poroChunks:
+    for poro in poroChunk.values:
+        poroResults.append(poro)
+
+permxChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
+permxResults = []
+for permxChunk in permxChunks:
+    for permx in permxChunk.values:
+        permxResults.append(permx)
+
+results = []
+for (poro, permx) in zip(poroResults, permxResults):
+    results.append(poro * permx)
+
+case.properties.setActiveCellProperty(results, 'GENERATED', 'POROPERMXSY', 0)
+
+end = time.time()
+print("Time elapsed: ", end - start)
+
 print("Transferred all results back")
 ```
 
@@ -778,29 +960,29 @@ Read two properties at the same time chunk by chunk, multiply each chunk togethe
 
 This is far more efficient.
 
-```python
-import rips
-import time
-
-def createResult(poroChunks, permxChunks):
-    for (poroChunk, permxChunk) in zip(poroChunks, permxChunks):
-        resultChunk = []
-        for (poro, permx) in zip(poroChunk.values, permxChunk.values):
-            resultChunk.append(poro * permx)
-        yield resultChunk
-
-resInsight     = rips.Instance.find()
-start = time.time()
-case = resInsight.project.case(id=0)
-
-poroChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
-permxChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
-
-case.properties.setActiveCellPropertyAsync(createResult(poroChunks, permxChunks),
-                                           'GENERATED', 'POROPERMXAS', 0)
-
-end = time.time()
-print("Time elapsed: ", end - start)
-
+```
+import rips
+import time
+
+def createResult(poroChunks, permxChunks):
+    for (poroChunk, permxChunk) in zip(poroChunks, permxChunks):
+        resultChunk = []
+        for (poro, permx) in zip(poroChunk.values, permxChunk.values):
+            resultChunk.append(poro * permx)
+        yield resultChunk
+
+resInsight     = rips.Instance.find()
+start = time.time()
+case = resInsight.project.case(id=0)
+
+poroChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
+permxChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
+
+case.properties.setActiveCellPropertyAsync(createResult(poroChunks, permxChunks),
+                                           'GENERATED', 'POROPERMXAS', 0)
+
+end = time.time()
+print("Time elapsed: ", end - start)
+
 print("Transferred all results back")
 ```
