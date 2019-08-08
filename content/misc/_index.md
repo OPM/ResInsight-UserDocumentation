@@ -1,5 +1,5 @@
 +++
-title = "Miscellaneous customization"
+title = "Customization & Miscellaneous"
 published = true
-weight = 70
+weight = 80
 +++

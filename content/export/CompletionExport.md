@@ -1,5 +1,5 @@
 +++
-title = "Export Completions"
+title = "Completions"
 published = true
 weight = 40
 +++

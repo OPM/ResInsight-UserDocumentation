@@ -1,10 +1,10 @@
 +++
-title = "Introduction"
+title = "Overview"
 published = true
 weight = 5
 +++
 
-### User Interface Overview 
+### User Interface 
 
 ResInsight has two main windows. One for 3D related visualization, and one for 2D graphs and plots. These ares shown in the images below. 
 
@@ -75,7 +75,8 @@ How to interact and manipulate the 3D model is described in [Model Navigation]({
 A *Case* in ResInsight means a Grid model with a particular set of results or property data. There are three different types of Eclipse cases and one type of Geomechanical cases.
 
 #### Eclipse Cases
-There are three different Eclipse Case types: 
+The following Eclipse cases can be imported into ResInsight via the **File->Import->Eclipse Cases** menu, 
+see [Import Eclipse Cases]({{< ref "eclipsecases.md" >}}): 
 
 ##### Result Case {{< image-in-text src="images/getting-started/Case24x24.png" >}}
 This is a Case based on the results of an Eclipse simulation, read from a grid file together with static and restart data. Multiple Cases can be selected and read from a folder.
@@ -83,7 +84,7 @@ This is a Case based on the results of an Eclipse simulation, read from a grid f
 ##### Input Case {{< image-in-text src="images/getting-started/EclipseInput24x24.png" >}}
 This Case type is based on a _`*.GRDECL`_ file, or a part of an Eclipse *Input* file. This Case type supports loading single ASCII files defining Eclipse Cell Properties, and also to export modified property sets to ASCII files.
 Each of the Eclipse properties are listed as separate entities in the **Project Tree**, and can be renamed and exported.
-See [ Grid Import and Property Export ]({{< relref "gridimport" >}})
+See [ Grid Import and Property Export ]({{< relref "eclipsecases" >}})
 
 #####  Statistics Case {{< image-in-text src="images/getting-started/Histogram24x24.png" >}}
 This is a Case type that belongs to a *Grid Case Group* and makes statistical calculations based on the source cases in the Grid Case Group. See [ Grid Case Groups and Statistics ]({{< relref "casegroupsandstatistics" >}}).
@@ -94,7 +95,13 @@ This is the case type listed in the Plot Main Window, and represents an _`*.SMSP
  
 #### Geomechanical cases {{< image-in-text src="images/getting-started/GeoMechCase24x24.png" >}}
 
-There are only one type of geomechanical cases, namely the ABAQUS-odb case type. The geomechanical cases are sorted into its own folder in the project tree named **Geomechanical Models** {{< image-in-text src="images/getting-started/GeoMechCases24x24.png" >}} as opposed to the **Grid Models** folder where the Eclipse cases and **Grid Case Groups** resides.
+There are only one type of geomechanical cases, namely the ABAQUS-odb case type. 
+When ResInsight is compiled with ABAQUS-odb support, _`*.odb`_ files can be imported by selecting the menu item:
+**File->Import->Geo Mechanical Cases-> {{< image-in-text src="images/getting-started/GeoMechCase24x24.png" >}} Import Geo Mechanical Model**.
+
+The geomechanical cases are sorted into its own folder in the project tree named **Geomechanical Models** {{< image-in-text src="images/getting-started/GeoMechCases24x24.png" >}} as opposed to the **Grid Models** folder where the Eclipse cases and **Grid Case Groups** resides.
+
+See [Build Instructions]({{< ref "buildinstructions.md" >}}) on how to compile ResInsight with odb-support.
 
 #### Grid Case Groups {{< image-in-text src="images/getting-started/GridCaseGroup24x24.png" >}}
 

@@ -1,5 +1,5 @@
 +++
-title = "Export Eclipse Properties"
+title = "Eclipse Properties"
 published = true
 weight = 20
 +++

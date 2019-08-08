@@ -1,7 +1,7 @@
 +++
-title = "ABAQUS Odb Support"
+title = "Geomechanical Data"
 published = true
-weight = 10
+weight = 20
 +++
 
 ResInsight can be built with support for reading and displaying geomechanical analysis models produced by ABAQUS in the _`*.odb`_ format. This is only possible if you or your organization has a copy of the ODB-Api from Simulia, and a valid license to use it. 

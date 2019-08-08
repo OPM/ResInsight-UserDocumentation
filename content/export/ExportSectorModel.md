@@ -1,5 +1,5 @@
 +++
-title = "Export Sector Model"
+title = "Sector Model"
 published = true
 weight = 60
 +++

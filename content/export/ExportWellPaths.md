@@ -1,5 +1,5 @@
 +++
-title = " Export Well Paths"
+title = "Well Paths"
 published = true
 weight = 50
 +++
