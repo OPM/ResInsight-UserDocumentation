@@ -7,7 +7,7 @@ theme = "learn"
 disableSearch = false
 disableHomeIcon = true
 ordersectionsby = "weight"
-disableShortcutsTitle = false
+disableShortcutsTitle = true
 
 
 [[menu.shortcuts]]
