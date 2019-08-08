@@ -300,7 +300,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
     display: block;
 }
 #sidebar ul li > a {
-    padding: 4px 0;
+    padding: 1px 0;
 }
 #sidebar ul li.visited > a .read-icon {
     color: #9c6fb6;
