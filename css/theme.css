@@ -20,13 +20,6 @@
     margin: 2px 0 -2px 0;
 }
 @font-face {
-    font-family: 'Novacento Sans Wide';
-    src: url("../fonts/Novecentosanswide-UltraLight-webfont.eot");
-    src: url("../fonts/Novecentosanswide-UltraLight-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Novecentosanswide-UltraLight-webfont.woff2") format("woff2"), url("../fonts/Novecentosanswide-UltraLight-webfont.woff") format("woff"), url("../fonts/Novecentosanswide-UltraLight-webfont.ttf") format("truetype"), url("../fonts/Novecentosanswide-UltraLight-webfont.svg#novecento_sans_wideultralight") format("svg");
-    font-style: normal;
-    font-weight: 200;
-}
-@font-face {
     font-family: 'Work Sans';
     font-style: normal;
     font-weight: 300;
@@ -307,7 +300,7 @@ textarea:focus, input[type="email"]:focus, input[type="number"]:focus, input[typ
     display: block;
 }
 #sidebar ul li > a {
-    padding: 4px 0;
+    padding: 1px 0;
 }
 #sidebar ul li.visited > a .read-icon {
     color: #9c6fb6;
@@ -464,7 +457,6 @@ h2, h3, h4, h5, h6 {
 h1 {
     font-family: "Novacento Sans Wide", "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
     text-align: center;
-    text-transform: uppercase;
     color: #222;
     font-weight: 200;
 }

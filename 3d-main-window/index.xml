@@ -54,46 +54,13 @@ Cell Results are used in several operations and settings:
     </item>
     
     <item>
-      <title>Grid Statistics Dialog</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/gridstatisticsdialog/</link>
+      <title>Contour Maps</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/contourmaps/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/gridstatisticsdialog/</guid>
-      <description>ResInsight 3D Views has an info box in the upper right corner displaying statistics for the current view. A more detailed version of this information may also be displayed in a separate dialog window. Right click on the 3D view background and select Grid Statistics to bring up the dialog.
-Grid Statistics Dialog Fields The dialog consist of three information parts.
- Info text Histogram Cumulative Histogram  Info Text The Info Text field shows general info about the case, the selected results, and some statistics.</description>
-    </item>
-    
-    <item>
-      <title>Result Inspection</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/resultinspection/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/resultinspection/</guid>
-      <description>The results mapped on the 3D model can be inspected in detail by left clicking cells in the 3D view. The selected cells will be highlighted, text information displayed in the Result Info docking window, and the time-history values plotted in the Result Plot, if available.
-Visibility of the docking widows can be controlled from the Windows menu.
-Result Info Clicking cells will display slightly different information text based on the case type as described in the following tables.</description>
-    </item>
-    
-    <item>
-      <title>Linked Views</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/linkedviews/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/linkedviews/</guid>
-      <description>One or more views can be linked together to allow some settings like camera position and range filters, propagate from one view to another.
-Establish Linked Views To establish a link between views, select Link Visible Views from the View toolbar. This will open a dialog where the Master View is selected. When pressing Ok in this dialog, the Linked Views items are displayed in the top of the Project Tree.</description>
-    </item>
-    
-    <item>
-      <title>Faults</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/faults/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/faults/</guid>
-      <description>This section describes how Faults are detected and visualized. NNC&amp;rsquo;s are a part of the Faults visualization and are thus also mentioned in this section.
-Fault Detection ResInsight always scans the grids for geometrical faults when they are loaded. When two opposite cell faces of I, J, K neighbor cells does not match geometrically, they are tagged.
-All the tagged cell faces are then compared to the faults possibly imported from the *.</description>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/contourmaps/</guid>
+      <description>ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells.
+Creating New Contour Maps Contour Maps can be created in many different ways:</description>
     </item>
     
     <item>
@@ -108,13 +75,14 @@ Visualization The tensor arrows visualize the principal vectors in three directi
     </item>
     
     <item>
-      <title>Intersections</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/intersections/</link>
+      <title>Result Inspection</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/resultinspection/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/intersections/</guid>
-      <description>Intersections are cross sections of the grid model that displays the grid cell values on planes that cut through the grid in various ways.
-There are two main types of intersections. The first one which simply is called Intersection, is defined by a piece-wise linear curve and an extrusion direction. The curve can be either a Simulation Well, a Well Path, a user defined polyline, or a user defined line.</description>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/resultinspection/</guid>
+      <description>The results mapped on the 3D model can be inspected in detail by left clicking cells in the 3D view. The selected cells will be highlighted, text information displayed in the Result Info docking window, and the time-history values plotted in the Result Plot, if available.
+Visibility of the docking widows can be controlled from the Windows menu.
+Result Info Clicking cells will display slightly different information text based on the case type as described in the following tables.</description>
     </item>
     
     <item>
@@ -129,13 +97,24 @@ There are two main types of intersections. The first one which simply is called 
     </item>
     
     <item>
-      <title>Contour Maps</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/contourmaps/</link>
+      <title>Intersections</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/intersections/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/contourmaps/</guid>
-      <description>ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells.
-Creating New Contour Maps Contour Maps can be created in many different ways:</description>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/intersections/</guid>
+      <description>Intersections are cross sections of the grid model that displays the grid cell values on planes that cut through the grid in various ways.
+There are two main types of intersections. The first one which simply is called Intersection, is defined by a piece-wise linear curve and an extrusion direction. The curve can be either a Simulation Well, a Well Path, a user defined polyline, or a user defined line.</description>
+    </item>
+    
+    <item>
+      <title>Faults</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/faults/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/faults/</guid>
+      <description>This section describes how Faults are detected and visualized. NNC&amp;rsquo;s are a part of the Faults visualization and are thus also mentioned in this section.
+Fault Detection ResInsight always scans the grids for geometrical faults when they are loaded. When two opposite cell faces of I, J, K neighbor cells does not match geometrically, they are tagged.
+All the tagged cell faces are then compared to the faults possibly imported from the *.</description>
     </item>
     
     <item>
@@ -151,6 +130,17 @@ To use this functionality you will need to :
     </item>
     
     <item>
+      <title>Grid Statistics Dialog</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/gridstatisticsdialog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/gridstatisticsdialog/</guid>
+      <description>ResInsight 3D Views has an info box in the upper right corner displaying statistics for the current view. A more detailed version of this information may also be displayed in a separate dialog window. Right click on the 3D view background and select Grid Statistics to bring up the dialog.
+Grid Statistics Dialog Fields The dialog consist of three information parts.
+ Info text Histogram Cumulative Histogram  Info Text The Info Text field shows general info about the case, the selected results, and some statistics.</description>
+    </item>
+    
+    <item>
       <title>Grid Case Groups and Statistics</title>
       <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/casegroupsandstatistics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -158,6 +148,16 @@ To use this functionality you will need to :
       <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/casegroupsandstatistics/</guid>
       <description>Grid Case Group&amp;rsquo;s are designed to make it easy to calculate statistics per cell and per time step of a large number of Eclipse simulation Cases with identical Grids (often labeled realizations).
 If you have several Eclipse simulations with different input parameters available, you can put all the realizations into a Grid Case Group and easily calculate each of the cells mean value, range and max/min values at each time step between the realizations.</description>
+    </item>
+    
+    <item>
+      <title>Linked Views</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/linkedviews/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/linkedviews/</guid>
+      <description>One or more views can be linked together to allow some settings like camera position and range filters, propagate from one view to another.
+Establish Linked Views To establish a link between views, select Link Visible Views from the View toolbar. This will open a dialog where the Master View is selected. When pressing Ok in this dialog, the Linked Views items are displayed in the top of the Project Tree.</description>
     </item>
     
     <item>

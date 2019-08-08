@@ -11,24 +11,13 @@
     
     
     <item>
-      <title>Introduction</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/introduction/</link>
+      <title>Overview</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/overview/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/introduction/</guid>
-      <description>User Interface Overview ResInsight has two main windows. One for 3D related visualization, and one for 2D graphs and plots. These ares shown in the images below.
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/overview/</guid>
+      <description>User Interface ResInsight has two main windows. One for 3D related visualization, and one for 2D graphs and plots. These ares shown in the images below.
 3D Main Window Plot Main Window Switching Between the Two Main Windows The two main windows has a toolbar button each, that directly opens and raises the other window. Each of the windows can also be closed freely, but if both are closed, ResInsight exits.</description>
-    </item>
-    
-    <item>
-      <title>obsolete about</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/obsolete-about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/obsolete-about/</guid>
-      <description>ResInsight is an open source, cross-platform 3D visualization, curve plotting and post processing tool for Eclipse reservoir models and simulations. It can also be configured to visualize geomechanical simulations from ABAQUS.
-The system also constitutes a framework for further development and can be extended to support new data sources and visualization methods, e.g. additional solvers, seismic data, CSEM, and more.
-Efficient User Interface The user interface is tailored for efficient interpretation of reservoir simulation data with specialized visualizations of properties, faults and wells.</description>
     </item>
     
     <item>

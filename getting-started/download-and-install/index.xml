@@ -16,8 +16,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/linux-installation/</guid>
-      <description>Note: None of the binary distributions includes support for ABAQUS odb files.
-Install ResInsight From downloaded tarball  Download TAR.GZ binary distribution from https://github.com/OPM/ResInsight/releases Extract content from TAR file Start ./ResInsight  Display Menu Icons in GNOME (Optional) By default, icons are not visible in menus in the GNOME desktop environment. ResInsight has icons for many menu items, and icons can be set visible by issuing the following commands (Tested on RHEL6) :</description>
+      <description>Install ResInsight From Binary Packages on Linux Red Hat Enterprise Linux 6 or 7 Login as root and do:
+yum-config-manager --add-repo https://opm-project.org/package/opm.repo yum install resinsight yum install resinsight-octave  Then you are good, and can start ResInsight by typing: ResInsight
+Ubuntu Linux 16.04-64bit On the command line do:
+sudo apt-get update sudo apt-get install software-properties-common sudo apt-add-repository ppa:opm/ppa sudo apt-get update sudo apt-get install resinsight sudo apt-get install octave-resinsight  Start ResInsight by typing : ResInsight</description>
     </item>
     
     <item>
@@ -26,9 +28,9 @@ Install ResInsight From downloaded tarball  Download TAR.GZ binary distribution 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/windows-installation/</guid>
-      <description>Note: None of the binary distributions includes support for ABAQUS odb files.
-ResInsight Installation  Download ZIP binary distribution from https://github.com/OPM/ResInsight/releases Extract content from ZIP file Start ResInsight.exe  Octave Installation (optional)  Download Octave-4.0.0 and install it. (Newer versions will not work) Launch ResInsight.exe, open Edit-&amp;gt;Preferences. On the Octave tab, enter the path to the Octave command line interpreter executable.
-( Usually C:\Your\Path\To\Octave-x.x.x\bin\octave-cli.exe )  A binary package of ResInsight will normally not work with other Octave versions than the one it is compiled with.</description>
+      <description>ResInsight Installation  Download ZIP binary distribution from https://github.com/OPM/ResInsight/releases Extract content from ZIP file Start ResInsight.exe  The binary distribution does not support ABAQUS odb files. For building ResInsight with ABAQUS support, see Build Instructions.
+Octave Installation (optional)  Download Octave-4.0.0 and install it. (Newer versions will not work) Launch ResInsight.exe, open Edit-&amp;gt;Preferences. On the Octave tab, enter the path to the Octave command line interpreter executable.
+( Usually C:\Your\Path\To\Octave-x.</description>
     </item>
     
   </channel>
