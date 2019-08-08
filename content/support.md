@@ -11,7 +11,7 @@ e-mail : info@ceetronsolutions.com
 
 Bug reports and general feature requests can be filed directly on [GitHub](https://github.com/OPM/ResInsight/issues?state=open)
 
-<br>
-[Ceetron Solutions AS - Digitalization and visualization for engineers](http://www.ceetronsolutions.com)
 <a href="http://www.ceetronsolutions.com">![]({{< relref "">}}images/CeetronSolutionWebPage.png)</a>
 
+### [Ceetron Solutions AS - Digitalization and visualization for engineers](http://www.ceetronsolutions.com)
+<a href="http://www.ceetronsolutions.com"></a>
