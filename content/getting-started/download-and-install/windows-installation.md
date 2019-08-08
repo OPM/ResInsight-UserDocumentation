@@ -5,13 +5,17 @@ hidden = false
 weight = 20
 +++
 
-<small>Note: None of the binary distributions includes support for ABAQUS odb files.</small>
-
 ### ResInsight Installation
 
 1. Download ZIP binary distribution from [https://github.com/OPM/ResInsight/releases](https://github.com/OPM/ResInsight/releases "release section on GitHub")
 2. Extract content from ZIP file
 3. Start ResInsight.exe 
+
+{{% notice info %}}
+The binary distribution does not support ABAQUS odb files. For building ResInsight with ABAQUS support, see 
+[Build Instructions]({{< ref "/more/buildinstructions" >}}).
+{{% /notice %}}
+
 
 ### Octave Installation (optional)
 1. Download [Octave-4.0.0](ftp://ftp.gnu.org/gnu/octave/windows) and install it. (Newer versions will not work)

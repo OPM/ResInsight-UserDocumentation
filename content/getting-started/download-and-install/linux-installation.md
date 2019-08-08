@@ -5,28 +5,13 @@ hidden = false
 weight = 10
 +++
 
-<small>Note: None of the binary distributions includes support for ABAQUS odb files.</small>
+
 
 
 ## Install ResInsight
 
-### From downloaded tarball
-1. Download TAR.GZ binary distribution from [https://github.com/OPM/ResInsight/releases](https://github.com/OPM/ResInsight/releases "release section on GitHub")
-2. Extract content from TAR file
-3. Start ./ResInsight
-
-#### Display Menu Icons in GNOME (Optional)
-By default, icons are not visible in menus in the GNOME desktop environment. ResInsight has icons for many menu items, and icons can be set visible by issuing the following commands (Tested on RHEL6) :
-
-```
-gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true
-gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true
-```
-
-This fix was taken from reply number 11 in this [thread](https://bbs.archlinux.org/viewtopic.php?id=117414)
-
 ### From Binary Packages on Linux 
- Packages for ResInsight are available as part of the distribution by the [Opm project](http://opm-project.org/?page_id=36)
+
 
 #### Red Hat Enterprise Linux 6 or 7
 Login as root and do:
@@ -48,6 +33,34 @@ On the command line do:
     sudo apt-get install octave-resinsight
 
 Start ResInsight by typing : `ResInsight`
+
+{{% notice info %}}
+For further installation details, see the ResInsight distribution on [Opm Project Downloading and Installing](http://opm-project.org/?page_id=36).
+{{% /notice %}}
+ 
+{{% notice info %}}
+The binary distributions does not support ABAQUS odb files. For building ResInsight with ABAQUS support, see 
+[Build Instructions]({{< ref "/more/buildinstructions" >}}).
+{{% /notice %}}
+
+
+
+
+
+### From downloaded tarball
+1. Download TAR.GZ binary distribution from [https://github.com/OPM/ResInsight/releases](https://github.com/OPM/ResInsight/releases "release section on GitHub")
+2. Extract content from TAR file
+3. Start ./ResInsight
+
+#### Display Menu Icons in GNOME (Optional)
+By default, icons are not visible in menus in the GNOME desktop environment. ResInsight has icons for many menu items, and icons can be set visible by issuing the following commands (Tested on RHEL6) :
+
+```
+gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true
+gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true
+```
+
+This fix was taken from reply number 11 in this [thread](https://bbs.archlinux.org/viewtopic.php?id=117414)
 
 ## Setup Octave Interface (optional)
 
