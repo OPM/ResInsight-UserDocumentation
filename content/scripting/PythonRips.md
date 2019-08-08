@@ -316,39 +316,11 @@ if resInsight is not None:
     print ("Got " + str(len(cases)) + " cases: ")
     for case in cases:
         print(case.name)
-        assert(case.address() is not 0)
-        assert(case.classKeyword() == "EclipseCase")
-        print("\n#### Case ####")
-        for keyword in case.keywords():
-            print (keyword + ": " + str(case.getValue(keyword)))
-        print ("\n####Project#####")
-        pdmProject = case.ancestor(classKeyword="ResInsightProject")
-        assert(pdmProject)
-        assert(pdmProject.address() is not 0)
-        assert(pdmProject.address() == resInsight.project.address())
-
-        for keyword in resInsight.project.keywords():
-            print (keyword + ": " + str(resInsight.project.getValue(keyword)))
-        pdmViews = resInsight.project.views()
-        for view in pdmViews:
-            print ("\n####View####")
-            print(view.classKeyword(), view.address())
-            for viewKeyword in view.keywords():
-                print(viewKeyword + "-> " + str(view.getValue(viewKeyword)))
+        views = case.views()
+        for view in views:
             view.setShowGridBox(not view.showGridBox())
             view.setBackgroundColor("#3388AA")
             view.update()
-        
-        print ("\n####Cell Result####")
-        firstView  = case.view(id=0)
-        assert(firstView is not None)
-        cellResult = firstView.cellResult()
-        print(cellResult.classKeyword(), cellResult.address())
-        for resultKeyword in cellResult.keywords():
-            print(resultKeyword + "->" + str(cellResult.getValue(resultKeyword)))
-        cellResult.setValue("ResultVariable", "SOIL")
-        cellResult.setValue("ResultType", "DYNAMIC_NATIVE")
-        cellResult.update()
 ```
 
 # Commands Module
@@ -713,6 +685,29 @@ Class for streaming properties to and from ResInsight
 
 
 #### activeCellProperty(propertyType, propertyName, timeStep, porosityModel='MATRIX_MODEL')
+Get a cell property for all active cells. Sync, so returns a list
+
+
+* **Parameters**
+
+    * **propertyType** (*str*) -- string enum. See available()
+
+    * **propertyName** (*str*) -- name of an Eclipse property
+
+    * **timeStep** (*int*) -- the time step for which to get the property for
+
+    * **porosityModel** (*str*) -- string enum. See available()
+
+
+
+* **Returns**
+
+    A list containing double values
+    You first loop through the chunks and then the values within the chunk to get all values.
+
+
+
+#### activeCellPropertyAsync(propertyType, propertyName, timeStep, porosityModel='MATRIX_MODEL')
 Get a cell property for all active cells. Async, so returns an iterator
 
 
@@ -744,15 +739,16 @@ Get a list of available properties
     * **propertyType** (*str*) -- string corresponding to propertyType enum.
 
       Can be one of the following:
+
       'DYNAMIC_NATIVE'
 
-      > 'STATIC_NATIVE'
-      > 'SOURSIMRL'
-      > 'GENERATED'
-      > 'INPUT_PROPERTY'
-      > 'FORMATION_NAMES'
-      > 'FLOW_DIAGNOSTICS'
-      > 'INJECTION_FLOODING'
+          'STATIC_NATIVE'
+          'SOURSIMRL'
+          'GENERATED'
+          'INPUT_PROPERTY'
+          'FORMATION_NAMES'
+          'FLOW_DIAGNOSTICS'
+          'INJECTION_FLOODING'
 
 
     * **porosityModel** (*str*) -- 'MATRIX_MODEL' or 'FRACTURE_MODEL'.
@@ -760,6 +756,30 @@ Get a list of available properties
 
 
 #### gridProperty(propertyType, propertyName, timeStep, gridIndex=0, porosityModel='MATRIX_MODEL')
+Get a cell property for all grid cells. Synchronous, so returns a list
+
+
+* **Parameters**
+
+    * **propertyType** (*str*) -- string enum. See available()
+
+    * **propertyName** (*str*) -- name of an Eclipse property
+
+    * **timeStep** (*int*) -- the time step for which to get the property for
+
+    * **gridIndex** (*int*) -- index to the grid we're getting values for
+
+    * **porosityModel** (*str*) -- string enum. See available()
+
+
+
+* **Returns**
+
+    A list of double values
+
+
+
+#### gridPropertyAsync(propertyType, propertyName, timeStep, gridIndex=0, porosityModel='MATRIX_MODEL')
 Get a cell property for all grid cells. Async, so returns an iterator
 
 
@@ -930,17 +950,8 @@ resInsight     = rips.Instance.find()
 start = time.time()
 case = resInsight.project.case(id=0)
 
-poroChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
-poroResults = []
-for poroChunk in poroChunks:
-    for poro in poroChunk.values:
-        poroResults.append(poro)
-
-permxChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
-permxResults = []
-for permxChunk in permxChunks:
-    for permx in permxChunk.values:
-        permxResults.append(permx)
+poroResults = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
+permxResults = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
 
 results = []
 for (poro, permx) in zip(poroResults, permxResults):
@@ -950,7 +961,6 @@ case.properties.setActiveCellProperty(results, 'GENERATED', 'POROPERMXSY', 0)
 
 end = time.time()
 print("Time elapsed: ", end - start)
-
 print("Transferred all results back")
 ```
 
@@ -975,8 +985,8 @@ resInsight     = rips.Instance.find()
 start = time.time()
 case = resInsight.project.case(id=0)
 
-poroChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
-permxChunks = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
+poroChunks = case.properties.activeCellPropertyAsync('STATIC_NATIVE', 'PORO', 0)
+permxChunks = case.properties.activeCellPropertyAsync('STATIC_NATIVE', 'PERMX', 0)
 
 case.properties.setActiveCellPropertyAsync(createResult(poroChunks, permxChunks),
                                            'GENERATED', 'POROPERMXAS', 0)
