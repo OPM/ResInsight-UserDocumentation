@@ -1,19 +1,19 @@
 +++
-title = "Well Trajectories"
+title = "Well Paths"
 published = true
 weight = 20
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/ResInsight_WellPathWithSimulationWell.png)
 
-ResInsight can import Well trajectories from simple Ascii files. 
-In addition, ResInsight is able to retrieve Well Trajectories from an Equinor internal web service.
+ResInsight can import well paths from simple Ascii files. 
+In addition, ResInsight is able to retrieve well paths from an Equinor internal web service.
 
 ResInsight also supports creation of your own user-defined well paths. See [Create Well Paths]({{< relref "createnewwellpaths" >}})
 
-## Ascii Well Trajectories
+## Ascii Well Paths
 
-The command **File -> Import -> Well Data -> Import Well Paths From File** will read the well paths in the selected file, and create one entry for each trajectory under the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**. 
+The command **File -> Import -> Well Data -> Import Well Paths From File** will read the well paths in the selected file, and create one entry for each well path under the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**. 
 
 The supported ASCII format is quite flexible but the main requirements are: 
 
@@ -58,18 +58,18 @@ The supported ASCII format is quite flexible but the main requirements are:
     5507	4638.5	1628.6	1628.6
 
     
-### Trajectory Files are Referenced
-The trajectory data is not copied into the ResInsight project as such. The project file only stores the file path, and the next time you open the project, ResInsight will try to read the well data from the file again.  
+### Well Path Files are Referenced
+The well path data is not copied into the ResInsight project as such. The project file only stores the file path, and the next time you open the project, ResInsight will try to read the well data from the file again.  
 
 {{% notice info %}}
-If the well trajectory file is changed and you would like a running ResInsight to update accordingly, you will need to delete all the well trajectories that emerge from that file, and import it again.
+If the well path file is changed and you would like a running ResInsight to update accordingly, you will need to delete all the well paths that emerge from that file, and import it again.
 {{% /notice %}}
 
 ## Importing from SSI-Hub (Internal Statoil Web-service)
 
 In order to import from SSI-Hub, a project file must be present and stored to file. All imported well paths from the web service will be stored relative to this project file location. If no project file exists, the menu item is disabled.
 
-The command **File -> Import -> Well Data -> Import Well Paths From SSI-hub** launches a wizard to guide you through the process of selecting the well trajectories you need.
+The command **File -> Import -> Well Data -> Import Well Paths From SSI-hub** launches a wizard to guide you through the process of selecting the well paths you need.
 
 {{% notice info %}}
 <strong>Access to web service: </strong>
@@ -78,30 +78,30 @@ The import of well paths is using a web service. If you are a Statoil employee, 
 
 After completing the wizard, the wells imported are accessible as Items under the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**.
 
-The trajectory data is not copied into the  ResInsight project as such, but is stored in files in a directory called *ProjectFileName_wellpaths* in the same directory as your project file.   
+The well path data is not copied into the ResInsight project as such, but is stored in files in a directory called *ProjectFileName_wellpaths* in the same directory as your project file.   
 
-## Well Trajectory Visualization
+## Well Path Visualization
 
-All the imported well trajectories are available below the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**. 
+All the imported well paths are available below the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**. 
 
 ![]({{< relref "" >}}images/3d-main-window/WellsInTree.png)
 
-The visible wells are always shown in all the 3D Views in the complete project, so the toggles and settings control the overall project visibility of the Well Trajectories. The **Property Editor** of the **Wells** item is shown below 
+The visible wells are always shown in all the 3D Views in the complete project, so the toggles and settings control the overall project visibility of the Well Paths. The **Property Editor** of the **Wells** item is shown below 
 
 ![]({{< relref "" >}}images/3d-main-window/WellPathCollectionProperties.png)
 
 - **Global well path visibility** -- This option forces the well paths on or off, ignoring the individual settings unless it is set to Individual.
-- **Clip Well Paths** -- This option hides the top of the Well Trajectories to avoid displaying the very long lines from the reservoir to the sea surface.
+- **Clip Well Paths** -- This option hides the top of the Well Paths to avoid displaying the very long lines from the reservoir to the sea surface.
 - **Well Path clipping depth distance** -- This number is the distance from the top of the reservoir to the clipping depth.
 
-## Individual Well Trajectories
-A well trajectory (well path) will hold well log data and well path data imported from files. A well path file is placed inside the well path item, while one or more well log files are placed as child items under the well path in the project tree.
+## Individual Well Path
+A well path will hold well log data and well path data imported from files. A well path file is placed inside the well path item, while one or more well log files are placed as child items under the well path in the project tree.
 
 ### Importing Well Log Files
 Well log data is usually imported from LAS-files (_\*.las_). LAS-files can be imported using the command: **File->Import-> Well Data->Import Well Logs from File**.
 
 ResInsight will look for the the well name in the imported LAS-files among the existing **Well Paths**.
-If a match is found, the LAS-file is placed as a child of that trajectory. If not, a new empty well path entry is created with the imported LAS-file under it. A well path may have more than one LAS-files as children.
+If a match is found, the LAS-file is placed as a child of that well path. If not, a new empty well path entry is created with the imported LAS-file under it. A well path may have more than one LAS-files as children.
 
 ![]({{< relref "" >}}images/3d-main-window/LasFilesInTree.png)
 
@@ -111,9 +111,6 @@ If the LAS-file does not contain a well name, the file name is used instead.
 If ResInsight's automatic well matching fails and a LAS-file is matched with the wrong well path, it is possible to move the LAS-file to the correct well path. Select the LAS-file context menu click **Move LAS File to Well Path** and select destination well path.
 
 ![]({{< relref "" >}}images/3d-main-window/MoveLasFileMenu.png)
-
-### Importing Well Path Files
-See [Importing Well Paths](#ascii-well-trajectories)
 
 ### Look for an Existing Well Path
 Well log names may vary slightly among different files from the same well. When importing a well log file or a well log path file, ResInsight have to look for an existing well path item to ensure that the well log data and well path are imported to the correct well path item. The lookup is based on name comparison this way:
