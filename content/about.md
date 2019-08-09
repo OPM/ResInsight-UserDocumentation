@@ -41,6 +41,7 @@ ResInsight is developed by [Ceetron Solutions](https://www.ceetronsolutions.com/
 ResInsight is a part of the [Open Porous Media Initiative](http://opm-project.org/).
 The software is hosted at [GitHub](https://github.com/OPM/ResInsight), and the development progress can be monitored there. The GitHub issue tracker is heavily used to organize the development process.
 
+### Licensing
 The software is licensed under GPL 3+, see [Licensing details](https://github.com/OPM/ResInsight/blob/master/COPYING).
 
 ### Web site programming and design

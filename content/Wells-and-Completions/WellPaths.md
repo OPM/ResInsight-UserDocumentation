@@ -7,7 +7,7 @@ weight = 20
 ![]({{< relref "" >}}images/3d-main-window/ResInsight_WellPathWithSimulationWell.png)
 
 ResInsight can import Well trajectories from simple Ascii files. 
-In addition, a Statoil specific solution to retrieve Well Trajectories from their internal web service is implemented.
+In addition, ResInsight is able to retrieve Well Trajectories from an Equinor internal web service.
 
 ResInsight also supports creation of your own user-defined well paths. See [Create Well Paths]({{< relref "createnewwellpaths" >}})
 
