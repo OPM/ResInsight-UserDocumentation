@@ -13,12 +13,15 @@ ResInsight provides powerful and flexible mechanisms for post-processing of resu
 - Octave interface
 
 ## Command Line Interface and Command files
-ResInsight supports several command line parameters for automation via shell scripts, see 
-[Command Line Interface]({{< ref "octaveinterfacereference.md" >}}). 
-By gathering commands into a file, you may run a sequence of specified commands by supplying the command file as a command line parameter. 
+ResInsight supports several [command line parameters] ({{< ref "CommandLineInterface.md" >}})
+for automation via shell scripts. 
+By gathering commands into a [Command file]({{< ref "CommandFile.md" >}}),
+you may run a sequence of commands by supplying the command file as a 
+[command line parameter]({{< ref "CommandLineInterface.md" >}}). 
 
 ## Python Interface
-ResInsight offers a Python Interface which allows you to interact with a running ResInsight instance from a Python script. 
+ResInsight offers a [Python Interface] ({{< ref "pythonrips.md" >}})
+which allows you to interact with a running ResInsight instance from a Python script. 
 This allows using the powerful Python language, numerical libraries, and other support modules in conjunction with ResInsight.
 
 ## Octave Interface
