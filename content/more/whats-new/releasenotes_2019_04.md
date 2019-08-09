@@ -26,7 +26,7 @@ See [Saturation Pressure Plots]({{< relref "saturationpressureplots" >}})
 
 Sub-sections of the Eclipse Grid with Parameters and Faults can be exported to Eclipse ASCII files in order to create new Simulations on the sub-section. These sub-sections can also be refined to a higher resolution.
 
-See [Export Sector Model]({{< relref "exportsectormodel" >}})
+See [Export Sector Model]({{< ref "sectormodel.md" >}})
 
 ## Well model for ICD, AICD and ICV
 ![]({{< relref "" >}}images/introduction/ValveVisualisation.png)
