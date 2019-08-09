@@ -13,7 +13,7 @@ weight = 20
 
 {{% notice info %}}
 The binary distribution does not support ABAQUS odb files. For building ResInsight with ABAQUS support, see 
-[Build Instructions]({{< ref "/more/buildinstructions" >}}).
+[Build Instructions]({{< ref "buildinstructions.md" >}}).
 {{% /notice %}}
 
 

@@ -24,7 +24,7 @@ See the following for common install procedures and options:
 
 - [ Windows Installation ]({{< ref "windows-installation.md" >}})
 
-See [ Build Instructions ]({{< ref "/more/buildinstructions.md" >}}) for the complete list of configuration options including support for 
+See [ Build Instructions ]({{< ref "buildinstructions.md" >}}) for the complete list of configuration options including support for 
 Octave plugins, ABAQUS ODB API, and HDF5.
 
 

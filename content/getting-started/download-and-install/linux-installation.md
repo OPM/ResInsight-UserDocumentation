@@ -40,7 +40,7 @@ For further installation details, see the ResInsight distribution on [Opm Projec
  
 {{% notice info %}}
 The binary distributions does not support ABAQUS odb files. For building ResInsight with ABAQUS support, see 
-[Build Instructions]({{< ref "/more/buildinstructions" >}}).
+[Build Instructions]({{< ref "buildinstructions.md" >}}).
 {{% /notice %}}
 
 
@@ -74,7 +74,7 @@ It is <b>not</b> expected to work for other configurations.
 (ResInsight 1.3.2-dev and earlier, was also tested on RedHat 5)<br>
 <br>
 If you need the octave interface to work on a different OS, you need to build ResInsight yourself.<br> 
-See <a href="{{< relref "buildinstructions" >}}">Build Instructions</a> 
+See <a href="{{< relref "buildinstructions.md" >}}">Build Instructions</a> 
 {{% /notice %}}
 
 
