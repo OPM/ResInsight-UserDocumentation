@@ -6,7 +6,7 @@ weight = 110
 
 ![]({{< relref "" >}}images/3d-main-window/GridStatisticsDialog.png)
 
-ResInsight 3D Views has an [info box]({{< relref "reservoirviews" >}}#info-box) in the upper right corner displaying statistics for the current view. A more detailed version of this information may also be displayed in a separate dialog window. Right click on the 3D view background and select **Grid Statistics** to bring up the dialog.
+ResInsight 3D Views has an [info box]({{< relref "3dviews" >}}#info-box) in the upper right corner displaying statistics for the current view. A more detailed version of this information may also be displayed in a separate dialog window. Right click on the 3D view background and select **Grid Statistics** to bring up the dialog.
 
 ## Grid Statistics Dialog Fields
 The dialog consist of three information parts.
