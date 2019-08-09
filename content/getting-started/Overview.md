@@ -6,7 +6,7 @@ weight = 5
 
 ### User Interface 
 
-ResInsight has two main windows. One for 3D related visualization, and one for 2D graphs and plots. These ares shown in the images below. 
+ResInsight has two main windows, one for 3D related visualizations and one for 2D graphs and plots. 
 
 #### 3D Main Window
 ![ResInsight User Interface]({{< relref "" >}}images/getting-started/ResInsightUIMediumSize.png)
