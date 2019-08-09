@@ -52,7 +52,6 @@ published = true
         <br>
         <a href="{{< relref "releasenotification" >}}">Release Notification &rarr;</a>
       </p>
-       Latest release is 2019.04
       </div>
     <div class="clear"></div>
   </div>
