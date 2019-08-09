@@ -82,7 +82,7 @@ Please refer to [Intersections]({{< relref "intersections" >}}) for details.
 Selected overlay items in the 3D view can activate a corresponding item in the **Property Editor**. This is implemented for Info box and result color legends. Please note that this feature is activated by clicking inside the texture/colored part of the legend. 
 
 
-## Eclipse-only features
+## Eclipse features
 
 ### Cell Edge Results {{< image-in-text src="images/3d-main-window/EdgeResult_1.png" >}}
 
