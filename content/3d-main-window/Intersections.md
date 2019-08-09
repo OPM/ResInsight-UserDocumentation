@@ -147,7 +147,7 @@ The view is mostly controlled by the options in the 3D view where the intersecti
 - **Defining Points**
   - **Show points** -- Toggle the display of the defining points for Polyline or Azimuth and Dip intersections.
 
-These options are similar to the options for a regular 3D view (See [View Properties]({{< relref "3diews" >}}#view-properties) ) 
+These options are similar to the options for a regular 3D view (See [View Properties]({{< relref "3dviews" >}}#view-properties) ) 
 
 ## Intersection Box and Intersection Planes
 

@@ -4,7 +4,7 @@ published = true
 weight = 60
 +++
 
-![]({{< relref "" >}}images/3d-main-window/TemporaryLGR_CompletionType.png) ![]({{< relref "" >}}images/3d-main-window/TemporaryLGR_CompletionType2.png)
+![]({{< relref "" >}}images/3d-main-window/TemporaryLGR_CompletionType_12_combined.png)
 
 ResInsight supports creating and exporting LGRs (Local Grid Refinement) in main grid cells intersected by completions.
 

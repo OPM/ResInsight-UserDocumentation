@@ -11,7 +11,7 @@ hidden = true
 ResInsight 2018.11 is the latest version of ResInsight, the professional quality, open source 3D visualization, curve plotting and post-processing tool for Eclipse reservoir models. Version 2018.11 contains a larger number of new and exciting features, some of which are listed below.
 
 ## Local Grid Refinement (LGR)
-![LGR Type 1]({{< relref "" >}}images/introduction/TemporaryLGR_CompletionType.png) ![LGR Type 2]({{< relref "" >}}images/introduction/TemporaryLGR_CompletionType2.png)
+![]({{< relref "" >}}images/3d-main-window/TemporaryLGR_CompletionType_12_combined.png)
 
 Local Grid Refinement (LGR) can be created based on Eclipse simulations. The refined grids can also be visualised in 3D.
 
