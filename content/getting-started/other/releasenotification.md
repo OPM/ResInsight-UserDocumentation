@@ -1,7 +1,7 @@
 +++
 title = "Release Notification Subscription"
 published = true
-hidden = true
+hidden = false
 weight = 40
 +++
 
