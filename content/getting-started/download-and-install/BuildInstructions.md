@@ -14,7 +14,7 @@ In a git enabled shell do: `git clone https://github.com/OPM/ResInsight.git`
 
 ### Windows Compiler
 
-Visual Studio 2015 or later is supported.
+Visual Studio 2015 and later is supported.
 
 ### GCC Compiler
 
@@ -22,29 +22,31 @@ GCC version 4.9 or later is supported. On RedHat Linux 6 you need to install dev
     
     source /opt/rh/devtoolset-3/enable
 
-### Qt4
+### Qt5
+[Qt](http://download.qt.io/archive/qt/) Qt5 version 5.6.0 or later is supported. 
+
+On some configurations you will be asked to specify the location of Qt5. Example for Windows :
+`Qt5_DIR=d:\Qt\5.11.3\msvc2017_64\lib\cmake\Qt5`
+
+#### Qt4 (Deprecated)
+
+{{% notice info %}}
+Qt4 is marked as deprecated and support for using Qt4 will soon be removed.
+{{% /notice %}}
 
 [Qt](http://download.qt.io/archive/qt/) Qt4 version 4.6.2 or later is supported. On Windows we recommend Qt-4.8.7, while the default installation will do under Linux. 
 
+`RESINSIGHT_BUILD_WITH_QT5=FALSE`
+
 You will need to patch the Qt sources in order to make them build using Visual Studio 2015 using this : 
 [Qt-patch](https://github.com/appleseedhq/appleseed/wiki/Making-Qt-4.8.7-compile-with-Visual-Studio-2015) 
-
-### Qt5 (BETA)
-Qt5 is now supported as beta functionality. To use Qt5, specify the cmake variable 
-
-`RESINSIGHT_BUILD_WITH_QT5=TRUE`
-
-and then specify location of Qt5
-
-`Qt5_DIR=d:\Qt\5.11.3\msvc2017_64\lib\cmake\Qt5`
-
 
 ### CMake
 [CMake](https://cmake.org/download/) version 2.8 or later is supported.
 
 ## Build Instructions
 The ResInsight build may be configured in different ways, with optional support for Octave plugins, 
-ABAQUS ODB API, HDF5, and OpenMP. This is configured using options in CMake.
+ABAQUS ODB API, HDF5, Pyton, and OpenMP. This is configured using options in CMake.
 
 If you check the button 'Grouped' in the CMake GUI, the CMake variables are grouped by prefix. 
 This makes it easier to see all of the options for ResInsight.
@@ -87,29 +89,46 @@ You will find the ResInsight binary under the Install directory in your build di
 | CMake Name                                        | Default | Description                                                           |
 |---------------------------------------------------|---------|-----------------------------------------------------------------------|
 | `RESINSIGHT_BUILD_DOCUMENTATION`                  | OFF     | Use Doxygen to create the HTML based API documentation. Doxygen must be properly installed. |
+| `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable gRPC scripting server. Required to be able to use ResInsight from Python |
 | `RESINSIGHT_HDF5_DIR`                             | Blank   | Windows Only: Optional path to HDF5 libraries on Windows |
-| `RESINSIGHT_INCLUDE_APPLICATION_UNIT_TESTS`       | OFF     | Include Application Code Unit Tests |
 | `RESINSIGHT_ODB_API_DIR`                          | Blank   | Optional path to the ABAQUS ODB API from Simulia. Needed for support of geomechanical models |
 | `RESINSIGHT_USE_OPENMP`                           | ON      | Enable OpenMP parallellization in the code |
 
 #### Advanced Options
+To be able to modify **Advanced Options** from the CMake User Interface, tick the checkbox **Advanced**
 
 | CMake Name                                        | Default | Description                              |
 |---------------------------------------------------|---------|--------------------------------------------------------|
-| `RESINSIGHT_ENABLE_PROTOTYPE_FEATURE_SOURING`     | ON      | Enable Souring features |
-| `RESINSIGHT_PRIVATE_INSTALL`                      | ON      | Linux only: Install the libecl shared libraries along the executable |
+| `RESINSIGHT_BUILD_WITH_QT5`                       | ON      | If ON, use Qt5. If OFF, use Qt4 (Support for Qt4 is deprecated and will be removed) |
+| `RESINSIGHT_BUNDLE_OPENSSL`                       | OFF     | Bundle the OpenSSL library DLLs in the Windows installer package |
 | `RESINSIGHT_ENABLE_COTIRE`                        | OFF     | Experimental speedup of compilation using cotire |
-| `RESINSIGHT_HDF5_BUNDLE_LIBRARIES`                | OFF     | Bundle HDF5 libraries with ResInsight  |
+| `RESINSIGHT_ENABLE_PROTOTYPE_FEATURE_SOURING`     | ON      | Enable Souring features |
+| `RESINSIGHT_INCLUDE_APPFWK_TESTS`                 | OFF     | Include unit tests from thirdparty libraries AppFwk and VizFwk |
+| `RESINSIGHT_INCLUDE_APPLICATION_UNIT_TESTS`       | OFF     | Include Application Code Unit Tests |
+| `RESINSIGHT_PRIVATE_INSTALL`                      | ON      | Linux only: Include libecl libraries in the installation package |
+| `RESINSIGHT_HDF5_BUNDLE_LIBRARIES`                | OFF     | Linux only: Include HDF5 libraries in the installation package |
+
+#### Configuration parameters for Python (beta)
+These parameters are considered beta, and might change.
+
+| CMake Name                                        | Default | Description                              |
+|---------------------------------------------------|---------|--------------------------------------------------------|
+| `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable gRPC scripting server. Required to be able to use ResInsight from Python |
+| `RESINSIGHT_GRPC_PYTHON_EXECUTABLE`               | Blank   | Location of Python3 executable |
+| `RESINSIGHT_GRPC_INSTALL_PREFIX`                  | Blank   | Linux only : Installation prefix for gRPC |
 
 ### Optional Libraries and features
 
-#### HDF5
+#### Python (Beta)
 
-HDF5 is used to read SourSimRL result files. On Windows this is optional, while on Linux the installed HDF5 library will be used if present.
+Scripting of ResInsight is possible from a Python library. The build configuration is a bit involved and is under review.
 
-Use an advanced flag RESINSIGHT_HDF5_BUNDLE_LIBRARIES to enable bundling of HDF5 libraries.
+The current build instructions are specified in text files in the ResInsight repository.
 
-Tested with 1.8.18 on windows, and default installation on RedHat 6.
+- [Grpc install instructions](https://github.com/OPM/ResInsight/blob/dev/GRPC_install_instructions.txt)
+- [Helper script for Linux](https://github.com/OPM/ResInsight/blob/dev/build_grpc_linux.sh)
+
+See [ Python API ]({{< ref "PythonRips.md" >}}) for how to use the Python library.
 
 #### Octave
 
@@ -125,11 +144,8 @@ ResInsight has been verified to build and run with Octave versions 3.4.3, 3.8.1,
 
 ##### Octave Dependencies for Debian Based Distributions
 
-- sudo apt-get install git cmake build-essential octave octave-headers qt4-dev-tools
-
-If you are running Ubuntu 12.10 or newer, you will need to replace octave-headers with liboctave-dev :
-
-- sudo apt-get install git cmake build-essential octave liboctave-dev qt4-dev-tools
+The following command line can be used as a starting point to install required libraries
+`sudo apt-get install git cmake build-essential octave liboctave-dev qtbase5-dev qtscript5-dev`
 
 #### ODB support
 
@@ -137,3 +153,12 @@ ResInsight can be built with support for ABAQUS ODB files. This requires an inst
 from Simulia on the build computer. The path to the ABAQUS ODB API folder containing header files and library 
 files must be specified. Leaving this option blank gives a build without ODB support. 
 ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windows 7/8/10 and RedHat Linux 6.
+
+#### HDF5
+
+HDF5 is used to read SourSimRL result files. On Windows this is optional, while on Linux the installed HDF5 library will be used if present.
+
+Use an advanced flag RESINSIGHT_HDF5_BUNDLE_LIBRARIES to include HDF5 libraries in the installation package.
+
+Tested with 1.8.18 on windows, and default installation on RedHat 6.
+
