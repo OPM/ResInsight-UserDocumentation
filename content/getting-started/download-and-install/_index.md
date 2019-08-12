@@ -25,4 +25,6 @@ For an overview of some of its new and exciting features, see the following:
 
 - [ ResInsight 2018.11 ]({{< ref "releasenotes_2018_11.md" >}})
 
+[ Sign up to be notified of new releases ]({{< ref "releasenotification.md" >}})
+
 For the complete list of releases and updates, please visit [ResInsight on Github](https://github.com/OPM/ResInsight/releases/).

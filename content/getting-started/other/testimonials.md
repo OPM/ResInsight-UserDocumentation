@@ -2,7 +2,7 @@
 title = "Testimonials"
 published = true
 weight = 60
-hidden = false
+hidden = true
 +++
 
 *“I have been using ResInsight now for some time and have stopped using the commercial software as ResInsight is much more responsive and easier to use. It really is an excellent piece of software.”*
