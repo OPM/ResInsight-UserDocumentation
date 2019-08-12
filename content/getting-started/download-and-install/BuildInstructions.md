@@ -100,6 +100,7 @@ To be able to modify **Advanced Options** from the CMake User Interface, tick th
 | CMake Name                                        | Default | Description                              |
 |---------------------------------------------------|---------|--------------------------------------------------------|
 | `RESINSIGHT_BUILD_WITH_QT5`                       | ON      | If ON, use Qt5. If OFF, use Qt4 (Support for Qt4 is deprecated and will be removed) |
+| `RESINSIGHT_QT5_BUNDLE_LIBRARIES`                 | OFF     | Linux only: Include Qt5 libraries in the installation package |
 | `RESINSIGHT_BUNDLE_OPENSSL`                       | OFF     | Bundle the OpenSSL library DLLs in the Windows installer package |
 | `RESINSIGHT_ENABLE_COTIRE`                        | OFF     | Experimental speedup of compilation using cotire |
 | `RESINSIGHT_ENABLE_PROTOTYPE_FEATURE_SOURING`     | ON      | Enable Souring features |
