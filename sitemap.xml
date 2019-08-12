@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/reservoirviews/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/3dviews/</loc>
   </url>
   
   <url>
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/whats-new/releasenotes_2019_04/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/whats-new/releasenotes_2019_04/</loc>
   </url>
   
   <url>
@@ -79,15 +79,11 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/testimonials/</loc>
-  </url>
-  
-  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/wellpaths/</loc>
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/whats-new/releasenotes_2018_11/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/whats-new/releasenotes_2018_11/</loc>
   </url>
   
   <url>
@@ -99,7 +95,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/buildinstructions/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/buildinstructions/</loc>
   </url>
   
   <url>
@@ -167,7 +163,7 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/releasenotification/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/other/releasenotification/</loc>
   </url>
   
   <url>
@@ -223,7 +219,11 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/export/exportsectormodel/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/export/sectormodel/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/other/testimonials/</loc>
   </url>
   
   <url>
@@ -304,10 +304,6 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/_header/</loc>
-  </url>
-  
-  <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/more/</loc>
   </url>
   
   <url>

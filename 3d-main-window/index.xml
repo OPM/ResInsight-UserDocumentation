@@ -23,10 +23,10 @@ Transmissibility Normalized by Area The transmissibility for cells and Non-Neigh
     
     <item>
       <title>3D Views</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/reservoirviews/</link>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/3dviews/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/reservoirviews/</guid>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/3dviews/</guid>
       <description>3D Views are the windows displaying the Grid Models. The visualization is controlled by the Project Tree item representing the View and their sub items.
 Each item has a set of properties that can be edited in the Property Editor.
 Several views can be added to the same case by right-clicking the case or a view and select New View. You can also Copy and then Paste a view into a Case.</description>

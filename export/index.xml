@@ -65,10 +65,10 @@ A dialog appears after selecting an export well path command.
     
     <item>
       <title>Sector Model</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/export/exportsectormodel/</link>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/export/sectormodel/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/export/exportsectormodel/</guid>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/export/sectormodel/</guid>
       <description>Sub-sections of the Eclipse Grid with Parameters and Faults can be exported to Eclipse ASCII files in order to create new Simulations on the sub-section.
 Exporting an Eclipse Sector Model To launch the export dialog, right-click on either the 3D-view in question or the Cell Result.
 Exporting Grid and Faults Grid Export The Export dialog will allow the user to export grid data as ascii (An Eclipse Input Grid) to a specific file name by checking the Export Grid Data option.</description>
