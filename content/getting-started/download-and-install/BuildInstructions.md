@@ -133,7 +133,7 @@ See [ Python API ]({{< ref "PythonRips.md" >}}) for how to use the Python librar
 
 #### Octave
 
-Octave is now detected searching the file system, and will usually find Octave on Linux. If Octave is not detected, the following file path variable must be defined
+Octave is now detected searching the file system. If Octave is not detected, the following file path variable must be defined:
 
 `OCTAVE_CONFIG_EXECUTABLE : d:\octave\Octave-4.0.0\bin\octave-config.exe`
 
