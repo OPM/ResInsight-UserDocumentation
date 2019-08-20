@@ -5,6 +5,7 @@ weight = 150
 +++
 
 ResInsight supports displaying a few types of annotations in 3D views and Contour Map view.
+
 - Text annotations
 - Reach circle annotations
 - Polyline annotations
