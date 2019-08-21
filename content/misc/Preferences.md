@@ -34,7 +34,7 @@ This group contains the different fonts which are used through ResInsight.
 - **Well Label Font Size** -- The font used for all Well Path labels.
 - **Plot Font Size** - The font used for legends, axes labels, values in Plots. This affects the docked plots in the main 3D window as well (Result Plot, Relative Permeability etc), although because of the reduces space available in these plots, the font size applied will be one less than the **Plot Font Size**.
 
-### 3d Views
+### 3D Views
 
 This group of options controls visual settings that will be used when creating new views.
 
@@ -46,8 +46,10 @@ This group of options controls visual settings that will be used when creating n
 - **Show 3D Information** -- Displays graphical resource usage as text in the 3D view.
 
 ### Other
-- **SSIHUB Address** -- Optional URL to Statoil internal web service used to import well paths.
-- **Show LAS Curve Without TVD Warning** - Turn off the warning displayed when showing LAS curves in TVD mode.
+- **Date Format** -- Defines the date format to be used in time legend plotting
+- **Time Format** -- Defines the time format to be used in time legend plotting
+- **SSIHUB Address** -- Optional URL to Equinor internal web service used to import well paths
+- **Show LAS Curve Without TVD Warning** - Turn off the warning displayed when showing LAS curves in TVD mode
 
 ## Eclipse - tab
 
@@ -58,21 +60,48 @@ This group of options controls visual settings that will be used when creating n
 - **Compute DEPTH Related Properties** -- If not present, compute DEPTH, DX, DY, DZ, TOP, BOTTOM when loading new cases.
 - **Load and Show SOIL** -- Control if SOIL is loaded and applied to grid.
 - **Import Faults/NNCs/Advanced MSW Data** -- Disable import of data for a case to reduce case import time.
-- **Fault Include File Absolute Path Prefix** -- Prefix used on Windows if fault files use absolute UNIX paths.
+- **Include File Absolute Path Prefix** -- Prefix used on Windows if include files use absolute UNIX paths.
 - **Use Result Index File** -- If enabled ResInsight will try to save a result index file when opening a new case. The file is stored in the same directory as the _`*.EGRID`_ file with filename _`<casename>.RESINSIGHT_IDX`_ If it exists, ResInsight will use this when loading the case, resulting in a significant speedup.
 - **Skip Import of Simulation Well Data** -- Disable import of simulation well data for a case to reduce case import time (opposite toggling than the other import commands).
 
-## Octave - tab
+### Origin Files
+Please refer to [Summary Origin]({{< relref "summaryplots.md#origin-files" >}}) for details related to handling of **Origin Files**.
 
-![]({{< relref "" >}}images/3d-main-window/OctavePreferences.png)
+
+## Summary - tab
+
+![]({{< relref "" >}}images/3d-main-window/Preferences_Summary.png)
+
+- **Default Summary Curves** -- Defines the curves for import when creating a new summary plot, ie `FOPT WOPT*`
+- **Default Curve Style for History Vectors**
+
+## Scripting - tab
+
+![]({{< relref "" >}}images/3d-main-window/Preferences_Scripting.png)
 
 ### Octave
 
-- **Octave executable location** -- Defines the binary file location for Octave. Usually without path on Linux, and including path on Windows.
+- **Octave Executable Location** -- Defines the binary file location for Octave. Usually without path on Linux, and including path on Windows.
 - **Show text header when executing scripts** -- Enables the default output that octave outputs when started.
+
+Please refer to [Octave Interface]({{< relref "octaveinterface.md" >}}) for more details.
+
+### Python
+
+- **Enable Python Script Server**
+- **Default Python Script Server Port** -- Defines the port used for communication with Python scripts
+- **Python Executable Location** 
+
+Please refer to [Python API]({{< relref "pythonrips.md" >}}) for more details.
 
 ### Script Files
 
 - **Shared Script Folder(s)** -- Defines the search paths for octave scripts
 - **Script Editor** -- The text editor to invoke when editing scripts
 
+
+## Export - tab
+
+![]({{< relref "" >}}images/3d-main-window/Preferences_Export.png)
+
+- **CSV Text Export Field Separator**
