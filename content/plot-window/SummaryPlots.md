@@ -8,7 +8,13 @@ weight = 10
 
 A Summary Plot is a window displaying a graph in the main area of the **Plot Main Window**. It can contain Summary Curves, Grid time history curves and pasted ascii curves ( See below ).
 
-A new plot can be created by using the right-click menu of a plot selecting {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot**. The [Summary Plot Editor]({{< relref "summaryploteditor" >}}) dialog will then open.
+A new plot can be created by using the right-click menu of a plot in the **Plot Project Tree** and activate {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **Open Summary Plot Editor**. The [Summary Plot Editor]({{< relref "summaryploteditor" >}}) dialog will then open.
+
+Activating {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot** from the right-click menu of a plot will create a new plot populated with the curves defined by the text string in [Preferences]({{< relref "preferences.md#summary-tab" >}}).
+
+{{% notice info %}}
+If you have many open plots, it can be useful to collapse all other plots. This is available by activating the item **Collapse Other Plots** from right-click menu of a plot in the <b>Plot Project Tree</b>.
+{{% /notice %}}
 
 ## Plot Data
 
@@ -67,8 +73,9 @@ Most of the settings for the Plot itself is controlled by its sub items in the P
   - **Time Mode** -- Option to show the time from Simulation Start, or as real date-times. 
   - **Time Unit** -- The time unit used to display **Time From Simulation Start** 
   - **Max**/**Min** -- The range of the visible time in the Plot in the appropriate time unit.  
-    The format of dates is _`yyyy-mm-ddThh:mm:ssZ`_ 
-  - **Font Size** -- The font size used for the date/times shown at the ticks of the axis 
+  - **Date Format** -- Date format for the time axis. Defaults to the setting defined in **Preferences**
+  - **Time Format** -- Time format for the time axis. Defaults to the setting defined in **Preferences**
+  - **Font Size** -- The font size used for the date/times shown at the ticks of the axis. Defaults to the setting defined in **Preferences**
 
 ### Y-axis Properties
 
@@ -84,6 +91,7 @@ Most of the settings for the Plot itself is controlled by its sub items in the P
   - **Font Size** --  Defines the font size used by the axis title. 
 - **Axis Values**
   - **Logarithmic Scale**  - Draw plot curves using a logarithmic scale. 
+  - **Invert Axis**  - Invert the axis. Used when depth is represented on the Y-axis.
   - **Number Format** -- Defines how the legend numbers are formatted.
     - **Auto** -- Legend numbers are either using a scientific or decimal notation based on the number of digits of the value
     - **Decimal** -- Legend numbers are displayed using decimal notation.
@@ -103,14 +111,19 @@ Most of the settings for the Plot itself is controlled by its sub items in the P
 - **Window Zoom** -- Window zoom is available by dragging the mouse when the left mouse button is pressed. Use {{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} **Zoom All** to restore default zoom level.
 - **Wheel Zoom** -- The mouse wheel will zoom the plot in and out towards the current mouse cursor position.
 
+### Curve Hightlight
+
+![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
+
+Summary curves will be highlighted when left-clicked in a plot. This allows for detailed investigation on curve values when many curves are plotted. All other curves can be hidden by activating the right-click menu of a plot, and select **On - Ohters Off**
+
 ### Accessing the Plot Data
 
-The command context command **Show Plot Data** will show a window containing the plot data in ascii format. The content of this window is easy to copy and paste into Excel or other tools for further processing.
+The right-click menu item **Show Plot Data** will open a window containing the plot data as text in columns. The text content of this window is easy to copy and paste into Excel or other tools for further processing.
 
-This dialog supports plot data displayed by day, week, month, Quarter, half year and year.
+This dialog supports plot data displayed by day, week, month, quarter, half year and year.
 
-It is also possible to save the ascii data to a file directly by using the context command **Export Plot Data to Text File** on the plot. 
-
+It is also possible to save the text data to a file directly by using the right-click command **Export Plot Data to Text File**. 
 
 ## Summary Curves
 
@@ -217,23 +230,20 @@ Copy and Paste of selections of Summary Plots and Curves, is possible using the 
 ## Recursive summary file import
 When using the standard file selection dialog, the user is limited to select files in one directory only. If the interesting files are distributed over multiple directories, the dialog has to be opened once for each directory. The recursive file selection dialog is created to circumvent this limitation. This dialog is able to search a directory tree for files matching a specified pattern.
 
-![]({{< relref "" >}}images/plot-window/RecursiveImportDialog1.png)
+![]({{< relref "" >}}images/plot-window/RecursiveImportDialog2.png)
 
 The dialog consists of the following fields:
 
-- **Root Folder**: The root directory where the file search starts. Text may be entered directly into the field. Alternatively press the browse button to display the directory selection dialog.
-- **Path Pattern**: The search pattern that applies to the start of the relative search path. If the pattern does not end with a "\*", an implicit wildcard is added silently. Supported wildcards:
-  - **\*** Matches any number of any characters except the directory separator
+- **Path Pattern**: The path filter uses normal wildcard file globbing, like in any unix shell. When the filter ends with a single "**" (eg. "/home/*"), however, ResInsight will search recursively in all subdirectories from that point. This is indicated by "..." in the **Effective Filter** label below.
+  - **\*** Matches any number of any characters except the path separator
   - **?** Matches one character exception the directory separator
   - **[abc]** Matches one of the specified characters. Ex. a, b or c
 - **File Pattern**: The search pattern that applies to the file name.
-- **Effective Filter**: The effective filter displays the resulting full path search pattern. It is updated on the fly as the user edits the pattern fields.
+- **Effective Filter**: The effective filter displays the resulting full path search pattern. It is updated on the fly as the user edits the pattern fields. A text string of "..." indicates a complete recursive directory search.
 
-After pressing the "Find" button, a file search is performed in the root directory and the directories below matching the path pattern. The files found are presented in a list, where the user can check/uncheck each file individually.
+After pressing the **Find** button, a file search is performed in the root directory and the directories below matching the path pattern. The files found are presented in a list, where the user can check/uncheck each file individually.
 
-![]({{< relref "" >}}images/plot-window/RecursiveImportDialog2.png)
-
-When the "OK" button is pressed, all checked files are imported.
+When the **OK** button is pressed, all checked files are imported.
 
 ### Origin Files
 ![]({{< relref "" >}}images/plot-window/OriginFileDialog.png)
