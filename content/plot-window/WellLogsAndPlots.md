@@ -106,7 +106,7 @@ It is possible to change some data source parameters in one go for either a full
 
 ![]({{< relref "" >}}images/plot-window/WellLogPlotDataSource.png)
 
-To change data source for some curves, select the curves you wish to change source for and select **Change Data Source** command form the context menu. The following dialog will appear:
+To change data source for some curves, select the curves you wish to change source for and select **Change Data Source** command from the right-click menu. The following dialog will appear:
 
 ![]({{< relref "" >}}images/plot-window/WellLogExtractionChangeDataSource.png)
 

@@ -29,13 +29,13 @@ The first command will display the "old" import dialog:
 ResInsight then creates a **Grid Case Group** for you, and populates its **Source Cases** with the Cases you selected. Then the first of those Cases are read completely, while the others are just scanned to verify that the Grids match and to detect changes in the Active Cells layout. This makes it quite fast to load even a quite large number of realizations.
 
 ### Manually
-A Grid Case Group can be created from the context menu available when right-clicking a Result Case, Input Case or a different Grid Case Group. **Source Cases** can then be added by using the mouse to *drag and drop* cases with equal grids into the **Grid Case Group**'s **Source Case** folder.
+A Grid Case Group can be created from the right-click menu of a Result Case, Input Case or a different Grid Case Group. **Source Cases** can then be added by using the mouse to *drag and drop* cases with equal grids into the **Grid Case Group**'s **Source Case** folder.
 This is useful if you want to create statistics based only on a subset of the source cases in an already created **Grid Case Group**.
 
 **Drag and Drop** of cases will normally copy the cases to the new destination, but moving them is possible by pressing and holding the **Shift** key while dropping.
 
 ## Viewing Special Source Cases
-To reduce the number of views, only a view for the first case is created automatically. If you want to inspect the results of a particular source case, right-click the case and select **New view** from the context menu. A new 3D View will the be created on that particular case.
+To reduce the number of views, only a view for the first case is created automatically. If you want to inspect the results of a particular source case, select **New view** from the right-click menu. A new 3D View will the be created on that particular case.
 
 {{% notice note %}}
 <h5>How to limit system resource allocation</h5>
@@ -70,7 +70,7 @@ A histogram is created and the percentile is calculated based on the histogram. 
 
 
 ### Viewing the Results
-When the computation is complete, you have to create a 3D View on the **Statistics Case** to view the results. Use the Context menu available by right-clicking the **Statistics Case** to create it.
+When the computation is complete, you have to create a 3D View on the **Statistics Case** to view the results. Use the right-click menu of the **Statistics Case** to create it.
 
 ### Adding Statistics Cases
-A new statistical calculation can be created by activating the context menu for **Derived Statistic->New Statistics Case**.
+A new statistical calculation can be created by activating the right-click menu for **Derived Statistic->New Statistics Case**.

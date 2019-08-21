@@ -65,7 +65,7 @@ Most of the settings and features of ResInsight is accessible through the **Proj
 
 Toggling a checkbox next to an item in the **Project Tree** will toggle visibility in the window. Toggling a checkbox for a collection of items will affect the visibility for all items in the collection. {{< image-in-text src="images/getting-started/TreeViewToggle.png" >}}
 
-Context menu commands are also available to do special operations on a selected set of items.
+right-click menu commands are also available to do special operations on a selected set of items.
 
 How to interact and manipulate the 3D model is described in [Model Navigation]({{< relref "modelnavigation" >}})
 

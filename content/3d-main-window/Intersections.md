@@ -12,11 +12,11 @@ There are two main types of intersections. The first one which simply is called 
 
 The second intersection type is called an **Intersection Box**. An Intersection Box can be used as a box cutting the grid cells, or collapsed to a restricted axis aligned plane. 
 
-All types of intersections are stored in a folder named **Intersections** in a **View** as shown below. Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the context menu of each intersection.
+All types of intersections are stored in a folder named **Intersections** in a **View** as shown below. Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the right-click menu of each intersection.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionInTree.png)
 
-Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the context menu of each intersection.
+Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the right-click menu of each intersection.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionInTreeCopy.png)
 
@@ -24,9 +24,9 @@ Once created, the intersections may be copied to other views by selecting the **
 
 There are four types of curve based intersections: Well Path, Simulation Well, Polyline, and Azimuth and Dip. Azimuth and Dip differs from the other three curves, as it is defined just by one straight line. It is called Azimuth and Dip because the plane's extrusion direction can be defined by the two angles.
 
-Any of these intersections can be created by activating {{< image-in-text src="images/3d-main-window/CrossSection16x16.png" >}} **New Intersection** from the context menu of the **Intersections** item in the Project Tree.
+Any of these intersections can be created by activating {{< image-in-text src="images/3d-main-window/CrossSection16x16.png" >}} **New Intersection** from the right-click menu of the **Intersections** item in the Project Tree.
 
-They can also be created from the context menu in the 3D view, as described below.
+They can also be created from the right-click menu in the 3D view, as described below.
 
 {{% notice info %}}
 To be able to see the intersections in the 3D view, the grid cells can be hidden by disabling the <b>Grids</b> item in the Project Tree or activating the <b>Hide Grid Cells</b> toolbar button.
@@ -74,7 +74,7 @@ If the well contains more than one branch, the intersection geometry will be cre
 
 ### Polyline Intersection
 
-A new **Polyline** intersection can be created from the context menu in the 3D view. Then, by left-clicking on reservoir geometry, a polyline is created. The points are added to the point list in the **Property Editor**. 
+A new **Polyline** intersection can be created from the right-click menu in the 3D view. Then, by left-clicking on reservoir geometry, a polyline is created. The points are added to the point list in the **Property Editor**. 
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionPolyline.png)
 
@@ -88,7 +88,7 @@ The points in the list can be copied to clipboard using **CTRL-C** when keyboard
 
 ### Azimuth and Dip
 
-A new **Azimuth and Dip** intersection can be created from the context menu in the 3D view. Then, by left-clicking two points on reservoir geometry, a single line is created between the first point, and the second point projected down to the plane with same z-value as the first point. The two points are added to the point list in the **Property Editor**. 
+A new **Azimuth and Dip** intersection can be created from the right-click menu in the 3D view. Then, by left-clicking two points on reservoir geometry, a single line is created between the first point, and the second point projected down to the plane with same z-value as the first point. The two points are added to the point list in the **Property Editor**. 
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionAzimuthDip.png)
 
@@ -151,7 +151,7 @@ These options are similar to the options for a regular 3D view (See [View Proper
 
 ## Intersection Box and Intersection Planes
 
-A new **Intersection Box** or **Intersection Plane** can be created from the context menu in the 3D view or the context menu in the **Project Tree**.
+A new **Intersection Box** or **Intersection Plane** can be created from the right-click menu in the 3D view or the right-click menu in the **Project Tree**.
 
 ![]({{< relref "" >}}images/3d-main-window/3d_view_context_menu.png)
 

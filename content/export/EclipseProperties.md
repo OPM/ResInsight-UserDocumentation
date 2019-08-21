@@ -10,7 +10,7 @@ The generated property can be exported for further use in the simulator.
 
 ### Export Command
 
-To export the property currently active in the 3D View, activate the context menu on a **Cell Result** item in the **Project Tree**. 
+To export the property currently active in the 3D View, activate the right-click menu on a **Cell Result** item in the **Project Tree**. 
 
 ![]({{< relref "" >}}images/export/ExportProperty.png) 
 

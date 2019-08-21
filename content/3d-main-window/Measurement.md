@@ -6,7 +6,7 @@ weight = 140
 
 ![]({{< relref "" >}}images/3d-main-window/Measurement.png)
 
-ResInsight supports measurements in the 3D views. To enter measurement mode, press the ruler toolbar button {{< image-in-text src="images/3d-main-window/MeasurementButton.png" >}} or the keyboard shortcut **Ctrl-M**. This mode can also be activated from the context menu in a 3D view.
+ResInsight supports measurements in the 3D views. To enter measurement mode, press the ruler toolbar button {{< image-in-text src="images/3d-main-window/MeasurementButton.png" >}} or the keyboard shortcut **Ctrl-M**. This mode can also be activated from the right-click menu in a 3D view.
 
 
 ![]({{< relref "" >}}images/3d-main-window/MeasurementToolbar.png)

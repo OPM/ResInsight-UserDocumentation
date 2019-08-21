@@ -57,7 +57,7 @@ After clicking *Reload Case*, the time steps in the toolbar will be updated.
 ### Eclipse ASCII Input Data
 1. Select **File->Import->Eclipse Cases-> {{< image-in-text src="images/getting-started/EclipseInput24x24.png" >}} Import Input Eclipse Case** and select a _`*.GRDECL`_ file.
 2. The case is imported, and a view of the case is created
-3. Right-click the **Input Properties** in the generated **Input Case** and use the context menu to import additional Eclipse Property data files.
+3. Right-click the **Input Properties** in the generated **Input Case** and use the right-click menu to import additional Eclipse Property data files.
 
 ### Handling Missing or Wrong MAPAXES
 

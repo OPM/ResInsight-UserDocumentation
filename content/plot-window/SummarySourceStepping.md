@@ -28,7 +28,7 @@ In some cases some of the stepping components are hidden, depending on the set o
 - Vectors/Summaries
 
 ### Tag selected curve item for source stepping
-If the plot contains a mix of different curves, ResInsight might end up with too few stepping components available. Then, by selecting a summary curve or ensemble curve set, and activation of the context menu item **Set as Source Stepping Curve**, will use the selected curve as basis for data source stepping. All source stepping components for the selected curve is dispayed. When a curve or ensemble is marked for source stepping, an source stepping icon is displayed next to the curve.
+If the plot contains a mix of different curves, ResInsight might end up with too few stepping components available. Then, by selecting a summary curve or ensemble curve set, and activation of the right-click menu item **Set as Source Stepping Curve**, will use the selected curve as basis for data source stepping. All source stepping components for the selected curve is dispayed. When a curve or ensemble is marked for source stepping, an source stepping icon is displayed next to the curve.
 
 Select **Clear Source Stepping Curve** to leave this mode.
 

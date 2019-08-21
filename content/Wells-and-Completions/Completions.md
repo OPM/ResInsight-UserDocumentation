@@ -109,7 +109,7 @@ An example of the ICD parameters can be seen below:
 An example of the AICD parameters:
 ![]({{< relref "" >}}images/3d-main-window/ValveTemplate_AICD.png)  
 
-New templates can also be added by selecting the **New Valve Template** option from the context menu of the **Valve Templates** entry in the **Completion Templates** Project Tree item.
+New templates can also be added by selecting the **New Valve Template** option from the right-click menu of the **Valve Templates** entry in the **Completion Templates** Project Tree item.
 
 ![]({{< relref "" >}}images/3d-main-window/NewValveTemplate.png)  
 
@@ -375,7 +375,7 @@ Instances of fractures can be created along well paths and simulation wells by r
 ### Multiple Fracture Creation
 In some cases the user wants to create a number of fractures on one or more well paths. Doing this by creating one by one fracture can be very error prone and time consuming. To ease this task, ResInsight has support for creating several fractures in one operation.
 
-Select one or more well paths in the project tree, right click and select **Create Multiple Fractures** from the context menu. Then the **Create Multiple Fractures** dialog appears. In this dialog, the user defines where fractures will be created on the selected well paths. Different fracture templates and spacing can be used for different K layer ranges in the grid, by adding new options lines to the table. To edit an option line, double click the field to edit. Adding and deleting option lines are done by right clicking the table.
+Select one or more well paths in the project tree, right click and select **Create Multiple Fractures** from the right-click menu. Then the **Create Multiple Fractures** dialog appears. In this dialog, the user defines where fractures will be created on the selected well paths. Different fracture templates and spacing can be used for different K layer ranges in the grid, by adding new options lines to the table. To edit an option line, double click the field to edit. Adding and deleting option lines are done by right clicking the table.
 
 ![]({{< relref "" >}}images/3d-main-window/CreateMultipleFracturesDialog.png)
 

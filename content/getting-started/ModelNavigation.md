@@ -22,7 +22,7 @@ The following applies to all navigation modes:
 
 |Mouse interaction | Action |
 |------------------|---------|
-|RMB single click  | Context menu |
+|RMB single click  | Right-click menu (context menu) |
 |LMB single click  | Update status bar and **Result Info** |
 
 #### RMS navigation mode

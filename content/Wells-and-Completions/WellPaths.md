@@ -108,7 +108,7 @@ If a match is found, the LAS-file is placed as a child of that well path. If not
 If the LAS-file does not contain a well name, the file name is used instead. 
 
 #### Moving LAS-file
-If ResInsight's automatic well matching fails and a LAS-file is matched with the wrong well path, it is possible to move the LAS-file to the correct well path. Select the LAS-file context menu click **Move LAS File to Well Path** and select destination well path.
+If ResInsight's automatic well matching fails and a LAS-file is matched with the wrong well path, it is possible to move the LAS-file to the correct well path. Select the LAS-file right-click menu click **Move LAS File to Well Path** and select destination well path.
 
 ![]({{< relref "" >}}images/3d-main-window/MoveLasFileMenu.png)
 
@@ -132,7 +132,7 @@ The well path property editor lets the user control the appearance of the well p
 - **Well Picks group** -- Information about imported [well picks]({{< relref "formations" >}}#well-picks) file containing data for the current well path
 
 ### Casing Design
-Some Casing Design elements can be assigned to the well path by selecting **Create Casign Design** from the context menu of the well path.
+Some Casing Design elements can be assigned to the well path by selecting **Create Casign Design** from the right-click menu of the well path.
 
 This will create a new child object for the Well Path, named **Casing Design**. In the **Casign Design** Property editor 
 well path containment properties such as Casing (with Casing Shoe) and Liner can be added to the well path along with a start and end depth and a diameter. 

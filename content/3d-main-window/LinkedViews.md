@@ -14,7 +14,7 @@ To establish a link between views, select {{< image-in-text src="images/3d-main-
 
 ![]({{< relref "" >}}images/3d-main-window/LinkedViewsInProjectTree.png)
 
-It is also possible to link specific views by selecting them and choosing **Link Selected Views** from the context menu. The following image shows the linking of a regular view with a **Contour Map**. Note that contour maps can never be the Master View.
+It is also possible to link specific views by selecting them and choosing **Link Selected Views** from the right-click menu. The following image shows the linking of a regular view with a **Contour Map**. Note that contour maps can never be the Master View.
 
 ![]({{< relref "" >}}images/3d-main-window/LinkedContourMap.png)
 
@@ -41,7 +41,7 @@ When selecting a linked view in the project tree, the different options are avai
 
 A linked view can temporarily be disabled by unchecking the linked view. To disable all linked views temporarily, uncheck the top level item **Linked Views**.
 
-## Project Tree Context menu
+## Project Tree right-click menu
 
 Right-clicking one of the linked view entries in the **Project Tree** displays the following menu entries: 
 
@@ -49,7 +49,7 @@ Right-clicking one of the linked view entries in the **Project Tree** displays t
 - **Delete All Linked Views** -- Delete the linked views group, and thereby unlink all the views.
 - **Delete** -- Remove an individual view from the group of linked views.
 
-## 3D View Context Menu
+## 3D View right-click menu
 To activate the menu items for a linked view, right-click inside the 3D view anywhere outside the model. 
 Depending on whether the view is a dependent-, or an unlinked view, some of the following commands are available: 
 

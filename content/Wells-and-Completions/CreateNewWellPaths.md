@@ -11,7 +11,7 @@ ResInsight lets the user create new/custom well paths by clicking in the 3D view
 To create a well path:
 
 1. Right click **Wells** in the project tree
-2. Select **Create Well Path** in the context menu. A new well node and a well targets node are created.
+2. Select **Create Well Path** in the right-click menu. A new well node and a well targets node are created.
 3. Click in the 3D view on locations where the well path will pass (targets). Note. A 3D object must be hit when clicking. Clicking in thin air will not work.
 4. When finished placing targets, click on "Stop Picking Targets" in the property editor
 
@@ -38,7 +38,7 @@ A self created well path may be edited by either editing coordinates in the prop
 Clicking and dragging the blue part of a target, it can be moved along the Z axis only. Clicking and dragging the magenta part of a target, it can be moved freely around.
 
 ### Well Plan
-A well plan can be displayed by selecting **Show Well Plan** from the context menu of a generated well path. 
+A well plan can be displayed by selecting **Show Well Plan** from the right-click menu of a generated well path. 
 
 ```
 -- MDRKB          CL            Inc          Azi            TVDMSL         NS                EW               Dogleg      Build        Turn          

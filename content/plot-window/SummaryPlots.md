@@ -8,7 +8,7 @@ weight = 10
 
 A Summary Plot is a window displaying a graph in the main area of the **Plot Main Window**. It can contain Summary Curves, Grid time history curves and pasted ascii curves ( See below ).
 
-A new plot can be created by using the context menu of a plot selecting {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot**. The [Summary Plot Editor]({{< relref "summaryploteditor" >}}) dialog will then open.
+A new plot can be created by using the right-click menu of a plot selecting {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot**. The [Summary Plot Editor]({{< relref "summaryploteditor" >}}) dialog will then open.
 
 ## Plot Data
 
@@ -24,7 +24,7 @@ Summary files can also be imported directly using one of the following commands 
 - **Import Summary Case Group**: Brings up the recursive file selection dialog. All files selected are automatically grouped in ResInsight.
 - **Import Ensemble**: Similar to the above, but in addition to just create a group, ResInsight performs some extra checking related to ensembles and converts the group to an ensemble. See [ensemble support description]({{< relref "ensembleplotting" >}}).
 
-These commands can also be accessed in the right-click context menu for the **Summary Cases** entry in the **Plot Main Window Project Tree** under which the imported cases will also be listed.
+These commands can also be accessed in the right-click menu for the **Summary Cases** entry in the **Plot Main Window Project Tree** under which the imported cases will also be listed.
 
 During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the Origin Files dialog is displayed. Origin file support is described [below](#origin-files).
 
@@ -114,7 +114,7 @@ It is also possible to save the ascii data to a file directly by using the conte
 
 ## Summary Curves
 
-Summary curves are normally created using the **Plot Editor** see [Summary Plot Editor]({{< relref "summaryploteditor" >}}), but can be created directly using the context menu in the **Main Plot Window Project Tree**. Right click a Summary Plot, the Summary Curves folder or an existing curve and select the command {{< image-in-text src="images/plot-window/SummaryCurve16x16.png" >}} **New Summary Curve**.
+Summary curves are normally created using the **Plot Editor** see [Summary Plot Editor]({{< relref "summaryploteditor" >}}), but can be created directly using the right-click menu in the **Main Plot Window Project Tree**. Right click a Summary Plot, the Summary Curves folder or an existing curve and select the command {{< image-in-text src="images/plot-window/SummaryCurve16x16.png" >}} **New Summary Curve**.
 
 ![]({{< relref "" >}}images/plot-window/summary_curve_properties.png)
 
@@ -212,7 +212,7 @@ The user can control the curve name used in the plot legend by using these optio
 
 ## Copy and Paste 
 
-Copy and Paste of selections of Summary Plots and Curves, is possible using the Project Tree Context menu and standard keyboard shortcuts (CTRL-C/CTRL-V).
+Copy and Paste of selections of Summary Plots and Curves, is possible using the Project Tree right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V).
 
 ## Recursive summary file import
 When using the standard file selection dialog, the user is limited to select files in one directory only. If the interesting files are distributed over multiple directories, the dialog has to be opened once for each directory. The recursive file selection dialog is created to circumvent this limitation. This dialog is able to search a directory tree for files matching a specified pattern.

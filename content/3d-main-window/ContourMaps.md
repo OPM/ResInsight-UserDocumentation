@@ -12,9 +12,9 @@ ResInsight can create contour maps based on different forms of aggregation of 3D
 
 Contour Maps can be created in many different ways:
 
-- New Contour Map from the context menu of case or the **Contour Maps** project tree item underneath the case. These will create contour maps with default values.
-- New Contour Map from 3D View in the Eclipse View context menu. This will create a contour map based on the existing 3D View with matching filters and result.
-- Duplicate Contour Map from the context menu of an existing Contour Map. This will copy the existing map.
+- New Contour Map from the right-click menu of case or the **Contour Maps** project tree item underneath the case. These will create contour maps with default values.
+- New Contour Map from 3D View in the Eclipse View right-click menu. This will create a contour map based on the existing 3D View with matching filters and result.
+- Duplicate Contour Map from the right-click menu of an existing Contour Map. This will copy the existing map.
 
 ![]({{< relref "" >}}images/3d-main-window/NewContourMapFromCase.png) ![]({{< relref "" >}}images/3d-main-window/NewContourMapFromFolder.png)
 

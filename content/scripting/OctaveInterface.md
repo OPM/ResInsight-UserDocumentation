@@ -24,16 +24,16 @@ Octave scripts are available in the **Scripts** folder in the **Project Tree**.
 This folder contains an entry for each of the directories you have added as a **Script Folder**. Each of the folder lists available _`*.m`_ files and sub directories.
 
 ### Adding Script Folders
-You can add directories by right-clicking the **Scripts** item to access the context menu.
+You can add directories by right-clicking the **Scripts** item to access the right-click menu.
 
 Multiple standard script folder locations can also be defined in the field **Shared Script Folder(s)** in the **Preferences Dialog** (**Edit -> Preferences**). 
 
 ### Editing Octave Scripts 
 To enable script editing from ResInsight you need to set up the path to a text editor in the **Script Editor** field in the **Preferences Dialog** (**Edit -> Preferences**) 
 
-When done, scripts can be edited using the context menu command **Edit** on the script item in the tree.
+When done, scripts can be edited using the right-click menu command **Edit** on the script item in the tree.
 
-If you add a script file directly by creating a new file, the new script can be made visible in the user interface by activating **Refresh** in the context menu of a script folder. 
+If you add a script file directly by creating a new file, the new script can be made visible in the user interface by activating **Refresh** in the right-click menu of a script folder. 
 
 ## Executing Octave Scripts
 
@@ -41,11 +41,11 @@ ResInsight can be instructed to execute an Octave script once as a one shot oper
 
 ### Executing a Script Once
 
-A script can be started by navigating to the script in the **Project Tree**, and selecting **Execute** from the context menu. The currently active case (The one with the active 3D View) will then be set as ResInsight's *Current Case*, and the script is executed once.
+A script can be started by navigating to the script in the **Project Tree**, and selecting **Execute** from the right-click menu. The currently active case (The one with the active 3D View) will then be set as ResInsight's *Current Case*, and the script is executed once.
 
 ### Executing a Script for Each Selected Case
 
-One script can be executed on many cases by first selecting a set of cases, and then activating **Execute script** from the context menu on the case selection. The script is then executed once per selected case setting the ResInsight's *Current Case* each time. 
+One script can be executed on many cases by first selecting a set of cases, and then activating **Execute script** from the right-click menu on the case selection. The script is then executed once per selected case setting the ResInsight's *Current Case* each time. 
 
 ![]({{< relref "" >}}images/scripting/ExecuteOctaveScriptOnSelectedCases.png)
 

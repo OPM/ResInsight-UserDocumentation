@@ -33,10 +33,10 @@ The icon in front of the filters show a + or - sign to indicate the setting {{< 
 Range filters enables the user to define a set of visible regions in the 3D view based on IJK boxes.
 Each *Include* range filter will *add more cells* to the visualization. The view will show the union of all the *Include* range filters.
 
-A new range filter can be added by activating the context menu for the **Range Filters** collection in the **Project Tree**. 
+A new range filter can be added by activating the right-click menu for the **Range Filters** collection in the **Project Tree**. 
 
 {{% notice note %}}
-An I,J or K-slice range filter can be added directly from a Cell in the <b>3D View</b> by right-clicking the cell and using the context menu. 
+An I,J or K-slice range filter can be added directly from a Cell in the <b>3D View</b> by right-clicking the cell and using the right-click menu. 
 {{% /notice %}}
 
 Below is a snapshot of the **Property Editor** of the **Range Filter** :
@@ -55,7 +55,7 @@ The **Width** labels shows the number of active cells from the start of the acti
 
 **Property Filters** applies to the results of the **Range Filters** and limits the visible cells to the ones approved by the filter. For a cell to be visible it must be accepted by all the property filters. 
 
-A new property filter can be made by activating the context menu on **Property Filters** or by right-clicking inside a 3D view. The new property filter is based on the currently viewed cell result by default. 
+A new property filter can be made by activating the right-click menu on **Property Filters** or by right-clicking inside a 3D view. The new property filter is based on the currently viewed cell result by default. 
 
 The name of the property filter is automatically set to *"propertyname (min .. max)"* as you edit the property filter.
 

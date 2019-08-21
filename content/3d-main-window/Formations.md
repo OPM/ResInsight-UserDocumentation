@@ -41,7 +41,7 @@ If only one formation file is imported, the formation will automatically be set 
 ![]({{< relref "" >}}images/3d-main-window/formations_property_editor.PNG)
 
 #### Reload of formation data
-If the formation file is modified outside ResInsight, the formation data can be imported again by the context menu **Formations->Reload**. This command will import formations for the selected formation files.
+If the formation file is modified outside ResInsight, the formation data can be imported again by the right-click menu **Formations->Reload**. This command will import formations for the selected formation files.
 
 ### Viewing the Formation Information
 

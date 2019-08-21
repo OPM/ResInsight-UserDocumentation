@@ -228,4 +228,4 @@ Please seek "User data file formats" in **Eclipse: File Formats Reference Manual
 
 ![]({{< relref "" >}}images/import/observedDataCurveCreator.png)
 
-To plot Observed Time History Data, choose **New Summary Plot** in the context menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the Plot Editor is covered in [Summary Plot Editor]({{< relref "summaryploteditor" >}}). Observed time history data points are plotted without lines by default.
+To plot Observed Time History Data, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the Plot Editor is covered in [Summary Plot Editor]({{< relref "summaryploteditor" >}}). Observed time history data points are plotted without lines by default.

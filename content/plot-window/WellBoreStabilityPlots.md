@@ -18,7 +18,7 @@ The third track contains curves showing different stability gradients (all norma
 
 The fourth track contains curves showing the angular orientation of the well path as azimuth (deviation from vertical) and inclination (deviation from x-axis) in degrees.
 
-These plots can be created from the context menu for a well path in the 3D view or from the the context menu of the Well Log Plots entry in the 2D Plot Window. In the former case the well bore stability plot will be created for the selected **Well Path**. In the latter case it will be created for the first well path in the well path list and the well path for the entire plot can be changed with the [Change Data Source Feature]({{< relref "welllogsandplots" >}}#change-data-source-for-plots-and-curves).
+These plots can be created from the right-click menu for a well path in the 3D view or from the the right-click menu of the Well Log Plots entry in the 2D Plot Window. In the former case the well bore stability plot will be created for the selected **Well Path**. In the latter case it will be created for the first well path in the well path list and the well path for the entire plot can be changed with the [Change Data Source Feature]({{< relref "welllogsandplots" >}}#change-data-source-for-plots-and-curves).
 
 In order to calculate **FG**  and **SFG** these curves the following input parameters are required:
 
