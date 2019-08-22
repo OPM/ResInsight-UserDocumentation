@@ -8,6 +8,8 @@ The command file interface allows a sequence of specified commands to be run in 
 The interface is used by supplying the command file as a [command line parameter]({{< relref "commandlineinterface" >}}).
 Once the command file is finished executing, ResInsight will exit.
 
+It is possible to use these commands directly from a Python script. For further details see [Python Documentation]({{< relref "PythonRips.md#commands-module" >}})
+
 ## Command List
 
 #### Case Control Commands
@@ -16,10 +18,14 @@ Once the command file is finished executing, ResInsight will exit.
 * [closeProject](#closeproject)
 * [setStartDir](#setstartdir)
 * [loadCase](#loadcase)
+* [createGridCaseGroup](#creategridcasegroup)
+* [createStatisticsCase](#createstatisticscase)
 * [replaceCase](#replacecase)
 * [replaceSourceCases](#replacesourcecases)
 
 #### Export Commands
+
+* [setExportFolder](#setexportfolder)
 
 * [exportMultiCaseSnapshots](#exportmulticasesnapshots)
 * [exportSnapshots](#exportsnapshots)
@@ -30,7 +36,7 @@ Once the command file is finished executing, ResInsight will exit.
 * [exportMsw](#exportmsw)
 * [exportWellPaths](#exportwellpaths)
 * [exportVisibleCells](#exportvisiblecells)
-* [setExportFolder](#setexportfolder)
+* [exportFlowCharacteristics](#exportflowcharacteristics)
 
 #### Other Commands
 
@@ -84,7 +90,9 @@ Opens a ResInsight project file.
 
 #### Example
 
-`openProject(path="/home/user/ResInsightProject.rsp")`
+```
+openProject(path="/home/user/ResInsightProject.rsp")
+```
 
 
 ### closeProject
@@ -93,7 +101,9 @@ Closes the current open project.
 
 #### Example
 
-`closeProject()`
+```
+closeProject()
+```
 
 
 ### setStartDir
@@ -106,7 +116,10 @@ Set startup directory.
 
 #### Example
 
-`setStartDir(path="/home/user")`
+```
+setStartDir(path="/home/user")
+```
+
 
 
 ### loadCase
@@ -119,11 +132,38 @@ Import Eclipse case from file.
 
 #### Example
 
-`loadCase(path="/home/user/reservoir.EGRID")`
+```
+loadCase(path="/home/user/reservoir.EGRID")
+```
+
+
+
+### createGridCaseGroup
+
+Create a Grid Case Group from a list of files.
+
+| Parameter   | Description                                        | Type    | Required |
+|-------------|----------------------------------------------------|---------|----------|
+| casePaths   | List of Paths to Case Files                        | String  | &#10004; |
+
+
+### createStatisticsCase
+
+Create a Statistics Case in a Grid Case Group.
+
+| Parameter   | Description                                        | Type    | Required |
+|-------------|----------------------------------------------------|---------|----------|
+| caseGroupId | ID to the Case Group                               | Integer | &#10004; |
+
+#### Example
+
+```
+createGridCaseGroup(path=["/home/user/reservoir.EGRID", "/home/user/other_reservoir.EGRID"])
+createStatisticsCase(caseGroupId=0)
+```
 
 
 ### replaceCase
-
 
 Replaces a case in the current project with the specified new case.
 
@@ -136,7 +176,10 @@ Replaces a case in the current project with the specified new case.
 
 #### Example
 
-`replaceCase(newGridFile="/home/user/otherReservoir.EGRID", caseId=4)`
+```
+replaceCase(newGridFile="/home/user/otherReservoir.EGRID", caseId=4)
+```
+
 
 
 ### replaceSourceCases
@@ -152,7 +195,10 @@ Replaces multiple source cases in the current project.
 
 #### Example
 
-`replaceSourceCases(gridListFile="C:/resinsight/replacement_files.txt")`
+```
+replaceSourceCases(gridListFile="C:/resinsight/replacement_files.txt")
+```
+
 
 
 ## Export Commands
@@ -172,7 +218,10 @@ Folder to output snapshots should be set using `setExportFolder` with `SNAPSHOTS
 
 #### Example
 
-`exportMultiCaseSnapshots(gridListFile="C:\\resinsight\\replacement_files.txt")`
+```
+exportMultiCaseSnapshots(gridListFile="C:\\resinsight\\replacement_files.txt")
+```
+
 
 
 ### exportSnapshots
@@ -188,7 +237,10 @@ Folder to output snapshots should be set using `setExportFolder` with `SNAPSHOTS
 
 #### Example
 
-`exportSnapshots(type=PLOTS)`
+```
+exportSnapshots(type=PLOTS)
+```
+
 
 
 ### exportProperty
@@ -206,7 +258,10 @@ Exports property values for all cells in the grid to file in Eclipse format.
 
 #### Example
 
-`exportProperty(caseId=1, timeStep=4, property="SOIL")`
+```
+exportProperty(caseId=1, timeStep=4, property="SOIL")
+```
+
 
 ### exportPropertyInViews
 
@@ -220,9 +275,12 @@ Exports property values for all cells in the grid to file in Eclipse format. Use
 
 #### Example
 
-`exportPropertyInViews(caseId=1)`
+```
+exportPropertyInViews(caseId=1)
 
-`exportPropertyInViews(caseId=1, viewNames=["view A", "view 4"])`
+exportPropertyInViews(caseId=1, viewNames=["view A", "view 4"])
+```
+
 
 ### exportWellPathCompletions
 
@@ -242,7 +300,10 @@ Export well path completions.
 
 #### Example
 
-`exportWellPathCompletions(caseId=3, timeStep=5, includeFishbones=false)`
+```
+exportWellPathCompletions(caseId=3, timeStep=5, includeFishbones=false)
+```
+
 
 ### exportSimWellFractureCompletions
 
@@ -259,7 +320,10 @@ Export fracture completions for simulation wells.
 
 #### Example
 
-`exportSimWellFractureCompletions(caseId=3, viewName="View 2", timeStep=5)`
+```
+exportSimWellFractureCompletions(caseId=3, viewName="View 2", timeStep=5)
+```
+
 
 ### exportMsw
 
@@ -272,7 +336,10 @@ Export multi-segment wells.
 
 #### Example
 
-`exportMsw(caseId=1, wellPath="MainWell")`
+```
+exportMsw(caseId=1, wellPath="MainWell")
+```
+
 
 ### exportWellPaths
 
@@ -285,7 +352,10 @@ Export well paths.
 
 #### Example
 
-`exportWellPaths(wellPathNames=["B-1H", "B-2H"], mdStepSize=1.5)`
+```
+exportWellPaths(wellPathNames=["B-1H", "B-2H"], mdStepSize=1.5)
+```
+
 
 ### exportVisibleCells
 
@@ -302,7 +372,10 @@ Export visible cells
 
 #### Example
 
-`exporVisibleCells(caseId=0, viewName="View 1", exportKeyword=MULTNUM)`
+```
+exporVisibleCells(caseId=0, viewName="View 1", exportKeyword=MULTNUM)
+```
+
 
 ### setExportFolder
 
@@ -316,7 +389,10 @@ Set the folder to export different types of data to. Set this before attempting 
 
 #### Example
 
-`setExportFolder(type=SNAPSHOTS, path="/home/user/snapshots")`
+```
+setExportFolder(type=SNAPSHOTS, path="/home/user/snapshots")
+```
+
 
 
 ## Other
@@ -332,7 +408,10 @@ Execute an Octave script.
 
 #### Example
 
-`runOctaveScript(path="/home/user/octave/something.m", caseIds=[1,2,6])`
+```
+runOctaveScript(path="/home/user/octave/something.m", caseIds=[1,2,6])
+```
+
 
 
 ### setMainWindowSize
@@ -346,7 +425,10 @@ Resize the main window to the specified size.
 
 #### Example
 
-`setMainWindowSize(width=1920, height=1200)`
+```
+setMainWindowSize(width=1920, height=1200)
+```
+
 
 
 ### computeCaseGroupStatistics
@@ -359,9 +441,12 @@ Compute statistics for statistics cases.
 
 #### Example
 
-`computeCaseGroupStatistics(caseIds=[5])`
+```
+computeCaseGroupStatistics(caseIds=[5])
 
-`computeCaseGroupStatistics(caseIds=[2,4,8])`
+computeCaseGroupStatistics(caseIds=[2,4,8])
+```
+
 
 
 ### setTimeStep
@@ -375,7 +460,10 @@ Set the time step for a given case. The time step is used for all views on the c
 
 #### Example
 
-`setTimeStep(caseId=1, timeStep=8)`
+```
+setTimeStep(caseId=1, timeStep=8)
+```
+
 
 ### scaleFractureTemplate
 
@@ -391,7 +479,10 @@ Scale fracture template parameters.
 
 #### Example
 
-`scaleFractureTemplate(id=1, width=2, height=1.5)`
+```
+scaleFractureTemplate(id=1, width=2, height=1.5)
+```
+
 
 ### setFractureContainment
 
@@ -405,7 +496,10 @@ Set fracture template containment parameters.
 
 #### Example
 
-`setFractureContainment(id=1, topLayer=2, baseLayer=7)`
+```
+setFractureContainment(id=1, topLayer=2, baseLayer=7)
+```
+
 
 ### createMultipleFractures
 
@@ -425,7 +519,10 @@ Create multiple fractures on one or more well paths.
 
 #### Example
 
-`createMultipleFractures(caseId=0, templateId=1, wellPathNames=["B-1H", "B-2H"], action=REPLACE_FRACTURES)`
+```
+createMultipleFractures(caseId=0, templateId=1, wellPathNames=["B-1H", "B-2H"], action=REPLACE_FRACTURES)
+```
+
 
 ### createLgrForCompletions
 
@@ -443,8 +540,9 @@ Create temporary LGRs for completions on the selected well paths. The splitType 
 
 #### Example
 
-`createLgrForCompletions(caseId=0, timeStep=0, wellPathNames=["B-1H", "B-2H"], `
-`refinementI=2, refinementJ=3, refinementK=4, splitType=LGR_PER_WELL)`
+```
+createLgrForCompletions(caseId=0, timeStep=0, wellPathNames=["B-1H", "B-2H"], refinementI=2, refinementJ=3, refinementK=4, splitType=LGR_PER_WELL)
+```
 
 
 ### createSaturationPressurePlots
@@ -458,4 +556,7 @@ Create saturation pressure plots for the specified cases.
 
 #### Example
 
-`createSaturationPressurePlots(caseIds=[0])`
+```
+createSaturationPressurePlots(caseIds=[0])
+```
+
