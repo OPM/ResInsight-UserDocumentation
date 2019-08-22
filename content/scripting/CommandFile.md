@@ -234,6 +234,7 @@ Folder to output snapshots should be set using `setExportFolder` with `SNAPSHOTS
 |-----------|-----------------------------------------------------------------------------------|--------|----------|
 | type      | Type of snapshots to export. Choices: `ALL`, `VIEWS`, `PLOTS`. Defaults to `ALL`  | Enum   |          |
 | prefix    | Exported file name prefix. Defaults to no prefix                                  | String |          |
+| caseId    | ID of case for export, defaults to -1 meaning all cases                           | Integer|          |
 
 #### Example
 
