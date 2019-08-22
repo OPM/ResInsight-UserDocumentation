@@ -26,7 +26,6 @@ It is possible to use these commands directly from a Python script. For further 
 #### Export Commands
 
 * [setExportFolder](#setexportfolder)
-
 * [exportMultiCaseSnapshots](#exportmulticasesnapshots)
 * [exportSnapshots](#exportsnapshots)
 * [exportProperty](#exportproperty)
@@ -61,6 +60,10 @@ As an example; `openProject(path="/path/to/ResInsightProject.rsp")` will execute
 
 Not all parameters are required, in which case they can be omitted and their value will be defaulted. The order of parameters does not matter.
 
+```
+Command file examples are displayed in sections like this.
+```
+
 ### Types
 
 There are different types of parameters that can be supplied.
@@ -88,7 +91,6 @@ Opens a ResInsight project file.
 |-----------|--------------------------------|--------|----------|
 | path      | File path to the project file  | String | &#10004; |
 
-#### Example
 
 ```
 openProject(path="/home/user/ResInsightProject.rsp")
@@ -99,7 +101,7 @@ openProject(path="/home/user/ResInsightProject.rsp")
 
 Closes the current open project.
 
-#### Example
+
 
 ```
 closeProject()
@@ -114,7 +116,7 @@ Set startup directory.
 |-----------|------------------------------------------------|--------|----------|
 | path      | Path to directory to use as startup directory  | String | &#10004; |
 
-#### Example
+
 
 ```
 setStartDir(path="/home/user")
@@ -130,7 +132,7 @@ Import Eclipse case from file.
 |-----------|--------------------------------|--------|----------|
 | path      | File path to the case to load  | String | &#10004; |
 
-#### Example
+
 
 ```
 loadCase(path="/home/user/reservoir.EGRID")
@@ -155,7 +157,7 @@ Create a Statistics Case in a Grid Case Group.
 |-------------|----------------------------------------------------|---------|----------|
 | caseGroupId | ID to the Case Group                               | Integer | &#10004; |
 
-#### Example
+
 
 ```
 createGridCaseGroup(path=["/home/user/reservoir.EGRID", "/home/user/other_reservoir.EGRID"])
@@ -174,7 +176,7 @@ Replaces a case in the current project with the specified new case.
 | newGridFile | File path to the new grid file to replace with     | String  | &#10004; |
 | caseId      | ID of the case to replace. Defaults to first case  | Integer |          |
 
-#### Example
+
 
 ```
 replaceCase(newGridFile="/home/user/otherReservoir.EGRID", caseId=4)
@@ -193,7 +195,7 @@ Replaces multiple source cases in the current project.
 | gridListFile | File path to file containing list of cases to replace with      | String  | &#10004; |
 | caseGroupId  | ID of group to replace cases in. Defaults to first group        | Integer |          |
 
-#### Example
+
 
 ```
 replaceSourceCases(gridListFile="C:/resinsight/replacement_files.txt")
@@ -216,7 +218,7 @@ Folder to output snapshots should be set using `setExportFolder` with `SNAPSHOTS
 |--------------|--------------------------------------------------------------------|---------|----------|
 | gridListFile | File path to file containing list of cases to create snapshots of  | String  | &#10004; |
 
-#### Example
+
 
 ```
 exportMultiCaseSnapshots(gridListFile="C:\\resinsight\\replacement_files.txt")
@@ -236,7 +238,7 @@ Folder to output snapshots should be set using `setExportFolder` with `SNAPSHOTS
 | prefix    | Exported file name prefix. Defaults to no prefix                                  | String |          |
 | caseId    | ID of case for export, defaults to -1 meaning all cases                           | Integer|          |
 
-#### Example
+
 
 ```
 exportSnapshots(type=PLOTS)
@@ -257,7 +259,7 @@ Exports property values for all cells in the grid to file in Eclipse format.
 | undefinedValue | Value to use for undefined values. Defaults to 0.0                                             | Double  |         |
 | exportFile     | Filename for export. Defaults to the value of `property` parameter                             | String  |         |
 
-#### Example
+
 
 ```
 exportProperty(caseId=1, timeStep=4, property="SOIL")
@@ -274,7 +276,7 @@ Exports property values for all cells in the grid to file in Eclipse format. Use
 | viewNames      | Name of views to export from. If not specified, all views are exported                 | List of String |          |
 | undefinedValue | Value to use for undefined values. Defaults to 0.0                                     | Double         |          |
 
-#### Example
+
 
 ```
 exportPropertyInViews(caseId=1)
@@ -299,7 +301,7 @@ Export well path completions.
 | excludeMainBoreForFishbones | Whether main bore completions should be excluded for cells with fishbones. Defaults to `false`                                                           | Boolean        |          |
 | combinationMode             | Combination mode. Choices: `INDIVIDUALLY`, `COMBINED`. Defaults to `INDIVIDUALLY`                                                                       | Enum           |          |
 
-#### Example
+
 
 ```
 exportWellPathCompletions(caseId=3, timeStep=5, includeFishbones=false)
@@ -319,7 +321,7 @@ Export fracture completions for simulation wells.
 | fileSplit                   | How the files are split. Choices: `UNIFIED_FILE`, `SPLIT_ON_WELL`, `SPLIT_ON_WELL_AND_COMPLETION_TYPE`. Defaults to `UNIFIED_FILE`                        | Enum           |          |
 | compdatExport               | Chose whether transmissibilities are exported. Choices: `TRANSMISSIBILITIES`, `WPIMULT_AND_DEFAULT_CONNECTION_FACTORS`. Defaults to `TRANSMISSIBILITIES`  | Enum           |          |
 
-#### Example
+
 
 ```
 exportSimWellFractureCompletions(caseId=3, viewName="View 2", timeStep=5)
@@ -335,7 +337,7 @@ Export multi-segment wells.
 | caseId    | ID of case to export well paths for            | Integer | &#10004; |
 | wellPath  | Name of well path to export well segments for  | String  | &#10004; |
 
-#### Example
+
 
 ```
 exportMsw(caseId=1, wellPath="MainWell")
@@ -351,7 +353,7 @@ Export well paths.
 | wellPathNames | Names of well paths to export for. Defaults to all checked wells. If a list of well names are provided, those wells are included even if unchecked                                   | List of String |          |
 | mdStepSize    | Spacing (measured depth) between each sample along the well path. Default to 5.0                                                                                                        | Double         |          |
 
-#### Example
+
 
 ```
 exportWellPaths(wellPathNames=["B-1H", "B-2H"], mdStepSize=1.5)
@@ -371,7 +373,7 @@ Export visible cells
 | hiddenActiveCellsValue  | Value to use for hidden active cells. Default: 0                             | Integer        |          |
 | inactiveCellsValue      | Value to use for inactive cells. Default: 0                                  | Integer        |          |
 
-#### Example
+
 
 ```
 exporVisibleCells(caseId=0, viewName="View 1", exportKeyword=MULTNUM)
@@ -388,7 +390,7 @@ Set the folder to export different types of data to. Set this before attempting 
 | path         | Directory to export the given type to                                                          | String    | &#10004; |
 | createFolder | If true, create the folder when required. Default false.                                       | Boolean   |          |
 
-#### Example
+
 
 ```
 setExportFolder(type=SNAPSHOTS, path="/home/user/snapshots")
@@ -407,7 +409,7 @@ Execute an Octave script.
 | path      | Path to the octave script to execute                                                            | Integer         | &#10004; |
 | caseIds   | The cases to run the octave script on. Defaults to running the script without a specified case  | List of Integer |          |
 
-#### Example
+
 
 ```
 runOctaveScript(path="/home/user/octave/something.m", caseIds=[1,2,6])
@@ -424,7 +426,7 @@ Resize the main window to the specified size.
 | width     | The width to set for the main window   | Integer | &#10004; |
 | height    | The height to set for the main window  | Integer | &#10004; |
 
-#### Example
+
 
 ```
 setMainWindowSize(width=1920, height=1200)
@@ -440,7 +442,7 @@ Compute statistics for statistics cases.
 |-----------|----------------------------------------------------------------------|-----------------|----------|
 | caseIds   | IDs of statistics cases to compute. Default is all statistics cases  | List of Integer |          |
 
-#### Example
+
 
 ```
 computeCaseGroupStatistics(caseIds=[5])
@@ -459,7 +461,7 @@ Set the time step for a given case. The time step is used for all views on the c
 | caseId    | ID of case to set time step for  | Integer | &#10004; |
 | timeStep  | Index of time step to switch to  | Integer | &#10004; |
 
-#### Example
+
 
 ```
 setTimeStep(caseId=1, timeStep=8)
@@ -478,7 +480,7 @@ Scale fracture template parameters.
 | dFactor      | D-factor scale factor            | Double  |          |
 | conductivity | Conductivity scale factor        | Double  |          |
 
-#### Example
+
 
 ```
 scaleFractureTemplate(id=1, width=2, height=1.5)
@@ -495,7 +497,7 @@ Set fracture template containment parameters.
 | topLayer     | Top layer containment            | Integer | &#10004; |
 | baseLayer    | Base layer containment           | Integer | &#10004; |
 
-#### Example
+
 
 ```
 setFractureContainment(id=1, topLayer=2, baseLayer=7)
@@ -518,7 +520,7 @@ Create multiple fractures on one or more well paths.
 | spacing             | Distance between fractures. Default: 300.0 m           | Double          |          |
 | action              | How to handle existing fractures. Choices: `APPEND_FRACTURES`, `REPLACE_FRACTURES`. The replace option will delete all existing fractures before adding new ones. Default: `APPEND_FRACTURES` | Enum            |          |
 
-#### Example
+
 
 ```
 createMultipleFractures(caseId=0, templateId=1, wellPathNames=["B-1H", "B-2H"], action=REPLACE_FRACTURES)
@@ -539,7 +541,7 @@ Create temporary LGRs for completions on the selected well paths. The splitType 
 | refinementK             | Size of the LGR along the K axis, in each main grid cell.                    | Integer        | &#10004; |
 | splitType               | How to split the LGRs. Options: `LGR_PER_CELL`, `LGR_PER_COMPLETION`, `LGR_PER_WELL`. Default option is `LGR_PER_COMPLETION`                                                                                     | Enum           |          |
 
-#### Example
+
 
 ```
 createLgrForCompletions(caseId=0, timeStep=0, wellPathNames=["B-1H", "B-2H"], refinementI=2, refinementJ=3, refinementK=4, splitType=LGR_PER_WELL)
@@ -555,7 +557,7 @@ Create saturation pressure plots for the specified cases.
 | caseIds   | IDs of cases to create plots for. Default is all cases  | List of Integer |          |
 
 
-#### Example
+
 
 ```
 createSaturationPressurePlots(caseIds=[0])
