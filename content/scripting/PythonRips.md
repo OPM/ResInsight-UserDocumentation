@@ -40,16 +40,6 @@ If the application was launched we may need to close it when exiting the script.
 
 
 
-#### app()
-Application information object. Set when creating an instance.
-
-
-* **Type**
-
-    App
-
-
-
 #### commands()
 Command executor. Set when creating an instance.
 
@@ -71,6 +61,10 @@ Set when creating an instance and updated when opening/closing projects.
 
 
 
+#### exit()
+Tell ResInsight instance to quit
+
+
 #### static find(startPort=50051, endPort=50071)
 Search for an existing Instance of ResInsight by testing ports.
 
@@ -85,6 +79,14 @@ RESINSIGHT_GRPC_PORT to RESINSIGHT_GRPC_PORT+20
 
     * **endPort** (*int*) -- search up to but not including this port
 
+
+
+#### isConsole()
+Returns true if the connected ResInsight instance is a console app
+
+
+#### isGui()
+Returns true if the connected ResInsight instance is a GUI app
 
 
 #### static launch(resInsightExecutable='', console=False)
@@ -114,37 +116,6 @@ The RESINSIGHT_GRPC_PORT environment variable can be set to an alternative port 
     Instance
 
 
-## Example
-
-```
-import rips
-
-resInsight  = rips.Instance.find()
-
-if resInsight is None:
-    print('ERROR: could not find ResInsight')
-```
-
-# App Module
-
-
-#### class rips.App(channel)
-ResInsight application information and control.
-Allows retrieving of information and controlling the running instance
-Not meant to be constructed manually, but exists as part of the Instance method
-
-
-#### exit()
-Tell ResInsight instance to quit
-
-
-#### isConsole()
-Returns true if the connected ResInsight instance is a console app
-
-
-#### isGui()
-Returns true if the connected ResInsight instance is a GUI app
-
 
 #### majorVersion()
 Get an integer with the major version number
@@ -164,12 +135,13 @@ Get a full version string, i.e. 2019.04.01
 ## Example
 
 ```
-import rips
 
 resInsight  = rips.Instance.find()
-if resInsight is not None:
-    print(resInsight.app.versionString())
-    print("Is this a console run?", resInsight.app.isConsole())
+
+if resInsight is None:
+    print('ERROR: could not find ResInsight')
+else:
+	print('Successfully connected to ResInsight')
 ```
 
 # Case Module
@@ -239,6 +211,33 @@ total number of cells
 
 
 #### cellInfoForActiveCells(porosityModel='MATRIX_MODEL')
+Get list of cell info objects for current case
+
+
+* **Parameters**
+
+    **porosityModel** (*str*) -- String representing an enum.
+    must be 'MATRIX_MODEL' or 'FRACTURE_MODEL'.
+
+
+
+* **Returns**
+
+    grid_index(int): grid the cell belongs to
+    parent_grid_index(int): parent of the grid the cell belongs to
+    coarsening_box_index(int): the coarsening box index
+    local_ijk(Vec3i: i(int), j(int), k(int)): local cell index in i, j, k directions.
+    parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.
+
+
+
+* **Return type**
+
+    List of cell info objects with the following attributes
+
+
+
+#### cellInfoForActiveCellsAsync(porosityModel='MATRIX_MODEL')
 Get Stream of cell info objects for current case
 
 
@@ -307,20 +306,20 @@ Get a list of views belonging to a case
 ## Example
 
 ```
+# Import the ResInsight Processing Server Module
 import rips
 
+# Connect to ResInsight
 resInsight  = rips.Instance.find()
 if resInsight is not None:
+    # Get a list of all cases
     cases = resInsight.project.cases()
 
     print ("Got " + str(len(cases)) + " cases: ")
     for case in cases:
-        print(case.name)
-        views = case.views()
-        for view in views:
-            view.setShowGridBox(not view.showGridBox())
-            view.setBackgroundColor("#3388AA")
-            view.update()
+        print("Case name: " + case.name)
+        print("Case grid path: " + case.gridPath())
+
 ```
 
 # Commands Module
@@ -408,7 +407,7 @@ Export an Eclipse property
 
 #### exportSimWellFractureCompletions(caseId, viewName, timeStep, simulationWellNames, fileSplit, compdatExport)
 
-#### exportSnapshots(type='ALL', prefix='')
+#### exportSnapshots(type='ALL', prefix='', caseId=-1)
 Export snapshots of a given type
 
 
@@ -417,6 +416,8 @@ Export snapshots of a given type
     * **type** (*str*) -- Enum string ('ALL', 'VIEWS' or 'PLOTS')
 
     * **prefix** (*str*) -- Exported file name prefix
+
+    * **caseId** (*int*) -- the case Id to export for. The default of -1 will export all cases
 
 
 
@@ -500,6 +501,9 @@ Set current start directory
 ## Example
 
 ```
+###############################################################################
+import os
+import tempfile
 import rips
 
 # Load instance
@@ -508,16 +512,29 @@ resInsight = rips.Instance.find()
 # Run a couple of commands
 resInsight.commands.setTimeStep(caseId=0, timeStep=3)
 resInsight.commands.setMainWindowSize(width=800, height=500)
-#resInsight.commands.exportWellPaths()
+
+# Create a temporary directory which will disappear at the end of this script
+# If you want to keep the files, provide a good path name instead of tmpdirname
 with tempfile.TemporaryDirectory(prefix="rips") as tmpdirname:
     print("Temporary folder: ", tmpdirname)
+    
+    # Set export folder for snapshots and properties
     resInsight.commands.setExportFolder(type='SNAPSHOTS', path=tmpdirname)
     resInsight.commands.setExportFolder(type='PROPERTIES', path=tmpdirname)
+    
+    # Export snapshots
     resInsight.commands.exportSnapshots()
+    
+    # Print contents of temporary folder
     print(os.listdir(tmpdirname))
+    
     assert(len(os.listdir(tmpdirname)) > 0)
     case = resInsight.project.case(id=0)
+    
+    # Export properties in the view
     resInsight.commands.exportPropertyInViews(0, "3D View", 0)
+    
+    # Check that the exported file exists
     expectedFileName = case.name + "-" + str("3D_View") + "-" + "T3" + "-SOIL"
     fullPath = tmpdirname + "/" + expectedFileName
     assert(os.path.exists(fullPath))
@@ -684,6 +701,20 @@ Get a list of views belonging to a project
 Class for streaming properties to and from ResInsight
 
 
+#### chunkSize()
+The size of each chunk during value streaming.
+A good chunk size is 64KiB = 65536B.
+Meaning the ideal number of doubles would be 8192.
+However we need overhead space, so the default is 8160.
+This leaves 256B for overhead.
+
+
+* **Type**
+
+    int
+
+
+
 #### activeCellProperty(propertyType, propertyName, timeStep, porosityModel='MATRIX_MODEL')
 Get a cell property for all active cells. Sync, so returns a list
 
@@ -736,20 +767,15 @@ Get a list of available properties
 
 * **Parameters**
 
-    * **propertyType** (*str*) -- string corresponding to propertyType enum.
-
-      Can be one of the following:
-
-      'DYNAMIC_NATIVE'
-
-          'STATIC_NATIVE'
-          'SOURSIMRL'
-          'GENERATED'
-          'INPUT_PROPERTY'
-          'FORMATION_NAMES'
-          'FLOW_DIAGNOSTICS'
-          'INJECTION_FLOODING'
-
+    * **propertyType** (*str*) -- string corresponding to propertyType enum. Can be one of the following:
+      - DYNAMIC_NATIVE
+      - STATIC_NATIVE
+      - SOURSIMRL
+      - GENERATED
+      - INPUT_PROPERTY
+      - FORMATION_NAMES
+      - FLOW_DIAGNOSTICS
+      - INJECTION_FLOODING
 
     * **porosityModel** (*str*) -- 'MATRIX_MODEL' or 'FRACTURE_MODEL'.
 
@@ -875,22 +901,24 @@ View Id corresponding to the View Id in ResInsight project.
     int
 
 
-Synchronous Example
-
 
 #### applyCellResult(resultType, resultVariable)
 Apply a regular cell result
-:param resultType [str]: String representing the result category
-
-> The valid values are: "DYNAMIC_NATIVE", "STATIC_NATIVE", "SOURSIMRL",
-
->     "GENERATED", "INPUT_PROPERTY", "FORMATION_NAMES",
->     "FLOW_DIAGNOSTICS" and "INJECTION_FLOODING"
 
 
 * **Parameters**
 
-    **[****str****]** (*resultVariable*) -- String representing the result value.
+    * **resultType** (*str*) -- String representing the result category. The valid values are
+      - DYNAMIC_NATIVE
+      - STATIC_NATIVE
+      - SOURSIMRL
+      - GENERATED
+      - INPUT_PROPERTY
+      - FORMATION_NAMES
+      - FLOW_DIAGNOSTICS
+      - INJECTION_FLOODING
+
+    * **resultVariable** (*str*) -- String representing the result variable.
 
 
 
@@ -900,23 +928,21 @@ Apply a flow diagnostics cell result
 
 * **Parameters**
 
-    * **[****str****]** (*selectionMode*) -- String representing the result value
+    * **resultVariable** (*str*) -- String representing the result value
       The valid values are 'TOF', 'Fraction', 'MaxFractionTracer' and 'Communication'.
 
-    * **[****str****]** -- String specifying which tracers to select.
-      The valid values are FLOW_TR_INJ_AND_PROD (all injector and producer tracers)
+    * **selectionMode** (*str*) -- String specifying which tracers to select.
+      The valid values are
+      - FLOW_TR_INJ_AND_PROD (all injector and producer tracers),
+      - FLOW_TR_PRODUCERS (all producers)
+      - FLOW_TR_INJECTORS (all injectors),
+      - FLOW_TR_BY_SELECTION (specify individual tracers in the
+      injectorTracers and producerTracers variables)
 
-      > FLOW_TR_PRODUCERS (all producers)
-      > FLOW_TR_INJECTORS (all injectors)
-      > FLOW_TR_BY_SELECTION (specify individual tracers in the
-
-      > > injectorTracers and producerTracers variables)
-
-
-    * **[****list****]** (*producerTracers*) -- List of injector names (strings) to select.
+    * **injectorTracers** (*list*) -- List of injector names (strings) to select.
       Requires selectionMode to be 'FLOW_TR_BY_SELECTION'.
 
-    * **[****list****]** -- List of producer tracers (strings) to select.
+    * **producerTracers** (*list*) -- List of producer tracers (strings) to select.
       Requires selectionMode to be 'FLOW_TR_BY_SELECTION'.
 
 
@@ -940,28 +966,44 @@ Set if the grid box is meant to be shown in the view
 #### showGridBox()
 Check if the grid box is meant to be shown in the view
 
+## Synchronous Example
+
+Read two properties, multiply them together and push the results back to ResInsight in a naïve way, by reading PORO into a list, then reading PERMX into a list, then multiplying them both in a resulting list and finally transferring back the list.
+
 This is slow and inefficient, but works.
 
 ```
+########################################################################################
 import rips
 import time
+import grpc
 
 resInsight     = rips.Instance.find()
 start = time.time()
 case = resInsight.project.case(id=0)
 
+# Read poro result into list
 poroResults = case.properties.activeCellProperty('STATIC_NATIVE', 'PORO', 0)
+# Read permx result into list
 permxResults = case.properties.activeCellProperty('STATIC_NATIVE', 'PERMX', 0)
 
+# Generate output result
 results = []
 for (poro, permx) in zip(poroResults, permxResults):
     results.append(poro * permx)
 
-case.properties.setActiveCellProperty(results, 'GENERATED', 'POROPERMXSY', 0)
+try:
+    # Send back output result
+    case.properties.setActiveCellProperty(results, 'GENERATED', 'POROPERMXSY', 0)
+except grpc.RpcError as e:
+    print("Exception Received: ", e)
+
 
 end = time.time()
 print("Time elapsed: ", end - start)
 print("Transferred all results back")
+
+view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXSY')
 ```
 
 ## Asynchronous Example
@@ -974,25 +1016,35 @@ This is far more efficient.
 import rips
 import time
 
+# Internal function for creating a result from a small chunk of poro and permx results
+# The return value of the function is a generator for the results rather than the result itself.
 def createResult(poroChunks, permxChunks):
+    # Loop through all the chunks of poro and permx in order
     for (poroChunk, permxChunk) in zip(poroChunks, permxChunks):
         resultChunk = []
+        # Loop through all the values inside the chunks, in order
         for (poro, permx) in zip(poroChunk.values, permxChunk.values):
             resultChunk.append(poro * permx)
+        # Return a generator object that behaves like a Python iterator
         yield resultChunk
 
 resInsight     = rips.Instance.find()
 start = time.time()
 case = resInsight.project.case(id=0)
 
+# Get a generator for the poro results. The generator will provide a chunk each time it is iterated
 poroChunks = case.properties.activeCellPropertyAsync('STATIC_NATIVE', 'PORO', 0)
+# Get a generator for the permx results. The generator will provide a chunk each time it is iterated
 permxChunks = case.properties.activeCellPropertyAsync('STATIC_NATIVE', 'PERMX', 0)
 
+# Send back the result with the result provided by a generator object.
+# Iterating the result generator will cause the script to read from the poro and permx generators
+# And return the result of each iteration
 case.properties.setActiveCellPropertyAsync(createResult(poroChunks, permxChunks),
                                            'GENERATED', 'POROPERMXAS', 0)
 
 end = time.time()
 print("Time elapsed: ", end - start)
-
 print("Transferred all results back")
+view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
 ```
