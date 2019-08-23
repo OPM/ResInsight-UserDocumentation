@@ -21,6 +21,8 @@ Octave plugins, ABAQUS ODB API, and HDF5.
 ResInsight is under continuous development targeting two major releases per year. 
 For an overview of some of its new and exciting features, see the following: 
 
+- [ ResInsight 2019.08 ]({{< ref "releasenotes_2019_08.md" >}})
+
 - [ ResInsight 2019.04 ]({{< ref "releasenotes_2019_04.md" >}})
 
 - [ ResInsight 2018.11 ]({{< ref "releasenotes_2018_11.md" >}})
