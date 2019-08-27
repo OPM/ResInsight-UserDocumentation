@@ -96,7 +96,7 @@ This section describes how the values are extracted from the grid when creating 
 
 Extraction curves are calculated by finding the intersections between a well trajectory and the cell-faces in a particular grid model. Usually there are two intersections at nearly the same spot; the one leaving the previous cell, and the one entering the next one. At each intersection point the measured depth along the trajectory is interpolated from the trajectory data. The result value is retrieved from the corresponding cell in different ways depending on the nature of the underlying result. 
 
-For Eclipse results the cell face value is used directly. This is normally the same as the corresponding cell value, but if a **Directional combined results** is used ( See [ Derived Results ]({{< relref "" >}}appendix/derivedresults) ), it will be that particular face's value.
+For Eclipse results the cell face value is used directly. This is normally the same as the corresponding cell value, but if a **Directional combined results** is used ( See [ Derived Results ]({{< relref "derivedresults.md" >}}) ), it will be that particular face's value.
 
 Abaqus results are interpolated across the intersected cell-face from the result values associated with the nodes of that face. This is also the case for integration point results, as they are directly associated with their corresponding element node in ResInsight. 
 
