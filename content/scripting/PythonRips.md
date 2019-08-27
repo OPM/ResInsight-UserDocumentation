@@ -89,7 +89,7 @@ Returns true if the connected ResInsight instance is a console app
 Returns true if the connected ResInsight instance is a GUI app
 
 
-#### static launch(resInsightExecutable='', console=False)
+#### static launch(resInsightExecutable='', console=False, launchPort=-1, commandLineParameters=[])
 Launch a new Instance of ResInsight. This requires the environment variable
 RESINSIGHT_EXECUTABLE to be set or the parameter resInsightExecutable to be provided.
 The RESINSIGHT_GRPC_PORT environment variable can be set to an alternative port number.
@@ -102,6 +102,11 @@ The RESINSIGHT_GRPC_PORT environment variable can be set to an alternative port 
       environment variable.
 
     * **console** (*bool*) -- If True, launch as console application, without GUI.
+
+    * **launchPort** (*int*) -- If -1 will use the default port of 50051 or look for RESINSIGHT_GRPC_PORT
+      if anything else, ResInsight will try to launch with this port
+
+    * **commandLineParameters** (*list*) -- Additional command line parameters as string entries in the list.
 
 
 
@@ -264,6 +269,10 @@ Get Stream of cell info objects for current case
 
 
 
+#### createView()
+Create a new view in the current case
+
+
 #### daysSinceStart()
 Get a list of decimal values representing days since the start of the simulation
 
@@ -306,6 +315,7 @@ Get a list of views belonging to a case
 ## Example
 
 ```
+
 # Import the ResInsight Processing Server Module
 import rips
 
@@ -319,6 +329,9 @@ if resInsight is not None:
     for case in cases:
         print("Case name: " + case.name)
         print("Case grid path: " + case.gridPath())
+        # Create a new view
+        view = case.createView()
+    
 
 ```
 
@@ -338,6 +351,8 @@ The differences are:
 
     * Booleans have to be specified as correct Python. True instead of true.
 
+
+#### cloneView(viewId)
 
 #### closeProject()
 Close the current project (and reopen empty one)
@@ -368,6 +383,8 @@ Create a Grid Case Group from a list of cases
 #### createSaturationPressurePlots(caseIds)
 
 #### createStatisticsCase(caseGroupId)
+
+#### createView(caseId)
 
 #### exportFlowCharacteristics(caseId, timeSteps, injectors, producers, fileName, minimumCommunication=0.0, aquiferCellThreshold=0.1)
 
@@ -951,8 +968,16 @@ Apply a flow diagnostics cell result
 Get the current background color in the view
 
 
+#### case()
+Get the case the view belongs to
+
+
 #### cellResult()
 Retrieve the current cell results
+
+
+#### clone()
+Clone the current view
 
 
 #### setBackgroundColor(bgColor)
