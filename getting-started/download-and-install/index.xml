@@ -16,10 +16,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/linux-installation/</guid>
-      <description>Install ResInsight From Binary Packages on Linux Red Hat Enterprise Linux 6 or 7 Login as root and do:
+      <description>Install ResInsight From Binary Packages on Linux Please not that the distribution by the OPM Project will updated some time after the release of a new version on GitHub.
+Red Hat Enterprise Linux 6 or 7 Login as root and do:
 yum-config-manager --add-repo https://opm-project.org/package/opm.repo yum install resinsight yum install resinsight-octave  Then you are good, and can start ResInsight by typing: ResInsight
-Ubuntu Linux 16.04-64bit On the command line do:
-sudo apt-get update sudo apt-get install software-properties-common sudo apt-add-repository ppa:opm/ppa sudo apt-get update sudo apt-get install resinsight sudo apt-get install octave-resinsight  Start ResInsight by typing : ResInsight</description>
+Ubuntu Linux 16.04-64bit On the command line do:</description>
     </item>
     
     <item>

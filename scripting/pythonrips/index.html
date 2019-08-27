@@ -12,18 +12,18 @@
     <title>Python API - rips :: ResInsight</title>
 
     
-    <link href="/ResInsight-UserDocumentation/css/nucleus.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/fontawesome-all.min.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/hybrid.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/featherlight.min.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/perfect-scrollbar.min.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/auto-complete.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/atom-one-dark-reasonable.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/theme.css?1566557812" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/hugo-theme.css?1566557812" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/nucleus.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/fontawesome-all.min.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/hybrid.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/featherlight.min.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/perfect-scrollbar.min.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/auto-complete.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/atom-one-dark-reasonable.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/theme.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/hugo-theme.css?1566894805" rel="stylesheet">
     
 
-    <script src="/ResInsight-UserDocumentation/js/jquery-3.3.1.min.js?1566557812"></script>
+    <script src="/ResInsight-UserDocumentation/js/jquery-3.3.1.min.js?1566894805"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1614,7 +1614,7 @@ ResInsight is developed by <br> <a href="https://www.ceetronsolutions.com">Ceetr
 <li><a href="#static-find-startport-50051-endport-50071">static find(startPort=50051, endPort=50071)</a></li>
 <li><a href="#isconsole">isConsole()</a></li>
 <li><a href="#isgui">isGui()</a></li>
-<li><a href="#static-launch-resinsightexecutable-console-false">static launch(resInsightExecutable=&ldquo;, console=False)</a></li>
+<li><a href="#static-launch-resinsightexecutable-console-false-launchport-1-commandlineparameters">static launch(resInsightExecutable=&ldquo;, console=False, launchPort=-1, commandLineParameters=[])</a></li>
 <li><a href="#majorversion">majorVersion()</a></li>
 <li><a href="#minorversion">minorVersion()</a></li>
 <li><a href="#patchversion">patchVersion()</a></li>
@@ -1636,6 +1636,7 @@ ResInsight is developed by <br> <a href="https://www.ceetronsolutions.com">Ceetr
 <li><a href="#cellcount-porositymodel-matrix-model">cellCount(porosityModel=&lsquo;MATRIX_MODEL&rsquo;)</a></li>
 <li><a href="#cellinfoforactivecells-porositymodel-matrix-model">cellInfoForActiveCells(porosityModel=&lsquo;MATRIX_MODEL&rsquo;)</a></li>
 <li><a href="#cellinfoforactivecellsasync-porositymodel-matrix-model">cellInfoForActiveCellsAsync(porosityModel=&lsquo;MATRIX_MODEL&rsquo;)</a></li>
+<li><a href="#createview">createView()</a></li>
 <li><a href="#dayssincestart">daysSinceStart()</a></li>
 <li><a href="#grid-index">grid(index)</a></li>
 <li><a href="#gridcount">gridCount()</a></li>
@@ -1654,6 +1655,7 @@ ResInsight is developed by <br> <a href="https://www.ceetronsolutions.com">Ceetr
 <li>
 <ul>
 <li><a href="#class-rips-commands-channel">class rips.Commands(channel)</a></li>
+<li><a href="#cloneview-viewid">cloneView(viewId)</a></li>
 <li><a href="#closeproject">closeProject()</a></li>
 <li><a href="#computecasegroupstatistics-caseids-casegroupid-1">computeCaseGroupStatistics(caseIds=[], caseGroupId=-1)</a></li>
 <li><a href="#creategridcasegroup-casepaths">createGridCaseGroup(casePaths)</a></li>
@@ -1661,6 +1663,7 @@ ResInsight is developed by <br> <a href="https://www.ceetronsolutions.com">Ceetr
 <li><a href="#createmultiplefractures-caseid-templateid-wellpathnames-mindistfromwelltd-maxfracturesperwell-toplayer-baselayer-spacing-action">createMultipleFractures(caseId, templateId, wellPathNames, minDistFromWellTd, maxFracturesPerWell, topLayer, baseLayer, spacing, action)</a></li>
 <li><a href="#createsaturationpressureplots-caseids">createSaturationPressurePlots(caseIds)</a></li>
 <li><a href="#createstatisticscase-casegroupid">createStatisticsCase(caseGroupId)</a></li>
+<li><a href="#createview-caseid">createView(caseId)</a></li>
 <li><a href="#exportflowcharacteristics-caseid-timesteps-injectors-producers-filename-minimumcommunication-0-0-aquifercellthreshold-0-1">exportFlowCharacteristics(caseId, timeSteps, injectors, producers, fileName, minimumCommunication=0.0, aquiferCellThreshold=0.1)</a></li>
 <li><a href="#exportmsw-caseid-wellpath">exportMsw(caseId, wellPath)</a></li>
 <li><a href="#exportmulticasesnapshots-gridlistfile">exportMultiCaseSnapshots(gridListFile)</a></li>
@@ -1759,7 +1762,9 @@ ResInsight is developed by <br> <a href="https://www.ceetronsolutions.com">Ceetr
 <li><a href="#applycellresult-resulttype-resultvariable">applyCellResult(resultType, resultVariable)</a></li>
 <li><a href="#applyflowdiagnosticscellresult-resultvariable-tof-selectionmode-flow-tr-by-selection-injectors-producers">applyFlowDiagnosticsCellResult(resultVariable=&lsquo;TOF&rsquo;, selectionMode=&lsquo;FLOW_TR_BY_SELECTION&rsquo;, injectors=[], producers=[])</a></li>
 <li><a href="#backgroundcolor">backgroundColor()</a></li>
+<li><a href="#case">case()</a></li>
 <li><a href="#cellresult">cellResult()</a></li>
+<li><a href="#clone">clone()</a></li>
 <li><a href="#setbackgroundcolor-bgcolor">setBackgroundColor(bgColor)</a></li>
 <li><a href="#setshowgridbox-value">setShowGridBox(value)</a></li>
 <li><a href="#showgridbox">showGridBox()</a></li>
@@ -1877,7 +1882,7 @@ RESINSIGHT_GRPC_PORT to RESINSIGHT_GRPC_PORT+20</p>
 
 <p>Returns true if the connected ResInsight instance is a GUI app</p>
 
-<h4 id="static-launch-resinsightexecutable-console-false">static launch(resInsightExecutable=&ldquo;, console=False)</h4>
+<h4 id="static-launch-resinsightexecutable-console-false-launchport-1-commandlineparameters">static launch(resInsightExecutable=&ldquo;, console=False, launchPort=-1, commandLineParameters=[])</h4>
 
 <p>Launch a new Instance of ResInsight. This requires the environment variable
 RESINSIGHT_EXECUTABLE to be set or the parameter resInsightExecutable to be provided.
@@ -1892,6 +1897,11 @@ will take precedence over what is provided in the RESINSIGHT_EXECUTABLE
 environment variable.</p></li>
 
 <li><p><strong>console</strong> (<em>bool</em>) &ndash; If True, launch as console application, without GUI.</p></li>
+
+<li><p><strong>launchPort</strong> (<em>int</em>) &ndash; If -1 will use the default port of 50051 or look for RESINSIGHT_GRPC_PORT
+if anything else, ResInsight will try to launch with this port</p></li>
+
+<li><p><strong>commandLineParameters</strong> (<em>list</em>) &ndash; Additional command line parameters as string entries in the list.</p></li>
 </ul></li>
 
 <li><p><strong>Returns</strong></p>
@@ -2037,6 +2047,10 @@ parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.
 <p>Stream of cell info objects with the following attributes</p></li>
 </ul>
 
+<h4 id="createview">createView()</h4>
+
+<p>Create a new view in the current case</p>
+
 <h4 id="dayssincestart">daysSinceStart()</h4>
 
 <p>Get a list of decimal values representing days since the start of the simulation</p>
@@ -2079,7 +2093,8 @@ parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.
 
 <h2 id="example-1">Example</h2>
 
-<pre><code># Import the ResInsight Processing Server Module
+<pre><code>
+# Import the ResInsight Processing Server Module
 import rips
 
 # Connect to ResInsight
@@ -2092,6 +2107,9 @@ if resInsight is not None:
     for case in cases:
         print(&quot;Case name: &quot; + case.name)
         print(&quot;Case grid path: &quot; + case.gridPath())
+        # Create a new view
+        view = case.createView()
+    
 
 </code></pre>
 
@@ -2112,6 +2130,8 @@ if resInsight is not None:
 
 * Booleans have to be specified as correct Python. True instead of true.
 </code></pre>
+
+<h4 id="cloneview-viewid">cloneView(viewId)</h4>
 
 <h4 id="closeproject">closeProject()</h4>
 
@@ -2140,6 +2160,8 @@ if resInsight is not None:
 <h4 id="createsaturationpressureplots-caseids">createSaturationPressurePlots(caseIds)</h4>
 
 <h4 id="createstatisticscase-casegroupid">createStatisticsCase(caseGroupId)</h4>
+
+<h4 id="createview-caseid">createView(caseId)</h4>
 
 <h4 id="exportflowcharacteristics-caseid-timesteps-injectors-producers-filename-minimumcommunication-0-0-aquifercellthreshold-0-1">exportFlowCharacteristics(caseId, timeSteps, injectors, producers, fileName, minimumCommunication=0.0, aquiferCellThreshold=0.1)</h4>
 
@@ -2742,9 +2764,17 @@ Requires selectionMode to be &lsquo;FLOW_TR_BY_SELECTION&rsquo;.</p></li>
 
 <p>Get the current background color in the view</p>
 
+<h4 id="case">case()</h4>
+
+<p>Get the case the view belongs to</p>
+
 <h4 id="cellresult">cellResult()</h4>
 
 <p>Retrieve the current cell results</p>
+
+<h4 id="clone">clone()</h4>
+
+<p>Clone the current view</p>
 
 <h4 id="setbackgroundcolor-bgcolor">setBackgroundColor(bgColor)</h4>
 
@@ -4040,20 +4070,20 @@ view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/ResInsight-UserDocumentation/js/clipboard.min.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.min.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.jquery.min.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/jquery.sticky.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/featherlight.min.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/html5shiv-printshiv.min.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/highlight.pack.js?1566557812"></script>
+    <script src="/ResInsight-UserDocumentation/js/clipboard.min.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.min.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.jquery.min.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/jquery.sticky.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/featherlight.min.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/html5shiv-printshiv.min.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/highlight.pack.js?1566894805"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/ResInsight-UserDocumentation/js/modernizr.custom-3.6.0.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/learn.js?1566557812"></script>
-    <script src="/ResInsight-UserDocumentation/js/hugo-learn.js?1566557812"></script>
+    <script src="/ResInsight-UserDocumentation/js/modernizr.custom-3.6.0.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/learn.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/hugo-learn.js?1566894805"></script>
 
-    <link href="/ResInsight-UserDocumentation/mermaid/mermaid.css?1566557812" rel="stylesheet" />
-    <script src="/ResInsight-UserDocumentation/mermaid/mermaid.js?1566557812"></script>
+    <link href="/ResInsight-UserDocumentation/mermaid/mermaid.css?1566894805" rel="stylesheet" />
+    <script src="/ResInsight-UserDocumentation/mermaid/mermaid.js?1566894805"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
