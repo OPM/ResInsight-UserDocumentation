@@ -12,6 +12,9 @@ weight = 10
 
 ### From Binary Packages on Linux 
 
+{{% notice info %}}
+Please not that the distribution by the OPM Project will updated some time after the release of a new version on GitHub.
+{{% /notice %}}
 
 #### Red Hat Enterprise Linux 6 or 7
 Login as root and do:
