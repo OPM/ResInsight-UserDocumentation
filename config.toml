@@ -2,6 +2,7 @@ baseURL = "https://opm.github.io/ResInsight-UserDocumentation/"
 languageCode = "en-us"
 title = "ResInsight"
 theme = "learn"
+googleAnalytics = "UA-79509181-1"
 
 [params]
 disableSearch = false
