@@ -78,24 +78,28 @@ A *Case* in ResInsight means a Grid model with a particular set of results or pr
 The following Eclipse cases can be imported into ResInsight via the **File->Import->Eclipse Cases** menu, 
 see [Import Eclipse Cases]({{< ref "eclipsecases.md" >}}): 
 
-##### Result Case {{< image-in-text src="images/getting-started/Case24x24.png" >}}
+**Result Case {{< image-in-text src="images/getting-started/Case24x24.png" >}}**
+
 This is a Case based on the results of an Eclipse simulation, read from a grid file together with static and restart data. Multiple Cases can be selected and read from a folder.
 
-##### Input Case {{< image-in-text src="images/getting-started/EclipseInput24x24.png" >}}
+**Input Case {{< image-in-text src="images/getting-started/EclipseInput24x24.png" >}}**
+
 This Case type is based on a _`*.GRDECL`_ file, or a part of an Eclipse *Input* file. This Case type supports loading single ASCII files defining Eclipse Cell Properties, and also to export modified property sets to ASCII files.
 Each of the Eclipse properties are listed as separate entities in the **Project Tree**, and can be renamed and exported.
 See [ Grid Import and Property Export ]({{< relref "eclipsecases" >}})
 
-#####  Statistics Case {{< image-in-text src="images/getting-started/Histogram24x24.png" >}}
+**Statistics Case {{< image-in-text src="images/getting-started/Histogram24x24.png" >}}**
+
 This is a Case type that belongs to a *Grid Case Group* and makes statistical calculations based on the source cases in the Grid Case Group. See [ Grid Case Groups and Statistics ]({{< relref "casegroupsandstatistics" >}}).
 
-##### Summary Case {{< image-in-text src="images/getting-started/SummaryCase24x24.png" >}}
+**Summary Case {{< image-in-text src="images/getting-started/SummaryCase24x24.png" >}}**
 
 This is the case type listed in the Plot Main Window, and represents an _`*.SMSPEC`_ file. These Cases are available for Summary Plotting. See [ Summary Plots ]({{< relref "summaryplots" >}}).
  
-#### Geomechanical cases {{< image-in-text src="images/getting-started/GeoMechCase24x24.png" >}}
+#### Geomechanical cases
 
-There are only one type of geomechanical cases, namely the ABAQUS-odb case type. 
+There are only one type of geomechanical {{< image-in-text src="images/getting-started/GeoMechCase24x24.png" >}}
+ cases, namely the ABAQUS-odb case type. 
 When ResInsight is compiled with ABAQUS-odb support, _`*.odb`_ files can be imported by selecting the menu item:
 **File->Import->Geo Mechanical Cases-> {{< image-in-text src="images/getting-started/GeoMechCase24x24.png" >}} Import Geo Mechanical Model**.
 
@@ -103,9 +107,9 @@ The geomechanical cases are sorted into its own folder in the project tree named
 
 See [Build Instructions]({{< ref "buildinstructions.md" >}}) on how to compile ResInsight with odb-support.
 
-#### Grid Case Groups {{< image-in-text src="images/getting-started/GridCaseGroup24x24.png" >}}
+#### Grid Case Groups
 
-A **Grid Case Group** is a group of Eclipse **Result Cases** with identical grids, but generally different active cells, initial values and results. These cases are called *Source Cases*. The purpose of a Grid Case group is to make it easy to calculate statistics across the source cases both for static and dynamic Eclipse Properties. See [ Grid Case Groups and Statistics ]({{< relref "casegroupsandstatistics" >}}).
+A **Grid Case Group**  {{< image-in-text src="images/getting-started/GridCaseGroup24x24.png" >}} is a group of Eclipse **Result Cases** with identical grids, but generally different active cells, initial values and results. These cases are called *Source Cases*. The purpose of a Grid Case group is to make it easy to calculate statistics across the source cases both for static and dynamic Eclipse Properties. See [ Grid Case Groups and Statistics ]({{< relref "casegroupsandstatistics" >}}).
 
 
 ### The Project File and the Cache Directory
