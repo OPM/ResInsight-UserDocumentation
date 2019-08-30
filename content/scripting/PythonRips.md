@@ -340,16 +340,13 @@ if resInsight is not None:
 
 #### class rips.Commands(channel)
 Command executor which can run ResInsight Command File commands nearly verbatim
-
-Documentation Command File Interface:
-
-    [https://resinsight.org/docs/commandfile/](https://resinsight.org/docs/commandfile/)
+For details, see [Command File Interface]({{< relref "commandfile" >}})
 
 The differences are:
 
-    * Enum values have to be provided as strings. I.e. "ALL" instead of ALL.
+* Enum values have to be provided as strings. I.e. "ALL" instead of ALL.
 
-    * Booleans have to be specified as correct Python. True instead of true.
+* Booleans have to be specified as correct Python. True instead of true.
 
 
 #### cloneView(viewId)
@@ -387,6 +384,26 @@ Create a Grid Case Group from a list of cases
 #### createView(caseId)
 
 #### exportFlowCharacteristics(caseId, timeSteps, injectors, producers, fileName, minimumCommunication=0.0, aquiferCellThreshold=0.1)
+Export Flow Characteristics data to text file
+
+
+* **Parameters**
+
+    * **caseId** (*int*) -- case ID
+
+    * **timeSteps** (*list*) -- list of integer representing time step indices
+
+    * **injectors** (*list*) -- list of strings representing injector names
+
+    * **producers** (*list*) -- list of strings representing producer names
+
+    * **fileName** (*str*) -- Export file name
+
+    * **minimumCommunication** (*double*) -- Minimum Communication, defaults to 0.0
+
+    * **aquiferCellThreshold** (*double*) -- Aquifer Cell Threshold, defaults to 0.1
+
+
 
 #### exportMsw(caseId, wellPath)
 

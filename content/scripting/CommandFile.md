@@ -379,6 +379,24 @@ Export visible cells
 exporVisibleCells(caseId=0, viewName="View 1", exportKeyword=MULTNUM)
 ```
 
+### exportFlowCharacteristics
+
+Export Flow Characteristics data to text file in CSV format
+
+| Parameter               | Description                                     | Type              | Required |
+|-------------------------|-------------------------------------------------|-------------------|----------|
+| caseId                  | ID of case                                      | Integer           | &#10004; |
+| timeSteps               | Time step indices                               | List of Integer   | &#10004; |
+| injectors               | Injector names                                  | List of Strings   |          |
+| producers               | Producer names                                  | List of Strings   |          |
+| fileName                | Export file name                                | Integer           |          |
+| minimumCommunication    | Minimum Communication, defaults to 0.0          | Integer           |          |
+| aquiferCellThreshold    | Aquifer Cell Threshold, defaults to 0.1         | Integer           |          |
+
+
+```
+exportFlowCharacteristics(caseId=0, timeSteps=[1, 5, 6], injectors=["INJA", "INJB"], producers=["PROD_F"], fileName="myData.csv")
+```
 
 ### setExportFolder
 
