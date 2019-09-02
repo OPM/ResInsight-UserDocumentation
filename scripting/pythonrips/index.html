@@ -12,18 +12,18 @@
     <title>Python API - rips :: ResInsight</title>
 
     
-    <link href="/ResInsight-UserDocumentation/css/nucleus.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/fontawesome-all.min.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/hybrid.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/featherlight.min.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/perfect-scrollbar.min.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/auto-complete.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/atom-one-dark-reasonable.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/theme.css?1566894805" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/hugo-theme.css?1566894805" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/nucleus.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/fontawesome-all.min.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/hybrid.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/featherlight.min.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/perfect-scrollbar.min.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/auto-complete.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/atom-one-dark-reasonable.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/theme.css?1567452122" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/hugo-theme.css?1567452122" rel="stylesheet">
     
 
-    <script src="/ResInsight-UserDocumentation/js/jquery-3.3.1.min.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/jquery-3.3.1.min.js?1567452122"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1366,6 +1366,25 @@
  
   
     
+      <li data-nav-id="/ResInsight-UserDocumentation/scripting/all_examples/" title="Python Examples" class="dd-item ">
+        <a href="/ResInsight-UserDocumentation/scripting/all_examples/">
+        Python Examples
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
       <li data-nav-id="/ResInsight-UserDocumentation/scripting/octaveinterface/" title="Octave Interface" class="dd-item ">
         <a href="/ResInsight-UserDocumentation/scripting/octaveinterface/">
         Octave Interface
@@ -1540,11 +1559,25 @@
 
     
     <section id="footer">
-      <a href="https://www.ceetronsolutions.com"><img src='https://opm.github.io/ResInsight-UserDocumentation//images/CeetronSolutionsLogo.png' style='width: 140px; '></a><br>
+      <a href="https://www.ceetronsolutions.com"><img src='https://opm.github.io/ResInsight-UserDocumentation//images/CeeSolLogoSmallForDarkBackground.png' style='width: 140px; '></a><br>
 
 ResInsight is developed by <br> <a href="https://www.ceetronsolutions.com">Ceetron Solutions</a>
 <p>in collaboration with</p>
 <a href="https://www.equinor.com">Equinor ASA</a>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-79509181-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
 
     </section>
   </div>
@@ -2077,7 +2110,50 @@ parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.
 
 <h4 id="timesteps">timeSteps()</h4>
 
-<p>Get a list containing time step strings for all time steps</p>
+<p>Get a list containing all time steps</p>
+
+<p>The time steps are defined by the class <strong>TimeStepDate</strong> :</p>
+
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>int</td>
+<td>year</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>month</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>day</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>hour</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>minute</td>
+</tr>
+
+<tr>
+<td>int</td>
+<td>second</td>
+</tr>
+</tbody>
+</table>
 
 <h4 id="view-id">view(id)</h4>
 
@@ -2107,8 +2183,12 @@ if resInsight is not None:
     for case in cases:
         print(&quot;Case name: &quot; + case.name)
         print(&quot;Case grid path: &quot; + case.gridPath())
-        # Create a new view
-        view = case.createView()
+        
+        timesteps = case.timeSteps()
+        for t in timesteps:
+            print(&quot;Year: &quot; + str(t.year))
+            print(&quot;Month: &quot; + str(t.month))
+        
     
 
 </code></pre>
@@ -2164,6 +2244,62 @@ if resInsight is not None:
 <h4 id="createview-caseid">createView(caseId)</h4>
 
 <h4 id="exportflowcharacteristics-caseid-timesteps-injectors-producers-filename-minimumcommunication-0-0-aquifercellthreshold-0-1">exportFlowCharacteristics(caseId, timeSteps, injectors, producers, fileName, minimumCommunication=0.0, aquiferCellThreshold=0.1)</h4>
+
+<p>Export Flow Characteristics data to text file in CSV format</p>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>caseId</td>
+<td>ID of case</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>timeSteps</td>
+<td>Time step indices</td>
+<td>List of Integer</td>
+</tr>
+
+<tr>
+<td>injectors</td>
+<td>Injector names</td>
+<td>List of Strings</td>
+</tr>
+
+<tr>
+<td>producers</td>
+<td>Producer names</td>
+<td>List of Strings</td>
+</tr>
+
+<tr>
+<td>fileName</td>
+<td>Export file name</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>minimumCommunication</td>
+<td>Minimum Communication, defaults to 0.0</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>aquiferCellThreshold</td>
+<td>Aquifer Cell Threshold, defaults to 0.1</td>
+<td>Integer</td>
+</tr>
+</tbody>
+</table>
 
 <h4 id="exportmsw-caseid-wellpath">exportMsw(caseId, wellPath)</h4>
 
@@ -3965,6 +4101,22 @@ view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -4060,7 +4212,7 @@ view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
 			<a class="nav nav-prev" href="/ResInsight-UserDocumentation/scripting/commandfile/" title="Command File"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/ResInsight-UserDocumentation/scripting/octaveinterface/" title="Octave Interface" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/ResInsight-UserDocumentation/scripting/all_examples/" title="Python Examples" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -4070,20 +4222,20 @@ view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/ResInsight-UserDocumentation/js/clipboard.min.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.min.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.jquery.min.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/jquery.sticky.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/featherlight.min.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/html5shiv-printshiv.min.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/highlight.pack.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/clipboard.min.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.min.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.jquery.min.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/jquery.sticky.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/featherlight.min.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/html5shiv-printshiv.min.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/highlight.pack.js?1567452122"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/ResInsight-UserDocumentation/js/modernizr.custom-3.6.0.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/learn.js?1566894805"></script>
-    <script src="/ResInsight-UserDocumentation/js/hugo-learn.js?1566894805"></script>
+    <script src="/ResInsight-UserDocumentation/js/modernizr.custom-3.6.0.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/learn.js?1567452122"></script>
+    <script src="/ResInsight-UserDocumentation/js/hugo-learn.js?1567452122"></script>
 
-    <link href="/ResInsight-UserDocumentation/mermaid/mermaid.css?1566894805" rel="stylesheet" />
-    <script src="/ResInsight-UserDocumentation/mermaid/mermaid.js?1566894805"></script>
+    <link href="/ResInsight-UserDocumentation/mermaid/mermaid.css?1567452122" rel="stylesheet" />
+    <script src="/ResInsight-UserDocumentation/mermaid/mermaid.js?1567452122"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

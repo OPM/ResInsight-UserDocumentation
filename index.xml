@@ -94,7 +94,7 @@ Commands Several commands are available as context commands on a simulation well
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/export/snapshots/</guid>
       <description>ResInsight has several commands to create snapshots conveniently. 3 commands to take snapshots of existing Plot and 3D Views directly, and a more advanced export command that can automatically modify Eclipse 3D Views before snapshotting them.
-Snapshots of Existing Views The commands to snapshot existing views and plots are available from the toolbar and the Edit and File-&amp;gt;Export menus in the main windows Snapshot to Clipboard  A snapshot of the active view is copied to the clipboard using Edit -&amp;gt; Copy Snapshot To Clipboard.</description>
+Snapshots of Existing Views The commands to snapshot existing views and plots are available from the toolbar and the Edit and File-&amp;gt;Export menus in the main windows Snapshot to Clipboard A snapshot of the active view is copied to the clipboard using Edit -&amp;gt; Copy Snapshot To Clipboard .</description>
     </item>
     
     <item>
@@ -402,6 +402,16 @@ Paste Options Dialog Most of the fields in this dialog are the same as in the CS
       <description>ResInsight has a gRPC Remote Procedure Call interface with a Python Client interface. This interface allows you to interact with a running ResInsight instance from a Python script.
 The Python client package is available for install via the Python PIP package system with pip install rips as admin user, or pip install --user rips as a regular user.
 On some systems the pip command may have to be replaced by python -m pip.</description>
+    </item>
+    
+    <item>
+      <title>Python Examples</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/all_examples/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/all_examples/</guid>
+      <description>This pages is created based on the content in the PythonExamples folder located inside the rips module, made available online for convenience.
+AllCases ################################################################################### # This example will connect to ResInsight, retrieve a list of cases and print info # ################################################################################### # Import the ResInsight Processing Server Module import rips # Connect to ResInsight resInsight = rips.Instance.find() if resInsight is not None: # Get a list of all cases cases = resInsight.</description>
     </item>
     
     <item>
