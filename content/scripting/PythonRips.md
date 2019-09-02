@@ -298,7 +298,18 @@ Get a list of all rips Grid objects in the case
 
 
 #### timeSteps()
-Get a list containing time step strings for all time steps
+Get a list containing all time steps
+
+The time steps are defined by the class **TimeStepDate** :
+
+Type      | Name
+--------- | ----------
+int       | year
+int       | month
+int       | day
+int       | hour
+int       | minute
+int       | second
 
 
 #### view(id)
@@ -329,8 +340,12 @@ if resInsight is not None:
     for case in cases:
         print("Case name: " + case.name)
         print("Case grid path: " + case.gridPath())
-        # Create a new view
-        view = case.createView()
+        
+        timesteps = case.timeSteps()
+        for t in timesteps:
+            print("Year: " + str(t.year))
+            print("Month: " + str(t.month))
+        
     
 
 ```
@@ -340,13 +355,16 @@ if resInsight is not None:
 
 #### class rips.Commands(channel)
 Command executor which can run ResInsight Command File commands nearly verbatim
-For details, see [Command File Interface]({{< relref "commandfile" >}})
+
+Documentation Command File Interface:
+
+    [https://resinsight.org/docs/commandfile/](https://resinsight.org/docs/commandfile/)
 
 The differences are:
 
-* Enum values have to be provided as strings. I.e. "ALL" instead of ALL.
+    * Enum values have to be provided as strings. I.e. "ALL" instead of ALL.
 
-* Booleans have to be specified as correct Python. True instead of true.
+    * Booleans have to be specified as correct Python. True instead of true.
 
 
 #### cloneView(viewId)
@@ -384,25 +402,17 @@ Create a Grid Case Group from a list of cases
 #### createView(caseId)
 
 #### exportFlowCharacteristics(caseId, timeSteps, injectors, producers, fileName, minimumCommunication=0.0, aquiferCellThreshold=0.1)
-Export Flow Characteristics data to text file
+Export Flow Characteristics data to text file in CSV format
 
-
-* **Parameters**
-
-    * **caseId** (*int*) -- case ID
-
-    * **timeSteps** (*list*) -- list of integer representing time step indices
-
-    * **injectors** (*list*) -- list of strings representing injector names
-
-    * **producers** (*list*) -- list of strings representing producer names
-
-    * **fileName** (*str*) -- Export file name
-
-    * **minimumCommunication** (*double*) -- Minimum Communication, defaults to 0.0
-
-    * **aquiferCellThreshold** (*double*) -- Aquifer Cell Threshold, defaults to 0.1
-
+Parameter                 | Description                                   | Type
+------------------------- | --------------------------------------------- | -----
+caseId                    | ID of case                                    | Integer
+timeSteps                 | Time step indices                             | List of Integer
+injectors                 | Injector names                                | List of Strings
+producers                 | Producer names                                | List of Strings
+fileName                  | Export file name                              | Integer
+minimumCommunication      | Minimum Communication, defaults to 0.0        | Integer
+aquiferCellThreshold      | Aquifer Cell Threshold, defaults to 0.1       | Integer
 
 
 #### exportMsw(caseId, wellPath)
