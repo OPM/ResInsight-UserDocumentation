@@ -354,17 +354,14 @@ if resInsight is not None:
 
 
 #### class rips.Commands(channel)
-Command executor which can run ResInsight Command File commands nearly verbatim
-
-Documentation Command File Interface:
-
-    [https://resinsight.org/docs/commandfile/](https://resinsight.org/docs/commandfile/)
+Command executor which can run ResInsight Command File commands nearly verbatim. See
+[ Command File Interface ]({{< ref "commandfile.md" >}})
 
 The differences are:
 
-    * Enum values have to be provided as strings. I.e. "ALL" instead of ALL.
+* Enum values have to be provided as strings. I.e. "ALL" instead of ALL.
 
-    * Booleans have to be specified as correct Python. True instead of true.
+* Booleans have to be specified as correct Python. True instead of true.
 
 
 #### cloneView(viewId)
