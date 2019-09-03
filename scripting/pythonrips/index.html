@@ -12,18 +12,18 @@
     <title>Python API - rips :: ResInsight</title>
 
     
-    <link href="/ResInsight-UserDocumentation/css/nucleus.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/fontawesome-all.min.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/hybrid.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/featherlight.min.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/perfect-scrollbar.min.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/auto-complete.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/atom-one-dark-reasonable.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/theme.css?1567488056" rel="stylesheet">
-    <link href="/ResInsight-UserDocumentation/css/hugo-theme.css?1567488056" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/nucleus.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/fontawesome-all.min.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/hybrid.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/featherlight.min.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/perfect-scrollbar.min.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/auto-complete.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/atom-one-dark-reasonable.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/theme.css?1567501936" rel="stylesheet">
+    <link href="/ResInsight-UserDocumentation/css/hugo-theme.css?1567501936" rel="stylesheet">
     
 
-    <script src="/ResInsight-UserDocumentation/js/jquery-3.3.1.min.js?1567488056"></script>
+    <script src="/ResInsight-UserDocumentation/js/jquery-3.3.1.min.js?1567501936"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -1347,6 +1347,25 @@
  
   
     
+      <li data-nav-id="/ResInsight-UserDocumentation/scripting/pythonexamples/" title="Python Examples" class="dd-item ">
+        <a href="/ResInsight-UserDocumentation/scripting/pythonexamples/">
+        Python Examples
+        
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+ 
+  
+    
       <li data-nav-id="/ResInsight-UserDocumentation/scripting/pythonrips/" title="Python API - rips" class="dd-item active">
         <a href="/ResInsight-UserDocumentation/scripting/pythonrips/">
         Python API - rips
@@ -1366,9 +1385,9 @@
  
   
     
-      <li data-nav-id="/ResInsight-UserDocumentation/scripting/pythonexamples/" title="Python Examples" class="dd-item ">
-        <a href="/ResInsight-UserDocumentation/scripting/pythonexamples/">
-        Python Examples
+      <li data-nav-id="/ResInsight-UserDocumentation/scripting/pythonconfiguration/" title="Python Configuration" class="dd-item ">
+        <a href="/ResInsight-UserDocumentation/scripting/pythonconfiguration/">
+        Python Configuration
         
         </a>
     </li>
@@ -1668,6 +1687,10 @@ if (!doNotTrack) {
 <li><a href="#groupid">groupId()</a></li>
 <li><a href="#cellcount-porositymodel-matrix-model">cellCount(porosityModel=&lsquo;MATRIX_MODEL&rsquo;)</a></li>
 <li><a href="#cellinfoforactivecells-porositymodel-matrix-model">cellInfoForActiveCells(porosityModel=&lsquo;MATRIX_MODEL&rsquo;)</a></li>
+</ul></li>
+<li><a href="#cellinfo-class-description">CellInfo class description</a></li>
+<li><a href="#vec3i-class-description">Vec3i class description</a>
+<ul>
 <li><a href="#cellinfoforactivecellsasync-porositymodel-matrix-model">cellInfoForActiveCellsAsync(porosityModel=&lsquo;MATRIX_MODEL&rsquo;)</a></li>
 <li><a href="#createview">createView()</a></li>
 <li><a href="#dayssincestart">daysSinceStart()</a></li>
@@ -1833,19 +1856,7 @@ if (!doNotTrack) {
 
 
 
-<p>ResInsight has a <a href="https://www.grpc.io/">gRPC Remote Procedure Call</a> interface with a Python Client interface. This interface allows you to interact with a running ResInsight instance from a Python script.</p>
-
-<p>The Python client package is available for install via the Python PIP package system with <code>pip install rips</code> as admin user, or <code>pip install --user rips</code> as a regular user.</p>
-
-<p>On some systems the <code>pip</code> command may have to be replaced by <code>python -m pip</code>.</p>
-
-<p>In order for gRPC to be available, ResInsight needs to be built with the <code>RESINSIGHT_ENABLE_GRPC</code> option set. A valid gRPC build will show a message in the About dialog confirming gRPC is available:</p>
-
-<p><img src="/ResInsight-UserDocumentation/images/scripting/AboutGrpc.png" alt="image" /></p>
-
-<p>Furthermore, gRPC needs to be enabled in the Scripting tab of the Preference dialog:</p>
-
-<p><img src="/ResInsight-UserDocumentation/images/scripting/PrefGrpc.png" alt="image" /></p>
+<p><img src="/ResInsight-UserDocumentation/images/scripting/python-logo-master-v3-TM.png" alt="" /></p>
 
 <h1 id="instance-module">Instance Module</h1>
 
@@ -2046,16 +2057,84 @@ must be &lsquo;MATRIX_MODEL&rsquo; or &lsquo;FRACTURE_MODEL&rsquo;.</p></li>
 
 <li><p><strong>Returns</strong></p>
 
-<p>grid_index(int): grid the cell belongs to
-parent_grid_index(int): parent of the grid the cell belongs to
-coarsening_box_index(int): the coarsening box index
-local_ijk(Vec3i: i(int), j(int), k(int)): local cell index in i, j, k directions.
-parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.</p></li>
-
-<li><p><strong>Return type</strong></p>
-
-<p>List of cell info objects with the following attributes</p></li>
+<p>List of <strong>CellInfo</strong> objects</p></li>
 </ul>
+
+<h3 id="cellinfo-class-description">CellInfo class description</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>grid_index</td>
+<td>Index to grid</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>parent_grid_index</td>
+<td>Index to parent grid</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>coarsening_box_index</td>
+<td>Index to coarsening box</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>local_ijk</td>
+<td>Cell index in IJK directions of local grid</td>
+<td>Vec3i</td>
+</tr>
+
+<tr>
+<td>parent_ijk</td>
+<td>Cell index in IJK directions of parent grid</td>
+<td>Vec3i</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="vec3i-class-description">Vec3i class description</h3>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>i</td>
+<td>I grid index</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>j</td>
+<td>J grid index</td>
+<td>Integer</td>
+</tr>
+
+<tr>
+<td>k</td>
+<td>K grid index</td>
+<td>Integer</td>
+</tr>
+</tbody>
+</table>
 
 <h4 id="cellinfoforactivecellsasync-porositymodel-matrix-model">cellInfoForActiveCellsAsync(porosityModel=&lsquo;MATRIX_MODEL&rsquo;)</h4>
 
@@ -2069,16 +2148,10 @@ must be &lsquo;MATRIX_MODEL&rsquo; or &lsquo;FRACTURE_MODEL&rsquo;.</p></li>
 
 <li><p><strong>Returns</strong></p>
 
-<p>grid_index(int): grid the cell belongs to
-parent_grid_index(int): parent of the grid the cell belongs to
-coarsening_box_index(int): the coarsening box index
-local_ijk(Vec3i: i(int), j(int), k(int)): local cell index in i, j, k directions.
-parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.</p></li>
-
-<li><p><strong>Return type</strong></p>
-
-<p>Stream of cell info objects with the following attributes</p></li>
+<p>Stream of <strong>CellInfo</strong> objects</p></li>
 </ul>
+
+<p>See cellInfoForActiveCells() for detalis on the <strong>CellInfo</strong> class.</p>
 
 <h4 id="createview">createView()</h4>
 
@@ -4051,6 +4124,22 @@ view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -4206,10 +4295,10 @@ view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
 	 
 	 
 		
-			<a class="nav nav-prev" href="/ResInsight-UserDocumentation/scripting/commandfile/" title="Command File"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/ResInsight-UserDocumentation/scripting/pythonexamples/" title="Python Examples"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/ResInsight-UserDocumentation/scripting/pythonexamples/" title="Python Examples" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/ResInsight-UserDocumentation/scripting/pythonconfiguration/" title="Python Configuration" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -4219,20 +4308,20 @@ view = case.views()[0].applyCellResult('GENERATED', 'POROPERMXAS')
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/ResInsight-UserDocumentation/js/clipboard.min.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.min.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.jquery.min.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/jquery.sticky.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/featherlight.min.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/html5shiv-printshiv.min.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/highlight.pack.js?1567488056"></script>
+    <script src="/ResInsight-UserDocumentation/js/clipboard.min.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.min.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/perfect-scrollbar.jquery.min.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/jquery.sticky.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/featherlight.min.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/html5shiv-printshiv.min.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/highlight.pack.js?1567501936"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/ResInsight-UserDocumentation/js/modernizr.custom-3.6.0.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/learn.js?1567488056"></script>
-    <script src="/ResInsight-UserDocumentation/js/hugo-learn.js?1567488056"></script>
+    <script src="/ResInsight-UserDocumentation/js/modernizr.custom-3.6.0.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/learn.js?1567501936"></script>
+    <script src="/ResInsight-UserDocumentation/js/hugo-learn.js?1567501936"></script>
 
-    <link href="/ResInsight-UserDocumentation/mermaid/mermaid.css?1567488056" rel="stylesheet" />
-    <script src="/ResInsight-UserDocumentation/mermaid/mermaid.js?1567488056"></script>
+    <link href="/ResInsight-UserDocumentation/mermaid/mermaid.css?1567501936" rel="stylesheet" />
+    <script src="/ResInsight-UserDocumentation/mermaid/mermaid.js?1567501936"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

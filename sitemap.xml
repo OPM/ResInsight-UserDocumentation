@@ -159,10 +159,6 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</loc>
-  </url>
-  
-  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonexamples/</loc>
   </url>
   
@@ -180,6 +176,14 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonconfiguration/</loc>
   </url>
   
   <url>
