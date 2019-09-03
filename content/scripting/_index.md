@@ -24,6 +24,8 @@ ResInsight offers a [Python Interface] ({{< ref "pythonrips.md" >}})
 which allows you to interact with a running ResInsight instance from a Python script. 
 This allows using the powerful Python language, numerical libraries, and other support modules in conjunction with ResInsight.
 
+For examples on how to use Python, see [Examples]({{< ref "pythonexamples.md" >}})
+
 ## Octave Interface
 By the interface to [Octave](http://www.gnu.org/software/octave/ "Octave") you will find:
 

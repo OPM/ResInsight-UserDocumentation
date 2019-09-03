@@ -1,26 +1,8 @@
 +++
 title = "Python API - rips"
 published = true
-weight = 40
+weight = 42
 +++
-
-ResInsight has a [gRPC Remote Procedure Call](https://www.grpc.io/) interface with a Python Client interface. This interface allows you to interact with a running ResInsight instance from a Python script.
-
-The Python client package is available for install via the Python PIP package system with `pip install rips` as admin user, or `pip install --user rips` as a regular user.
-
-On some systems the `pip` command may have to be replaced by `python -m pip`.
-
-In order for gRPC to be available, ResInsight needs to be built with the `RESINSIGHT_ENABLE_GRPC` option set. A valid gRPC build will show a message in the About dialog confirming gRPC is available:
-
-
-
-![image]({{<relref"">}}images/scripting/AboutGrpc.png)
-
-Furthermore, gRPC needs to be enabled in the Scripting tab of the Preference dialog:
-
-
-
-![image]({{<relref"">}}images/scripting/PrefGrpc.png)
 
 # Instance Module
 
@@ -228,18 +210,26 @@ Get list of cell info objects for current case
 
 * **Returns**
 
-    grid_index(int): grid the cell belongs to
-    parent_grid_index(int): parent of the grid the cell belongs to
-    coarsening_box_index(int): the coarsening box index
-    local_ijk(Vec3i: i(int), j(int), k(int)): local cell index in i, j, k directions.
-    parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.
+    List of **CellInfo** objects
 
 
+### CellInfo class description
 
-* **Return type**
+Parameter                 | Description                                   | Type
+------------------------- | --------------------------------------------- | -----
+grid_index                | Index to grid                                 | Integer
+parent_grid_index         | Index to parent grid                          | Integer
+coarsening_box_index      | Index to coarsening box                       | Integer
+local_ijk                 | Cell index in IJK directions of local grid    | Vec3i
+parent_ijk                | Cell index in IJK directions of parent grid   | Vec3i
 
-    List of cell info objects with the following attributes
+### Vec3i class description
 
+Parameter        | Description                                  | Type
+---------------- | -------------------------------------------- | -----
+i                | I grid index                                 | Integer
+j                | J grid index                                 | Integer
+k                | K grid index                                 | Integer
 
 
 #### cellInfoForActiveCellsAsync(porosityModel='MATRIX_MODEL')
@@ -255,18 +245,10 @@ Get Stream of cell info objects for current case
 
 * **Returns**
 
-    grid_index(int): grid the cell belongs to
-    parent_grid_index(int): parent of the grid the cell belongs to
-    coarsening_box_index(int): the coarsening box index
-    local_ijk(Vec3i: i(int), j(int), k(int)): local cell index in i, j, k directions.
-    parent_ijk(Vec3i: i(int), j(int), k(int)): cell index in parent grid in i, j, k.
+    Stream of **CellInfo** objects
 
 
-
-* **Return type**
-
-    Stream of cell info objects with the following attributes
-
+See cellInfoForActiveCells() for detalis on the **CellInfo** class.
 
 
 #### createView()
