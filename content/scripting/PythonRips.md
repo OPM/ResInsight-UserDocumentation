@@ -4,6 +4,8 @@ published = true
 weight = 42
 +++
 
+![]({{< relref "" >}}images/scripting/python-logo-master-v3-TM.png)
+
 # Instance Module
 
 

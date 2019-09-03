@@ -4,6 +4,7 @@ published = true
 weight = 45
 +++
 
+![]({{< relref "" >}}images/scripting/python-logo-master-v3-TM.png)
 
 ResInsight has a [gRPC Remote Procedure Call](https://www.grpc.io/) interface with a Python Client interface. This interface allows you to interact with a running ResInsight instance from a Python script.
 
@@ -21,5 +22,6 @@ Furthermore, gRPC needs to be enabled in the Scripting tab of the Preference dia
 
 
 ![image]({{<relref"">}}images/scripting/PrefGrpc.png)
+
 
 
