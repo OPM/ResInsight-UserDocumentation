@@ -2,6 +2,11 @@
 title = "Getting Started"
 published = true
 weight = 10
+
+aliases = [
+    "/docs/home"
+]
+
 +++
 
 ![Using ResInsight]({{< relref "" >}}images/getting-started/usingResinsight.png)
