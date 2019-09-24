@@ -44,7 +44,7 @@ A new perforation interval on a well can be set up by right-clicking on the well
 After creating the perforation interval, the following properties of the perforation can be set in the property editor:
 
 - **Start MD**, **End MD** -- Measured depth along the well path for the perforation to start/stop. 
-- **Diameter** -- Diameter of the perforation, used in calculation of transmissibility ( For details on the transmissibility calculation, see [Transmissibility Calculations]({{< relref "completionexport" >}}#transmissibility-calculations)). 
+- **Diameter** -- Well bore diameter for the perforation interval, used in calculation of transmissibility ( For details on the transmissibility calculation, see [Transmissibility Calculations]({{< relref "completionexport" >}}#transmissibility-calculations)). 
 - **Skin Factor** -- Skin factor for the perforation, used in calculation of transmissibility. 
 - **All Timesteps** -- If on, the perforation interval will be present for all time steps
 - **Start Date** -- The perforation will be included in the model for all time steps after this date. If "All TimeSteps" is turned on, this option is not available and the perforation is included for all time steps. 
@@ -62,7 +62,7 @@ For multi-segment wells there are additional parameters which should be set. The
 ![]({{< relref "" >}}images/3d-main-window/PerfIntervalMsw.PNG)
 
 - **Multi Segment Well Options** - Options used by the Well Segments Export
-  - **Liner Inner Diameter** -- The liner inner diameter for the perforation intervals.
+  - **Liner Inner Diameter** -- The liner inner diameter for the completion intervals.
   - **Roughness Factor** -- The roughness factor used in export of main bore segments. 
   - **Pressure Drop** -- can be either *Hydrostatic*, *Hydrostatic + Friction* or *Hydrostatic + Friction + Acceleration*. 
   - **Length and Depth** -- Used in WELSEGS export - when specifying the length and depth change for each segment
@@ -70,18 +70,18 @@ For multi-segment wells there are additional parameters which should be set. The
     - **Absolute** -- the length down the tube or depth of the last nodal point
   - **Enforce Max Segment Length** -- Limit segment to max size. When this check box is checked, a max segment length input field is displayed.
   
-There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options brings up several input fields.
+There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas given Dake´s (1976) radiel inflow model and correlation for calculating matrix beta factor depending on permeability and porosity.
 
 ![]({{< relref "" >}}images/3d-main-window/PerfIntervalNonDarcy.PNG)
 
 - **Non-Darcy Flow** - Non-Darcy settings for D factor computation
-  - **Grid Permeability Scaling Factor**
-  - **Well Radius**
-  - **Relative Gas Density**
-  - **Gas Viscosity**
-  - **Inertial Coefficient**
-  - **Permeability Scaling Factor**
-  - **Porosity Scaling Factor**
+  - **Grid Permeability Kr Scaling Factor** -- Rel.perm. scaling factor to calculate effective permeability.
+  - **Well Radius** -- Well bore radius.
+  - **Relative Gas Density** 
+  - **Gas Viscosity** -- Gas viscosity at flowing bottom hole pressure.
+  - **Inertial Coefficient** -- Coefficient to calculate beta factor.
+  - **Permeability Scaling Exponent** -- For beta factor calculation.
+  - **Porosity Scaling Exponent** -- For beta factor calculation.
   
 ### Perforation Interval Valves
 
