@@ -7,9 +7,12 @@ Edit documentation in the folder **content**
 Download Hugo and install locally from
 https://github.com/gohugoio/hugo/releases
 
-1. Clone the master branch
-2. Open a command line, and make sure `hugo.exe` is available in path
-3. Execute command `hugo.exe serve` This will start a local webserver and display the documentation
+The **master** branch is intended to represent the documentation source for current published website at **gh-pages**. The **next-major-release** branch is intended to be used to document new features not yet released. When a new release is published, **next-major-release
+** is merged into **master**
+
+1. Clone the branch to work on
+2. Open a command line prompt, and make sure `hugo.exe` is available in path
+3. Execute command `hugo.exe serve`. This will start a local webserver and display the documentation
 
 ## Publish the documentation
 - Execute command `hugo.exe` This will create the static site in the folder `public`
