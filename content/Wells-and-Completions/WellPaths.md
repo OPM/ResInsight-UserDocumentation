@@ -17,7 +17,7 @@ The command **File -> Import -> Well Data -> Import Well Paths From File** will 
 
 The supported ASCII format is quite flexible but the main requirements are: 
 
-- Each data line must contain four numbers: X Y TVD MD separated with white-space.
+- Each data line must contain four numbers: X Y TVD(MSL) MD(RKB) separated with white-space.
 - Lines starting with `"--" or "#"` is considered to be comment lines
 - A line starting with none-number-characters are used as a well name after the following rules:
   - If the line contains a pair of : ```  "'", "`", "´", "’" or "‘" ``` the text between the quotation marks is used as a well name.
@@ -39,7 +39,7 @@ The supported ASCII format is quite flexible but the main requirements are:
     -999
 
 #### Example 2:
-    X Y TVD MD
+    X Y TVD(MSL) MD(RKB)
     Name Well_1
     6507.1	725	2542	2542
     6523.5	757	2549	2578.6
