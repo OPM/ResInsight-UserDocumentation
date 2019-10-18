@@ -20,11 +20,19 @@ To use this functionality you will need to :
 ### Import of Formation Names Files
 
 Formation Names files can be imported by using the command: **File->Import->Import Formation Names**.
-The user is asked to select _`*.lyr`_ files for import.
 
+Supported Formation Names files are: 
+
+- Formation Names description files (_`*.lyr`_)
+- FMU Layer Zone Table (_`layer_zone_table.txt`_)
+
+To select the appropriate file type, use the button to the right of file name in the *Import Formation Names* dialog. 
 The imported Formation Names files are then listed in the **Project Tree** in a folder named **Formations**. 
 
-Formation Names files consists of a list of formation names and their k-range. Below is an example of a Formation Names file:
+
+#### Formation Names description files (_`*.lyr`_)
+Formation Names description files (_`*.lyr`_) consist of a list of formation names and their k-range. 
+Below is an example of a Formation Names description file:
 
 ```
 -- Any text as comment
@@ -33,6 +41,31 @@ Formation Names files consists of a list of formation names and their k-range. B
 '3 k-layer thick 18,19 and 20'    3
 'Last Name'                      21 - 21 
 ```
+
+#### FMU Layer Zone Table (_`layer_zone_table.txt`_)
+The FMU Layer Zone Table (_`layer_zone_table.txt`_) contains two columns to correlate each grid k-layer with a formation name. 
+Below is an example of a _`layer_zone_table.txt`_ file:
+
+```
+1   UpperReek
+2   UpperReek
+3   UpperReek
+4   UpperReek
+5   UpperReek
+6   MidReek
+7   MidReek
+8   MidReek
+9   MidReek
+10  MidReek
+11  LowerReek
+12  LowerReek
+13  LowerReek
+14  LowerReek
+```
+
+
+
+
 
 ### Select the Formation File in a Case
 
