@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/ResInsight-UserDocumentation/images/favicon.png" type="image/png">
 
-    <title>Build Instructions :: ResInsight</title>
+    <title>Ensemble RFT Plot :: ResInsight</title>
 
     
     <link href="/ResInsight-UserDocumentation/css/nucleus.css?1571404404" rel="stylesheet">
@@ -33,7 +33,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/ResInsight-UserDocumentation/getting-started/download-and-install/buildinstructions/">
+  <body class="" data-url="/ResInsight-UserDocumentation/plot-window/ensemblerftplot/">
     <nav id="sidebar" class="">
 
 
@@ -70,7 +70,7 @@
   
     
     <li data-nav-id="/ResInsight-UserDocumentation/getting-started/" title="Getting Started" class="dd-item 
-        parent
+        
         
         
         ">
@@ -116,7 +116,7 @@
   
     
     <li data-nav-id="/ResInsight-UserDocumentation/getting-started/download-and-install/" title="Download and Install" class="dd-item 
-        parent
+        
         
         
         ">
@@ -178,7 +178,7 @@
  
   
     
-      <li data-nav-id="/ResInsight-UserDocumentation/getting-started/download-and-install/buildinstructions/" title="Build Instructions" class="dd-item active">
+      <li data-nav-id="/ResInsight-UserDocumentation/getting-started/download-and-install/buildinstructions/" title="Build Instructions" class="dd-item ">
         <a href="/ResInsight-UserDocumentation/getting-started/download-and-install/buildinstructions/">
         Build Instructions
         
@@ -568,7 +568,7 @@
   
     
     <li data-nav-id="/ResInsight-UserDocumentation/plot-window/" title="Plot Main Window" class="dd-item 
-        
+        parent
         
         
         ">
@@ -763,7 +763,7 @@
  
   
     
-      <li data-nav-id="/ResInsight-UserDocumentation/plot-window/ensemblerftplot/" title="Ensemble RFT Plot" class="dd-item ">
+      <li data-nav-id="/ResInsight-UserDocumentation/plot-window/ensemblerftplot/" title="Ensemble RFT Plot" class="dd-item active">
         <a href="/ResInsight-UserDocumentation/plot-window/ensemblerftplot/">
         Ensemble RFT Plot
         
@@ -1656,13 +1656,7 @@ if (!doNotTrack) {
             
           
           
-            
-            
-          
-          
-            <a href='/ResInsight-UserDocumentation/'>ResInsight</a> > <a href='/ResInsight-UserDocumentation/getting-started/'>Getting Started</a> > <a href='/ResInsight-UserDocumentation/getting-started/download-and-install/'>Download and Install</a> > Build Instructions
-          
-         
+            <a href='/ResInsight-UserDocumentation/'>ResInsight</a> > <a href='/ResInsight-UserDocumentation/plot-window/'>Plot Main Window</a> > Ensemble RFT Plot
           
          
           
@@ -1679,35 +1673,23 @@ if (!doNotTrack) {
 <ul>
 <li>
 <ul>
-<li><a href="#source-code">Source code</a></li>
-<li><a href="#dependencies-and-prerequisites">Dependencies and Prerequisites</a>
+<li><a href="#create-new-ensemble-rft-plot">Create New Ensemble RFT Plot</a></li>
+<li><a href="#property-editor">Property Editor</a>
 <ul>
-<li><a href="#windows-compiler">Windows Compiler</a></li>
-<li><a href="#gcc-compiler">GCC Compiler</a></li>
-<li><a href="#qt5">Qt5</a>
-<ul>
-<li><a href="#qt4-deprecated">Qt4 (Deprecated)</a></li>
+<li><a href="#well-name">Well Name</a></li>
+<li><a href="#sources">Sources</a></li>
+<li><a href="#time-steps">Time Steps</a></li>
+<li><a href="#zonation-formation-names">Zonation/Formation Names</a></li>
+<li><a href="#legend-and-axis">Legend and Axis</a></li>
 </ul></li>
-<li><a href="#cmake">CMake</a></li>
-</ul></li>
-<li><a href="#build-instructions">Build Instructions</a>
+<li><a href="#import-of-observed-ensemble-rft-data-from-fmu">Import of Observed Ensemble RFT data from FMU</a>
 <ul>
-<li><a href="#windows">Windows</a></li>
-<li><a href="#linux">Linux</a></li>
-<li><a href="#cmake-options-for-resinsight">CMake Options for ResInsight</a>
+<li>
 <ul>
-<li><a href="#advanced-options">Advanced Options</a></li>
-<li><a href="#configuration-parameters-for-python-beta">Configuration parameters for Python (beta)</a></li>
-</ul></li>
-<li><a href="#optional-libraries-and-features">Optional Libraries and features</a>
-<ul>
-<li><a href="#python-beta">Python (Beta)</a></li>
-<li><a href="#octave">Octave</a>
-<ul>
-<li><a href="#octave-dependencies-for-debian-based-distributions">Octave Dependencies for Debian Based Distributions</a></li>
-</ul></li>
-<li><a href="#odb-support">ODB support</a></li>
-<li><a href="#hdf5">HDF5</a></li>
+<li><a href="#correlation-of-grid-and-formations">Correlation of grid and formations</a></li>
+<li><a href="#observed-pressure-and-error">Observed pressure and error</a></li>
+<li><a href="#reservoir-zone-name">Reservoir zone name</a></li>
+<li><a href="#well-measurements">Well measurements</a></li>
 </ul></li>
 </ul></li>
 </ul></li>
@@ -1728,7 +1710,7 @@ if (!doNotTrack) {
           
             <h1>
               
-              Build Instructions
+              Ensemble RFT Plot
             </h1>
           
 
@@ -1738,292 +1720,176 @@ if (!doNotTrack) {
 
 
 
-<h2 id="source-code">Source code</h2>
+<p><img src="/ResInsight-UserDocumentation/images/plot-window/EnsembleRftPlot.png" alt="" /></p>
 
-<p>The source code is hosted at <a href="https://github.com/opm/resinsight">GitHub</a></p>
+<p>ResInsight allows the user to create a ensemble RFT plot similar to summary ensemble plots.
+The functionality also computes statistics, e.g. P10, P90, and mean.
+When possible, ResInsight avoids loading the grid when reading ensemble RFT data.</p>
 
-<p>In a git enabled shell do: <code>git clone https://github.com/OPM/ResInsight.git</code></p>
+<h2 id="create-new-ensemble-rft-plot">Create New Ensemble RFT Plot</h2>
 
-<h2 id="dependencies-and-prerequisites">Dependencies and Prerequisites</h2>
+<p>When a <a href="/ResInsight-UserDocumentation/plot-window/ensembleplotting/#import">summary ensemble has been imported</a>,
+observed FMU data can be imported via right-clicking <strong>Observed Data</strong> in the <strong>Plot Project Tree</strong>,
+and selecting <strong>Import Observed FMU Data</strong>.</p>
 
-<h3 id="windows-compiler">Windows Compiler</h3>
+<p><img src="/ResInsight-UserDocumentation/images/plot-window/EnsembleRftImportObservedData.png" alt="" /></p>
 
-<p>Visual Studio 2015 and later is supported.</p>
+<p>To create ensemble RFT plot, right-click <strong>RFT Plots</strong> and select <strong>New RFT Plot</strong>.</p>
 
-<h3 id="gcc-compiler">GCC Compiler</h3>
+<p><img src="/ResInsight-UserDocumentation/images/plot-window/EnsembleRftNewRftPlot.png" alt="" /></p>
 
-<p>GCC version 4.9 or later is supported. On RedHat Linux 6 you need to install devtoolset-3, and enable it with</p>
+<h2 id="property-editor">Property Editor</h2>
 
-<pre><code>source /opt/rh/devtoolset-3/enable
-</code></pre>
+<p>The property editor lets the user select which curves to display in the RFT plot.</p>
 
-<h3 id="qt5">Qt5</h3>
+<p><img src="/ResInsight-UserDocumentation/images/plot-window/EnsembleRftPlotPropertyEditor.png" alt="" /></p>
 
-<p><a href="http://download.qt.io/archive/qt/">Qt</a> Qt5 version 5.6.0 or later is supported.</p>
+<h3 id="well-name">Well Name</h3>
 
-<p>On some configurations you will be asked to specify the location of Qt5. Example for Windows :
-<code>Qt5_DIR=d:\Qt\5.11.3\msvc2017_64\lib\cmake\Qt5</code></p>
+<p>Select the well to display in the plot. Wells postfixed by <em>&rsquo;(Well Path)&rsquo;</em> have an associated well trajectory loaded.</p>
 
-<h4 id="qt4-deprecated">Qt4 (Deprecated)</h4>
+<h3 id="sources">Sources</h3>
+
+<p>Subsequent to selecting a well in the Well Name field, the relevant sources for that well will appear in the <strong>Sources</strong> field. The sources for this particular case are:</p>
+
+<ul>
+<li><strong>Ensembles with RFT Data</strong> &ndash; List of ensembles which contain RFT data with check-boxes to activate display.</li>
+<li><strong>Observed FMU data</strong> &ndash; Observed data imported from a FMU run.</li>
+</ul>
+
+<p>When the user selects one or more sources, a selection of their time steps appears in the <strong>Time Steps</strong> field.</p>
+
+<h3 id="time-steps">Time Steps</h3>
+
+<p>The <strong>Time Steps</strong> field contains the relevant time steps according to the source selection. Time steps are deemed to be relevant by the following rules:</p>
+
+<ol>
+<li>If a single source or sources of the same type are selected, all available time steps in those sources are shown.</li>
+<li>If sources from two or tree types are selected, the time steps are filtered:
+
+<ul>
+<li>The time steps matching the observed case(s) time steps.</li>
+<li>If no time steps from a case match the observed time step, the two adjacent ones are shown.</li>
+<li>The first time step from any grid case(s) (as initial pressure reference).
+If the Observed data isn&rsquo;t selected, the RFT data serves as filter reference.</li>
+</ul></li>
+</ol>
+
+<p>Each time step is postfixed by letter(s) to indicate source type(s) of each time step. The source types are indicated in square brackets:</p>
+
+<ul>
+<li><strong>O</strong> &ndash; Time step has Observed data</li>
+<li><strong>E</strong> &ndash; Time step has Ensemble data</li>
+<li><strong>R</strong> &ndash; Time step has RFT data</li>
+<li><strong>G</strong> &ndash; Time step has Grid data</li>
+</ul>
+
+<p>More than one letter for one single time step, means that the time step comes from multiple case types.</p>
+
+<h3 id="zonation-formation-names">Zonation/Formation Names</h3>
+
+<p>The display of formations lines is controlled in the same manner as for <a href="/ResInsight-UserDocumentation/plot-window/rftplot/#zonation-formation-names">RFT plots</a>.
+Please see the <a href="/ResInsight-UserDocumentation/3d-main-window/formations/">full documentation</a> of the formations property editor for details about formations.</p>
+
+<h3 id="legend-and-axis">Legend and Axis</h3>
+
+<p>Visual properties of legend and axes is controlled in the same manner as for <a href="/ResInsight-UserDocumentation/plot-window/rftplot/#legend-and-axis">RFT plots</a>.</p>
+
+<h2 id="import-of-observed-ensemble-rft-data-from-fmu">Import of Observed Ensemble RFT data from FMU</h2>
+
+<p>Observed RFT data as part of a FMU run is presupposed to be located in a folder which contains the following four file types:</p>
+
+<ul>
+<li>layer_zone_table.txt</li>
+<li>&lt;<em>well_name</em>&gt;.obs</li>
+<li>&lt;<em>well_name</em>&gt;.txt</li>
+<li>well_date_rft.txt</li>
+</ul>
+
+<p>The purpose and format of the data files is explained below.</p>
 
 
-<div class="notices info" ><p>Qt4 is marked as deprecated and support for using Qt4 will soon be removed.</p>
+<div class="notices note" ><p>The data file <em>well_date_rft.txt</em> is required. If missing, no Observed FMU data will be imported.</p>
 </div>
 
 
-<p><a href="http://download.qt.io/archive/qt/">Qt</a> Qt4 version 4.6.2 or later is supported. On Windows we recommend Qt-4.8.7, while the default installation will do under Linux.</p>
+<h4 id="correlation-of-grid-and-formations">Correlation of grid and formations</h4>
 
-<p><code>RESINSIGHT_BUILD_WITH_QT5=FALSE</code></p>
+<p>The file <em>layer_zone_table.txt</em> can be used to correlate each grid k-layer with a formation name.
+This file is identical for all cases in the same ensemble.</p>
 
-<p>You will need to patch the Qt sources in order to make them build using Visual Studio 2015 using this :
-<a href="https://github.com/appleseedhq/appleseed/wiki/Making-Qt-4.8.7-compile-with-Visual-Studio-2015">Qt-patch</a></p>
+<p>Example file <em>layer_zone_table.txt</em>:</p>
 
-<h3 id="cmake">CMake</h3>
+<pre><code>1   UpperReek
+2   UpperReek
+3   UpperReek
+4   UpperReek
+5   UpperReek
+6   MidReek
+7   MidReek
+8   MidReek
+9   MidReek
+10  MidReek
+11  LowerReek
+12  LowerReek
+13  LowerReek
+14  LowerReek
+</code></pre>
 
-<p><a href="https://cmake.org/download/">CMake</a> version 2.8 or later is supported.</p>
+<h4 id="observed-pressure-and-error">Observed pressure and error</h4>
 
-<h2 id="build-instructions">Build Instructions</h2>
+<p>For a given well name, the file <em>&lt;well_name&gt;.obs</em> is a data file containing two columns to specify observed pressure and error.
+Column one contains observed pressure and column two contains error. The observation data is valid for one and only one layer/formation.</p>
 
-<p>The ResInsight build may be configured in different ways, with optional support for Octave plugins,
-ABAQUS ODB API, HDF5, Pyton, and OpenMP. This is configured using options in CMake.</p>
+<p>Example file  for well <em>OP_1</em>, i.e. <em>OP_1.obs</em>:</p>
 
-<p>If you check the button &lsquo;Grouped&rsquo; in the CMake GUI, the CMake variables are grouped by prefix.
-This makes it easier to see all of the options for ResInsight.</p>
+<pre><code>303.000   3.000
+304.000   3.000
+305.000   3.000
+</code></pre>
 
-<ul>
-<li>Open the CMake GUI</li>
-<li>Set the path to the source code</li>
-<li>Set the path to the build directory</li>
-<li>Click <strong>Configure</strong> and select your preferred compiler</li>
-<li>Set the build options and click &ldquo;Configure&rdquo; again (see ResInsight specific options below)</li>
-<li>Click <strong>Generate</strong> to generate the makefiles or solution file and project files in the build directory</li>
-<li>Run the compiler using the generated makefiles or solution file/project files to build ResInsight</li>
-</ul>
+<h4 id="reservoir-zone-name">Reservoir zone name</h4>
 
-<h3 id="windows">Windows</h3>
-
-<p>ResInsight has been verified to build and run on Windows 7/8/10 using Microsoft Visual Studio <sup>2015</sup>&frasl;<sub>2017</sub>.
-Typical usage on Windows is to follow the build instructions above, and then open the generated
-solution file in Visual Studio to build the application.</p>
-
-<h3 id="linux">Linux</h3>
-
-<p>Typical usage is to follow the build instructions above to build the makefiles. Then go to the build directory, and run:</p>
-
-<ul>
-<li>make</li>
-<li>make install</li>
-</ul>
-
-<p>To build from the command line without using the CMake GUI:</p>
+<p>For a given well name, the file <em>&lt;well_name&gt;.txt</em> is a data file containing five columns that specify its correlation with reservoir zones.
+Each line of data must contain:</p>
 
 <ul>
-<li>mkdir ResInsight_build</li>
-<li>cd ResInsight_build</li>
-<li>&hellip;</li>
-<li>(set CMake options)</li>
-<li>&hellip;</li>
-<li>cmake &lt; path to ResInsight source folder &gt;</li>
-<li>make</li>
-<li>make install</li>
+<li>Utmx: x-coordinate in UTM</li>
+<li>Utmy: y-coordinate in UTM</li>
+<li>Measured Depth relative to the Kelly Bushing (MDRKB)</li>
+<li>True Vertical Depth referenced to Mean Sea Level (TVDMSL)</li>
+<li>Reservoir zone name</li>
 </ul>
 
-<p>You will find the ResInsight binary under the Install directory in your build directory.</p>
+<p>Example file for well <em>OP_1</em>, i.e. <em>OP_1.txt</em>:</p>
 
-<h3 id="cmake-options-for-resinsight">CMake Options for ResInsight</h3>
+<pre><code>461288.719   5933415.000   1816.200   1611.692   UpperReek
+461288.685   5933415.027   1824.560   1620.052   MidReek
+461288.683   5933415.029   1840.000   1635.492   LowerReek
+</code></pre>
 
-<table>
-<thead>
-<tr>
-<th>CMake Name</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
+<h4 id="well-measurements">Well measurements</h4>
 
-<tbody>
-<tr>
-<td><code>RESINSIGHT_BUILD_DOCUMENTATION</code></td>
-<td>OFF</td>
-<td>Use Doxygen to create the HTML based API documentation. Doxygen must be properly installed.</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_ENABLE_GRPC</code></td>
-<td>OFF</td>
-<td>Enable gRPC scripting server. Required to be able to use ResInsight from Python</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_HDF5_DIR</code></td>
-<td>Blank</td>
-<td>Windows Only: Optional path to HDF5 libraries on Windows</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_ODB_API_DIR</code></td>
-<td>Blank</td>
-<td>Optional path to the ABAQUS ODB API from Simulia. Needed for support of geomechanical models</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_USE_OPENMP</code></td>
-<td>ON</td>
-<td>Enable OpenMP parallellization in the code</td>
-</tr>
-</tbody>
-</table>
-
-<h4 id="advanced-options">Advanced Options</h4>
-
-<p>To be able to modify <strong>Advanced Options</strong> from the CMake User Interface, tick the checkbox <strong>Advanced</strong></p>
-
-<table>
-<thead>
-<tr>
-<th>CMake Name</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><code>RESINSIGHT_BUILD_WITH_QT5</code></td>
-<td>ON</td>
-<td>If ON, use Qt5. If OFF, use Qt4 (Support for Qt4 is deprecated and will be removed)</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_QT5_BUNDLE_LIBRARIES</code></td>
-<td>OFF</td>
-<td>Linux only: Include Qt5 libraries in the installation package</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_BUNDLE_OPENSSL</code></td>
-<td>OFF</td>
-<td>Bundle the OpenSSL library DLLs in the Windows installer package</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_ENABLE_COTIRE</code></td>
-<td>OFF</td>
-<td>Experimental speedup of compilation using cotire</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_ENABLE_PROTOTYPE_FEATURE_SOURING</code></td>
-<td>ON</td>
-<td>Enable Souring features</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_INCLUDE_APPFWK_TESTS</code></td>
-<td>OFF</td>
-<td>Include unit tests from thirdparty libraries AppFwk and VizFwk</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_INCLUDE_APPLICATION_UNIT_TESTS</code></td>
-<td>OFF</td>
-<td>Include Application Code Unit Tests</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_PRIVATE_INSTALL</code></td>
-<td>ON</td>
-<td>Linux only: Include libecl libraries in the installation package</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_HDF5_BUNDLE_LIBRARIES</code></td>
-<td>OFF</td>
-<td>Linux only: Include HDF5 libraries in the installation package</td>
-</tr>
-</tbody>
-</table>
-
-<h4 id="configuration-parameters-for-python-beta">Configuration parameters for Python (beta)</h4>
-
-<p>These parameters are considered beta, and might change.</p>
-
-<table>
-<thead>
-<tr>
-<th>CMake Name</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><code>RESINSIGHT_ENABLE_GRPC</code></td>
-<td>OFF</td>
-<td>Enable gRPC scripting server. Required to be able to use ResInsight from Python</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_GRPC_PYTHON_EXECUTABLE</code></td>
-<td>Blank</td>
-<td>Location of Python3 executable</td>
-</tr>
-
-<tr>
-<td><code>RESINSIGHT_GRPC_INSTALL_PREFIX</code></td>
-<td>Blank</td>
-<td>Linux only : Installation prefix for gRPC</td>
-</tr>
-</tbody>
-</table>
-
-<h3 id="optional-libraries-and-features">Optional Libraries and features</h3>
-
-<h4 id="python-beta">Python (Beta)</h4>
-
-<p>Scripting of ResInsight is possible from a Python library. The build configuration is a bit involved and is under review.</p>
-
-<p>The current build instructions are specified in text files in the ResInsight repository.</p>
+<p>The data file <em>well_date_rft.txt</em> contains well measurements. The file contains four columns for each well measurement:</p>
 
 <ul>
-<li><a href="https://github.com/OPM/ResInsight/blob/dev/GRPC_install_instructions.txt">Grpc install instructions</a></li>
-<li><a href="https://github.com/OPM/ResInsight/blob/dev/build_grpc_linux.sh">Helper script for Linux</a></li>
+<li>Well Name</li>
+<li>Date in two digit form &lt;DD&gt;</li>
+<li>Month in two digit form &lt;MM&gt;</li>
+<li>Year in four digit form &lt;YYYY&gt;</li>
+<li>Measurement index</li>
 </ul>
 
-<p>See <a href="/ResInsight-UserDocumentation/scripting/pythonrips/"> Python API </a> for how to use the Python library.</p>
+<p>There can be multiple measurement for each well.</p>
 
-<h4 id="octave">Octave</h4>
+<p>Example file <em>well_date_rft.txt</em>:</p>
 
-<p>Octave is now detected searching the file system. If Octave is not detected, the following file path variable must be defined:</p>
-
-<p><code>OCTAVE_CONFIG_EXECUTABLE : d:\octave\Octave-4.0.0\bin\octave-config.exe</code></p>
-
-<p>It is possible to build ResInsight without compiling the Octave plugins. This can be done by specifying blank for
-the Octave CMake options. The Octave plugin module will not be built, and CMake will show warnings like &lsquo;Failed to find mkoctfile&rsquo;.
-This will not break the build or compilation of ResInsight.</p>
-
-<p>ResInsight has been verified to build and run with Octave versions 3.4.3, 3.8.1, and 4.0.0 on RedHat linux, and 4.0.0 on Windows.</p>
-
-<h5 id="octave-dependencies-for-debian-based-distributions">Octave Dependencies for Debian Based Distributions</h5>
-
-<p>The following command line can be used as a starting point to install required libraries
-<code>sudo apt-get install git cmake build-essential octave liboctave-dev qtbase5-dev qtscript5-dev</code></p>
-
-<h4 id="odb-support">ODB support</h4>
-
-<p>ResInsight can be built with support for ABAQUS ODB files. This requires an installation of the ABAQUS ODB API
-from Simulia on the build computer. The path to the ABAQUS ODB API folder containing header files and library
-files must be specified. Leaving this option blank gives a build without ODB support.
-ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windows 7/8/10 and RedHat Linux 6.</p>
-
-<h4 id="hdf5">HDF5</h4>
-
-<p>HDF5 is used to read SourSimRL result files. On Windows this is optional, while on Linux the installed HDF5 library will be used if present.</p>
-
-<p>Use an advanced flag RESINSIGHT_HDF5_BUNDLE_LIBRARIES to include HDF5 libraries in the installation package.</p>
-
-<p>Tested with 1.8.18 on windows, and default installation on RedHat 6.</p>
+<pre><code>OP_1   01 02 2000   1
+OP_2   01 02 2000   1
+OP_4   01 01 2001   1
+WI_1   01 02 2000   1
+WI_3   01 03 2001   1
+</code></pre>
 
 
 <footer class=" footline" >
@@ -2062,22 +1928,6 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -2086,22 +1936,7 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
 
                     
                     
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
                     
                     
 
@@ -2110,9 +1945,6 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2138,6 +1970,19 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
                     
 
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
             
         
                     
@@ -2146,6 +1991,21 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -2180,9 +2040,6 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -2474,6 +2331,7 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
                 
                     
+                    
                 
                 
 
@@ -2486,6 +2344,9 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -2631,6 +2492,7 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
                 
                     
+                    
                 
                 
 
@@ -2646,6 +2508,9 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -3262,10 +3127,10 @@ ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windo
 	 
 	 
 		
-			<a class="nav nav-prev" href="/ResInsight-UserDocumentation/getting-started/download-and-install/windows-installation/" title="Windows Installation"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/ResInsight-UserDocumentation/plot-window/rftplot/" title="RFT Plot"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/ResInsight-UserDocumentation/getting-started/modelnavigation/" title="Model Navigation" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/ResInsight-UserDocumentation/plot-window/pltplot/" title="PLT Plot" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
