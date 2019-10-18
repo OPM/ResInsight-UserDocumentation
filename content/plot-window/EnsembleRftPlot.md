@@ -18,7 +18,7 @@ and selecting **Import Observed FMU Data**.
 
 ![]({{< relref "" >}}images/plot-window/EnsembleRftImportObservedData.png)
 
-To create ensemble RFT plot, right-click **RFT Plots** and select **New PLT Plot**.
+To create ensemble RFT plot, right-click **RFT Plots** and select **New RFT Plot**.
 
 ![]({{< relref "" >}}images/plot-window/EnsembleRftNewRftPlot.png)
 
