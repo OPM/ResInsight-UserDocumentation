@@ -9,8 +9,8 @@ An ensemble is a group of cases that are tightly coupled, only a set of ensemble
 ## Import
 There are several ways to import an ensemble:
 
-- Use the **Import Ensemble** command in the window menu
-- Use the **Import Summary Case group** and then convert the group to an ensemble
+- Use menu option **File->Import->Summary Cases->Import Ensemble**
+- Use menu option **File->Import->Summary Cases->Import Summary Case group** and then convert the group to an ensemble
 - Import a number of summary cases, move them into a group and then convert the group to an ensemble
 
 During import of a summary case, ResInsight tries to find an associated **parameters.txt** file or **runspecification.xml** file containing ensemble parameters. If found, the ensemble parameters are stored together with the summary case. When the user adds a summary case to an ensemble, then ResInsight will perform ensemble parameters validation. A warning dialog is displayed in the following cases:
