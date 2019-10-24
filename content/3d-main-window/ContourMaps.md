@@ -6,7 +6,8 @@ weight = 40
 
 ![]({{< relref "" >}}images/3d-main-window/ContourMaps.png)
 
-ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells.
+ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
+ResInsight is able to [export a contour map]({{< relref "contourmapexport" >}}) to a text file. 
 
 ## Creating New Contour Maps
 
@@ -59,3 +60,9 @@ For the Column options, no **Cell Result** is available in the property tree und
 ![]({{< relref "" >}}images/3d-main-window/ContourMapProjectionWeights.png)
 
 For the **Arithmetic Mean**, **Geometric Mean** and **Harmonic Mean** it is also possible to specify a cell result as a weighting parameter in addition to the regular weighting by volume of intersection. The total weight will then be the volume of intersection multiplied by the specified cell result. The full range of regular cell results is available for this use.
+
+
+
+## Contour Map Export
+
+ResInsight is able to [export a contour map]({{< relref "contourmapexport" >}}) to a text file. 
