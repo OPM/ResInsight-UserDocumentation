@@ -379,8 +379,7 @@ Creating new 3D Well Log Curves Add a new 3D well log curve by selecting a Well 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/contourmaps/</guid>
-      <description>ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells.
-Creating New Contour Maps Contour Maps can be created in many different ways:</description>
+      <description>ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. ResInsight is able to export a contour map to a text file.</description>
     </item>
     
     <item>
@@ -400,7 +399,7 @@ Paste Options Dialog Most of the fields in this dialog are the same as in the CS
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonexamples/</guid>
       <description>This pages is created based on the content in the PythonExamples folder located inside the rips module, made available online for convenience.
-AllCases ################################################################################### # This example will connect to ResInsight, retrieve a list of cases and print info # ################################################################################### # Import the ResInsight Processing Server Module import rips # Connect to ResInsight resInsight = rips.Instance.find() if resInsight is not None: # Get a list of all cases cases = resInsight.</description>
+AllCases ################################################################################### # This example will connect to ResInsight, retrieve a list of cases and print info # ################################################################################### # Import the ResInsight Processing Server Module import rips # Connect to ResInsight resinsight = rips.Instance.find() if resinsight is not None: # Get a list of all cases cases = resinsight.</description>
     </item>
     
     <item>
@@ -440,7 +439,7 @@ Subscribe</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</guid>
-      <description>Instance Module class rips.Instance(port=50051, launched=False) The ResInsight Instance class. Use to launch or find existing ResInsight instances
+      <description>Instance Module class rips.instance.Instance(port=50051, launched=False) The ResInsight Instance class. Use to launch or find existing ResInsight instances
 launched() Tells us whether the application was launched as a new process. If the application was launched we may need to close it when exiting the script.
  Type
 bool
@@ -647,6 +646,16 @@ All the tagged cell faces are then compared to the faults possibly imported from
       <guid>https://opm.github.io/ResInsight-UserDocumentation/plot-window/rftplot/</guid>
       <description>An RFT (Repeated Formation Tester) plot is a special well plot for comparing observed formation pressure and simulated formation pressure. The curves are plotted as pressure against true vertical depth (TVD) or measured depth (MD). Simulated pressure data is retrieved directly from the grid model or from the corresponding (*.rft) files, while observed pressure data are loaded from well log files (*.las).
 Create New RFT Plot There are several ways to create new RFT Plots.</description>
+    </item>
+    
+    <item>
+      <title>Contour Map Export</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/export/contourmapexport/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/export/contourmapexport/</guid>
+      <description>ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as oil, gas and hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells.
+Export of Contour Map Data To export a contour map, invoke one of the following options (c.</description>
     </item>
     
     <item>
