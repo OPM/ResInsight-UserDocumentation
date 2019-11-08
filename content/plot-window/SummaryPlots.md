@@ -70,36 +70,38 @@ Most of the settings for the Plot itself is controlled by its sub items in the P
   - **Title Position** --  Either *Center* or *At End* 
   - **Font Size** -- The font size used for the axis title
 - **Time Values**
-  - **Time Mode** -- Option to show the time from Simulation Start, or as real date-times. 
-  - **Time Unit** -- The time unit used to display **Time From Simulation Start** 
-  - **Max**/**Min** -- The range of the visible time in the Plot in the appropriate time unit.  
-  - **Date Format** -- Date format for the time axis. Defaults to the setting defined in **Preferences**
-  - **Time Format** -- Time format for the time axis. Defaults to the setting defined in **Preferences**
-  - **Font Size** -- The font size used for the date/times shown at the ticks of the axis. Defaults to the setting defined in **Preferences**
+  - **Time Mode** -- Option to show the time from *Simulation Start*, or as real date-times. 
+  - **Max**/**Min** -- The range of visible date/time in the Plot.
+  - **Automatic Date/Time labels** -- Option to invoke automatic date/time labels.
+  - **Font Size** -- The font size used for the date/time axis ticks, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
+- **Date/Time Label Format**
+  - **Date Label Format** -- Date format for the time axis, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
+  - **Time Label Format** -- Time format for the time axis, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
 
 ### Y-axis Properties
 
 ![]({{< relref "" >}}images/plot-window/summary_plot_yaxis_properties.png)
 
-- **Axis Title**
-  - **Auto Title** -- If enabled, the y-axis title is derived from the vectors associated with the axis. Long names, acronymes  and unit can be used. 
-    - **Names** -- Use the long name of the quantities
-    - **Acronymes** -- Add the shortname/acronyme of the quantities
-  - **Title** -- If **Auto Title** is disabled, the plot title is set using this field.
+- **Title Text**
+  - **Auto Title** -- If enabled, the y-axis title is derived automatically with the following options:
+     - **Names** -- Add quantity long name to y-axis title.
+     - **Acronyms** -- Add quantity acronym to y-axis title.
+	 - **Units** - Add unit of quantity to y-axis title.
+  - **Title** -- If **Auto Title** is disabled, the **Title** field emerges to facilitate manual setting of plot title.
 - **Title Layout**
-  - **Title Position** -- Controls the position of the title. Center or At End.
-  - **Font Size** --  Defines the font size used by the axis title. 
+  - **Title Position** -- Controls the position of the title; *Center* or *At End*.
+  - **Font Size** --  Defines the font size used for the axis title. 
 - **Axis Values**
   - **Logarithmic Scale**  - Draw plot curves using a logarithmic scale. 
-  - **Invert Axis**  - Invert the axis. Used when depth is represented on the Y-axis.
+  - **Invert Axis**  - Invert the axis, e.g. when depth is represented by the Y-axis.
   - **Number Format** -- Defines how the legend numbers are formatted.
-    - **Auto** -- Legend numbers are either using a scientific or decimal notation based on the number of digits of the value
-    - **Decimal** -- Legend numbers are displayed using decimal notation.
-    - **Scientific** -- Legend numbers are displayed using scientific notation (ie. 1.2e+6).
-  - **Number of Decimals** -- Controls the number of digits after "." (for  **Decimal** or **Scientific** format options).
-  - **Scale Factor** -- "Moves" the scale value away from the values along the axis and into the unit on the axis title (for  **Decimal** or **Scientific** format options).
-  - **Max and Min** -- Defines the visible y range.
-  - **Font Size** -- The font size used for the values shown at the ticks on the axis.   
+     - **Auto** -- Legend numbers are displayed by either scientific or decimal notation depending on actual value.
+     - **Decimal** -- Legend numbers are displayed using decimal notation.
+     - **Scientific** -- Legend numbers are displayed using scientific notation (e.g. 1.2e+6).
+  - **Number of Decimals** -- Controls the number of digits after "." for  **Decimal** and **Scientific**.
+  - **Scale Factor** -- Displays the y-axis values by multiplying with a specific scale factor for **Decimal** and **Scientific**.
+  - **Max and Min** -- Defines the visible y-range.
+  - **Font Size** -- The font size for showing values at the axis ticks.   
 
 ### Plot Mouse Interaction
 
@@ -131,11 +133,12 @@ Summary curves are normally created using the **Plot Editor** see [Summary Plot 
 
 ![]({{< relref "" >}}images/plot-window/summary_curve_properties.png)
 
-The property panel is divided in three main groups of options:
+The property panel is divided in the following main options groups:
 
-- **Summary Vector** -- Options selecting the value to plot.
-- **Appearance Settings** -- Options controlling the color, symbol etc of the curve.
-- **Curve Name Configuration** -- Controls how the curve is labeled in the legend.
+- **Summary Vector** -- Options selecting the case and vector to plot along with axis specification and error bars.
+- **Appearance** -- Options controlling curve color, symbols, line style etc.
+- **Curve Name** -- Controls how the curve is labeled in the legend.
+- **Advanced** -- Specifying additional options that may be applicable.
 
 ### Summary Vector
 
