@@ -8,7 +8,8 @@ ResInsight supports several command line parameters that can be used to automate
 
 Command line parameters are prefixed using a double dash. This convention is used on all platforms to make it possible to reuse scripts across different platforms. See GNU Standards for [Command Line Interfaces](http://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html#Command_002dLine-Interfaces).
 
-Examples on how command line options are used are given [below]({{< relref "commandlineinterface" >}}#usage-examples)
+Examples on how command line options are used are given [below]({{< relref "commandlineinterface" >}}#examples)
+
 
 ## Command line options
 
