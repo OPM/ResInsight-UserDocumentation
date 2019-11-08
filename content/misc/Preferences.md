@@ -68,12 +68,17 @@ This group of options controls visual settings that will be used when creating n
 Please refer to [Summary Origin]({{< relref "summaryplots.md#origin-files" >}}) for details related to handling of **Origin Files**.
 
 
-## Summary - tab
+## Plotting - tab
 
-![]({{< relref "" >}}images/3d-main-window/Preferences_Summary.png)
+![]({{< relref "" >}}images/misc/PreferencesPlotting.png)
 
-- **Default Summary Curves** -- Defines the curves for import when creating a new summary plot, ie `FOPT WOPT*`
-- **Default Curve Style for History Vectors**
+- **Default Summary Curves**: Defines default curves for import when creating a new summary plot, e.g. `FOPT WOPT*`
+- **Default Curve Style for History Vectors**: allows specifying *symbols* and/or *lines* as preference.
+- **Date** and **Time** format preferences.
+- **Plot Templates** allows setting preferences for:
+  - *Plot Template Folder(s)*: Allows to enter and delete folder(s) that are searched for plot templates. Press *Append* to browse for folder to append. 
+  - Checking *Search Plot Templates Recursively* instructs ResInsight to search subdirectories of specified folder(s) for templates.
+
 
 ## Scripting - tab
 
