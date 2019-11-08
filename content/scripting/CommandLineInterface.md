@@ -68,11 +68,12 @@ ResInsight stores data computed by statistics calculation in a cache file. When 
 The summary plotting command option follows the following syntax:
 
 ```
-resinsight --summaryplot [<plotOptions>] <eclipsesummaryvectorfilters> [<eclipsedatafiles>]
+resinsight --summaryplot [<plotOptions>] <eclipsedatafiles> <eclipsesummaryvectorfilters>
 
 where:
-<eclipsesummaryvectorfilters> has the syntax <vectorname>[:<item>[:<subitem>[:i,j,k]]]
+<plotOptions>                 denote summary plot options, see table below
 <eclipsedatafiles>            lists a set of Eclipse data files with or without extension
+<eclipsesummaryvectorfilters> has the syntax <vectorname>[:<item>[:<subitem>[:i,j,k]]]
 ```
 
 The summary plotting command option creates one summary plot for each of the the summary vectors matched by  
@@ -84,9 +85,10 @@ Eclipse summary vector filters can be repeated and may include wildcards, e.g. *
 As long as only summary vectors are requested, only the corresponding SMSPEC file will be opened for each case.
 However, if a grid property is requested, the corresponding EGRID and restart data will be loaded as well.
 
-The summary plot options, i.e. *\<plotOptions\>*, are listed in the table below.
+Specifying summary plot options is optional, c.f. table below.
 
-[Examples]({{< relref "commandlineinterface#example-5-summary-plotting" >}}) using summary plot options are listed below. 
+[Examples]({{< relref "commandlineinterface#summary-plotting-1" >}}) using summary plot options are listed below. 
+
 
 | Option     | Description |
 |------------|-------------|
