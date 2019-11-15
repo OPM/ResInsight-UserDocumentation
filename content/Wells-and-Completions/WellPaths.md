@@ -65,20 +65,20 @@ The well path data is not copied into the ResInsight project as such. The projec
 If the well path file is changed and you would like a running ResInsight to update accordingly, you will need to delete all the well paths that emerge from that file, and import it again.
 {{% /notice %}}
 
-## Importing from SSI-Hub (Internal Statoil Web-service)
+## Importing well paths from SSI-Hub
 
-In order to import from SSI-Hub, a project file must be present and stored to file. All imported well paths from the web service will be stored relative to this project file location. If no project file exists, the menu item is disabled.
+SSI-Hub is an Equinor internal webservice. In order to import well paths from SSI-Hub, a project file must be present and stored to file. All imported well paths from the web service will be stored relative to this project file location. If no project file exists, the menu item is disabled.
 
 The command **File -> Import -> Well Data -> Import Well Paths From SSI-hub** launches a wizard to guide you through the process of selecting the well paths you need.
+Having completed the wizard, the imported wells are accessible as Items under the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**.
+
+The well path data is not copied into the ResInsight project as such, but is stored in files in a directory called *ProjectFileName_wellpaths* in the same directory as your project file.   
 
 {{% notice info %}}
 <strong>Access to web service: </strong>
-The import of well paths is using a web service. If you are a Statoil employee, make sure you have access to "EDM Landmark" and "EDM Compass".
+If you are an Equinor employee, make sure you have access to "EDM Landmark" and "EDM Compass".
 {{% /notice %}}
 
-After completing the wizard, the wells imported are accessible as Items under the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**.
-
-The well path data is not copied into the ResInsight project as such, but is stored in files in a directory called *ProjectFileName_wellpaths* in the same directory as your project file.   
 
 ## Well Path Visualization
 
