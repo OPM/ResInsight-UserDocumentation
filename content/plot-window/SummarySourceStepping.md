@@ -12,11 +12,11 @@ The functionality applies both to single summary curves and ensemble curve sets.
 
 The functionality is available from both the toolbar and the **Summary Curves** property editor under a **Summary Plot** item in the **Main Plot Window Project Tree**.
 
-The toolbar is:
+The toolbar allows use of [vector filters]({{< relref "summaryplots#property-editor" >}}) in addition to source stepping:
 
 ![]({{< relref "" >}}images/plot-window/SummarySourceSteppingToolbar.png)
 
-and the property editor is:
+The corresponding property editor is:
 
 ![]({{< relref "" >}}images/plot-window/SummarySourceSteppingPropertyEditor.png)
 
