@@ -6,19 +6,19 @@ weight = 10
 
 ![]({{< relref "" >}}images/plot-window/ResInsightMainPlotMediumSize.png)
 
-A Summary Plot is a window displaying a graph in the main area of the **Plot Main Window**. It can contain Summary Curves, Grid time history curves and pasted ascii curves ( See below ).
+A Summary Plot is a window displaying a graph in the main area of the **Plot Main Window**. As described below, a Summary Plot can contain Summary Curves, Grid time history curves, and pasted ascii curves.
 
-A new plot can be created by using the right-click menu of a plot in the **Plot Project Tree** and activate {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **Open Summary Plot Editor**. The [Summary Plot Editor]({{< relref "summaryploteditor" >}}) dialog will then open.
-
-Activating {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot** from the right-click menu of a plot will create a new plot populated with the curves defined by the text string in [Preferences]({{< relref "preferences.md#summary-tab" >}}).
+A new Summary Plot can be created by using the right-click menu of **Summary Plots** in the **Plot Project Tree** and activate 
+{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **Open Summary Plot Editor** or 
+{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot**. 
 
 {{% notice info %}}
-If you have many open plots, it can be useful to collapse all other plots. This is available by activating the item **Collapse Other Plots** from right-click menu of a plot in the <b>Plot Project Tree</b>.
+If you have many open plots, it can be useful to collapse all other plots by activating **Collapse Other Plots** from right-click menu of a plot in the <b>Plot Project Tree</b>.
 {{% /notice %}}
 
 ## Plot Data
 
-ResInsight can create summary plots based on vectors from SUMMARY files ( _`*.SMSPEC`_ ), imported Observed Time History Data, Grid Cell Time history Curve and pasted ascii curves. 
+ResInsight can create summary plots based on vectors from SUMMARY files ( _`*.SMSPEC`_ ), imported Observed Time History Data, Grid Cell Time history Curve, and pasted ascii curves. 
 
 ### SUMMARY Files
 
@@ -50,22 +50,47 @@ See [Result Inspection]({{< relref "resultinspection" >}}#result-plot).
 
 You can copy an ascii table directly from Excel or any text source and paste it directly into a Summary Plot using the command **Paste Excel Data to Summary Plot**. See [Paste Excel Time History Data]({{< relref "pasteexceltimedata" >}}).
 
-## Plot Settings
+## Summary Plots
+
+Summary plots are created in the **Plot Project Tree** by right-clicking **Summary Plots** and selecting 
+{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **Open Summary Plot Editor** or 
+{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot**. 
+Having created a Summary Plot, its entry is listed in the Plot Project Tree. 
+The settings of the Plot are controlled by its sub items in the **Plot Project Tree** and the **Property Editor** as described below.
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlotTree.png)
 
-Most of the settings for the Plot itself is controlled by its sub items in the Property Tree: 
 
-- **Time Axis** -- Controls the properties for the time axis (font size, title text, time range)
-- **Left Y-axis** -- Controls the properties for the left Y-axis
-- **Right Y-axis** -- Controls the properties for the right Y-axis
+### Property Editor
+
+The Property Editor allows **Text-Based Curve Creation** based on selected sources and setting **General Plot Options**.
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotPropertyEditor.png)
+
+**Text-Based Curve Creation** allows specification of a list of vectors for plotting based on selected sources.
+The vectors to plot are specified by the following syntax:
+`<vectorshortname>[:<item>[:<subitem>[:i,j,k]]]`.
+The specification of vectors allows use of wildcards and multiple entries separated by space: 
+
+- `WOPT:*`: One total oil production curve for each well.
+- `FOPT FWPT`: Two curves with oil and water total production.
+- `BPR:15,28,*`: Oil phase pressure for all blocks along k as separate curves.
+
+**General Plot Options** allows the following settings:
+
+- **Show Title** -- Toggles whether to show the axis title 
+- **Auto Title** -- If enabled, the Plot title is derived automatically
+- **Name** -- Allows manual setting of plot title if **Auto Title** is disabled
+- **Show Legends** -- Toggles whether to legends
+- **Legend Font Size** -- Font size to be used in plot
+- **Normalize all curves** -- Scales all curves into the range 0.0-1.0
 
 ### Time Axis Properties
 
 ![]({{< relref "" >}}images/plot-window/SummaryTimeAxisProperties.png)
 
 - **Axis Title**
-  - **Show Title** -- Toggles whether to show the axis title 
+  - **Show Title** -- Toggles whether to show the axis title
   - **Title** -- A user defined name for the axis 
   - **Title Position** --  Either *Center* or *At End* 
   - **Font Size** -- The font size used for the axis title
@@ -113,117 +138,61 @@ Most of the settings for the Plot itself is controlled by its sub items in the P
 - **Window Zoom** -- Window zoom is available by dragging the mouse when the left mouse button is pressed. Use {{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} **Zoom All** to restore default zoom level.
 - **Wheel Zoom** -- The mouse wheel will zoom the plot in and out towards the current mouse cursor position.
 
-### Curve Hightlight
+### Curve Highlight
 
 ![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
 
-Summary curves will be highlighted when left-clicked in a plot. This allows for detailed investigation on curve values when many curves are plotted. All other curves can be hidden by activating the right-click menu of a plot, and select **On - Ohters Off**
+Summary curves will be highlighted when left-clicked in a plot. This allows for detailed investigation on curve values when many curves are plotted. All other curves can be hidden by activating the right-click menu of a plot, and select **On - Others Off**
 
 ### Accessing the Plot Data
 
-The right-click menu item **Show Plot Data** will open a window containing the plot data as text in columns. The text content of this window is easy to copy and paste into Excel or other tools for further processing.
-
+Right-clicking a plot and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
 This dialog supports plot data displayed by day, week, month, quarter, half year and year.
 
+The text content of this window is easy to copy and paste into Excel or other tools for further processing.
 It is also possible to save the text data to a file directly by using the right-click command **Export Plot Data to Text File**. 
 
-## Summary Curves
+## Editing properties of single Summary Curve
 
-Summary curves are normally created using the **Plot Editor** see [Summary Plot Editor]({{< relref "summaryploteditor" >}}), but can be created directly using the right-click menu in the **Main Plot Window Project Tree**. Right click a Summary Plot, the Summary Curves folder or an existing curve and select the command {{< image-in-text src="images/plot-window/SummaryCurve16x16.png" >}} **New Summary Curve**.
+Selecting a specific Summary Curve is possible via the **Plot Project Tree**.
+
+![]({{< relref "" >}}images/plot-window/SummaryCurveSelection.png)
+
+Having selected a Summary Curve, its properties are shown by the **Property Editor**.
 
 ![]({{< relref "" >}}images/plot-window/summary_curve_properties.png)
 
-The property panel is divided in the following main options groups:
+As seen, the Property Editor organizes the available options into the following groups:
 
-- **Summary Vector** -- Options selecting the case and vector to plot along with axis specification and error bars.
-- **Appearance** -- Options controlling curve color, symbols, line style etc.
+- **Summary Vector** -- Options to select case, vector to plot, axis specification, and error bars.
+- **Appearance** -- Options to control curve color, symbols, line style etc.
 - **Curve Name** -- Controls how the curve is labeled in the legend.
-- **Advanced** -- Specifying additional options that may be applicable.
+- **Advanced** -- Specification of additional options.
 
 ### Summary Vector
 
-This group of options is used to define the summary vector data that the curve will display. 
+This group of options is used to define summary vector data that the curve will display. 
 
 - **Case** -- Selects the imported Summary or Observed Data case to use as source.
-- **Vector** -- Displays a short name/ acronyme of the selected vector.
+- **Vector** -- Displays the acronym of the selected vector.
 - **Axis** -- Controls whether the curve is to be associated with the left or right Y-Axis. 
+
+Selection of vector is performed using a vector acronym or pressing the button to the right. 
+Pressing the button opens a dialog similar to the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
 
 {{% notice note %}}
 Switching the Y-Axis for several curves in one go can be done using the context command <b>Switch Plot Axis</b>.  
 {{% /notice %}}
 
-To optional ways to select the curve data are available: The **Vector Selection Dialog** and the **Vector Selection Filter**.
 
-The first is accessed by clicking the button **Vector Selection Dialog**. This opens a dialog similar to the one used as Plot Editor. See [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
-
-The **Vector Selection Filter** group of options is a different way of selecting the curve data:
-
-- **Search** -- This option controls the filtering mode. Several are available and controls witch search fields that are made available. The search modes are described below 
-- **Options depending on Search Mode** -- Described below. 
-- **List of vector names** -- This list displays the set of vectors filtered by the search options. Use this to select which of the vectors you want to plot.
-
-In the following, all the search fields are wildcard-based text filters. An empty search string will match anything: any value or no value at all. A single _`*`_ however, will only match something: There has to be some value for that particular quantity to make the filter match.
-
-The **Vector Name** field will match the name of the quantity itself, while the additional mode specific fields will match the item(s) being addressed. 
-
-#### Search Modes with Filter Fields
-
-- **All** -- A wildcard search filter applied to the colon-separated string that describes the complete vector. Eg. _`"*:*, 55, *"`_ or _`"WBHP:*"`_. This mode is the default.
-   - **Filter** -- The actual filter text to apply
-- **Field** -- Select Field related vectors only
-  -  **Vector name** -- Filter for Field related vector names 
-- **Well** -- Select Well related vectors only
-   - **Vector name** -- Filter for Well related vector names 
-   - **Well name** --  Well name filter 
-- **Group** - Select Group related vectors only
-   - **Vector name** -- Filter for Group related vector names 
-   - **Group name** --  Group name filter 
-- **Completion**   -- Select Completion related vectors only
-   - **Vector name**  -- Filter for Completion related vector names 
-   - **Well name** --  Well name filter 
-   - **I, J, K** -- Text based filter of the I, J, K value string of the completion. Eg _`"18,*,*"`_ to find vectors with I = 18 only 
-- **Segment** -- Select Segment related vectors only    
-   - **Vector name**  -- Filter for Segment related vector names 
-   - **Well name** -- Well name filter 
-   - **Segment number** -- Text based filter of the segment numbers
-- **Block** -- Select I, J, K -- Block related vectors only 
-   - **Vector name**  -- Filter for cell Block related vector names 
-   - **I, J, K** -- Text based filter of the I, J, K value string of the Block. 
-- **Region** -- Select Region related vectors only  
-   - **Vector name**  -- Filter for Region related vector names 
-   - **Region number** -- Text based filter of the Region numbers
-- **Region-Region** -- Select Region to Region related vectors only  
-   - **Vector name**  -- Filter for Region to Region related vector names 
-   - **Region number** -- Text based filter of the first Region number
-   - **2. Region number** -- Text based filter of the second Region number
-- **Lgr-Well** -- Select Well in LGR related vectors only
-   - **Vector name** -- Filter for Well in Lgr related vector names 
-   - **Well name** -- Well name filter 
-   - **Lgr name** -- Lgr name filter 
-- **Lgr-Completion** -- Select Completion in LGR related vectors only
-   - **Vector name** -- Filter for Well in Lgr related vector names 
-   - **Well name** --  Well name filter 
-   - **Lgr name** -- Lgr name filter 
-   - **I, J, K** -- Text based filter of the I, J, K value string of the completion in the Lgr.
-- **Lgr-Block** -- Select I, J, K - Block in LGR related vectors only
-   - **Vector name**  -- Filter for cell Block related vector names 
-   - **Lgr name** -- Lgr name filter 
-   - **I, J, K** -- Text based filter of the I, J, K value string of the Block in the Lgr. 
-- **Misc** -- Select vectors in the Misc category only 
-   - **Vector name** -- Filter for Misc category vector names 
-- **Aquifer** -- Select Aquifer category vectors only 
-   - **Vector name** -- Filter for Aquifer category vector names 
-- **Network** -- Select Network category vectors only  
-   - **Vector name** -- Filter for Network category vector names 
-- **All (Advanced)** -- This is a complete combined search mode with all the different search options available to create advanced cross item type searches.  
 
 ### Curve Name 
 
-The user can control the curve name used in the plot legend by using these options.
+The user can control the curve name used in the plot legend by the following options:
 
-- **Contribute To Legend** -- This option controls whether the curve will be visible in the plot legend at all. A curves with an empty name will also be removed from the legend. 
+- **Contribute To Legend** -- This option controls whether the curve will be visible in the plot legend. A curve with an empty name will be removed from legend. 
 - **Auto Name** -- If enabled, ResInsight will create a name for the curve automatically based on the settings in this option group.
-- **Curve Name** -- If **Auto Name** is off, you can enter any name here. If empty, the curve will be removed from the legend, but still visible in the plot.
+- **Curve Name** -- If **Auto Name** is off, you can enter a curve name here. If empty, the curve will be removed from the legend, but still visible in the plot.
 - **Case Name, Vector name ...** etc. -- These options controls what part of the summary vector information to use in the curve auto-name.
 
 ## Copy and Paste 
