@@ -80,15 +80,19 @@ where:
 The summary plotting command option creates one summary plot for each of the the summary vectors matched by  
 *\<eclipsesummaryvectorfilters\>* using all listed Eclipse data files in each plot.
 
-Eclipse summary vector filters can be repeated and may include wildcards, e.g. *WOPT:\** to select the total oil production from all wells.
-3D Grid properties from restart files can also be requested in the form *\<propertyname\>:i,j,k*, e.g. *SOIL:20,21,1*.
+Eclipse summary vector filters specify a list of vectors separated by spaces following the syntax noted above. 
+Wildcards can be used in the specification. Brief examples are: 
+
+- `WOPT:*`: One total oil production curve for each well.
+- `FOPT FWPT`: Two curves with oil and water total production.
+- `BPR:15,28,*`: Oil phase pressure for all blocks along k as separate curves. Please note no space in expression.
+
+[Examples]({{< relref "commandlineinterface#summary-plotting-1" >}}) are listed below.
 
 As long as only summary vectors are requested, only the corresponding SMSPEC file will be opened for each case.
 However, if a grid property is requested, the corresponding EGRID and restart data will be loaded as well.
 
 Specifying summary plot options is optional, c.f. table below.
-
-[Examples]({{< relref "commandlineinterface#summary-plotting-1" >}}) are listed below. 
 
 
 | Option     | Description |
@@ -192,7 +196,7 @@ The trailing option *-s* gathers the vectors into a single summary plot.
 ResInsight --summaryplot 1_R001_REEK-0 FOPT WOPT*:op_2 -s
 ```
 
-Adding to previous example, the following command line also plots SOIL for cell (20, 21, 1).
+Adding to previous example, the following command line also plots the 3D grid property `SOIL` for cell (20, 21, 1).
 ```
 ResInsight --summaryplot 1_R001_REEK-0 FOPT WOPT*:op_2 SOIL:20,21,1
 ```
