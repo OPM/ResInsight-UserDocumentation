@@ -27,6 +27,7 @@ Contour Maps can be created in many different ways:
 
 A contour Map has many of the same options available as a 3D View, but is always orthographic/parallel projection with no perspective projection or lighting available. Instead of the 3D Grid Box, the Contour Maps uses a 2D Grid simular to the **2d Intersection Views** with optional Axis Lines controlled with the **Show Axis Lines** toggle. The name of the map can be automatically generated from the Case Name, Property Type, Aggregation Type and Sample Spacing (See **Map Projection Properties** for the two latter).
 
+ 
 ## Map Projection Properties
 
 ![]({{< relref "" >}}images/3d-main-window/ContourMapProjectionProperties.png)
@@ -61,6 +62,13 @@ For the Column options, no **Cell Result** is available in the property tree und
 
 For the **Arithmetic Mean**, **Geometric Mean** and **Harmonic Mean** it is also possible to specify a cell result as a weighting parameter in addition to the regular weighting by volume of intersection. The total weight will then be the volume of intersection multiplied by the specified cell result. The full range of regular cell results is available for this use.
 
+
+## Difference options
+
+Creating a Contour Map as a difference with a specific base case and/or base time step is performed by clicking the 
+{{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** item
+underneath the actual **Contour Map** in the project tree. This will display the {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** [Property Editor]
+({{< relref "cellresults" >}}#eclipse-result-types) to specify base case and/or base time step.
 
 
 ## Contour Map Export
