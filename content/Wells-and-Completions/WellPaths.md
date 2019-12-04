@@ -98,27 +98,7 @@ The visible wells are always shown in all the 3D Views in the complete project, 
 A well path will hold well log data and well path data imported from files. A well path file is placed inside the well path item, while one or more well log files are placed as child items under the well path in the project tree.
 
 ### Importing Well Log Files
-Well log data is usually imported from LAS-files (_\*.las_). LAS-files can be imported using the command: **File->Import-> Well Data->Import Well Logs from File**.
-
-ResInsight will look for the the well name in the imported LAS-files among the existing **Well Paths**.
-If a match is found, the LAS-file is placed as a child of that well path. If not, a new empty well path entry is created with the imported LAS-file under it. A well path may have more than one LAS-files as children.
-
-![]({{< relref "" >}}images/3d-main-window/LasFilesInTree.png)
-
-If the LAS-file does not contain a well name, the file name is used instead. 
-
-#### Moving LAS-file
-If ResInsight's automatic well matching fails and a LAS-file is matched with the wrong well path, it is possible to move the LAS-file to the correct well path. Select the LAS-file right-click menu click **Move LAS File to Well Path** and select destination well path.
-
-![]({{< relref "" >}}images/3d-main-window/MoveLasFileMenu.png)
-
-### Look for an Existing Well Path
-Well log names may vary slightly among different files from the same well. When importing a well log file or a well log path file, ResInsight have to look for an existing well path item to ensure that the well log data and well path are imported to the correct well path item. The lookup is based on name comparison this way:
-
-- First remove any prefix (like `xxxxx1111/1111-` or `xxxxx1111/1111_`)
-- Then try an exact name match
-- If not found, try to match the names ignoring all spaces, dashes and underscores
-- If still no match, no existing well was found and a new one is created
+Well log data is [imported from LAS-files]({{< relref "lasfile" >}}#importing-a-las-file).
 
 ### Well Path Property Editor
 The well path property editor lets the user control the appearance of the well path and associate the well path to a simulation well. It also gives some information about the well path metadata.
