@@ -22,7 +22,7 @@ All the result fields in the odb-file is then available for post processing in R
 
 Pressure and stress are always displayed using the *Bar* unit.
 
-Other derived results are also calculated, and are described in [ Derived Results ]({{< relref "" >}}appendix/derivedresults)
+Other derived results are also calculated, and are described in [ Derived Results ]({{< relref "derivedresults" >}}) 
 
 ### ResInsight Features
 Most of the central features of ResInsight visualization setup also applies to ABAQUS Odb models, like range filters and property filters. Well Paths will also show up along with the odb models.
