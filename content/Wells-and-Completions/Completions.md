@@ -10,12 +10,13 @@ Three types of completions are available for modeling and export: Perforation in
 
 Completions can be modeled by adding new perforation intervals, fishbones subs or fractures. Details about the completions must then be specified, such as the length of the perforation interval or number of fishbone subs and laterals. After modeling the completions, the transmissibility (cell connection factors) can be calculated and exported to the Eclipse COMPDAT Keyword. See [ Export Completions]({{< relref "completionexport" >}})
 
-For fishbones completions, multi-segment well information can even be exported to the Eclipse Keywords WELSEGS, COMPSEGS and WSEGVALV. See [ Export Well Segments]({{< relref "completionexport" >}}#export-well-segments)
+For fishbones completions, multi-segment well information can even be exported to the Eclipse Keywords WELSEGS, COMPSEGS and WSEGVALV,
+c.f. [Export Well Segments]({{< relref "completionexport" >}}).
 
 {{% notice note %}}
-  The derived cell property <b>Completion Type</b> displays wich cells are intersected by the completions.
-  See <a href="{{< relref "" >}}appendix/derivedresults#completion-type">Derived Results&rarr;Completion Type</a>
+  The derived cell property [Completion Type]({{< relref "derivedresults#completion-type" >}}) displays wich cells are intersected by the completions.
 {{% /notice %}}
+
 
 
 ## Visualization and Inspection of Well Connection Factors
@@ -29,8 +30,8 @@ The **Property Panel** of the **Well Connection Factors** item has a few options
 - **Geometry Scale Factor** -- Scales the connection factor symbols relative to the displayed well path radius
 - **Show on Closed Connections** -- Show the connection factors calculated for closed simulation well cells in addition to the ones at open cells.
 
-A combined view of well connection factors and the derived result **Completion Type** enables the user to see the completion type contributing to connection factor in a cell 
-( [Derived Results, Completion Type]({{< relref "" >}}appendix/derivedresults#completion-type) )
+A combined view of well connection factors and the derived result [Completion Type]({{< relref "derivedresults#completion-type" >}}) 
+enables the user to see the completion type contributing to connection factor in a cell.
 
 
 ## Perforation Intervals
