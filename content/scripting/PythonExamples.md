@@ -88,8 +88,8 @@ import rips
 # Connect to ResInsight
 resinsight  = rips.Instance.find()
 
-# Get the case with id == 0. This will fail if your project doesn't have a case with id == 0
-case = resinsight.project.case(case_id=0)
+# Get the first case. This will fail if you haven't loaded any cases
+case = resinsight.project.cases()[0]
 
 # Get the cell count object
 cell_counts = case.cell_count()
@@ -129,7 +129,7 @@ resinsight.set_plot_window_size(width=1000, height=1000)
 case = resinsight.project.cases()[0]
 
 # Get a view
-view1 = case.view(view_id=0)
+view1 = case.views()[0]
 
 # Clone the view
 view2 = view1.clone()
@@ -283,6 +283,43 @@ if case is not None:
 
 
 
+```
+
+# ExportContourMaps
+
+```
+# Load ResInsight Processing Server Client Library
+import rips
+import tempfile
+import pathlib
+
+# Connect to ResInsight instance
+resInsight = rips.Instance.find()
+
+# Data will be written to temp
+tmpdir = pathlib.Path(tempfile.gettempdir())
+
+# Find all eclipse contour maps of the project
+contour_maps = resInsight.project.contour_maps(rips.ContourMapType.ECLIPSE)
+print("Number of eclipse contour maps:", len(contour_maps))
+
+# Export the contour maps to a text file
+for (index, contour_map) in enumerate(contour_maps):
+    filename = "eclipse_contour_map" + str(index) + ".txt"
+    filepath = tmpdir / filename
+    print("Exporting to:", filepath)
+    contour_map.export_to_text(str(filepath))
+
+# The contour maps is also available for a Case
+cases = resInsight.project.cases()
+for case in cases:
+    contour_maps = case.contour_maps(rips.ContourMapType.GEO_MECH)
+    # Export the contour maps to a text file
+    for (index, contour_map) in enumerate(contour_maps):
+        filename = "geomech_contour_map" + str(index) + ".txt"
+        filepath = tmpdir / filename
+        print("Exporting to:", filepath)
+        contour_map.export_to_text(str(filepath))
 ```
 
 # ExportPlots
@@ -441,7 +478,7 @@ def create_result(poro_chunks, permx_chunks):
 
 resinsight     = rips.Instance.find()
 start = time.time()
-case = resinsight.project.case(case_id=0)
+case = resinsight.project.cases()[0]
 
 # Get a generator for the poro results. The generator will provide a chunk each time it is iterated
 poro_chunks = case.active_cell_property_async('STATIC_NATIVE', 'PORO', 0)
@@ -474,7 +511,7 @@ import grpc
 
 resinsight     = rips.Instance.find()
 start = time.time()
-case = resinsight.project.case(case_id=0)
+case = resinsight.project.cases()[0]
 
 # Read poro result into list
 poro_results = case.active_cell_property('STATIC_NATIVE', 'PORO', 0)
@@ -567,7 +604,7 @@ import rips
 
 resinsight  = rips.Instance.find()
 
-view = resinsight.project.view(view_id=0)
+view = resinsight.project.views()[0]
 view.apply_cell_result(result_type='STATIC_NATIVE', result_variable='DX')
 ```
 
@@ -583,7 +620,7 @@ import rips
 # Connect to ResInsight instance
 resinsight = rips.Instance.find()
 
-view = resinsight.project.view(view_id=0)
+view = resinsight.project.view(view_id=1)
 #view.apply_flow_diagnostics_cell_result(result_variable='Fraction',
 #                                    selection_mode='FLOW_TR_INJ_AND_PROD')
                                     
@@ -713,7 +750,7 @@ def create_result(soil_chunks, porv_chunks):
 
 resinsight   = rips.Instance.find()
 start        = time.time()
-case         = resinsight.project.case(case_id=0)
+case         = resinsight.project.cases()[0]
 timeStepInfo = case.time_steps()
 
 # Get a generator for the porv results. The generator will provide a chunk each time it is iterated
@@ -754,7 +791,7 @@ import time
 
 resinsight = rips.Instance.find()
 start = time.time()
-case       = resinsight.project.case(case_id=0)
+case       = resinsight.project.cases()[0]
 
 # Read the full porv result
 porv_results = case.active_cell_property('STATIC_NATIVE', 'PORV', 0)

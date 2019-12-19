@@ -1082,6 +1082,12 @@ Replace all source cases within a case group
 
 
 
+#### save(path='')
+Save the project to the existing project file, or to a new file
+:param path: File path to the file to save the project to. If empty, saves to the active project file
+:type path: str
+
+
 #### scale_fracture_template(template_id, half_length, height, d_factor, conductivity)
 Scale fracture template parameters
 
@@ -1321,7 +1327,7 @@ def create_result(poro_chunks, permx_chunks):
 
 resinsight     = rips.Instance.find()
 start = time.time()
-case = resinsight.project.case(case_id=0)
+case = resinsight.project.cases()[0]
 
 # Get a generator for the poro results. The generator will provide a chunk each time it is iterated
 poro_chunks = case.active_cell_property_async('STATIC_NATIVE', 'PORO', 0)
@@ -1354,7 +1360,7 @@ import grpc
 
 resinsight     = rips.Instance.find()
 start = time.time()
-case = resinsight.project.case(case_id=0)
+case = resinsight.project.cases()[0]
 
 # Read poro result into list
 poro_results = case.active_cell_property('STATIC_NATIVE', 'PORO', 0)
