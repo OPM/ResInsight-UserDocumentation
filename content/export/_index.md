@@ -14,6 +14,7 @@ ResInsight features the following capabilities for export of data to reporting o
 - completions defined in ResInsight can be exported to Eclipse for use in new simulation runs
 - file export of well paths
 - export of sub-sections of an Eclipse Grid with Parameters and Faults to Eclipse ASCII files to perform additional simulations
+- export of a contour map to text file
 
 The following subchapters details the functionality and capabilites.
 

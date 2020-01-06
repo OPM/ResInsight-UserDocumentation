@@ -150,6 +150,15 @@ width     | Width in pixels  | Integer
 height    | Height in pixels | Integer
 
 
+#### set_plot_window_size(width, height)
+Set the plot window size in pixels
+
+Parameter | Description      | Type
+--------- | ---------------- | -----
+width     | Width in pixels  | Integer
+height    | Height in pixels | Integer
+
+
 #### set_start_dir(path)
 Set current start directory
 
@@ -178,7 +187,7 @@ else:
 # Case Module
 
 
-#### class rips.case.Case(channel, case_id)
+#### class rips.case.Case(channel, case_id, project)
 ResInsight case class
 
 Operate on a ResInsight case specified by a Case Id integer.
@@ -375,6 +384,26 @@ Get Stream of cell info objects for current case
 See cell_info_for_active_cells() for detalis on the **CellInfo** class.
 
 
+#### contour_maps(map_type=<ContourMapType.ECLIPSE: 1>)
+Get a list of all contour maps belonging to a project
+
+Parameter       | Description                            | Type
+--------------- | -------------------------------------- | -----
+time_steps      | Time step index                        | Integer
+well_path_names | List of well path names                | List of Strings
+refinement_i    | Refinment in x-direction               | Integer
+refinement_j    | Refinment in y-direction               | Integer
+refinement_k    | Refinment in z-direction               | Integer
+split_type      | Defines how to split LGRS              | String enum
+
+* **Parameters**
+
+    **map_type** (*enum*) -- ContourMapType.ECLIPSE or ContourMapType.GEO_MECH
+
+
+#### create_multiple_fractures(template_id, well_path_names, min_dist_from_well_td, max_fractures_per_well, top_layer, base_layer, spacing, action)
+Create Multiple Fractures in one go
+
 #### create_lgr_for_completion(time_step, well_path_names, refinement_i, refinement_j, refinement_k, split_type)
 Create a local grid refinement for the completions on the given well paths
 
@@ -395,6 +424,8 @@ Option                  | Description
 "LGR_PER_COMPLETION"    | One LGR for each completion (fracture, perforation, ...)
 "LGR_PER_WELL"          | One LGR for each well
 
+#### create_view()
+Create a new view in the current case
 
 #### create_multiple_fractures(template_id, well_path_names, min_dist_from_well_td, max_fractures_per_well, top_layer, base_layer, spacing, action)
 Create Multiple Fractures in one go
@@ -419,9 +450,28 @@ Create saturation pressure plots for the current case
 Create a new view in the current case
 
 
+#### create_well_bore_stability_plot(well_path, time_step)
+Create a new well bore stability plot
+
+
+* **Parameters**
+
+    * **well_path** (*str*) -- well path name
+
+    * **time_step** (*int*) -- time step
+
+
+
+* **Returns**
+
+    A new plot object
+
+
+
 #### days_since_start()
 Get a list of decimal values representing days since the start of the simulation
 
+    * **export_file** (*str*) -- File name for export. Defaults to the value of property parameter
 
 #### export_flow_characteristics(time_steps, injectors, producers, file_name, minimum_communication=0.0, aquifer_cell_threshold=0.1)
 Export Flow Characteristics data to text file in CSV format
@@ -439,6 +489,7 @@ aquifer_cell_threshold    | Aquifer Cell Threshold, defaults to 0.1       | Inte
 #### export_msw(well_path)
 Export Eclipse Multi-segment-well model to file
 
+* **Parameters**
 
 * **Parameters**
 
@@ -449,8 +500,13 @@ Export Eclipse Multi-segment-well model to file
 #### export_property(time_step, property_name, eclipse_keyword=<class 'property'>, undefined_value=0.0, export_file=<class 'property'>)
 Export an Eclipse property
 
+##### Enum file_split
 
-* **Parameters**
+Option                              | Description
+----------------------------------- | ------------
+"UNIFIED_FILE"                      | A single file with all combined transmissibilities
+"SPLIT_ON_WELL"                     | One file for each well with combined transmissibilities
+"SPLIT_ON_WELL_AND_COMPLETION_TYPE" | One file for each completion type for each well
 
     * **time_step** (*int*) -- time step index
 
@@ -462,15 +518,19 @@ Export an Eclipse property
 
     * **export_file** (*str*) -- File name for export. Defaults to the value of property parameter
 
+#### grid(index)
+Get Grid of a given index. Returns a rips Grid object
 
 
-#### export_snapshots_of_all_views(prefix='')
+#### export_snapshots_of_all_views(prefix='', export_folder='')
 Export snapshots for all views in the case
 
 
 * **Parameters**
 
-    **prefix** (*str*) -- Exported file name prefix
+    * **prefix** (*str*) -- Exported file name prefix
+
+    * **export_folder** (*str*) -- The path to export to. By default will use the global export folder
 
 
 
@@ -519,6 +579,7 @@ Get Grid of a given index. Returns a rips Grid object
 
     **index** (*int*) -- The grid index
 
+    * **property_name** (*str*) -- name of an Eclipse property
 
 Returns: Grid object
 
@@ -582,6 +643,16 @@ Get a cell property for all grid cells. Async, so returns an iterator
 Get a list of all rips Grid objects in the case
 
 
+#### import_formation_names(formation_files=None)
+Import formation names into project and apply it to the current case
+
+
+* **Parameters**
+
+    **formation_files** (*list*) -- list of files to import
+
+
+
 #### replace(new_grid_file)
 Replace the current case grid with a new grid loaded from file
 
@@ -591,6 +662,7 @@ Replace the current case grid with a new grid loaded from file
     **new_egrid_file** (*str*) -- path to EGRID file
 
 
+    * **property_name** (*str*) -- name of an Eclipse property
 
 #### set_active_cell_property(values, property_type, property_name, time_step, porosity_model='MATRIX_MODEL')
 Set a cell property for all active cells.
@@ -689,7 +761,9 @@ if resinsight is not None:
 
     print ("Got " + str(len(cases)) + " cases: ")
     for case in cases:
+        print("Case id: " + str(case.case_id))
         print("Case name: " + case.name)
+        print("Case type: " + case.type)
         print("Case grid path: " + case.grid_path())
         
         timesteps = case.time_steps()
@@ -700,6 +774,38 @@ if resinsight is not None:
     
 
 ```
+
+# Contour Map Module
+
+
+#### class rips.contour_map.ContourMap(pdm_object, project, map_type)
+ResInsight contour map class
+
+
+#### view_id()
+View Id corresponding to the View Id in ResInsight project.
+
+
+* **Type**
+
+    int
+
+
+
+#### export_to_text(export_file_name='', export_local_coordinates=False, undefined_value_label='NaN', exclude_undefined_values=False)
+Export snapshot for the current view
+
+
+* **Parameters**
+
+    * **export_file_name** (*str*) -- The file location to store results in.
+
+    * **export_local_coordinates** (*bool*) -- Should we export local coordinates, or UTM.
+
+    * **undefined_value_label** (*str*) -- Replace undefined values with this label.
+
+    * **exclude_undefined_values** (*bool*) -- Skip undefined values.
+
 
 # Grid Module
 
@@ -800,38 +906,44 @@ Get a list of views belonging to a grid case group
 #### class rips.project.Project(channel)
 ResInsight project. Not intended to be created separately.
 
-Automatically created and assigned to Instance.
 
+* **Type**
 
 #### case(case_id)
 Get a specific case from the provided case Id
 
 
+
+#### compute_statistics(case_ids=None)
+Compute statistics for the given case ids
+
+
 * **Parameters**
 
-    **id** (*int*) -- case id
+    * **case_ids** (*list of integers*) -- list of case ids.
+
+    * **this is None all cases in group are included** (*If*) -- 
 
 
 
-* **Returns**
-
-    A rips Case object
-
-
-
-#### cases()
-Get a list of all cases in the project
+#### create_statistics_case()
+Create a Statistics case in the Grid Case Group
 
 
 * **Returns**
 
-    A list of rips Case objects
+    A new Case
 
 
 
-#### close()
-Close the current project (and open new blank project)
+#### statistics_cases()
+Get a list of all statistics cases in the Grid Case Group
 
+
+#### contour_maps(map_type=<ContourMapType.ECLIPSE: 1>)
+Get a list of all contour maps belonging to a project
+
+Returns: a view object
 
 #### create_grid_case_group(case_paths)
 Create a Grid Case Group from a list of cases
@@ -891,6 +1003,8 @@ Get a particular grid case group belonging to a project
 
     **groupId** (*int*) -- group id
 
+#### create_grid_case_group(case_paths)
+Create a Grid Case Group from a list of cases
 
 Returns: a grid case group object
 
@@ -899,15 +1013,66 @@ Returns: a grid case group object
 Get a list of all grid case groups in the project
 
 
-#### load_case(path)
-Load a new case from the given file path
+#### import_formation_names(formation_files=None)
+Import formation names into project
 
 
 * **Parameters**
 
+    **formation_files** (*list*) -- list of files to import
+
+
+#### export_multi_case_snapshots(grid_list_file)
+Export snapshots for a set of cases
+
+#### import_well_log_files(well_log_files=None, well_log_folder='')
+Import well log files into project
+
+
+* **Parameters**
+
+    * **well_log_files** (*list*) -- List of file paths to import
+
+    * **well_log_folder** (*str*) -- A folder path containing files to import
+
+
+
+* **Returns**
+
+    A list of well path names (strings) that had logs imported
+
+
+
+#### import_well_paths(well_path_files=None, well_path_folder='')
+Import well paths into project
+
+
+* **Parameters**
+
+    * **well_path_files** (*list*) -- List of file paths to import
+
+    * **well_path_folder** (*str*) -- A folder path containing files to import
+
+
+
+* **Returns**
+
+    A list of well path names (strings)
+
+
+Returns: a grid case group object
+
+#### load_case(path)
+Load a new case from the given file path
+
+#### grid_case_groups()
+Get a list of all grid case groups in the project
+
+
     **path** (*str*) -- file path to case
 
 
+* **Parameters**
 
 * **Returns**
 
@@ -924,6 +1089,19 @@ Open a new project from the given path
     **path** (*str*) -- path to project file
 
 
+* **Parameters**
+
+#### plot(view_id)
+Get a particular plot by providing view id
+:param view_id: view id
+:type view_id: int
+
+Returns: a plot object
+
+
+#### plots()
+Get a list of all plots belonging to a project
+
 
 #### replace_source_cases(grid_list_file, case_group_id=0)
 Replace all source cases within a case group
@@ -935,6 +1113,12 @@ Replace all source cases within a case group
 
     * **case_group_id** (*int*) -- id of the case group to replace
 
+
+
+#### save(path='')
+Save the project to the existing project file, or to a new file
+:param path: File path to the file to save the project to. If empty, saves to the active project file
+:type path: str
 
 
 #### scale_fracture_template(template_id, half_length, height, d_factor, conductivity)
@@ -963,6 +1147,8 @@ Get a list of all cases selected in the project tree
 
     A list of rips Case objects
 
+#### set_fracture_containment(template_id, top_layer, base_layer)
+Set fracture template containment parameters
 
 
 #### set_fracture_containment(template_id, top_layer, base_layer)
@@ -985,7 +1171,7 @@ Get a particular view belonging to a case by providing view id
 
 * **Parameters**
 
-    **id** (*int*) -- view id
+    **view_id** (*int*) -- view id
 
 
 Returns: a view object
@@ -994,14 +1180,18 @@ Returns: a view object
 #### views()
 Get a list of views belonging to a project
 
+
+#### well_paths()
+Get a list of all the well path names in the project
+
 # View Module
 
 
-#### class rips.view.View(pdm_object)
+#### class rips.view.View(pdm_object, project)
 ResInsight view class
 
 
-#### id()
+#### view_id()
 View Id corresponding to the View Id in ResInsight project.
 
 
@@ -1099,13 +1289,15 @@ Option                                   | Description
 "WPIMULT_AND_DEFAULT_CONNECTION_FACTORS" | Include export of WPIMULT
 
 
-#### export_snapshot(prefix='')
+#### export_snapshot(prefix='', export_folder='')
 Export snapshot for the current view
 
 
 * **Parameters**
 
-    **prefix** (*str*) -- Exported file name prefix
+    * **prefix** (*str*) -- Exported file name prefix
+
+    * **export_folder** (*str*) -- The path to export to. By default will use the global export folder
 
 
 
@@ -1153,6 +1345,49 @@ Read two properties, multiply them together and push the results back to ResInsi
 This is slow and inefficient, but works.
 
 ```
+import rips
+import time
+
+# Internal function for creating a result from a small chunk of poro and permx results
+# The return value of the function is a generator for the results rather than the result itself.
+def create_result(poro_chunks, permx_chunks):
+    # Loop through all the chunks of poro and permx in order
+    for (poroChunk, permxChunk) in zip(poro_chunks, permx_chunks):
+        resultChunk = []
+        # Loop through all the values inside the chunks, in order
+        for (poro, permx) in zip(poroChunk.values, permxChunk.values):
+            resultChunk.append(poro * permx)
+        # Return a generator object that behaves like a Python iterator
+        yield resultChunk
+
+resinsight     = rips.Instance.find()
+start = time.time()
+case = resinsight.project.cases()[0]
+
+# Get a generator for the poro results. The generator will provide a chunk each time it is iterated
+poro_chunks = case.active_cell_property_async('STATIC_NATIVE', 'PORO', 0)
+# Get a generator for the permx results. The generator will provide a chunk each time it is iterated
+permx_chunks = case.active_cell_property_async('STATIC_NATIVE', 'PERMX', 0)
+
+# Send back the result with the result provided by a generator object.
+# Iterating the result generator will cause the script to read from the poro and permx generators
+# And return the result of each iteration
+case.set_active_cell_property_async(create_result(poro_chunks, permx_chunks),
+                                           'GENERATED', 'POROPERMXAS', 0)
+
+end = time.time()
+print("Time elapsed: ", end - start)
+print("Transferred all results back")
+view = case.views()[0].apply_cell_result('GENERATED', 'POROPERMXAS')
+```
+
+## Asynchronous Example
+
+Read two properties at the same time chunk by chunk, multiply each chunk together and start transferring the result back to ResInsight as soon as the chunk is finished.
+
+This is far more efficient.
+
+```
 ########################################################################################
 import rips
 import time
@@ -1160,7 +1395,7 @@ import grpc
 
 resinsight     = rips.Instance.find()
 start = time.time()
-case = resinsight.project.case(case_id=0)
+case = resinsight.project.cases()[0]
 
 # Read poro result into list
 poro_results = case.active_cell_property('STATIC_NATIVE', 'PORO', 0)
@@ -1184,47 +1419,4 @@ print("Time elapsed: ", end - start)
 print("Transferred all results back")
 
 view = case.views()[0].apply_cell_result('GENERATED', 'POROPERMXSY')
-```
-
-## Asynchronous Example
-
-Read two properties at the same time chunk by chunk, multiply each chunk together and start transferring the result back to ResInsight as soon as the chunk is finished.
-
-This is far more efficient.
-
-```
-import rips
-import time
-
-# Internal function for creating a result from a small chunk of poro and permx results
-# The return value of the function is a generator for the results rather than the result itself.
-def create_result(poro_chunks, permx_chunks):
-    # Loop through all the chunks of poro and permx in order
-    for (poroChunk, permxChunk) in zip(poro_chunks, permx_chunks):
-        resultChunk = []
-        # Loop through all the values inside the chunks, in order
-        for (poro, permx) in zip(poroChunk.values, permxChunk.values):
-            resultChunk.append(poro * permx)
-        # Return a generator object that behaves like a Python iterator
-        yield resultChunk
-
-resinsight     = rips.Instance.find()
-start = time.time()
-case = resinsight.project.case(case_id=0)
-
-# Get a generator for the poro results. The generator will provide a chunk each time it is iterated
-poro_chunks = case.active_cell_property_async('STATIC_NATIVE', 'PORO', 0)
-# Get a generator for the permx results. The generator will provide a chunk each time it is iterated
-permx_chunks = case.active_cell_property_async('STATIC_NATIVE', 'PERMX', 0)
-
-# Send back the result with the result provided by a generator object.
-# Iterating the result generator will cause the script to read from the poro and permx generators
-# And return the result of each iteration
-case.set_active_cell_property_async(create_result(poro_chunks, permx_chunks),
-                                           'GENERATED', 'POROPERMXAS', 0)
-
-end = time.time()
-print("Time elapsed: ", end - start)
-print("Transferred all results back")
-view = case.views()[0].apply_cell_result('GENERATED', 'POROPERMXAS')
 ```

@@ -1,8 +1,8 @@
 +++
-title = " Derived Results"
+title = "Derived Results"
 published = true
-weight = 10
-hidden = true
+weight = 160
+hidden = false
 +++
 
 ResInsight computes several derived results. In this section we will explain what they are, and briefly how they are calculated.

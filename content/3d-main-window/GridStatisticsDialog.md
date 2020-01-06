@@ -28,7 +28,7 @@ The histogram shows a histogram of the complete time series of the currently loa
 The cumulative histogram shows av accumulated version of the histogram above.
 
 ## Grid Statistics Configuration
-A grid statistics dialog is always connected to the 3D view from where it was opened. When the contents of the 3D view changes due to user interactions, the grid statistics dialog contents will be updated automatically along with the info box. The info box has some options for configuration. These settings become available by clicking in the info box or the info box node in the project tree.
+A grid statistics dialog is always connected to the 3D view from where it was opened. When the contents of the 3D view changes due to user interactions, the grid statistics dialog contents will be updated automatically along with the info box. The Statistics Options of the info box is shown in the figure below with default settings. These settings become available by clicking in the info box or the info box node in **Project Tree**.
 
 ![]({{< relref "" >}}images/3d-main-window/InfoBoxConfig.png)
 

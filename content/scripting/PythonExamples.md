@@ -27,7 +27,9 @@ if resinsight is not None:
 
     print ("Got " + str(len(cases)) + " cases: ")
     for case in cases:
+        print("Case id: " + str(case.case_id))
         print("Case name: " + case.name)
+        print("Case type: " + case.type)
         print("Case grid path: " + case.grid_path())
         
         timesteps = case.time_steps()
@@ -37,17 +39,6 @@ if resinsight is not None:
         
     
 
-```
-
-# AppInfo
-
-```
-import rips
-
-resinsight  = rips.Instance.find()
-if resinsight is not None:
-    print(resinsight.version_string())
-    print("Is this a console run?", resinsight.is_console())
 ```
 
 # CaseGridGroup
@@ -97,8 +88,8 @@ import rips
 # Connect to ResInsight
 resinsight  = rips.Instance.find()
 
-# Get the case with id == 0. This will fail if your project doesn't have a case with id == 0
-case = resinsight.project.case(id=0)
+# Get the first case. This will fail if you haven't loaded any cases
+case = resinsight.project.cases()[0]
 
 # Get the cell count object
 cell_counts = case.cell_count()
@@ -129,14 +120,16 @@ import rips
 # Load instance
 resinsight = rips.Instance.find()
 
-# Set window size
+# Set window sizes
 resinsight.set_main_window_size(width=800, height=500)
+resinsight.set_plot_window_size(width=1000, height=1000)
+
 
 # Retrieve first case
 case = resinsight.project.cases()[0]
 
 # Get a view
-view1 = case.view(view_id=0)
+view1 = case.views()[0]
 
 # Clone the view
 view2 = view1.clone()
@@ -176,6 +169,41 @@ with tempfile.TemporaryDirectory(prefix="rips") as tmpdirname:
 
 ```
 
+# Create WBS Plot
+
+```
+import os
+# Load ResInsight Processing Server Client Library
+import rips
+# Connect to ResInsight instance
+resInsight = rips.Instance.find()
+
+cases = resInsight.project.cases()
+
+well_paths = resInsight.project.import_well_paths(well_path_folder='D:/Projects/ResInsight-regression-test/ModelData/Norne_LessWellPaths')
+well_log_files = resInsight.project.import_well_log_files(well_log_folder='D:/Projects/ResInsight-regression-test/ModelData/Norne_PLT_LAS')
+
+if len(well_paths) < 1:
+    print("No well paths in project")
+    exit(1)
+print(well_paths)
+
+for case in cases:
+    if case.type == "GeoMechCase":
+        print (case.case_id)
+        case_path = case.grid_path()
+        folder_name = os.path.dirname(case_path)
+        case.import_formation_names(formation_files=['D:/Projects/ResInsight-regression-test/ModelData/norne/Norne_ATW2013.lyr'])
+
+        # create a folder to hold the snapshots
+        dirname = os.path.join(folder_name, 'snapshots')
+        print("Exporting to: " + dirname)
+
+        for well_path in well_paths:
+            wbsplot = case.create_well_bore_stability_plot(well_path=well_path, time_step=0)
+            wbsplot.export_snapshot(export_folder=dirname)
+```
+
 # ErrorHandling
 
 ```
@@ -186,6 +214,7 @@ with tempfile.TemporaryDirectory(prefix="rips") as tmpdirname:
 
 import rips
 import grpc
+import tempfile
 
 resinsight     = rips.Instance.find()
 
@@ -195,7 +224,25 @@ case = None
 try:
     case = resinsight.project.load_case("Nonsense")
 except grpc.RpcError as e:
-    print("Expected Server Exception Received: ", e)
+    print("Expected Server Exception Received while loading case: ", e)
+
+# Try loading well paths from a non-existing folder.  We should get a grpc.RpcError exception from the server
+try:
+    well_path_files = resinsight.project.import_well_paths(well_path_folder="NONSENSE/NONSENSE")
+except grpc.RpcError as e:
+    print("Expected Server Exception Received while loading wellpaths: ", e)
+
+# Try loading well paths from an existing but empty folder. We should get a warning.
+try:
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        well_path_files = resinsight.project.import_well_paths(well_path_folder=tmpdirname)
+        assert(len(well_path_files) == 0)
+        assert(resinsight.project.has_warnings())
+        print("Should get warnings below")
+        for warning in resinsight.project.warnings():
+            print (warning)
+except grpc.RpcError as e:
+    print("Unexpected Server Exception caught!!!", e)
 
 case = resinsight.project.case(case_id=0)
 if case is not None:
@@ -234,8 +281,68 @@ if case is not None:
     except IndexError:
         print ("Got expected index out of bounds error on client side")
 
-        
 
+
+```
+
+# ExportContourMaps
+
+```
+# Load ResInsight Processing Server Client Library
+import rips
+import tempfile
+import pathlib
+
+# Connect to ResInsight instance
+resInsight = rips.Instance.find()
+
+# Data will be written to temp
+tmpdir = pathlib.Path(tempfile.gettempdir())
+
+# Find all eclipse contour maps of the project
+contour_maps = resInsight.project.contour_maps(rips.ContourMapType.ECLIPSE)
+print("Number of eclipse contour maps:", len(contour_maps))
+
+# Export the contour maps to a text file
+for (index, contour_map) in enumerate(contour_maps):
+    filename = "eclipse_contour_map" + str(index) + ".txt"
+    filepath = tmpdir / filename
+    print("Exporting to:", filepath)
+    contour_map.export_to_text(str(filepath))
+
+# The contour maps is also available for a Case
+cases = resInsight.project.cases()
+for case in cases:
+    contour_maps = case.contour_maps(rips.ContourMapType.GEO_MECH)
+    # Export the contour maps to a text file
+    for (index, contour_map) in enumerate(contour_maps):
+        filename = "geomech_contour_map" + str(index) + ".txt"
+        filepath = tmpdir / filename
+        print("Exporting to:", filepath)
+        contour_map.export_to_text(str(filepath))
+```
+
+# ExportPlots
+
+```
+# Import the tempfile module
+import tempfile
+# Load ResInsight Processing Server Client Library
+import rips
+# Connect to ResInsight instance
+resInsight = rips.Instance.find()
+
+# Get a list of all plots
+plots = resInsight.project.plots()
+
+export_folder = tempfile.mkdtemp()
+
+print("Exporting to: " + export_folder)
+
+for plot in plots:
+	plot.export_snapshot(export_folder=export_folder)
+	plot.export_data_as_las(export_folder=export_folder)
+	plot.export_data_as_ascii(export_folder=export_folder)
 ```
 
 # ExportSnapshots
@@ -310,6 +417,43 @@ for case in cases:
 
 ```
 
+# Import Well Paths
+
+```
+# Load ResInsight Processing Server Client Library
+import rips
+# Connect to ResInsight instance
+resInsight = rips.Instance.find()
+
+well_path_names = resInsight.project.import_well_paths(well_path_folder='D:/Projects/ResInsight-regression-test/ModelData/norne/wellpaths')
+if resInsight.project.has_warnings():
+    for warning in resInsight.project.warnings():
+        print(warning)
+
+
+for well_path_name in well_path_names:
+    print("Imported from folder: " + well_path_name)
+
+well_path_names = resInsight.project.import_well_paths(well_path_files=['D:/Projects/ResInsight-regression-test/ModelData/Norne_WellPaths/E-3H.json',
+                                                                        'D:/Projects/ResInsight-regression-test/ModelData/Norne_WellPaths/C-1H.json'])
+if resInsight.project.has_warnings():
+    for warning in resInsight.project.warnings():
+        print(warning)
+
+
+for well_path_name in well_path_names:
+    print("Imported from indivdual files: " + well_path_name)
+
+
+well_path_names = resInsight.project.import_well_log_files(well_log_folder='D:/Projects/ResInsight-regression-test/ModelData/Norne_PLT_LAS')
+if resInsight.project.has_warnings():
+    for warning in resInsight.project.warnings():
+        print(warning)
+
+for well_path_name in well_path_names:
+    print("Imported well log file for: " + well_path_name)
+```
+
 # InputPropTestAsync
 
 ```
@@ -334,7 +478,7 @@ def create_result(poro_chunks, permx_chunks):
 
 resinsight     = rips.Instance.find()
 start = time.time()
-case = resinsight.project.case(case_id=0)
+case = resinsight.project.cases()[0]
 
 # Get a generator for the poro results. The generator will provide a chunk each time it is iterated
 poro_chunks = case.active_cell_property_async('STATIC_NATIVE', 'PORO', 0)
@@ -367,7 +511,7 @@ import grpc
 
 resinsight     = rips.Instance.find()
 start = time.time()
-case = resinsight.project.case(case_id=0)
+case = resinsight.project.cases()[0]
 
 # Read poro result into list
 poro_results = case.active_cell_property('STATIC_NATIVE', 'PORO', 0)
@@ -460,7 +604,7 @@ import rips
 
 resinsight  = rips.Instance.find()
 
-view = resinsight.project.view(view_id=0)
+view = resinsight.project.views()[0]
 view.apply_cell_result(result_type='STATIC_NATIVE', result_variable='DX')
 ```
 
@@ -476,7 +620,7 @@ import rips
 # Connect to ResInsight instance
 resinsight = rips.Instance.find()
 
-view = resinsight.project.view(view_id=0)
+view = resinsight.project.view(view_id=1)
 #view.apply_flow_diagnostics_cell_result(result_variable='Fraction',
 #                                    selection_mode='FLOW_TR_INJ_AND_PROD')
                                     
@@ -606,7 +750,7 @@ def create_result(soil_chunks, porv_chunks):
 
 resinsight   = rips.Instance.find()
 start        = time.time()
-case         = resinsight.project.case(case_id=0)
+case         = resinsight.project.cases()[0]
 timeStepInfo = case.time_steps()
 
 # Get a generator for the porv results. The generator will provide a chunk each time it is iterated
@@ -647,7 +791,7 @@ import time
 
 resinsight = rips.Instance.find()
 start = time.time()
-case       = resinsight.project.case(case_id=0)
+case       = resinsight.project.cases()[0]
 
 # Read the full porv result
 porv_results = case.active_cell_property('STATIC_NATIVE', 'PORV', 0)
