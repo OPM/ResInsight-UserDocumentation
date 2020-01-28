@@ -22,7 +22,7 @@ you may run a sequence of commands by supplying the command file as a
 ## Python Interface
 ResInsight offers a [Python Interface] ({{< ref "pythonrips.md" >}})
 which allows you to interact with a running ResInsight instance from a Python script. 
-This allows using the powerful Python language, numerical libraries, and other support modules in conjunction with ResInsight.
+This allows using the powerful Python language, numerical libraries, and other support modules in conjunction with ResInsight. The Python client package is compatible with **Python 3**.
 
 For examples on how to use Python, see [Examples]({{< ref "pythonexamples.md" >}})
 
