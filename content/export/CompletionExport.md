@@ -27,7 +27,7 @@ The completions defined in ResInsight can be exported to Eclipse for use in new 
   - **Perforations** -- Option to include or exclude perforation intervals in the export. 
     - **Time step** -- Which timestep to export. This option is included since perforation intervals have a start time, and thus not all perforations need be present at all time steps. 
   - **Fractures** -- Option to include or exclude fracture completions from the export.
-    - ** Pressure Differential Depletion Scaling -- Options to scale transmissibilities based on the well drawdown. This allows the Eclipse simulation to more accurately model cases with high differential depletion.
+    - **Pressure Differential Depletion Scaling** -- Options to scale transmissibilities based on the well drawdown. This allows the Eclipse simulation to more accurately model cases with high differential depletion.
   - **Fishbones** -- Option to include or exclude fishbone completions from the export. The direction reported in the COMPDAT/COMPDATL keywords is computed based on the orientation of the main bore cell the fishbone is connected to.
     - **Exclude Main Bore Transmissibility** -- If this options is checked on, only the transmissibilities for the fishbone laterals will be included in the export, and transmissibility along the main bore will not contribute. 
 
