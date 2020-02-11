@@ -4,7 +4,7 @@ published = true
 weight = 50
 +++
 
-In order to export well paths to dev files, select the menu item **File -> Export -> Export Visible Well Paths** or select one or more well paths and then select one of the items in the context sub menu **Export Well Paths**.
+In order to export well paths to dev files, select the menu item **File -> Export -> Export Visible Well Paths** or select one or more well paths and then select one of the items in the sub menu **Export Well Paths**.
 
 A dialog appears after selecting an export well path command.
 
