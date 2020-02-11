@@ -22,7 +22,9 @@ ResInsight offers several ways to import Eclipse (grid) files. Use one of the fo
 - **Import Input Eclipse Case**: See [description](#eclipse-ascii-input-data)
 - **Create Grid Case Group from Files** and **Create Grid Case Group from Files Recursively**: These commands import a number of Eclipse files and places the cases in a [grid case group]({{< relref "casegroupsandstatistics" >}}#creating-grid-case-groups). The only difference between the two commands, is the dialog used to select files. The recursive version is using the [recursive file selection dialog]({{< relref "summaryplots" >}}#recursive-summary-file-import) and is considered the new way of selecting files.
 
-The **Reload Case** command can be used to reload a previously imported case, to make sure it is up to date. This is useful if the grid or result files changes while a ResInsight session is active.
+The **Reload** command can be used to reload a previously imported case, to make sure it is up to date. This is useful if the grid or result files changes while a ResInsight session is active.
+
+The **Replace** command selects a new case to replace an existing one. All attached views is updated with data from the newly imported case.
 
 {{% notice note %}}
 You can select several grid files in one go by multiple selection of files (Ctrl + left mouse button, Shift + left mouse button). 
