@@ -13,8 +13,8 @@ ResInsight can create [contour maps]({{< relref "contourmaps" >}}) based on diff
 
 To export a contour map, invoke one of the following options (c.f. figure above):
 
-- Select context command **Export Contour Map to text** in the graphics window showing a contour map.
-- Select context command **Export Contour Map to text** for a contour map in the **Project Tree**
+- Select right-click command **Export Contour Map to text** in the graphics window showing a contour map.
+- Select right-click command **Export Contour Map to text** for a contour map in the **Project Tree**
 
 This initiates the following dialog for export options:
 

@@ -181,7 +181,7 @@ Selection of vector is performed using a vector acronym or pressing the button t
 Pressing the button opens a dialog similar to the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
 
 {{% notice note %}}
-Switching the Y-Axis for several curves in one go can be done using the context command <b>Switch Plot Axis</b>.  
+Switching the Y-Axis for several curves in one go can be done using the right-click command <b>Switch Plot Axis</b>.  
 {{% /notice %}}
 
 

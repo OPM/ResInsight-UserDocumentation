@@ -14,11 +14,11 @@ There are several ways to create new RFT Plots.
 
 **From the Project Tree in the Plot Main Window**
 
-- Select context command **New RFT Plot** for _Well Path_ node or _RFT Plots_ node.
+- Select right-click command **New RFT Plot** for _Well Path_ node or _RFT Plots_ node.
 
 **From the Project Tree in the 3D Main Window**
 
-- Select context command **New RFT plot** for a simulation well.
+- Select right-click command **New RFT plot** for a simulation well.
 
 **From a 3D view**
 
