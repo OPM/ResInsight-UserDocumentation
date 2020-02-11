@@ -37,9 +37,6 @@ During summary file import, ResInsight checks whether the summary file is restar
 ### Summary Case Groups
 A selection of cases can be grouped by right-clicking  a selection of summary cases and selecting the command **Group Summary Cases**. Summary cases can also be drag-dropped between summary groups. The groups will be used when listing the cases in the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
 
-### Replace Summary Case
-A summary case can be replaced by right-clicking on it and selecting the command **Replace**. This will redisplay all configured plots with data from the newly imported case.
-
 ### Observed Data
 
 See [Observed Time History Data]({{< relref "observeddata" >}})
