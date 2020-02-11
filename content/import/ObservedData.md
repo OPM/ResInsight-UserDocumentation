@@ -10,7 +10,7 @@ Observed Time History Data, is data measured in time. On import of observed time
 Importing observed time history data to ResInsight may be performed in two different ways:
 
 - By selecting the main menu item **File -> Import -> Import Observed Time History Data**
-- By using the context command **Import Observed Time History Data** on the **Observed Time History Data** item in the **Plot Main Window Project Tree** 
+- By using the right-click command **Import Observed Time History Data** on the **Observed Time History Data** item in the **Plot Main Window Project Tree** 
 
 The following file types are supported:
 

@@ -33,7 +33,7 @@ To plot the Well allocation for a well, right-click the well in the **Project Tr
 
 ![]({{< relref "" >}}images/plot-window/SimulationWellContextMenu.png)
 
-The command updates the default **Well Allocation Plot** with new values based on the selection and the settings in the active view. This plot can then be copied to the **Stored Plots** folder by the context command **Add Stored Well Allocation Plot**. 
+The command updates the default **Well Allocation Plot** with new values based on the selection and the settings in the active view. This plot can then be copied to the **Stored Plots** folder by the right-click command **Add Stored Well Allocation Plot**. 
 
 ### Options
 
@@ -79,9 +79,9 @@ The depth value in the plot can be controlled by selecting the **Accumulated Flo
   
 ### Accessing the Plot Data
 
-The command context command **Show Plot Data** will show a window containing the plot data in ascii format. The content of this window is easy to copy and paste into Excel or other tools for further processing.
+The command right-click command **Show Plot Data** will show a window containing the plot data in ascii format. The content of this window is easy to copy and paste into Excel or other tools for further processing.
 
-It is also possible to save the ascii data to a file directly by using the context command **Export Plot Data to Text File** on the **Accumulated Flow**/**Inflow Rates** item in the **Project Tree**. 
+It is also possible to save the ascii data to a file directly by using the right-click command **Export Plot Data to Text File** on the **Accumulated Flow**/**Inflow Rates** item in the **Project Tree**. 
 
 The total accumulation data can also be viewed in ascci format by the command **Show Total Allocation Data**.
 

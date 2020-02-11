@@ -44,7 +44,7 @@ Pressing and holding **CTRL** while using the mouse wheel will allow you to zoom
 
 Right-click a Well Log Plot and select **Show Plot Data** to show a window containing the plot data in ascii format. The content of this window is easy to copy and paste into Excel or other tools for further processing.
 
-It is also possible to save the ascii data to a file by selecting a Well Log Plot in the **Plot Project Tree** and use the context command **Export Plot Data to Text File**. 
+It is also possible to save the ascii data to a file by selecting a Well Log Plot in the **Plot Project Tree** and use the right-click command **Export Plot Data to Text File**. 
 
 ## Tracks
 

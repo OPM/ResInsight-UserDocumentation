@@ -13,11 +13,11 @@ There are several ways to create new PLT Plots
 
 **From Project Tree in the Plot Main Window**
 
-- Select context command **New PLT Plot** for the _PLT Plots_ node.
+- Select right-click command **New PLT Plot** for the _PLT Plots_ node.
 
 **From the Project Tree in the Main Window**
 
-- Select context command **New PLT Plot** for a _Well Path_ node or a _Simulation Well_ node that has an associated well path.
+- Select right-click command **New PLT Plot** for a _Well Path_ node or a _Simulation Well_ node that has an associated well path.
 
 **From the 3D view**
  

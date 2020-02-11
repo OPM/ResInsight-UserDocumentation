@@ -60,7 +60,7 @@ A new property filter can be made by activating the right-click menu on **Proper
 The name of the property filter is automatically set to *"propertyname (min .. max)"* as you edit the property filter.
 
 {{% notice note %}}
-The context command <b>Apply As Cell Result</b> on a property filter, sets the Cell Color Result to the same values as the selected property filter.
+The right-click command <b>Apply As Cell Result</b> on a property filter, sets the Cell Color Result to the same values as the selected property filter.
 {{% /notice %}}
 
 Below is a snapshot of the **Property Editor** of the **Property Filter**.
