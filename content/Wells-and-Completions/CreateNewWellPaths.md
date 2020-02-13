@@ -19,17 +19,18 @@ To create a well path:
 
 ![]({{< relref "" >}}images/3d-main-window/WellTargetsPropertyEditor.png)
 
-Well targets property editor fields
+Well targets property editor fields:
 
-- **UTM Reference Point** - Reference point. Defaults to the first target point clicked
-- **MDRKB at First Target** - Define MD (referenced to Rotary Kelly Bushing) at first target point. Applies to well path export only.
+- **Start Type** - Specify well to start either at surface or at first target point.
+- **UTM Reference Point** - Reference point. Defaults to the first target point clicked.
+- **Air Gap** - Specify Air Gap, i.e. distance from Rotary Kelling Bushing to sea surface. Applies to well path export only.
 - **Well Targets:** List of targets. Will have pink background when in picking state.
-  - **Point** - Target position relative to reference point
-  - **DL in** - Dog leg inwards. Unit: Degrees/30m
-  - **DL out** - Dog leg outwards. Unit: Degrees/30m
-  - **Dir** - Check box for overriding well path auto calculated directions
-  - **Azi (deg)** - Azimuth. Y axis is 0 degrees
-  - **Inc (deg)** - Inclination. Z axis is 0 degrees
+  - **Point** - Target position relative to reference point.
+  - **DL in** - Dog leg inwards [degrees/30m].
+  - **DL out** - Dog leg outwards [degrees/30m].
+  - **Dir** - Check box for overriding well path auto calculated directions.
+  - **Azi (deg)** - Azimuth. Y axis is 0 degrees.
+  - **Inc (deg)** - Inclination. Z axis is 0 degrees.
 
 A self created well path may be edited by either editing coordinates in the property editor or clicking and dragging targets in the 3D view. 
 
