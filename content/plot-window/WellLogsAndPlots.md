@@ -25,7 +25,7 @@ Each **Well Log Plot** can contain several *Tracks*, and each **Track** can cont
 
 Tracks and Curves can be organized using **drag and drop** of their entries in the **Plot Project Tree**. Tracks can be moved from one plot to another and you can alter the order of tracks within a Well Log Plot by drag and drop. In addition, *Curves* can be moved from one *Track* to another. Furthermore, **copy and paste** of a *Well Log Plot*, *Track*, and *Curve* is possible by right-clicking their entry.
 
-### Measured Depth (MD), True Vertical Depth (TVD) and Pseudo Length (PL)
+### Measured Depth (MD), True Vertical Depth (TVD), True Vertical Depth RKB (TVDRKB) and Pseudo Length (PL)
 
 All **Tracks** in the same Well Log Plot always display the same depth range, and share the *True Vertical Depth (TVD)* or *Measured Depth (MD)* setting. In the property panel of the plot, the exact depth range can be adjusted along with the depth type setting (TVD/MD). 
 
@@ -50,7 +50,7 @@ It is also possible to save the ascii data to a file by selecting a Well Log Plo
 
 Tracks can be created by right-clicking a **Well Log Plot** and select **New Track**.
 
-The settings of each Track is controlled by the Property Editor. The figure below shows settings for the middle Track shown in the figure at top of this page which is annotated by [Formations] ({{< relref "formations" >}}) in *Category colors*.  
+The settings of each Track is controlled by the Property Editor. The figure below shows settings for the middle Track shown in the figure at top of this page which is annotated by [Formations]({{< relref "formations" >}}) in *Category colors*. For GeoMechanical models, adding formations will also indicate the sea level.
 
 ![]({{< relref "" >}}images/plot-window/TrackProperties.png)
 
