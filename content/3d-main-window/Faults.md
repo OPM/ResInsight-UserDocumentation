@@ -8,6 +8,12 @@ weight = 90
 
 This section describes how Faults are detected and visualized. NNC's are a part of the Faults visualization and are thus also mentioned in this section. 
 
+**Related pages :**
+
+[Allen Diagrams]({{< relref "allendiagrams" >}})
+
+[Derived Results]({{< relref "derivedresults" >}}) 
+
 ## Fault Detection
 
 ResInsight always scans the grids for geometrical faults when they are loaded. When two opposite cell faces of I, J, K neighbor cells does not match geometrically, they are tagged. 
@@ -35,6 +41,8 @@ As import of faults can be time consuming, reading of faults can be disabled fro
 If enabled in **Preferences**, ResInsight will read Non Neighbor Connections from the Eclipse output file (_`*.INIT`_), and create explicit visualizations of those. 
 The NNC's are sorted onto the Fault's and their visibility is controlled along with them.
 
+When the NNCs are imported from file, ResInsight will identify NNCs not defined in the input file (Faces with zero transmissibility is not exported from the simulator). See [Derived Results]({{< relref "derivedresults" >}}) for details on other NNC related results.
+
 ## Fault Visualization Options
 
 ### Fault Visibility
@@ -49,6 +57,10 @@ Each named Fault is given a color on import. This color can be controlled by sel
 
 ### Separate Fault Result
 The default result mapping used on faults are to use the same as specified in **Cell Result**. If a different result mapping is wanted, enable the checkbox at **Separate Fault Result** and select the result from the result selection dialog in the **Property Editor**. A second legend for the fault result is then added to the view.
+
+Please note that the groups [Fault Face Visibility]({{< relref "#fault-face-visibility" >}}) and [NNC Visibility]({{< relref "#nnc-visibility" >}}) are available below result selection.
+
+Useful NNC results are descrived in [Derived Results]({{< relref "derivedresults" >}}) 
 
 ### Toolbar Control
 Visualization mode and mesh lines can be controlled from the toolbar.
