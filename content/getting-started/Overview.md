@@ -63,11 +63,12 @@ Commands to arrange the windows in the standard ways are available from the **Wi
 
 Most of the settings and features of ResInsight is accessible through the **Project Tree** and the **Property Editor**. Selecting an item in the **Project Tree** activates the corresponding Window, and shows the item properties in the **Property Editor** available for editing. 
 
-Toggling a checkbox next to an item in the **Project Tree** will toggle visibility in the window. Toggling a checkbox for a collection of items will affect the visibility for all items in the collection. {{< image-in-text src="images/getting-started/TreeViewToggle.png" >}}
+Toggling a checkbox next to an item in the **Project Tree** will toggle visibility in the window. Toggling a checkbox for a collection of items will affect the visibility for all items in the collection {{< image-in-text src="images/getting-started/TreeViewToggle.png" >}}.
+Right-click menu commands are also available to do special operations on a selected set of items.
 
-right-click menu commands are also available to do special operations on a selected set of items.
+ResInsight stores all views and settings in a [Project File]({{< relref "projectfile" >}}) to easily continue the work in a subsequent session. 
 
-How to interact and manipulate the 3D model is described in [Model Navigation]({{< relref "modelnavigation" >}})
+[Model Navigation]({{< relref "modelnavigation" >}}) describes how to interact and manipulate the 3D model. 
 
 
 ### Cases and Their Types
