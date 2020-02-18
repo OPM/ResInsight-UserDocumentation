@@ -22,20 +22,30 @@ ResInsight can create summary plots based on vectors from SUMMARY files ( _`*.SM
 
 ### SUMMARY Files
 
-When opening an Eclipse case in the 3D view, the associated summary file is opened automatically by default, and made available as a **Summary Case**.
+When opening an Eclipse case in the 3D view, the associated summary file is opened automatically by default and made available as a **Summary Case**.
 Summary files can also be imported directly using one of the following commands in the **File->Import->Summary Cases** menu:
 
 - **Import Summary Case**: Brings up the standard file selection dialog. Multiple selections are allowed.
-- **Import Summary Cases Recursively**: Brings up the recursive file selection dialog. This dialog is described in details [below](#recursive-summary-file-import)
-- **Import Summary Case Group**: Brings up the recursive file selection dialog. All files selected are automatically grouped in ResInsight.
-- **Import Ensemble**: Similar to the above, but in addition to just create a group, ResInsight performs some extra checking related to ensembles and converts the group to an ensemble. See [ensemble support description]({{< relref "ensembleplotting" >}}).
+- **Import Summary Cases Recursively**: Brings up the [recursive file selection](#recursive-summary-file-import) dialog to load files from multiple directories.
+- **Import Summary Case Group**: Brings up the [recursive file selection](#recursive-summary-file-import) dialog. Selected files are automatically grouped.
+- **Import Ensemble**: Similar to the above, but in addition to just create a group, ResInsight performs some extra checking related to ensembles and converts the group to an ensemble, c.f. [Ensemble Plotting]({{< relref "ensembleplotting" >}}).
 
-These commands can also be accessed in the right-click menu for the **Summary Cases** entry in the **Plot Main Window Project Tree** under which the imported cases will also be listed.
+These commands can also be accessed in the right-click menu for the **Summary Cases** entry in the **Plot Project Tree**.
+Notably, the right-click menu also allows creating [derived ensembles]({{< relref "ensembleplotting" >}}#derived-ensembles) 
+and [derived summary cases]({{< relref "summaryplots" >}}#derived-summary-case).
 
-During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the Origin Files dialog is displayed. Origin file support is described [below](#origin-files).
+During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the [Origin Files](#origin-files) dialog is displayed.
+
 
 ### Summary Case Groups
 A selection of cases can be grouped by right-clicking  a selection of summary cases and selecting the command **Group Summary Cases**. Summary cases can also be drag-dropped between summary groups. The groups will be used when listing the cases in the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
+
+
+### Derived Summary Case
+A derived Summary Case can be created as either the sum or difference between two existing summary cases. 
+To create a derived summary case, select two existing summary cases in the project tree, then right click and select **New Derived Summary Case**. A new derived ensemble is created with the two selected summary cases as input and a default arithmetic operator. In the Property Editor for the new derived summary case, both display name, the two base summary cases, and operator can be modified.
+An existing derived summary case may be input to a new derived ensemble.
+
 
 ### Replace Summary Case
 A summary case can be replaced by right-clicking on it and selecting the command **Replace**. This will redisplay all configured plots with data from the newly imported case.
