@@ -41,8 +41,8 @@ Example:
 ![]({{< relref "" >}}images/plot-window/Ensemble.png)
 
 ## Derived Ensembles
-New ensembles can be created based on calculations on two or more ensembles. Such ensembles are called 'derived ensembles'. A derived ensemble will contain data which are either the sum or difference between two other ensembles. An existing derived ensemble may be input to a new derived ensemble, making it possible to for instance add more than two ensembles.
+New ensembles can be created based on calculations on two or more ensembles. Such ensembles are called *derived ensembles*. A derived ensemble will contain data which are either the sum or difference between two other ensembles. An existing derived ensemble may be input to a new derived ensemble, making it possible to for instance add more than two ensembles.
 
-To create a derived ensemble, select two existing ensembled in the project tree. Right click and select **New Derived Ensenble**. A new derived ensemble is created with the two selected ensembles as input and a default arithmetic operator. In the property for the new ensemble, both input ensembles and operator can be modified.
+To create a derived ensemble, select two existing ensembles in **Plot Project Tree**, then right-click and select **New Derived Ensemble**. A new derived ensemble is created with the two selected ensembles as input and a default arithmetic operator. In the property for the new ensemble, both input ensembles and operator can be modified.
 
 If the two input ensembles differs in which cases they consist of, ResInsight will display a warning and let the user decide whether to create the derived ensemble or not.
