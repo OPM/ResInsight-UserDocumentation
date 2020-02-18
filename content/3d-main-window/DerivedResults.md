@@ -19,7 +19,6 @@ The transmissibility for cells and Non-Neighbor Connections (NNCs) are dependent
 
 The normalized transmissibilities make it easier to compare and check the flow capacity visually. This can be useful when history matching pressure differences across a fault. 
 
-
 ### Overall Transmissibility Multiplier
 Transmissibility can be set or adjusted with multiple keywords in an Eclipse data deck. To visualize the adjustments made, ResInsight calculates a multiplicator for the overall change. First unadjusted transmissibilities for all neighbor cells and NNCs are evaluated based on geometry and permeabilities, similar to the NEWTRAN algorithm in Eclipse. For x- and y-directions, the NTG parameter is also included. The results are named **riTRANX**, **riTRANY** and **riTRANZ** respectively.
 
@@ -75,7 +74,7 @@ ResInsight calculates several of the presented geomechanical results based on th
 ResInsight can calculate and display relative results, sometimes also referred to as Time Lapse results.
 When enabled, every result variable is calculated as :
 
-Value'(t) = Value(t) - Value(BaseTime)
+$$Value'(t) = Value(t) - Value(BaseTime)$$
 
 Enable the **Enable Relative Result**  option in the **Relative Result Options** group, and select the appropriate **Base Time Step**. 
 
@@ -96,7 +95,7 @@ The calculated result fields are:
 * Element Nodal and Integration Points
   * ST (Total Stress)
      * All tensor components
-     * Principals, with directions (S<sub>i</sub>inc, S<sub>i</sub>azi)
+     * Principals, with directions ($S\_iinc, S\_iazi$)
      * STM (Mean total stress)
      * Q (Deviatoric stress)
   * Gamma (Stress path)
@@ -124,7 +123,7 @@ The calculated result fields are:
     * FAULTMOB 
     * PCRIT
     
-#### Definitions of Derived Results
+### Definitions of Derived Results
 
 In this text the label Sa and Ea will be used to denote the unchanged stress and strain tensor respectively from the odb file.
 
@@ -135,7 +134,7 @@ Components with two subscripts however, refers to the global directions 1, 2, an
 - Inclination is measured from the downwards direction
 - Azimuth is measured from the Northing (Y) Axis in Clockwise direction looking down.
 
-##### Case Constants
+### Case Constants
 
 Two constants can be assigned to a Geomechanical case:
 
@@ -146,90 +145,89 @@ In the following they are denoted s0 and fa respectively. Some of the derived re
 
 ![]({{< relref "" >}}images/appendix/GeoMechCasePropertyPanel.png)
 
-##### COMPACTION
+### COMPACTION
 
 Compaction is the difference in vertical displacement (U3) between a grid node and a specified reference K layer.
 The reference K layer is specified in the property editor.
 
 For each node <i>n</i> in the grid, a node <i>nref</i> in the reference K layer is found by vertical intersection from the node <i>n</i>.
 
-If Depth<sub>n</sub> <= Depth<sub>nref</sub>:
+$ If (Depth\_n <= Depth\_{nref}) $
 
-COMPACTION<sub>n</sub> = -(U3<sub>n</sub> - U3<sub>nref</sub>)
+$ \space \space COMPACTION\_n = -(U3\_n - U3\_{nref})$
 
-else:
+$ else $
 
-COMPACTION<sub>n</sub> = -(U3<sub>nref</sub> - U3<sub>n</sub>)
+$\space \space COMPACTION\_n = -(U3\_{nref} - U3\_n )$
 
-##### ST - Total Stress
+### ST - Total Stress
 
-ST<sub>ii</sub> = -Sa<sub>ii</sub> + POR (i= 1,2,3)
+$ST\_{ii} = -Sa\_{ii} + POR (i= 1,2,3)$
 
-ST<sub>ij</sub> = -Sa<sub>ij</sub> (i,j = 1,2,3 and i not equal j)
+$ST\_{ij} = -Sa\_{ij} (i,j = 1,2,3 \text{ and i not equal j})$
 
 We use a value of POR=0.0 where it is not defined.
 
-ST<sub>i</sub> = Principal value i of ST
+$ST\_i = \text{Principal value i of ST}$
 
-##### STM - Total Mean Stress
+### STM - Total Mean Stress
 
-STM = (ST<sub>11</sub> + ST<sub>22</sub> + ST<sub>33</sub>)/3
+$STM = \frac{ST\_{11} + ST\_{22} + ST\_{33}}{3} $
 
-##### Q - Deviatoric Stress
+### Q - Deviatoric Stress
 
-Q = sqrt( (3/2) * ( (ST<sub>1</sub> – STM)<sup>2</sup>  + (ST<sub>2</sub> – STM)<sup>2</sup>  + (ST<sub>3</sub> – STM)<sup>2</sup> )) 
+$Q = \sqrt {\frac{3}{2} * ((ST\_1 - STM)^2 + (ST\_2 - STM)^2 + (ST\_3 - STM)^2 }$
 
-##### Gamma - Stress Path
+### Gamma - Stress Path
 
-Gamma<sub>ii</sub> = ST<sub>ii</sub>/POR (i= 1,2,3) 
+$Gamma\_{ii} = \frac{ST\_{ii}} {POR} (i= 1,2,3) $
 
-Gamma<sub>i</sub> = ST<sub>i</sub>/POR 
+$Gamma\_{i} = \frac{ST\_{i}} {POR}  $
 
 In these calculations we set Gamma to *undefined* if abs(POR) > 0.01 MPa. 
 
-##### SE - Effective Stress
+### SE - Effective Stress
 
-SE<sub>ij</sub> = -Sa<sub>ij</sub> (Where POR is defined) 
+$SE\_{ij} = -Sa\_{ij} \text{ (Where POR is defined)} $
 
-SE<sub>ij</sub> = *undefined* (Were POR is not defined)
+$SE\_{ij} = \text{Undefined (Where POR is defined)} $
 
-SE<sub>i</sub> = Principal value i of SE
+$SE\_i = \text{Principal value i of SE} $
 
-##### SEM - Effective Mean Stress
+### SEM - Effective Mean Stress
 
-SEM = (SE<sub>11</sub> + SE<sub>22</sub> + SE<sub>33</sub>)/3
+$SEM = \frac{SE\_{11} + SE\_{22} + SE\_{33}} {3}  $
 
-##### SFI
+### SFI
 
-SFI  =   ( (s0/tan(fa)  + 0.5*(SE<sub>1</sub> + SE<sub>3</sub>))*sin(fa)  ) /(0.5*(SE<sub>1</sub>-SE<sub>3</sub>) )  
+$$SFI = \frac{\frac{S0}{tan(fa)} + 0.5 * (SE\_1 + SE\_3) * sin(fa)} {0.5*(SE\_1-SE\_3)}  $$
 
-##### DSM 
+### DSM 
 
-DSM = tan(rho)/tan(fa)
- 
+$DSM = \frac{tan(\rho)} {tan(fa)} $
+
 where 
 
-rho = 2 * (arctan (sqrt (( SE<sub>1</sub> + a)/(SE<sub>3</sub> + a)) ) – pi/4)
+$$ \rho = 2 * (arctan (\sqrt \frac{ SE\_1 + a} {SE\_3 + a}) \space – \frac {\pi} {4}) $$
+$$ a = \frac {s0} {tan(fa)} $$
 
-a = s0/tan(fa) 
+### FOS
 
-##### FOS
+$FOS = \frac{1}{DSM}$
 
-FOS = 1/DSM
+### E - Strain
 
-##### E - Strain
+$E\_{ij} = -Ea\_{ij}$
 
-E<sub>ij</sub> = -Ea<sub>ij</sub>
-
-##### EV - Volumetric Strain
+### EV - Volumetric Strain
 
 EV = E11 + E22 + E33 
 
-##### ED - Deviatoric Strain
+### ED - Deviatoric Strain
 
-ED = 2*(E1-E3)/3  
+$ED = 2*\frac {E1-E3} {3}  $
 
-##### Element Nodal On Face
+### Element Nodal On Face
 
 For each face displayed, (might be an element face or an intersection/intersection box face), 
 a coordinate system is established such that:
@@ -240,29 +238,29 @@ a coordinate system is established such that:
 
 The stress tensors in that particular face are then transformed to that coordinate system.  The following quantities are derived from the transformed tensor named TS in the following:
 
-##### SN - Stress component Normal to face
+### SN - Stress component Normal to face
 
-SN = TS<sub>33</sub>
+$SN = TS\_{33}$
 
-##### TPH - Horizontal in-plane shear component
+### TPH - Horizontal in-plane shear component
 
-TPH = TS<sub>31</sub> = TS<sub>ZX</sub>
+$TPH = TS\_{31} = TS\_{ZX} $
 
-##### TNQV - Horizontal in-plane shear component
+### TNQV - Horizontal in-plane shear component
 
-TPQV = TS<sub>32</sub> = TS<sub>ZY</sub>
+$TPQV = TS\_{32} = TS\_{ZY}$
 
-##### TP - Total in-plane shear
+### TP - Total in-plane shear
 
-TP = sqrt(TPH<sup>2</sup> + TPQV<sup>2</sup>)
+$TP = \sqrt {(TPH^2 + TPQV^2)} $
 
-##### TPinc - Direction of TP
+### TPinc - Direction of TP
 
 Angle of the total in-plane shear relative to the Quasi Vertical direction 
 
-TPinc = acos(TPQV/TP)
+$TPinc = acos (\frac {TPQV} {TP}) $
 
-##### Pinc and Pazi - Face Inclination and Azimuth
+### Pinc and Pazi - Face Inclination and Azimuth
 
 These are the directional angles of the face-normal itself. 
 
