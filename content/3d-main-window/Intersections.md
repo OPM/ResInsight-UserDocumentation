@@ -14,13 +14,11 @@ The second intersection type is called an **Intersection Box**. An Intersection 
 
 All types of intersections are stored in a folder named **Intersections** in a **View** as shown below. Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the right-click menu of each intersection.
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionInTree.png)
-
 Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the right-click menu of each intersection.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionInTreeCopy.png)
 
-## Curve Based **Intersections**
+## Curve Based Intersections
 
 There are four types of curve based intersections: Well Path, Simulation Well, Polyline, and Azimuth and Dip. Azimuth and Dip differs from the other three curves, as it is defined just by one straight line. It is called Azimuth and Dip because the plane's extrusion direction can be defined by the two angles.
 
@@ -169,3 +167,21 @@ The following list describes the properties for an **Intersection Box**:
 Direct interaction in a 3D view is activated when **Show 3D manipulator** is pressed. Handles are displayed at the sides of the intersection object, and interactive modification is done by dragging a handle in the 3D view.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionBoxWithHandles.png)
+
+
+## Intersection Results
+
+To select a simulation result to display on an intersection, the first step is to right-click **Separate Intersection Results** in **Project Tree** and select **New Separate Intersection Result**.
+
+![]({{< relref "" >}}images/3d-main-window/SeparateIntersectionResults.png)
+
+By selecting the entry of a specific **Separate Intersection Result**, the Property Editor allows to specify case, type or position etc depending on whether the result stem from an Eclipse case or a Geomechanical case.
+
+The next step is to select an **Intersection** in **Project Tree** and define **Separate Result Reference**. 
+
+![]({{< relref "" >}}images/3d-main-window/IntersectionSeparateResultReference.png)
+
+
+
+
+
