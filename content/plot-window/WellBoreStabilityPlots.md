@@ -91,7 +91,7 @@ $$\sigma'_2 = \sigma'_3 (\theta) = \sigma\_{t \min} = \frac{1}{2} \left( (\sigma
 Next step is to solve for the value of $\theta \in [0 - 180]$ that yields $\sigma'_3 (\theta) = 0$ which in turn gives us $\sigma\_\theta$ which can be used to solve for $P_w$ in the Kirsch equations.
 
 Then calculate *FG* in equivalent mud weight units as
-$$ FG = \frac{P_w}{TVD_{RKB} \\: g  \\: \rho}$$ where $TVD_{RKB} = TVD_{MSL} + AirGap$, the gravity acceleration $g = 9.81 m/s^2$ and  the density of sea water $\rho$ in $kg/m^3$ (thus 1000 x the UI input in $g/cm^3$).
+$$ FG = \frac{P_w}{TVD\_{RKB} \\: g  \\: \rho}$$ where $TVD\_{RKB} = TVD\_{MSL} + AirGap$, the gravity acceleration $g = 9.81 m/s^2$ and  the density of sea water $\rho$ in $kg/m^3$ (thus 1000 x the UI input in $g/cm^3$).
 
 ### Stassi-d'Alia failure criterion in shale
 
@@ -105,7 +105,7 @@ and *UCS* is the *uniaxial compressive strength*.
 
 The Shear Failure Gradient is then given as
 
-$$SFG = \frac{P_w}{TVD_{RKB} \\: g \\: \rho}$$
+$$SFG = \frac{P_w}{TVD\_{RKB} \\: g \\: \rho}$$
 
 ## Python Interface
 The ResInsight Python Server has specific functionality for creating Well Bore Stability Plots in Python. In particular the Python ```Case``` class has a method ```create_well_bore_stability_plot``` method ([API doc]({{< relref "pythonrips" >}}#create_well_bore_stability_plotwell_path-time_step))
