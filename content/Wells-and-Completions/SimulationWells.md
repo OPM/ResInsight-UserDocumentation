@@ -47,6 +47,7 @@ These options controls the visibility of different aspects of the simulation wel
 - **Well head** -- Controls visibility of the arrow displaying the production status of the well
 - **Pipe** -- A symbolic pipe can be drawn between the well connection cells to illustrate the well. This option controls the visibility of the pipes.
 - **Spheres** -- This option toggles the visibility of spheres drawn at the center of each well connection cell.
+- **Disks** -- Visualization of production and injection rates and cumulative production and injection with oil, gas, and water phases.
 - **Communication Lines** -- Toggles the visibility of well communication lines. 
    These arrows shows the communication between wells. Broader arrows indicate higher level of communication. 
    These arrows are based on Flow Diagnostics calculations, and are only available if the eclipse results includes fluxes. 
@@ -100,6 +101,17 @@ The **Individual Pipe Color** setting has two different options:
 
 - **Well Cell Transparency** -- Controls the transparency level for the well cells.
 - **Well Head Position** -- Controls the depth position of the wellhead. Either relative to the top of the active cells in the relevant IJ-column, or relative to the highest active cell overall.  
+
+
+### Disks
+
+Disks may be used to visualize production and injection rates and cumulative production and injection with oil, gas, and water phases shown in green, red, and blue, respectively. Optionally, the quantity of production and injection can be displayed.
+
+Display of **Disks** are enabled from **Simulations Wells**, c.f. figure below. *Property Type* defaults to predefined production and injection properties but also allows for selection of a single property. When showing *Quantity Labels*, it is often useful to also activate *Show Label Background*.
+
+![]({{< relref "" >}}images/3d-main-window/WellDisks.png)
+
+
 
 ## Individual Simulation Well options 
 
