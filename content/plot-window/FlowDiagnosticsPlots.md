@@ -85,6 +85,22 @@ It is also possible to save the ascii data to a file directly by using the right
 
 The total accumulation data can also be viewed in ascci format by the command **Show Total Allocation Data**.
 
+
+## Cumulative Phase Distribution Plot
+
+A Cumulative Phase Distribution Plot shows the volumetric oil, gas, and water distribution from contributing wells to a target well.
+For producer B-2H, for instance, such a plot can be created by right-clicking its entry under **Simulation Wells** in **Project Tree**.
+
+![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionCreate.png)
+
+A Cumulative Phase Distribution Plot can also be created by right-clicking a Cumulative Saturation plot, c.f. figure below. 
+
+![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionPlot.png)
+
+Clicking its entry in **Plot Project Tree**, displays content and settings of the Cumulative Phase Distribution Plot.
+
+![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionProperties.png)
+
 ## Flow Characteristics Plot
 
 ![]({{< relref "" >}}images/plot-window/FlowCharacteristicsPlot.png)
