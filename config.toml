@@ -17,7 +17,10 @@ disableShortcutsTitle = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-
+  [markup.tableOfContents]
+    endLevel = 3
+    ordered = false
+    startLevel = 2
 
 [[menu.shortcuts]]
 	name = "<i class='fas fa-info-circle'></i> About"
