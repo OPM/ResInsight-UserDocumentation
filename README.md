@@ -7,6 +7,9 @@ Edit documentation in the folder **content**
 Download Hugo and install locally from
 https://github.com/gohugoio/hugo/releases
 
+**Last known working version is **
+https://github.com/gohugoio/hugo/releases/tag/v0.65.3
+
 The **master** branch is intended to represent the documentation source for current published website at **gh-pages**. The **next-major-release** branch is intended to be used to document new features not yet released. When a new release is published, **next-major-release
 ** is merged into **master**
 
