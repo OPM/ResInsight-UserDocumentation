@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/overview/</loc>
-  </url>
-  
-  <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/derivedresults/</loc>
   </url>
   
   <url>
@@ -55,6 +51,22 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/whats-new/releasenotes_2019_12/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/whats-new/releasenotes_2019_12_1/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/import/lasfile/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/misc/projectfile/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/</loc>
   </url>
   
@@ -92,6 +104,10 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/windows-installation/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/helpmenu/</loc>
   </url>
   
   <url>
@@ -143,6 +159,10 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/comparisonview/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/3dwelllogcurves/</loc>
   </url>
   
@@ -184,6 +204,14 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonconfiguration/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/plot-window/summaryplottemplate/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/plot-window/multiplots/</loc>
   </url>
   
   <url>
@@ -251,6 +279,10 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/wellmeasurements/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/intersections/</loc>
   </url>
   
@@ -263,7 +295,15 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/allendiagrams/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/faults/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/getting-started/other/</loc>
   </url>
   
   <url>
@@ -319,6 +359,10 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/derivedresults/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/_footer/</loc>
   </url>
   
@@ -332,7 +376,6 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -349,7 +392,6 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/tags/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Import on ResInsight</title>
@@ -19,6 +19,17 @@
       <description>ResInsight supports the following type of Eclipse input data:
  *.GRID and *.EGRID files along with their *.INIT and restart files *.XNNN and *.UNRST. Grid and Property data from *.GRDECL files.  Release 2018.11 supports import of simulations from Intersect. To be able to import into ResInsight, the Intersect simulation must be exported into Eclipse file format.
 Eclipse Results ResInsight offers several ways to import Eclipse (grid) files. Use one of the following commands in the File-&amp;gt;Import-&amp;gt;Eclipse Cases menu:</description>
+    </item>
+    
+    <item>
+      <title>Log ASCII Standard File</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/import/lasfile/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/import/lasfile/</guid>
+      <description>Log ASCII Standard (LAS) is a standard file format common in the oil-and-gas industry to store well log information.
+Importing a LAS file Log ASCII Standard (LAS) files can be imported using the command: File-&amp;gt;Import-&amp;gt; Well Data-&amp;gt;Import Well Logs from File.
+ResInsight will look for the the well name in the imported LAS-files among the existing Well Paths. If a match is found, the LAS-file is placed as a child of that well path.</description>
     </item>
     
     <item>
@@ -61,7 +72,7 @@ A couple of property names are recognized and treated specially:
       <guid>https://opm.github.io/ResInsight-UserDocumentation/import/observeddata/</guid>
       <description>Observed Time History Data, is data measured in time. On import of observed time history data, ResInsight translates the data to make it similar to summary data. Observed time history data can be plotted along with summary data in Summary Plots.
 Import Observed Time History Data Importing observed time history data to ResInsight may be performed in two different ways:
- By selecting the main menu item File -&amp;gt; Import -&amp;gt; Import Observed Time History Data By using the context command Import Observed Time History Data on the Observed Time History Data item in the Plot Main Window Project Tree  The following file types are supported:</description>
+ By selecting the main menu item File -&amp;gt; Import -&amp;gt; Import Observed Time History Data By using the right-click command Import Observed Time History Data on the Observed Time History Data item in the Plot Main Window Project Tree  The following file types are supported:</description>
     </item>
     
     <item>
@@ -71,7 +82,7 @@ Import Observed Time History Data Importing observed time history data to ResIns
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/import/pasteexceltimedata/</guid>
       <description>When text have been copied to the operating system&amp;rsquo;s clipboard, it will be possible to paste that text into a summary plot. Right click on a summary plot in the Plot Main Window Project Tree and select Paste Excel Data to Summary Plot. Then a paste options dialog will appear.
-Paste Options Dialog Most of the fields in this dialog are the same as in the CSV/txt import options dialog.</description>
+Paste Options Dialog Most of the fields in this dialog are the same as in the CSV/txt import options dialog. Please see that section for documentation on those fields.</description>
     </item>
     
   </channel>

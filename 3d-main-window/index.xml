@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>3D Main Window on ResInsight</title>
@@ -9,17 +9,6 @@
     
 	<atom:link href="https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title> Derived Results</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/derivedresults/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/derivedresults/</guid>
-      <description>ResInsight computes several derived results. In this section we will explain what they are, and briefly how they are calculated.
-Derived Results for Eclipse Cases ResInsight calculates several derived cell properties that is made available as Static or Dynamic cell properties. The derived results listed at the bottom of the Static result properties, are shown below.
-Transmissibility Normalized by Area The transmissibility for cells and Non-Neighbor Connections (NNCs) are dependent on both cell properties and geometry.</description>
-    </item>
     
     <item>
       <title>3D Views</title>
@@ -51,6 +40,16 @@ Cell Results are used in several operations and settings:
       <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/resultcolorlegend/</guid>
       <description>The color mapping of the displayed cell result is controlled by the Color Legend located below a result node in the Project Tree. The legend can be shown or hidden by checking or unchecking the box in front of the Legend Definition.
  Number of levels &amp;ndash; Defines the number of tick marks displayed next to the color legend Significant digits &amp;ndash; Defines the number of significant digits in the number formatting Number format &amp;ndash; Defines how the numbers are formatted Colors &amp;ndash; Defines the color palette Mapping &amp;ndash; This option defines how the values are mapped onto the color distribution  Discrete Linear &amp;ndash; Legend divided into linear levels defined by Number of levels Continuous Linear &amp;ndash; Continuous linear legend with tick mark count defined by Number of levels Continuous Logarithmic &amp;ndash; Continuous logarithmic legend with tick mark count defined by Number of levels Discrete Logarithmic &amp;ndash; Logarithmic legend divided into levels defined by Number of levels Category &amp;ndash; Special legend with one level for each category, either integer values or formation names.</description>
+    </item>
+    
+    <item>
+      <title>Comparison View</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/comparisonview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/comparisonview/</guid>
+      <description>ResInsight offers a Comparison View to compare two existing views in terms of grid geometry, results, intersections and more. The Comparison View allows comparison of information of different grids and different solutions on the same grid in a single view. This improves efficiency and simplifies the workflow when working with related but different models.
+The figure above exemplifies a Comparison View for comparison of two different simulations models and results. The left hand side is used to display grid and results of an Eclipse simulation while the right hand side displays an ABAQUS grid and simulation results from geomechanical analysis.</description>
     </item>
     
     <item>
@@ -102,7 +101,18 @@ Visibility of the docking widows can be controlled from the Windows menu.
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/intersections/</guid>
       <description>Intersections are cross sections of the grid model that displays the grid cell values on planes that cut through the grid in various ways.
-There are two main types of intersections. The first one which simply is called Intersection, is defined by a piece-wise linear curve and an extrusion direction. The curve can be either a Simulation Well, a Well Path, a user defined polyline, or a user defined line.</description>
+There are two main types of intersections. The first one which simply is called Intersection, is defined by a piece-wise linear curve and an extrusion direction. The curve can be either a Simulation Well, a Well Path, a user defined polyline, or a user defined line. These intersections can also be shown in their own separate 2D Intersection View</description>
+    </item>
+    
+    <item>
+      <title>Allen Diagram</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/allendiagrams/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/allendiagrams/</guid>
+      <description>Allen Diagrams displays the overlap of formations and layers across fault faces.
+Separate Fault Result The Allen Diagram is dispayed by selecting the Separate Fault Result in the project tree. See Faults  for more details.
+Property Editor Settings  Binary Formation Allen One color for all NNC areas with same formation on across fault, and one color for NNC with different formations across fault Formation Allen Formation colors are used, and a mix of the two formation colors are displayed if we have different formations across fault  Mouse interaction When clicking on an NNC area multiple times, the highlighted cell switched from the cell in front of the formation and behind the fault.</description>
     </item>
     
     <item>
@@ -112,6 +122,9 @@ There are two main types of intersections. The first one which simply is called 
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/faults/</guid>
       <description>This section describes how Faults are detected and visualized. NNC&amp;rsquo;s are a part of the Faults visualization and are thus also mentioned in this section.
+Related pages :
+Allen Diagrams
+Derived Results
 Fault Detection ResInsight always scans the grids for geometrical faults when they are loaded. When two opposite cell faces of I, J, K neighbor cells does not match geometrically, they are tagged.
 All the tagged cell faces are then compared to the faults possibly imported from the *.</description>
     </item>
@@ -145,7 +158,7 @@ Grid Statistics Dialog Fields The dialog consist of three information parts.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/casegroupsandstatistics/</guid>
-      <description>Grid Case Group&amp;rsquo;s are designed to make it easy to calculate statistics per cell and per time step of a large number of Eclipse simulation Cases with identical Grids (often labeled realizations).
+      <description>Grid Case Group&amp;lsquo;s are designed to make it easy to calculate statistics per cell and per time step of a large number of Eclipse simulation Cases with identical Grids (often labeled realizations).
 If you have several Eclipse simulations with different input parameters available, you can put all the realizations into a Grid Case Group and easily calculate each of the cells mean value, range and max/min values at each time step between the realizations.</description>
     </item>
     
@@ -176,7 +189,18 @@ When ResInsight is in measurement mode, clicking on an surface in the 3D view wi
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/annotations/</guid>
       <description>ResInsight supports displaying a few types of annotations in 3D views and Contour Map view.
- Text annotations Reach circle annotations Polyline annotations  User defined polylines Polylines imported from file   Global scope vs local scope annotations Global annotations may be displayed in all views and are located in the Annotations project tree node right below Grid Models (Global annotations sub tree). Local annotations are associated with a specific view and are located in the Annotations project tree node below the view node (Local annotations sub tree).</description>
+ Text annotations Reach circle annotations Polyline annotations  User defined polylines Polylines imported from file    Global scope vs local scope annotations Global annotations may be displayed in all views and are located in the Annotations project tree node right below Grid Models (Global annotations sub tree). Local annotations are associated with a specific view and are located in the Annotations project tree node below the view node (Local annotations sub tree).</description>
+    </item>
+    
+    <item>
+      <title>Derived Results</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/derivedresults/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/derivedresults/</guid>
+      <description>ResInsight computes several derived results. In this section we will explain what they are, and briefly how they are calculated.
+Derived Results for Eclipse Cases ResInsight calculates several derived cell properties that is made available as Static or Dynamic cell properties. The derived results listed at the bottom of the Static result properties, are shown below.
+Transmissibility Normalized by Area The transmissibility for cells and Non-Neighbor Connections (NNCs) are dependent on both cell properties and geometry.</description>
     </item>
     
   </channel>
