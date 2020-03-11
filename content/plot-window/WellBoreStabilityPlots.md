@@ -47,19 +47,20 @@ In order to calculate **PP**, **FG**, **SFG** and **SH_MK**, the following input
 |  SFG  | Uniaxial Compressive Strength (UCS) |
 | SH_MK | K0_SH, Overburden Gradient at initial time (OBG0) and the Depletion Factor (DF) |
 
-The numbering for import is order of preference if multiple sources are found.
+For parameters with multiple available sources, the sources will be tried in numbered order for each curve point (where well path intersects with grid). However, the options for **FG Shale** are mutually exclusive and will apply to the whole domain.
 
 | Parameter     | Default | Sources |
 |---------------|---------|-------------------|
 | Density of Sea Water | $1.03 g/cm^3$ | User setting in GUI|
-| PP Reservoir | Grid Nodal Values (POR) | 1. Grid (Grid units), 2. LAS-file as equivalent mud-weight (Variable: "PP_INP", Units: SG_EMW), 3. Element Property Table (Variable: "POR", Units: Pascal)|
-| PP Non-Reservoir | Hydrostatic PP (from TVDRKB, Density of Sea Water and gravity) | 1. LAS-file as equivalent mud-weight (Variable: "PP_INP", Units: SG_EMW), 3. Element Property Table (Variable: "POR", Units: Pascal), 4. Hydrostatic Pressure|
-| Poissons' Ratio | 0.35 | 1. LAS-file (Variable: "POISSON_RATIO_INP"), 2. Element Property Table (Variable: "POISSON_RATIO")|
-| UCS             | 100 bar | 1. LAS-file (Variable: "UCS_INP", Units: bar), 2. Element Property Table (Variable: "UCS", Units: MPa) |
-| K0_FG | 0.75 x Hydrostatic PP | LAS-file (Variable: "K0_FG_INP", Units: SG_EMW) |
-| K0_SH | 0.65 x Hydrostatic PP | LAS-file (Variable: "K0_SH_INP", Units: SG_EMW) | 
+| PP Reservoir | Grid Nodal Values (POR) | 1. Grid (Grid units), 2. LAS-file as equivalent mud-weight (Variable: "PP_INP" or "PP_RES_INP", Units: SG_EMW), 3. Element Property Table (Variable: "POR_INP" with Units: Pascal or Variable: "PP_INP" with Units: SG_EMW)|
+| PP Non-Reservoir | Hydrostatic PP (from TVDRKB, Density of Sea Water and gravity) | 1. LAS-file as equivalent mud-weight (Variable: "PP_NONRES_INP", Units: SG_EMW), 3. Element Property Table (Variable: "POR_NONRES_INP" with Units: Pascal or Variable: "PP_NONRES_INP" with Units: SG_EMW), 4. Hydrostatic Pressure|
+| Poissons' Ratio | 0.35 | 1. LAS-file (Variable: "POISSON_RATIO_INP"), 2. Element Property Table (Variable: "POISSON_RATIO_INP")|
+| UCS             | 100 bar | 1. LAS-file (Variable: "UCS_INP", Units: bar), 2. Element Property Table (Variable: "UCS_INP", Units: Pascal) |
 | Initial Overburden Gradient (OBG0) | OBG at initial time step | 1. Grid (Grid units), 2. LAS-file (Variable: "OBG0_INP", Units: Bar) | 
-| FG Shale | Derived from K0_FG | 1. Derived from K0_FG and PP Non-Reservoir, 2. Proportional to SH, 3. LAS-file (Variable: "FG_SHALE_INP", Units: SG_EMW)|
+| DF | 0.7 | 1. LAS-file (Variable: "DF_INP", No Units), 2. Element Property Table (Variable: "DF_INP", No units), 3 User Defined |
+| K0_SH | 0.65 x Hydrostatic PP | 1. LAS-file (Variable: "K0_SH_INP", Units: SG_EMW), 2. Element Property Table("Variable: "K0_SH_INP", Units: SG_EMW), 3. User Defined | 
+| FG Shale | Derived from K0_FG | Derived from K0_FG and PP Non-Reservoir, Proportional to SH or LAS-file (Variable: "FG_SHALE_INP", Units: SG_EMW)|
+| K0_FG | 0.75 x Hydrostatic PP | 1. LAS-file (Variable: "K0_FG_INP", Units: SG_EMW), 2. Element Property Table("Variable: "K0_FG_INP", Units: SG_EMW), 3. User Defined |
 
 In addition to the units above, it LAS-files it is possible to supply PP in Bar and UCS in Pascal or MPa. Conversion will be handled automatically.
 
@@ -92,6 +93,12 @@ Next step is to solve for the value of $\theta \in [0 - 180]$ that yields $\sigm
 
 Then calculate *FG* in equivalent mud weight units as
 $$ FG = \frac{P_w}{TVD\_{RKB} \\: g  \\: \rho}$$ where $TVD\_{RKB} = TVD\_{MSL} + AirGap$, the gravity acceleration $g = 9.81 m/s^2$ and  the density of sea water $\rho$ in $kg/m^3$ (thus 1000 x the UI input in $g/cm^3$).
+
+### Fracture gradient in shale
+$$FG\_{shale} = K0\_{FG} \times (OBG0 - PP0)$$
+
+### SH from Matthews & Kelly
+$$SH\_{MK} = K0\_{SH} \times (OBG0 - PP0) + PP0 + DF$$
 
 ### Stassi-d'Alia failure criterion in shale
 
