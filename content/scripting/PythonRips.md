@@ -187,55 +187,79 @@ else:
 # Case Module
 
 
-#### class rips.case.Case(channel, case_id, project)
-ResInsight case class
+#### class rips.case.Case(pb2_object=None, channel=None)
+The ResInsight base class for Cases
 
-Operate on a ResInsight case specified by a Case Id integer.
-Not meant to be constructed separately but created by one of the following
-methods in Project: loadCase, case, allCases, selectedCasesq
+Attributes
 
-
-#### id()
-Case Id corresponding to case Id in ResInsight project.
+    file_path (str): Case File Name
+    id (int): Case ID
+    name (str): Case Name
 
 
-* **Type**
-
-    int
-
+#### active_cell_centers(porosity_model='MATRIX_MODEL')
+Get a cell centers for all active cells. Synchronous, so returns a list.
 
 
-#### name()
-Case name
+* **Parameters**
 
-
-* **Type**
-
-    str
+    **porosity_model** (*str*) -- string enum. See available()
 
 
 
-#### group_id()
-Case Group id
+* **Returns**
 
-
-* **Type**
-
-    int
+    A list of Vec3d
 
 
 
-#### chunkSize()
-The size of each chunk during value streaming.
-A good chunk size is 64KiB = 65536B.
-Meaning the ideal number of doubles would be 8192.
-However we need overhead space, so the default is 8160.
-This leaves 256B for overhead.
+#### active_cell_centers_async(porosity_model='MATRIX_MODEL')
+Get a cell centers for all active cells. Async, so returns an iterator
 
 
-* **Type**
+* **Parameters**
 
-    int
+    **porosity_model** (*str*) -- string enum. See available()
+
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an array of Vec3d values.
+    Loop through the chunks and then the values within the chunk to get all values.
+
+
+
+#### active_cell_corners(porosity_model='MATRIX_MODEL')
+Get a cell corners for all active cells. Synchronous, so returns a list.
+
+
+* **Parameters**
+
+    **porosity_model** (*str*) -- string enum. See available()
+
+
+
+* **Returns**
+
+    A list of CellCorners
+
+
+
+#### active_cell_corners_async(porosity_model='MATRIX_MODEL')
+Get a cell corners for all active cells. Async, so returns an iterator
+
+
+* **Parameters**
+
+    **porosity_model** (*str*) -- string enum. See available()
+
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an array of CellCorners (which is eight Vec3d values).
+    Loop through the chunks and then the values within the chunk to get all values.
 
 
 
@@ -283,6 +307,10 @@ Get a cell property for all active cells. Async, so returns an iterator
     An iterator to a chunk object containing an array of double values
     Loop through the chunks and then the values within the chunk to get all values.
 
+
+
+#### available_nnc_properties()
+Get a list of available NNC properties
 
 
 #### available_properties(property_type, porosity_model='MATRIX_MODEL')
@@ -384,25 +412,16 @@ Get Stream of cell info objects for current case
 See cell_info_for_active_cells() for detalis on the **CellInfo** class.
 
 
-#### contour_maps(map_type=<ContourMapType.ECLIPSE: 1>)
-Get a list of all contour maps belonging to a project
-
-Parameter       | Description                            | Type
---------------- | -------------------------------------- | -----
-time_steps      | Time step index                        | Integer
-well_path_names | List of well path names                | List of Strings
-refinement_i    | Refinment in x-direction               | Integer
-refinement_j    | Refinment in y-direction               | Integer
-refinement_k    | Refinment in z-direction               | Integer
-split_type      | Defines how to split LGRS              | String enum
-
-* **Parameters**
-
-    **map_type** (*enum*) -- ContourMapType.ECLIPSE or ContourMapType.GEO_MECH
+#### coarsening_info()
+Get a coarsening information for all grids in the case.
 
 
-#### create_multiple_fractures(template_id, well_path_names, min_dist_from_well_td, max_fractures_per_well, top_layer, base_layer, spacing, action)
-Create Multiple Fractures in one go
+* **Returns**
+
+    A list of CoarseningInfo objects with two Vec3i min and max objects
+    for each entry.
+
+
 
 #### create_lgr_for_completion(time_step, well_path_names, refinement_i, refinement_j, refinement_k, split_type)
 Create a local grid refinement for the completions on the given well paths
@@ -424,8 +443,6 @@ Option                  | Description
 "LGR_PER_COMPLETION"    | One LGR for each completion (fracture, perforation, ...)
 "LGR_PER_WELL"          | One LGR for each well
 
-#### create_view()
-Create a new view in the current case
 
 #### create_multiple_fractures(template_id, well_path_names, min_dist_from_well_td, max_fractures_per_well, top_layer, base_layer, spacing, action)
 Create Multiple Fractures in one go
@@ -450,7 +467,7 @@ Create saturation pressure plots for the current case
 Create a new view in the current case
 
 
-#### create_well_bore_stability_plot(well_path, time_step)
+#### create_well_bore_stability_plot(well_path, time_step, parameters=None)
 Create a new well bore stability plot
 
 
@@ -471,7 +488,6 @@ Create a new well bore stability plot
 #### days_since_start()
 Get a list of decimal values representing days since the start of the simulation
 
-    * **export_file** (*str*) -- File name for export. Defaults to the value of property parameter
 
 #### export_flow_characteristics(time_steps, injectors, producers, file_name, minimum_communication=0.0, aquifer_cell_threshold=0.1)
 Export Flow Characteristics data to text file in CSV format
@@ -489,7 +505,6 @@ aquifer_cell_threshold    | Aquifer Cell Threshold, defaults to 0.1       | Inte
 #### export_msw(well_path)
 Export Eclipse Multi-segment-well model to file
 
-* **Parameters**
 
 * **Parameters**
 
@@ -500,13 +515,8 @@ Export Eclipse Multi-segment-well model to file
 #### export_property(time_step, property_name, eclipse_keyword=<class 'property'>, undefined_value=0.0, export_file=<class 'property'>)
 Export an Eclipse property
 
-##### Enum file_split
 
-Option                              | Description
------------------------------------ | ------------
-"UNIFIED_FILE"                      | A single file with all combined transmissibilities
-"SPLIT_ON_WELL"                     | One file for each well with combined transmissibilities
-"SPLIT_ON_WELL_AND_COMPLETION_TYPE" | One file for each completion type for each well
+* **Parameters**
 
     * **time_step** (*int*) -- time step index
 
@@ -518,8 +528,6 @@ Option                              | Description
 
     * **export_file** (*str*) -- File name for export. Defaults to the value of property parameter
 
-#### grid(index)
-Get Grid of a given index. Returns a rips Grid object
 
 
 #### export_snapshots_of_all_views(prefix='', export_folder='')
@@ -579,15 +587,8 @@ Get Grid of a given index. Returns a rips Grid object
 
     **index** (*int*) -- The grid index
 
-    * **property_name** (*str*) -- name of an Eclipse property
 
 Returns: Grid object
-
-
-#### grid_path()
-Get path of the current grid case
-
-Returns: path string
 
 
 #### grid_property(property_type, property_name, time_step, grid_index=0, porosity_model='MATRIX_MODEL')
@@ -653,6 +654,105 @@ Import formation names into project and apply it to the current case
 
 
 
+#### nnc_connections()
+Get the NNC connection. Synchronous, so returns a list.
+
+
+* **Returns**
+
+    A list of NNCConnection objects.
+
+
+
+#### nnc_connections_async()
+Get the NNC connections. Async, so returns an iterator.
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an array NNCConnection objects.
+    Loop through the chunks and then the connection within the chunk to get all connections.
+
+
+
+#### nnc_connections_dynamic_values(property_name, time_step)
+Get the dynamic NNC values.
+
+
+* **Returns**
+
+    A list of doubles. The order of the list matches the list from
+    nnc_connections, i.e. the nth object of nnc_connections() refers to nth
+    value in this list.
+
+
+
+#### nnc_connections_dynamic_values_async(property_name, time_step)
+Get the dynamic NNC values. Async, so returns an iterator.
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an list of doubles.
+    Loop through the chunks and then the values within the chunk to get values
+    for all the connections. The order of the list matches the list from
+    nnc_connections, i.e. the nth object of nnc_connections() refers to nth
+    value in this list.
+
+
+
+#### nnc_connections_generated_values(property_name, time_step)
+Get the generated NNC values.
+
+
+* **Returns**
+
+    A list of doubles. The order of the list matches the list from
+    nnc_connections, i.e. the nth object of nnc_connections() refers to nth
+    value in this list.
+
+
+
+#### nnc_connections_generated_values_async(property_name, time_step)
+Get the generated NNC values. Async, so returns an iterator.
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an list of doubles.
+    Loop through the chunks and then the values within the chunk to get values
+    for all the connections. The order of the list matches the list from
+    nnc_connections, i.e. the nth object of nnc_connections() refers to nth
+    value in this list.
+
+
+
+#### nnc_connections_static_values(property_name)
+Get the static NNC values.
+
+
+* **Returns**
+
+    A list of doubles. The order of the list matches the list from
+    nnc_connections, i.e. the nth object of nnc_connections() refers to nth
+    value in this list.
+
+
+
+#### nnc_connections_static_values_async(property_name)
+Get the static NNC values. Async, so returns an iterator.
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an list of doubles.
+    Loop through the chunks and then the values within the chunk to get values
+    for all the connections. The order of the list matches the list from
+    nnc_connections, i.e. the nth object of nnc_connections() refers to nth
+    value in this list.
+
+
+
 #### replace(new_grid_file)
 Replace the current case grid with a new grid loaded from file
 
@@ -662,7 +762,85 @@ Replace the current case grid with a new grid loaded from file
     **new_egrid_file** (*str*) -- path to EGRID file
 
 
+
+#### reservoir_boundingbox()
+Get the reservoir bounding box
+
+Returns: A class with six double members: min_x, max_x, min_y, max_y, min_z, max_z
+
+
+#### reservoir_depth_range()
+Get the reservoir depth range
+
+Returns: A tuple with two members. The first is the minimum depth, the second is the maximum depth
+
+
+#### selected_cell_property(property_type, property_name, time_step, porosity_model='MATRIX_MODEL')
+Get a cell property for all selected cells. Sync, so returns a list
+
+
+* **Parameters**
+
+    * **property_type** (*str*) -- string enum. See available()
+
     * **property_name** (*str*) -- name of an Eclipse property
+
+    * **time_step** (*int*) -- the time step for which to get the property for
+
+    * **porosity_model** (*str*) -- string enum. See available()
+
+
+
+* **Returns**
+
+    A list containing double values
+    Loop through the chunks and then the values within the chunk to get all values.
+
+
+
+#### selected_cell_property_async(property_type, property_name, time_step, porosity_model='MATRIX_MODEL')
+Get a cell property for all selected cells. Async, so returns an iterator
+
+
+* **Parameters**
+
+    * **property_type** (*str*) -- string enum. See available()
+
+    * **property_name** (*str*) -- name of an Eclipse property
+
+    * **time_step** (*int*) -- the time step for which to get the property for
+
+    * **porosity_model** (*str*) -- string enum. See available()
+
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an array of double values
+    Loop through the chunks and then the values within the chunk to get all values.
+
+
+
+#### selected_cells()
+Get the selected cells. Synchronous, so returns a list.
+
+
+* **Returns**
+
+    A list of Cells.
+
+
+
+#### selected_cells_async()
+Get the selected cells. Async, so returns an iterator.
+
+
+* **Returns**
+
+    An iterator to a chunk object containing an array of cells.
+    Loop through the chunks and then the cells within the chunk to get all cells.
+
+
 
 #### set_active_cell_property(values, property_type, property_name, time_step, porosity_model='MATRIX_MODEL')
 Set a cell property for all active cells.
@@ -720,6 +898,32 @@ Set a cell property for all grid cells.
 
 
 
+#### set_nnc_connections_values(values, property_name, time_step, porosity_model='MATRIX_MODEL')
+Set nnc connection values for all connections..
+
+
+* **Parameters**
+
+    * **values** (*list*) -- a list of double precision floating point numbers
+
+    * **property_name** (*str*) -- name of an Eclipse property
+
+    * **time_step** (*int*) -- the time step for which to get the property for
+
+    * **porosity_model** (*str*) -- string enum. See available()
+
+
+
+#### simulation_wells()
+Get a list of all simulation wells for a case
+
+
+* **Returns**
+
+    A list of rips **SimulationWell** objects
+
+
+
 #### time_steps()
 Get a list containing all time steps
 
@@ -742,10 +946,6 @@ Get a particular view belonging to a case by providing view id
 
 Returns: a view object
 
-
-#### views()
-Get a list of views belonging to a case
-
 ## Example
 
 ```
@@ -761,35 +961,53 @@ if resinsight is not None:
 
     print ("Got " + str(len(cases)) + " cases: ")
     for case in cases:
-        print("Case id: " + str(case.case_id))
+        print("Case id: " + str(case.id))
         print("Case name: " + case.name)
-        print("Case type: " + case.type)
-        print("Case grid path: " + case.grid_path())
-        
+        print("Case type: " + case.__class__.__name__)
+        print("Case file name: " + case.file_path)
+        print("Case reservoir bounding box:", case.reservoir_boundingbox())
+
         timesteps = case.time_steps()
         for t in timesteps:
             print("Year: " + str(t.year))
             print("Month: " + str(t.month))
-        
-    
 
+        if isinstance(case, rips.EclipseCase):
+            print ("Getting coarsening info for case: ", case.name, case.id)
+            coarsening_info = case.coarsening_info()
+            if coarsening_info:
+                print("Coarsening information:")
+
+            for c in coarsening_info:
+                print("[{}, {}, {}] - [{}, {}, {}]".format(c.min.x, c.min.y, c.min.z,
+                                                           c.max.x, c.max.y, c.max.z))
 ```
 
 # Contour Map Module
 
 
-#### class rips.contour_map.ContourMap(pdm_object, project, map_type)
-ResInsight contour map class
+#### class rips.contour_map.EclipseContourMap(pb2_object=None, channel=None)
+A contour map for Eclipse cases
 
 
-#### view_id()
-View Id corresponding to the View Id in ResInsight project.
+#### export_to_text(export_file_name='', export_local_coordinates=False, undefined_value_label='NaN', exclude_undefined_values=False)
+Export snapshot for the current view
 
 
-* **Type**
+* **Parameters**
 
-    int
+    * **export_file_name** (*str*) -- The file location to store results in.
 
+    * **export_local_coordinates** (*bool*) -- Should we export local coordinates, or UTM.
+
+    * **undefined_value_label** (*str*) -- Replace undefined values with this label.
+
+    * **exclude_undefined_values** (*bool*) -- Skip undefined values.
+
+
+
+#### class rips.contour_map.GeoMechContourMap(pb2_object=None, channel=None)
+A contour map for GeoMech cases
 
 
 #### export_to_text(export_file_name='', export_local_coordinates=False, undefined_value_label='NaN', exclude_undefined_values=False)
@@ -813,7 +1031,71 @@ Export snapshot for the current view
 #### class rips.grid.Grid(index, case, channel)
 Grid Information. Not meant to be constructed separately
 
-Create Grid objects using mathods on Case: Grid() and Grids()
+Create Grid objects using methods on Case: Grid() and Grids()
+
+
+#### cell_centers()
+The cell center for all cells in given grid
+
+
+* **Returns**
+
+    class with double attributes x, y, x giving cell centers
+
+
+
+* **Return type**
+
+    List of Vec3d
+
+
+
+#### cell_centers_async()
+The cells center for all cells in given grid async.
+
+
+* **Returns**
+
+    class with double attributes x, y, x giving cell centers
+
+
+
+* **Return type**
+
+    Iterator to a list of Vec3d
+
+
+
+#### cell_corners()
+The cell corners for all cells in given grid
+
+
+* **Returns**
+
+    a class with Vec3d for each corner (c0, c1.., c7)
+
+
+
+* **Return type**
+
+    list of CellCorners
+
+
+
+#### cell_corners_async()
+The cell corners for all cells in given grid, async.
+
+
+* **Returns**
+
+    a class with Vec3d for each corner (c0, c1.., c7)
+
+
+
+* **Return type**
+
+    iterator to a list of CellCorners
+
 
 
 #### dimensions()
@@ -847,20 +1129,13 @@ print (case.gridCount())
 # GridCaseGroup Module
 
 
-#### class rips.gridcasegroup.GridCaseGroup(pdm_object)
-ResInsight Grid Case Group class
+#### class rips.gridcasegroup.GridCaseGroup(pb2_object=None, channel=None)
+A statistics case group
 
-Operate on a ResInsight case group specified by a Case Group Id integer.
+Attributes
 
-
-#### group_id()
-Grid Case Group Id corresponding to case group Id in ResInsight project.
-
-
-* **Type**
-
-    int
-
+    group_id (int): Case Group ID
+    user_description (str): Name
 
 
 #### compute_statistics(case_ids=None)
@@ -900,50 +1175,48 @@ Returns: a view object
 #### views()
 Get a list of views belonging to a grid case group
 
+# Plot Module
+
+
+#### class rips.project.Plot(pb2_object=None, channel=None)
+The Abstract Base Class for all Plot Objects
+
 # Project Module
 
 
-#### class rips.project.Project(channel)
-ResInsight project. Not intended to be created separately.
+#### class rips.project.Project(pb2_object=None, channel=None)
+The ResInsight Project
 
-
-* **Type**
 
 #### case(case_id)
 Get a specific case from the provided case Id
 
 
-
-#### compute_statistics(case_ids=None)
-Compute statistics for the given case ids
-
-
 * **Parameters**
 
-    * **case_ids** (*list of integers*) -- list of case ids.
+    **id** (*int*) -- case id
 
-    * **this is None all cases in group are included** (*If*) -- 
-
-
-
-#### create_statistics_case()
-Create a Statistics case in the Grid Case Group
 
 
 * **Returns**
 
-    A new Case
+    A rips Case object
 
 
 
-#### statistics_cases()
-Get a list of all statistics cases in the Grid Case Group
+#### cases()
+Get a list of all cases in the project
 
 
-#### contour_maps(map_type=<ContourMapType.ECLIPSE: 1>)
-Get a list of all contour maps belonging to a project
+* **Returns**
 
-Returns: a view object
+    A list of rips Case objects
+
+
+
+#### close()
+Close the current project (and open new blank project)
+
 
 #### create_grid_case_group(case_paths)
 Create a Grid Case Group from a list of cases
@@ -971,7 +1244,7 @@ Export snapshots for a set of cases
 
 
 
-#### export_snapshots(snapshot_type='ALL', prefix='')
+#### export_snapshots(snapshot_type='ALL', prefix='', plot_format='PNG')
 Export all snapshots of a given type
 
 
@@ -980,6 +1253,8 @@ Export all snapshots of a given type
     * **snapshot_type** (*str*) -- Enum string ('ALL', 'VIEWS' or 'PLOTS')
 
     * **prefix** (*str*) -- Exported file name prefix
+
+    * **plot_format** (*str*) -- Enum string, 'PNG' or 'PDF'
 
 
 
@@ -1003,8 +1278,6 @@ Get a particular grid case group belonging to a project
 
     **groupId** (*int*) -- group id
 
-#### create_grid_case_group(case_paths)
-Create a Grid Case Group from a list of cases
 
 Returns: a grid case group object
 
@@ -1022,8 +1295,6 @@ Import formation names into project
     **formation_files** (*list*) -- list of files to import
 
 
-#### export_multi_case_snapshots(grid_list_file)
-Export snapshots for a set of cases
 
 #### import_well_log_files(well_log_files=None, well_log_folder='')
 Import well log files into project
@@ -1057,22 +1328,19 @@ Import well paths into project
 
 * **Returns**
 
-    A list of well path names (strings)
+    A list of WellPath objects
 
 
-Returns: a grid case group object
 
 #### load_case(path)
 Load a new case from the given file path
 
-#### grid_case_groups()
-Get a list of all grid case groups in the project
 
+* **Parameters**
 
     **path** (*str*) -- file path to case
 
 
-* **Parameters**
 
 * **Returns**
 
@@ -1089,7 +1357,6 @@ Open a new project from the given path
     **path** (*str*) -- path to project file
 
 
-* **Parameters**
 
 #### plot(view_id)
 Get a particular plot by providing view id
@@ -1147,8 +1414,6 @@ Get a list of all cases selected in the project tree
 
     A list of rips Case objects
 
-#### set_fracture_containment(template_id, top_layer, base_layer)
-Set fracture template containment parameters
 
 
 #### set_fracture_containment(template_id, top_layer, base_layer)
@@ -1181,24 +1446,49 @@ Returns: a view object
 Get a list of views belonging to a project
 
 
+#### well_path_by_name(well_path_name)
+Get a specific well path by name from the project
+
+
+* **Returns**
+
+    A WellPath object
+
+
+
 #### well_paths()
-Get a list of all the well path names in the project
+Get a list of all well paths in the project
+
+
+* **Returns**
+
+    A list of rips WellPath objects
+
+
+# Simulation Well Module
+
+
+#### class rips.simulation_well.SimulationWell(pb2_object=None, channel=None)
+An Eclipse Simulation Well
+
+Attributes
+
+    name (str): Name
 
 # View Module
 
 
-#### class rips.view.View(pdm_object, project)
-ResInsight view class
+#### class rips.view.View(pb2_object=None, channel=None)
+Attributes
 
-
-#### view_id()
-View Id corresponding to the View Id in ResInsight project.
-
-
-* **Type**
-
-    int
-
+    background_color (str): Background
+    current_time_step (int): Current Time Step
+    disable_lighting (str): Disable Results Lighting
+    grid_z_scale (float): Z Scale
+    id (int): View ID
+    perspective_projection (str): Perspective Projection
+    show_grid_box (str): Show Grid Box
+    show_z_scale (str): Show Z Scale Label
 
 
 #### apply_cell_result(result_type, result_variable)
@@ -1241,14 +1531,6 @@ Option                  | Description
 "Communication"         | Communication
 
 
-#### background_color()
-Get the current background color in the view
-
-
-#### case()
-Get the case the view belongs to
-
-
 #### clone()
 Clone the current view
 
@@ -1289,18 +1571,6 @@ Option                                   | Description
 "WPIMULT_AND_DEFAULT_CONNECTION_FACTORS" | Include export of WPIMULT
 
 
-#### export_snapshot(prefix='', export_folder='')
-Export snapshot for the current view
-
-
-* **Parameters**
-
-    * **prefix** (*str*) -- Exported file name prefix
-
-    * **export_folder** (*str*) -- The path to export to. By default will use the global export folder
-
-
-
 #### export_visible_cells(export_keyword='FLUXNUM', visible_active_cells_value=1, hidden_active_cells_value=0, inactive_cells_value=0)
 Export special properties for all visible cells.
 
@@ -1319,24 +1589,68 @@ Export special properties for all visible cells.
 
 
 
-#### set_background_color(bgcolor)
-Set the background color in the view
-
-
-#### set_cell_result()
-Retrieve the current cell results
-
-
-#### set_show_grid_box(value)
-Set if the grid box is meant to be shown in the view
-
-
 #### set_time_step(time_step)
 Set the time step for current view
 
+# Well Log Plot Module
 
-#### show_grid_box()
-Check if the grid box is meant to be shown in the view
+
+#### class rips.well_log_plot.WellLogPlot(pb2_object=None, channel=None)
+A Well Log Plot With a shared Depth Axis and Multiple Tracks
+
+Attributes
+
+    auto_scale_depth_enabled (str): Auto Scale
+    depth_type (str): Type
+    depth_unit (str): Unit
+    maximum_depth (float): Max
+    minimum_depth (float): Min
+    show_depth_grid_lines (str): Show Grid Lines
+    show_title_in_plot (str): Show Title
+
+
+#### export_data_as_ascii(export_folder, file_prefix='', capitalize_file_names=False)
+Export LAS file(s) for the current plot
+
+
+* **Parameters**
+
+    * **export_folder** (*str*) -- The path to export to. By default will use the global export folder
+
+    * **file_prefix** (*str*) -- Exported file name prefix
+
+    * **capitalize_file_names** (*bool*) -- Make all file names upper case
+
+
+
+* **Returns**
+
+    A list of files exported
+
+
+
+#### export_data_as_las(export_folder, file_prefix='', export_tvdrkb=False, capitalize_file_names=False, resample_interval=0.0, convert_to_standard_units=False)
+Export LAS file(s) for the current plot
+
+
+* **Parameters**
+
+    * **export_folder** (*str*) -- The path to export to. By default will use the global export folder
+
+    * **file_prefix** (*str*) -- Exported file name prefix
+
+    * **export_tvdrkb** (*bool*) -- Export in TVD-RKB format
+
+    * **capitalize_file_names** (*bool*) -- Make all file names upper case
+
+    * **resample_interval** (*double*) -- if > 0.0 the files will be resampled
+
+
+
+* **Returns**
+
+    A list of files exported
+
 
 ## Synchronous Example
 

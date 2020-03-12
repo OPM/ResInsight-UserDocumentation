@@ -13,7 +13,7 @@ This pages is created based on the content in the **PythonExamples** folder loca
 ```
 ###################################################################################
 # This example will connect to ResInsight, retrieve a list of cases and print info
-# 
+#
 ###################################################################################
 
 # Import the ResInsight Processing Server Module
@@ -27,18 +27,26 @@ if resinsight is not None:
 
     print ("Got " + str(len(cases)) + " cases: ")
     for case in cases:
-        print("Case id: " + str(case.case_id))
+        print("Case id: " + str(case.id))
         print("Case name: " + case.name)
-        print("Case type: " + case.type)
-        print("Case grid path: " + case.grid_path())
-        
+        print("Case type: " + case.__class__.__name__)
+        print("Case file name: " + case.file_path)
+        print("Case reservoir bounding box:", case.reservoir_boundingbox())
+
         timesteps = case.time_steps()
         for t in timesteps:
             print("Year: " + str(t.year))
             print("Month: " + str(t.month))
-        
-    
 
+        if isinstance(case, rips.EclipseCase):
+            print ("Getting coarsening info for case: ", case.name, case.id)
+            coarsening_info = case.coarsening_info()
+            if coarsening_info:
+                print("Coarsening information:")
+
+            for c in coarsening_info:
+                print("[{}, {}, {}] - [{}, {}, {}]".format(c.min.x, c.min.y, c.min.z,
+                                                           c.max.x, c.max.y, c.max.z))
 ```
 
 # CaseGridGroup
@@ -62,16 +70,14 @@ case_group.print_object_info()
 #stat_cases = caseGroup.statistics_cases()
 #case_ids = []
 #for stat_case in stat_cases:
-#    stat_case.set_value("DynamicPropertiesToCalculate", ["SWAT"])
-#    stat_case.update()
-#    case_ids.append(stat_case.get_value("CaseId"))
+#    stat_case.set_dynamic_properties_to_calculate(["SWAT"])
+#    case_ids.append(stat_case.id)
 
 case_group.compute_statistics()
 
 view = case_group.views()[0]
-cell_result = view.set_cell_result()
-cell_result.set_value("ResultVariable", "PRESSURE_DEV")
-cell_result.update()
+cell_result = view.cell_result()
+cell_result.set_result_variable("PRESSURE_DEV")
         
 ```
 
@@ -173,35 +179,48 @@ with tempfile.TemporaryDirectory(prefix="rips") as tmpdirname:
 
 ```
 import os
+import grpc
+
 # Load ResInsight Processing Server Client Library
 import rips
 # Connect to ResInsight instance
 resInsight = rips.Instance.find()
 
-cases = resInsight.project.cases()
+# Get all GeoMech cases
+cases = resInsight.project.descendants(rips.GeoMechCase)
 
-well_paths = resInsight.project.import_well_paths(well_path_folder='D:/Projects/ResInsight-regression-test/ModelData/Norne_LessWellPaths')
-well_log_files = resInsight.project.import_well_log_files(well_log_folder='D:/Projects/ResInsight-regression-test/ModelData/Norne_PLT_LAS')
+# Get all well paths
+well_paths = resInsight.project.well_paths()
 
+# Ensure there's at least one well path
 if len(well_paths) < 1:
     print("No well paths in project")
     exit(1)
-print(well_paths)
 
+# Create a set of WbsParameters
+params = rips.WbsParameters()
+params.user_poisson_ratio = 0.23456
+params.user_ucs = 123
+
+# Loop through all cases
 for case in cases:
-    if case.type == "GeoMechCase":
-        print (case.case_id)
-        case_path = case.grid_path()
-        folder_name = os.path.dirname(case_path)
-        case.import_formation_names(formation_files=['D:/Projects/ResInsight-regression-test/ModelData/norne/Norne_ATW2013.lyr'])
+    assert(isinstance(case, rips.GeoMechCase))
+    min_res_depth, max_res_depth = case.reservoir_depth_range()
 
-        # create a folder to hold the snapshots
-        dirname = os.path.join(folder_name, 'snapshots')
-        print("Exporting to: " + dirname)
+    # Find a good output path
+    case_path = case.file_path
+    folder_name = os.path.dirname(case_path)
 
-        for well_path in well_paths:
-            wbsplot = case.create_well_bore_stability_plot(well_path=well_path, time_step=0)
-            wbsplot.export_snapshot(export_folder=dirname)
+    # Import formation names
+    case.import_formation_names(formation_files=['D:/Projects/ResInsight-regression-test/ModelData/norne/Norne_ATW2013.lyr'])
+
+    # create a folder to hold the snapshots
+    dirname = os.path.join(folder_name, 'snapshots')
+    print("Exporting to: " + dirname)
+
+    for well_path in well_paths[0:4]: # Loop through the first five well paths
+        # Create plot with parameters
+        wbsplot = case.create_well_bore_stability_plot(well_path=well_path.name, time_step=0, parameters=params)
 ```
 
 # ErrorHandling
@@ -224,13 +243,13 @@ case = None
 try:
     case = resinsight.project.load_case("Nonsense")
 except grpc.RpcError as e:
-    print("Expected Server Exception Received while loading case: ", e)
+    print("Expected Server Exception Received while loading case: ", e.code(), e.details())
 
 # Try loading well paths from a non-existing folder.  We should get a grpc.RpcError exception from the server
 try:
     well_path_files = resinsight.project.import_well_paths(well_path_folder="NONSENSE/NONSENSE")
 except grpc.RpcError as e:
-    print("Expected Server Exception Received while loading wellpaths: ", e)
+    print("Expected Server Exception Received while loading wellpaths: ", e.code(), e.details())
 
 # Try loading well paths from an existing but empty folder. We should get a warning.
 try:
@@ -300,7 +319,7 @@ resInsight = rips.Instance.find()
 tmpdir = pathlib.Path(tempfile.gettempdir())
 
 # Find all eclipse contour maps of the project
-contour_maps = resInsight.project.contour_maps(rips.ContourMapType.ECLIPSE)
+contour_maps = resInsight.project.descendants(rips.EclipseContourMap)
 print("Number of eclipse contour maps:", len(contour_maps))
 
 # Export the contour maps to a text file
@@ -313,7 +332,7 @@ for (index, contour_map) in enumerate(contour_maps):
 # The contour maps is also available for a Case
 cases = resInsight.project.cases()
 for case in cases:
-    contour_maps = case.contour_maps(rips.ContourMapType.GEO_MECH)
+    contour_maps = case.descendants(rips.GeoMechContourMap)
     # Export the contour maps to a text file
     for (index, contour_map) in enumerate(contour_maps):
         filename = "geomech_contour_map" + str(index) + ".txt"
@@ -341,8 +360,10 @@ print("Exporting to: " + export_folder)
 
 for plot in plots:
 	plot.export_snapshot(export_folder=export_folder)
-	plot.export_data_as_las(export_folder=export_folder)
-	plot.export_data_as_ascii(export_folder=export_folder)
+	plot.export_snapshot(export_folder=export_folder, output_format='PDF')
+	if isinstance(plot, rips.WellLogPlot):
+		plot.export_data_as_las(export_folder=export_folder)
+		plot.export_data_as_ascii(export_folder=export_folder)
 ```
 
 # ExportSnapshots
@@ -368,9 +389,9 @@ property_list = ['SOIL', 'PRESSURE'] # list of parameter for snapshot
 print ("Looping through cases")
 for case in cases:
     print("Case name: ", case.name)
-    print("Case id: ", case.case_id)
+    print("Case id: ", case.id)
     # Get grid path and its folder name
-    case_path = case.grid_path()
+    case_path = case.file_path
     folder_name = os.path.dirname(case_path)
     
     # create a folder to hold the snapshots
@@ -384,10 +405,11 @@ for case in cases:
    
     time_steps = case.time_steps()
     print('Number of time_steps: ' + str(len(time_steps)))
-        
-    view = case.views()[0]
-    for property in property_list:
-        view.apply_cell_result(result_type='DYNAMIC_NATIVE', result_variable=property)
+
+    for view in case.views():
+        if view.is_eclipse_view():
+            for property in property_list:
+                view.apply_cell_result(result_type='DYNAMIC_NATIVE', result_variable=property)
         for time_step in range(0, len(time_steps), 10):
             view.set_time_step(time_step = time_step)
             view.export_snapshot()
@@ -425,24 +447,24 @@ import rips
 # Connect to ResInsight instance
 resInsight = rips.Instance.find()
 
-well_path_names = resInsight.project.import_well_paths(well_path_folder='D:/Projects/ResInsight-regression-test/ModelData/norne/wellpaths')
+well_paths = resInsight.project.import_well_paths(well_path_folder='D:/Projects/ResInsight-regression-test/ModelData/norne/wellpaths')
 if resInsight.project.has_warnings():
     for warning in resInsight.project.warnings():
         print(warning)
 
 
-for well_path_name in well_path_names:
-    print("Imported from folder: " + well_path_name)
+for well_path in well_paths:
+    print("Imported from folder: " + well_path.name)
 
-well_path_names = resInsight.project.import_well_paths(well_path_files=['D:/Projects/ResInsight-regression-test/ModelData/Norne_WellPaths/E-3H.json',
+well_paths = resInsight.project.import_well_paths(well_path_files=['D:/Projects/ResInsight-regression-test/ModelData/Norne_WellPaths/E-3H.json',
                                                                         'D:/Projects/ResInsight-regression-test/ModelData/Norne_WellPaths/C-1H.json'])
 if resInsight.project.has_warnings():
     for warning in resInsight.project.warnings():
         print(warning)
 
 
-for well_path_name in well_path_names:
-    print("Imported from indivdual files: " + well_path_name)
+for well_path in well_paths:
+    print("Imported from individual files: " + well_path.name)
 
 
 well_path_names = resInsight.project.import_well_log_files(well_log_folder='D:/Projects/ResInsight-regression-test/ModelData/Norne_PLT_LAS')
@@ -566,7 +588,7 @@ cases = resinsight.project.cases()
 print ("Got " + str(len(cases)) + " cases: ")
 for case in cases:
     print("Case name: " + case.name)
-    print("Case grid path: " + case.grid_path())
+    print("Case grid path: " + case.file_path)
 ```
 
 # SelectedCases
@@ -838,13 +860,15 @@ if resinsight is not None:
         views = case.views()
         for view in views:
             # Set some parameters for the view
-            view.set_show_grid_box(not view.show_grid_box())
-            view.set_background_color("#3388AA")            
+            view.show_grid_box = not view.show_grid_box
+            view.background_color = "#3388AA"
             # Update the view in ResInsight
             view.update()
         # Clone the first view
         new_view = views[0].clone()
-        view.set_show_grid_box(False)
-        new_view.set_background_color("#FFAA33")
+        new_view.background_color = "#FFAA33"
         new_view.update()
+        view.show_grid_box = False
+        view.set_visible(False)
+        view.update()
 ```
