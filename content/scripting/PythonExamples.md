@@ -49,6 +49,93 @@ if resinsight is not None:
                                                            c.max.x, c.max.y, c.max.z))
 ```
 
+# AllSimulationWells
+
+```
+###################################################################################
+# This example will connect to ResInsight, retrieve a list of
+# simulation wells and print info
+###################################################################################
+
+# Import the ResInsight Processing Server Module
+import rips
+
+# Connect to ResInsight
+resinsight  = rips.Instance.find()
+if resinsight is not None:
+    # Get a list of all wells
+    cases = resinsight.project.cases()
+
+    for case in cases:
+        print("Case id: " + str(case.id))
+        print("Case name: " + case.name)
+
+        timesteps = case.time_steps()
+        sim_wells = case.simulation_wells()
+        for sim_well in sim_wells:
+            print("Simulation well: " + sim_well.name)
+
+            for (tidx, timestep) in enumerate(timesteps):
+                status = sim_well.status(tidx)
+                cells = sim_well.cells(tidx)
+                print("timestep: " + str(tidx) + " type: " + status.well_type + " open: " + str(status.is_open) + " cells:" + str(len(cells)))
+```
+
+# AllWells
+
+```
+###################################################################################
+# This example will connect to ResInsight, retrieve a list of wells and print info
+#
+###################################################################################
+
+# Import the ResInsight Processing Server Module
+import rips
+
+# Connect to ResInsight
+resinsight  = rips.Instance.find()
+if resinsight is not None:
+    # Get a list of all wells
+    wells = resinsight.project.well_paths()
+
+    print ("Got " + str(len(wells)) + " wells: ")
+    for well in wells:
+        print("Well name: " + well.name)
+```
+
+# AlterWbsPlot
+
+```
+# Load ResInsight Processing Server Client Library
+import rips
+
+# Connect to ResInsight instance
+resinsight = rips.Instance.find()
+
+# Get the project
+project = resinsight.project
+
+# Find all the well bore stability plots in the project
+wbsplots = project.descendants(rips.WellBoreStabilityPlot)
+
+# Chose a sensible output folder
+dirname = "C:/temp"
+
+# Loop through all Well Bore Stability plots
+for wbsplot in wbsplots:
+    # Set depth type a parameter and export snapshot
+    wbsplot.depth_type = "TRUE_VERTICAL_DEPTH_RKB"
+
+    # Example of setting parameters for existing plots
+    params = wbsplot.parameters()
+    params.user_poisson_ratio = 0.12345
+    params.update()
+    wbsplot.update()    
+    wbsplot.export_snapshot(export_folder=dirname)
+
+
+```
+
 # CaseGridGroup
 
 ```
@@ -111,6 +198,28 @@ assert(cell_counts.active_cell_count == len(active_cell_infos))
 # Print information for the first active cell
 print("First active cell: ")
 print(active_cell_infos[0])
+```
+
+# CellResultData
+
+```
+######################################################################
+# This script retrieves cell result data and alters it
+######################################################################
+import rips
+
+resinsight  = rips.Instance.find()
+
+view = resinsight.project.views()[0]
+results = view.cell_result_data()
+print ("Number of result values: ", len(results))
+
+newresults = []
+for i in range(0, len(results)):
+    newresults.append(results[i] * -1.0)
+view.set_cell_result_data(newresults)
+
+    
 ```
 
 # CommandExample
@@ -591,6 +700,38 @@ for case in cases:
     print("Case grid path: " + case.file_path)
 ```
 
+# Launch Using Command Line Options
+
+```
+# Load ResInsight Processing Server Client Library
+import rips
+# Launch ResInsight with last project file and a Window size of 600x1000 pixels
+resinsight = rips.Instance.launch(command_line_parameters=['--last', '--size', 600, 1000])
+# Get a list of all cases
+cases = resinsight.project.cases()
+
+print ("Got " + str(len(cases)) + " cases: ")
+for case in cases:
+    print("Case name: " + case.name)
+    print("Case grid path: " + case.file_path)
+```
+
+# NewSummaryPlot
+
+```
+# Load ResInsight Processing Server Client Library
+import rips
+# Connect to ResInsight instance
+resinsight = rips.Instance.find()
+# Example code
+project = resinsight.project
+
+summary_cases = project.descendants(rips.SummaryCase)
+summary_plot_collection = project.descendants(rips.SummaryPlotCollection)[0]
+if len(summary_cases) > 0:    
+    summary_plot = summary_plot_collection.new_summary_plot(summary_cases=summary_cases, address="FOP*")
+```
+
 # SelectedCases
 
 ```
@@ -614,6 +755,61 @@ if resinsight is not None:
             print(property)
 
 
+```
+
+# SelectedCells
+
+```
+############################################################################
+# This example prints center and corners for the currently selected cells
+# in ResInsight
+############################################################################
+
+import rips
+
+resinsight  = rips.Instance.find()
+if resinsight is not None:
+    cases = resinsight.project.cases()
+
+    print ("Got " + str(len(cases)) + " cases: ")
+    for case in cases:
+        print(case.name)
+        cells = case.selected_cells()
+        print("Found " + str(len(cells)) + " selected cells")
+
+        time_step_info = case.time_steps()
+
+        for (idx, cell) in enumerate(cells):
+            print("Selected cell: [{}, {}, {}] grid: {}".format(cell.ijk.i+1, cell.ijk.j+1, cell.ijk.k+1, cell.grid_index))
+
+            # Get the grid and dimensions
+            grid = case.grids()[cell.grid_index]
+            dimensions = grid.dimensions()
+
+            # Map ijk to cell index
+            cell_index = dimensions.i * dimensions.j * cell.ijk.k + dimensions.i * cell.ijk.j + cell.ijk.i
+
+            # Print the cell center
+            cell_centers = grid.cell_centers()
+            cell_center = cell_centers[cell_index]
+            print("Cell center: [{}, {}, {}]".format(cell_center.x, cell_center.y, cell_center.z))
+
+            # Print the cell corners
+            cell_corners = grid.cell_corners()[cell_index]
+            print("Cell corners:")
+            print("c0:\n" + str(cell_corners.c0))
+            print("c1:\n" + str(cell_corners.c1))
+            print("c2:\n" + str(cell_corners.c2))
+            print("c3:\n" + str(cell_corners.c3))
+            print("c4:\n" + str(cell_corners.c4))
+            print("c5:\n" + str(cell_corners.c5))
+            print("c6:\n" + str(cell_corners.c6))
+            print("c7:\n" + str(cell_corners.c7))
+
+            for (tidx, timestep) in enumerate(time_step_info):
+                # Read the full SOIL result for time step
+                soil_results = case.selected_cell_property('DYNAMIC_NATIVE', 'SOIL', tidx)
+                print("SOIL: {} ({}.{}.{})".format(soil_results[idx], timestep.year, timestep.month, timestep.day))
 ```
 
 # SetCellResult

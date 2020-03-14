@@ -190,11 +190,35 @@ else:
 #### class rips.case.Case(pb2_object=None, channel=None)
 The ResInsight base class for Cases
 
-Attributes
 
-    file_path (str): Case File Name
-    id (int): Case ID
-    name (str): Case Name
+#### file_path()
+Case File Name
+
+
+* **Type**
+
+    str
+
+
+
+#### id()
+Case ID
+
+
+* **Type**
+
+    int
+
+
+
+#### name()
+Case Name
+
+
+* **Type**
+
+    str
+
 
 
 #### active_cell_centers(porosity_model='MATRIX_MODEL')
@@ -1132,10 +1156,25 @@ print (case.gridCount())
 #### class rips.gridcasegroup.GridCaseGroup(pb2_object=None, channel=None)
 A statistics case group
 
-Attributes
 
-    group_id (int): Case Group ID
-    user_description (str): Name
+#### group_id()
+Case Group ID
+
+
+* **Type**
+
+    int
+
+
+
+#### user_description()
+Name
+
+
+* **Type**
+
+    str
+
 
 
 #### compute_statistics(case_ids=None)
@@ -1471,24 +1510,99 @@ Get a list of all well paths in the project
 #### class rips.simulation_well.SimulationWell(pb2_object=None, channel=None)
 An Eclipse Simulation Well
 
-Attributes
 
-    name (str): Name
+#### name()
+Name
+
+
+* **Type**
+
+    str
+
 
 # View Module
 
 
 #### class rips.view.View(pb2_object=None, channel=None)
-Attributes
 
-    background_color (str): Background
-    current_time_step (int): Current Time Step
-    disable_lighting (str): Disable Results Lighting
-    grid_z_scale (float): Z Scale
-    id (int): View ID
-    perspective_projection (str): Perspective Projection
-    show_grid_box (str): Show Grid Box
-    show_z_scale (str): Show Z Scale Label
+#### background_color()
+Background
+
+
+* **Type**
+
+    str
+
+
+
+#### current_time_step()
+Current Time Step
+
+
+* **Type**
+
+    int
+
+
+
+#### disable_lighting()
+Disable Results Lighting
+
+
+* **Type**
+
+    str
+
+
+
+#### grid_z_scale()
+Z Scale
+
+
+* **Type**
+
+    float
+
+
+
+#### id()
+View ID
+
+
+* **Type**
+
+    int
+
+
+
+#### perspective_projection()
+Perspective Projection
+
+
+* **Type**
+
+    str
+
+
+
+#### show_grid_box()
+Show Grid Box
+
+
+* **Type**
+
+    str
+
+
+
+#### show_z_scale()
+Show Z Scale Label
+
+
+* **Type**
+
+    str
+
 
 
 #### apply_cell_result(result_type, result_variable)
@@ -1598,15 +1712,75 @@ Set the time step for current view
 #### class rips.well_log_plot.WellLogPlot(pb2_object=None, channel=None)
 A Well Log Plot With a shared Depth Axis and Multiple Tracks
 
-Attributes
 
-    auto_scale_depth_enabled (str): Auto Scale
-    depth_type (str): Type
-    depth_unit (str): Unit
-    maximum_depth (float): Max
-    minimum_depth (float): Min
-    show_depth_grid_lines (str): Show Grid Lines
-    show_title_in_plot (str): Show Title
+#### auto_scale_depth_enabled()
+Auto Scale
+
+
+* **Type**
+
+    str
+
+
+
+#### depth_type()
+Type
+
+
+* **Type**
+
+    str
+
+
+
+#### depth_unit()
+Unit
+
+
+* **Type**
+
+    str
+
+
+
+#### maximum_depth()
+Max
+
+
+* **Type**
+
+    float
+
+
+
+#### minimum_depth()
+Min
+
+
+* **Type**
+
+    float
+
+
+
+#### show_depth_grid_lines()
+Show Grid Lines
+
+
+* **Type**
+
+    str
+
+
+
+#### show_title_in_plot()
+Show Title
+
+
+* **Type**
+
+    str
+
 
 
 #### export_data_as_ascii(export_folder, file_prefix='', capitalize_file_names=False)
