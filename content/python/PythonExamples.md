@@ -1,15 +1,11 @@
 +++
 title = "Python Examples"
 published = true
-weight = 40
 +++
-
-![]({{< relref "" >}}images/scripting/python-logo-master-v3-TM.png)
 
 This pages is created based on the content in the **PythonExamples** folder located inside the **rips** module, made available online for convenience.
 
-# AllCases
-
+## all_cases
 ```
 ###################################################################################
 # This example will connect to ResInsight, retrieve a list of cases and print info
@@ -47,10 +43,9 @@ if resinsight is not None:
             for c in coarsening_info:
                 print("[{}, {}, {}] - [{}, {}, {}]".format(c.min.x, c.min.y, c.min.z,
                                                            c.max.x, c.max.y, c.max.z))
+
 ```
-
-# AllSimulationWells
-
+## all_simulation_wells
 ```
 ###################################################################################
 # This example will connect to ResInsight, retrieve a list of
@@ -79,10 +74,9 @@ if resinsight is not None:
                 status = sim_well.status(tidx)
                 cells = sim_well.cells(tidx)
                 print("timestep: " + str(tidx) + " type: " + status.well_type + " open: " + str(status.is_open) + " cells:" + str(len(cells)))
+
 ```
-
-# AllWells
-
+## all_wells
 ```
 ###################################################################################
 # This example will connect to ResInsight, retrieve a list of wells and print info
@@ -101,10 +95,9 @@ if resinsight is not None:
     print ("Got " + str(len(wells)) + " wells: ")
     for well in wells:
         print("Well name: " + well.name)
+
 ```
-
-# AlterWbsPlot
-
+## alter_wbs_plot
 ```
 # Load ResInsight Processing Server Client Library
 import rips
@@ -134,10 +127,9 @@ for wbsplot in wbsplots:
     wbsplot.export_snapshot(export_folder=dirname)
 
 
+
 ```
-
-# CaseGridGroup
-
+## case_grid_group
 ```
 import os
 import rips
@@ -167,9 +159,7 @@ cell_result = view.cell_result()
 cell_result.set_result_variable("PRESSURE_DEV")
         
 ```
-
-# CaseInfoStreamingExample
-
+## case_info_streaming_example
 ```
 ###############################################################################
 # This example will get the cell info for the active cells for the first case
@@ -198,10 +188,9 @@ assert(cell_counts.active_cell_count == len(active_cell_infos))
 # Print information for the first active cell
 print("First active cell: ")
 print(active_cell_infos[0])
+
 ```
-
-# CellResultData
-
+## cell_result_data
 ```
 ######################################################################
 # This script retrieves cell result data and alters it
@@ -221,9 +210,7 @@ view.set_cell_result_data(newresults)
 
     
 ```
-
-# CommandExample
-
+## command_example
 ```
 ###############################################################################
 # This example will show setting time step, window size and export snapshots and properties
@@ -282,10 +269,9 @@ with tempfile.TemporaryDirectory(prefix="rips") as tmpdirname:
 
     assert(os.path.exists(full_path))
 
+
 ```
-
-# Create WBS Plot
-
+## create_wbs_plot
 ```
 import os
 import grpc
@@ -331,9 +317,7 @@ for case in cases:
         # Create plot with parameters
         wbsplot = case.create_well_bore_stability_plot(well_path=well_path.name, time_step=0, parameters=params)
 ```
-
-# ErrorHandling
-
+## error_handling
 ```
 ###################################################################
 # This example demonstrates the use of ResInsight exceptions 
@@ -411,10 +395,9 @@ if case is not None:
 
 
 
+
 ```
-
-# ExportContourMaps
-
+## export_contour_maps
 ```
 # Load ResInsight Processing Server Client Library
 import rips
@@ -448,10 +431,9 @@ for case in cases:
         filepath = tmpdir / filename
         print("Exporting to:", filepath)
         contour_map.export_to_text(str(filepath))
+
 ```
-
-# ExportPlots
-
+## export_plots
 ```
 # Import the tempfile module
 import tempfile
@@ -473,10 +455,9 @@ for plot in plots:
 	if isinstance(plot, rips.WellLogPlot):
 		plot.export_data_as_las(export_folder=export_folder)
 		plot.export_data_as_ascii(export_folder=export_folder)
+
 ```
-
-# ExportSnapshots
-
+## export_snapshots
 ```
 ############################################################################
 # This script will export snapshots for two properties in every loaded case
@@ -522,10 +503,9 @@ for case in cases:
         for time_step in range(0, len(time_steps), 10):
             view.set_time_step(time_step = time_step)
             view.export_snapshot()
+
 ```
-
-# GridInformation
-
+## grid_information
 ```
 ######################################################################################
 # This example prints information about the grids of all cases in the current project
@@ -546,10 +526,9 @@ for case in cases:
 
 
 
+
 ```
-
-# Import Well Paths
-
+## import_well_paths_and_logs
 ```
 # Load ResInsight Processing Server Client Library
 import rips
@@ -584,9 +563,7 @@ if resInsight.project.has_warnings():
 for well_path_name in well_path_names:
     print("Imported well log file for: " + well_path_name)
 ```
-
-# InputPropTestAsync
-
+## input_prop_test_async
 ```
 ########################################################################################
 # This example generates a derived property in an asynchronous manner
@@ -627,9 +604,7 @@ print("Time elapsed: ", end - start)
 print("Transferred all results back")
 view = case.views()[0].apply_cell_result('GENERATED', 'POROPERMXAS')
 ```
-
-# InputPropTestSync
-
+## input_prop_test_sync
 ```
 ########################################################################################
 # This example generates a derived property in an synchronous manner
@@ -667,9 +642,7 @@ print("Transferred all results back")
 
 view = case.views()[0].apply_cell_result('GENERATED', 'POROPERMXSY')
 ```
-
-# InstanceExample
-
+## instance_example
 ```
 #######################################
 # This example connects to ResInsight
@@ -683,9 +656,7 @@ if resinsight is None:
 else:
 	print('Successfully connected to ResInsight')
 ```
-
-# LaunchWithCommandLineOptions
-
+## launch_with_commandline_options
 ```
 # Load ResInsight Processing Server Client Library
 import rips
@@ -698,26 +669,9 @@ print ("Got " + str(len(cases)) + " cases: ")
 for case in cases:
     print("Case name: " + case.name)
     print("Case grid path: " + case.file_path)
-```
-
-# Launch Using Command Line Options
 
 ```
-# Load ResInsight Processing Server Client Library
-import rips
-# Launch ResInsight with last project file and a Window size of 600x1000 pixels
-resinsight = rips.Instance.launch(command_line_parameters=['--last', '--size', 600, 1000])
-# Get a list of all cases
-cases = resinsight.project.cases()
-
-print ("Got " + str(len(cases)) + " cases: ")
-for case in cases:
-    print("Case name: " + case.name)
-    print("Case grid path: " + case.file_path)
-```
-
-# NewSummaryPlot
-
+## new_summary_plot
 ```
 # Load ResInsight Processing Server Client Library
 import rips
@@ -730,10 +684,9 @@ summary_cases = project.descendants(rips.SummaryCase)
 summary_plot_collection = project.descendants(rips.SummaryPlotCollection)[0]
 if len(summary_cases) > 0:    
     summary_plot = summary_plot_collection.new_summary_plot(summary_cases=summary_cases, address="FOP*")
+
 ```
-
-# SelectedCases
-
+## selected_cases
 ```
 ############################################################################
 # This example returns the currently selected cases in ResInsight
@@ -755,10 +708,9 @@ if resinsight is not None:
             print(property)
 
 
+
 ```
-
-# SelectedCells
-
+## selected_cells
 ```
 ############################################################################
 # This example prints center and corners for the currently selected cells
@@ -810,10 +762,9 @@ if resinsight is not None:
                 # Read the full SOIL result for time step
                 soil_results = case.selected_cell_property('DYNAMIC_NATIVE', 'SOIL', tidx)
                 print("SOIL: {} ({}.{}.{})".format(soil_results[idx], timestep.year, timestep.month, timestep.day))
+
 ```
-
-# SetCellResult
-
+## set_cell_result
 ```
 ######################################################################
 # This script applies a cell result to the first view in the project
@@ -824,10 +775,9 @@ resinsight  = rips.Instance.find()
 
 view = resinsight.project.views()[0]
 view.apply_cell_result(result_type='STATIC_NATIVE', result_variable='DX')
+
 ```
-
-# SetFlowDiagnosticsResult
-
+## set_flow_diagnostics_result
 ```
 ######################################################################
 # This script applies a flow diagnostics cell result to the first view in the project
@@ -847,10 +797,9 @@ view.apply_flow_diagnostics_cell_result(result_variable='Fraction',
                                     selection_mode='FLOW_TR_BY_SELECTION',
                                     injectors = ['C-1H', 'C-2H', 'F-2H'],
                                     producers = ['B-1AH', 'B-3H', 'D-1H'])
+
 ```
-
-# SetGridProperties
-
+## set_grid_properties
 ```
 ######################################################################
 # This script sets values for SOIL for all grid cells in the first case in the project
@@ -869,10 +818,9 @@ for i in range(0, total_cell_count):
 print("Applying values to full grid")
 case.set_grid_property(values, 'DYNAMIC_NATIVE', 'SOIL', 0)
 
+
 ```
-
-# SoilAverageAsync
-
+## soil_average_async
 ```
 ###########################################################################################
 # This example will asynchronously calculate the average value for SOIL for all time steps
@@ -912,9 +860,7 @@ end = time.time()
 print("Time elapsed: ", end - start)
 print(averages)
 ```
-
-# SoilAverageSync
-
+## soil_average_sync
 ```
 ###########################################################################################
 # This example will synchronously calculate the average value for SOIL for all time steps
@@ -944,9 +890,7 @@ end = time.time()
 print("Time elapsed: ", end - start)
 print(averages)
 ```
-
-# SoilPorvAsync
-
+## soil_porv_async
 ```
 ##############################################################################
 # This example will create a derived result for each time step asynchronously
@@ -996,9 +940,7 @@ print("Transferred all results back")
 
 view = case.views()[0].apply_cell_result('GENERATED', 'SOILPORVAsync')
 ```
-
-# SoilPorvSync
-
+## soil_porv_sync
 ```
 ##############################################################################
 # This example will create a derived result for each time step synchronously
@@ -1034,9 +976,7 @@ print("Transferred all results back")
 
 view = case.views()[0].apply_cell_result('GENERATED', 'SOILPORVSync')
 ```
-
-# ViewExample
-
+## view_example
 ```
 #############################################################
 # This example will alter the views of all cases
@@ -1067,4 +1007,5 @@ if resinsight is not None:
         view.show_grid_box = False
         view.set_visible(False)
         view.update()
+
 ```

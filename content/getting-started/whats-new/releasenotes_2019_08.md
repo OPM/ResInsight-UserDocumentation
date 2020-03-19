@@ -31,7 +31,7 @@ if resInsight is not None:
             view.update()
 ```
 
-See [Python Scripting]({{< relref "PythonRips.md" >}})
+See [Python Scripting]({{< relref "python" >}})
 
 
 ## Launch ResInsight without user interface
