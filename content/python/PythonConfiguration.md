@@ -1,5 +1,5 @@
 +++
-title = "Python"
+title = "Python Configuration"
 published = true
 weight = 45
 +++
@@ -12,5 +12,16 @@ The Python client package is available for install via the Python PIP package sy
 
 On some systems the `pip` command may have to be replaced by `python -m pip`.
 
+In order for gRPC to be available, ResInsight needs to be built with the `RESINSIGHT_ENABLE_GRPC` option set. A valid gRPC build will show a message in the About dialog confirming gRPC is available:
 
-[ResInsight Scripting API](https://api.resinsight.org)
+
+![image]({{<relref"">}}images/scripting/AboutGrpc.png)
+
+Furthermore, gRPC needs to be enabled in the Scripting tab of the Preference dialog:
+
+
+
+![image]({{<relref"">}}images/scripting/PrefGrpc.png)
+
+
+
