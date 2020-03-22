@@ -445,16 +445,6 @@ Paste Options Dialog Most of the fields in this dialog are the same as in the CS
     </item>
     
     <item>
-      <title>Python Examples</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonexamples/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonexamples/</guid>
-      <description>This pages is created based on the content in the PythonExamples folder located inside the rips module, made available online for convenience.
-AllCases #################################################################################### This example will connect to ResInsight, retrieve a list of cases and print info# #################################################################################### Import the ResInsight Processing Server Moduleimport rips# Connect to ResInsightresinsight = rips.Instance.find()if resinsight is not None:# Get a list of all casescases = resinsight.</description>
-    </item>
-    
-    <item>
       <title>Regression Test System</title>
       <link>https://opm.github.io/ResInsight-UserDocumentation/misc/regressiontestsystem/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -487,10 +477,10 @@ Subscribe</description>
     
     <item>
       <title>Python API - rips</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</link>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</guid>
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips/</guid>
       <description>Instance Module class rips.instance.Instance(port=50051, launched=False) The ResInsight Instance class. Use to launch or find existing ResInsight instances
 launched() Tells us whether the application was launched as a new process. If the application was launched we may need to close it when exiting the script.
   Type
@@ -499,6 +489,17 @@ bool
   Type
 Commands
   project() Current project in ResInsight. Set when creating an instance and updated when opening/closing projects.</description>
+    </item>
+    
+    <item>
+      <title>Python Configuration</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/pythonconfiguration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/pythonconfiguration/</guid>
+      <description>ResInsight has a gRPC Remote Procedure Call interface with a Python Client interface. This interface allows you to interact with a running ResInsight instance from a Python script. The Python client package is compatible with Python 3.
+The Python client package is available for install via the Python PIP package system with pip install rips as admin user, or pip install --user rips as a regular user.
+On some systems the pip command may have to be replaced by python -m pip.</description>
     </item>
     
     <item>
@@ -768,6 +769,28 @@ Create New Ensemble RFT Plot When a summary ensemble has been imported, observed
     </item>
     
     <item>
+      <title>Python Classes (BETA)</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips_class/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips_class/</guid>
+      <description>Introduction As the Python interface is growing release by release, we are investigating how to automate the building of documentation. This document shows the inheritance relationship between objects derived from PdmObject. The PdmObject is the base object for all objects automatically created based on the data model in ResInsight.## PdmObject
+Case Inherits PdmObject
+The ResInsight base class for Cases
+   Attribute Type Description     file_path str Case File Name   id int Case ID   name str Case Name    GeoMechCase Inherits Case</description>
+    </item>
+    
+    <item>
+      <title>Command Reference (BETA)</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips_commands/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips_commands/</guid>
+      <description>Introduction As the Python interface is growing release by release, we are investigating how to automate the building of reference documentation. This document is not complete, but will improve as the automation moves forward.
+Currently missing features  Description of enums Description of return values/classes Description of each object  clone_view    Parameter Type Description     view_id int View Id    close_project    Parameter Type Description    compute_case_group_statistics    Parameter Type Description     case_group_id int Case Group ID   case_ids List of str Case IDs    create_grid_case_group    Parameter Type Description     case_paths List of str List of Paths to Case Files    create_lgr_for_completions    Parameter Type Description     case_id int Case ID   time_step int Time Step Index   well_path_names List of str Well Path Names   refinement_i int RefinementI   refinement_j int RefinementJ   refinement_k int RefinementK   split_type str SplitType    create_multi_plot    Parameter Type Description     plots List of str Plots    create_multiple_fractures    Parameter Type Description     case_id int Case ID   well_path_names List of str Well Path Names   min_dist_from_well_td float Min Distance From Well TD   max_fractures_per_well int Max Fractures per Well   template_id int Template ID   top_layer int Top Layer   base_layer int Base Layer   spacing float Spacing   action str Action    create_saturation_pressure_plots    Parameter Type Description     case_ids List of str Case IDs    create_statistics_case    Parameter Type Description     case_group_id int Case Group Id    create_view    Parameter Type Description     case_id int Case Id    create_well_bore_stability_plot    Parameter Type Description     case_id int GeoMech Case Id   well_path str Well Path   time_step int Time Step   wbs_parameters str WbsParameters    export_contour_map_to_text    Parameter Type Description     export_file_name str    export_local_coordinates str    undefined_value_label str    exclude_undefined_values str    view_id int View Id    export_flow_characteristics    Parameter Type Description     case_id int Case ID   time_steps List of str Selected Time Steps   injectors List of str Injectors   producers List of str Producers   file_name str Export File Name   minimum_communication float Minimum Communication   aquifer_cell_threshold float Aquifer Cell Threshold    export_lgr_for_completions    Parameter Type Description     case_id int Case ID   time_step int Time Step Index   well_path_names List of str Well Path Names   refinement_i int RefinementI   refinement_j int RefinementJ   refinement_k int RefinementK   split_type str SplitType    export_msw    Parameter Type Description     case_id int Case ID   well_path str Well Path Name   include_perforations str Include Perforations   include_fishbones str Include Fishbones   include_fractures str Include Fractures   file_split str File Split    export_multi_case_snapshots    Parameter Type Description     grid_list_file str Grid List File    export_property    Parameter Type Description     case_id int Case ID   time_step int Time Step Index   property str Property Name   eclipse_keyword str Eclipse Keyword   undefined_value float Undefined Value   export_file str Export FileName    export_property_in_views    Parameter Type Description     case_id int Case ID   view_ids List of str View IDs   view_names List of str View Names   undefined_value float Undefined Value    export_sim_well_fracture_completions    Parameter Type Description     case_id int Case ID   view_id int View ID   view_name str View Name   time_step int Time Step Index   simulation_well_names List of str Simulation Well Names   file_split str File Split   compdat_export str Compdat Export    export_snapshots    Parameter Type Description     type str Type   prefix str Prefix   case_id int Case Id   view_id int View Id   export_folder str Export Folder   plot_output_format str Output Format    export_visible_cells    Parameter Type Description     case_id int Case ID   view_id int View ID   view_name str View Name   export_keyword str Export Keyword   visible_active_cells_value int Visible Active Cells Value   hidden_active_cells_value int Hidden Active Cells Value   inactive_cells_value int Inactive Cells Value    export_well_log_plot_data    Parameter Type Description     export_format str    view_id int    export_folder str    file_prefix str    export_tvd_rkb str    capitalize_file_names str    resample_interval float    convert_curve_units str     export_well_path_completions    Parameter Type Description     case_id int Case ID   time_step int Time Step Index   well_path_names List of str Well Path Names   file_split str File Split   compdat_export str Compdat Export   combination_mode str Combination Mode   use_ntg_horizontally str Use NTG Horizontally   include_perforations str Include Perforations   include_fishbones str Include Fishbones   include_fractures str Include Fractures   exclude_main_bore_for_fishbones str Exclude Main Bore for Fishbones   perform_trans_scaling str Perform Transmissibility Scaling   trans_scaling_time_step int Transmissibility Scaling Pressure Time Step   trans_scaling_wbhp_from_summary str Transmissibility Scaling WBHP from summary   trans_scaling_wbhp float Transmissibility Scaling Constant WBHP Value    export_well_paths    Parameter Type Description     well_path_names List of str Well Path Names   md_step_size float MD Step Size    import_formation_names    Parameter Type Description     formation_files List of str    apply_to_case_id int     import_well_log_files    Parameter Type Description     well_log_folder str    well_log_files List of str     import_well_paths    Parameter Type Description     well_path_folder str    well_path_files List of str     load_case    Parameter Type Description     path str Path to Case File    open_project    Parameter Type Description     path str Path    replace_case    Parameter Type Description     case_id int Case ID   new_grid_file str New Grid File    replace_multiple_cases    Parameter Type Description    replace_source_cases    Parameter Type Description     case_group_id int Case Group ID   grid_list_file str Grid List File    run_octave_script    Parameter Type Description     path str Path   case_ids List of str Case IDs    save_project    Parameter Type Description     file_path str     save_project_as    Parameter Type Description     file_path str     scale_fracture_template    Parameter Type Description     id int Id   half_length float HalfLengthScaleFactor   height float HeightScaleFactor   d_factor float DFactorScaleFactor   conductivity float ConductivityScaleFactor   width float WidthScaleFactor    set_export_folder    Parameter Type Description     type str Type   path str Path   create_folder str Create Folder    set_fracture_containment    Parameter Type Description     id int Id   top_layer int TopLayer   base_layer int BaseLayer    set_main_window_size    Parameter Type Description     height int Height   width int Width    set_plot_window_size    Parameter Type Description     height int Height   width int Width    set_start_dir    Parameter Type Description     path str Path    set_time_step    Parameter Type Description     case_id int Case ID   view_id int View ID   time_step int Time Step Index    </description>
+    </item>
+    
+    <item>
       <title> Zonations/Formations</title>
       <link>https://opm.github.io/ResInsight-UserDocumentation/3d-main-window/formations/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -912,12 +935,287 @@ Efficient User Interface The user interface is tailored for efficient interpreta
     </item>
     
     <item>
+      <title>Case</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pycase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pycase/</guid>
+      <description>Case Case(self, pb2_object=None, channel=None)The ResInsight base class for Cases
+Attributes:
+ file_path str - Case File Name id int - Case ID name str - Case Name  grid Case.grid(index)Get Grid of a given index. Returns a rips Grid object
+Arguments:
+  index int - The grid index
+  Returns - Grid object
+  grids Case.grids()Get a list of all rips Grid objects in the case</description>
+    </item>
+    
+    <item>
+      <title>CellColors</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pycellcolors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pycellcolors/</guid>
+      <description>CellColors CellColors(self, pb2_object=None, channel=None)Eclipse Cell Colors class</description>
+    </item>
+    
+    <item>
+      <title>EclipseCase</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipsecase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipsecase/</guid>
+      <description>EclipseCase EclipseCase(self, pb2_object=None, channel=None)The Regular Eclipse Results Case</description>
+    </item>
+    
+    <item>
+      <title>EclipseContourMap</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipsecontourmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipsecontourmap/</guid>
+      <description>EclipseContourMap EclipseContourMap(self, pb2_object=None, channel=None)A contour map for Eclipse cases
+export_to_text EclipseContourMap.export_to_text(export_file_name=&amp;#39;&amp;#39;,export_local_coordinates=False,undefined_value_label=&amp;#39;NaN&amp;#39;,exclude_undefined_values=False)Export snapshot for the current view
+Arguments:
+ export_file_name(str) - The file location to store results in. export_local_coordinates(bool) - Should we export local coordinates, or UTM. undefined_value_label(str) - Replace undefined values with this label. exclude_undefined_values(bool) - Skip undefined values.  </description>
+    </item>
+    
+    <item>
+      <title>EclipseResult</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipseresult/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipseresult/</guid>
+      <description>EclipseResult EclipseResult(self, pb2_object=None, channel=None)An eclipse result definition
+Attributes:
+ flow_tracer_selection_mode str - Tracers phase_selection str - Phases porosity_model_type str - Porosity result_type str - Type result_variable str - Variable selected_injector_tracers str - Injector Tracers selected_producer_tracers str - Producer Tracers selected_souring_tracers str - Tracers  </description>
+    </item>
+    
+    <item>
+      <title>EclipseView</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipseview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipseview/</guid>
+      <description>EclipseView EclipseView(self, pb2_object=None, channel=None)The Eclipse 3d Reservoir View
+cell_result EclipseView.cell_result()Cell Result
+Returns:
+CellColors
+cell_result_data EclipseView.cell_result_data()Current Eclipse Cell Result
+Returns:
+str
+set_cell_result_data EclipseView.set_cell_result_data(values)Set Current Eclipse Cell Result
+Arguments:
+ values str - data  </description>
+    </item>
+    
+    <item>
+      <title>FileSummaryCase</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyfilesummarycase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyfilesummarycase/</guid>
+      <description>FileSummaryCase FileSummaryCase(self, pb2_object=None, channel=None)A Summary Case based on SMSPEC files
+Attributes:
+ include_restart_files str - Include Restart Files  </description>
+    </item>
+    
+    <item>
+      <title>FileWellPath</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyfilewellpath/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyfilewellpath/</guid>
+      <description>FileWellPath FileWellPath(self, pb2_object=None, channel=None)Well Paths Loaded From File</description>
+    </item>
+    
+    <item>
+      <title>GeoMechCase</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechcase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechcase/</guid>
+      <description>GeoMechCase GeoMechCase(self, pb2_object=None, channel=None)The Abaqus Based GeoMech Case
+views GeoMechCase.views()All GeoMech Views in the Case
+Returns:
+List of GeoMechView</description>
+    </item>
+    
+    <item>
+      <title>GeoMechContourMap</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechcontourmap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechcontourmap/</guid>
+      <description>GeoMechContourMap GeoMechContourMap(self, pb2_object=None, channel=None)A contour map for GeoMech cases
+export_to_text GeoMechContourMap.export_to_text(export_file_name=&amp;#39;&amp;#39;,export_local_coordinates=False,undefined_value_label=&amp;#39;NaN&amp;#39;,exclude_undefined_values=False)Export snapshot for the current view
+Arguments:
+ export_file_name(str) - The file location to store results in. export_local_coordinates(bool) - Should we export local coordinates, or UTM. undefined_value_label(str) - Replace undefined values with this label. exclude_undefined_values(bool) - Skip undefined values.  </description>
+    </item>
+    
+    <item>
+      <title>GeoMechView</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechview/</guid>
+      <description>GeoMechView GeoMechView(self, pb2_object=None, channel=None)The Geomechanical 3d View</description>
+    </item>
+    
+    <item>
+      <title>GridCaseGroup</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygridcasegroup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygridcasegroup/</guid>
+      <description>GridCaseGroup GridCaseGroup(self, pb2_object=None, channel=None)A statistics case group
+Attributes:
+ group_id int - Case Group ID user_description str - Name  create_statistics_case GridCaseGroup.create_statistics_case()Create a Statistics case in the Grid Case Group
+Returns:
+A new Case
+statistics_cases GridCaseGroup.statistics_cases()Get a list of all statistics cases in the Grid Case Group
+views GridCaseGroup.views()Get a list of views belonging to a grid case group
+view GridCaseGroup.view(view_id)Get a particular view belonging to a case group by providing view id</description>
+    </item>
+    
+    <item>
+      <title>GridSummaryCase</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygridsummarycase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygridsummarycase/</guid>
+      <description>GridSummaryCase GridSummaryCase(self, pb2_object=None, channel=None)A Summary Case based on extracting grid data.</description>
+    </item>
+    
+    <item>
+      <title>Instance</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyinstance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyinstance/</guid>
+      <description>Instance Instance(self, port=50051, launched=False)The ResInsight Instance class. Use to launch or find existing ResInsight instances
+Attributes:
+ launched bool - Tells us whether the application was launched as a new process. If the application was launched we may need to close it when exiting the script. commands Commands - Command executor. Set when creating an instance. project Project - Current project in ResInsight. Set when creating an instance and updated when opening/closing projects.</description>
+    </item>
+    
+    <item>
+      <title>ModeledWellPath</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pymodeledwellpath/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pymodeledwellpath/</guid>
+      <description>ModeledWellPath ModeledWellPath(self, pb2_object=None, channel=None)A Well Path created interactively in ResInsight</description>
+    </item>
+    
+    <item>
+      <title>Plot</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyplot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyplot/</guid>
+      <description>Plot Plot(self, pb2_object=None, channel=None)The Abstract Base Class for all Plot Objects</description>
+    </item>
+    
+    <item>
+      <title>PlotWindow</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyplotwindow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyplotwindow/</guid>
+      <description>PlotWindow PlotWindow(self, pb2_object=None, channel=None)The Abstract base class for all MDI Windows in the Plot Window
+Attributes:
+ id int - View ID  export_snapshot PlotWindow.export_snapshot(export_folder=&amp;#39;&amp;#39;,file_prefix=&amp;#39;&amp;#39;,output_format=&amp;#39;PNG&amp;#39;)Export snapshot for the current plot
+Arguments:
+ export_folder(str) - The path to export to. By default will use the global export folder prefix str - Exported file name prefix output_format(str) - Enum string. Can be &amp;lsquo;PNG&amp;rsquo; or &amp;lsquo;PDF&amp;rsquo;.  </description>
+    </item>
+    
+    <item>
+      <title>Project</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyproject/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyproject/</guid>
+      <description>Project Project(self, pb2_object=None, channel=None)The ResInsight Project
+open Project.open(path)Open a new project from the given path
+Arguments:
+ path(str) - path to project file  save Project.save(path=&amp;#39;&amp;#39;)Save the project to the existing project file, or to a new file
+Arguments:
+ path(str) - File path to the file to save the project to. If empty, saves to the active project file  close Project.close()Close the current project (and open new blank project)</description>
+    </item>
+    
+    <item>
+      <title>Python Examples</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/pythonexamples/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/pythonexamples/</guid>
+      <description>This pages is created based on the content in the PythonExamples folder located inside the rips module, made available online for convenience.
+all_cases #################################################################################### This example will connect to ResInsight, retrieve a list of cases and print info##################################################################################### Import the ResInsight Processing Server Moduleimport rips# Connect to ResInsightresinsight = rips.Instance.find()if resinsight is not None:# Get a list of all casescases = resinsight.</description>
+    </item>
+    
+    <item>
+      <title>Reservoir</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyreservoir/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyreservoir/</guid>
+      <description>Reservoir Reservoir(self, pb2_object=None, channel=None)Abtract base class for Eclipse Cases
+views Reservoir.views()All Eclipse Views in the case
+Returns:
+List of EclipseView</description>
+    </item>
+    
+    <item>
       <title>Search</title>
       <link>https://opm.github.io/ResInsight-UserDocumentation/search/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://opm.github.io/ResInsight-UserDocumentation/search/</guid>
       <description>Search for: window.store = [];window.store[&#34;/ResInsight-UserDocumentation/getting-started/overview/&#34;] = {title: &#34;Overview&#34;,content: &#34;User Interface ResInsight has two main windows, one for 3D related visualizations and one for 2D graphs and plots.\n3D Main Window Plot Main Window Switching Between the Two Main Windows The two main windows has a toolbar button each, that directly opens and raises the other window. Each of the windows can also be closed freely, but if both are closed, ResInsight exits.</description>
+    </item>
+    
+    <item>
+      <title>SimulationWell</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysimulationwell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysimulationwell/</guid>
+      <description>SimulationWell SimulationWell(self, pb2_object=None, channel=None)An Eclipse Simulation Well
+Attributes:
+ name str - Name  </description>
+    </item>
+    
+    <item>
+      <title>SummaryCase</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummarycase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummarycase/</guid>
+      <description>SummaryCase SummaryCase(self, pb2_object=None, channel=None)The Base Class for all Summary Cases
+Attributes:
+ auto_shorty_name str - Use Auto Display Name short_name str - Display Name summary_header_filename str - Summary Header File  </description>
+    </item>
+    
+    <item>
+      <title>SummaryPlot</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummaryplot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummaryplot/</guid>
+      <description>SummaryPlot SummaryPlot(self, pb2_object=None, channel=None)A Summary Plot
+Attributes:
+ is_using_auto_name str - Auto Title normalize_curve_y_values str - Normalize all curves plot_description str - Name show_plot_title str - Plot Title  </description>
+    </item>
+    
+    <item>
+      <title>SummaryPlotCollection</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummaryplotcollection/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummaryplotcollection/</guid>
+      <description>SummaryPlotCollection SummaryPlotCollection(self, pb2_object=None, channel=None)new_summary_plot SummaryPlotCollection.new_summary_plot(summary_cases=[],ensemble=None,address=None)Create a new Summary Plot
+Arguments:
+ summary_cases List of SummaryCase - Summary Cases ensemble SummaryCaseSubCollection - Ensemble address str - Formatted address string specifying the plot options  Returns:
+SummaryPlot</description>
     </item>
     
     <item>
@@ -931,6 +1229,77 @@ Phone : +47 73 60 43 00 e-mail : info@ceetronsolutions.com
 Bug reports and general feature requests can be filed directly on GitHub
 
 Ceetron Solutions AS - Digitalization and visualization for engineers</description>
+    </item>
+    
+    <item>
+      <title>View</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyview/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyview/</guid>
+      <description>View View(self, pb2_object=None, channel=None)Attributes:
+ background_color str - Background current_time_step int - Current Time Step disable_lighting str - Disable Results Lighting grid_z_scale float - Z Scale id int - View ID perspective_projection str - Perspective Projection show_grid_box str - Show Grid Box show_z_scale str - Show Z Scale Label  apply_cell_result View.apply_cell_result(result_type, result_variable)Apply a regular cell result
+Arguments:
+ result_type str - String representing the result category. The valid values are  DYNAMIC_NATIVE STATIC_NATIVE SOURSIMRL GENERATED INPUT_PROPERTY FORMATION_NAMES FLOW_DIAGNOSTICS INJECTION_FLOODING   result_variable str - String representing the result variable.</description>
+    </item>
+    
+    <item>
+      <title>ViewWindow</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyviewwindow/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyviewwindow/</guid>
+      <description>ViewWindow ViewWindow(self, pb2_object=None, channel=None)The Base Class for all Views and Plots in ResInsight
+case ViewWindow.case()Get the case the view belongs to
+export_snapshot ViewWindow.export_snapshot(prefix=&amp;#39;&amp;#39;, export_folder=&amp;#39;&amp;#39;)Export snapshot for the current view
+Arguments:
+ prefix str - Exported file name prefix export_folder(str) - The path to export to. By default will use the global export folder  </description>
+    </item>
+    
+    <item>
+      <title>WbsParameters</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywbsparameters/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywbsparameters/</guid>
+      <description>WbsParameters WbsParameters(self, pb2_object=None, channel=None)Attributes:
+ df_source str - Depletion Factor (DF) fg_multiplier float - SH Multiplier for FG in Shale fg_shale_source str - FG in Shale Calculation k0_fg_source str - K0_FG k0_sh_source str - K0_SH obg0_source str - Initial Overburden Gradient poission_ratio_source str - Poisson Ratio pore_pressure_non_reservoir_source str - Non-Reservoir Pore Pressure pore_pressure_reservoir_source str - Reservoir Pore Pressure ucs_source str - Uniaxial Compressive Strength user_df float - User Defined DF user_k0_fg float - User Defined K0_FG user_k0_sh float - User Defined K0_SH user_poisson_ratio float - User Defined Poisson Ratio user_pp_non_reservoir float - Multiplier of hydrostatic PP user_ucs float - User Defined UCS [bar] water_density float - Density of Sea Water [g/cm^3]  </description>
+    </item>
+    
+    <item>
+      <title>WellBoreStabilityPlot</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywellborestabilityplot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywellborestabilityplot/</guid>
+      <description>WellBoreStabilityPlot WellBoreStabilityPlot(self, pb2_object=None, channel=None)A GeoMechanical Well Bore Stabilit Plot
+parameters WellBoreStabilityPlot.parameters()Well Bore Stability Parameters
+Returns:
+WbsParameters</description>
+    </item>
+    
+    <item>
+      <title>WellLogPlot</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywelllogplot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywelllogplot/</guid>
+      <description>WellLogPlot WellLogPlot(self, pb2_object=None, channel=None)A Well Log Plot With a shared Depth Axis and Multiple Tracks
+Attributes:
+ auto_scale_depth_enabled str - Auto Scale depth_type str - Type depth_unit str - Unit maximum_depth float - Max minimum_depth float - Min show_depth_grid_lines str - Show Grid Lines show_title_in_plot str - Show Title  export_data_as_las WellLogPlot.export_data_as_las(export_folder,file_prefix=&amp;#39;&amp;#39;,export_tvdrkb=False,capitalize_file_names=False,resample_interval=0.0,convert_to_standard_units=False)Export LAS file(s) for the current plot
+Arguments:
+ export_folder(str) - The path to export to.</description>
+    </item>
+    
+    <item>
+      <title>WellPath</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywellpath/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywellpath/</guid>
+      <description>WellPath WellPath(self, pb2_object=None, channel=None)The Base class for Well Paths
+Attributes:
+ name str - Name  </description>
     </item>
     
   </channel>

@@ -179,10 +179,6 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonexamples/</loc>
-  </url>
-  
-  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/misc/regressiontestsystem/</loc>
   </url>
   
@@ -199,7 +195,11 @@
   </url>
   
   <url>
-    <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/pythonrips/</loc>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/pythonconfiguration/</loc>
   </url>
   
   <url>
@@ -271,6 +271,10 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/scripting/</loc>
   </url>
   
@@ -280,6 +284,10 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/wells-and-completions/wellmeasurements/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/</loc>
   </url>
   
   <url>
@@ -316,6 +324,14 @@
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/plot-window/ensemblerftplot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips_class/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/pythonrips_commands/</loc>
   </url>
   
   <url>
@@ -375,7 +391,87 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pycase/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pycellcolors/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipsecase/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipsecontourmap/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipseresult/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyeclipseview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyfilesummarycase/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyfilewellpath/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechcase/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechcontourmap/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygeomechview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygridcasegroup/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pygridsummarycase/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyinstance/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pymodeledwellpath/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyplot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyplotwindow/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyproject/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/pythonexamples/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyreservoir/</loc>
   </url>
   
   <url>
@@ -387,11 +483,51 @@
   </url>
   
   <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysimulationwell/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummarycase/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummaryplot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pysummaryplotcollection/</loc>
+  </url>
+  
+  <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/support/</loc>
   </url>
   
   <url>
     <loc>https://opm.github.io/ResInsight-UserDocumentation/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyview/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pyviewwindow/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywbsparameters/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywellborestabilityplot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywelllogplot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://opm.github.io/ResInsight-UserDocumentation/python/python-ref/pywellpath/</loc>
   </url>
   
 </urlset>
