@@ -96,10 +96,10 @@ Please refer to [Octave Interface]({{< relref "octaveinterface.md" >}}) for more
 ### Python
 
 - **Enable Python Script Server**
-- **Default Python Script Server Port** -- Defines the port used for communication with Python scripts
+- **Default Python Script Server Port**
 - **Python Executable Location** 
 
-Please refer to [Python API]({{< relref "pythonrips.md" >}}) for more details.
+Please refer to the [ResInsight Python API](https://api.resinsight.org) for more details.
 
 ### Script Files
 

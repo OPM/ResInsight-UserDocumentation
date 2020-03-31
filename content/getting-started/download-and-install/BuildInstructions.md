@@ -109,27 +109,19 @@ To be able to modify **Advanced Options** from the CMake User Interface, tick th
 | `RESINSIGHT_PRIVATE_INSTALL`                      | ON      | Linux only: Include libecl libraries in the installation package |
 | `RESINSIGHT_HDF5_BUNDLE_LIBRARIES`                | OFF     | Linux only: Include HDF5 libraries in the installation package |
 
-#### Configuration parameters for Python (beta)
-These parameters are considered beta, and might change.
+#### Configuration parameters for Python
 
 | CMake Name                                        | Default | Description                              |
 |---------------------------------------------------|---------|--------------------------------------------------------|
-| `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable gRPC scripting server. Required to be able to use ResInsight from Python |
+| `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable ResInsight scripting server (required for use of Python) |
 | `RESINSIGHT_GRPC_PYTHON_EXECUTABLE`               | Blank   | Location of Python3 executable |
 | `RESINSIGHT_GRPC_INSTALL_PREFIX`                  | Blank   | Linux only : Installation prefix for gRPC |
 
 ### Optional Libraries and features
 
-#### Python (Beta)
+#### Python
 
-Scripting of ResInsight is possible from a Python library. The build configuration is a bit involved and is under review.
-
-The current build instructions are specified in text files in the ResInsight repository.
-
-- [Grpc install instructions](https://github.com/OPM/ResInsight/blob/dev/GRPC_install_instructions.txt)
-- [Helper script for Linux](https://github.com/OPM/ResInsight/blob/dev/build_grpc_linux.sh)
-
-See [ Python API ]({{< ref "PythonRips.md" >}}) for how to use the Python library.
+Please see [ResInsight Python API](https://api.resinsight.org) for installation and configuration.
 
 #### Octave
 

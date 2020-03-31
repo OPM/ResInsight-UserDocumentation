@@ -63,9 +63,7 @@ x               y               value
 
 ## Python interface for export of contour maps
 
-The [ResInsight Python Interface] ({{< ref "pythonrips.md" >}})
-allows the user to 
-[access all contour maps]({{< ref "pythonrips.md#contour-maps-map-type-contourmaptype-eclipse-1" >}}) belonging to a project.
-A [Python script]({{< ref "pythonrips.md" >}}) for exporting contour maps to a text file is included as one of the [Python examples]
-({{< ref "pythonexamples.md" >}}).
+The [ResInsight Python API](https://api.resinsight.org) allows the user to access all contour maps belonging to a project.
+A Python script for exporting contour maps to a text file is included as one of the examples of the
+[ResInsight Python API](https://api.resinsight.org).
 

@@ -115,6 +115,6 @@ The Shear Failure Gradient is then given as
 $$SFG = \frac{P_w}{TVD\_{RKB} \\: g \\: \rho}$$
 
 ## Python Interface
-The ResInsight Python Server has specific functionality for creating Well Bore Stability Plots in Python. In particular the Python ```Case``` class has a method ```create_well_bore_stability_plot``` method ([API doc]({{< relref "pythonrips" >}}#create_well_bore_stability_plotwell_path-time_step))
-
-See the [Create WBS Plot example]({{< relref "pythonexamples" >}}#create-wbs-plot) for an example of use.
+The [ResInsight Python API](https://api.resinsight.org) offers functionality for creating Well Bore Stability Plots from Python.
+For an example of use, see [ResInsight Python API](https://api.resinsight.org), and the *Create WBS Plot* script listed
+under *Python Examples*.

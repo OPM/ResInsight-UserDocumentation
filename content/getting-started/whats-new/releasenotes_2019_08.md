@@ -31,7 +31,7 @@ if resInsight is not None:
             view.update()
 ```
 
-See [Python Scripting]({{< relref "python" >}})
+For more information and examples, please see the [ResInsight Python API](https://api.resinsight.org).
 
 
 ## Launch ResInsight without user interface

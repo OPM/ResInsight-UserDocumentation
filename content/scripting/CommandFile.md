@@ -8,7 +8,8 @@ The command file interface allows a sequence of specified commands to be run in 
 The interface is used by supplying the command file as a [command line parameter]({{< relref "commandlineinterface" >}}).
 Once the command file is finished executing, ResInsight will exit.
 
-It is possible to use these commands directly from a Python script. For further details see [Python Documentation]({{< relref "PythonRips.md#commands-module" >}})
+It is possible to use these commands directly from a Python script. For further details, please see 
+the [ResInsight Python API](https://api.resinsight.org).
 
 ## Command List
 
