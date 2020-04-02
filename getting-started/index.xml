@@ -78,12 +78,12 @@ Well Path Creation ResInsight lets the user create new/custom well paths by clic
     </item>
     
     <item>
-      <title>Help Menu</title>
-      <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/helpmenu/</link>
+      <title>Help Menu and Documentation</title>
+      <link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/helpmenuanddocumentation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/helpmenu/</guid>
-      <description>ResInsight Help menu options are:
+      <guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/helpmenuanddocumentation/</guid>
+      <description>ResInsight Help Menu ResInsight Help menu options are:
  About &amp;ndash; Opens a dialog with information on ResInsight version, enabled features, and technical information of subsystems. Command Line Help &amp;ndash; Provides an overview of ResInsight Command line parameters and their syntax. Summary Command Line Help &amp;ndash; Provides an overview of ResInsight Summary command line parameters and their syntax. Users Guide &amp;ndash; Opens the ResInsight documentation in your default browser Search Help &amp;ndash; Searches the ResInsight documentation for help on the selected item in Project Tree.</description>
     </item>
     
