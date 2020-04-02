@@ -1,6 +1,6 @@
 +++
 title = "Other"
-published = false
+published = true
 weight = 90
 +++
 
