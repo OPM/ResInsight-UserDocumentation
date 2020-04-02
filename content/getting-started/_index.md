@@ -15,3 +15,8 @@ ResInsight is a powerful open source, cross-platform 3D visualization, curve plo
 This chapter provides an overview of its functionality and installation.
 
 
+## ResInsight Documentation Overview
+
+- [resinsight.org](https://resinsight.org/) - Documentation for latest stable release
+- [api.resinsight.org](https://api.resinsight.org/) - Documentation of Python API
+- [beta.resinsight.org](http://beta.resinsight.org) - Latest documentation (not yet released)
