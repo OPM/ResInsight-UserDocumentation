@@ -36,7 +36,7 @@ enables the user to see the completion type contributing to connection factor in
 
 ## Perforation Intervals
 
-A new perforation interval on a well can be set up by right-clicking on the well in the **3D View** or in the **Project Tree**, and choosing the command **Create Perforation interval** in the **Create Completions** sub-menu. In the 3D View the completion will be created at the specific depth the right-click occured at.
+A new perforation interval on a well can be set up by right-clicking on the well in the **3D View** or in the **Project Tree**, and choosing the command **Create Perforation interval** in the **Create Completions** sub-menu. In the 3D View the completion will be created at the specific depth the right-click occurred at.
 
 ![]({{< relref "" >}}images/3d-main-window/CreateCompletionOnWellPath.png)
 
@@ -205,7 +205,7 @@ The new **Fishbones Subs Definition** (a group of fishbone subs) is created in t
   - **Measured Depths** -- The measured depth of each of the fishbone subs. If the **Location Defined By** is set to the **User Specified** this will be directly editable by the user. 
 - **Laterals Configuration** -- Configures the laterals at each sub position.  
   - **Laterals Per Sub** -- Number of laterals for each sub position
-  - **Lenght(s)** -- Length of each lateral, in m or ft. 
+  - **Length(s)** -- Length of each lateral, in m or ft. 
   - **Exit Angle** -- Exit angle for fishbone lateral, in degree. 
   - **Build Angle** -- Build angle for fishbone lateral, in degree pr meter. 
   - **Orientation**
