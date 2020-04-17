@@ -10,26 +10,24 @@ https://github.com/gohugoio/hugo/releases
 **Last known working version is **
 https://github.com/gohugoio/hugo/releases/tag/v0.65.3
 
-The **master** branch is intended to represent the documentation source for current published website at **gh-pages**. The **next-major-release** branch is intended to be used to document new features not yet released. When a new release is published, **next-major-release
-** is merged into **master**
+The **next-major-release** branch is intended to represent the new features not yet released. The content of this branch is automatically published to **gh-pages** of this repository. This website can be reached by https://beta.resinsight.org
+
+The **master** branch is intended to represent the documentation for latest public release, and is used as source for resinsight.org
 
 1. Clone the branch to work on
 2. Open a command line prompt, and make sure `hugo.exe` is available in path
 3. Execute command `hugo.exe serve`. This will start a local webserver and display the documentation
 
-## Publish the documentation
-- Execute command `hugo.exe` This will create the static site in the folder `public`
-- Publish the generated site to the branch `gh-pages`
-  - Either : Copy content of folder public into branch `gh-pages` and push changes to github manually
-  - Or : Use a script for linux `publish_to_ghpages.sh`, will automatically publish content of public to gh-pages branch on GitHub
-
 ## See beta documentation online
-https://opm.github.io/ResInsight-UserDocumentation/
+https://beta.resinsight.org redirects to https://opm.github.io/ResInsight-UserDocumentation/
 
 ## Publish to resinsight.org
+- Update master branch from **next-major-release**
 - In `config.toml`, set `baseURL = "https://resinsight.org/"`
 - Generate site by executing command `hugo.exe`
+- Checkout gh-pages from https://github.com/OPM/ResInsight
 - Make sure there is a file named CNAME with content resinsight.org
+- Copy content from Hugo into gh-pages
 - Publish to https://github.com/OPM/ResInsight/tree/gh-pages
 
 ## Tips and trics
