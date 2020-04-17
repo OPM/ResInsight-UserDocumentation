@@ -31,8 +31,8 @@ Summary files can also be imported directly using one of the following commands 
 - **Import Ensemble**: Similar to the above, but in addition to just create a group, ResInsight performs some extra checking related to ensembles and converts the group to an ensemble, c.f. [Ensemble Plotting]({{< relref "ensembleplotting" >}}).
 
 These commands can also be accessed in the right-click menu for the **Summary Cases** entry in the **Plot Project Tree**.
-Notably, the right-click menu also allows creating [derived ensembles]({{< relref "ensembleplotting" >}}#derived-ensembles) 
-and [derived summary cases]({{< relref "summaryplots" >}}#derived-summary-case).
+Notably, the right-click menu also allows creating a [delta ensemble]({{< relref "ensembleplotting" >}}#delta-ensemble) 
+and [delta summary case]({{< relref "summaryplots" >}}#delta-summary-case).
 
 During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the [Origin Files](#origin-files) dialog is displayed.
 
@@ -41,10 +41,18 @@ During summary file import, ResInsight checks whether the summary file is restar
 A selection of cases can be grouped by right-clicking  a selection of summary cases and selecting the command **Group Summary Cases**. Summary cases can also be drag-dropped between summary groups. The groups will be used when listing the cases in the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
 
 
-### Derived Summary Case
-A derived Summary Case can be created as either the sum or difference between two existing summary cases. 
-To create a derived summary case, select two existing summary cases in the project tree, then right click and select **New Derived Summary Case**. A new derived ensemble is created with the two selected summary cases as input and a default arithmetic operator. In the Property Editor for the new derived summary case, both display name, the two base summary cases, and operator can be modified.
-An existing derived summary case may be input to a new derived ensemble.
+### Delta Summary Case
+A **Delta Summary Case** can be created as either the sum or difference between two existing summary cases. 
+To create a delta summary case, select two existing summary cases in **Plot Project tree**, then right click and select **New Delta Summary Case**. 
+A new delta ensemble is created with the two selected summary cases as input and a default arithmetic operator. 
+An existing delta summary case may be input to a new delta summary case.
+
+The Property Editor for the new delta summary case allows to modify display name, the two base summary cases, and the arithmetic operator.
+In addition, it is possible to specify a specific time step to be used in delta computation.
+As an example according to the settings in the figure below, the delta computation between two cases for a given parameter, e.g. *WBHP*, will be:
+$$WBHP\_{delta}(t) = WBHP\_{case1}(@02.01.2000) - WBHP\_{case2}(t)$$
+
+![]({{< relref "" >}}images/plot-window/DeltaSummaryCasePropertyEditor.png)
 
 
 ### Replace Summary Case

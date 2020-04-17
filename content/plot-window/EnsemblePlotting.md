@@ -40,9 +40,19 @@ Example:
 
 ![]({{< relref "" >}}images/plot-window/Ensemble.png)
 
-## Derived Ensembles
-New ensembles can be created based on calculations on two or more ensembles. Such ensembles are called *derived ensembles*. A derived ensemble will contain data which are either the sum or difference between two other ensembles. An existing derived ensemble may be input to a new derived ensemble, making it possible to for instance add more than two ensembles.
+## Delta Ensemble
+A new ensemble can be created based on calculations on two or more ensembles. 
+Such an ensemble is called an **Delta Ensemble**. 
+A delta ensemble will contain data which are either the sum or difference between two other ensembles. 
+An existing delta ensemble may be input to a new delta ensemble, making it possible to, for instance, add more than two ensembles.
 
-To create a derived ensemble, select two existing ensembles in **Plot Project Tree**, then right-click and select **New Derived Ensemble**. A new derived ensemble is created with the two selected ensembles as input and a default arithmetic operator. In the property for the new ensemble, both input ensembles and operator can be modified.
+To create a delta ensemble, select two existing ensembles in **Plot Project Tree**, then right-click and select **New Delta Ensemble**. 
+A new delta ensemble is created with the two selected ensembles as input and a default arithmetic operator. 
+In the property for the delta ensemble, both input ensembles and operator can be modified.
+Checking *Match On Parameters* ensures strict match on ensemble parameters. 
+In addition, it is possible to specify a fixed time step to be used in delta computation, see 
+[Delta Summary Case]({{< relref "summaryplots" >}}#delta-summary-case) for an example.
 
-If the two input ensembles differs in which cases they consist of, ResInsight will display a warning and let the user decide whether to create the derived ensemble or not.
+![]({{< relref "" >}}images/plot-window/DeltaEnsemblePropertyEditor.png)
+
+If the two input ensembles differs in which cases they consist of, ResInsight will display a warning and let the user decide whether to create the delta ensemble or not.
