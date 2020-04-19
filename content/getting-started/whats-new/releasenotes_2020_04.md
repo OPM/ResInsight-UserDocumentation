@@ -10,7 +10,7 @@ ResInsight 2020.04 is the latest version of ResInsight, the professional quality
 ## Surfaces
 ![]({{< relref "" >}}images/3d-main-window/SurfacesOverview.png)
 
-ResInsight supports import of 3D surfaces, and allows mapping properties and simulation results onto [ 3D Surfaces ]({{< relref "3d-main-window/surfaces" >}})
+ResInsight supports import of [ 3D Surfaces ]({{< relref "3d-main-window/surfaces" >}}), and allows mapping properties and simulation results onto these surfaces.
 
 ## Allen Diagrams
 
