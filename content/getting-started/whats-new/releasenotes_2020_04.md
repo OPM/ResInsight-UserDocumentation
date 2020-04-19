@@ -73,4 +73,4 @@ All external file references are now located at the top of the [ Project File ](
 
 **Release Notes on GitHub**
 
-[Release info on GitHub](https://github.com/OPM/ResInsight/releases/tag/v2020.04)
+[Release info on GitHub](https://github.com/OPM/ResInsight/releases/)
