@@ -12,11 +12,11 @@ ResInsight 2020.04 is the latest version of ResInsight, the professional quality
 
 ResInsight supports import of [ 3D Surfaces ]({{< relref "3d-main-window/surfaces" >}}), and allows mapping properties and simulation results onto these surfaces.
 
-## Allen Diagrams
+## Allan Diagrams
 
-![]({{< relref "" >}}images/3d-main-window/AllenDiagram.png)
+![]({{< relref "" >}}images/3d-main-window/AllanDiagram.png)
 
-[Allen Diagrams]({{< relref "/3d-main-window/allendiagrams" >}}) displays the overlap of formations and layers across fault faces.
+[Allan Diagrams]({{< relref "/3d-main-window/allandiagrams" >}}) displays the overlap of formations and layers across fault faces.
 
 ## Cumulative Phase Distribution Plots
 ![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionPlot.png)

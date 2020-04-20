@@ -1,5 +1,5 @@
 baseURL = "https://opm.github.io/ResInsight-UserDocumentation/"
-# baseURL = "https://resinsight.org/"
+#baseURL = "https://resinsight.org/"
 
 languageCode = "en-us"
 title = "ResInsight"

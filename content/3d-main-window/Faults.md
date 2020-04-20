@@ -10,7 +10,7 @@ This section describes how Faults are detected and visualized. NNC's are a part 
 
 **Related pages :**
 
-[Allen Diagrams]({{< relref "allendiagrams" >}})
+[Allan Diagrams]({{< relref "allandiagrams" >}})
 
 [Derived Results]({{< relref "derivedresults" >}}) 
 
