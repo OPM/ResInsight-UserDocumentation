@@ -165,7 +165,7 @@ $\space \space COMPACTION\_n = -(U3\_{nref} - U3\_n )$
 $ST\_{ii} = -Sa\_{ii} + \alpha * POR (i= 1,2,3)$
 
 $\alpha$ is the Biot porelastic coefficient which defines the compressibility of sand grains: $\alpha = 1.0$ for incompressible grains,
-and $\alpha < 1.0$ for compressible grains. $\alpha$ is not used for the intial (Geostatic) time step. The default value is 1.0, but values
+and $\alpha < 1.0$ for compressible grains. $\alpha$ is not used for the initial (Geostatic) time step. The default value is 1.0, but values
 per element can be imported as an [element property table]({{< relref "ElementPropertyTable.md" >}}). $Sa\_{ii}$ is the stress calculated by Abaqus.
 We use a value of $POR=0.0$ where it is not defined.
 
