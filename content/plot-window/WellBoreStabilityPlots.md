@@ -6,7 +6,7 @@ weight = 80
 
 ![]({{< relref "" >}}images/plot-window/WellBoreStability.png)
 
-ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{< relref "welllogsandplots" >}}) to visualize [Formations]({{< relref "formations" >}}), [Well Path Attributes]({{< relref "wellpaths" >}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
+ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{< relref "welllogsandplots" >}}) to visualize [Formations]({{< relref "formations" >}}), [Well Measurements]({{< relref "wellmeasurements" >}}), [Well Path Attributes]({{< relref "wellpaths" >}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
 
 In the figure above, the first track contains [Formations]({{< relref "formations" >}}) and an indication of sea level.
 
@@ -28,6 +28,8 @@ The fourth track (third visible by default) shows the following stability gradie
 - **SH_MK**: Minimum horizontal stress from Matthews & Kelly.
 
 The fifth track contains curves showing the angular orientation of the well path as azimuth (deviation from vertical) and inclination (deviation from x-axis) in degrees.
+
+If any [Well Measurements]({{< relref "wellmeasurements" >}}) are present, they will be visible as symbols in the track **Stability Curves**.
 
 ## Create Well Bore Stability plots
 
