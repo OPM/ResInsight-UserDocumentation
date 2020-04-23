@@ -58,9 +58,9 @@ For parameters with multiple available sources, the sources will be tried in num
 | UCS             | 100 bar | 1. LAS-file (Variable: "UCS_INP", Units: bar), 2. Element Property Table (Variable: "UCS_INP", Units: Pascal) |
 | Initial Overburden Gradient (OBG0) | OBG at initial time step | 1. Grid (Grid units), 2. LAS-file (Variable: "OBG0_INP", Units: Bar) | 
 | DF | 0.7 | 1. LAS-file (Variable: "DF_INP", No Units), 2. Element Property Table (Variable: "DF_INP", No units), 3 User Defined |
-| K0_SH | 0.65 x Hydrostatic PP | 1. LAS-file (Variable: "K0_SH_INP", Units: SG_EMW), 2. Element Property Table("Variable: "K0_SH_INP", Units: SG_EMW), 3. User Defined | 
+| K0_SH | 0.65  | 1. LAS-file (Variable: "K0_SH_INP", No Units ), 2. Element Property Table("Variable: "K0_SH_INP", No Units), 3. User Defined | 
 | FG Shale | Derived from K0_FG | Derived from K0_FG and PP Non-Reservoir, Proportional to SH or LAS-file (Variable: "FG_SHALE_INP", Units: SG_EMW)|
-| K0_FG | 0.75 x Hydrostatic PP | 1. LAS-file (Variable: "K0_FG_INP", Units: SG_EMW), 2. Element Property Table("Variable: "K0_FG_INP", Units: SG_EMW), 3. User Defined |
+| K0_FG | 0.75  | 1. LAS-file (Variable: "K0_FG_INP", No Units ), 2. Element Property Table("Variable: "K0_FG_INP", No Units), 3. User Defined |
 
 In addition to the units above, it LAS-files it is possible to supply PP in Bar and UCS in Pascal or MPa. Conversion will be handled automatically.
 
