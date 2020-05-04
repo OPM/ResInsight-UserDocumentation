@@ -6,7 +6,7 @@ weight = 80
 
 ![]({{< relref "" >}}images/plot-window/WellBoreStability.png)
 
-ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{< relref "welllogsandplots" >}}) to visualize [Formations]({{< relref "formations" >}}), [Well Path Attributes]({{< relref "wellpaths" >}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
+ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{< relref "welllogsandplots" >}}) to visualize [Formations]({{< relref "formations" >}}), [Well Measurements]({{< relref "wellmeasurements" >}}), [Well Path Attributes]({{< relref "wellpaths" >}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
 
 In the figure above, the first track contains [Formations]({{< relref "formations" >}}) and an indication of sea level.
 
@@ -28,6 +28,8 @@ The fourth track (third visible by default) shows the following stability gradie
 - **SH_MK**: Minimum horizontal stress from Matthews & Kelly.
 
 The fifth track contains curves showing the angular orientation of the well path as azimuth (deviation from vertical) and inclination (deviation from x-axis) in degrees.
+
+If any [Well Measurements]({{< relref "wellmeasurements" >}}) are present, they will be visible as symbols in the track **Stability Curves**.
 
 ## Create Well Bore Stability plots
 
@@ -58,9 +60,9 @@ For parameters with multiple available sources, the sources will be tried in num
 | UCS             | 100 bar | 1. LAS-file (Variable: "UCS_INP", Units: bar), 2. Element Property Table (Variable: "UCS_INP", Units: Pascal) |
 | Initial Overburden Gradient (OBG0) | OBG at initial time step | 1. Grid (Grid units), 2. LAS-file (Variable: "OBG0_INP", Units: Bar) | 
 | DF | 0.7 | 1. LAS-file (Variable: "DF_INP", No Units), 2. Element Property Table (Variable: "DF_INP", No units), 3 User Defined |
-| K0_SH | 0.65 x Hydrostatic PP | 1. LAS-file (Variable: "K0_SH_INP", Units: SG_EMW), 2. Element Property Table("Variable: "K0_SH_INP", Units: SG_EMW), 3. User Defined | 
+| K0_SH | 0.65  | 1. LAS-file (Variable: "K0_SH_INP", No Units ), 2. Element Property Table("Variable: "K0_SH_INP", No Units), 3. User Defined | 
 | FG Shale | Derived from K0_FG | Derived from K0_FG and PP Non-Reservoir, Proportional to SH or LAS-file (Variable: "FG_SHALE_INP", Units: SG_EMW)|
-| K0_FG | 0.75 x Hydrostatic PP | 1. LAS-file (Variable: "K0_FG_INP", Units: SG_EMW), 2. Element Property Table("Variable: "K0_FG_INP", Units: SG_EMW), 3. User Defined |
+| K0_FG | 0.75  | 1. LAS-file (Variable: "K0_FG_INP", No Units ), 2. Element Property Table("Variable: "K0_FG_INP", No Units), 3. User Defined |
 
 In addition to the units above, it LAS-files it is possible to supply PP in Bar and UCS in Pascal or MPa. Conversion will be handled automatically.
 
@@ -95,10 +97,10 @@ Then calculate *FG* in equivalent mud weight units as
 $$ FG = \frac{P_w}{TVD\_{RKB} \\: g  \\: \rho}$$ where $TVD\_{RKB} = TVD\_{MSL} + AirGap$, the gravity acceleration $g = 9.81 m/s^2$ and  the density of sea water $\rho$ in $kg/m^3$ (thus 1000 x the UI input in $g/cm^3$).
 
 ### Fracture gradient in shale
-$$FG\_{shale} = K0\_{FG} \times (OBG0 - PP0)$$
+$$FG\_{shale} = K0\_{FG} \times (OBG0 - PP0) + PP0$$
 
 ### SH from Matthews & Kelly
-$$SH\_{MK} = K0\_{SH} \times (OBG0 - PP0) + PP0 + DF$$
+$$SH\_{MK} = K0\_{SH} \times (OBG0 - PP0) + PP0 + DF \times (PP-PP0)$$
 
 ### Stassi-d'Alia failure criterion in shale
 

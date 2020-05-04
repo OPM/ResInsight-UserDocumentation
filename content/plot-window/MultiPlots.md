@@ -14,6 +14,14 @@ A new Multi Plot can be created by selecting a set of plots and from the right-c
 
 ![]({{< relref "" >}}images/plot-window/MultiPlotCreate.png)
 
+The currenly supported types of plots to be part of a **Multi Plot** are:
+- Summary Plots
+- Ensemble Plots
+- Grid Cross Plots
+- Saturation Pressure Plots
+- Phase Distribution Plots
+
+
 ## Properties
 
 The main page layout is controlled from **Preferences**
