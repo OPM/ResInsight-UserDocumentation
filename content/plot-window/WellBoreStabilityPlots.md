@@ -97,10 +97,10 @@ Then calculate *FG* in equivalent mud weight units as
 $$ FG = \frac{P_w}{TVD\_{RKB} \\: g  \\: \rho}$$ where $TVD\_{RKB} = TVD\_{MSL} + AirGap$, the gravity acceleration $g = 9.81 m/s^2$ and  the density of sea water $\rho$ in $kg/m^3$ (thus 1000 x the UI input in $g/cm^3$).
 
 ### Fracture gradient in shale
-$$FG\_{shale} = K0\_{FG} \times (OBG0 - PP0)$$
+$$FG\_{shale} = K0\_{FG} \times (OBG0 - PP0) + PP0$$
 
 ### SH from Matthews & Kelly
-$$SH\_{MK} = K0\_{SH} \times (OBG0 - PP0) + PP0 + DF$$
+$$SH\_{MK} = K0\_{SH} \times (OBG0 - PP0) + PP0 + DF \times (PP-PP0)$$
 
 ### Stassi-d'Alia failure criterion in shale
 
