@@ -31,15 +31,17 @@ The imported Formation Names files are then listed in the **Project Tree** in a 
 
 
 #### Formation Names description files (_`*.lyr`_)
-Formation Names description files (_`*.lyr`_) consist of a list of formation names and their k-range. 
-Below is an example of a Formation Names description file:
+Formation Names description files (_`*.lyr`_) consist of a list of entries containing formation name, k-range, and *optionally* a formation color.
+Formation color can be given as a World Wide Web Consortium [SVG color keyword name](https://www.w3.org/TR/SVG11/types.html#ColorKeywords)
+or a six-digit, three-byte hexadecimal number used in HTML, CSS, SVG, and other computing applications to represent the red, green and 
+blue components of the color, c.f. example below:
 
 ```
 -- Any text as comment
-'MyFormationName'                 4 - 12
-'MySecondFormationName'          15 - 17
-'3 k-layer thick 18,19 and 20'    3
-'Last Name'                      21 - 21 
+'My First  Formation Name'                             4 - 12   red
+'My Second Formation Name'                            15 - 17   green
+'Formation spanning 3 k-layers, i.e. 18,19 and 20'       3      blue
+'Last Formation Name'                                 21 - 21   #FFFF00
 ```
 
 #### FMU Layer Zone Table (_`layer_zone_table.txt`_)
