@@ -275,3 +275,40 @@ $TPinc = acos (\frac {TPQV} {TP}) $
 These are the directional angles of the face-normal itself. 
 
 
+### Pore Compressibility
+
+#### Pore Compressibility
+
+$ C\_{p} = \frac{ \alpha \epsilon\_{vol}}{ \Delta P\_p \phi} + \frac{1}{K\_s} ( \frac{ \alpha } { \phi } - 1) $
+
+Where:
+
+- $ \alpha $ is the Biot coefficient (see $ST\_{ii}$ definition above for details),
+- $ \epsilon\_{vol} $ is volumetric strain (EV in ResInsight),
+- $ \phi $ is porosity,
+- $ \Delta P\_p $ is change in pore pressure between current state and reference state,
+- $ K\_s $ bulk modulus for the solid material (grain).
+
+The bulk modulus for solid material is defined as:
+
+$ K\_s = \frac{ K\_{fr} }{ 1 - \alpha}, K\_{fr} = \frac{ E }{ 3(1-2\nu)} $
+
+Where:
+
+- $ E $ is the elastic moduli (Young's moduli) from element property table [MODULUS]({{< relref "ElementPropertyTable.md" >}}).
+- $ \nu $ is Poisson ratio imported from element property table [RATIO]({{< relref "ElementPropertyTable.md" >}}).
+
+
+#### Vertical Compressibility
+
+$ C\_{v} = - \frac{ \epsilon\_{\nu}}{ \alpha * \Delta P\_p } $
+
+$ \epsilon\_\nu $  is vertical strain (E33 in ResInsight).
+
+
+#### Vertical Compressibility Ratio
+
+$ C\_{vr} = \frac{ C\_v E(1-\nu) } { (1+\nu) ( 1 - 2\nu) } $
+
+Vertical Compression Ratio is the ratio between the real vertical compression and the compression in a uniaxial strain case.
+All parameters are described above.
