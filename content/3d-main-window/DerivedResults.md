@@ -208,6 +208,13 @@ $SE\_i = \text{Principal value i of SE} $
 
 $SEM = \frac{SE\_{11} + SE\_{22} + SE\_{33}} {3}  $
 
+
+### STA/SEA - Stress Anisotropy
+
+$STA\_{ij} = 2 \frac{ST\_{i} - ST\_{j}}{ ST\_{i} + ST\_{j}} (i,j = 1,2,3 \text{ and i $\lt$ j})$
+
+The same expressions are available for effective stresses as $SEA\_{12}$, $SEA\_{13}$ and $SEA\_{23}$.
+
 ### SFI
 
 $$SFI = \frac{\frac{S0}{tan(fa)} + 0.5 * (SE\_1 + SE\_3) * sin(fa)} {0.5*(SE\_1-SE\_3)}  $$
