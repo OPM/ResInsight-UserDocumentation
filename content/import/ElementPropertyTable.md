@@ -10,7 +10,7 @@ To view the data as a **Color Result** select the **Result Position**: ***Elemen
 
 A couple of property names are recognized and treated specially:
 
-- MODULUS -- Scaled by 1.0e-9 and shown as "Yong's Modulus" in the user interface
+- MODULUS -- Scaled by 1.0e-9 and shown as "Young's Modulus" in the user interface
 - RATIO -- Shown as "Poisson's Ratio" in the user interface
 
 ### File Format
