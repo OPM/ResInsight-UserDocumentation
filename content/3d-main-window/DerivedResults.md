@@ -286,7 +286,7 @@ These are the directional angles of the face-normal itself.
 
 #### Pore Compressibility
 
-$ C\_{p} = \frac{ \alpha \epsilon\_{vol}}{ \Delta P\_p \phi} + \frac{1}{K\_s} ( \frac{ \alpha } { \phi } - 1) $
+$ C\_{p} = -\frac{ \alpha \epsilon\_{vol}}{ \Delta P\_p \phi} + \frac{1}{K\_s} ( \frac{ \alpha } { \phi } - 1) $
 
 Where:
 
