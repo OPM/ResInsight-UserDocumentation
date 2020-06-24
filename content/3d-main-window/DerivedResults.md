@@ -304,7 +304,7 @@ $ K\_s = \frac{ K\_{fr} }{ 1 - \alpha}, K\_{fr} = \frac{ E }{ 3(1-2\nu)} $
 
 Where:
 
-- $ E $ is the elastic moduli (Young's moduli) from element property table [MODULUS]({{< relref "ElementPropertyTable.md" >}}).
+- $ E $ is the elastic modulus (Young's modulus) from element property table [MODULUS]({{< relref "ElementPropertyTable.md" >}}).
 - $ \nu $ is Poisson's ratio imported from element property table [RATIO]({{< relref "ElementPropertyTable.md" >}}).
 
 
