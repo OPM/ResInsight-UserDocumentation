@@ -321,3 +321,35 @@ $ C\_{vr} = \frac{ C\_v E(1-\nu) } { (1+\nu) ( 1 - 2\nu) } $
 
 Vertical Compression Ratio is the ratio between the real vertical compression and the compression in a uniaxial strain case.
 All parameters are described above.
+
+
+### Porosity and Permeability
+
+#### Porosity
+
+Porosity change is defined as either total change in porosity between initial (geostatic) state and current state,
+or change in porosity between a reference state and the current state $ \Delta\phi $. The latter is given as
+
+$ \Delta\phi = \phi_0(C_p \Delta P_p + \Delta\epsilon\_{vol}) $
+
+Here, $\Delta\phi_0$ is found from this equation with the reference state being the initial state (geostatic).
+The current porosity is then given as
+
+$ \phi = \phi_0 + \Delta\phi_0 $
+
+with $ \phi_0 $ being the porosity at the initial state, $\Delta\phi_0$ is porosity change between initial (geostatic)
+state current, $C_p$ is pore compressibility (between reference and current state), $\Delta P_p$ is change in pore pressure
+and $\Delta\epsilon\_{vol}$ is volumetric strain change.
+
+#### Permeability
+
+An expression for permeability is taken from Petunin (2011).
+
+$ k = k_0( \frac{\phi}{\phi_0} )^A $
+
+Where:
+
+- $k_0$ is the permeability at the initial state (unit: mD),
+- $\phi$ is porosity at current state,
+- $\phi_0$ is initial porosity,
+- $A$ is a constant
