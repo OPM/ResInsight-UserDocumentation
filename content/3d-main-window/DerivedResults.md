@@ -286,13 +286,15 @@ These are the directional angles of the face-normal itself.
 
 #### Pore Compressibility
 
-$ C\_{p} = -\frac{ \alpha \epsilon\_{vol}}{ \Delta P\_p \phi} + \frac{1}{K\_s} ( \frac{ \alpha } { \phi } - 1) $
+Pore compressibility between a reference state and the current stress state is defined as:
+
+$ C\_{p} = -\frac{ \alpha \Delta\epsilon\_{vol}}{ \Delta P\_p \phi_0} + \frac{1}{K\_s} ( \frac{ \alpha } { \phi_0 } - 1) $
 
 Where:
 
 - $ \alpha $ is the Biot coefficient (see $ST\_{ii}$ definition above for details),
-- $ \epsilon\_{vol} $ is volumetric strain (EV in ResInsight),
-- $ \phi $ is porosity,
+- $ \Delta\epsilon\_{vol} $ is volumetric strain change (EV in ResInsight) between curret state and reference state,
+- $ \phi_0 $ is porosity on the Geostatic step,
 - $ \Delta P\_p $ is change in pore pressure between current state and reference state,
 - $ K\_s $ bulk modulus for the solid material (grain).
 
@@ -303,14 +305,14 @@ $ K\_s = \frac{ K\_{fr} }{ 1 - \alpha}, K\_{fr} = \frac{ E }{ 3(1-2\nu)} $
 Where:
 
 - $ E $ is the elastic moduli (Young's moduli) from element property table [MODULUS]({{< relref "ElementPropertyTable.md" >}}).
-- $ \nu $ is Poisson ratio imported from element property table [RATIO]({{< relref "ElementPropertyTable.md" >}}).
+- $ \nu $ is Poisson's ratio imported from element property table [RATIO]({{< relref "ElementPropertyTable.md" >}}).
 
 
 #### Vertical Compressibility
 
-$ C\_{v} = - \frac{ \epsilon\_{\nu}}{ \alpha * \Delta P\_p } $
+$ C\_{v} = - \frac{ \Delta\epsilon\_{\nu}}{ \alpha \Delta P\_p } $
 
-$ \epsilon\_\nu $  is vertical strain (E33 in ResInsight).
+$ \Delta\epsilon\_\nu $ is the vertical strain change between current state and reference state (E33 in ResInsight).
 
 
 #### Vertical Compressibility Ratio
