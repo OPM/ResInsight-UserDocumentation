@@ -238,7 +238,7 @@ $E\_{ij} = -Ea\_{ij}$
 
 ### EV - Volumetric Strain
 
-EV = E11 + E22 + E33 
+$EV = E\_{11} + E\_{22} + E\_{33} $
 
 ### ED - Deviatoric Strain
 
