@@ -17,9 +17,18 @@ in the **3D Main Window**.
 ![]({{< relref "" >}}images/3d-main-window/SurfacesImport.png)
 
 Imported surfaces are listed under the {{< image-in-text src="images/3d-main-window/SurfacesProjectTreeNode.png" >}} entry 
-in **Project Tree** allowing for change of name, file, and color.
+in the **Project Tree**. You can click on a surface to change i.e. the name or color of the surface, or change the file to read the surface data from. 
 
 ![]({{< relref "" >}}images/3d-main-window/SurfacesPropertyEditor.png)
+
+You can also change the depth of the surface by adding a depth offset (positive or negative). This could be used i.e. to import the same surface file multiple times and assign each instance of the surface a separate depth offset. When an depth offset is set, the value will be shown as part of the surface name in the project tree.
+
+![]({{< relref "" >}}images/3d-main-window/surface_multiple.png)
+
+{{% notice note %}}
+Multiple surfaces can be imported at the same time by choosing more than one input file in the file selection window that shows up when you start an import.
+{{% /notice %}}
+
 
 ## Surface Results
 
@@ -28,18 +37,40 @@ If another result is to be displayed, specify the result under **Separate Surfac
 
 ![]({{< relref "" >}}images/3d-main-window/SurfacesSeparateSurfaceResults.png)
 
-Clicking a surface of a **View** in **Project Tree** activates the Property Editor for allowing view settings as shown below. 
-Please note the **Depth Offset** capability to offset a surface in z-direction and initiate result mapping to the surface 
-at that particular depth.
+Clicking a surface of a **View** in the **Project Tree** activates the Property Editor for allowing view settings as shown below. 
+
 To change result displayed on the surface, please specify the desired result in the **Separate Result Reference**
 section of the Property Editor.
 
 ![]({{< relref "" >}}images/3d-main-window/SurfacesViewPropertyEditor.png)
 
 
-## Supported Surface Import Formats
+## Reloading Surfaces
 
-### GOCAD Surface Import
+If you have modified a surface file using an external program, you can easily load the changes into ResInsight by using the reload surface feature. Bring up the context menu for the surface you want to reload (usually a mouse right-click) and choose  **Reload**. The views will automatically update with the new data (could take a few seconds).
+
+![]({{< relref "" >}}images/3d-main-window/surface_reload.png)
+
+## Grid Case Surfaces
+
+In addition to importing surfaces from file, ResInsight can also generate grid case surfaces. You do that by bringing up the context menu for the {{< image-in-text src="images/3d-main-window/SurfacesProjectTreeNode.png" >}} project tree entry and choose **Create Grid Case Surfaces**.
+
+![]({{< relref "" >}}images/3d-main-window/surface_gridcase.png)
+
+A grid case surface has the same properties as a surface imported from file, but instead of choosing which file the data should come from, you choose a source case, a slice direction and a slice index. The slice direction and index will be added to the surface name shown in the project tree.
+
+![]({{< relref "" >}}images/3d-main-window/surfaces_gridcaseproperties.png)
+
+
+## Exporting Surfaces
+
+ResInsight can export surfaces to the GOCAD TSurf file format. Grid case surfaces can additionally be exported to Petrel Surface PTL format. Use the context menu for the surface you want to export and choose the export format you want to use. A file selection window will show up allowing you to choose where you want to save the exported data.
+
+![]({{< relref "" >}}images/3d-main-window/surface_export.png)
+
+## Supported Surface Formats
+
+### GOCAD Surface format
 
 GOCAD is a computer application that allows you to import, create, modify, integrate, view, and export geological objects in 3D.
 The GOCAD export file format supported by ResInsight is **TSURF** (*.ts). 
@@ -72,7 +103,7 @@ END
 ```
 
 
-### Petrel Surface Import from PTL files
+### Petrel Surface PTL files
 
 ResInsight is capable of importing a surface defined by a **PTL** (*.ptl) file from Schlumberger Petrel.
 A PTL data file specifies the quads of a surface by *x*, *y*, *z* nodal coordinates and the *i* and *j* indices as exemplified below. 
