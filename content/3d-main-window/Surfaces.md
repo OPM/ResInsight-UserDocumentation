@@ -21,7 +21,7 @@ in the **Project Tree**. You can click on a surface to change i.e. the name or c
 
 ![]({{< relref "" >}}images/3d-main-window/SurfacesPropertyEditor.png)
 
-You can also change the depth of the surface by adding a depth offset (positive or negative). This could be used i.e. to import the same surface file multiple times and assign each instance of the surface a separate depth offset. When an depth offset is set, the value will be shown as part of the surface name in the project tree.
+You can also change the depth of the surface by adding a depth offset (positive or negative). This could be used i.e. to import the same surface file multiple times and assign each instance of the surface a separate depth offset. When a depth offset is set, the offset value will be shown as part of the surface name in the project tree.
 
 ![]({{< relref "" >}}images/3d-main-window/surface_multiple.png)
 
