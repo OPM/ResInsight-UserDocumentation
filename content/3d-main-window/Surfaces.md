@@ -47,13 +47,13 @@ section of the Property Editor.
 
 ## Reloading Surfaces
 
-If you have modified a surface file using an external program, you can easily load the changes into ResInsight by using the reload surface feature. Bring up the context menu for the surface you want to reload (usually a mouse right-click) and choose  **Reload**. The views will automatically update with the new data (could take a few seconds).
+If you have modified a surface file using an external program, you can easily load the changes into ResInsight by using the reload surface feature. Bring up the right-click menu for the surface you want to reload and choose  **Reload**. The views will automatically update with the new data (could take a few seconds).
 
 ![]({{< relref "" >}}images/3d-main-window/surface_reload.png)
 
 ## Grid Case Surfaces
 
-In addition to importing surfaces from file, ResInsight can also generate grid case surfaces. You do that by bringing up the context menu for the {{< image-in-text src="images/3d-main-window/SurfacesProjectTreeNode.png" >}} project tree entry and choose **Create Grid Case Surfaces**.
+In addition to importing surfaces from file, ResInsight can also generate grid case surfaces. You do that by bringing up the right-click menu for the {{< image-in-text src="images/3d-main-window/SurfacesProjectTreeNode.png" >}} project tree entry and choose **Create Grid Case Surfaces**.
 
 ![]({{< relref "" >}}images/3d-main-window/surface_gridcase.png)
 
@@ -64,7 +64,7 @@ A grid case surface has the same properties as a surface imported from file, but
 
 ## Exporting Surfaces
 
-ResInsight can export surfaces to the GOCAD TSurf file format. Grid case surfaces can additionally be exported to Petrel Surface PTL format. Use the context menu for the surface you want to export and choose the export format you want to use. A file selection window will show up allowing you to choose where you want to save the exported data.
+ResInsight can export surfaces to the GOCAD TSurf file format. Grid case surfaces can additionally be exported to Petrel Surface PTL format. Use the right-click menu for the surface you want to export and choose the export format you want to use. A file selection window will show up allowing you to choose where you want to save the exported data.
 
 ![]({{< relref "" >}}images/3d-main-window/surface_export.png)
 
