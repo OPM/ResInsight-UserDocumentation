@@ -385,3 +385,43 @@ Where:
 - $\phi$ is porosity at current state,
 - $\phi_0$ is initial porosity,
 - $A$ is a constant
+
+
+### Mud Weight Window
+
+Mud Weight Window (MWW) represents the difference between the minimum and the maximum possible
+mud weight between specific formation layers representing top and base of a fictitious well section.
+
+To find MWW a two step procedure is needed:
+
+- first find the limits per element,
+- determine the MWW for each element based on the vertical column.
+
+
+#### Finding Upper and Lower Mud Weight Limit
+
+The upper mud weight limit (UMWL) and lower mud weight limit (LMWL) is found for each element intersected by the fictitious well.
+The UMWL is either the fracture gradient (FG) or minimum horizontal stress (SHmin) for both sand and shale. 
+The LMWL is defined as the maximum of shear fracture gradient (SFG) and/or pore pressure in shale, and as pore pressure in sand.
+
+The calculations for fracture gradient and shear fracture gradient, and the needed input, are described in detail
+in [Well Bore Stability Plots]({{< relref "WellBoreStabilityPlots.md" >}}).
+
+
+#### Mud Weight Window
+
+Thereafter, the combined use of mud weight limits for all elements between the top and base (for a given IJ)
+determines the MWW parameters as will be further described below.
+
+A reference element index ($K_{ref}$) represents the base or the top of the fictitious well. Then for a set
+of elements with i = I, j = J and k = K to $K\_{ref}$ the maximum LWML and the minimum UWML must be found from
+these element values. Then the difference between the two defines the MWW parameter.
+
+Thus for a vertical stack of elements $element\_{ijk} = K \to K_{ref}$, $MWW\_{ijk}$ is given as
+
+$ MWW\_{ijk} = maximum(LMWL) - minimum(UMWL) (k = K \to K_{ref}) $
+
+Similar calculations are made below the reference layer, but then with the reference layer as the top layer.
+
+In addition to the MWW parameter, the mud weight representing the middle of the drilling window (MWM) is calculated if MWW > 0.
+Otherwise, MWM should is undefined.
