@@ -23,7 +23,7 @@ Alternatively, Correlation Plots can be created by right-clicking the **Correlat
 
 
 ## Specifying Setup and Settings
-The Correlation Plots property editor offers the user to specify an extensive number of settings dependant on the actual type of correlation plot. The complete set of settings are listed below according to the individual sections of the property editor.
+The Correlation Plots property editor allows the user to specify an extensive number of settings dependent on the actual type of correlation plot. The complete set of settings are listed below according to the individual sections of the property editor.
 
 ### Correlation Factor Settings
 This section of the property editor allows for setting correlation factor to either *Pearson Correlation Coefficient* or *Spearman's Rank Correlation Coefficient* as basis for Correlation Plots and to select ensemble parameter(s) of choice.
