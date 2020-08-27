@@ -162,16 +162,13 @@ $\space \space COMPACTION\_n = -(U3\_{nref} - U3\_n )$
 
 ### ST - Total Stress
 
-$ST\_{ii} = -Sa\_{ii} + \alpha * POR (i= 1,2,3)$
+$ST\_{ii} = -Sa\_{ii} + POR (i= 1,2,3)$
 
-$\alpha$ is the Biot porelastic coefficient which defines the compressibility of sand grains: $\alpha = 1.0$ for incompressible grains,
-and $\alpha < 1.0$ for compressible grains. $\alpha$ is not used for the initial (Geostatic) time step. The default value is 1.0, but values
-per element can be imported as an [element property table]({{< relref "ElementPropertyTable.md" >}}). $Sa\_{ii}$ is the stress calculated by Abaqus.
 We use a value of $POR=0.0$ where it is not defined.
 
 $ST\_{ij} = -Sa\_{ij} (i,j = 1,2,3 \text{ and i $\ne$ j})$
 
-$Sa\_{ij}$ is the stress calculated by Abaqus.
+$Sa\_{ii}$ and $Sa\_{ij}$ are the stresses calculated by Abaqus.
 
 $ST\_i = \text{Principal value i of ST}$
 
@@ -193,12 +190,7 @@ In these calculations we set Gamma to *undefined* if abs(POR) > 0.01 MPa.
 
 ### SE - Effective Stress
 
-$SE\_{ii} = ST\_{ii} - \alpha * POR - (1.0 - \alpha) * POR\_0  \text{ (Where POR is defined)} $
-
-where $\alpha$ is the Biot porelastic coefficient (see $ST\_{ii}$ definition above for details), $POR$ is the pore pressure at the given time step, and $POR\_0$ is the
-initial pore pressure (Geostatic step).
-
-$SE\_{ij} = -Sa\_{ij} (i,j = 1,2,3 \text{ and i $\ne$ j})$
+$SE\_{ij} = -Sa\_{ij} (i,j = 1,2,3 \text{ where POR is defined})$
 
 where $Sa\_{ij}$ is the stress calculated by Abaqus.
 
@@ -292,11 +284,16 @@ $ C\_{p} = -\frac{ \alpha \Delta\epsilon\_{vol}}{ \Delta P\_p \phi_0} + \frac{1}
 
 Where:
 
-- $ \alpha $ is the Biot coefficient (see $ST\_{ii}$ definition above for details),
+- $ \alpha $ is the Biot coefficient,
 - $ \Delta\epsilon\_{vol} $ is volumetric strain change (EV in ResInsight) between curret state and reference state,
 - $ \phi_0 $ is porosity on the Geostatic step,
 - $ \Delta P\_p $ is change in pore pressure between current state and reference state,
 - $ K\_s $ bulk modulus for the solid material (grain).
+
+The Biot porelastic coefficient ($\alpha$) defines the compressibility of sand grains: $\alpha = 1.0$ for incompressible grains,
+and $\alpha < 1.0$ for compressible grains. $\alpha$ is not used for the initial (Geostatic) time step. The default value is 1.0, but values
+per element can be imported as an [element property table]({{< relref "ElementPropertyTable.md" >}}).
+
 
 The bulk modulus for solid material is defined as:
 
