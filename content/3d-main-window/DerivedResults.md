@@ -180,6 +180,31 @@ $STM = \frac{ST\_{11} + ST\_{22} + ST\_{33}}{3} $
 
 $Q = \sqrt {\frac{3}{2} * ((ST\_1 - STM)^2 + (ST\_2 - STM)^2 + (ST\_3 - STM)^2 }$
 
+
+### DPN - Shear Slip Indicator
+
+Excess pore pressure parameter is defined as 
+
+$DPN = \frac{P_p - P_0} { \sigma_v - P_0  }$
+
+Where:
+
+- $P_0$ is hydrostatic pore pressure,
+- $P_p$ is pore pressure (at the time of the incident) and
+- $\sigma_v$ total vertical stress ($ ST\_{33} $).
+
+
+Hydrostatic pore pressure is
+
+$ P_0 = \rho_w * TVDMSL * g $
+
+Where:
+
+- $\rho_w$ is (average) density of formation water (default = 1.03),
+- TVDMSL is true vertical depth mean sea level and
+- $g$ is gravity.
+
+
 ### Gamma - Stress Path
 
 $Gamma\_{ii} = \frac{ST\_{ii}} {POR} (i= 1,2,3) $
