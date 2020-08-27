@@ -338,6 +338,16 @@ with $ \phi_0 $ being the porosity at the initial state, $\Delta\phi_0$ is poros
 state current, $C_p$ is pore compressibility (between reference and current state), $\Delta P_p$ is change in pore pressure
 and $\Delta\epsilon\_{vol}$ is volumetric strain change.
 
+#### Initial Porosity
+
+Porosity at the initial state:
+
+$ \phi_0 = \frac{VOIDR} {1 + VOIDR} $
+
+Where:
+
+- VOIDR is void ratio from Abaqus.
+
 #### Permeability
 
 An expression for permeability is taken from Petunin (2011).
