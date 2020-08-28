@@ -132,15 +132,15 @@ Geomechanical results are sorted in different **Result Position**s:
 - **Element Nodal** -- Results with values per element node
 - **Integration Point** -- Results with values per integration point. These are displayed in the same way as element nodal results. 
 - **Element Nodal on Face** -- Results with values transformed to element faces or intersections. 
-See [Element Nodal on Face]({{< ref "derivedresults.md#element-nodal-on-face" >}}) for more information 
+See [Element Nodal on Face]({{< ref "derivedresultsgeomech.md#element-nodal-on-face" >}}) for more information 
 - **Formation Names** -- Lists the **Active Formation Names** selected on the case. ( See [Formations]({{< ref "formations.md" >}}) )
 - **Element** -- Imported element property table results. One value pr element. See [Element Property Table Import]({{< ref "elementpropertytable.md" >}})
 
-Several derived cell properties are calculated. Please refer to [Derived Results]({{< ref "derivedresults.md" >}}) for more information.
+Several derived cell properties are calculated. Please refer to [Derived Results]({{< ref "derivedresultsgeomech.md" >}}) for more information.
 
 ### Relative Result Options
 
-This group of options controls time-lapse results to be calculated. ( See [Relative Results]({{< ref "derivedresults.md#relative-results-time-lapse-results" >}}) for more information ) 
+This group of options controls time-lapse results to be calculated. ( See [Relative Results]({{< ref "derivedresultsgeomech.md#relative-results-time-lapse-results" >}}) for more information ) 
 
 ## Select Color Result
 ![]({{< relref "" >}}images/3d-main-window/SelectColorResult.png)
