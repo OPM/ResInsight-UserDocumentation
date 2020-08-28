@@ -44,6 +44,11 @@ CommandExample
 .. literalinclude:: ../rips/PythonExamples/command_example.py
 
 ===============
+Create Fracture
+===============
+.. literalinclude:: ../rips/PythonExamples/create_and_export_fracture_model.py
+
+===============
 Create WBS Plot
 ===============
 .. literalinclude:: ../rips/PythonExamples/create_wbs_plot.py
@@ -152,6 +157,11 @@ SoilPorvAsync
 SoilPorvSync
 ==================================
 .. literalinclude:: ../rips/PythonExamples/soil_porv_sync.py
+
+==================================
+SurfaceImport
+==================================
+.. literalinclude:: ../rips/PythonExamples/surface_import.py
 
 ==================================
 SummaryVectors
