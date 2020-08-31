@@ -30,6 +30,13 @@ Multiple surfaces can be imported at the same time by choosing more than one inp
 {{% /notice %}}
 
 
+## Using folders
+
+To make it easier to organize the surfaces you import into your project, ResInsight supports creating surface folders in the project tree. To create a new folder, right-click on the top level **Surfaces** folder in the project tree and choose **Add Folder**.
+
+![]({{< relref "" >}}images/3d-main-window/surface_addfolder.png)
+
+
 ## Surface Results
 
 Per default, ResInsight maps current **Cell Result** on a given surface. 
@@ -50,6 +57,12 @@ section of the Property Editor.
 If you have modified a surface file using an external program, you can easily load the changes into ResInsight by using the reload surface feature. Bring up the right-click menu for the surface you want to reload and choose  **Reload**. The views will automatically update with the new data (could take a few seconds).
 
 ![]({{< relref "" >}}images/3d-main-window/surface_reload.png)
+
+## Create a copy
+
+You can easily create a copy of an existing surface by choosing  **Create Copy** in the surface right-click menu. A new, identical surface will show up at the same level in the project tree. You can now give it a new name, change depth offset etc.
+
+![]({{< relref "" >}}images/3d-main-window/surface_copy.png)
 
 ## Grid Case Surfaces
 
