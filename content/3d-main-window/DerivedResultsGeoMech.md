@@ -14,19 +14,29 @@ ResInsight calculates several of the presented geomechanical results based on th
 ### Relative Results (Time Lapse Results) 
 
 ResInsight can calculate and display relative results, sometimes also referred to as Time Lapse results.
-When enabled, every result variable is calculated as :
+When enabled, every result variable is calculated as:
 
-$$Value'(t) = Value(t) - Value(BaseTime)$$
+$Value\_{[t-b]} = Value\_{[t]} - Value\_{[b]}$
 
-Enable the **Enable Relative Result**  option in the **Relative Result Options** group, and select the appropriate **Base Time Step**. 
+where:
+
+- $b$ is the base time step,
+- $t$ is the current time step
+
+Select the appropriate **Base Time Step** option in the **Difference Options** group to enable the time lapse result.
 
 ![]({{< relref "" >}}images/appendix/DerivedRelativeResults.png)
 
-Each variable is then post-fixed with "_D*TimeStepIndex*" to distinguish them from the native variables.
+Note: Relative Results calculated based on Gamma values and Stress Anisotropy are calculated slightly differently:
 
-Note: Relative Results calculated based on Gamma values are calculated slightly differently:
+Gamma:
 
-Gamma_D*n* = ST_D*n* / POR_D*n*
+$Gamma\_{i[t-b]} = \frac{ST\_{i[t]} - ST\_{i[b]}}{ POR\_{[t]} - POR\_{[b]}  }$
+
+Stress Anisotropy:
+
+$SA\_{ij[t-b]} = 2 * \frac{(ST\_{i[t]} - ST\_{i[b]}) - (ST\_{j[t]} - ST\_{j[b]})}{(ST\_{i[t]} - ST\_{i[b]}) + (ST\_{j[t]} - ST\_{j[b]})}$
+
 
 ### Derived Result Fields
 
