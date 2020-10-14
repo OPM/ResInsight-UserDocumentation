@@ -104,6 +104,32 @@ class ElasticProperties(PdmObjectBase):
         if ElasticProperties.__custom_init__ is not None:
             ElasticProperties.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class FaciesProperties(PdmObjectBase):
+    """
+    Attributes:
+        color_legend (str): Colors
+        file_path (str): File Path
+        properties_table (str): Properties Table
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.color_legend = "ColorLegend:2650342614112"
+        self.file_path = ""
+        self.properties_table = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaciesProperties.__custom_init__ is not None:
+            FaciesProperties.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def facies_definition(self):
+        """
+        Returns:
+             EclipseResult
+        """
+        children = self.children("FaciesDefinition", EclipseResult)
+        return children[0] if len(children) > 0 else None
+
+
 class SummaryCase(PdmObjectBase):
     """
     The Base Class for all Summary Cases
@@ -111,6 +137,7 @@ class SummaryCase(PdmObjectBase):
     Attributes:
         auto_shorty_name (str): Use Auto Display Name
         id (int): Case ID
+        name_setting (str): Name Setting
         short_name (str): Display Name
         summary_header_filename (str): Summary Header File
     """
@@ -119,7 +146,8 @@ class SummaryCase(PdmObjectBase):
     def __init__(self, pb2_object=None, channel=None):
         self.auto_shorty_name = False
         self.id = -1
-        self.short_name = "Display Name"
+        self.name_setting = "FULL_CASE_NAME"
+        self.short_name = ""
         self.summary_header_filename = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SummaryCase.__custom_init__ is not None:
@@ -209,17 +237,17 @@ class FractureModelCollection(CheckableNamedObject):
         return self.children("FractureModels", RimFractureModel)
 
 
-    def new_fracture_model(self, well_path=None, measured_depth=None, elastic_properties_file_path=None):
+    def new_fracture_model(self, well_path=None, measured_depth=None, fracture_model_template=None):
         """
         Create a new Fracture Model
         Arguments:
             well_path (WellPathBase): Well Path
             measured_depth (float): Measured Depth
-            elastic_properties_file_path (str): Elastic Properties File Path
+            fracture_model_template (RimFractureModelTemplate): Fracture Model Template
         Returns:
             RimFractureModel
         """
-        return self._call_pdm_method("NewFractureModel", well_path=well_path, measured_depth=measured_depth, elastic_properties_file_path=elastic_properties_file_path)
+        return self._call_pdm_method("NewFractureModel", well_path=well_path, measured_depth=measured_depth, fracture_model_template=fracture_model_template)
 
 
 class ViewWindow(PdmObjectBase):
@@ -295,15 +323,15 @@ class FractureModelPlot(DepthTrackPlot):
         if FractureModelPlot.__custom_init__ is not None:
             FractureModelPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def export_to_file(self, file_path=None):
+    def export_to_file(self, directory_path=None):
         """
         Export Fracture Model Plot to File
         Arguments:
-            file_path (str): File Path
+            directory_path (str): Directory Path
         Returns:
             FractureModelPlot
         """
-        return self._call_pdm_method("ExportToFile", file_path=file_path)
+        return self._call_pdm_method("ExportToFile", directory_path=directory_path)
 
 
 class FractureModelPlotCollection(PdmObjectBase):
@@ -335,6 +363,34 @@ class FractureModelPlotCollection(PdmObjectBase):
         return self._call_pdm_method("NewFractureModelPlot", eclipse_case=eclipse_case, fracture_model=fracture_model, time_step=time_step)
 
 
+class FractureModelTemplateCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FractureModelTemplateCollection.__custom_init__ is not None:
+            FractureModelTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def fracture_model_templates(self):
+        """Fracture Model Templates
+        Returns:
+             List of RimFractureModelTemplate
+        """
+        return self.children("FractureModelTemplates", RimFractureModelTemplate)
+
+
+    def new_fracture_model_template(self, facies_properties_file_path=None, elastic_properties_file_path=None):
+        """
+        Create a new Fracture Model Template
+        Arguments:
+            facies_properties_file_path (str): Facies Properties File Path
+            elastic_properties_file_path (str): Elastic Properties File Path
+        Returns:
+            RimFractureModelTemplate
+        """
+        return self._call_pdm_method("NewFractureModelTemplate", facies_properties_file_path=facies_properties_file_path, elastic_properties_file_path=elastic_properties_file_path)
+
+
 class View(ViewWindow):
     """
     Attributes:
@@ -350,7 +406,7 @@ class View(ViewWindow):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#b0c4de"
+        self.background_color = "#ffffff"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
@@ -412,6 +468,15 @@ class ModeledWellPath(WellPath):
         WellPath.__init__(self, pb2_object, channel)
         if ModeledWellPath.__custom_init__ is not None:
             ModeledWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def well_path_geometry(self):
+        """Trajectory
+        Returns:
+             WellPathGeometry
+        """
+        children = self.children("WellPathGeometry", WellPathGeometry)
+        return children[0] if len(children) > 0 else None
+
 
 class GeoMechCase(Case):
     """
@@ -587,74 +652,115 @@ class RimFractureModel(CheckableNamedObject):
     """
     Attributes:
         anchor_position (str): Anchor Position
+        auto_compute_barrier (str): Auto Compute Barrier
+        azimuth_angle (float): Azimuth Angle
+        barrier (str): Barrier
+        barrier_annotation (str): Barrier Annotation
+        barrier_dip (float): Barrier Dip
+        barrier_fault_name (str): Barrier Fault
+        barrier_text_annotation (str): Barrier Text Annotation
         bounding_box_horizontal (float): Bounding Box Horizontal
         bounding_box_vertical (float): Bounding Box Vertical
+        distance_to_barrier (float): Distance To Barrier [m]
+        extraction_type (str): Extraction Type
+        formation_dip (float): Formation Dip
+        fracture_orientation (str): Fracture Orientation
+        md (float): MD
+        perforation_length (float): Perforation Length [m]
+        poro_elastic_constant (float): Poro-Elastic Constant
+        relative_permeability_factor (float): Relative Permeability Factor
+        show_all_faults (str): Show All Faults
+        show_only_barrier_fault (str): Show Only Barrier Fault
+        thermal_expansion_coefficient (float): Thermal Expansion Coefficient [1/C]
+        thickness_direction (str): Thickness Direction
+        thickness_direction_well_path (str): Thickness Direction Well Path
+        use_detailed_fluid_loss (str): Use Detailed Fluid Loss
+        well_penetration_layer (int): Well Penetration Layer
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.anchor_position = [0, 0, 0]
+        self.auto_compute_barrier = True
+        self.azimuth_angle = 0
+        self.barrier = True
+        self.barrier_annotation = ""
+        self.barrier_dip = 0
+        self.barrier_fault_name = ""
+        self.barrier_text_annotation = ""
+        self.bounding_box_horizontal = 50
+        self.bounding_box_vertical = 100
+        self.distance_to_barrier = 0
+        self.extraction_type = "TST"
+        self.formation_dip = 0
+        self.fracture_orientation = "ALONG_WELL_PATH"
+        self.md = 0
+        self.perforation_length = 10
+        self.poro_elastic_constant = 0
+        self.relative_permeability_factor = 0.5
+        self.show_all_faults = False
+        self.show_only_barrier_fault = False
+        self.thermal_expansion_coefficient = 0
+        self.thickness_direction = [0, 0, 0]
+        self.thickness_direction_well_path = ""
+        self.use_detailed_fluid_loss = True
+        self.well_penetration_layer = 0
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if RimFractureModel.__custom_init__ is not None:
+            RimFractureModel.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimFractureModelTemplate(PdmObjectBase):
+    """
+    Attributes:
         default_permeability (float): Default Permeability
         default_porosity (float): Default Porosity
-        extraction_type (str): Extraction Type
-        md (float): MD
+        id (int): ID
         overburden_facies (str): Overburden Facies
         overburden_fluid_density (float): Overburden Fluid Density [g/cm^3]
         overburden_formation (str): Overburden Formation
         overburden_height (float): Overburden Height
         overburden_permeability (float): Overburden Permeability
         overburden_porosity (float): Overburden Porosity
-        poro_elastic_constant (float): Poro-Elastic Constant
         reference_temperature (float): Temperature [C]
         reference_temperature_depth (float): Temperature Depth [m]
         reference_temperature_gradient (float): Temperature Gradient [C/m]
-        relative_permeability_factor (float): Relative Permeability Factor
         stress_depth (float): Stress Depth
-        thermal_expansion_coefficient (float): Thermal Expansion Coefficient [1/C]
-        thickness_direction (str): Thickness Direction
-        thickness_direction_well_path (str): Thickness Direction Well Path
         underburden_facies (str): Underburden Facies
         underburden_fluid_density (float): Underburden Fluid Density [g/cm^3]
         underburden_formation (str): Underburden Formation
         underburden_height (float): Underburden Height
         underburden_permeability (float): Underburden Permeability
         underburden_porosity (float): Underburden Porosity
-        use_detailed_fluid_loss (str): Use Detailed Fluid Loss
         vertical_stress (float): Vertical Stress
         vertical_stress_gradient (float): Vertical Stress Gradient
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.anchor_position = [0, 0, 0]
-        self.bounding_box_horizontal = 50
-        self.bounding_box_vertical = 100
         self.default_permeability = 1e-05
         self.default_porosity = 0
-        self.extraction_type = "TST"
-        self.md = 0
+        self.id = -1
         self.overburden_facies = ""
         self.overburden_fluid_density = 1.03
         self.overburden_formation = ""
         self.overburden_height = 50
         self.overburden_permeability = 1e-05
         self.overburden_porosity = 0
-        self.poro_elastic_constant = 0
-        self.reference_temperature = 20
-        self.reference_temperature_depth = 1000
+        self.reference_temperature = 70
+        self.reference_temperature_depth = 2500
         self.reference_temperature_gradient = 0.025
-        self.relative_permeability_factor = 0.5
         self.stress_depth = 1000
-        self.thermal_expansion_coefficient = 0
-        self.thickness_direction = [0, 0, 0]
-        self.thickness_direction_well_path = ""
         self.underburden_facies = ""
         self.underburden_fluid_density = 1.03
         self.underburden_formation = ""
         self.underburden_height = 50
         self.underburden_permeability = 1e-05
         self.underburden_porosity = 0
-        self.use_detailed_fluid_loss = True
-        self.vertical_stress = 879
+        self.vertical_stress = 238
         self.vertical_stress_gradient = 0.238
-        CheckableNamedObject.__init__(self, pb2_object, channel)
-        if RimFractureModel.__custom_init__ is not None:
-            RimFractureModel.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if RimFractureModelTemplate.__custom_init__ is not None:
+            RimFractureModelTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
     def elastic_properties(self):
         """Elastic Properties
@@ -662,6 +768,15 @@ class RimFractureModel(CheckableNamedObject):
              ElasticProperties
         """
         children = self.children("ElasticProperties", ElasticProperties)
+        return children[0] if len(children) > 0 else None
+
+
+    def facies_properties(self):
+        """Facies Properties
+        Returns:
+             FaciesProperties
+        """
+        children = self.children("FaciesProperties", FaciesProperties)
         return children[0] if len(children) > 0 else None
 
 
@@ -741,7 +856,6 @@ class SummaryPlot(Plot):
         is_using_auto_name (str): Auto Title
         normalize_curve_y_values (str): Normalize all curves
         plot_description (str): Name
-        show_plot_title (str): Plot Title
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -749,7 +863,6 @@ class SummaryPlot(Plot):
         self.is_using_auto_name = True
         self.normalize_curve_y_values = False
         self.plot_description = "Summary Plot"
-        self.show_plot_title = True
         Plot.__init__(self, pb2_object, channel)
         if SummaryPlot.__custom_init__ is not None:
             SummaryPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -954,6 +1067,44 @@ class FileWellPath(WellPath):
         if FileWellPath.__custom_init__ is not None:
             FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class WellPathGeometry(PdmObjectBase):
+    """
+    Class containing the geometry of a modeled Well Path
+
+    Attributes:
+        air_gap (float): Air Gap
+        md_at_first_target (float): MD at First Target
+        reference_point (str): UTM Reference Point
+        use_auto_generated_target_at_sea_level (str): Generate Target at Sea Level
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.air_gap = 0
+        self.md_at_first_target = 0
+        self.reference_point = [0, 0, 0]
+        self.use_auto_generated_target_at_sea_level = True
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathGeometry.__custom_init__ is not None:
+            WellPathGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def auto_generated_target(self):
+        """Auto Generated Target
+        Returns:
+             WellPathTarget
+        """
+        children = self.children("AutoGeneratedTarget", WellPathTarget)
+        return children[0] if len(children) > 0 else None
+
+
+    def well_path_targets(self):
+        """Well Targets
+        Returns:
+             List of WellPathTarget
+        """
+        return self.children("WellPathTargets", WellPathTarget)
+
+
 def class_dict():
     classes = {}
     classes['Case'] = Case
@@ -968,11 +1119,13 @@ def class_dict():
     classes['EclipseResult'] = EclipseResult
     classes['EclipseView'] = EclipseView
     classes['ElasticProperties'] = ElasticProperties
+    classes['FaciesProperties'] = FaciesProperties
     classes['FileSummaryCase'] = FileSummaryCase
     classes['FileWellPath'] = FileWellPath
     classes['FractureModelCollection'] = FractureModelCollection
     classes['FractureModelPlot'] = FractureModelPlot
     classes['FractureModelPlotCollection'] = FractureModelPlotCollection
+    classes['FractureModelTemplateCollection'] = FractureModelTemplateCollection
     classes['GeoMechCase'] = GeoMechCase
     classes['GeoMechContourMap'] = GeoMechContourMap
     classes['GeoMechView'] = GeoMechView
@@ -987,6 +1140,7 @@ def class_dict():
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
     classes['RimFractureModel'] = RimFractureModel
+    classes['RimFractureModelTemplate'] = RimFractureModelTemplate
     classes['SimulationWell'] = SimulationWell
     classes['SummaryCase'] = SummaryCase
     classes['SummaryCaseSubCollection'] = SummaryCaseSubCollection
@@ -1001,6 +1155,7 @@ def class_dict():
     classes['WellBoreStabilityPlot'] = WellBoreStabilityPlot
     classes['WellLogPlot'] = WellLogPlot
     classes['WellPath'] = WellPath
+    classes['WellPathGeometry'] = WellPathGeometry
     return classes
 
 def class_from_keyword(class_keyword):
