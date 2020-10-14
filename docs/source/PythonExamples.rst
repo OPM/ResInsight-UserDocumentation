@@ -98,20 +98,25 @@ InstanceExample
 ===============
 .. literalinclude:: ../rips/PythonExamples/instance_example.py
 
-============================
-LaunchWithCommandLineOptions
-============================
-.. literalinclude:: ../rips/PythonExamples/launch_with_commandline_options.py
-
 =================================
 Launch Using Command Line Options
 =================================
 .. literalinclude:: ../rips/PythonExamples/launch_with_commandline_options.py
 
+============================
+ModeledWellPath
+============================
+.. literalinclude:: ../rips/PythonExamples/modeled_well_path.py
+
 ==============
 NewSummaryPlot
 ==============
 .. literalinclude:: ../rips/PythonExamples/new_summary_plot.py
+
+==============
+ReplaceCase
+==============
+.. literalinclude:: ../rips/PythonExamples/replace_case.py
 
 ==============
 SelectedCases
@@ -159,14 +164,19 @@ SoilPorvSync
 .. literalinclude:: ../rips/PythonExamples/soil_porv_sync.py
 
 ==================================
-SurfaceImport
+SummaryCases
 ==================================
-.. literalinclude:: ../rips/PythonExamples/surface_import.py
+.. literalinclude:: ../rips/PythonExamples/summary_cases.py
 
 ==================================
 SummaryVectors
 ==================================
 .. literalinclude:: ../rips/PythonExamples/summary_vectors.py
+
+==================================
+SurfaceImport
+==================================
+.. literalinclude:: ../rips/PythonExamples/surface_import.py
 
 ==================================
 ViewExample
