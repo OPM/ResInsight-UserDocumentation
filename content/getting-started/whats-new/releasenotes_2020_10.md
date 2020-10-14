@@ -35,6 +35,11 @@ More derived geomechanical results are now available. These includes Mud Weight 
 
 For more details on these parameters see [Geomechanical Derived Results]({{< ref "derivedresultsgeomech.md" >}})
 
+## Flow Vectors
+
+Improved visualization of flow vectors including NNC flow.
+
+
 ## Application Themes
 
 ![]({{< relref "" >}}images/3d-main-window/ApplicationTheme.png )
