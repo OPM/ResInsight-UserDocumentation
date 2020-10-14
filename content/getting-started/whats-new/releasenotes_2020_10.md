@@ -33,7 +33,7 @@ Several visualizations can be created, including tornado plots, correlation matr
 
 More derived geomechanical results are now available. These includes Mud Weight Window, Stress Anisotropy timelapse, Shear Slip Indicator and Pore Compressibility.
 
-For more details on these parameters see [ Geomechanical Derived Results ]({{< relref "3d-main-window\derivedresultsgeomech" >}}) 
+For more details on these parameters see [Geomechanical Derived Results]({{< ref "derivedresultsgeomech.md" >}})
 
 ## Application Themes
 
