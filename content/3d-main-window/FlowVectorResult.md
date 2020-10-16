@@ -6,7 +6,7 @@ weight = 50
 
 ![]({{< relref "" >}}images/3d-main-window/FlowVectorResult.PNG)
 
-The Flow Vector Result View lets the user investigate fluxes by visualizing flow vectors in the oil field. It allows for selecting and combining different fluids and directions. Vectors can be combined, scaled or neglected.
+The Flow Vector Result View lets the user investigate fluxes by visualizing flow vectors in the reservoir. It allows for selecting and combining different fluids and directions. Selected vectors can be combined and scaled.
 
 ### Open the Flow Vector Result View
 
@@ -45,20 +45,14 @@ The fluxes of the fluids selected here are shown as aggregated vectors in the 3D
 - **At vector anchor:** The vectors are starting at the cells' faces.
 - **At vector center:** The vectors' centers are located at the cell's faces.
 
-**I**\
--- Use flows in **I** direction for computing vectors.
+**I/J/K**
+- Use flows in **I/J/K** direction for computing vectors.
 
-**J**\
--- Use flows in **J** direction for computing vectors.
+**Show NNC data**
+- Visualize flows between non-neighbouring cells.
 
-**K**\
--- Use flows in **K** direction for computing vectors.
-
-**Show NNC data**\
--- Visualize flows between non-neighbouring cells.
-
-**Threshold**\
--- All vectors with flow result values below this number are hidden.
+**Threshold**
+- All vectors with flow result values below this number are hidden.
 
 #### Vector Colors
 - **Result Colors:** Color vectors in the flow result color according to the *Element Vector Result* legend shown in the 3D View.
@@ -66,11 +60,10 @@ The fluxes of the fluids selected here are shown as aggregated vectors in the 3D
 
 #### Vector Size
 
-**Size Scale**\
--- Scales the length of the vectors by this value.
+**Size Scale**
+- Scales the length of the vectors by this value.
 
 **Scale Method**
 - **Result:** Scale the vectors according to their flow result value.
-- **Result (logarithmically):** Scale the vectors according to their flow result value but in a logarithmic scale. 
--- ***Note:** all values are increased by 1 in order to be able to properly show flow result values smaller than 1.*
+- **Result (logarithmically):** Scale the vectors according to their flow result value but in a logarithmic scale. **Note:** all values are increased by 1 in order to be able to properly show flow result values smaller than 1.*
 - **Constant:** All vectors have the same constant length.
