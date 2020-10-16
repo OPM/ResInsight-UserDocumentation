@@ -37,8 +37,11 @@ For more details on these parameters see [Geomechanical Derived Results]({{< ref
 
 ## Flow Vectors
 
-Improved visualization of flow vectors including NNC flow.
+![]({{< relref "" >}}images/3d-main-window/FlowVectorResult.PNG)
 
+The Flow Vector Result View lets the user investigate fluxes by visualizing flow vectors in the reservoir. It allows for selecting and combining different fluids and directions.
+
+[Flow Vector Result]({{< ref "flowvectorresult.md" >}})
 
 ## Application Themes
 

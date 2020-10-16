@@ -8,6 +8,8 @@ weight = 50
 
 The Flow Vector Result View lets the user investigate fluxes by visualizing flow vectors in the reservoir. It allows for selecting and combining different fluids and directions. Selected vectors can be combined and scaled.
 
+The flow vectors are based on the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**
+
 ### Open the Flow Vector Result View
 
 In order to show Flow Vector Results, select and check the checkbox next to **Flow Vector Result** in the **Project Tree**.
