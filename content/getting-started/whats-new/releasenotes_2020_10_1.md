@@ -10,7 +10,7 @@ ResInsight 2020.10.1 is the latest version of ResInsight, the professional quali
 
 **Most important fixes**
 - Using text filter to select summary curves for ensembles now works
-- Summary adress selection for analysis and tornado plots can now select single adress instead of always all wells
+- Summary address selection for analysis and tornado plots can now select single address instead of always all wells
 - Fixed several visualization issues related to contour plots
 - Make sure the color legend is drawn as discrete instead of continuous
 - Recalculate required curves when summary case is replaced

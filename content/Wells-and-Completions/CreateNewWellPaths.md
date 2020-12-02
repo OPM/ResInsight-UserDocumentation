@@ -8,7 +8,7 @@ weight = 30
 
 ResInsight lets the user create new/custom well paths by clicking in the 3D view. A self created well path will behave the same way as an ordinary imported well path.
 
-To create a well path:
+### Building a well path
 
 1. Right click **Wells** in the project tree
 2. Select **Create Well Path** in the right-click menu. A new well node and a well targets node are created.
@@ -24,6 +24,8 @@ Well targets property editor fields:
 - **Start Type** - Specify well to start either at surface or at first target point.
 - **UTM Reference Point** - Reference point. Defaults to the first target point clicked.
 - **Air Gap** - Specify Air Gap, i.e. distance from Rotary Kelling Bushing to sea surface. Applies to well path export only.
+- **MD at First Target** - Defines the measured depth at the first defined well target.
+- **Generate Target at Sea Level** - Automatically create a target at sea level based on a reasonable well path from reservoir to sea level
 - **Well Targets:** List of targets. Will have pink background when in picking state.
   - **Point** - Target position relative to reference point.
   - **DL in** - Dog leg inwards [degrees/30m].
@@ -37,6 +39,17 @@ A self created well path may be edited by either editing coordinates in the prop
 ![]({{< relref "" >}}images/3d-main-window/WellTargets.png)
 
 Clicking and dragging the blue part of a target, it can be moved along the Z axis only. Clicking and dragging the magenta part of a target, it can be moved freely around.
+
+### Starting well path at a fixed position
+
+The toggle **Generate Target at Sea Level** is on by default. If the well path is supposed to start at a predefined location at the sea level, the following procedure can be used:
+
+1. Right click **Wells** in the project tree
+2. Select **Create Well Path** in the right-click menu. A new well node and a well targets node are created.
+3. Clear **Generate Target at Sea Level**
+4. Right-click in the pink well target area, and select **Insert new Target above**
+5. In the **UTM Reference Point** field, enter the predefined UTM coordinate (usually, the depth is set to 0.0 for sea level)
+6. Continue clicking on geometry in the 3D view to add more well targets and make sure the first well target is defined by [0.00 0.00 0.00] to make sure the first target is located at the predefined UTM reference position
 
 ### Well Plan
 A well plan can be displayed by selecting **Show Well Plan** from the right-click menu of a generated well path. 
