@@ -67,7 +67,11 @@ Please see the [full documentation]({{< relref "formations" >}}) of the formatio
 ### Legend and Axis
 Visual properties of legend and axes is controlled in the same manner as for [RFT plots]({{< relref "RftPlot" >}}#legend-and-axis).
 
+### Color by Ensemble Parameter
+One ensemble parameter is selected to control coloring. The ensemble parameter value for each case is used to pick a color in a color range. In this case a color legend appears.
 
+
+![]({{< relref "" >}}images/plot-window/EnsembleRftPlotColors.png)
 
 
 ## Import of Observed Ensemble RFT data from FMU  
