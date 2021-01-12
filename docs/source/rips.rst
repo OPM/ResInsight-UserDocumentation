@@ -1,4 +1,4 @@
-rips package
+Main rips classes
 ============
 
 rips.case module
