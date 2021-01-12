@@ -21,6 +21,8 @@ from Definitions_pb2 import Empty
 import RiaVersionInfo
 
 from .project import Project
+from .retry_policy import ExponentialBackoffRetryPolicy
+from .grpc_retry_interceptor import RetryOnRpcErrorClientInterceptor
 
 
 class Instance:
@@ -79,7 +81,7 @@ class Instance:
         port_env = os.environ.get('RESINSIGHT_GRPC_PORT')
         if port_env:
             port = int(port_env)
-        if launch_port is not -1:
+        if launch_port != -1:
             port = launch_port
 
         if not resinsight_executable:
@@ -180,15 +182,38 @@ class Instance:
         # Main version check package
         self.app = App_pb2_grpc.AppStub(self.channel)
 
+        self._check_connection_and_version(self.channel, launched)
+
+        # Intercept UNAVAILABLE errors and retry on failures
+        interceptors = (
+            RetryOnRpcErrorClientInterceptor(
+                retry_policy=ExponentialBackoffRetryPolicy(min_backoff=100, max_backoff=5000, max_num_retries=20),
+                status_for_retry=(grpc.StatusCode.UNAVAILABLE,),
+            ),
+        )
+
+        intercepted_channel = grpc.intercept_channel(self.channel, *interceptors)
+
+        # Recreate ommand stubs with the retry policy
+        self.commands = Commands_pb2_grpc.CommandsStub(intercepted_channel)
+
+        # Service packages
+        self.project = Project.create(intercepted_channel)
+
+        path = os.getcwd()
+        self.set_start_dir(path=path)
+
+    def _check_connection_and_version(self, channel, launched):
         connection_ok = False
         version_ok = False
 
+        retry_policy = ExponentialBackoffRetryPolicy()
         if self.launched:
-            for _ in range(0, 10):
+            for num_tries in range(0, retry_policy.num_retries()):
                 connection_ok, version_ok = self.__check_version()
                 if connection_ok:
                     break
-                time.sleep(1.0)
+                retry_policy.sleep(num_tries)
         else:
             connection_ok, version_ok = self.__check_version()
 
@@ -196,18 +221,12 @@ class Instance:
             if self.launched:
                 raise Exception('Error: Could not connect to resinsight at ',
                                 location,
-                                ' after trying 10 times with 1 second apart')
+                                '.', retry_policy.time_out_message())
             raise Exception('Error: Could not connect to resinsight at ', location)
         if not version_ok:
             raise Exception('Error: Wrong Version of ResInsight at ', location,
                             self.version_string(), " ",
                             self.client_version_string())
-
-        # Service packages
-        self.project = Project.create(self.channel)
-
-        path = os.getcwd()
-        self.set_start_dir(path=path)
 
     def __version_message(self):
         return self.app.GetVersion(Empty())
