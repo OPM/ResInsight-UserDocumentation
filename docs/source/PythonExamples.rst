@@ -1,184 +1,193 @@
+.. 
+   This file was created using the script in docs/source/create_python_examples.py
+
 Python Examples
 ---------------
 
 This pages is created based on the content in the **PythonExamples** folder located inside the **rips** module, made available online for convenience.
 
-========
-AllCases
-========
+===================================
+All Cases
+===================================
 .. literalinclude:: ../rips/PythonExamples/all_cases.py
 
-==================
-AllSimulationWells  
-==================
+===================================
+All Simulation Wells
+===================================
 .. literalinclude:: ../rips/PythonExamples/all_simulation_wells.py
 
-========
-AllWells
-========
+===================================
+All Wells
+===================================
 .. literalinclude:: ../rips/PythonExamples/all_wells.py
 
-============
-AlterWbsPlot
-============
-.. literalinclude:: ../rips/PythonExamples/alter_wbs_plot.py 
+===================================
+Alter Wbs Plot
+===================================
+.. literalinclude:: ../rips/PythonExamples/alter_wbs_plot.py
 
-=============
-CaseGridGroup
-=============
+===================================
+Case Grid Group
+===================================
 .. literalinclude:: ../rips/PythonExamples/case_grid_group.py
 
-=================
-CaseInfoStreaming
-=================
+===================================
+Case Info Streaming Example
+===================================
 .. literalinclude:: ../rips/PythonExamples/case_info_streaming_example.py
 
-==============
-CellResultData
-==============
+===================================
+Cell Result Data
+===================================
 .. literalinclude:: ../rips/PythonExamples/cell_result_data.py
 
-==============
-CommandExample
-==============
+===================================
+Command Example
+===================================
 .. literalinclude:: ../rips/PythonExamples/command_example.py
 
-===============
-Create Fracture
-===============
+===================================
+Create And Export Fracture Model
+===================================
 .. literalinclude:: ../rips/PythonExamples/create_and_export_fracture_model.py
 
-===============
-Create WBS Plot
-===============
+===================================
+Create And Export Stim Plan Model
+===================================
+.. literalinclude:: ../rips/PythonExamples/create_and_export_stim_plan_model.py
+
+===================================
+Create Wbs Plot
+===================================
 .. literalinclude:: ../rips/PythonExamples/create_wbs_plot.py
 
-=============
-ErrorHandling
-=============
+===================================
+Error Handling
+===================================
 .. literalinclude:: ../rips/PythonExamples/error_handling.py
 
-=================
-ExportContourMaps
-=================
-.. literalinclude:: ../rips/PythonExamples/export_contour_maps.py 
+===================================
+Export Contour Maps
+===================================
+.. literalinclude:: ../rips/PythonExamples/export_contour_maps.py
 
-===========
-ExportPlots
-===========
+===================================
+Export Plots
+===================================
 .. literalinclude:: ../rips/PythonExamples/export_plots.py
 
-===============
-ExportSnapshots
-===============
+===================================
+Export Snapshots
+===================================
 .. literalinclude:: ../rips/PythonExamples/export_snapshots.py
 
-===============
-GridInformation
-===============
+===================================
+Grid Information
+===================================
 .. literalinclude:: ../rips/PythonExamples/grid_information.py
 
-=================
-Import Well Paths
-=================
+===================================
+Import Well Paths And Logs
+===================================
 .. literalinclude:: ../rips/PythonExamples/import_well_paths_and_logs.py
 
-==================
-InputPropTestAsync
-==================
+===================================
+Input Prop Test Async
+===================================
 .. literalinclude:: ../rips/PythonExamples/input_prop_test_async.py
 
-=================
-InputPropTestSync
-=================
+===================================
+Input Prop Test Sync
+===================================
 .. literalinclude:: ../rips/PythonExamples/input_prop_test_sync.py
 
-===============
-InstanceExample
-===============
+===================================
+Instance Example
+===================================
 .. literalinclude:: ../rips/PythonExamples/instance_example.py
 
-=================================
-Launch Using Command Line Options
-=================================
+===================================
+Launch With Commandline Options
+===================================
 .. literalinclude:: ../rips/PythonExamples/launch_with_commandline_options.py
 
-============================
-ModeledWellPath
-============================
+===================================
+Modeled Well Path
+===================================
 .. literalinclude:: ../rips/PythonExamples/modeled_well_path.py
 
-==============
-NewSummaryPlot
-==============
+===================================
+New Summary Plot
+===================================
 .. literalinclude:: ../rips/PythonExamples/new_summary_plot.py
 
-==============
-ReplaceCase
-==============
+===================================
+Replace Case
+===================================
 .. literalinclude:: ../rips/PythonExamples/replace_case.py
 
-==============
-SelectedCases
-==============
+===================================
+Selected Cases
+===================================
 .. literalinclude:: ../rips/PythonExamples/selected_cases.py
 
-==============
-SelectedCells
-==============
+===================================
+Selected Cells
+===================================
 .. literalinclude:: ../rips/PythonExamples/selected_cells.py
 
-==============
-SetCellResult
-==============
+===================================
+Set Cell Result
+===================================
 .. literalinclude:: ../rips/PythonExamples/set_cell_result.py
 
-========================
-SetFlowDiagnosticsResult
-========================
+===================================
+Set Flow Diagnostics Result
+===================================
 .. literalinclude:: ../rips/PythonExamples/set_flow_diagnostics_result.py
 
-==================
-SetGridProperties
-==================
+===================================
+Set Grid Properties
+===================================
 .. literalinclude:: ../rips/PythonExamples/set_grid_properties.py
 
-==================================
-SoilAverageAsync
-==================================
+===================================
+Soil Average Async
+===================================
 .. literalinclude:: ../rips/PythonExamples/soil_average_async.py
 
-==================================
-SoilAverageSync
-==================================
+===================================
+Soil Average Sync
+===================================
 .. literalinclude:: ../rips/PythonExamples/soil_average_sync.py
 
-==================================
-SoilPorvAsync
-==================================
+===================================
+Soil Porv Async
+===================================
 .. literalinclude:: ../rips/PythonExamples/soil_porv_async.py
 
-==================================
-SoilPorvSync
-==================================
+===================================
+Soil Porv Sync
+===================================
 .. literalinclude:: ../rips/PythonExamples/soil_porv_sync.py
 
-==================================
-SummaryCases
-==================================
+===================================
+Summary Cases
+===================================
 .. literalinclude:: ../rips/PythonExamples/summary_cases.py
 
-==================================
-SummaryVectors
-==================================
+===================================
+Summary Vectors
+===================================
 .. literalinclude:: ../rips/PythonExamples/summary_vectors.py
 
-==================================
-SurfaceImport
-==================================
+===================================
+Surface Import
+===================================
 .. literalinclude:: ../rips/PythonExamples/surface_import.py
 
-==================================
-ViewExample
-==================================
+===================================
+View Example
+===================================
 .. literalinclude:: ../rips/PythonExamples/view_example.py
+
