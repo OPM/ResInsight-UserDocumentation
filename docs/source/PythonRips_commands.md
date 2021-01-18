@@ -1,10 +1,13 @@
-
 As the Python interface is growing release by release, we are investigating how to automate the building of reference documentation. This document is not complete, but will improve as the automation moves forward.
-## Currently missing features
 
- - Description of enums
- - Description of return values/classes
- - Description of each object
+More details on the command file operations, see https://resinsight.org/scripting/commandfile/
+
+## auto_group_well_paths
+
+Parameter | Type | Description
+--------- | ---- | -----------
+well_paths | str | 
+
 ## clone_view
 
 Parameter | Type | Description
@@ -21,13 +24,13 @@ Parameter | Type | Description
 Parameter | Type | Description
 --------- | ---- | -----------
 case_group_id | int | Case Group ID
-case_ids | List of str | Case IDs
+case_ids | int | Case IDs
 
 ## create_grid_case_group
 
 Parameter | Type | Description
 --------- | ---- | -----------
-case_paths | List of str | List of Paths to Case Files
+case_paths | str | List of Paths to Case Files
 
 ## create_lgr_for_completions
 
@@ -35,7 +38,7 @@ Parameter | Type | Description
 --------- | ---- | -----------
 case_id | int | Case ID
 time_step | int | Time Step Index
-well_path_names | List of str | Well Path Names
+well_path_names | str | Well Path Names
 refinement_i | int | RefinementI
 refinement_j | int | RefinementJ
 refinement_k | int | RefinementK
@@ -45,14 +48,14 @@ split_type | str | SplitType
 
 Parameter | Type | Description
 --------- | ---- | -----------
-plots | List of str | Plots
+plots | str | Plots
 
 ## create_multiple_fractures
 
 Parameter | Type | Description
 --------- | ---- | -----------
 case_id | int | Case ID
-well_path_names | List of str | Well Path Names
+well_path_names | str | Well Path Names
 min_dist_from_well_td | float | Min Distance From Well TD
 max_fractures_per_well | int | Max Fractures per Well
 template_id | int | Template ID
@@ -65,7 +68,7 @@ action | str | Action
 
 Parameter | Type | Description
 --------- | ---- | -----------
-case_ids | List of str | Case IDs
+case_ids | int | Case IDs
 
 ## create_statistics_case
 
@@ -103,9 +106,9 @@ view_id | int | View Id
 Parameter | Type | Description
 --------- | ---- | -----------
 case_id | int | Case ID
-time_steps | List of str | Selected Time Steps
-injectors | List of str | Injectors
-producers | List of str | Producers
+time_steps | int | Selected Time Steps
+injectors | str | Injectors
+producers | str | Producers
 file_name | str | Export File Name
 minimum_communication | float | Minimum Communication
 aquifer_cell_threshold | float | Aquifer Cell Threshold
@@ -116,7 +119,7 @@ Parameter | Type | Description
 --------- | ---- | -----------
 case_id | int | Case ID
 time_step | int | Time Step Index
-well_path_names | List of str | Well Path Names
+well_path_names | str | Well Path Names
 refinement_i | int | RefinementI
 refinement_j | int | RefinementJ
 refinement_k | int | RefinementK
@@ -155,8 +158,8 @@ export_file | str | Export FileName
 Parameter | Type | Description
 --------- | ---- | -----------
 case_id | int | Case ID
-view_ids | List of str | View IDs
-view_names | List of str | View Names
+view_ids | int | View IDs
+view_names | str | View Names
 undefined_value | float | Undefined Value
 
 ## export_sim_well_fracture_completions
@@ -167,7 +170,7 @@ case_id | int | Case ID
 view_id | int | View ID
 view_name | str | View Name
 time_step | int | Time Step Index
-simulation_well_names | List of str | Simulation Well Names
+simulation_well_names | str | Simulation Well Names
 file_split | str | File Split
 compdat_export | str | Compdat Export
 
@@ -213,7 +216,7 @@ Parameter | Type | Description
 --------- | ---- | -----------
 case_id | int | Case ID
 time_step | int | Time Step Index
-well_path_names | List of str | Well Path Names
+well_path_names | str | Well Path Names
 file_split | str | File Split
 compdat_export | str | Compdat Export
 combination_mode | str | Combination Mode
@@ -231,29 +234,45 @@ trans_scaling_wbhp | float | Transmissibility Scaling Constant WBHP Value
 
 Parameter | Type | Description
 --------- | ---- | -----------
-well_path_names | List of str | Well Path Names
+well_path_names | str | Well Path Names
 md_step_size | float | MD Step Size
+
+## group_well_paths
+
+Parameter | Type | Description
+--------- | ---- | -----------
+group | str | 
+well_paths | str | 
 
 ## import_formation_names
 
 Parameter | Type | Description
 --------- | ---- | -----------
-formation_files | List of str | 
+formation_files | str | 
 apply_to_case_id | int | 
+
+## import_grouped_well_paths
+
+Parameter | Type | Description
+--------- | ---- | -----------
+well_path_folder | str | 
+well_path_files | str | 
+import_grouped | str | 
 
 ## import_well_log_files
 
 Parameter | Type | Description
 --------- | ---- | -----------
 well_log_folder | str | 
-well_log_files | List of str | 
+well_log_files | str | 
 
 ## import_well_paths
 
 Parameter | Type | Description
 --------- | ---- | -----------
 well_path_folder | str | 
-well_path_files | List of str | 
+well_path_files | str | 
+import_grouped | str | 
 
 ## load_case
 
@@ -291,7 +310,7 @@ grid_list_file | str | Grid List File
 Parameter | Type | Description
 --------- | ---- | -----------
 path | str | Path
-case_ids | List of str | Case IDs
+case_ids | int | Case IDs
 
 ## save_project
 
@@ -359,4 +378,16 @@ Parameter | Type | Description
 case_id | int | Case ID
 view_id | int | View ID
 time_step | int | Time Step Index
+
+## stack_curves
+
+Parameter | Type | Description
+--------- | ---- | -----------
+curves | str | 
+
+## unstack_curves
+
+Parameter | Type | Description
+--------- | ---- | -----------
+curves | str | 
 
