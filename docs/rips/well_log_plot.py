@@ -2,11 +2,11 @@
 ResInsight Well Log Plot plot module
 """
 
-import Commands_pb2
+import rips.generated.Commands_pb2
 
 from .plot import Plot
 from .pdmobject import PdmObjectBase, add_method
-from resinsight_classes import WellLogPlot
+from .resinsight_classes import WellLogPlot
 
 
 @add_method(WellLogPlot)

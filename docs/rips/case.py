@@ -49,16 +49,16 @@ Attributes:
 import builtins
 import grpc
 
-import Case_pb2
-import Case_pb2_grpc
-import Commands_pb2 as Cmd
-import PdmObject_pb2 as PdmObject_pb2
+import rips.generated.Case_pb2
+import rips.generated.Case_pb2_grpc
+import rips.generated.Commands_pb2 as Cmd
+import rips.generated.PdmObject_pb2 as PdmObject_pb2
 
-import Properties_pb2
-import Properties_pb2_grpc
-import NNCProperties_pb2
-import NNCProperties_pb2_grpc
-from resinsight_classes import Case, EclipseCase, GeoMechCase, WellBoreStabilityPlot, WbsParameters
+import rips.generated.Properties_pb2
+import rips.generated.Properties_pb2_grpc
+import rips.generated.NNCProperties_pb2
+import rips.generated.NNCProperties_pb2_grpc
+from .resinsight_classes import Case, EclipseCase, GeoMechCase, WellBoreStabilityPlot, WbsParameters
 
 from .grid import Grid
 from .pdmobject import add_method
@@ -321,7 +321,7 @@ def view(self, view_id):
         view_id(int): view id
 
     Returns:
-        :class:`rips.generated.resinsight_classes.View`
+        :class:`rips.generated.generated_classes.View`
     """
     views = self.views()
     for view_object in views:
@@ -335,7 +335,7 @@ def create_view(self):
     """Create a new view in the current case
 
     Returns: 
-        :class:`rips.generated.resinsight_classes.View`
+        :class:`rips.generated.generated_classes.View`
     """
     return self.view(
         self._execute_command(createView=Cmd.CreateViewRequest(
@@ -586,7 +586,7 @@ def available_properties(self,
                          porosity_model="MATRIX_MODEL"):
     """Get a list of available properties
 
-    For argument details, see :ref:`result-definition-label`
+    For argument details, see :ref:`Result Definition <result-definition-label>`
 
     Arguments:
         property_type (str): string corresponding to property_type enum.
@@ -610,7 +610,7 @@ def active_cell_property_async(self,
                                property_name,
                                time_step,
                                porosity_model="MATRIX_MODEL"):
-    """Get a cell property for all active cells. Async, so returns an iterator. For argument details, see :ref:`result-definition-label`
+    """Get a cell property for all active cells. Async, so returns an iterator. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             property_type(str): string enum
@@ -641,7 +641,7 @@ def active_cell_property(self,
                          property_name,
                          time_step,
                          porosity_model="MATRIX_MODEL"):
-    """Get a cell property for all active cells. Sync, so returns a list. For argument details, see :ref:`result-definition-label`
+    """Get a cell property for all active cells. Sync, so returns a list. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             property_type(str): string enum
@@ -669,7 +669,7 @@ def selected_cell_property_async(self,
                                  property_name,
                                  time_step,
                                  porosity_model="MATRIX_MODEL"):
-    """Get a cell property for all selected cells. Async, so returns an iterator. For argument details, see :ref:`result-definition-label`
+    """Get a cell property for all selected cells. Async, so returns an iterator. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             property_type(str): string enum
@@ -700,7 +700,7 @@ def selected_cell_property(self,
                            property_name,
                            time_step,
                            porosity_model="MATRIX_MODEL"):
-    """Get a cell property for all selected cells. Sync, so returns a list. For argument details, see :ref:`result-definition-label`
+    """Get a cell property for all selected cells. Sync, so returns a list. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             property_type(str): string enum
@@ -730,7 +730,7 @@ def grid_property_async(
         time_step,
         grid_index=0,
         porosity_model="MATRIX_MODEL"):
-    """Get a cell property for all grid cells. Async, so returns an iterator. For argument details, see :ref:`result-definition-label`
+    """Get a cell property for all grid cells. Async, so returns an iterator. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             property_type(str): string enum
@@ -765,7 +765,7 @@ def grid_property(
         time_step,
         grid_index=0,
         porosity_model="MATRIX_MODEL"):
-    """Get a cell property for all grid cells. Synchronous, so returns a list. For argument details, see :ref:`result-definition-label`
+    """Get a cell property for all grid cells. Synchronous, so returns a list. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             property_type(str): string enum
@@ -795,7 +795,7 @@ def set_active_cell_property_async(
         property_name,
         time_step,
         porosity_model="MATRIX_MODEL"):
-    """Set cell property for all active cells Async. Takes an iterator to the input values. For argument details, see :ref:`result-definition-label`
+    """Set cell property for all active cells Async. Takes an iterator to the input values. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             values_iterator(iterator): an iterator to the properties to be set
@@ -827,7 +827,7 @@ def set_active_cell_property(
         property_name,
         time_step,
         porosity_model="MATRIX_MODEL"):
-    """Set a cell property for all active cells. For argument details, see :ref:`result-definition-label`
+    """Set a cell property for all active cells. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             values(list): a list of double precision floating point numbers
@@ -861,7 +861,7 @@ def set_grid_property(
         time_step,
         grid_index=0,
         porosity_model="MATRIX_MODEL"):
-    """Set a cell property for all grid cells. For argument details, see :ref:`result-definition-label`
+    """Set a cell property for all grid cells. For argument details, see :ref:`Result Definition <result-definition-label>`
 
         Arguments:
             values(list): a list of double precision floating point numbers
@@ -924,7 +924,7 @@ def create_well_bore_stability_plot(self, well_path, time_step, parameters=None)
         time_step(int): time step
 
     Returns:
-        :class:`rips.generated.resinsight_classes.WellBoreStabilityPlot`
+        :class:`rips.generated.generated_classes.WellBoreStabilityPlot`
     """
     pb2_parameters = None
     if parameters is not None:
@@ -962,7 +962,7 @@ def simulation_wells(self):
     """Get a list of all simulation wells for a case
 
     Returns:
-        :class:`rips.generated.resinsight_classes.SimulationWell`
+        :class:`rips.generated.generated_classes.SimulationWell`
 
     """
     wells = self.descendants(SimulationWell)

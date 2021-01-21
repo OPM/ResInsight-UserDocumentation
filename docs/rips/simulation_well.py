@@ -3,13 +3,13 @@ ResInsight SimulationWell
 """
 import grpc
 
-import SimulationWell_pb2
-import SimulationWell_pb2_grpc
+from .generated.SimulationWell_pb2 import *
+from .generated.SimulationWell_pb2_grpc import *
 
-import Properties_pb2
-import Properties_pb2_grpc
+from .generated.Properties_pb2 import *
+from .generated.Properties_pb2_grpc import *
 
-from resinsight_classes import SimulationWell
+from .resinsight_classes import SimulationWell
 
 from .pdmobject import PdmObjectBase, add_method
 
