@@ -12,13 +12,13 @@ import time
 
 import grpc
 
-import App_pb2
-import App_pb2_grpc
-import Commands_pb2
-import Commands_pb2_grpc
-from Definitions_pb2 import Empty
+import rips.generated.App_pb2
+import rips.generated.App_pb2_grpc
+import rips.generated.Commands_pb2
+import rips.generated.Commands_pb2_grpc
+from rips.generated.Definitions_pb2 import Empty
 
-import RiaVersionInfo
+import rips.generated.RiaVersionInfo
 
 from .project import Project
 from .retry_policy import ExponentialBackoffRetryPolicy

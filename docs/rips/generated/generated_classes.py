@@ -184,7 +184,7 @@ class FaciesProperties(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.color_legend = "ColorLegend:2174931122064"
+        self.color_legend = "ColorLegend:2448476982720"
         self.file_path = ""
         self.properties_table = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
@@ -573,6 +573,7 @@ class EclipseResult(PdmObjectBase):
         selected_injector_tracers (List of str): Injector Tracers
         selected_producer_tracers (List of str): Producer Tracers
         selected_souring_tracers (List of str): Tracers
+        show_only_visible_tracers_in_legend (str): Show Only Visible Tracers In Legend
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -585,6 +586,7 @@ class EclipseResult(PdmObjectBase):
         self.selected_injector_tracers = []
         self.selected_producer_tracers = []
         self.selected_souring_tracers = []
+        self.show_only_visible_tracers_in_legend = True
         PdmObjectBase.__init__(self, pb2_object, channel)
         if EclipseResult.__custom_init__ is not None:
             EclipseResult.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -600,6 +602,27 @@ class CellColors(EclipseResult):
         EclipseResult.__init__(self, pb2_object, channel)
         if CellColors.__custom_init__ is not None:
             CellColors.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimCellFilterCollection(PdmObjectBase):
+    """
+    Attributes:
+        active (str): Active
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.active = True
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if RimCellFilterCollection.__custom_init__ is not None:
+            RimCellFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def cell_filters(self):
+        """Filters
+        Returns:
+             List of CellFilter
+        """
+        return self.children("CellFilters", CellFilter)
+
 
 class EclipseContourMap(EclipseView):
     """
@@ -882,7 +905,7 @@ class StimPlanModelTemplate(PdmObjectBase):
 
     def __init__(self, pb2_object=None, channel=None):
         self.default_permeability = 1e-05
-        self.default_porosity = 0
+        self.default_porosity = 0.01
         self.id = -1
         self.overburden_facies = ""
         self.overburden_fluid_density = 1.03
@@ -1330,6 +1353,7 @@ def class_dict():
     classes['Project'] = Project
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
+    classes['RimCellFilterCollection'] = RimCellFilterCollection
     classes['SimulationWell'] = SimulationWell
     classes['StimPlanModel'] = StimPlanModel
     classes['StimPlanModelCollection'] = StimPlanModelCollection

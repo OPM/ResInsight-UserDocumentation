@@ -20,12 +20,12 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'ResInsight Python API'
+project = 'ResInsight Python API - rips'
 copyright = '2020, Ceetron Solutions AS'
 author = 'Ceetron Solutions AS'
 
 # The full version, including alpha/beta/rc tags
-release = '2020.04'
+release = '2020.10'
 
 
 # -- General configuration ---------------------------------------------------
@@ -37,7 +37,7 @@ extensions = [
     'sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.napoleon', 'm2r'
 ]
 
-master_doc  = 'index'
+master_doc = 'index'
 
 napoleon_google_docstring = True
 
@@ -62,7 +62,7 @@ html_logo = "images/ResInsightCroppedIconPicture.png"
 html_theme_options = {
     'style_nav_header_background': '#505050',
 }
-smartquotes=False
+smartquotes = False
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

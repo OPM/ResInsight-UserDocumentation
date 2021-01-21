@@ -5,9 +5,9 @@ Module containing the Grid class, containing information
 about Case grids.
 """
 
-import Case_pb2
-import Grid_pb2
-import Grid_pb2_grpc
+import rips.generated.Case_pb2
+import rips.generated.Grid_pb2
+import rips.generated.Grid_pb2_grpc
 
 
 class Grid:

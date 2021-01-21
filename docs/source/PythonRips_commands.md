@@ -18,7 +18,7 @@ view_id | int | View Id
 
 Parameter | Type | Description
 --------- | ---- | -----------
-
+          |      |
 ## compute_case_group_statistics
 
 Parameter | Type | Description
@@ -28,9 +28,9 @@ case_ids | int | Case IDs
 
 ## create_grid_case_group
 
-Parameter | Type | Description
---------- | ---- | -----------
-case_paths | str | List of Paths to Case Files
+Parameter      | Type        | Description
+-------------- | ----------- | -----------
+case_paths     | List of str | List of Paths to Case Files
 
 ## create_lgr_for_completions
 
@@ -297,7 +297,7 @@ new_grid_file | str | New Grid File
 
 Parameter | Type | Description
 --------- | ---- | -----------
-
+          |      |
 ## replace_source_cases
 
 Parameter | Type | Description
