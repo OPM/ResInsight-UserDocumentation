@@ -15,9 +15,6 @@ You can look for objects of a specific type by using the **descendants** method 
    # Get a list of all Eclipsev view in the project
    views = resinsight.project.descendants(rips.EclipseView)
 
-.. automodule:: rips
-    :members:
-    :noindex:
-    :inherited-members:
-    :show-inheritance:
-    
+.. automodapi:: rips
+
+
