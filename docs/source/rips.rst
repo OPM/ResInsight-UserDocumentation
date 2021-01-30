@@ -1,8 +1,8 @@
 Main Classes
 ============
 
-Case
-----
+Case class
+----------
 Access to case information.
 Inherits :ref:`PdmObjectBase<PdmObjectBaseLabel>` and all its members.
 
@@ -39,23 +39,17 @@ result
     FLOW_DIAGNOSTICS        |       |
     INJECTION_FLOODING      |       |
 
-.. autoclass:: rips.Case
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Detailed documentation :class:`rips.Case`
 
 Examples
 ^^^^^^^^
 See :ref:`all_cases`, :ref:`load_case` and :ref:`selected_cases`.
 
-Grid
-----
+Grid class
+----------
 Access to grid information
 
-.. autoclass:: rips.Grid
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Detailed documentation :class:`rips.Grid`
 
 Examples
 ^^^^^^^^
@@ -71,10 +65,7 @@ The basic access class to ResInsight. Use to find or launch a running instance o
    # Get the ResInsight project
    project = resinsight.project
 
-.. autoclass:: rips.Instance
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Detailed documentation :class:`rips.Instance`
 
 Examples
 ^^^^^^^^
@@ -82,8 +73,8 @@ See :ref:`instance_example` and :ref:`launch_with_commandline_options`.
 
 .. _PdmObjectBaseLabel:
 
-PdmObjectBase
--------------
+PdmObjectBase class
+-------------------
 The base class of all data classes in ResInsight. Not used directly but all attributes
 and methods are available in the other ResInsight data classes.
 
@@ -98,13 +89,10 @@ ancestors(), children() and descendants() using a class name as the argument ::
 
 See :ref:`AllClasses` for all classes based on PdmObjectBase.
 
-.. autoclass:: rips.PdmObjectBase
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Detailed documentation :class:`rips.PdmObjectBase`
 
-Project
--------
+Project class
+-------------
 The ResInsight project. Inherits :ref:`PdmObjectBase<PdmObjectBaseLabel>` and all its members.
 Always available as an object member "project" on the rips.Instance ::
 
@@ -115,24 +103,18 @@ Always available as an object member "project" on the rips.Instance ::
    # Get the project
    project = resinsight.project
 
-.. autoclass:: rips.Project
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Detailed documentation :class:`rips.Project`
 
 Examples
 ^^^^^^^^
 See :ref:`open_project`
 
-View
-----
+View class
+----------
 The base class of all views in ResInsight.
 Inherits :ref:`PdmObjectBase<PdmObjectBaseLabel>` and all its members
 
-.. autoclass:: rips.View
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Detailed documentation :class:`rips.View`
 
 Examples
 ^^^^^^^^
