@@ -3,6 +3,9 @@ Main Classes
 
 Case class
 ----------
+
+Overview
+^^^^^^^^^
 Access to case information.
 Inherits :ref:`PdmObjectBase<PdmObjectBaseLabel>` and all its members.
 
@@ -17,6 +20,21 @@ Can be accessed with the case() and cases() methods on rips.Project ::
 
 In practise each object is of the sub-classes rips.EclipseCase and rips.GeoMechCase.
 See :ref:`AllClasses` for a description of them.
+
+API Documentation
+^^^^^^^^^^^^^^^^^
+.. autoclass:: rips.Case
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:
+   :noindex:
+
+Detailed documentation :class:`rips.Case`
+
+Examples
+^^^^^^^^
+See :ref:`all_cases`, :ref:`load_case` and :ref:`selected_cases`.
 
 .. _result-definition-label:
 
@@ -39,15 +57,21 @@ result
     FLOW_DIAGNOSTICS        |       |
     INJECTION_FLOODING      |       |
 
-Detailed documentation :class:`rips.Case`
-
-Examples
-^^^^^^^^
-See :ref:`all_cases`, :ref:`load_case` and :ref:`selected_cases`.
-
 Grid class
 ----------
-Access to grid information
+
+Overview
+^^^^^^^^^
+Access to grid geometry and size information. Can be accessed with the grid() and grids() methods on rips.Case.
+
+API Documentation
+^^^^^^^^^^^^^^^^^
+.. autoclass:: rips.Grid
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:
+   :noindex:
 
 Detailed documentation :class:`rips.Grid`
 
@@ -57,6 +81,9 @@ See :ref:`grid_information`.
 
 Instance - the main starting point
 ----------------------------------
+
+Overview
+^^^^^^^^^
 The basic access class to ResInsight. Use to find or launch a running instance of ResInsight ::
 
    import rips
@@ -64,6 +91,16 @@ The basic access class to ResInsight. Use to find or launch a running instance o
    resinsight = rips.Instance.find()
    # Get the ResInsight project
    project = resinsight.project
+
+API Documentation
+^^^^^^^^^^^^^^^^^
+
+.. autoclass:: rips.Instance
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:
+   :noindex:
 
 Detailed documentation :class:`rips.Instance`
 
@@ -75,6 +112,9 @@ See :ref:`instance_example` and :ref:`launch_with_commandline_options`.
 
 PdmObjectBase class
 -------------------
+
+Overview
+^^^^^^^^^
 The base class of all data classes in ResInsight. Not used directly but all attributes
 and methods are available in the other ResInsight data classes.
 
@@ -89,10 +129,16 @@ ancestors(), children() and descendants() using a class name as the argument ::
 
 See :ref:`AllClasses` for all classes based on PdmObjectBase.
 
+API Documentation
+^^^^^^^^^^^^^^^^^
+
 Detailed documentation :class:`rips.PdmObjectBase`
 
 Project class
 -------------
+
+Overview
+^^^^^^^^^
 The ResInsight project. Inherits :ref:`PdmObjectBase<PdmObjectBaseLabel>` and all its members.
 Always available as an object member "project" on the rips.Instance ::
 
@@ -103,6 +149,16 @@ Always available as an object member "project" on the rips.Instance ::
    # Get the project
    project = resinsight.project
 
+API Documentation
+^^^^^^^^^^^^^^^^^
+
+.. autoclass:: rips.Project
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:
+   :noindex:
+
 Detailed documentation :class:`rips.Project`
 
 Examples
@@ -111,8 +167,21 @@ See :ref:`open_project`
 
 View class
 ----------
+
+Overview
+^^^^^^^^^
 The base class of all views in ResInsight.
 Inherits :ref:`PdmObjectBase<PdmObjectBaseLabel>` and all its members
+
+API Documentation
+^^^^^^^^^^^^^^^^^
+
+.. autoclass:: rips.View
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:
+   :noindex:
 
 Detailed documentation :class:`rips.View`
 
