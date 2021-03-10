@@ -37,7 +37,7 @@ A new cell filter can be added by invoking the right-click menu for the **Cell F
 
 The available cell filters are:
 
-- **Polygon Filters**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
+- **Polygon Filters**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. Target points are defined and manipulated in 3D view as decribed in [User Defined Polyline Annotations]({{< relref "Annotations.md" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
 
 - **User Defined Filters**: Defining a filter by specifying explicit cells to include or exclude by their IJK-index.
 
