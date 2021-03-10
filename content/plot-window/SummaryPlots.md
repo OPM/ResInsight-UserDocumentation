@@ -185,17 +185,18 @@ Having selected a Summary Curve, its properties are shown by the **Property Edit
 
 As seen, the Property Editor organizes the available options into the following groups:
 
-- **Summary Vector** -- Options to select case, vector to plot, axis specification, and error bars.
+- **Summary Vector** -- Options to select case, vector to plot, resampling, axis specification, and error bars.
+- **Stacking** - Options to control stacking of curves optionally with phase colors.
 - **Appearance** -- Options to control curve color, symbols, line style etc.
 - **Curve Name** -- Controls how the curve is labeled in the legend.
 - **Advanced** -- Specification of additional options.
 
 ### Summary Vector
-
 This group of options is used to define summary vector data that the curve will display. 
 
 - **Case** -- Selects the imported Summary or Observed Data case to use as source.
 - **Vector** -- Displays the acronym of the selected vector.
+- **Resampling** - Option to sample curve data per day, week, month, quarter, half year, year, or decade.
 - **Axis** -- Controls whether the curve is to be associated with the left or right Y-Axis. 
 
 Selection of vector is performed using a vector acronym or pressing the button to the right. 
@@ -206,9 +207,7 @@ Switching the Y-Axis for several curves in one go can be done using the right-cl
 {{% /notice %}}
 
 
-
 ### Curve Name 
-
 The user can control the curve name used in the plot legend by the following options:
 
 - **Contribute To Legend** -- This option controls whether the curve will be visible in the plot legend. A curve with an empty name will be removed from legend. 
