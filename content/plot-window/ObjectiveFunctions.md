@@ -10,7 +10,7 @@ An **Objective Function** is used to color the curves of an ensemble plot in Res
 
 ## Using Objective Functions
 
-**Objective Functions** are accessed and activated via the **Plot Project Tree** as shown below. 
+Curve coloring by **Objective Function** is activated as shown below. 
 
 ![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsPlotProjectTree.png)
 
@@ -22,7 +22,7 @@ ResInsight offers two default objective functions which are readily available to
 
 
 ## Creating Custom Objective Functions
-It is also possible to create a **Custom Objective Function** to customize a formula to color ensemble plots:
+It is also possible to create a **Custom Objective Function** to customize the coloring of ensemble plots:
 
 - Custom objective functions can express a weighted sum of the default objective functions (applied to any vector)
 
@@ -34,7 +34,7 @@ A Custom Objective Function is created by invoking the context menu on the **Cus
 
 ![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsCustomFunction.png)
 
-Composing an objective function by adding a new weighted function is performed by invoking the context menu on the custom objective function and using the property editor.
+Adding a new weighted function expression to an existing objective function is performed by invoking the context menu as shown below.
 
 ![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsWeightsNaming.png)
 
