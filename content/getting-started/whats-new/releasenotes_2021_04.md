@@ -10,7 +10,7 @@ Version 2021.04 is a major update bringing a range of significant new and enhanc
 ## Streamlines
 ![]({{< relref "" >}}images/3d-main-window/Streamlines.png)
 
-[Streamlines]({{< relref "plot-window/Streamlines" >}}) lets the user investigate the flow of different phases through a reservoar. It allows for selecting both an individual phase or a combination of phases colored by the dominant phase or velocity. The visualization and animation of streamlines requires the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**.
+[Streamlines]({{< relref "3d-main-window/Streamlines" >}}) lets the user investigate the flow of different phases through a reservoar. It allows for selecting both an individual phase or a combination of phases colored by the dominant phase or velocity. The visualization and animation of streamlines requires the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**.
 
 
 ## Objective Functions
@@ -27,7 +27,7 @@ A [Vertical Flow Performance Plot (VFP Plot)]({{< relref "plot-window/VfpPlot" >
 ## Polygon Cell Filter
 ![]({{< relref "" >}}images/3d-main-window/CellFilter_Polygon.png)
 
-[Polygon Cell Filter]({{< relref "3d-main-window/Filters" >}}) allows the user to define a filter by marking target points of a polygon in 3D view to include or exclude matching cells. Target points are defined and manipulated in 3D view as decribed in [User Defined Polyline Annotations]({{< relref "Annotations.md" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
+[Polygon Cell Filter]({{< relref "3d-main-window/Filters" >}}#cell-filters) allows the user to define a filter by marking target points of a polygon in 3D view to include or exclude matching cells. Target points are defined and manipulated in 3D view as decribed in [User Defined Polyline Annotations]({{< relref "Annotations.md" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
 
 
 ## Multiselect including Undo/Redo of Operations
