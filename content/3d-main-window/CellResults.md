@@ -46,6 +46,8 @@ Difference options are:
 - **Difference Case** -- Base case for calculation of difference
 - **Base Time Step** -- Base time step for calculation of difference
 
+For [some cell face results]({{< relref "flowvectorresult" >}}#cell-result-view), it is possible to normalize the results by cell face area.
+
 {{% notice note %}}
 The difference option is not applicable for TERNARY result display.  
 {{% /notice %}}
