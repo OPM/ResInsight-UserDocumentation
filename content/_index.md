@@ -8,17 +8,6 @@ published = true
 
 ![]({{< relref "" >}}images/FrontPageImage.png)
 
-<!--
-<section class="intro">
-  <div class="grid">
-    <div class="unit whole center-on-mobiles">
-      <p class="first">Post Processing of Reservoir Simulations</p>
-    </div>
-    <div class="post-content">
-	  <img src="{{< relref "" >}}images/FrontPageImage.png" alt="Reservoir" />
-    </div>
-  </div>
-</section> -->
 <section class="features">
   <div class="grid">
     <div class="unit one-third">
@@ -29,6 +18,7 @@ published = true
 	&#x2713; Handles large Eclipse cases<br>
         &#x2713; Plotting of summary vectors<br>
 	&#x2713; Embedded Flow Diagnostics<br>
+        &#x2713; Python API for scripting<br>
       </p>
     </div>
     <div class="unit one-third">
