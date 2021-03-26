@@ -5,11 +5,12 @@ Ubuntu Linux 16.04-64bit On the command line do:</description></item><item><titl
 Octave Installation (optional) Download Octave-4.0.0 and install it. (Newer versions will not work) Launch ResInsight.exe, open Edit-&amp;gt;Preferences. On the Octave tab, enter the path to the Octave command line interpreter executable.
 ( Usually C:\Your\Path\To\Octave-x.</description></item><item><title>Build Instructions</title><link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/buildinstructions/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/buildinstructions/</guid><description>Source code The source code is hosted at GitHub
 In a git enabled shell do: git clone https://github.com/OPM/ResInsight.git
-Dependencies and Prerequisites Windows Compiler Visual Studio 2015 and later is supported.
+Dependencies and Prerequisites Windows Compiler Visual Studio 2019 and later is supported.
 GCC Compiler GCC version 4.9 or later is supported. On RedHat Linux 6 you need to install devtoolset-3, and enable it with
-source /opt/rh/devtoolset-3/enable Qt5 Qt Qt5 version 5.6.0 or later is supported.
-On some configurations you will be asked to specify the location of Qt5.</description></item><item><title>Build Instructions CentOS 7</title><link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-centos7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-centos7/</guid><description>Dependencies and Prerequisites vcpkg can be used to install grpc for C++. This method is cross platform, and can be easier to use than directly installing grpc and dependencies directly from grpc source code. The source code for vcpkg is avaialable as a Git sub module in the folder &amp;lsquo;vcpkg&amp;rsquo;. Python3 is required.
+source /opt/rh/devtoolset-3/enable Qt 5 Qt 5.9 or later is supported.
+Qt download
+On some configurations you will be asked to specify the location of Qt 5.</description></item><item><title>Build Instructions CentOS 7</title><link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-centos7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-centos7/</guid><description>Dependencies and Prerequisites vcpkg can be used to install grpc for C++. This method is cross platform, and can be easier to use than directly installing grpc and dependencies directly from grpc source code. The source code for vcpkg is avaialable as a Git sub module in the folder &amp;lsquo;vcpkg&amp;rsquo;. Python3 is required.
 vcpkg requires relatively new versions of git and compiler.
 vcpkg
 grpc quickstart
-Reference project A test project for CentOS7 is configured using GitHub actions.</description></item></channel></rss>
+Reference project A workflow file is used to build using CentOS 7 on GitHub actions.</description></item></channel></rss>
