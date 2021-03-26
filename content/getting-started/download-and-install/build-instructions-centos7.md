@@ -16,9 +16,9 @@ vcpkg requires relatively new versions of git and compiler.
 
 
 ### Reference project
-A test project for CentOS7 is configured using GitHub actions. A blank Centos7 Docker image is used, and the required dependencies are installed.
+A workflow file is used to build using CentOS 7 on GitHub actions. A blank Centos7 Docker image is used, and the required dependencies are installed.
 
-[Test project for CentOS 7](https://github.com/magnesj/test-centos7-ri-build)
+[Link to workflows](https://github.com/OPM/ResInsight/blob/dev/.github/workflows/)
 
 ### Configuration and build
 
