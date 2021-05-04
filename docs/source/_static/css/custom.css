@@ -1,4 +1,4 @@
-/** css/yourtheme.css **/
+/* https: //docs.readthedocs.io/en/stable/guides/adding-custom-css.html#overriding-or-replacing-a-theme-s-stylesheet */
 
 
 /* This line is theme specific - it includes the base theme CSS */
@@ -6,6 +6,10 @@
 @import 'theme.css';
 
 /* for the Read the Docs theme */
+
+
+/* white-space: normal is required instead of white-space: nowrap
+to avoid horizontal scrolling in tables */
 
 .wy-table-responsive table td,
 .wy-table-responsive table th {
