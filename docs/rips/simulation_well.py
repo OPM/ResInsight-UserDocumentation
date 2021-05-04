@@ -3,11 +3,11 @@ ResInsight SimulationWell
 """
 import grpc
 
-from .generated.SimulationWell_pb2 import *
-from .generated.SimulationWell_pb2_grpc import *
+import SimulationWell_pb2
+import SimulationWell_pb2_grpc
 
-from .generated.Properties_pb2 import *
-from .generated.Properties_pb2_grpc import *
+import Properties_pb2
+import Properties_pb2_grpc
 
 from .resinsight_classes import SimulationWell
 
@@ -30,15 +30,15 @@ def status(self, timestep):
         Parameter   | Description                                                   | Type
         ----------- | ------------------------------------------------------------- | -----
         well_type   | Well type as string                                           | string
-        is_open     | True if simulation well is open at the specified time step    | bool 
+        is_open     | True if simulation well is open at the specified time step    | bool
 
     Arguments:
         timestep(int): Time step index
 
     """
-    sim_well_request = SimulationWell_pb2.SimulationWellRequest(case_id=self.case().id,
-                                                                well_name=self.name,
-                                                                timestep=timestep)
+    sim_well_request = SimulationWell_pb2.SimulationWellRequest(
+        case_id=self.case().id, well_name=self.name, timestep=timestep
+    )
     return self._simulation_well_stub.GetSimulationWellStatus(sim_well_request)
 
 
@@ -52,7 +52,7 @@ def cells(self, timestep):
         ----------- | --------------------------------------------------------- | -----
         ijk         | Cell IJK location                                         | Vec3i
         grid_index  | Grid index                                                | int
-        is_open     | True if connection to is open at the specified time step  | bool 
+        is_open     | True if connection to is open at the specified time step  | bool
         branch_id   |                                                           | int
         segment_id  |                                                           | int
 
@@ -63,9 +63,9 @@ def cells(self, timestep):
         List of SimulationWellCellInfo
 
     """
-    sim_well_request = SimulationWell_pb2.SimulationWellRequest(case_id=self.case().id,
-                                                                well_name=self.name,
-                                                                timestep=timestep)
+    sim_well_request = SimulationWell_pb2.SimulationWellRequest(
+        case_id=self.case().id, well_name=self.name, timestep=timestep
+    )
     return self._simulation_well_stub.GetSimulationWellCells(sim_well_request).data
 
 

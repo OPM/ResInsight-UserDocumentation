@@ -54,12 +54,6 @@ Command Example
 ===================================
 .. literalinclude:: ../rips/PythonExamples/command_example.py
 
-.. _create_and_export_fracture_model:
-
-Create And Export Fracture Model
-===================================
-.. literalinclude:: ../rips/PythonExamples/create_and_export_fracture_model.py
-
 .. _create_and_export_stim_plan_model:
 
 Create And Export Stim Plan Model

@@ -12,11 +12,11 @@ from .pdmobject import PdmObjectBase, add_method, add_static_method
 from .plot import Plot
 from .view import View
 
-import rips.generated.Commands_pb2
-from rips.generated.Definitions_pb2 import Empty
-import rips.generated.Project_pb2_grpc
-import rips.generated.Project_pb2
-import rips.generated.PdmObject_pb2
+import Commands_pb2
+from Definitions_pb2 import Empty
+import Project_pb2_grpc
+import Project_pb2
+import PdmObject_pb2
 from .resinsight_classes import Project, PlotWindow, WellPath, SummaryCase
 
 
@@ -70,8 +70,9 @@ def load_case(self, path):
     Returns:
         :class:`rips.generated.generated_classes.Case`
     """
-    command_reply = self._execute_command(loadCase=Commands_pb2.FilePathRequest(
-        path=path))
+    command_reply = self._execute_command(
+        loadCase=Commands_pb2.FilePathRequest(path=path)
+    )
     return self.case(command_reply.loadCaseResult.id)
 
 
@@ -106,7 +107,7 @@ def case(self, case_id):
     Arguments:
         id(int): case id
     Returns:
-        :class:`rips.generated.generated_classes.Case`
+        :class:`rips.generated.resinsight_classes.Case`
     """
     allCases = self.cases()
     for case in allCases:
@@ -125,7 +126,9 @@ def replace_source_cases(self, grid_list_file, case_group_id=0):
     """
     return self._execute_command(
         replaceSourceCases=Commands_pb2.ReplaceSourceCasesRequest(
-            gridListFile=grid_list_file, caseGroupId=case_group_id))
+            gridListFile=grid_list_file, caseGroupId=case_group_id
+        )
+    )
 
 
 @add_method(Project)
@@ -135,21 +138,24 @@ def create_grid_case_group(self, case_paths):
     Arguments:
         case_paths (list): list of file path strings
     Returns:
-        :class:`rips.generated.generated_classes.GridCaseGroup`
+        :class:`rips.generated.resinsight_classes.GridCaseGroup`
     """
     command_reply = self._execute_command(
         createGridCaseGroup=Commands_pb2.CreateGridCaseGroupRequest(
-            casePaths=case_paths))
-    return self.grid_case_group(
-        command_reply.createGridCaseGroupResult.groupId)
+            casePaths=case_paths
+        )
+    )
+    return self.grid_case_group(command_reply.createGridCaseGroupResult.groupId)
+
 
 @add_method(Project)
 def summary_cases(self):
     """Get a list of all summary cases in the Project
 
-    Returns: A list of :class:`rips.generated.generated_classes.SummaryCase`
-    """        
+    Returns: A list of :class:`rips.generated.resinsight_classes.SummaryCase`
+    """
     return self.descendants(SummaryCase)
+
 
 @add_method(Project)
 def views(self):
@@ -180,9 +186,9 @@ def plots(self):
     Returns:
         List of :class:`rips.generated.generated_classes.Plot`
     """
-    generated_classes = self.descendants(PlotWindow)
+    resinsight_classes = self.descendants(PlotWindow)
     plot_list = []
-    for pdm_object in generated_classes:
+    for pdm_object in resinsight_classes:
         if pdm_object.id != -1:
             plot_list.append(pdm_object)
     return plot_list
@@ -243,12 +249,14 @@ def export_multi_case_snapshots(self, grid_list_file):
     """
     return self._execute_command(
         exportMultiCaseSnapshot=Commands_pb2.ExportMultiCaseRequest(
-            gridListFile=grid_list_file))
+            gridListFile=grid_list_file
+        )
+    )
 
 
 @add_method(Project)
-def export_snapshots(self, snapshot_type='ALL', prefix='', plot_format='PNG'):
-    """ Export all snapshots of a given type
+def export_snapshots(self, snapshot_type="ALL", prefix="", plot_format="PNG"):
+    """Export all snapshots of a given type
 
     Arguments:
         snapshot_type (str): Enum string ('ALL', 'VIEWS' or 'PLOTS')
@@ -257,12 +265,18 @@ def export_snapshots(self, snapshot_type='ALL', prefix='', plot_format='PNG'):
     """
     return self._execute_command(
         exportSnapshots=Commands_pb2.ExportSnapshotsRequest(
-            type=snapshot_type, prefix=prefix, caseId=-1, viewId=-1, plotOutputFormat=plot_format))
+            type=snapshot_type,
+            prefix=prefix,
+            caseId=-1,
+            viewId=-1,
+            plotOutputFormat=plot_format,
+        )
+    )
 
 
 @add_method(Project)
 def export_well_paths(self, well_paths=None, md_step_size=5.0):
-    """ Export a set of well paths
+    """Export a set of well paths
 
     Arguments:
         well_paths(list): List of strings of well paths. If none, export all.
@@ -272,14 +286,18 @@ def export_well_paths(self, well_paths=None, md_step_size=5.0):
         well_paths = []
     elif isinstance(well_paths, str):
         well_paths = [well_paths]
-    return self._execute_command(exportWellPaths=Commands_pb2.ExportWellPathRequest(
-        wellPathNames=well_paths, mdStepSize=md_step_size))
+    return self._execute_command(
+        exportWellPaths=Commands_pb2.ExportWellPathRequest(
+            wellPathNames=well_paths, mdStepSize=md_step_size
+        )
+    )
 
 
 @add_method(Project)
-def scale_fracture_template(self, template_id, half_length, height,
-                            d_factor, conductivity):
-    """ Scale fracture template parameters
+def scale_fracture_template(
+    self, template_id, half_length, height, d_factor, conductivity
+):
+    """Scale fracture template parameters
 
     Arguments:
         template_id(int): ID of fracture template
@@ -294,12 +312,14 @@ def scale_fracture_template(self, template_id, half_length, height,
             halfLength=half_length,
             height=height,
             dFactor=d_factor,
-            conductivity=conductivity))
+            conductivity=conductivity,
+        )
+    )
 
 
 @add_method(Project)
 def set_fracture_containment(self, template_id, top_layer, base_layer):
-    """ Set fracture template containment parameters
+    """Set fracture template containment parameters
 
     Arguments:
         template_id(int): ID of fracture template
@@ -308,12 +328,14 @@ def set_fracture_containment(self, template_id, top_layer, base_layer):
     """
     return self._execute_command(
         setFractureContainment=Commands_pb2.SetFracContainmentRequest(
-            id=template_id, topLayer=top_layer, baseLayer=base_layer))
+            id=template_id, topLayer=top_layer, baseLayer=base_layer
+        )
+    )
 
 
 @add_method(Project)
-def import_well_paths(self, well_path_files=None, well_path_folder=''):
-    """ Import well paths into project
+def import_well_paths(self, well_path_files=None, well_path_folder=""):
+    """Import well paths into project
 
     Arguments:
         well_path_files(list): List of file paths to import
@@ -325,8 +347,11 @@ def import_well_paths(self, well_path_files=None, well_path_folder=''):
     if well_path_files is None:
         well_path_files = []
 
-    res = self._execute_command(importWellPaths=Commands_pb2.ImportWellPathsRequest(wellPathFolder=well_path_folder,
-                                                                                    wellPathFiles=well_path_files))
+    res = self._execute_command(
+        importWellPaths=Commands_pb2.ImportWellPathsRequest(
+            wellPathFolder=well_path_folder, wellPathFiles=well_path_files
+        )
+    )
     well_paths = []
     for well_path_name in res.importWellPathsResult.wellPathNames:
         well_paths.append(self.well_path_by_name(well_path_name))
@@ -358,8 +383,8 @@ def well_path_by_name(self, well_path_name):
 
 
 @add_method(Project)
-def import_well_log_files(self, well_log_files=None, well_log_folder=''):
-    """ Import well log files into project
+def import_well_log_files(self, well_log_files=None, well_log_folder=""):
+    """Import well log files into project
 
     Arguments:
         well_log_files(list): List of file paths to import
@@ -371,14 +396,17 @@ def import_well_log_files(self, well_log_files=None, well_log_folder=''):
 
     if well_log_files is None:
         well_log_files = []
-    res = self._execute_command(importWellLogFiles=Commands_pb2.ImportWellLogFilesRequest(wellLogFolder=well_log_folder,
-                                                                                          wellLogFiles=well_log_files))
+    res = self._execute_command(
+        importWellLogFiles=Commands_pb2.ImportWellLogFilesRequest(
+            wellLogFolder=well_log_folder, wellLogFiles=well_log_files
+        )
+    )
     return res.importWellLogFilesResult.wellPathNames
 
 
 @add_method(Project)
 def import_formation_names(self, formation_files=None):
-    """ Import formation names into project
+    """Import formation names into project
 
     Arguments:
         formation_files(list): list of files to import
@@ -389,5 +417,8 @@ def import_formation_names(self, formation_files=None):
     elif isinstance(formation_files, str):
         formation_files = [formation_files]
 
-    self._execute_command(importFormationNames=Commands_pb2.ImportFormationNamesRequest(formationFiles=formation_files,
-                                                                                        applyToCaseId=-1))
+    self._execute_command(
+        importFormationNames=Commands_pb2.ImportFormationNamesRequest(
+            formationFiles=formation_files, applyToCaseId=-1
+        )
+    )

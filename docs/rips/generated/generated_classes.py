@@ -184,7 +184,7 @@ class FaciesProperties(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.color_legend = "ColorLegend:2448476982720"
+        self.color_legend = "ColorLegend:1446460090704"
         self.file_path = ""
         self.properties_table = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
@@ -259,7 +259,7 @@ class SummaryCase(PdmObjectBase):
 
     def summary_vector_values(self, address=None):
         """
-        Create a new Summary Plot
+        Get all values for a summary vector
         Arguments:
             address (str): Formatted address specifying the summary vector
         Returns:
@@ -310,7 +310,7 @@ class View(ViewWindow):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#b0c4de"
+        self.background_color = "#3b3b3b"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
@@ -395,27 +395,6 @@ class ModeledWellPath(WellPath):
              WellPathGeometry
         """
         children = self.children("WellPathGeometry", WellPathGeometry)
-        return children[0] if len(children) > 0 else None
-
-
-class ModeledWellPathLateral(WellPath):
-    """
-    A Well Path Lateral created interactively
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object=None, channel=None):
-        WellPath.__init__(self, pb2_object, channel)
-        if ModeledWellPathLateral.__custom_init__ is not None:
-            ModeledWellPathLateral.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def well_path_lateral_geometry(self):
-        """Trajectory
-        Returns:
-             WellPathLateralGeometry
-        """
-        children = self.children("WellPathLateralGeometry", WellPathLateralGeometry)
         return children[0] if len(children) > 0 else None
 
 
@@ -687,18 +666,20 @@ class StimPlanModel(CheckableNamedObject):
         bounding_box_horizontal (float): Bounding Box Horizontal
         bounding_box_vertical (float): Bounding Box Vertical
         distance_to_barrier (float): Distance To Barrier [m]
-        eclipse_case (str): Case
+        eclipse_case (str): Dynamic Case
         extraction_depth_bottom (float): Bottom
         extraction_depth_top (float): Top
         extraction_type (str): Extraction Type
         formation_dip (float): Formation Dip
         fracture_orientation (str): Fracture Orientation
+        initial_pressure_eclipse_case (str): Initial Pressure Case
         measured_depth (float): Measured Depth
         perforation_length (float): Perforation Length [m]
         poro_elastic_constant (float): Poro-Elastic Constant
         relative_permeability_factor (float): Relative Permeability Factor
         show_all_faults (str): Show All Faults
         show_only_barrier_fault (str): Show Only Barrier Fault
+        static_eclipse_case (str): Static Case
         thermal_expansion_coefficient (float): Thermal Expansion Coefficient [1/C]
         thickness_direction (str): Thickness Direction
         thickness_direction_well_path (str): Thickness Direction Well Path
@@ -726,12 +707,14 @@ class StimPlanModel(CheckableNamedObject):
         self.extraction_type = "TST"
         self.formation_dip = 0
         self.fracture_orientation = "ALONG_WELL_PATH"
+        self.initial_pressure_eclipse_case = ""
         self.measured_depth = 0
         self.perforation_length = 10
         self.poro_elastic_constant = 0
         self.relative_permeability_factor = 0.5
         self.show_all_faults = False
         self.show_only_barrier_fault = False
+        self.static_eclipse_case = ""
         self.thermal_expansion_coefficient = 0
         self.thickness_direction = [0, 0, 0]
         self.thickness_direction_well_path = ""
@@ -761,19 +744,17 @@ class StimPlanModelCollection(CheckableNamedObject):
         if StimPlanModelCollection.__custom_init__ is not None:
             StimPlanModelCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_stim_plan_model(self, eclipse_case=None, time_step=None, well_path=None, measured_depth=None, stim_plan_model_template=None):
+    def new_stim_plan_model(self, well_path=None, measured_depth=None, stim_plan_model_template=None):
         """
         Create a new StimPlan Model
         Arguments:
-            eclipse_case (RimReservoir): Eclipse Case
-            time_step (int): Time Step
             well_path (WellPathBase): Well Path
             measured_depth (float): Measured Depth
             stim_plan_model_template (StimPlanModelTemplate): StimPlan Model Template
         Returns:
             StimPlanModel
         """
-        return self._call_pdm_method("NewStimPlanModel", eclipse_case=eclipse_case, time_step=time_step, well_path=well_path, measured_depth=measured_depth, stim_plan_model_template=stim_plan_model_template)
+        return self._call_pdm_method("NewStimPlanModel", well_path=well_path, measured_depth=measured_depth, stim_plan_model_template=stim_plan_model_template)
 
 
     def stim_plan_models(self):
@@ -810,7 +791,6 @@ class DepthTrackPlot(PlotWindow):
         maximum_depth (float): Max
         minimum_depth (float): Min
         show_depth_grid_lines (str): Show Grid Lines
-        show_title_in_plot (str): Show Title
         sub_title_font_size (str): Track Title Font Size
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -824,7 +804,6 @@ class DepthTrackPlot(PlotWindow):
         self.maximum_depth = 1000
         self.minimum_depth = 0
         self.show_depth_grid_lines = "GRID_X_MAJOR"
-        self.show_title_in_plot = False
         self.sub_title_font_size = "Medium"
         PlotWindow.__init__(self, pb2_object, channel)
         if DepthTrackPlot.__custom_init__ is not None:
@@ -881,7 +860,9 @@ class StimPlanModelTemplate(PdmObjectBase):
     Attributes:
         default_permeability (float): Default Permeability
         default_porosity (float): Default Porosity
+        dynamic_eclipse_case (str): Dynamic Case
         id (int): ID
+        initial_pressure_eclipse_case (str): Initial Pressure Case
         overburden_facies (str): Overburden Facies
         overburden_fluid_density (float): Overburden Fluid Density [g/cm^3]
         overburden_formation (str): Overburden Formation
@@ -891,7 +872,9 @@ class StimPlanModelTemplate(PdmObjectBase):
         reference_temperature (float): Temperature [C]
         reference_temperature_depth (float): Temperature Depth [m]
         reference_temperature_gradient (float): Temperature Gradient [C/m]
+        static_eclipse_case (str): Static Case
         stress_depth (float): Stress Depth
+        time_step (int): Time Step
         underburden_facies (str): Underburden Facies
         underburden_fluid_density (float): Underburden Fluid Density [g/cm^3]
         underburden_formation (str): Underburden Formation
@@ -906,7 +889,9 @@ class StimPlanModelTemplate(PdmObjectBase):
     def __init__(self, pb2_object=None, channel=None):
         self.default_permeability = 1e-05
         self.default_porosity = 0.01
+        self.dynamic_eclipse_case = ""
         self.id = -1
+        self.initial_pressure_eclipse_case = ""
         self.overburden_facies = ""
         self.overburden_fluid_density = 1.03
         self.overburden_formation = ""
@@ -916,7 +901,9 @@ class StimPlanModelTemplate(PdmObjectBase):
         self.reference_temperature = 70
         self.reference_temperature_depth = 2500
         self.reference_temperature_gradient = 0.025
+        self.static_eclipse_case = ""
         self.stress_depth = 1000
+        self.time_step = 0
         self.underburden_facies = ""
         self.underburden_fluid_density = 1.03
         self.underburden_formation = ""
@@ -938,6 +925,14 @@ class StimPlanModelTemplate(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+    def facies_initial_pressure_configs(self):
+        """Facies Initial Pressure Configs
+        Returns:
+             List of FaciesInitialPressureConfig
+        """
+        return self.children("FaciesInitialPressureConfigs", FaciesInitialPressureConfig)
+
+
     def facies_properties(self):
         """Facies Properties
         Returns:
@@ -956,6 +951,15 @@ class StimPlanModelTemplate(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+    def pressure_table(self):
+        """Pressure Table
+        Returns:
+             PressureTable
+        """
+        children = self.children("PressureTable", PressureTable)
+        return children[0] if len(children) > 0 else None
+
+
 class StimPlanModelTemplateCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -964,16 +968,18 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
         if StimPlanModelTemplateCollection.__custom_init__ is not None:
             StimPlanModelTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_stim_plan_model_template(self, facies_properties_file_path=None, elastic_properties_file_path=None):
+    def new_stim_plan_model_template(self, eclipse_case=None, time_step=None, facies_properties_file_path=None, elastic_properties_file_path=None):
         """
         Create a new StimPlan Model Template
         Arguments:
+            eclipse_case (RimReservoir): Eclipse Case
+            time_step (int): Time Step
             facies_properties_file_path (str): Facies Properties File Path
             elastic_properties_file_path (str): Elastic Properties File Path
         Returns:
             StimPlanModelTemplate
         """
-        return self._call_pdm_method("NewStimPlanModelTemplate", facies_properties_file_path=facies_properties_file_path, elastic_properties_file_path=elastic_properties_file_path)
+        return self._call_pdm_method("NewStimPlanModelTemplate", eclipse_case=eclipse_case, time_step=time_step, facies_properties_file_path=facies_properties_file_path, elastic_properties_file_path=elastic_properties_file_path)
 
 
     def stim_plan_model_templates(self):
@@ -1240,16 +1246,20 @@ class WellPathGeometry(PdmObjectBase):
 
     Attributes:
         air_gap (float): Air Gap
+        attached_to_parent_well (str): Attached to Parent Well
         md_at_first_target (float): MD at First Target
         reference_point (str): UTM Reference Point
+        show_spheres (str): Spheres
         use_auto_generated_target_at_sea_level (str): Generate Target at Sea Level
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
         self.air_gap = 0
+        self.attached_to_parent_well = False
         self.md_at_first_target = 0
         self.reference_point = [0, 0, 0]
+        self.show_spheres = False
         self.use_auto_generated_target_at_sea_level = True
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathGeometry.__custom_init__ is not None:
@@ -1277,12 +1287,14 @@ class WellPathGroup(WellPath):
     A Group of Well Paths
 
     Attributes:
+        add_valve_at_connection (str): Add Outlet Valve for Branches
         group_name (str): Group Name
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.group_name = ""
+        self.add_valve_at_connection = False
+        self.group_name = "Well 1"
         WellPath.__init__(self, pb2_object, channel)
         if WellPathGroup.__custom_init__ is not None:
             WellPathGroup.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -1295,27 +1307,13 @@ class WellPathGroup(WellPath):
         return self.children("ChildWellPaths", WellPath)
 
 
-class WellPathLateralGeometry(PdmObjectBase):
-    """
-    Class containing the geometry of a modeled Well Path Lateral
-
-    Attributes:
-        md_at_connection (float): MD at Well Path Connection
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object=None, channel=None):
-        self.md_at_connection = 0
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if WellPathLateralGeometry.__custom_init__ is not None:
-            WellPathLateralGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def well_path_targets(self):
-        """Well Targets
+    def valve(self):
+        """Branch Outlet Valve
         Returns:
-             List of WellPathTarget
+             WellPathValve
         """
-        return self.children("WellPathTargets", WellPathTarget)
+        children = self.children("Valve", WellPathValve)
+        return children[0] if len(children) > 0 else None
 
 
 def class_dict():
@@ -1344,7 +1342,6 @@ def class_dict():
     classes['GridStatisticsPlotCollection'] = GridStatisticsPlotCollection
     classes['GridSummaryCase'] = GridSummaryCase
     classes['ModeledWellPath'] = ModeledWellPath
-    classes['ModeledWellPathLateral'] = ModeledWellPathLateral
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
     classes['NonNetLayers'] = NonNetLayers
     classes['PdmObjectBase'] = PdmObjectBase
@@ -1376,7 +1373,6 @@ def class_dict():
     classes['WellPath'] = WellPath
     classes['WellPathGeometry'] = WellPathGeometry
     classes['WellPathGroup'] = WellPathGroup
-    classes['WellPathLateralGeometry'] = WellPathLateralGeometry
     return classes
 
 def class_from_keyword(class_keyword):
