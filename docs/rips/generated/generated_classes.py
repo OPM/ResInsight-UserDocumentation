@@ -73,6 +73,7 @@ class Reservoir(Case):
 
     def views(self):
         """All Eclipse Views in the case
+
         Returns:
              List of EclipseView
         """
@@ -111,6 +112,7 @@ class ElasticProperties(PdmObjectBase):
     def add_property_scaling(self, formation=None, facies=None, property=None, scale=None):
         """
         Add Elastic Property Scaling
+
         Arguments:
             formation (str): Formation
             facies (str): Facies
@@ -124,6 +126,7 @@ class ElasticProperties(PdmObjectBase):
 
     def property_scaling_collection(self):
         """PropertyScalingCollection
+
         Returns:
              ElasticPropertyScalingCollection
         """
@@ -168,6 +171,7 @@ class ElasticPropertyScalingCollection(PdmObjectBase):
 
     def elastic_property_scalings(self):
         """Elastic Property Scalings
+
         Returns:
              List of ElasticPropertyScaling
         """
@@ -184,7 +188,7 @@ class FaciesProperties(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.color_legend = "ColorLegend:1446460090704"
+        self.color_legend = "ColorLegend:1682353580928"
         self.file_path = ""
         self.properties_table = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
@@ -193,6 +197,7 @@ class FaciesProperties(PdmObjectBase):
 
     def facies_definition(self):
         """
+
         Returns:
              EclipseResult
         """
@@ -226,6 +231,7 @@ class SummaryCase(PdmObjectBase):
     def available_addresses(self, ):
         """
         
+
         Arguments:
             
         Returns:
@@ -237,6 +243,7 @@ class SummaryCase(PdmObjectBase):
     def available_time_steps(self, ):
         """
         
+
         Arguments:
             
         Returns:
@@ -248,6 +255,7 @@ class SummaryCase(PdmObjectBase):
     def resample_values(self, address=None, resampling_period=None):
         """
         
+
         Arguments:
             address (str): Formatted address specifying the summary vector
             resampling_period (str): Resampling Period
@@ -260,6 +268,7 @@ class SummaryCase(PdmObjectBase):
     def summary_vector_values(self, address=None):
         """
         Get all values for a summary vector
+
         Arguments:
             address (str): Formatted address specifying the summary vector
         Returns:
@@ -344,6 +353,7 @@ class GridStatisticsPlotCollection(PdmObjectBase):
 
     def grid_statistics_plots(self):
         """
+
         Returns:
              List of GridStatisticsPlot
         """
@@ -391,6 +401,7 @@ class ModeledWellPath(WellPath):
 
     def well_path_geometry(self):
         """Trajectory
+
         Returns:
              WellPathGeometry
         """
@@ -415,6 +426,7 @@ class NonNetLayers(PdmObjectBase):
 
     def facies_definition(self):
         """
+
         Returns:
              EclipseResult
         """
@@ -436,6 +448,7 @@ class GeoMechCase(Case):
 
     def views(self):
         """All GeoMech Views in the Case
+
         Returns:
              List of GeoMechView
         """
@@ -457,6 +470,7 @@ class Project(PdmObjectBase):
     def import_summary_case(self, file_name=None):
         """
         Import Summary Case
+
         Arguments:
             file_name (str): 
         Returns:
@@ -468,6 +482,7 @@ class Project(PdmObjectBase):
     def summary_case(self, case_id=None):
         """
         Find Summary Case
+
         Arguments:
             case_id (int): 
         Returns:
@@ -479,6 +494,7 @@ class Project(PdmObjectBase):
     def surface_folder(self, folder_name=None):
         """
         Get Surface Folder
+
         Arguments:
             folder_name (str): 
         Returns:
@@ -516,6 +532,7 @@ class EclipseView(View):
 
     def cell_result(self):
         """Cell Result
+
         Returns:
              CellColors
         """
@@ -525,6 +542,7 @@ class EclipseView(View):
 
     def cell_result_data(self):
         """Current Eclipse Cell Result
+
         Returns:
              str
         """
@@ -533,6 +551,7 @@ class EclipseView(View):
 
     def set_cell_result_data(self, values):
         """Set Current Eclipse Cell Result
+
         Arguments:
             values (str): data
         """
@@ -597,6 +616,7 @@ class RimCellFilterCollection(PdmObjectBase):
 
     def cell_filters(self):
         """Filters
+
         Returns:
              List of CellFilter
         """
@@ -728,6 +748,7 @@ class StimPlanModel(CheckableNamedObject):
     def export_to_file(self, directory_path=None):
         """
         Export StimPlan Model Plot to File
+
         Arguments:
             directory_path (str): Directory Path
         Returns:
@@ -747,6 +768,7 @@ class StimPlanModelCollection(CheckableNamedObject):
     def new_stim_plan_model(self, well_path=None, measured_depth=None, stim_plan_model_template=None):
         """
         Create a new StimPlan Model
+
         Arguments:
             well_path (WellPathBase): Well Path
             measured_depth (float): Measured Depth
@@ -759,6 +781,7 @@ class StimPlanModelCollection(CheckableNamedObject):
 
     def stim_plan_models(self):
         """
+
         Returns:
              List of StimPlanModel
         """
@@ -839,6 +862,7 @@ class StimPlanModelPlotCollection(PdmObjectBase):
     def new_stim_plan_model_plot(self, stim_plan_model=None):
         """
         Create a new StimPlan Model
+
         Arguments:
             stim_plan_model (StimPlanModel): StimPlan Model
         Returns:
@@ -849,6 +873,7 @@ class StimPlanModelPlotCollection(PdmObjectBase):
 
     def stim_plan_model_plots(self):
         """
+
         Returns:
              List of StimPlanModelPlot
         """
@@ -918,6 +943,7 @@ class StimPlanModelTemplate(PdmObjectBase):
 
     def elastic_properties(self):
         """Elastic Properties
+
         Returns:
              ElasticProperties
         """
@@ -927,6 +953,7 @@ class StimPlanModelTemplate(PdmObjectBase):
 
     def facies_initial_pressure_configs(self):
         """Facies Initial Pressure Configs
+
         Returns:
              List of FaciesInitialPressureConfig
         """
@@ -935,6 +962,7 @@ class StimPlanModelTemplate(PdmObjectBase):
 
     def facies_properties(self):
         """Facies Properties
+
         Returns:
              FaciesProperties
         """
@@ -944,6 +972,7 @@ class StimPlanModelTemplate(PdmObjectBase):
 
     def non_net_layers(self):
         """Non-Net Layers
+
         Returns:
              NonNetLayers
         """
@@ -953,6 +982,7 @@ class StimPlanModelTemplate(PdmObjectBase):
 
     def pressure_table(self):
         """Pressure Table
+
         Returns:
              PressureTable
         """
@@ -971,6 +1001,7 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
     def new_stim_plan_model_template(self, eclipse_case=None, time_step=None, facies_properties_file_path=None, elastic_properties_file_path=None):
         """
         Create a new StimPlan Model Template
+
         Arguments:
             eclipse_case (RimReservoir): Eclipse Case
             time_step (int): Time Step
@@ -984,6 +1015,7 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
 
     def stim_plan_model_templates(self):
         """StimPlan Model Templates
+
         Returns:
              List of StimPlanModelTemplate
         """
@@ -1051,6 +1083,7 @@ class SummaryPlotCollection(PdmObjectBase):
     def new_summary_plot(self, summary_cases=[], ensemble=None, address=None):
         """
         Create a new Summary Plot
+
         Arguments:
             summary_cases (List of SummaryCase): Summary Cases
             ensemble (SummaryCaseSubCollection): Ensemble
@@ -1100,6 +1133,7 @@ class SurfaceCollection(PdmObjectBase):
     def add_folder(self, folder_name=None):
         """
         Add a new surface folder
+
         Arguments:
             folder_name (str): New surface folder name
         Returns:
@@ -1111,6 +1145,7 @@ class SurfaceCollection(PdmObjectBase):
     def import_surface(self, file_name=None):
         """
         Import a new surface from file
+
         Arguments:
             file_name (str): Filename to import surface from
         Returns:
@@ -1121,6 +1156,7 @@ class SurfaceCollection(PdmObjectBase):
 
     def sub_collections(self):
         """Surfaces
+
         Returns:
              List of SurfaceCollection
         """
@@ -1129,6 +1165,7 @@ class SurfaceCollection(PdmObjectBase):
 
     def surfaces_field(self):
         """Surfaces
+
         Returns:
              List of SurfaceInterface
         """
@@ -1221,6 +1258,7 @@ class WellBoreStabilityPlot(WellLogPlot):
 
     def parameters(self):
         """Well Bore Stability Parameters
+
         Returns:
              WbsParameters
         """
@@ -1267,6 +1305,7 @@ class WellPathGeometry(PdmObjectBase):
 
     def auto_generated_target(self):
         """Auto Generated Target
+
         Returns:
              WellPathTarget
         """
@@ -1276,6 +1315,7 @@ class WellPathGeometry(PdmObjectBase):
 
     def well_path_targets(self):
         """Well Targets
+
         Returns:
              List of WellPathTarget
         """
@@ -1301,6 +1341,7 @@ class WellPathGroup(WellPath):
 
     def child_well_paths(self):
         """Child Well Paths
+
         Returns:
              List of WellPath
         """
@@ -1309,6 +1350,7 @@ class WellPathGroup(WellPath):
 
     def valve(self):
         """Branch Outlet Valve
+
         Returns:
              WellPathValve
         """
