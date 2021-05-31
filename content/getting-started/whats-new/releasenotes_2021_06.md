@@ -1,11 +1,11 @@
 +++
-title = "What's New in 2021.04"
+title = "What's New in 2021.06"
 published = true
 weight = 10
 hidden = true
 +++
 
-Version 2021.04 is a major update bringing a range of significant new and enhanced features as described below.
+Version 2021.06 is a major update bringing a range of significant new and enhanced features as described below.
 
 ## Streamlines
 ![]({{< relref "" >}}images/3d-main-window/Streamlines.png)
