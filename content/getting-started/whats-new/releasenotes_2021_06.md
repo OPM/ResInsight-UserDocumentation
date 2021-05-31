@@ -42,7 +42,6 @@ A [Vertical Flow Performance Plot (VFP Plot)]({{< relref "plot-window/VfpPlot" >
 
 
 ## Additional New Features and Enhancements
-ResInsight 2021.04 an additional set of new features and enhancements as described below:
 
 - Support for relperm and PVT plots for dual porosity models
 - Fixed issue related to negative values in delta case contour maps
