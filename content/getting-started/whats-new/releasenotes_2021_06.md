@@ -24,6 +24,17 @@ Version 2021.06 is a major update bringing a range of significant new and enhanc
 
 A [Vertical Flow Performance Plot (VFP Plot)]({{< relref "plot-window/VfpPlot" >}}) shows the relationship between bottom hole well conditions and wellhead pressure describing a well's ability to lift fluids to the surface. ResInsight can display both production and injection VFP plots.
 
+## Integrated ResInsight Help
+If you need the [User Manual]({{< relref "helpmenuanddocumentation" >}}) for an object, you can use the right-click menu of the object and select **Search Help for:**. This will open up the user manual for the selected object from **resinsight.org**.
+
+![]({{< relref "" >}}images/getting-started/help_on_context_menu.png)
+
+## ResInsight Online Tutorials
+![]({{< relref "" >}}images/getting-started/tutorials-you-tube.png)
+
+- [ResInsight Tutorial Videos (YouTube)](https://www.youtube.com/channel/UCEJoH_ti1YZXz4hPMeAKMgw)
+- [ResInsight Tutorials](https://github.com/CeetronSolutions/resinsight-tutorials)
+
 ## Polygon Cell Filter
 ![]({{< relref "" >}}images/3d-main-window/CellFilter_Polygon.png)
 
