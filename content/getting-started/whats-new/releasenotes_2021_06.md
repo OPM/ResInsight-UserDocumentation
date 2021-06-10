@@ -7,6 +7,12 @@ hidden = true
 
 Version 2021.06 is a major update bringing a range of significant new and enhanced features as described below.
 
+## Multilateral Wells
+![]({{< relref "" >}}images/3d-main-window/MultiLateralWell_3d_view.png)
+ResInsight lets the user create [Multilateral Well Paths]({{< relref "3d-main-window/createmultilateralwellpaths" >}}) by clicking in the 3D view. Completions can be added to laterals, and the complete specification of the well can 
+be exported using the [Completion Export]({{< relref "completionexport" >}})
+
+
 ## Streamlines
 ![]({{< relref "" >}}images/3d-main-window/Streamlines.png)
 
