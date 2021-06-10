@@ -69,6 +69,27 @@ To import a polyline annotation from file, right click **Annotations** or **Poly
 - **File** - Name of the imported file
 - **Line Appearance** - Set line color and line thickness
 
+### Polyline File format
+
+Define each point as three double per line (**X Y Depth**). Comment lines are supported by using **#** at the start of the line
+
+```
+# This is a comment
+# This is a comment
+58177.76 732.7 1643.6 
+58260.83 732.8 1596.6 
+57985.66 732.7 1542.0 
+59601.45 732.4 3639.0 
+59422.01 732.2 3639.0 
+59793.41 732.2 3639.0 
+999 999 999
+# starting polyline 2
+58260.83 732.8 1596.6 
+57985.66 732.7 1542.0 
+59601.45 732.4 3639.0 
+```
+
+
 ## Annotations visibility
 Local annotations visibility is controlled by the check boxes in the local annotations sub tree only. Global annotations visibility, on the other hand, is controlled by the check boxes in both the global and local annotations sub trees. So in order to display a global annotation in a specific view, both the annotation tree note itself and its representation in the local sub tree must have visibilty enabled.
 
