@@ -17,8 +17,8 @@ be exported using the [Completion Export]({{< relref "completionexport" >}})
 3. A new well path lateral is created, and click in the 3D scene to define targets for the lateral
 4. Repeat from 2. for more laterals
 
-### Settings
-The visual appearance of well targets can be controlled from the property editor.
+### Tie In Control
+The parent well and the measured depth of the tie in location can be adjusted from the property editor.
 
 ![]({{< relref "" >}}images/3d-main-window/MultiLateralWell_property_editor.png)
 
