@@ -14,11 +14,25 @@ Curve coloring by **Objective Function** is activated as shown below.
 
 ![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsPlotProjectTree.png)
 
-ResInsight offers two default objective functions which are readily available to color ensemble plots:
 
-- $ M1(vectors) = \frac{ \Sigma \mid (vectors) \mid }{ stdv } $ for all time steps in selected range (for one or multiple vectors)
+**Objective Function**
 
-- $ M2(vectors) = \Sigma \mid (vectors) \mid $ for all checked time steps (for one or multiple vectors)
+ResInsight uses the following objective function definition:
+
+$ F = \frac {1} {N} \Sigma (\frac{  \mid (t_i - tH_i) \mid }{ \epsilon * tH_i } )^n $ 
+
+$ t_i $ : Simulated value for time step $i$
+
+$ tH_i $ : History (observed) value for time step $i$
+
+$ N $ : Number of Observations
+
+$ \epsilon $ : Error estimate [0..100 %]
+
+$ n $ : Either 1 - Basic error term, or 2 - Squared error term
+
+
+The time step selection is either specified using **Time Range (F1)** to define all time steps in a time range or **Selected Time Steps (F2)**
 
 
 ## Creating Custom Objective Functions
@@ -28,7 +42,7 @@ It is also possible to create a **Custom Objective Function** to customize the c
 
 - Custom objective functions allow for an arbitrary combination of weigthed default objective functions
 
-- Thus, $ M_{custom} = \Sigma_i^N weight_i * f_i(vectors) $ where $ f_i \in \lbrace M1, M2 \rbrace $
+- Thus, $ M_{custom} = \Sigma_i^N weight_i * f_i(vectors) $ where $ f_i \in \lbrace F1, F2 \rbrace $
 
 A Custom Objective Function is created by invoking the context menu on the **Custom Objective Functions** item in **Plot Project Tree**.
 
