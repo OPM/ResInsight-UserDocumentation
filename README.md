@@ -1,5 +1,8 @@
 # ResInsight User Documentation
 
+## Edit of the documentation for Python API
+[Edit docs for Python API](docs/README.md)
+
 ## Edit documentation
 Edit documentation in the folder **content**
 

@@ -26,6 +26,12 @@ Ensembles are plotted in the summary plot the same way as ordinary summary curve
 
 Stepping of data source for ensemble curves is described in [Summary Plot Source Stepping]({{< relref "summarysourcestepping" >}})
 
+
+### Resampling
+Resampling of curves is possibly by selecting the actual curve(s) listed by the *Ensemble Curve Sets* item in **Plot Project Tree** and using the **Resampling** feature of **Property Editor**.
+
+![]({{< relref "" >}}images/plot-window/EnsemblePlottingResampling.png)
+
 ### Statistics curves
 If the number of curves in a curve set is sufficient, ResInsight will calculate statistics for the curve set. The following statistics curves may be displayed:
 

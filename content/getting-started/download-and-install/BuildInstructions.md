@@ -14,7 +14,7 @@ In a git enabled shell do: `git clone https://github.com/OPM/ResInsight.git`
 
 ### Windows Compiler
 
-Visual Studio 2015 and later is supported.
+Visual Studio 2019 and later is supported.
 
 ### GCC Compiler
 
@@ -22,27 +22,16 @@ GCC version 4.9 or later is supported. On RedHat Linux 6 you need to install dev
     
     source /opt/rh/devtoolset-3/enable
 
-### Qt5
-[Qt](http://download.qt.io/archive/qt/) Qt5 version 5.6.0 or later is supported. 
+### Qt 5
+Qt 5.9 or later is supported.
 
-On some configurations you will be asked to specify the location of Qt5. Example for Windows :
-`Qt5_DIR=d:\Qt\5.11.3\msvc2017_64\lib\cmake\Qt5`
+[Qt download](http://download.qt.io/archive/qt/)  
 
-#### Qt4 (Deprecated)
-
-{{% notice info %}}
-Qt4 is marked as deprecated and support for using Qt4 will soon be removed.
-{{% /notice %}}
-
-[Qt](http://download.qt.io/archive/qt/) Qt4 version 4.6.2 or later is supported. On Windows we recommend Qt-4.8.7, while the default installation will do under Linux. 
-
-`RESINSIGHT_BUILD_WITH_QT5=FALSE`
-
-You will need to patch the Qt sources in order to make them build using Visual Studio 2015 using this : 
-[Qt-patch](https://github.com/appleseedhq/appleseed/wiki/Making-Qt-4.8.7-compile-with-Visual-Studio-2015) 
+On some configurations you will be asked to specify the location of Qt 5. Example for Windows :
+`Qt5_DIR=d:\Qt\5.15.0\msvc2019_64\lib\cmake\Qt5`
 
 ### CMake
-[CMake](https://cmake.org/download/) version 2.8 or later is supported.
+[CMake](https://cmake.org/download/) version 3.12 or later is supported.
 
 ## Build Instructions
 The ResInsight build may be configured in different ways, with optional support for Octave plugins, 
@@ -60,9 +49,7 @@ This makes it easier to see all of the options for ResInsight.
 - Run the compiler using the generated makefiles or solution file/project files to build ResInsight
 
 ### Windows
-ResInsight has been verified to build and run on Windows 7/8/10 using Microsoft Visual Studio 2015/2017. 
-Typical usage on Windows is to follow the build instructions above, and then open the generated 
-solution file in Visual Studio to build the application.
+ResInsight has been verified to build and run on Windows 10 using Microsoft Visual Studio 2017/2019. Typical usage on Windows is to follow the build instructions above, and then open the generated solution file in Visual Studio to build the application.
 
 ### Linux
 
@@ -99,11 +86,9 @@ To be able to modify **Advanced Options** from the CMake User Interface, tick th
 
 | CMake Name                                        | Default | Description                              |
 |---------------------------------------------------|---------|--------------------------------------------------------|
-| `RESINSIGHT_BUILD_WITH_QT5`                       | ON      | If ON, use Qt5. If OFF, use Qt4 (Support for Qt4 is deprecated and will be removed) |
 | `RESINSIGHT_QT5_BUNDLE_LIBRARIES`                 | OFF     | Linux only: Include Qt5 libraries in the installation package |
-| `RESINSIGHT_BUNDLE_OPENSSL`                       | OFF     | Bundle the OpenSSL library DLLs in the Windows installer package |
-| `RESINSIGHT_ENABLE_COTIRE`                        | OFF     | Experimental speedup of compilation using cotire |
-| `RESINSIGHT_ENABLE_PROTOTYPE_FEATURE_SOURING`     | ON      | Enable Souring features |
+| `RESINSIGHT_BUNDLE_OPENSSL`                       | OFF     | Bundle the OpenSSL library binaries |
+| `RESINSIGHT_ENABLE_UNITY_BUILD`                   | OFF     | Activate use of CMAKE_UNITY_BUILD on some libraries to improve build speed |
 | `RESINSIGHT_INCLUDE_APPFWK_TESTS`                 | OFF     | Include unit tests from thirdparty libraries AppFwk and VizFwk |
 | `RESINSIGHT_INCLUDE_APPLICATION_UNIT_TESTS`       | OFF     | Include Application Code Unit Tests |
 | `RESINSIGHT_PRIVATE_INSTALL`                      | ON      | Linux only: Include libecl libraries in the installation package |
@@ -113,9 +98,11 @@ To be able to modify **Advanced Options** from the CMake User Interface, tick th
 
 | CMake Name                                        | Default | Description                              |
 |---------------------------------------------------|---------|--------------------------------------------------------|
-| `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable ResInsight scripting server (required for use of Python) |
+| `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable gRPC scripting server. Required to be able to use ResInsight from Python |
+| `RESINSIGHT_GRPC_BUNDLE_PYTHON_MODULE`            | OFF     | Bundle GRPC Python module in install folder |
+| `RESINSIGHT_GRPC_DOWNLOAD_PYTHON_MODULE`          | ON      | Download GRPC Python module |
 | `RESINSIGHT_GRPC_PYTHON_EXECUTABLE`               | Blank   | Location of Python3 executable |
-| `RESINSIGHT_GRPC_INSTALL_PREFIX`                  | Blank   | Linux only : Installation prefix for gRPC |
+
 
 ### Optional Libraries and features
 

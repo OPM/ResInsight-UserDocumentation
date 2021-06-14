@@ -1,71 +1,62 @@
 +++
-title = "Flow Vector Result"
+title = "Flow Results"
 published = true
 weight = 50
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/FlowVectorResult.PNG)
 
-The Flow Vector Result View lets the user investigate fluxes by visualizing flow vectors in the reservoir. It allows for selecting and combining different fluids and directions. Selected vectors can be combined and scaled.
+Flow Results lets the user investigate flow properties and fluxes in a reservoir, e.g. by flow vector visualizations selecting and combining different fluids and directions. 
 
-The flow vectors are based on the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**
+## Flow Vectors
+Flow vectors are computed based on the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**. 
+Visualization of flow vector results always use velocity instead of rate. Velocity is computed as flow rate divided by cell face area.
 
-### Open the Flow Vector Result View
-
-In order to show Flow Vector Results, select and check the checkbox next to **Flow Vector Result** in the **Project Tree**.
+In order to show flow vectors, check the checkbox next to **Flow Vector Result** in **Project Tree**. 
 
 ![]({{< relref "" >}}images/3d-main-window/FlowVectorResultMenu.PNG)
 
-The 3D View gets updated with arrows visualizing the fluxes. The directions, data source fluids, color, scale and threshold can be adjusted in the Property Editor.
+This updates the 3D View with arrows visualizing the fluxes for the given time step or animation. The directions, data source fluids, color, scale and threshold can be adjusted in the Property Editor.
 
-### Legend
+The legend in 3D View maps the Flow Vector colors to their respective result values. By default it shows the max values for all time steps. The legend settings can be changed in the **Color Legend** sub item of the **Flow Vector Result** item in **Project Tree**.
 
 ![]({{< relref "" >}}images/3d-main-window/FlowVectorResultLegend.PNG)
 
-The legend maps the Flow Vector colors to their respective result values. By default it shows the max values for all time steps. The legend settings can be changed in the **Color Legend** sub item of the **Flow Vector Result** item in the **Project Tree**.
+{{% notice note %}}
+When combining several fluids, the max value shown in legend is an aggregation of the single max values of each selected fluid. This means that this number might be higher than the result of any flow vector.
+{{% /notice %}}
 
-**Note:**\
-When combining several fluids, the max value shown in the legend is an aggregation of the single max values of each selected fluid. This means that this number might be higher than the result of any flow vector.
 
 
-### Adjust the View
-
-In the *Property Editor*, there are four different settings groups.
+## Flow Vector Settings
 
 ![]({{< relref "" >}}images/3d-main-window/FlowVectorResultProperties.PNG)
 
-#### Fluids
-The fluxes of the fluids selected here are shown as aggregated vectors in the 3D view.
+The Property Editor controls the following settings:
 
-#### Visibility
+- **Fluids**: Selection of fluids for displaying fluxes as aggregated vectors in 3D view.
 
-**View Vectors**
-- **Per Face:** Show one flow vector per cell face. Each direction has its own vector.
-- **Cell Center Total:** Show only one vector per cell, located at the cell's center position. This vector is an aggregation of all single direction vectors.
+- **Visibility**
 
-**Vectors Touching Surface** (only enabled when **View vectors** is set to **Per Face**)
-- **At vector anchor:** The vectors are starting at the cells' faces.
-- **At vector center:** The vectors' centers are located at the cell's faces.
+  -- **View Vectors**: Select *Per Face* to show one flow vector per cell face or *Cell Center Total* to show only one vector per cell center (as an aggregation of all single direction vectors).
 
-**I/J/K**
-- Use flows in **I/J/K** direction for computing vectors.
+  -- **Vectors Touching Surface**: Select *At Vector Anchor* to display vectors starting at cell faces or *At Vector Center* to center vectors at cell faces. 
+     *Vectors Touching Surface* is enabled when *View vectors* is set to *Per Face*.
 
-**Show NNC data**
-- Visualize flows between non-neighbouring cells.
+  -- **I/J/K**: Use flows in I/J/K direction for computing vectors.
 
-**Threshold**
-- All vectors with flow result values below this number are hidden.
+  -- **Show NNC data**: Visualize flows between non-neighbouring cells.
 
-#### Vector Colors
-- **Result Colors:** Color vectors in the flow result color according to the *Element Vector Result* legend shown in the 3D View.
-- **Uniform:** Color vectors in a uniform color.
+  -- **Threshold**: All vectors with flow result values below this number are hidden.
 
-#### Vector Size
+- **Appearance**: Select *Result Colors* to color vectors according to *Element Vector Result* legend in 3D View or *Uniform* for uniform color. Use *Size Scale* to scale vector length.
 
-**Size Scale**
-- Scales the length of the vectors by this value.
+  
+## Cell Result View
+ResInsight may visualize intercell flows, flow rates, and transmissibilities as *Cell Results* optionally divided by face area, c.f. check-box *Divide By Area* below.
+For instance, the option enables comparison of horisontal and vertical flow velocities as alternative to flow rates as the latter is typically influenced by significant differences in cell face areas.
 
-**Scale Method**
-- **Result:** Scale the vectors according to their flow result value.
-- **Result (logarithmically):** Scale the vectors according to their flow result value but in a logarithmic scale. **Note:** all values are increased by 1 in order to be able to properly show flow result values smaller than 1.*
-- **Constant:** All vectors have the same constant length.
+![]({{< relref "" >}}images/3d-main-window/FlowRateCellResultAndLegend.png)
+
+Specifically, the check-box *Divide By Area* is applicable to Eclipse properties *FLROIL, FLRGAS, FLRWAT, FLOOIL, FLOGAS, FLOWAT*, and transmissibilities *TRAN* and *riTRAN*.
+These results are listed in ResInsight postfixed by *IJK+-* or *XYZ* as shown above. As seen, checking *Divide By Area* is reflected by text */A* in legend.  

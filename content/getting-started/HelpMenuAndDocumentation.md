@@ -4,6 +4,18 @@ published = true
 weight = 25
 +++
 
+## Integrated ResInsight Help
+If you need the user manual for an object, you can use the right-click menu of the object and select **Search Help for:**. This will open up the user manual for the selected object from **resinsight.org**.
+
+![]({{< relref "" >}}images/getting-started/help_on_context_menu.png)
+
+
+## ResInsight Online Tutorials
+![]({{< relref "" >}}images/getting-started/tutorials-you-tube.png)
+
+- [ResInsight Tutorial Videos (YouTube)](https://www.youtube.com/channel/UCEJoH_ti1YZXz4hPMeAKMgw)
+- [ResInsight Tutorials](https://github.com/CeetronSolutions/resinsight-tutorials)
+
 ## ResInsight Help Menu
 
 ![]({{< relref "" >}}images/getting-started/HelpMenu.png)
@@ -24,3 +36,4 @@ ResInsight Help menu options are:
 - [resinsight.org](https://resinsight.org/) - Documentation for latest stable release
 - [api.resinsight.org](https://api.resinsight.org/) - Documentation of Python API
 - [beta.resinsight.org](http://beta.resinsight.org) - Latest documentation (not yet released)
+

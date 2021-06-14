@@ -7,7 +7,7 @@ from .view import View
 from .case import Case
 
 import Commands_pb2
-from resinsight_classes import GridCaseGroup
+from .resinsight_classes import GridCaseGroup
 
 
 @add_method(GridCaseGroup)
@@ -15,21 +15,22 @@ def create_statistics_case(self):
     """Create a Statistics case in the Grid Case Group
 
     Returns:
-        :class:`rips.generated.resinsight_classes.EclipseCase`
+        :class:`rips.generated.generated_classes.EclipseCase`
     """
     command_reply = self._execute_command(
         createStatisticsCase=Commands_pb2.CreateStatisticsCaseRequest(
-            caseGroupId=self.group_id))
-    return Case(self.channel,
-                command_reply.createStatisticsCaseResult.caseId)
+            caseGroupId=self.group_id
+        )
+    )
+    return Case(self.channel, command_reply.createStatisticsCaseResult.caseId)
 
 
 @add_method(GridCaseGroup)
 def statistics_cases(self):
     """Get a list of all statistics cases in the Grid Case Group
 
-    Returns: 
-        List of :class:`rips.generated.resinsight_classes.EclipseCase`
+    Returns:
+        List of :class:`rips.generated.generated_classes.EclipseCase`
 
     """
     stat_case_collection = self.children("StatisticsCaseCollection")[0]
@@ -40,8 +41,8 @@ def statistics_cases(self):
 def views(self):
     """Get a list of views belonging to a grid case group
 
-    Returns: 
-        List of :class:`rips.generated.resinsight_classes.EclipseView`
+    Returns:
+        List of :class:`rips.generated.generated_classes.EclipseView`
 
     """
     resinsight_classes = self.descendants(EclipseView)
@@ -54,11 +55,12 @@ def views(self):
 @add_method(GridCaseGroup)
 def view(self, view_id):
     """Get a particular view belonging to a case group by providing view id
+
     Arguments:
         id(int): view id
 
     Returns:
-        List of :class:`rips.generated.resinsight_classes.EclipseView`
+        List of :class:`rips.generated.generated_classes.EclipseView`
 
     """
     views = self.views()
@@ -70,7 +72,7 @@ def view(self, view_id):
 
 @add_method(GridCaseGroup)
 def compute_statistics(self, case_ids=None):
-    """ Compute statistics for the given case ids
+    """Compute statistics for the given case ids
 
     Arguments:
         case_ids(list of integers): List of case ids. If this is None all cases in group are included
@@ -80,4 +82,6 @@ def compute_statistics(self, case_ids=None):
         case_ids = []
     return self._execute_command(
         computeCaseGroupStatistics=Commands_pb2.ComputeCaseGroupStatRequest(
-            caseIds=case_ids, caseGroupId=self.group_id))
+            caseIds=case_ids, caseGroupId=self.group_id
+        )
+    )

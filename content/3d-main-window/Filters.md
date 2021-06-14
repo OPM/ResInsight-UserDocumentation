@@ -1,45 +1,58 @@
 +++
-title = "Cell Filters"
+title = "Filters"
 published = true
 weight = 70
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/FiltersOverview.png)
 
-Cell Filters are used to control visibility of the cells in the 3D view. Two types of filters exists:
+Filters are used to control the visibility of cells in the 3D view. Two types of filters exist:
 
-- **Range Filter** -- Extracts an IJK subset of the model.
-- **Property Filter** -- Extracts cells with a property value matching a value range.
+- **Cell Filter** -- Extracts subset(s) of grid cells
+- **Property Filter** -- Extracts cells with a property value matching a value range
 
 {{% notice note %}}
-The visibilities of cells connection to wells, and fences based on these cells can be controlled from <b> <a href="{{< relref "simulationwells" >}}">Simulation Wells</a> </b>.<br> 
+The visibility of cells connected to wells, and fences can be controlled from <b> <a href="{{< relref "simulationwells" >}}">Simulation Wells</a></b>.<br> 
 <small><i>(Not applicable for Geomechanical cases)</i></small>
 {{% /notice %}}
 
-## Common Properties for Range and Property Filters
+## Common Properties Cell and Property Filters
 
-Both filter types can be turned on or off using the toggle in the **Project Tree** and controlled from their corresponding **Property Editor**.
+Filters can be turned on and off using their check-boxes in **Project Tree** and controlled by their corresponding **Property Editor**. The sequence of the filters can be rearranged by clicking the arrow icons of selected filter.
 
 ![]({{< relref "" >}}images/3d-main-window/FiltersInTreeView.png)
 
-Range Filters and Property filters can either be set to **Include** cells or to **Exclude** them. 
+Cell Filters and Property filters can either be set to **Include** or **Exclude** the matching cells. 
+The *Include* setting marks the cells as visible while the *Exclude* setting is used to remove cells from visualization regardless of other filters. 
+The icon in front of each filter show a + or - sign to indicate *Include* or *Exclude* {{< image-in-text src="images/3d-main-window/FilterIncEx.png" >}}.
 
-The **Exclude** setting is used to explicitly remove cells from the visualization, regardless of what other filters say. 
-The **Include** setting behaves differently for Range filters and Property Filters but marks the cells as visible.
-The icon in front of the filters show a + or - sign to indicate the setting {{< image-in-text src="images/3d-main-window/FilterIncEx.png" >}}
+## Cell Filters
+Cell Filters enables the user to define a set of visible regions in the 3D view.
+Each *Include* cell filter will add cells to the visualization and the resulting 3D view will show the union of all the *Include* cell filters.
 
-## Range filters
+A new cell filter can be added by invoking the right-click menu for the **Cell Filters** collection in **Project Tree**. 
 
-Range filters enables the user to define a set of visible regions in the 3D view based on IJK boxes.
-Each *Include* range filter will *add more cells* to the visualization. The view will show the union of all the *Include* range filters.
+![]({{< relref "" >}}images/3d-main-window/CellFilterTypes.png)
 
-A new range filter can be added by activating the right-click menu for the **Range Filters** collection in the **Project Tree**. 
+The available cell filters are:
+
+- **Polygon Filter**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. 
+
+- **User Defined Filter**: Defining a filter by specifying explicit cells to include or exclude by their IJK-index.
+
+- **Range Filter**: Defining a filter to include or exclude cells by specifying IJK-ranges. 
+
+- **Slice Filter**: Defining a filter to include or exclude a slice of cells in either I-, J-, or K-direction.
+
+The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as decribed in [User Defined Polyline Annotations]({{< relref "Annotations.md" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
+
+![]({{< relref "" >}}images/3d-main-window/CellFilter_Polygon.png)
 
 {{% notice note %}}
-An I,J or K-slice range filter can be added directly from a Cell in the <b>3D View</b> by right-clicking the cell and using the right-click menu. 
+A filter can be added directly from <b>3D View</b> by right-clicking a cell using the displayed menu. 
 {{% /notice %}}
 
-Below is a snapshot of the **Property Editor** of the **Range Filter** :
+Below is a snapshot of the **Property Editor** for the **Range Filter** type of Cell Filter:
 
 ![]({{< relref "" >}}images/3d-main-window/RangeFilterProperties.png)
 
@@ -47,15 +60,15 @@ Below is a snapshot of the **Property Editor** of the **Range Filter** :
  - **Grid** --  This option selects which of the grids the range is addressing.
  - **Apply to Subgrids** -- This option tells ResInsight to use the visibility of the cells in the current grid to control the visibility of the cells in sub-LGR's. If this option is turned off, Sub LGR-cells is not included in this particular Range Filter.  
  
-The **Start** and **Width** labels in front of the sliders features a number in parenthesis denoting maximum available value.<br>
-The **Start** labels shows the index of the start of the active cells.<br>
-The **Width** labels shows the number of active cells from the start of the active cells.
+The **Start** and **Width** labels in front of the sliders features a number in parenthesis denoting maximum available value.
+The **Start** labels show the index of the start of the active cells.
+The **Width** labels show the number of active cells from the start of the active cells.
 
 ## Property Filters
 
-**Property Filters** applies to the results of the **Range Filters** and limits the visible cells to the ones approved by the filter. For a cell to be visible it must be accepted by all the property filters. 
+**Property Filters** applies to the results of the **Cell Filters** and limits the visible cells to the ones approved by the filter. For a cell to be visible it must be accepted by all property filters. 
 
-A new property filter can be made by activating the right-click menu on **Property Filters** or by right-clicking inside a 3D view. The new property filter is based on the currently viewed cell result by default. 
+A new property filter is created by activating the right-click menu on **Property Filters** or by right-clicking inside a 3D view. The new property filter is based on the currently viewed cell result by default. 
 
 The name of the property filter is automatically set to *"propertyname (min .. max)"* as you edit the property filter.
 
