@@ -27,3 +27,5 @@ for file_name in file_names:
 #print (txt)
 f = open("PythonExamples.rst", "w")
 f.write(txt)
+
+print("Completed export of PythonExamples.rst")
