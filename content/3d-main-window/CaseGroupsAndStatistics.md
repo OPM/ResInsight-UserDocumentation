@@ -14,17 +14,9 @@ If you have several Eclipse simulations with different input parameters availabl
 
 ### From Files
 The easiest way to create a **Grid Case Group** is to use the Import command:
-**File->Import->Eclipse Cases->Create Grid Case Group from Files** or **File->Import->Eclipse Cases->Create Grid Case Group from Files Recursively**
+**File->Import->Eclipse Cases->Create Grid Case Group**
 
-The latter command will display the recursive file import dialog described on the [Summary Plots page]({{< relref "summaryplots" >}}#recursive-summary-file-import).
-
-The first command will display the "old" import dialog:
-![]({{< relref "" >}}images/3d-main-window/CreateGridCaseGroupFromFileDialog.png) 
-
-1. Add one or more search folders to the list on the left.
-2. The EGRID or GRID files found in these directories and sub directories are shown in the list to the right.
-3. If you want to remove some EGRID files from the list, select them and press the **Remove** button.
-4. When you are ready, press the **OK** button.
+This command will display the recursive file import dialog described on the [Summary Plots page]({{< relref "eclipsesummarydata" >}}#recursive-summary-file-import).
 
 ResInsight then creates a **Grid Case Group** for you, and populates its **Source Cases** with the Cases you selected. Then the first of those Cases are read completely, while the others are just scanned to verify that the Grids match and to detect changes in the Active Cells layout. This makes it quite fast to load even a quite large number of realizations.
 

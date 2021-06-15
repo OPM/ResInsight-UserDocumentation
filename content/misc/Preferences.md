@@ -6,7 +6,7 @@ weight = 10
 
 In this section the different settings that controls the default behavior of ResInsight is described. These settings can be controlled using the **Preference** dialog available from the **Edit -> Preferences** menu.
 
-![]({{< relref "" >}}images/3d-main-window/Preferences.png)
+![]({{< relref "" >}}images/misc/PreferencesGeneral.png)
 
 When changing the preferences, any default color, font or Z-scale Factor that has not been changed by the user in the various views, will be applied immediately. If the user has changed font sizes in specific plots or annotations from the default value, ResInsight will ask if the user wants the new defaults applied to all existing views and plots even where custom settings have been set.
 
@@ -42,18 +42,18 @@ This group of options controls visual settings that will be used when creating n
 - **Navigation mode** -- Defines how to use the mouse to interact with with the 3D model. Please refer to [Model Navigation]({{< relref "modelnavigation" >}}) for details.
 - **Default Z Scale Factor** -- Default depth scale for grid models.
 - **Show Box around Legends** -- Create a semi-transparent box containing each legend in the 3D Views.
-- **Use shaders** -- This option controls the use of OpenGL shaders. Should be left **On**. Available only for testing purposes.
-- **Show 3D Information** -- Displays graphical resource usage as text in the 3D view.
+- **Enable Faults by Default** -- Controls default visibility of faults in views
+- **Show Info Box in New Projects** -- Controls default visibility Info Box in upper right corner
+- **Show Grid Box in New Projects** -- Controls default visibility of grid box
+
 
 ### Other
-- **Date Format** -- Defines the date format to be used in time legend plotting
-- **Time Format** -- Defines the time format to be used in time legend plotting
 - **SSIHUB Address** -- Optional URL to Equinor internal web service used to import well paths
 - **Show LAS Curve Without TVD Warning** - Turn off the warning displayed when showing LAS curves in TVD mode
 
-## Eclipse - tab
+## Eclipse Grid
 
-![]({{< relref "" >}}images/3d-main-window/EclipsePreferences.png)
+![]({{< relref "" >}}images/misc/PreferencesEclipseGrid.png)
 
 ### Behavior When Loading Data
 
@@ -64,11 +64,26 @@ This group of options controls visual settings that will be used when creating n
 - **Use Result Index File** -- If enabled ResInsight will try to save a result index file when opening a new case. The file is stored in the same directory as the _`*.EGRID`_ file with filename _`<casename>.RESINSIGHT_IDX`_ If it exists, ResInsight will use this when loading the case, resulting in a significant speedup.
 - **Skip Import of Simulation Well Data** -- Disable import of simulation well data for a case to reduce case import time (opposite toggling than the other import commands).
 
+## Eclipse Summary
+
+![]({{< relref "" >}}images/misc/PreferencesEclipseSummary.png)
+
 ### Origin Files
-Please refer to [Summary Origin]({{< relref "summaryplots.md#origin-files" >}}) for details related to handling of **Origin Files**.
+Please refer to [Summary Origin]({{< relref "eclipsesummarydata#origin-files" >}}) for details related to handling of **Origin Files**.
 
+## Summary Data Import
 
-## Plotting - tab
+Please refer to [Summary Origin]({{< relref "eclipsesummarydata#origin-files" >}}) for details related to handling of **Origin Files**.
+
+- **File Format**: Defines the file reader for summary data import
+  - **h5 (HDF5)** Import data from  h5 files
+  - **UNSMRY (libecl)** Import data from native UNSMRY files
+  - **LODSMRY (opm-common)** Experimental file format used by opm-flow
+- **Create h5 Summary Files** : If no h5 file is present on disk, import curve data from UNSMRY and write to a h5 file in the same folder
+- **Check File Timestamp** : Update content of h5 file if UNSMRY has new data
+- **h5 Summary Export Thread Count** : Defines number of threads when creating h5 files
+
+## Plotting
 
 ![]({{< relref "" >}}images/misc/PreferencesPlotting.png)
 

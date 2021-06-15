@@ -1,7 +1,7 @@
 .. _AllClasses:
 
 Project Tree Classes
-===========
+====================
 ResInsight provides access to a number of other objects in the Project Tree. These all inherit the
 :ref:`PdmObjectBaseLabel` class.
 
