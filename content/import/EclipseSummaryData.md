@@ -61,7 +61,7 @@ If the user selected multiple summary files or grid files, this dialog will be d
 
 **h5 File Format**
 
-*Eclipse* is able to reorganize the summary data after a simulations has completed. This will produce an additional curve data file with the extention **h5**. The curve data in this file is identical to curve data in **UNSMRY**.
+*Eclipse* is able to reorganize the summary data after a simulations has completed. This will produce an additional curve data file with the extension **h5**. The curve data in this file is identical to curve data in **UNSMRY**.
 
 ResInsight will now by default use **H5** files to import summary data, as this format has good performance for large datasets. The native *Eclipse* **UNSMRY** reader can be used when configured in [Eclipse Summary Preferences]({{< relref "preferences#eclipse-summary" >}}).
 
