@@ -57,12 +57,12 @@ By default the file names are displayed using relative path based on the common 
 
 If the user selected multiple summary files or grid files, this dialog will be displayed for every file that has an origin summary file. In this case the button **OK to All** appears. When this button is clicked, the rest of the files will be imported silently using the same options.
 
-
 ### Summary Data File Formats
 
 **h5 File Format**
-Eclipse is able to reorganize the summary data after a simulations has completed. This will produce an additional file with the extention **h5**. The curve data in this file is identical to curve data in **UNSMRY**.
 
-ResInsight is now by default using **H5** files to import summary data, as this format has good performance for huge datasets. The native Eclipse **UNSMRY** files can be imported from [Eclipse Summary Preferences]({{< relref "preferences#eclipse-summary" >}}).
+*Eclipse* is able to reorganize the summary data after a simulations has completed. This will produce an additional curve data file with the extention **h5**. The curve data in this file is identical to curve data in **UNSMRY**.
+
+ResInsight will now by default use **H5** files to import summary data, as this format has good performance for large datasets. The native *Eclipse* **UNSMRY** reader can be used when configured in [Eclipse Summary Preferences]({{< relref "preferences#eclipse-summary" >}}).
 
 
