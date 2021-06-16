@@ -8,24 +8,22 @@ weight = 10
 
 
 
-## Install ResInsight
-
-### From Binary Packages on Linux 
+## Install From Binary Packages on Linux 
 
 {{% notice info %}}
 Please not that the distribution by the OPM Project will updated some time after the release of a new version on GitHub.
 {{% /notice %}}
 
-#### Red Hat Enterprise Linux 6 or 7
+### Red Hat Enterprise Linux 6 or 7
 Login as root and do:
 
     yum-config-manager --add-repo https://opm-project.org/package/opm.repo
     yum install resinsight
     yum install resinsight-octave
 
-Then you are good, and can start ResInsight by typing: ResInsight
+Launch the application using the command `ResInsight`
 
-#### Ubuntu Linux 16.04-64bit
+### Ubuntu 
 On the command line do: 
 
     sudo apt-get update
@@ -35,7 +33,7 @@ On the command line do:
     sudo apt-get install resinsight
     sudo apt-get install octave-resinsight
 
-Start ResInsight by typing : `ResInsight`
+Launch the application using the command `ResInsight`
 
 {{% notice info %}}
 For further installation details, see the ResInsight distribution on [Opm Project Downloading and Installing](http://opm-project.org/?page_id=36).
@@ -47,15 +45,19 @@ The binary distributions does not support ABAQUS odb files. For building ResInsi
 {{% /notice %}}
 
 
-
-
-
-### From downloaded tarball
+## Install From downloaded tarball
 1. Download TAR.GZ binary distribution from [https://github.com/OPM/ResInsight/releases](https://github.com/OPM/ResInsight/releases "release section on GitHub")
 2. Extract content from TAR file
 3. Start ./ResInsight
 
-#### Display Menu Icons in GNOME (Optional)
+## Custom Qt configuration
+If you are using a version of Qt that is not available in system path, you need to do the following to make runtime Qt paths available to ResInsight
+
+    export LD_LIBRARY_PATH=/path_to_qt
+    export QT_PLUGIN_PATH=/path_to_qt/plugins:$QT_PLUGIN_PATH
+
+
+### Display Menu Icons in GNOME (Optional)
 By default, icons are not visible in menus in the GNOME desktop environment. ResInsight has icons for many menu items, and icons can be set visible by issuing the following commands (Tested on RHEL6) :
 
 ```
