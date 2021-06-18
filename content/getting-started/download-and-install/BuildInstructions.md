@@ -23,7 +23,7 @@ GCC version 4.9 or later is supported. On RedHat Linux 6 you need to install dev
     source /opt/rh/devtoolset-3/enable
 
 ### Qt 5
-Qt 5.9 or later is supported.
+Qt 5.9 or later is supported, Qt 5.15 is recommended.
 
 [Qt download](http://download.qt.io/archive/qt/)  
 
