@@ -11,7 +11,7 @@ weight = 10
 ## Install From Binary Packages on Linux 
 
 {{% notice info %}}
-Please not that the distribution by the OPM Project will updated some time after the release of a new version on GitHub.
+Please not that the distribution by the OPM Project will be updated some time after the release of a new version on GitHub.
 {{% /notice %}}
 
 ### Red Hat Enterprise Linux 6 or 7
