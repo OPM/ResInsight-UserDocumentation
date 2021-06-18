@@ -138,12 +138,6 @@ Load Case
 ===================================
 .. literalinclude:: ../rips/PythonExamples/load_case.py
 
-.. _modeled_well_path:
-
-Modeled Well Path
-===================================
-.. literalinclude:: ../rips/PythonExamples/modeled_well_path.py
-
 .. _new_summary_plot:
 
 New Summary Plot
