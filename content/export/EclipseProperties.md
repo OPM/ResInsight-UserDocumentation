@@ -22,6 +22,9 @@ The following dialog will appear:
 - **Eclipse Keyword** -- The keyword to use for the property in the eclipse file
 - **Undefined Value** -- This value is written to the file for all values that are flagged as undefined in ResInsight
 
+For import this type of property data see [Import: Eclipse Cases]({{< relref "eclipsecases" >}}/#appending-additional-properties-to-a-binary-case)
+
+
 ### File Format
 
 The exported file has the following format, that matches the Eclipse input format:

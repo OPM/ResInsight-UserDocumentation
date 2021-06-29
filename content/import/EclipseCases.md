@@ -13,7 +13,7 @@ ResInsight supports the following type of Eclipse input data:
 Release 2018.11 supports import of simulations from Intersect. To be able to import into ResInsight, the Intersect simulation must be exported into Eclipse file format.
 {{% /notice %}}
 
-### Eclipse Results
+## Eclipse Results
 ResInsight offers several ways to import Eclipse (grid) files. Use one of the following commands in the **File->Import->Eclipse Cases** menu:
 
 - **Import Eclipse Case**: Brings up the standard file selection dialog. Select _`*.EGRID`_ or _`*.GRID`_ Eclipse files for import. Multiple selections are allowed.
@@ -28,12 +28,12 @@ The **Reload Case** command can be used to reload a previously imported case, to
 You can select several grid files in one go by multiple selection of files (Ctrl + left mouse button, Shift + left mouse button). 
 {{% /notice %}}
 
-#### Result Index File
+### Result Index File
 
 If enabled, ResInsight will generate an index file when reading the eclipse result files for the first time. This file will significantly reduce the time used to open the case next time. The file is named _`<casename>.RESINSIGHT_IDX`_
 See [Preferences: Behavior When Loading Data]({{< relref "preferences" >}}#behavior-when-loading-data)
 
-### Time Step Filtered Eclipse Result
+## Time Step Filtered Eclipse Result
 Some Eclipse files have an enormous amount of time steps. If only a selection of the time steps really are needed for the session, the time steps can be filtered before loading. This can possibly speed up the import a great deal. Filtering can be done in the following way.
 
 Select **File->Import->Eclipse Cases-> {{< image-in-text src="images/getting-started/Case24x24.png" >}} Import Eclipse Case (Time Step Filtered)** and select an _`*.EGRID`_ or _`*.GRID`_ Eclipse file for import. A dialog will appear.
@@ -54,12 +54,23 @@ Filtering can also be done after import, in a case's **Property Window**.
 
 After clicking *Reload Case*, the time steps in the toolbar will be updated.
 
-### Eclipse ASCII Input Data
+## Eclipse ASCII Input Data
 1. Select **File->Import->Eclipse Cases-> {{< image-in-text src="images/getting-started/EclipseInput24x24.png" >}} Import Input Eclipse Case** and select a _`*.GRDECL`_ file.
 2. The case is imported, and a view of the case is created
 3. Right-click the **Input Properties** in the generated **Input Case** and use the right-click menu to import additional Eclipse Property data files.
 
-### Handling Missing or Wrong MAPAXES
+### Appending additional properties to a binary case
+If a binary or text Eclipse case is loaded, additional properties can be appended to this binary case. Make sure that the number of values in the GRDECL file matches the total number of cells in the binary case.
+
+For export of currently selected cell result values to text file, see [Export: Eclipse Properties]({{< relref "eclipseproperties" >}})
+
+**Appending properties**
+1. Open an Eclipse case (binary or input)
+2. From the right-click menu of the case or Cell Result, select **Add Input Property**
+3. Select the text file with properties
+4. The imported data is then available in the **Cell Result** by activating the **Input Property** in the **Type** drop down list.
+
+## Handling Missing or Wrong MAPAXES
 
 The X and Y grid data can be negated in order to make the Grid model appear correctly in ResInsight. This functionality is accessible in the **Property Editor** for all Eclipse Case types as the toggle buttons **Flip X Axis** and **Flip Y Axis** as shown in the example below.
  
