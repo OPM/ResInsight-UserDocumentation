@@ -40,6 +40,16 @@ A self created well path may be edited by either editing coordinates in the prop
 
 Clicking and dragging the blue part of a target, it can be moved along the Z axis only. Clicking and dragging the magenta part of a target, it can be moved freely around.
 
+### Well Target Interaction Operations
+When the well target handles are active in the 3D view, the following operations are possible when pressing left mouse button on well target handles:
+
+|User Interaction           | Description |
+|---------------------------|-------------|
+|Mouse Move                 | Modification of a single target |
+|Mouse Move + CTRL          | Modification of all well target on selected well (laterals excluded) |
+|Mouse Move + CTRL + SHIFT  | Modification of all well targets (laterals included) |
+
+
 ### Starting well path at a fixed position
 
 The toggle **Generate Target at Sea Level** is on by default. If the well path is supposed to start at a predefined location at the sea level, the following procedure can be used:
