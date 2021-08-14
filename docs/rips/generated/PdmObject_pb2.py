@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0fPdmObject.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"T\n\x1aPdmDescendantObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x15\n\rchild_keyword\x18\x02 \x01(\t\"M\n\x15PdmChildObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x13\n\x0b\x63hild_field\x18\x02 \x01(\t\"S\n\x1b\x43reatePdmChildObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x13\n\x0b\x63hild_field\x18\x02 \x01(\t\"Q\n\x16PdmParentObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x16\n\x0eparent_keyword\x18\x02 \x01(\t\"\xc0\x01\n\tPdmObject\x12\x15\n\rclass_keyword\x18\x01 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x02 \x01(\x04\x12\x33\n\nparameters\x18\x03 \x03(\x0b\x32\x1f.rips.PdmObject.ParametersEntry\x12\x0f\n\x07visible\x18\x04 \x01(\x08\x12\x12\n\npersistent\x18\x05 \x01(\x08\x1a\x31\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"2\n\x0ePdmObjectArray\x12 \n\x07objects\x18\x01 \x03(\x0b\x32\x0f.rips.PdmObject\"I\n\x16PdmObjectGetterRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x0e\n\x06method\x18\x02 \x01(\t\"[\n\x16PdmObjectSetterRequest\x12-\n\x07request\x18\x01 \x01(\x0b\x32\x1c.rips.PdmObjectGetterRequest\x12\x12\n\ndata_count\x18\x02 \x01(\x05\"\xbf\x01\n\x14PdmObjectSetterChunk\x12\x33\n\x0bset_request\x18\x01 \x01(\x0b\x32\x1c.rips.PdmObjectSetterRequestH\x00\x12$\n\x07\x64oubles\x18\x02 \x01(\x0b\x32\x11.rips.DoubleArrayH\x00\x12\x1e\n\x04ints\x18\x03 \x01(\x0b\x32\x0e.rips.IntArrayH\x00\x12$\n\x07strings\x18\x04 \x01(\x0b\x32\x11.rips.StringArrayH\x00\x42\x06\n\x04\x64\x61ta\"\x1b\n\x0b\x44oubleArray\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x01\"\x18\n\x08IntArray\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x05\"\x1b\n\x0bStringArray\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\t\"\x8a\x01\n\x14PdmObjectGetterReply\x12$\n\x07\x64oubles\x18\x01 \x01(\x0b\x32\x11.rips.DoubleArrayH\x00\x12\x1e\n\x04ints\x18\x02 \x01(\x0b\x32\x0e.rips.IntArrayH\x00\x12$\n\x07strings\x18\x03 \x01(\x0b\x32\x11.rips.StringArrayH\x00\x42\x06\n\x04\x64\x61ta\"j\n\x16PdmObjectMethodRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x0e\n\x06method\x18\x02 \x01(\t\x12\x1f\n\x06params\x18\x03 \x01(\x0b\x32\x0f.rips.PdmObject2\xf9\x04\n\x10PdmObjectService\x12S\n\x17GetDescendantPdmObjects\x12 .rips.PdmDescendantObjectRequest\x1a\x14.rips.PdmObjectArray\"\x00\x12I\n\x12GetChildPdmObjects\x12\x1b.rips.PdmChildObjectRequest\x1a\x14.rips.PdmObjectArray\"\x00\x12G\n\x14GetAncestorPdmObject\x12\x1c.rips.PdmParentObjectRequest\x1a\x0f.rips.PdmObject\"\x00\x12L\n\x14\x43reateChildPdmObject\x12!.rips.CreatePdmChildObjectRequest\x1a\x0f.rips.PdmObject\"\x00\x12\x39\n\x17UpdateExistingPdmObject\x12\x0f.rips.PdmObject\x1a\x0b.rips.Empty\"\x00\x12S\n\x13\x43\x61llPdmObjectGetter\x12\x1c.rips.PdmObjectGetterRequest\x1a\x1a.rips.PdmObjectGetterReply\"\x00\x30\x01\x12V\n\x13\x43\x61llPdmObjectSetter\x12\x1a.rips.PdmObjectSetterChunk\x1a\x1f.rips.ClientToServerStreamReply\"\x00(\x01\x12\x46\n\x13\x43\x61llPdmObjectMethod\x12\x1c.rips.PdmObjectMethodRequest\x1a\x0f.rips.PdmObject\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0fPdmObject.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"T\n\x1aPdmDescendantObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x15\n\rchild_keyword\x18\x02 \x01(\t\"M\n\x15PdmChildObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x13\n\x0b\x63hild_field\x18\x02 \x01(\t\"j\n\x1b\x43reatePdmChildObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x13\n\x0b\x63hild_field\x18\x02 \x01(\t\x12\x15\n\rclass_keyword\x18\x03 \x01(\t\"Q\n\x16PdmParentObjectRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x16\n\x0eparent_keyword\x18\x02 \x01(\t\"\xc0\x01\n\tPdmObject\x12\x15\n\rclass_keyword\x18\x01 \x01(\t\x12\x0f\n\x07\x61\x64\x64ress\x18\x02 \x01(\x04\x12\x33\n\nparameters\x18\x03 \x03(\x0b\x32\x1f.rips.PdmObject.ParametersEntry\x12\x0f\n\x07visible\x18\x04 \x01(\x08\x12\x12\n\npersistent\x18\x05 \x01(\x08\x1a\x31\n\x0fParametersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"2\n\x0ePdmObjectArray\x12 \n\x07objects\x18\x01 \x03(\x0b\x32\x0f.rips.PdmObject\"I\n\x16PdmObjectGetterRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x0e\n\x06method\x18\x02 \x01(\t\"[\n\x16PdmObjectSetterRequest\x12-\n\x07request\x18\x01 \x01(\x0b\x32\x1c.rips.PdmObjectGetterRequest\x12\x12\n\ndata_count\x18\x02 \x01(\x05\"\xbf\x01\n\x14PdmObjectSetterChunk\x12\x33\n\x0bset_request\x18\x01 \x01(\x0b\x32\x1c.rips.PdmObjectSetterRequestH\x00\x12$\n\x07\x64oubles\x18\x02 \x01(\x0b\x32\x11.rips.DoubleArrayH\x00\x12\x1e\n\x04ints\x18\x03 \x01(\x0b\x32\x0e.rips.IntArrayH\x00\x12$\n\x07strings\x18\x04 \x01(\x0b\x32\x11.rips.StringArrayH\x00\x42\x06\n\x04\x64\x61ta\"\x1b\n\x0b\x44oubleArray\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x01\"\x18\n\x08IntArray\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\x05\"\x1b\n\x0bStringArray\x12\x0c\n\x04\x64\x61ta\x18\x01 \x03(\t\"\x8a\x01\n\x14PdmObjectGetterReply\x12$\n\x07\x64oubles\x18\x01 \x01(\x0b\x32\x11.rips.DoubleArrayH\x00\x12\x1e\n\x04ints\x18\x02 \x01(\x0b\x32\x0e.rips.IntArrayH\x00\x12$\n\x07strings\x18\x03 \x01(\x0b\x32\x11.rips.StringArrayH\x00\x42\x06\n\x04\x64\x61ta\"j\n\x16PdmObjectMethodRequest\x12\x1f\n\x06object\x18\x01 \x01(\x0b\x32\x0f.rips.PdmObject\x12\x0e\n\x06method\x18\x02 \x01(\t\x12\x1f\n\x06params\x18\x03 \x01(\x0b\x32\x0f.rips.PdmObject2\xf9\x04\n\x10PdmObjectService\x12S\n\x17GetDescendantPdmObjects\x12 .rips.PdmDescendantObjectRequest\x1a\x14.rips.PdmObjectArray\"\x00\x12I\n\x12GetChildPdmObjects\x12\x1b.rips.PdmChildObjectRequest\x1a\x14.rips.PdmObjectArray\"\x00\x12G\n\x14GetAncestorPdmObject\x12\x1c.rips.PdmParentObjectRequest\x1a\x0f.rips.PdmObject\"\x00\x12L\n\x14\x43reateChildPdmObject\x12!.rips.CreatePdmChildObjectRequest\x1a\x0f.rips.PdmObject\"\x00\x12\x39\n\x17UpdateExistingPdmObject\x12\x0f.rips.PdmObject\x1a\x0b.rips.Empty\"\x00\x12S\n\x13\x43\x61llPdmObjectGetter\x12\x1c.rips.PdmObjectGetterRequest\x1a\x1a.rips.PdmObjectGetterReply\"\x00\x30\x01\x12V\n\x13\x43\x61llPdmObjectSetter\x12\x1a.rips.PdmObjectSetterChunk\x1a\x1f.rips.ClientToServerStreamReply\"\x00(\x01\x12\x46\n\x13\x43\x61llPdmObjectMethod\x12\x1c.rips.PdmObjectMethodRequest\x1a\x0f.rips.PdmObject\"\x00\x62\x06proto3'
   ,
   dependencies=[Definitions__pb2.DESCRIPTOR,])
 
@@ -127,6 +127,13 @@ _CREATEPDMCHILDOBJECTREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='class_keyword', full_name='rips.CreatePdmChildObjectRequest.class_keyword', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -140,7 +147,7 @@ _CREATEPDMCHILDOBJECTREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=209,
-  serialized_end=292,
+  serialized_end=315,
 )
 
 
@@ -178,8 +185,8 @@ _PDMPARENTOBJECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=294,
-  serialized_end=375,
+  serialized_start=317,
+  serialized_end=398,
 )
 
 
@@ -217,8 +224,8 @@ _PDMOBJECT_PARAMETERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=521,
-  serialized_end=570,
+  serialized_start=544,
+  serialized_end=593,
 )
 
 _PDMOBJECT = _descriptor.Descriptor(
@@ -276,8 +283,8 @@ _PDMOBJECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=378,
-  serialized_end=570,
+  serialized_start=401,
+  serialized_end=593,
 )
 
 
@@ -308,8 +315,8 @@ _PDMOBJECTARRAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=572,
-  serialized_end=622,
+  serialized_start=595,
+  serialized_end=645,
 )
 
 
@@ -347,8 +354,8 @@ _PDMOBJECTGETTERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=624,
-  serialized_end=697,
+  serialized_start=647,
+  serialized_end=720,
 )
 
 
@@ -386,8 +393,8 @@ _PDMOBJECTSETTERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=699,
-  serialized_end=790,
+  serialized_start=722,
+  serialized_end=813,
 )
 
 
@@ -444,8 +451,8 @@ _PDMOBJECTSETTERCHUNK = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=793,
-  serialized_end=984,
+  serialized_start=816,
+  serialized_end=1007,
 )
 
 
@@ -476,8 +483,8 @@ _DOUBLEARRAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=986,
-  serialized_end=1013,
+  serialized_start=1009,
+  serialized_end=1036,
 )
 
 
@@ -508,8 +515,8 @@ _INTARRAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1015,
-  serialized_end=1039,
+  serialized_start=1038,
+  serialized_end=1062,
 )
 
 
@@ -540,8 +547,8 @@ _STRINGARRAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1041,
-  serialized_end=1068,
+  serialized_start=1064,
+  serialized_end=1091,
 )
 
 
@@ -591,8 +598,8 @@ _PDMOBJECTGETTERREPLY = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1071,
-  serialized_end=1209,
+  serialized_start=1094,
+  serialized_end=1232,
 )
 
 
@@ -637,8 +644,8 @@ _PDMOBJECTMETHODREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1211,
-  serialized_end=1317,
+  serialized_start=1234,
+  serialized_end=1340,
 )
 
 _PDMDESCENDANTOBJECTREQUEST.fields_by_name['object'].message_type = _PDMOBJECT
@@ -812,8 +819,8 @@ _PDMOBJECTSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1320,
-  serialized_end=1953,
+  serialized_start=1343,
+  serialized_end=1976,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetDescendantPdmObjects',

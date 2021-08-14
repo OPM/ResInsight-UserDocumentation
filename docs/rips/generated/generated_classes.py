@@ -178,6 +178,31 @@ class ElasticPropertyScalingCollection(PdmObjectBase):
         return self.children("ElasticPropertyScalings", ElasticPropertyScaling)
 
 
+class EnsembleWellLogs(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if EnsembleWellLogs.__custom_init__ is not None:
+            EnsembleWellLogs.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FaciesInitialPressureConfig(PdmObjectBase):
+    """
+    Attributes:
+        facies_name (str): Facies
+        facies_value (int): Value
+        fraction (float): ? Pressure Fraction
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.facies_name = ""
+        self.facies_value = -1665136688
+        self.fraction = 0
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaciesInitialPressureConfig.__custom_init__ is not None:
+            FaciesInitialPressureConfig.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class FaciesProperties(PdmObjectBase):
     """
     Attributes:
@@ -188,7 +213,7 @@ class FaciesProperties(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.color_legend = "ColorLegend:1682353580928"
+        self.color_legend = ""
         self.file_path = ""
         self.properties_table = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
@@ -319,13 +344,13 @@ class View(ViewWindow):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#3b3b3b"
+        self.background_color = "#b0c4de"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
         self.id = -1
         self.perspective_projection = True
-        self.show_grid_box = True
+        self.show_grid_box = False
         self.show_z_scale = True
         ViewWindow.__init__(self, pb2_object, channel)
         if View.__custom_init__ is not None:
@@ -342,23 +367,6 @@ class GeoMechView(View):
         View.__init__(self, pb2_object, channel)
         if GeoMechView.__custom_init__ is not None:
             GeoMechView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class GridStatisticsPlotCollection(PdmObjectBase):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object=None, channel=None):
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if GridStatisticsPlotCollection.__custom_init__ is not None:
-            GridStatisticsPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def grid_statistics_plots(self):
-        """
-
-        Returns:
-             List of GridStatisticsPlot
-        """
-        return self.children("GridStatisticsPlots", GridStatisticsPlot)
-
 
 class GridSummaryCase(SummaryCase):
     """
@@ -399,6 +407,34 @@ class ModeledWellPath(WellPath):
         if ModeledWellPath.__custom_init__ is not None:
             ModeledWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def append_lateral(self, tie_in_depth=None, lateral_name=None):
+        """
+        Append Well Path Lateral
+
+        Arguments:
+            tie_in_depth (float): Measured Depth on the Parent Well Path
+            lateral_name (str): Lateral Name
+        Returns:
+            ModeledWellPath
+        """
+        return self._call_pdm_method("AppendLateral", tie_in_depth=tie_in_depth, lateral_name=lateral_name)
+
+
+    def append_perforation_interval(self, start_md=None, end_md=None, diameter=None, skin_factor=None):
+        """
+        Append Perforation Interval
+
+        Arguments:
+            start_md (float): Start Measured Depth
+            end_md (float): End Measured Depth
+            diameter (float): Diameter
+            skin_factor (float): Skin Factor
+        Returns:
+            Perforation
+        """
+        return self._call_pdm_method("AppendPerforationInterval", start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor)
+
+
     def well_path_geometry(self):
         """Trajectory
 
@@ -433,6 +469,45 @@ class NonNetLayers(PdmObjectBase):
         children = self.children("FaciesDefinition", EclipseResult)
         return children[0] if len(children) > 0 else None
 
+
+class PressureTable(PdmObjectBase):
+    """
+    Attributes:
+        pressure_date (str): Pressure Date
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.pressure_date = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if PressureTable.__custom_init__ is not None:
+            PressureTable.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def items(self):
+        """Pressure Table Items
+
+        Returns:
+             List of PressureTableItem
+        """
+        return self.children("Items", PressureTableItem)
+
+
+class PressureTableItem(PdmObjectBase):
+    """
+    Attributes:
+        depth (float): Depth TVDMSL [m]
+        initial_pressure (float): Initial Pressure [Bar]
+        pressure (float): Pressure [Bar]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.depth = 0
+        self.initial_pressure = 0
+        self.pressure = 0
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if PressureTableItem.__custom_init__ is not None:
+            PressureTableItem.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class GeoMechCase(Case):
     """
@@ -571,7 +646,7 @@ class EclipseResult(PdmObjectBase):
         selected_injector_tracers (List of str): Injector Tracers
         selected_producer_tracers (List of str): Producer Tracers
         selected_souring_tracers (List of str): Tracers
-        show_only_visible_tracers_in_legend (str): Show Only Visible Tracers In Legend
+        show_only_visible_categories_in_legend (str): Show Only Visible Categories In Legend
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -584,7 +659,7 @@ class EclipseResult(PdmObjectBase):
         self.selected_injector_tracers = []
         self.selected_producer_tracers = []
         self.selected_souring_tracers = []
-        self.show_only_visible_tracers_in_legend = True
+        self.show_only_visible_categories_in_legend = True
         PdmObjectBase.__init__(self, pb2_object, channel)
         if EclipseResult.__custom_init__ is not None:
             EclipseResult.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -613,15 +688,6 @@ class RimCellFilterCollection(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if RimCellFilterCollection.__custom_init__ is not None:
             RimCellFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def cell_filters(self):
-        """Filters
-
-        Returns:
-             List of CellFilter
-        """
-        return self.children("CellFilters", CellFilter)
-
 
 class EclipseContourMap(EclipseView):
     """
@@ -671,6 +737,30 @@ class MudWeightWindowParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if MudWeightWindowParameters.__custom_init__ is not None:
             MudWeightWindowParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class PlotCurve(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if PlotCurve.__custom_init__ is not None:
+            PlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogPlotCurve(PlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PlotCurve.__init__(self, pb2_object, channel)
+        if WellLogPlotCurve.__custom_init__ is not None:
+            WellLogPlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimWellLogExtractionCurve(WellLogPlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        WellLogPlotCurve.__init__(self, pb2_object, channel)
+        if RimWellLogExtractionCurve.__custom_init__ is not None:
+            RimWellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class StimPlanModel(CheckableNamedObject):
     """
@@ -1244,6 +1334,20 @@ class WellLogPlot(DepthTrackPlot):
         if WellLogPlot.__custom_init__ is not None:
             WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def new_well_log_track(self, title=None, case=None, well_path=None):
+        """
+        Create a new well log track
+
+        Arguments:
+            title (str): Title
+            case (RimReservoir): Case
+            well_path (WellPathBase): Well Path
+        Returns:
+            WellLogPlotTrack
+        """
+        return self._call_pdm_method("NewWellLogTrack", title=title, case=case, well_path=well_path)
+
+
 class WellBoreStabilityPlot(WellLogPlot):
     """
     A GeoMechanical Well Bore Stabilit Plot
@@ -1266,6 +1370,63 @@ class WellBoreStabilityPlot(WellLogPlot):
         return children[0] if len(children) > 0 else None
 
 
+class WellLogPlotCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellLogPlotCollection.__custom_init__ is not None:
+            WellLogPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def new_well_log_plot(self, case=None, well_path=None, property_type=None, property_name=None, time_step=None):
+        """
+        Create a new well log plot
+
+        Arguments:
+            case (RimReservoir): Case
+            well_path (WellPathBase): Well Path
+            property_type (str): Property Type
+            property_name (str): Property Name
+            time_step (int): Time Step
+        Returns:
+            WellLogPlot
+        """
+        return self._call_pdm_method("NewWellLogPlot", case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
+
+
+    def well_log_plots(self):
+        """
+
+        Returns:
+             List of WellLogPlot
+        """
+        return self.children("WellLogPlots", WellLogPlot)
+
+
+class WellLogPlotTrack(Plot):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        Plot.__init__(self, pb2_object, channel)
+        if WellLogPlotTrack.__custom_init__ is not None:
+            WellLogPlotTrack.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_extraction_curve(self, case=None, well_path=None, property_type=None, property_name=None, time_step=None):
+        """
+        Create a well log extraction curve
+
+        Arguments:
+            case (RimReservoir): Case
+            well_path (WellPathBase): Well Path
+            property_type (str): Property Type
+            property_name (str): Property Name
+            time_step (int): Time Step
+        Returns:
+            RimWellLogExtractionCurve
+        """
+        return self._call_pdm_method("AddExtractionCurve", case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
+
+
 class FileWellPath(WellPath):
     """
     Well Paths Loaded From File
@@ -1285,6 +1446,7 @@ class WellPathGeometry(PdmObjectBase):
     Attributes:
         air_gap (float): Air Gap
         attached_to_parent_well (str): Attached to Parent Well
+        link_reference_point_updates (str): Link Reference Point
         md_at_first_target (float): MD at First Target
         reference_point (str): UTM Reference Point
         show_spheres (str): Spheres
@@ -1295,13 +1457,27 @@ class WellPathGeometry(PdmObjectBase):
     def __init__(self, pb2_object=None, channel=None):
         self.air_gap = 0
         self.attached_to_parent_well = False
+        self.link_reference_point_updates = False
         self.md_at_first_target = 0
         self.reference_point = [0, 0, 0]
-        self.show_spheres = False
+        self.show_spheres = True
         self.use_auto_generated_target_at_sea_level = True
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathGeometry.__custom_init__ is not None:
             WellPathGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def append_well_target(self, coordinate=None, absolute=None):
+        """
+        Create and Add New Well Target
+
+        Arguments:
+            coordinate (class cvf::Vector3<double>): Coordinate
+            absolute (bool): Relative or Absolute Coordinate
+        Returns:
+            WellPathTarget
+        """
+        return self._call_pdm_method("AppendWellTarget", coordinate=coordinate, absolute=absolute)
+
 
     def auto_generated_target(self):
         """Auto Generated Target
@@ -1322,40 +1498,50 @@ class WellPathGeometry(PdmObjectBase):
         return self.children("WellPathTargets", WellPathTarget)
 
 
-class WellPathGroup(WellPath):
+class WellPathTarget(PdmObjectBase):
     """
-    A Group of Well Paths
+    Class containing the Well Target definition
 
     Attributes:
-        add_valve_at_connection (str): Add Outlet Valve for Branches
-        group_name (str): Group Name
+        azimuth (float): Azi(deg)
+        dogleg1 (float): DL in
+        dogleg2 (float): DL out
+        inclination (float): Inc(deg)
+        target_measured_depth (float): MD
+        target_point (str): Relative Coord
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.add_valve_at_connection = False
-        self.group_name = "Well 1"
-        WellPath.__init__(self, pb2_object, channel)
-        if WellPathGroup.__custom_init__ is not None:
-            WellPathGroup.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+        self.azimuth = 0
+        self.dogleg1 = 3
+        self.dogleg2 = 3
+        self.inclination = 0
+        self.target_measured_depth = 0
+        self.target_point = [0, 0, 0]
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathTarget.__custom_init__ is not None:
+            WellPathTarget.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def child_well_paths(self):
-        """Child Well Paths
+class WellPathCollection(PdmObjectBase):
+    """
+    Collection of Well Paths
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathCollection.__custom_init__ is not None:
+            WellPathCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def well_paths(self):
+        """Well Paths
 
         Returns:
              List of WellPath
         """
-        return self.children("ChildWellPaths", WellPath)
-
-
-    def valve(self):
-        """Branch Outlet Valve
-
-        Returns:
-             WellPathValve
-        """
-        children = self.children("Valve", WellPathValve)
-        return children[0] if len(children) > 0 else None
+        return self.children("WellPaths", WellPath)
 
 
 def class_dict():
@@ -1374,6 +1560,8 @@ def class_dict():
     classes['ElasticProperties'] = ElasticProperties
     classes['ElasticPropertyScaling'] = ElasticPropertyScaling
     classes['ElasticPropertyScalingCollection'] = ElasticPropertyScalingCollection
+    classes['EnsembleWellLogs'] = EnsembleWellLogs
+    classes['FaciesInitialPressureConfig'] = FaciesInitialPressureConfig
     classes['FaciesProperties'] = FaciesProperties
     classes['FileSummaryCase'] = FileSummaryCase
     classes['FileWellPath'] = FileWellPath
@@ -1381,18 +1569,21 @@ def class_dict():
     classes['GeoMechContourMap'] = GeoMechContourMap
     classes['GeoMechView'] = GeoMechView
     classes['GridCaseGroup'] = GridCaseGroup
-    classes['GridStatisticsPlotCollection'] = GridStatisticsPlotCollection
     classes['GridSummaryCase'] = GridSummaryCase
     classes['ModeledWellPath'] = ModeledWellPath
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
     classes['NonNetLayers'] = NonNetLayers
     classes['PdmObjectBase'] = PdmObjectBase
     classes['Plot'] = Plot
+    classes['PlotCurve'] = PlotCurve
     classes['PlotWindow'] = PlotWindow
+    classes['PressureTable'] = PressureTable
+    classes['PressureTableItem'] = PressureTableItem
     classes['Project'] = Project
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
     classes['RimCellFilterCollection'] = RimCellFilterCollection
+    classes['RimWellLogExtractionCurve'] = RimWellLogExtractionCurve
     classes['SimulationWell'] = SimulationWell
     classes['StimPlanModel'] = StimPlanModel
     classes['StimPlanModelCollection'] = StimPlanModelCollection
@@ -1412,9 +1603,13 @@ def class_dict():
     classes['WbsParameters'] = WbsParameters
     classes['WellBoreStabilityPlot'] = WellBoreStabilityPlot
     classes['WellLogPlot'] = WellLogPlot
+    classes['WellLogPlotCollection'] = WellLogPlotCollection
+    classes['WellLogPlotCurve'] = WellLogPlotCurve
+    classes['WellLogPlotTrack'] = WellLogPlotTrack
     classes['WellPath'] = WellPath
+    classes['WellPathCollection'] = WellPathCollection
     classes['WellPathGeometry'] = WellPathGeometry
-    classes['WellPathGroup'] = WellPathGroup
+    classes['WellPathTarget'] = WellPathTarget
     return classes
 
 def class_from_keyword(class_keyword):

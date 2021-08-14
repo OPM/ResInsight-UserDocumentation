@@ -90,6 +90,12 @@ Export Snapshots
 ===================================
 .. literalinclude:: ../rips/PythonExamples/export_snapshots.py
 
+.. _generate_ensemble_of_well_logs:
+
+Generate Ensemble Of Well Logs
+===================================
+.. literalinclude:: ../rips/PythonExamples/generate_ensemble_of_well_logs.py
+
 .. _grid_information:
 
 Grid Information
@@ -137,6 +143,18 @@ Launch With Commandline Options
 Load Case
 ===================================
 .. literalinclude:: ../rips/PythonExamples/load_case.py
+
+.. _modeled_well_path:
+
+Modeled Well Path
+===================================
+.. literalinclude:: ../rips/PythonExamples/modeled_well_path.py
+
+.. _modeled_well_path_lateral:
+
+Modeled Well Path Lateral
+===================================
+.. literalinclude:: ../rips/PythonExamples/modeled_well_path_lateral.py
 
 .. _new_summary_plot:
 
