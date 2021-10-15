@@ -1,5 +1,15 @@
 # ResInsight User Documentation
 
+This repository contains both the source code for three documentation sites
+
+    resinsight.org
+    beta.resinsight.org
+    api.resinsight.org
+
+The Python API is documented in the `docs` folder.
+
+Documentation for ResInsight User Interface is located in the `content` folder.
+
 ## Edit of the documentation for Python API
 [Edit docs for Python API](docs/README.md)
 
