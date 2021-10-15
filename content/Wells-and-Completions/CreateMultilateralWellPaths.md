@@ -6,8 +6,7 @@ weight = 32
 
 ![]({{< relref "" >}}images/3d-main-window/MultiLateralWell_3d_view.png)
 
-ResInsight lets the user create additional well path laterals by clicking in the 3D view. Completions can be added to laterals, and the complete specification of the well can 
-be exported using the [Completion Export]({{< relref "completionexport" >}})
+ResInsight lets the user create additional well path laterals by clicking in the 3D view. Completions can be added to laterals, and the complete specification of the well can be exported using the [Completion Export]({{< relref "completionexport" >}})
 
 ## Building a well path
 

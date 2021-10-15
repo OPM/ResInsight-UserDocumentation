@@ -8,11 +8,13 @@ weight = 30
 
 ResInsight lets the user create new/custom well paths by clicking in the 3D view. A self created well path will behave the same way as an ordinary imported well path.
 
+[Building a multilateral well path]({{< relref "createmultilateralwellpaths" >}}) 
+
 ### Building a well path
 
 1. Right click **Wells** in the project tree
-2. Select **Create Well Path** in the right-click menu. A new well node and a well targets node are created.
-3. Click in the 3D view on locations where the well path will pass (targets). Note. A 3D object must be hit when clicking. Clicking in thin air will not work.
+2. Select **Create Well Path** in the right-click menu. A new well node and a well targets node are created
+3. Click in the 3D view on locations where the well path should pass (well path targets)
 4. When finished placing targets, click on "Stop Picking Targets" in the property editor
 
 ![]({{< relref "" >}}images/3d-main-window/WellTargetsTree.png)
@@ -21,20 +23,29 @@ ResInsight lets the user create new/custom well paths by clicking in the 3D view
 
 Well targets property editor fields:
 
-- **Start Type** - Specify well to start either at surface or at first target point.
 - **UTM Reference Point** - Reference point. Defaults to the first target point clicked.
+- **Link Reference Point** - All wells with this option checked will be moved as a group. 
 - **Air Gap** - Specify Air Gap, i.e. distance from Rotary Kelling Bushing to sea surface. Applies to well path export only.
 - **MD at First Target** - Defines the measured depth at the first defined well target.
 - **Generate Target at Sea Level** - Automatically create a target at sea level based on a reasonable well path from reservoir to sea level
-- **Well Targets:** List of targets. Will have pink background when in picking state.
-  - **Point** - Target position relative to reference point.
-  - **DL in** - Dog leg inwards [degrees/30m].
-  - **DL out** - Dog leg outwards [degrees/30m].
-  - **Dir** - Check box for overriding well path auto calculated directions.
-  - **Azi (deg)** - Azimuth. Y axis is 0 degrees.
-  - **Inc (deg)** - Inclination. Z axis is 0 degrees.
 
-A self created well path may be edited by either editing coordinates in the property editor or clicking and dragging targets in the 3D view. 
+**Well Targets Appearance**
+
+Controls the visibility and appearance of spheres at well target locations in addition to 3D interaction handles. The 3D interaction handles will be visible only when the Well Target object is selected, but the spheres will be always be visible if enabled.
+
+
+**Well Targets**
+
+List of all defined well targets. The editor will have a contrast background color when in picking state.
+
+- **Point** - Target position relative to reference point.
+- **DL in** - Dog leg inwards [degrees/30m].
+- **DL out** - Dog leg outwards [degrees/30m].
+- **Dir** - Check box for overriding well path auto calculated directions.
+- **Azi (deg)** - Azimuth. Y axis is 0 degrees.
+- **Inc (deg)** - Inclination. Z axis is 0 degrees.
+
+A well path defined by well targets may be edited by either editing coordinates in the property editor or clicking and dragging targets in the 3D view.
 
 ![]({{< relref "" >}}images/3d-main-window/WellTargets.png)
 
