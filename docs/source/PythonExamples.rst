@@ -90,17 +90,41 @@ Export Snapshots
 ===================================
 .. literalinclude:: ../rips/PythonExamples/export_snapshots.py
 
+.. _export_well_path_completions:
+
+Export Well Path Completions
+===================================
+.. literalinclude:: ../rips/PythonExamples/export_well_path_completions.py
+
 .. _generate_ensemble_of_well_logs:
 
 Generate Ensemble Of Well Logs
 ===================================
 .. literalinclude:: ../rips/PythonExamples/generate_ensemble_of_well_logs.py
 
+.. _generate_ensemble_surface:
+
+Generate Ensemble Surface
+===================================
+.. literalinclude:: ../rips/PythonExamples/generate_ensemble_surface.py
+
+.. _generate_ensemble_surface_optimized:
+
+Generate Ensemble Surface Optimized
+===================================
+.. literalinclude:: ../rips/PythonExamples/generate_ensemble_surface_optimized.py
+
 .. _grid_information:
 
 Grid Information
 ===================================
 .. literalinclude:: ../rips/PythonExamples/grid_information.py
+
+.. _import_fractures_on_well:
+
+Import Fractures On Well
+===================================
+.. literalinclude:: ../rips/PythonExamples/import_fractures_on_well.py
 
 .. _import_well_paths_and_logs:
 
@@ -173,6 +197,12 @@ Open Project
 Replace Case
 ===================================
 .. literalinclude:: ../rips/PythonExamples/replace_case.py
+
+.. _save_project:
+
+Save Project
+===================================
+.. literalinclude:: ../rips/PythonExamples/save_project.py
 
 .. _selected_cases:
 

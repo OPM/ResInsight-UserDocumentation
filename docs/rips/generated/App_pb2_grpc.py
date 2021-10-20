@@ -4,6 +4,7 @@ import grpc
 
 import App_pb2 as App__pb2
 import Definitions_pb2 as Definitions__pb2
+import PdmObject_pb2 as PdmObject__pb2
 
 
 class AppStub(object):
@@ -30,6 +31,11 @@ class AppStub(object):
                 request_serializer=Definitions__pb2.Empty.SerializeToString,
                 response_deserializer=App__pb2.RuntimeInfo.FromString,
                 )
+        self.GetPdmObject = channel.unary_unary(
+                '/rips.App/GetPdmObject',
+                request_serializer=Definitions__pb2.Empty.SerializeToString,
+                response_deserializer=PdmObject__pb2.PdmObject.FromString,
+                )
 
 
 class AppServicer(object):
@@ -53,6 +59,12 @@ class AppServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetPdmObject(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AppServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -70,6 +82,11 @@ def add_AppServicer_to_server(servicer, server):
                     servicer.GetRuntimeInfo,
                     request_deserializer=Definitions__pb2.Empty.FromString,
                     response_serializer=App__pb2.RuntimeInfo.SerializeToString,
+            ),
+            'GetPdmObject': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPdmObject,
+                    request_deserializer=Definitions__pb2.Empty.FromString,
+                    response_serializer=PdmObject__pb2.PdmObject.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -129,5 +146,22 @@ class App(object):
         return grpc.experimental.unary_unary(request, target, '/rips.App/GetRuntimeInfo',
             Definitions__pb2.Empty.SerializeToString,
             App__pb2.RuntimeInfo.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetPdmObject(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/rips.App/GetPdmObject',
+            Definitions__pb2.Empty.SerializeToString,
+            PdmObject__pb2.PdmObject.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

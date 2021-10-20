@@ -13,6 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 import Definitions_pb2 as Definitions__pb2
+import PdmObject_pb2 as PdmObject__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -21,9 +22,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\tApp.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"N\n\x07Version\x12\x15\n\rmajor_version\x18\x01 \x01(\x05\x12\x15\n\rminor_version\x18\x02 \x01(\x05\x12\x15\n\rpatch_version\x18\x03 \x01(\x05\":\n\x0bRuntimeInfo\x12+\n\x08\x61pp_type\x18\x01 \x01(\x0e\x32\x19.rips.ApplicationTypeEnum*C\n\x13\x41pplicationTypeEnum\x12\x13\n\x0fGUI_APPLICATION\x10\x00\x12\x17\n\x13\x43ONSOLE_APPLICATION\x10\x01\x32\x89\x01\n\x03\x41pp\x12*\n\nGetVersion\x12\x0b.rips.Empty\x1a\r.rips.Version\"\x00\x12\"\n\x04\x45xit\x12\x0b.rips.Empty\x1a\x0b.rips.Empty\"\x00\x12\x32\n\x0eGetRuntimeInfo\x12\x0b.rips.Empty\x1a\x11.rips.RuntimeInfo\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\tApp.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\x1a\x0fPdmObject.proto\"N\n\x07Version\x12\x15\n\rmajor_version\x18\x01 \x01(\x05\x12\x15\n\rminor_version\x18\x02 \x01(\x05\x12\x15\n\rpatch_version\x18\x03 \x01(\x05\":\n\x0bRuntimeInfo\x12+\n\x08\x61pp_type\x18\x01 \x01(\x0e\x32\x19.rips.ApplicationTypeEnum*C\n\x13\x41pplicationTypeEnum\x12\x13\n\x0fGUI_APPLICATION\x10\x00\x12\x17\n\x13\x43ONSOLE_APPLICATION\x10\x01\x32\xb9\x01\n\x03\x41pp\x12*\n\nGetVersion\x12\x0b.rips.Empty\x1a\r.rips.Version\"\x00\x12\"\n\x04\x45xit\x12\x0b.rips.Empty\x1a\x0b.rips.Empty\"\x00\x12\x32\n\x0eGetRuntimeInfo\x12\x0b.rips.Empty\x1a\x11.rips.RuntimeInfo\"\x00\x12.\n\x0cGetPdmObject\x12\x0b.rips.Empty\x1a\x0f.rips.PdmObject\"\x00\x62\x06proto3'
   ,
-  dependencies=[Definitions__pb2.DESCRIPTOR,])
+  dependencies=[Definitions__pb2.DESCRIPTOR,PdmObject__pb2.DESCRIPTOR,])
 
 _APPLICATIONTYPEENUM = _descriptor.EnumDescriptor(
   name='ApplicationTypeEnum',
@@ -45,8 +46,8 @@ _APPLICATIONTYPEENUM = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=178,
-  serialized_end=245,
+  serialized_start=195,
+  serialized_end=262,
 )
 _sym_db.RegisterEnumDescriptor(_APPLICATIONTYPEENUM)
 
@@ -97,8 +98,8 @@ _VERSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=38,
-  serialized_end=116,
+  serialized_start=55,
+  serialized_end=133,
 )
 
 
@@ -129,8 +130,8 @@ _RUNTIMEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=118,
-  serialized_end=176,
+  serialized_start=135,
+  serialized_end=193,
 )
 
 _RUNTIMEINFO.fields_by_name['app_type'].enum_type = _APPLICATIONTYPEENUM
@@ -162,8 +163,8 @@ _APP = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=248,
-  serialized_end=385,
+  serialized_start=265,
+  serialized_end=450,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetVersion',
@@ -192,6 +193,16 @@ _APP = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=Definitions__pb2._EMPTY,
     output_type=_RUNTIMEINFO,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetPdmObject',
+    full_name='rips.App.GetPdmObject',
+    index=3,
+    containing_service=None,
+    input_type=Definitions__pb2._EMPTY,
+    output_type=PdmObject__pb2._PDMOBJECT,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

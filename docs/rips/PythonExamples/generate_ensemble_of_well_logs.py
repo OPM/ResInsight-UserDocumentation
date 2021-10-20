@@ -11,7 +11,12 @@ resinsight = rips.Instance.find()
 home_dir = expanduser("~")
 
 
-properties = [("STATIC_NATIVE", "PORO", 0), ("DYNAMIC_NATIVE", "PRESSURE", 0)]
+properties = [
+    ("STATIC_NATIVE", "INDEX_K", 0),
+    ("STATIC_NATIVE", "PORO", 0),
+    ("STATIC_NATIVE", "PERMX", 0),
+    ("DYNAMIC_NATIVE", "PRESSURE", 0),
+]
 
 export_folder = tempfile.mkdtemp()
 
@@ -36,7 +41,8 @@ for realization in range(0, num_realizations):
 for path in case_file_paths:
     # Load a case
     path_name = path.as_posix()
-    case = resinsight.project.load_case(path_name)
+    grid_only = True
+    case = resinsight.project.load_case(path_name, grid_only)
 
     # Load some wells
     well_paths = resinsight.project.import_well_paths(
@@ -77,3 +83,5 @@ for path in case_file_paths:
 
         export_folder = export_folder_path.as_posix()
         well_log_plot.export_data_as_las(export_folder=export_folder)
+
+    resinsight.project.close()

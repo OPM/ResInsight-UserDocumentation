@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0e\x43ommands.proto\x12\x04rips\x1a\nCase.proto\x1a\x11\x44\x65\x66initions.proto\x1a\x0fPdmObject.proto\"\x1f\n\x0f\x46ilePathRequest\x12\x0c\n\x04path\x18\x01 \x01(\t\"9\n\x12ReplaceCaseRequest\x12\x13\n\x0bnewGridFile\x18\x01 \x01(\t\x12\x0e\n\x06\x63\x61seId\x18\x02 \x01(\x05\"B\n\x13ReplaceCaseRequests\x12+\n\tcasePairs\x18\x01 \x03(\x0b\x32\x18.rips.ReplaceCaseRequest\"F\n\x19ReplaceSourceCasesRequest\x12\x14\n\x0cgridListFile\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x61seGroupId\x18\x02 \x01(\x05\".\n\x16\x45xportMultiCaseRequest\x12\x14\n\x0cgridListFile\x18\x01 \x01(\t\"\xb2\x01\n\x16\x45xportSnapshotsRequest\x12 \n\x04type\x18\x01 \x01(\x0e\x32\x12.rips.SnapshotType\x12\x0e\n\x06prefix\x18\x02 \x01(\t\x12\x0e\n\x06\x63\x61seId\x18\x03 \x01(\x05\x12\x0e\n\x06viewId\x18\x04 \x01(\x05\x12\x14\n\x0c\x65xportFolder\x18\x05 \x01(\t\x12\x30\n\x10plotOutputFormat\x18\x06 \x01(\x0e\x32\x16.rips.PlotOutputFormat\"\x8f\x01\n\x15\x45xportPropertyRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08timeStep\x18\x02 \x01(\x05\x12\x10\n\x08property\x18\x03 \x01(\t\x12\x16\n\x0e\x65\x63lipseKeyword\x18\x04 \x01(\t\x12\x16\n\x0eundefinedValue\x18\x05 \x01(\x01\x12\x12\n\nexportFile\x18\x06 \x01(\t\"W\n\x1c\x45xportPropertyInViewsRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0f\n\x07viewIds\x18\x02 \x03(\x05\x12\x16\n\x0eundefinedValue\x18\x03 \x01(\x01\"\x8b\x03\n\x19\x45xportWellPathCompRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08timeStep\x18\x02 \x01(\x05\x12\x15\n\rwellPathNames\x18\x03 \x03(\t\x12+\n\tfileSplit\x18\x04 \x01(\x0e\x32\x18.rips.CompdatExportSplit\x12.\n\rcompdatExport\x18\x05 \x01(\x0e\x32\x17.rips.CompdatExportType\x12\x1b\n\x13includePerforations\x18\x06 \x01(\x08\x12\x18\n\x10includeFishbones\x18\x07 \x01(\x08\x12#\n\x1b\x65xcludeMainBoreForFishbones\x18\x08 \x01(\x08\x12\x35\n\x0f\x63ombinationMode\x18\t \x01(\x0e\x32\x1c.rips.CompdatCombinationMode\x12\x16\n\x0e\x63ustomFileName\x18\n \x01(\t\x12\x16\n\x0e\x65xportComments\x18\x0b \x01(\x08\x12\x15\n\rexportWelspec\x18\x0c \x01(\x08\"\xca\x01\n\x1c\x45xportSimWellPathFracRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x10\n\x08timeStep\x18\x03 \x01(\x05\x12\x1b\n\x13simulationWellNames\x18\x04 \x03(\t\x12+\n\tfileSplit\x18\x05 \x01(\x0e\x32\x18.rips.CompdatExportSplit\x12.\n\rcompdatExport\x18\x06 \x01(\x0e\x32\x17.rips.CompdatExportType\"4\n\x10\x45xportMswRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08wellPath\x18\x02 \x01(\t\"B\n\x15\x45xportWellPathRequest\x12\x15\n\rwellPathNames\x18\x01 \x03(\t\x12\x12\n\nmdStepSize\x18\x02 \x01(\x01\"\xaf\x01\n\x19\x45xportVisibleCellsRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x15\n\rexportKeyword\x18\x03 \x01(\t\x12\x1f\n\x17visibleActiveCellsValue\x18\x04 \x01(\x05\x12\x1e\n\x16hiddenActiveCellsValue\x18\x05 \x01(\x05\x12\x1a\n\x12inactiveCellsValue\x18\x06 \x01(\x05\"b\n\x16SetExportFolderRequest\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.rips.ExportFolderType\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x14\n\x0c\x63reateFolder\x18\x03 \x01(\x08\"7\n\x16RunOctaveScriptRequest\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0f\n\x07\x63\x61seIds\x18\x02 \x03(\x05\"4\n\x13SetWindowSizeParams\x12\x0e\n\x06height\x18\x01 \x01(\x05\x12\r\n\x05width\x18\x02 \x01(\x05\"C\n\x1b\x43omputeCaseGroupStatRequest\x12\x0f\n\x07\x63\x61seIds\x18\x01 \x03(\x05\x12\x13\n\x0b\x63\x61seGroupId\x18\x02 \x01(\x05\"E\n\x11SetTimeStepParams\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x10\n\x08timeStep\x18\x03 \x01(\x05\"N\n\x1cScaleFractureTemplateRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x12\n\nhalfLength\x18\x02 \x01(\x01\x12\x0e\n\x06height\x18\x03 \x01(\x01\"L\n\x19SetFracContainmentRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08topLayer\x18\x02 \x01(\x05\x12\x11\n\tbaseLayer\x18\x03 \x01(\x05\"\xee\x01\n\x19\x43reateMultipleFracRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x12\n\ntemplateId\x18\x02 \x01(\x05\x12\x15\n\rwellPathNames\x18\x03 \x03(\t\x12\x19\n\x11minDistFromWellTd\x18\x04 \x01(\x01\x12\x1b\n\x13maxFracturesPerWell\x18\x05 \x01(\x05\x12\x10\n\x08topLayer\x18\x06 \x01(\x05\x12\x11\n\tbaseLayer\x18\x07 \x01(\x05\x12\x0f\n\x07spacing\x18\x08 \x01(\x05\x12(\n\x06\x61\x63tion\x18\t \x01(\x0e\x32\x18.rips.MultipleFracAction\"\xb8\x01\n\x17\x43reateLgrForCompRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08timeStep\x18\x02 \x01(\x05\x12\x15\n\rwellPathNames\x18\x03 \x03(\t\x12\x13\n\x0brefinementI\x18\x04 \x01(\x05\x12\x13\n\x0brefinementJ\x18\x05 \x01(\x05\x12\x13\n\x0brefinementK\x18\x06 \x01(\x05\x12%\n\tsplitType\x18\x07 \x01(\x0e\x32\x12.rips.LgrSplitType\",\n\x19\x43reateSatPressPlotRequest\x12\x0f\n\x07\x63\x61seIds\x18\x01 \x03(\x05\"/\n\x1a\x43reateGridCaseGroupRequest\x12\x11\n\tcasePaths\x18\x01 \x03(\t\"2\n\x1b\x43reateStatisticsCaseRequest\x12\x13\n\x0b\x63\x61seGroupId\x18\x01 \x01(\x05\"\xae\x01\n\x15\x45xportFlowInfoRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x11\n\ttimeSteps\x18\x02 \x03(\x05\x12\x11\n\tinjectors\x18\x03 \x03(\t\x12\x11\n\tproducers\x18\x04 \x03(\t\x12\x10\n\x08\x66ileName\x18\x05 \x01(\t\x12\x1c\n\x14minimumCommunication\x18\x06 \x01(\x01\x12\x1c\n\x14\x61quiferCellThreshold\x18\x07 \x01(\x01\"#\n\x11\x43reateViewRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\"\"\n\x10\x43loneViewRequest\x12\x0e\n\x06viewId\x18\x01 \x01(\x05\"r\n\x14\x43reateWbsPlotRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08wellPath\x18\x02 \x01(\t\x12\x10\n\x08timeStep\x18\x03 \x01(\x05\x12&\n\rwbsParameters\x18\x04 \x01(\x0b\x32\x0f.rips.PdmObject\"G\n\x16ImportWellPathsRequest\x12\x16\n\x0ewellPathFolder\x18\x01 \x01(\t\x12\x15\n\rwellPathFiles\x18\x02 \x03(\t\"H\n\x19ImportWellLogFilesRequest\x12\x15\n\rwellLogFolder\x18\x01 \x01(\t\x12\x14\n\x0cwellLogFiles\x18\x02 \x03(\t\"L\n\x1bImportFormationNamesRequest\x12\x16\n\x0e\x66ormationFiles\x18\x01 \x03(\t\x12\x15\n\rapplyToCaseId\x18\x02 \x01(\x05\"\xea\x01\n\x1c\x45xportWellLogPlotDataRequest\x12(\n\x0c\x65xportFormat\x18\x01 \x01(\x0e\x32\x12.rips.ExportFormat\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x14\n\x0c\x65xportFolder\x18\x03 \x01(\t\x12\x12\n\nfilePrefix\x18\x04 \x01(\t\x12\x14\n\x0c\x65xportTvdRkb\x18\x05 \x01(\x08\x12\x1b\n\x13\x63\x61pitalizeFileNames\x18\x06 \x01(\x08\x12\x18\n\x10resampleInterval\x18\x07 \x01(\x01\x12\x19\n\x11\x63onvertCurveUnits\x18\x08 \x01(\x08\"\xa4\x01\n\x1d\x45xportContourMapToTextRequest\x12\x16\n\x0e\x65xportFileName\x18\x01 \x01(\t\x12\x1e\n\x16\x65xportLocalCoordinates\x18\x02 \x01(\x08\x12\x1b\n\x13undefinedValueLabel\x18\x03 \x01(\t\x12\x1e\n\x16\x65xcludeUndefinedValues\x18\x04 \x01(\x08\x12\x0e\n\x06viewId\x18\x05 \x01(\x05\"&\n\x12SaveProjectRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"\xb1\x12\n\rCommandParams\x12,\n\x0bopenProject\x18\x01 \x01(\x0b\x32\x15.rips.FilePathRequestH\x00\x12#\n\x0c\x63loseProject\x18\x02 \x01(\x0b\x32\x0b.rips.EmptyH\x00\x12,\n\x0bsetStartDir\x18\x03 \x01(\x0b\x32\x15.rips.FilePathRequestH\x00\x12)\n\x08loadCase\x18\x04 \x01(\x0b\x32\x15.rips.FilePathRequestH\x00\x12/\n\x0breplaceCase\x18\x05 \x01(\x0b\x32\x18.rips.ReplaceCaseRequestH\x00\x12=\n\x12replaceSourceCases\x18\x06 \x01(\x0b\x32\x1f.rips.ReplaceSourceCasesRequestH\x00\x12@\n\x18\x65xportMultiCaseSnapshots\x18\x07 \x01(\x0b\x32\x1c.rips.ExportMultiCaseRequestH\x00\x12\x37\n\x0f\x65xportSnapshots\x18\x08 \x01(\x0b\x32\x1c.rips.ExportSnapshotsRequestH\x00\x12\x35\n\x0e\x65xportProperty\x18\t \x01(\x0b\x32\x1b.rips.ExportPropertyRequestH\x00\x12\x43\n\x15\x65xportPropertyInViews\x18\n \x01(\x0b\x32\".rips.ExportPropertyInViewsRequestH\x00\x12\x44\n\x19\x65xportWellPathCompletions\x18\x0b \x01(\x0b\x32\x1f.rips.ExportWellPathCompRequestH\x00\x12N\n exportSimWellFractureCompletions\x18\x0c \x01(\x0b\x32\".rips.ExportSimWellPathFracRequestH\x00\x12+\n\texportMsw\x18\r \x01(\x0b\x32\x16.rips.ExportMswRequestH\x00\x12\x36\n\x0f\x65xportWellPaths\x18\x0e \x01(\x0b\x32\x1b.rips.ExportWellPathRequestH\x00\x12=\n\x12\x65xportVisibleCells\x18\x0f \x01(\x0b\x32\x1f.rips.ExportVisibleCellsRequestH\x00\x12\x37\n\x0fsetExportFolder\x18\x10 \x01(\x0b\x32\x1c.rips.SetExportFolderRequestH\x00\x12\x37\n\x0frunOctaveScript\x18\x11 \x01(\x0b\x32\x1c.rips.RunOctaveScriptRequestH\x00\x12\x36\n\x11setMainWindowSize\x18\x12 \x01(\x0b\x32\x19.rips.SetWindowSizeParamsH\x00\x12G\n\x1a\x63omputeCaseGroupStatistics\x18\x13 \x01(\x0b\x32!.rips.ComputeCaseGroupStatRequestH\x00\x12.\n\x0bsetTimeStep\x18\x14 \x01(\x0b\x32\x17.rips.SetTimeStepParamsH\x00\x12\x43\n\x15scaleFractureTemplate\x18\x15 \x01(\x0b\x32\".rips.ScaleFractureTemplateRequestH\x00\x12\x41\n\x16setFractureContainment\x18\x16 \x01(\x0b\x32\x1f.rips.SetFracContainmentRequestH\x00\x12\x42\n\x17\x63reateMultipleFractures\x18\x17 \x01(\x0b\x32\x1f.rips.CreateMultipleFracRequestH\x00\x12@\n\x17\x63reateLgrForCompletions\x18\x18 \x01(\x0b\x32\x1d.rips.CreateLgrForCompRequestH\x00\x12H\n\x1d\x63reateSaturationPressurePlots\x18\x19 \x01(\x0b\x32\x1f.rips.CreateSatPressPlotRequestH\x00\x12\x39\n\x14replaceMultipleCases\x18\x1a \x01(\x0b\x32\x19.rips.ReplaceCaseRequestsH\x00\x12?\n\x13\x63reateGridCaseGroup\x18\x1b \x01(\x0b\x32 .rips.CreateGridCaseGroupRequestH\x00\x12\x41\n\x14\x63reateStatisticsCase\x18\x1c \x01(\x0b\x32!.rips.CreateStatisticsCaseRequestH\x00\x12@\n\x19\x65xportFlowCharacteristics\x18\x1d \x01(\x0b\x32\x1b.rips.ExportFlowInfoRequestH\x00\x12-\n\ncreateView\x18\x1e \x01(\x0b\x32\x17.rips.CreateViewRequestH\x00\x12+\n\tcloneView\x18\x1f \x01(\x0b\x32\x16.rips.CloneViewRequestH\x00\x12\x41\n\x1b\x63reateWellBoreStabilityPlot\x18  \x01(\x0b\x32\x1a.rips.CreateWbsPlotRequestH\x00\x12\x37\n\x0fimportWellPaths\x18! \x01(\x0b\x32\x1c.rips.ImportWellPathsRequestH\x00\x12=\n\x12importWellLogFiles\x18\" \x01(\x0b\x32\x1f.rips.ImportWellLogFilesRequestH\x00\x12\x41\n\x14importFormationNames\x18# \x01(\x0b\x32!.rips.ImportFormationNamesRequestH\x00\x12\x43\n\x15\x65xportWellLogPlotData\x18$ \x01(\x0b\x32\".rips.ExportWellLogPlotDataRequestH\x00\x12\x36\n\x11setPlotWindowSize\x18% \x01(\x0b\x32\x19.rips.SetWindowSizeParamsH\x00\x12\x45\n\x16\x65xportContourMapToText\x18& \x01(\x0b\x32#.rips.ExportContourMapToTextRequestH\x00\x12/\n\x0bsaveProject\x18\' \x01(\x0b\x32\x18.rips.SaveProjectRequestH\x00\x42\x08\n\x06params\"9\n\x13GridCaseGroupResult\x12\x0f\n\x07groupId\x18\x01 \x01(\x05\x12\x11\n\tgroupName\x18\x02 \x01(\t\",\n\x1a\x43reateStatisticsCaseResult\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\"\"\n\x10\x43reateViewResult\x12\x0e\n\x06viewId\x18\x01 \x01(\x05\"%\n\x13\x43reateWbsPlotResult\x12\x0e\n\x06viewId\x18\x01 \x01(\x05\".\n\x15ImportWellPathsResult\x12\x15\n\rwellPathNames\x18\x01 \x03(\t\"1\n\x18ImportWellLogFilesResult\x12\x15\n\rwellPathNames\x18\x01 \x03(\t\"4\n\x1b\x45xportWellLogPlotDataResult\x12\x15\n\rexportedFiles\x18\x01 \x03(\t\"\xab\x04\n\x0c\x43ommandReply\x12\"\n\x0b\x65mptyResult\x18\x01 \x01(\x0b\x32\x0b.rips.EmptyH\x00\x12+\n\x0eloadCaseResult\x18\x02 \x01(\x0b\x32\x11.rips.CaseRequestH\x00\x12>\n\x19\x63reateGridCaseGroupResult\x18\x03 \x01(\x0b\x32\x19.rips.GridCaseGroupResultH\x00\x12\x46\n\x1a\x63reateStatisticsCaseResult\x18\x04 \x01(\x0b\x32 .rips.CreateStatisticsCaseResultH\x00\x12\x32\n\x10\x63reateViewResult\x18\x05 \x01(\x0b\x32\x16.rips.CreateViewResultH\x00\x12\x38\n\x13\x63reateWbsPlotResult\x18\x06 \x01(\x0b\x32\x19.rips.CreateWbsPlotResultH\x00\x12<\n\x15importWellPathsResult\x18\x07 \x01(\x0b\x32\x1b.rips.ImportWellPathsResultH\x00\x12\x42\n\x18importWellLogFilesResult\x18\x08 \x01(\x0b\x32\x1e.rips.ImportWellLogFilesResultH\x00\x12H\n\x1b\x65xportWellLogPlotDataResult\x18\t \x01(\x0b\x32!.rips.ExportWellLogPlotDataResultH\x00\x42\x08\n\x06result*$\n\x10PlotOutputFormat\x12\x07\n\x03PNG\x10\x00\x12\x07\n\x03PDF\x10\x01*-\n\x0cSnapshotType\x12\t\n\x05VIEWS\x10\x00\x12\t\n\x05PLOTS\x10\x01\x12\x07\n\x03\x41LL\x10\x02*`\n\x12\x43ompdatExportSplit\x12\x10\n\x0cUNIFIED_FILE\x10\x00\x12\x11\n\rSPLIT_ON_WELL\x10\x01\x12%\n!SPLIT_ON_WELL_AND_COMPLETION_TYPE\x10\x02*k\n\x11\x43ompdatExportType\x12\x16\n\x12TRANSMISSIBILITIES\x10\x00\x12*\n&WPIMULT_AND_DEFAULT_CONNECTION_FACTORS\x10\x01\x12\x12\n\x0eNO_COMPLETIONS\x10\x02*8\n\x16\x43ompdatCombinationMode\x12\x10\n\x0cINDIVIDUALLY\x10\x00\x12\x0c\n\x08\x43OMBINED\x10\x01*v\n\x10\x45xportFolderType\x12\x0f\n\x0b\x43OMPLETIONS\x10\x00\x12\r\n\tSNAPSHOTS\x10\x01\x12\x0e\n\nPROPERTIES\x10\x02\x12\x0e\n\nSTATISTICS\x10\x03\x12\r\n\tWELLPATHS\x10\x04\x12\t\n\x05\x43\x45LLS\x10\x05\x12\x08\n\x04LGRS\x10\x06*K\n\x12MultipleFracAction\x12\x08\n\x04NONE\x10\x00\x12\x14\n\x10\x41PPEND_FRACTURES\x10\x01\x12\x15\n\x11REPLACE_FRACTURES\x10\x02*J\n\x0cLgrSplitType\x12\x10\n\x0cLGR_PER_CELL\x10\x00\x12\x16\n\x12LGR_PER_COMPLETION\x10\x01\x12\x10\n\x0cLGR_PER_WELL\x10\x02*\"\n\x0c\x45xportFormat\x12\x07\n\x03LAS\x10\x00\x12\t\n\x05\x41SCII\x10\x01\x32@\n\x08\x43ommands\x12\x34\n\x07\x45xecute\x12\x13.rips.CommandParams\x1a\x12.rips.CommandReply\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x0e\x43ommands.proto\x12\x04rips\x1a\nCase.proto\x1a\x11\x44\x65\x66initions.proto\x1a\x0fPdmObject.proto\"1\n\x0f\x46ilePathRequest\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x10\n\x08gridOnly\x18\x02 \x01(\x08\"9\n\x12ReplaceCaseRequest\x12\x13\n\x0bnewGridFile\x18\x01 \x01(\t\x12\x0e\n\x06\x63\x61seId\x18\x02 \x01(\x05\"B\n\x13ReplaceCaseRequests\x12+\n\tcasePairs\x18\x01 \x03(\x0b\x32\x18.rips.ReplaceCaseRequest\"F\n\x19ReplaceSourceCasesRequest\x12\x14\n\x0cgridListFile\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x61seGroupId\x18\x02 \x01(\x05\".\n\x16\x45xportMultiCaseRequest\x12\x14\n\x0cgridListFile\x18\x01 \x01(\t\"\xb2\x01\n\x16\x45xportSnapshotsRequest\x12 \n\x04type\x18\x01 \x01(\x0e\x32\x12.rips.SnapshotType\x12\x0e\n\x06prefix\x18\x02 \x01(\t\x12\x0e\n\x06\x63\x61seId\x18\x03 \x01(\x05\x12\x0e\n\x06viewId\x18\x04 \x01(\x05\x12\x14\n\x0c\x65xportFolder\x18\x05 \x01(\t\x12\x30\n\x10plotOutputFormat\x18\x06 \x01(\x0e\x32\x16.rips.PlotOutputFormat\"\x8f\x01\n\x15\x45xportPropertyRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08timeStep\x18\x02 \x01(\x05\x12\x10\n\x08property\x18\x03 \x01(\t\x12\x16\n\x0e\x65\x63lipseKeyword\x18\x04 \x01(\t\x12\x16\n\x0eundefinedValue\x18\x05 \x01(\x01\x12\x12\n\nexportFile\x18\x06 \x01(\t\"W\n\x1c\x45xportPropertyInViewsRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0f\n\x07viewIds\x18\x02 \x03(\x05\x12\x16\n\x0eundefinedValue\x18\x03 \x01(\x01\"\x8b\x03\n\x19\x45xportWellPathCompRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08timeStep\x18\x02 \x01(\x05\x12\x15\n\rwellPathNames\x18\x03 \x03(\t\x12+\n\tfileSplit\x18\x04 \x01(\x0e\x32\x18.rips.CompdatExportSplit\x12.\n\rcompdatExport\x18\x05 \x01(\x0e\x32\x17.rips.CompdatExportType\x12\x1b\n\x13includePerforations\x18\x06 \x01(\x08\x12\x18\n\x10includeFishbones\x18\x07 \x01(\x08\x12#\n\x1b\x65xcludeMainBoreForFishbones\x18\x08 \x01(\x08\x12\x35\n\x0f\x63ombinationMode\x18\t \x01(\x0e\x32\x1c.rips.CompdatCombinationMode\x12\x16\n\x0e\x63ustomFileName\x18\n \x01(\t\x12\x16\n\x0e\x65xportComments\x18\x0b \x01(\x08\x12\x15\n\rexportWelspec\x18\x0c \x01(\x08\"\xca\x01\n\x1c\x45xportSimWellPathFracRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x10\n\x08timeStep\x18\x03 \x01(\x05\x12\x1b\n\x13simulationWellNames\x18\x04 \x03(\t\x12+\n\tfileSplit\x18\x05 \x01(\x0e\x32\x18.rips.CompdatExportSplit\x12.\n\rcompdatExport\x18\x06 \x01(\x0e\x32\x17.rips.CompdatExportType\"4\n\x10\x45xportMswRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08wellPath\x18\x02 \x01(\t\"B\n\x15\x45xportWellPathRequest\x12\x15\n\rwellPathNames\x18\x01 \x03(\t\x12\x12\n\nmdStepSize\x18\x02 \x01(\x01\"\xaf\x01\n\x19\x45xportVisibleCellsRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x15\n\rexportKeyword\x18\x03 \x01(\t\x12\x1f\n\x17visibleActiveCellsValue\x18\x04 \x01(\x05\x12\x1e\n\x16hiddenActiveCellsValue\x18\x05 \x01(\x05\x12\x1a\n\x12inactiveCellsValue\x18\x06 \x01(\x05\"b\n\x16SetExportFolderRequest\x12$\n\x04type\x18\x01 \x01(\x0e\x32\x16.rips.ExportFolderType\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x14\n\x0c\x63reateFolder\x18\x03 \x01(\x08\"7\n\x16RunOctaveScriptRequest\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x0f\n\x07\x63\x61seIds\x18\x02 \x03(\x05\"4\n\x13SetWindowSizeParams\x12\x0e\n\x06height\x18\x01 \x01(\x05\x12\r\n\x05width\x18\x02 \x01(\x05\"C\n\x1b\x43omputeCaseGroupStatRequest\x12\x0f\n\x07\x63\x61seIds\x18\x01 \x03(\x05\x12\x13\n\x0b\x63\x61seGroupId\x18\x02 \x01(\x05\"E\n\x11SetTimeStepParams\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x10\n\x08timeStep\x18\x03 \x01(\x05\"N\n\x1cScaleFractureTemplateRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x12\n\nhalfLength\x18\x02 \x01(\x01\x12\x0e\n\x06height\x18\x03 \x01(\x01\"L\n\x19SetFracContainmentRequest\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08topLayer\x18\x02 \x01(\x05\x12\x11\n\tbaseLayer\x18\x03 \x01(\x05\"\xee\x01\n\x19\x43reateMultipleFracRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x12\n\ntemplateId\x18\x02 \x01(\x05\x12\x15\n\rwellPathNames\x18\x03 \x03(\t\x12\x19\n\x11minDistFromWellTd\x18\x04 \x01(\x01\x12\x1b\n\x13maxFracturesPerWell\x18\x05 \x01(\x05\x12\x10\n\x08topLayer\x18\x06 \x01(\x05\x12\x11\n\tbaseLayer\x18\x07 \x01(\x05\x12\x0f\n\x07spacing\x18\x08 \x01(\x05\x12(\n\x06\x61\x63tion\x18\t \x01(\x0e\x32\x18.rips.MultipleFracAction\"\xb8\x01\n\x17\x43reateLgrForCompRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08timeStep\x18\x02 \x01(\x05\x12\x15\n\rwellPathNames\x18\x03 \x03(\t\x12\x13\n\x0brefinementI\x18\x04 \x01(\x05\x12\x13\n\x0brefinementJ\x18\x05 \x01(\x05\x12\x13\n\x0brefinementK\x18\x06 \x01(\x05\x12%\n\tsplitType\x18\x07 \x01(\x0e\x32\x12.rips.LgrSplitType\",\n\x19\x43reateSatPressPlotRequest\x12\x0f\n\x07\x63\x61seIds\x18\x01 \x03(\x05\"/\n\x1a\x43reateGridCaseGroupRequest\x12\x11\n\tcasePaths\x18\x01 \x03(\t\"2\n\x1b\x43reateStatisticsCaseRequest\x12\x13\n\x0b\x63\x61seGroupId\x18\x01 \x01(\x05\"\xae\x01\n\x15\x45xportFlowInfoRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x11\n\ttimeSteps\x18\x02 \x03(\x05\x12\x11\n\tinjectors\x18\x03 \x03(\t\x12\x11\n\tproducers\x18\x04 \x03(\t\x12\x10\n\x08\x66ileName\x18\x05 \x01(\t\x12\x1c\n\x14minimumCommunication\x18\x06 \x01(\x01\x12\x1c\n\x14\x61quiferCellThreshold\x18\x07 \x01(\x01\"#\n\x11\x43reateViewRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\"\"\n\x10\x43loneViewRequest\x12\x0e\n\x06viewId\x18\x01 \x01(\x05\"r\n\x14\x43reateWbsPlotRequest\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\x12\x10\n\x08wellPath\x18\x02 \x01(\t\x12\x10\n\x08timeStep\x18\x03 \x01(\x05\x12&\n\rwbsParameters\x18\x04 \x01(\x0b\x32\x0f.rips.PdmObject\"G\n\x16ImportWellPathsRequest\x12\x16\n\x0ewellPathFolder\x18\x01 \x01(\t\x12\x15\n\rwellPathFiles\x18\x02 \x03(\t\"H\n\x19ImportWellLogFilesRequest\x12\x15\n\rwellLogFolder\x18\x01 \x01(\t\x12\x14\n\x0cwellLogFiles\x18\x02 \x03(\t\"L\n\x1bImportFormationNamesRequest\x12\x16\n\x0e\x66ormationFiles\x18\x01 \x03(\t\x12\x15\n\rapplyToCaseId\x18\x02 \x01(\x05\"\xea\x01\n\x1c\x45xportWellLogPlotDataRequest\x12(\n\x0c\x65xportFormat\x18\x01 \x01(\x0e\x32\x12.rips.ExportFormat\x12\x0e\n\x06viewId\x18\x02 \x01(\x05\x12\x14\n\x0c\x65xportFolder\x18\x03 \x01(\t\x12\x12\n\nfilePrefix\x18\x04 \x01(\t\x12\x14\n\x0c\x65xportTvdRkb\x18\x05 \x01(\x08\x12\x1b\n\x13\x63\x61pitalizeFileNames\x18\x06 \x01(\x08\x12\x18\n\x10resampleInterval\x18\x07 \x01(\x01\x12\x19\n\x11\x63onvertCurveUnits\x18\x08 \x01(\x08\"\xa4\x01\n\x1d\x45xportContourMapToTextRequest\x12\x16\n\x0e\x65xportFileName\x18\x01 \x01(\t\x12\x1e\n\x16\x65xportLocalCoordinates\x18\x02 \x01(\x08\x12\x1b\n\x13undefinedValueLabel\x18\x03 \x01(\t\x12\x1e\n\x16\x65xcludeUndefinedValues\x18\x04 \x01(\x08\x12\x0e\n\x06viewId\x18\x05 \x01(\x05\"&\n\x12SaveProjectRequest\x12\x10\n\x08\x66ilePath\x18\x01 \x01(\t\"\xb1\x12\n\rCommandParams\x12,\n\x0bopenProject\x18\x01 \x01(\x0b\x32\x15.rips.FilePathRequestH\x00\x12#\n\x0c\x63loseProject\x18\x02 \x01(\x0b\x32\x0b.rips.EmptyH\x00\x12,\n\x0bsetStartDir\x18\x03 \x01(\x0b\x32\x15.rips.FilePathRequestH\x00\x12)\n\x08loadCase\x18\x04 \x01(\x0b\x32\x15.rips.FilePathRequestH\x00\x12/\n\x0breplaceCase\x18\x05 \x01(\x0b\x32\x18.rips.ReplaceCaseRequestH\x00\x12=\n\x12replaceSourceCases\x18\x06 \x01(\x0b\x32\x1f.rips.ReplaceSourceCasesRequestH\x00\x12@\n\x18\x65xportMultiCaseSnapshots\x18\x07 \x01(\x0b\x32\x1c.rips.ExportMultiCaseRequestH\x00\x12\x37\n\x0f\x65xportSnapshots\x18\x08 \x01(\x0b\x32\x1c.rips.ExportSnapshotsRequestH\x00\x12\x35\n\x0e\x65xportProperty\x18\t \x01(\x0b\x32\x1b.rips.ExportPropertyRequestH\x00\x12\x43\n\x15\x65xportPropertyInViews\x18\n \x01(\x0b\x32\".rips.ExportPropertyInViewsRequestH\x00\x12\x44\n\x19\x65xportWellPathCompletions\x18\x0b \x01(\x0b\x32\x1f.rips.ExportWellPathCompRequestH\x00\x12N\n exportSimWellFractureCompletions\x18\x0c \x01(\x0b\x32\".rips.ExportSimWellPathFracRequestH\x00\x12+\n\texportMsw\x18\r \x01(\x0b\x32\x16.rips.ExportMswRequestH\x00\x12\x36\n\x0f\x65xportWellPaths\x18\x0e \x01(\x0b\x32\x1b.rips.ExportWellPathRequestH\x00\x12=\n\x12\x65xportVisibleCells\x18\x0f \x01(\x0b\x32\x1f.rips.ExportVisibleCellsRequestH\x00\x12\x37\n\x0fsetExportFolder\x18\x10 \x01(\x0b\x32\x1c.rips.SetExportFolderRequestH\x00\x12\x37\n\x0frunOctaveScript\x18\x11 \x01(\x0b\x32\x1c.rips.RunOctaveScriptRequestH\x00\x12\x36\n\x11setMainWindowSize\x18\x12 \x01(\x0b\x32\x19.rips.SetWindowSizeParamsH\x00\x12G\n\x1a\x63omputeCaseGroupStatistics\x18\x13 \x01(\x0b\x32!.rips.ComputeCaseGroupStatRequestH\x00\x12.\n\x0bsetTimeStep\x18\x14 \x01(\x0b\x32\x17.rips.SetTimeStepParamsH\x00\x12\x43\n\x15scaleFractureTemplate\x18\x15 \x01(\x0b\x32\".rips.ScaleFractureTemplateRequestH\x00\x12\x41\n\x16setFractureContainment\x18\x16 \x01(\x0b\x32\x1f.rips.SetFracContainmentRequestH\x00\x12\x42\n\x17\x63reateMultipleFractures\x18\x17 \x01(\x0b\x32\x1f.rips.CreateMultipleFracRequestH\x00\x12@\n\x17\x63reateLgrForCompletions\x18\x18 \x01(\x0b\x32\x1d.rips.CreateLgrForCompRequestH\x00\x12H\n\x1d\x63reateSaturationPressurePlots\x18\x19 \x01(\x0b\x32\x1f.rips.CreateSatPressPlotRequestH\x00\x12\x39\n\x14replaceMultipleCases\x18\x1a \x01(\x0b\x32\x19.rips.ReplaceCaseRequestsH\x00\x12?\n\x13\x63reateGridCaseGroup\x18\x1b \x01(\x0b\x32 .rips.CreateGridCaseGroupRequestH\x00\x12\x41\n\x14\x63reateStatisticsCase\x18\x1c \x01(\x0b\x32!.rips.CreateStatisticsCaseRequestH\x00\x12@\n\x19\x65xportFlowCharacteristics\x18\x1d \x01(\x0b\x32\x1b.rips.ExportFlowInfoRequestH\x00\x12-\n\ncreateView\x18\x1e \x01(\x0b\x32\x17.rips.CreateViewRequestH\x00\x12+\n\tcloneView\x18\x1f \x01(\x0b\x32\x16.rips.CloneViewRequestH\x00\x12\x41\n\x1b\x63reateWellBoreStabilityPlot\x18  \x01(\x0b\x32\x1a.rips.CreateWbsPlotRequestH\x00\x12\x37\n\x0fimportWellPaths\x18! \x01(\x0b\x32\x1c.rips.ImportWellPathsRequestH\x00\x12=\n\x12importWellLogFiles\x18\" \x01(\x0b\x32\x1f.rips.ImportWellLogFilesRequestH\x00\x12\x41\n\x14importFormationNames\x18# \x01(\x0b\x32!.rips.ImportFormationNamesRequestH\x00\x12\x43\n\x15\x65xportWellLogPlotData\x18$ \x01(\x0b\x32\".rips.ExportWellLogPlotDataRequestH\x00\x12\x36\n\x11setPlotWindowSize\x18% \x01(\x0b\x32\x19.rips.SetWindowSizeParamsH\x00\x12\x45\n\x16\x65xportContourMapToText\x18& \x01(\x0b\x32#.rips.ExportContourMapToTextRequestH\x00\x12/\n\x0bsaveProject\x18\' \x01(\x0b\x32\x18.rips.SaveProjectRequestH\x00\x42\x08\n\x06params\"9\n\x13GridCaseGroupResult\x12\x0f\n\x07groupId\x18\x01 \x01(\x05\x12\x11\n\tgroupName\x18\x02 \x01(\t\",\n\x1a\x43reateStatisticsCaseResult\x12\x0e\n\x06\x63\x61seId\x18\x01 \x01(\x05\"\"\n\x10\x43reateViewResult\x12\x0e\n\x06viewId\x18\x01 \x01(\x05\"%\n\x13\x43reateWbsPlotResult\x12\x0e\n\x06viewId\x18\x01 \x01(\x05\".\n\x15ImportWellPathsResult\x12\x15\n\rwellPathNames\x18\x01 \x03(\t\"1\n\x18ImportWellLogFilesResult\x12\x15\n\rwellPathNames\x18\x01 \x03(\t\"4\n\x1b\x45xportWellLogPlotDataResult\x12\x15\n\rexportedFiles\x18\x01 \x03(\t\"\xab\x04\n\x0c\x43ommandReply\x12\"\n\x0b\x65mptyResult\x18\x01 \x01(\x0b\x32\x0b.rips.EmptyH\x00\x12+\n\x0eloadCaseResult\x18\x02 \x01(\x0b\x32\x11.rips.CaseRequestH\x00\x12>\n\x19\x63reateGridCaseGroupResult\x18\x03 \x01(\x0b\x32\x19.rips.GridCaseGroupResultH\x00\x12\x46\n\x1a\x63reateStatisticsCaseResult\x18\x04 \x01(\x0b\x32 .rips.CreateStatisticsCaseResultH\x00\x12\x32\n\x10\x63reateViewResult\x18\x05 \x01(\x0b\x32\x16.rips.CreateViewResultH\x00\x12\x38\n\x13\x63reateWbsPlotResult\x18\x06 \x01(\x0b\x32\x19.rips.CreateWbsPlotResultH\x00\x12<\n\x15importWellPathsResult\x18\x07 \x01(\x0b\x32\x1b.rips.ImportWellPathsResultH\x00\x12\x42\n\x18importWellLogFilesResult\x18\x08 \x01(\x0b\x32\x1e.rips.ImportWellLogFilesResultH\x00\x12H\n\x1b\x65xportWellLogPlotDataResult\x18\t \x01(\x0b\x32!.rips.ExportWellLogPlotDataResultH\x00\x42\x08\n\x06result*$\n\x10PlotOutputFormat\x12\x07\n\x03PNG\x10\x00\x12\x07\n\x03PDF\x10\x01*-\n\x0cSnapshotType\x12\t\n\x05VIEWS\x10\x00\x12\t\n\x05PLOTS\x10\x01\x12\x07\n\x03\x41LL\x10\x02*`\n\x12\x43ompdatExportSplit\x12\x10\n\x0cUNIFIED_FILE\x10\x00\x12\x11\n\rSPLIT_ON_WELL\x10\x01\x12%\n!SPLIT_ON_WELL_AND_COMPLETION_TYPE\x10\x02*k\n\x11\x43ompdatExportType\x12\x16\n\x12TRANSMISSIBILITIES\x10\x00\x12*\n&WPIMULT_AND_DEFAULT_CONNECTION_FACTORS\x10\x01\x12\x12\n\x0eNO_COMPLETIONS\x10\x02*8\n\x16\x43ompdatCombinationMode\x12\x10\n\x0cINDIVIDUALLY\x10\x00\x12\x0c\n\x08\x43OMBINED\x10\x01*v\n\x10\x45xportFolderType\x12\x0f\n\x0b\x43OMPLETIONS\x10\x00\x12\r\n\tSNAPSHOTS\x10\x01\x12\x0e\n\nPROPERTIES\x10\x02\x12\x0e\n\nSTATISTICS\x10\x03\x12\r\n\tWELLPATHS\x10\x04\x12\t\n\x05\x43\x45LLS\x10\x05\x12\x08\n\x04LGRS\x10\x06*K\n\x12MultipleFracAction\x12\x08\n\x04NONE\x10\x00\x12\x14\n\x10\x41PPEND_FRACTURES\x10\x01\x12\x15\n\x11REPLACE_FRACTURES\x10\x02*J\n\x0cLgrSplitType\x12\x10\n\x0cLGR_PER_CELL\x10\x00\x12\x16\n\x12LGR_PER_COMPLETION\x10\x01\x12\x10\n\x0cLGR_PER_WELL\x10\x02*\"\n\x0c\x45xportFormat\x12\x07\n\x03LAS\x10\x00\x12\t\n\x05\x41SCII\x10\x01\x32@\n\x08\x43ommands\x12\x34\n\x07\x45xecute\x12\x13.rips.CommandParams\x1a\x12.rips.CommandReply\"\x00\x62\x06proto3'
   ,
   dependencies=[Case__pb2.DESCRIPTOR,Definitions__pb2.DESCRIPTOR,PdmObject__pb2.DESCRIPTOR,])
 
@@ -47,8 +47,8 @@ _PLOTOUTPUTFORMAT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7037,
-  serialized_end=7073,
+  serialized_start=7055,
+  serialized_end=7091,
 )
 _sym_db.RegisterEnumDescriptor(_PLOTOUTPUTFORMAT)
 
@@ -78,8 +78,8 @@ _SNAPSHOTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7075,
-  serialized_end=7120,
+  serialized_start=7093,
+  serialized_end=7138,
 )
 _sym_db.RegisterEnumDescriptor(_SNAPSHOTTYPE)
 
@@ -109,8 +109,8 @@ _COMPDATEXPORTSPLIT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7122,
-  serialized_end=7218,
+  serialized_start=7140,
+  serialized_end=7236,
 )
 _sym_db.RegisterEnumDescriptor(_COMPDATEXPORTSPLIT)
 
@@ -140,8 +140,8 @@ _COMPDATEXPORTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7220,
-  serialized_end=7327,
+  serialized_start=7238,
+  serialized_end=7345,
 )
 _sym_db.RegisterEnumDescriptor(_COMPDATEXPORTTYPE)
 
@@ -166,8 +166,8 @@ _COMPDATCOMBINATIONMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7329,
-  serialized_end=7385,
+  serialized_start=7347,
+  serialized_end=7403,
 )
 _sym_db.RegisterEnumDescriptor(_COMPDATCOMBINATIONMODE)
 
@@ -217,8 +217,8 @@ _EXPORTFOLDERTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7387,
-  serialized_end=7505,
+  serialized_start=7405,
+  serialized_end=7523,
 )
 _sym_db.RegisterEnumDescriptor(_EXPORTFOLDERTYPE)
 
@@ -248,8 +248,8 @@ _MULTIPLEFRACACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7507,
-  serialized_end=7582,
+  serialized_start=7525,
+  serialized_end=7600,
 )
 _sym_db.RegisterEnumDescriptor(_MULTIPLEFRACACTION)
 
@@ -279,8 +279,8 @@ _LGRSPLITTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7584,
-  serialized_end=7658,
+  serialized_start=7602,
+  serialized_end=7676,
 )
 _sym_db.RegisterEnumDescriptor(_LGRSPLITTYPE)
 
@@ -305,8 +305,8 @@ _EXPORTFORMAT = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=7660,
-  serialized_end=7694,
+  serialized_start=7678,
+  serialized_end=7712,
 )
 _sym_db.RegisterEnumDescriptor(_EXPORTFORMAT)
 
@@ -357,6 +357,13 @@ _FILEPATHREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='gridOnly', full_name='rips.FilePathRequest.gridOnly', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -370,7 +377,7 @@ _FILEPATHREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=72,
-  serialized_end=103,
+  serialized_end=121,
 )
 
 
@@ -408,8 +415,8 @@ _REPLACECASEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=105,
-  serialized_end=162,
+  serialized_start=123,
+  serialized_end=180,
 )
 
 
@@ -440,8 +447,8 @@ _REPLACECASEREQUESTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=164,
-  serialized_end=230,
+  serialized_start=182,
+  serialized_end=248,
 )
 
 
@@ -479,8 +486,8 @@ _REPLACESOURCECASESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=232,
-  serialized_end=302,
+  serialized_start=250,
+  serialized_end=320,
 )
 
 
@@ -511,8 +518,8 @@ _EXPORTMULTICASEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=304,
-  serialized_end=350,
+  serialized_start=322,
+  serialized_end=368,
 )
 
 
@@ -578,8 +585,8 @@ _EXPORTSNAPSHOTSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=353,
-  serialized_end=531,
+  serialized_start=371,
+  serialized_end=549,
 )
 
 
@@ -645,8 +652,8 @@ _EXPORTPROPERTYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=534,
-  serialized_end=677,
+  serialized_start=552,
+  serialized_end=695,
 )
 
 
@@ -691,8 +698,8 @@ _EXPORTPROPERTYINVIEWSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=679,
-  serialized_end=766,
+  serialized_start=697,
+  serialized_end=784,
 )
 
 
@@ -800,8 +807,8 @@ _EXPORTWELLPATHCOMPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=769,
-  serialized_end=1164,
+  serialized_start=787,
+  serialized_end=1182,
 )
 
 
@@ -867,8 +874,8 @@ _EXPORTSIMWELLPATHFRACREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1167,
-  serialized_end=1369,
+  serialized_start=1185,
+  serialized_end=1387,
 )
 
 
@@ -906,8 +913,8 @@ _EXPORTMSWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1371,
-  serialized_end=1423,
+  serialized_start=1389,
+  serialized_end=1441,
 )
 
 
@@ -945,8 +952,8 @@ _EXPORTWELLPATHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1425,
-  serialized_end=1491,
+  serialized_start=1443,
+  serialized_end=1509,
 )
 
 
@@ -1012,8 +1019,8 @@ _EXPORTVISIBLECELLSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1494,
-  serialized_end=1669,
+  serialized_start=1512,
+  serialized_end=1687,
 )
 
 
@@ -1058,8 +1065,8 @@ _SETEXPORTFOLDERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1671,
-  serialized_end=1769,
+  serialized_start=1689,
+  serialized_end=1787,
 )
 
 
@@ -1097,8 +1104,8 @@ _RUNOCTAVESCRIPTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1771,
-  serialized_end=1826,
+  serialized_start=1789,
+  serialized_end=1844,
 )
 
 
@@ -1136,8 +1143,8 @@ _SETWINDOWSIZEPARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1828,
-  serialized_end=1880,
+  serialized_start=1846,
+  serialized_end=1898,
 )
 
 
@@ -1175,8 +1182,8 @@ _COMPUTECASEGROUPSTATREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1882,
-  serialized_end=1949,
+  serialized_start=1900,
+  serialized_end=1967,
 )
 
 
@@ -1221,8 +1228,8 @@ _SETTIMESTEPPARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1951,
-  serialized_end=2020,
+  serialized_start=1969,
+  serialized_end=2038,
 )
 
 
@@ -1267,8 +1274,8 @@ _SCALEFRACTURETEMPLATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2022,
-  serialized_end=2100,
+  serialized_start=2040,
+  serialized_end=2118,
 )
 
 
@@ -1313,8 +1320,8 @@ _SETFRACCONTAINMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2102,
-  serialized_end=2178,
+  serialized_start=2120,
+  serialized_end=2196,
 )
 
 
@@ -1401,8 +1408,8 @@ _CREATEMULTIPLEFRACREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2181,
-  serialized_end=2419,
+  serialized_start=2199,
+  serialized_end=2437,
 )
 
 
@@ -1475,8 +1482,8 @@ _CREATELGRFORCOMPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2422,
-  serialized_end=2606,
+  serialized_start=2440,
+  serialized_end=2624,
 )
 
 
@@ -1507,8 +1514,8 @@ _CREATESATPRESSPLOTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2608,
-  serialized_end=2652,
+  serialized_start=2626,
+  serialized_end=2670,
 )
 
 
@@ -1539,8 +1546,8 @@ _CREATEGRIDCASEGROUPREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2654,
-  serialized_end=2701,
+  serialized_start=2672,
+  serialized_end=2719,
 )
 
 
@@ -1571,8 +1578,8 @@ _CREATESTATISTICSCASEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2703,
-  serialized_end=2753,
+  serialized_start=2721,
+  serialized_end=2771,
 )
 
 
@@ -1645,8 +1652,8 @@ _EXPORTFLOWINFOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2756,
-  serialized_end=2930,
+  serialized_start=2774,
+  serialized_end=2948,
 )
 
 
@@ -1677,8 +1684,8 @@ _CREATEVIEWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2932,
-  serialized_end=2967,
+  serialized_start=2950,
+  serialized_end=2985,
 )
 
 
@@ -1709,8 +1716,8 @@ _CLONEVIEWREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2969,
-  serialized_end=3003,
+  serialized_start=2987,
+  serialized_end=3021,
 )
 
 
@@ -1762,8 +1769,8 @@ _CREATEWBSPLOTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3005,
-  serialized_end=3119,
+  serialized_start=3023,
+  serialized_end=3137,
 )
 
 
@@ -1801,8 +1808,8 @@ _IMPORTWELLPATHSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3121,
-  serialized_end=3192,
+  serialized_start=3139,
+  serialized_end=3210,
 )
 
 
@@ -1840,8 +1847,8 @@ _IMPORTWELLLOGFILESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3194,
-  serialized_end=3266,
+  serialized_start=3212,
+  serialized_end=3284,
 )
 
 
@@ -1879,8 +1886,8 @@ _IMPORTFORMATIONNAMESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3268,
-  serialized_end=3344,
+  serialized_start=3286,
+  serialized_end=3362,
 )
 
 
@@ -1960,8 +1967,8 @@ _EXPORTWELLLOGPLOTDATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3347,
-  serialized_end=3581,
+  serialized_start=3365,
+  serialized_end=3599,
 )
 
 
@@ -2020,8 +2027,8 @@ _EXPORTCONTOURMAPTOTEXTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3584,
-  serialized_end=3748,
+  serialized_start=3602,
+  serialized_end=3766,
 )
 
 
@@ -2052,8 +2059,8 @@ _SAVEPROJECTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3750,
-  serialized_end=3788,
+  serialized_start=3768,
+  serialized_end=3806,
 )
 
 
@@ -2355,8 +2362,8 @@ _COMMANDPARAMS = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=3791,
-  serialized_end=6144,
+  serialized_start=3809,
+  serialized_end=6162,
 )
 
 
@@ -2394,8 +2401,8 @@ _GRIDCASEGROUPRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6146,
-  serialized_end=6203,
+  serialized_start=6164,
+  serialized_end=6221,
 )
 
 
@@ -2426,8 +2433,8 @@ _CREATESTATISTICSCASERESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6205,
-  serialized_end=6249,
+  serialized_start=6223,
+  serialized_end=6267,
 )
 
 
@@ -2458,8 +2465,8 @@ _CREATEVIEWRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6251,
-  serialized_end=6285,
+  serialized_start=6269,
+  serialized_end=6303,
 )
 
 
@@ -2490,8 +2497,8 @@ _CREATEWBSPLOTRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6287,
-  serialized_end=6324,
+  serialized_start=6305,
+  serialized_end=6342,
 )
 
 
@@ -2522,8 +2529,8 @@ _IMPORTWELLPATHSRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6326,
-  serialized_end=6372,
+  serialized_start=6344,
+  serialized_end=6390,
 )
 
 
@@ -2554,8 +2561,8 @@ _IMPORTWELLLOGFILESRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6374,
-  serialized_end=6423,
+  serialized_start=6392,
+  serialized_end=6441,
 )
 
 
@@ -2586,8 +2593,8 @@ _EXPORTWELLLOGPLOTDATARESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6425,
-  serialized_end=6477,
+  serialized_start=6443,
+  serialized_end=6495,
 )
 
 
@@ -2679,8 +2686,8 @@ _COMMANDREPLY = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=6480,
-  serialized_end=7035,
+  serialized_start=6498,
+  serialized_end=7053,
 )
 
 _REPLACECASEREQUESTS.fields_by_name['casePairs'].message_type = _REPLACECASEREQUEST
@@ -3260,8 +3267,8 @@ _COMMANDS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=7696,
-  serialized_end=7760,
+  serialized_start=7714,
+  serialized_end=7778,
   methods=[
   _descriptor.MethodDescriptor(
     name='Execute',

@@ -17,16 +17,9 @@ path_name = os.path.join(
     test_models_path, "TEST10K_FLT_LGR_NNC/TEST10K_FLT_LGR_NNC.EGRID"
 )
 case = resinsight.project.load_case(path_name)
-case.create_view()
 
-# Print out lots of information from the case object
-print("Case id: " + str(case.id))
-print("Case name: " + case.name)
-print("Case type: " + case.__class__.__name__)
-print("Case file name: " + case.file_path)
-print("Case reservoir bounding box:", case.reservoir_boundingbox())
-
-timesteps = case.time_steps()
-for t in timesteps:
-    print("Year: " + str(t.year))
-    print("Month: " + str(t.month))
+# Save the project to file
+home_dir = os.path.expanduser("~")
+project_path = home_dir + "/new-project.rsp"
+print("Saving project to: ", project_path)
+resinsight.project.save(project_path)

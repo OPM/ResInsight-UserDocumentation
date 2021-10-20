@@ -109,7 +109,7 @@ class ElasticProperties(PdmObjectBase):
         if ElasticProperties.__custom_init__ is not None:
             ElasticProperties.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_property_scaling(self, formation=None, facies=None, property=None, scale=None):
+    def add_property_scaling(self, formation="", facies="", property="", scale=0):
         """
         Add Elastic Property Scaling
 
@@ -134,11 +134,29 @@ class ElasticProperties(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
-class CheckableNamedObject(PdmObjectBase):
+class NamedObject(PdmObjectBase):
+    """
+    Attributes:
+        name (str): Name
+    """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
+        self.name = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
+        if NamedObject.__custom_init__ is not None:
+            NamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CheckableNamedObject(NamedObject):
+    """
+    Attributes:
+        is_checked (str): Active
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.is_checked = True
+        NamedObject.__init__(self, pb2_object, channel)
         if CheckableNamedObject.__custom_init__ is not None:
             CheckableNamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
@@ -178,11 +196,122 @@ class ElasticPropertyScalingCollection(PdmObjectBase):
         return self.children("ElasticPropertyScalings", ElasticPropertyScaling)
 
 
-class EnsembleWellLogs(PdmObjectBase):
+class SurfaceInterface(PdmObjectBase):
+    """
+    Attributes:
+        depth_offset (float): Depth Offset
+        surface_user_decription (str): Name
+    """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
+        self.depth_offset = 0
+        self.surface_user_decription = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
+        if SurfaceInterface.__custom_init__ is not None:
+            SurfaceInterface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def export_to_file(self, file_name=""):
+        """
+        Export a surface to file
+
+        Arguments:
+            file_name (str): Filename to export surface to
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method("ExportToFile", file_name=file_name)
+
+
+class EnsembleStatisticsSurface(SurfaceInterface):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        SurfaceInterface.__init__(self, pb2_object, channel)
+        if EnsembleStatisticsSurface.__custom_init__ is not None:
+            EnsembleStatisticsSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class SurfaceCollection(PdmObjectBase):
+    """
+    Attributes:
+        surface_user_decription (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.surface_user_decription = "Surfaces"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if SurfaceCollection.__custom_init__ is not None:
+            SurfaceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_folder(self, folder_name="Surfaces"):
+        """
+        Add a new surface folder
+
+        Arguments:
+            folder_name (str): New surface folder name
+        Returns:
+            SurfaceCollection
+        """
+        return self._call_pdm_method("AddFolder", folder_name=folder_name)
+
+
+    def import_surface(self, file_name=""):
+        """
+        Import a new surface from file
+
+        Arguments:
+            file_name (str): Filename to import surface from
+        Returns:
+            Surface
+        """
+        return self._call_pdm_method("ImportSurface", file_name=file_name)
+
+
+    def new_surface(self, case="", k_index=0):
+        """
+        Create a new surface
+
+        Arguments:
+            case (Case): 
+            k_index (int): 
+        Returns:
+            GridCaseSurface
+        """
+        return self._call_pdm_method("NewSurface", case=case, k_index=k_index)
+
+
+    def sub_collections(self):
+        """Surfaces
+
+        Returns:
+             List of SurfaceCollection
+        """
+        return self.children("SubCollections", SurfaceCollection)
+
+
+    def surfaces_field(self):
+        """Surfaces
+
+        Returns:
+             List of SurfaceInterface
+        """
+        return self.children("SurfacesField", SurfaceInterface)
+
+
+class EnsembleSurface(SurfaceCollection):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        SurfaceCollection.__init__(self, pb2_object, channel)
+        if EnsembleSurface.__custom_init__ is not None:
+            EnsembleSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class EnsembleWellLogs(NamedObject):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        NamedObject.__init__(self, pb2_object, channel)
         if EnsembleWellLogs.__custom_init__ is not None:
             EnsembleWellLogs.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
@@ -197,7 +326,7 @@ class FaciesInitialPressureConfig(PdmObjectBase):
 
     def __init__(self, pb2_object=None, channel=None):
         self.facies_name = ""
-        self.facies_value = -1665136688
+        self.facies_value = 0
         self.fraction = 0
         PdmObjectBase.__init__(self, pb2_object, channel)
         if FaciesInitialPressureConfig.__custom_init__ is not None:
@@ -277,7 +406,7 @@ class SummaryCase(PdmObjectBase):
         return self._call_pdm_method("availableTimeSteps")
 
 
-    def resample_values(self, address=None, resampling_period=None):
+    def resample_values(self, address="", resampling_period=""):
         """
         
 
@@ -290,7 +419,7 @@ class SummaryCase(PdmObjectBase):
         return self._call_pdm_method("resampleValues", address=address, resampling_period=resampling_period)
 
 
-    def summary_vector_values(self, address=None):
+    def summary_vector_values(self, address=""):
         """
         Get all values for a summary vector
 
@@ -316,6 +445,56 @@ class FileSummaryCase(SummaryCase):
         SummaryCase.__init__(self, pb2_object, channel)
         if FileSummaryCase.__custom_init__ is not None:
             FileSummaryCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FractureDefinitionCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FractureDefinitionCollection.__custom_init__ is not None:
+            FractureDefinitionCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def new_fracture_template(self, file_path=""):
+        """
+        Create a new StimPlan Fracture Template
+
+        Arguments:
+            file_path (str): File Path to StimPlan Countour File
+        Returns:
+            RimStimPlanFractureTemplate
+        """
+        return self._call_pdm_method("NewFractureTemplate", file_path=file_path)
+
+
+class GeoMechPart(CheckableNamedObject):
+    """
+    Attributes:
+        part_id (int): Part Id
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.part_id = 0
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if GeoMechPart.__custom_init__ is not None:
+            GeoMechPart.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class GeoMechPartCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if GeoMechPartCollection.__custom_init__ is not None:
+            GeoMechPartCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def parts(self):
+        """Parts
+
+        Returns:
+             List of GeoMechPart
+        """
+        return self.children("Parts", GeoMechPart)
+
 
 class ViewWindow(PdmObjectBase):
     """
@@ -344,13 +523,13 @@ class View(ViewWindow):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#b0c4de"
+        self.background_color = "#3b3b3b"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
         self.id = -1
         self.perspective_projection = True
-        self.show_grid_box = False
+        self.show_grid_box = True
         self.show_z_scale = True
         ViewWindow.__init__(self, pb2_object, channel)
         if View.__custom_init__ is not None:
@@ -367,6 +546,23 @@ class GeoMechView(View):
         View.__init__(self, pb2_object, channel)
         if GeoMechView.__custom_init__ is not None:
             GeoMechView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class GridCaseSurface(SurfaceInterface):
+    """
+    Attributes:
+        slice_index (int): Slice Index (K)
+        source_case (str): Source Case
+        watertight (str): Watertight Surface (fill gaps)
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.slice_index = 1
+        self.source_case = ""
+        self.watertight = False
+        SurfaceInterface.__init__(self, pb2_object, channel)
+        if GridCaseSurface.__custom_init__ is not None:
+            GridCaseSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class GridSummaryCase(SummaryCase):
     """
@@ -395,6 +591,19 @@ class WellPath(PdmObjectBase):
         if WellPath.__custom_init__ is not None:
             WellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def new_fracture(self, measured_depth=0, stim_plan_fracture_template=""):
+        """
+        Add StimPlan Fracture
+
+        Arguments:
+            measured_depth (float): 
+            stim_plan_fracture_template (RimStimPlanFractureTemplate): StimPlan Fracture Template
+        Returns:
+            WellPathFracture
+        """
+        return self._call_pdm_method("NewFracture", measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template)
+
+
 class ModeledWellPath(WellPath):
     """
     A Well Path created interactively in ResInsight
@@ -407,7 +616,7 @@ class ModeledWellPath(WellPath):
         if ModeledWellPath.__custom_init__ is not None:
             ModeledWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def append_lateral(self, tie_in_depth=None, lateral_name=None):
+    def append_lateral(self, tie_in_depth=0, lateral_name=""):
         """
         Append Well Path Lateral
 
@@ -420,7 +629,7 @@ class ModeledWellPath(WellPath):
         return self._call_pdm_method("AppendLateral", tie_in_depth=tie_in_depth, lateral_name=lateral_name)
 
 
-    def append_perforation_interval(self, start_md=None, end_md=None, diameter=None, skin_factor=None):
+    def append_perforation_interval(self, start_md=0, end_md=0, diameter=0, skin_factor=0):
         """
         Append Perforation Interval
 
@@ -542,7 +751,7 @@ class Project(PdmObjectBase):
         if Project.__custom_init__ is not None:
             Project.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def import_summary_case(self, file_name=None):
+    def import_summary_case(self, file_name=""):
         """
         Import Summary Case
 
@@ -554,7 +763,7 @@ class Project(PdmObjectBase):
         return self._call_pdm_method("importSummaryCase", file_name=file_name)
 
 
-    def summary_case(self, case_id=None):
+    def summary_case(self, case_id=2072343232):
         """
         Find Summary Case
 
@@ -566,7 +775,7 @@ class Project(PdmObjectBase):
         return self._call_pdm_method("summaryCase", case_id=case_id)
 
 
-    def surface_folder(self, folder_name=None):
+    def surface_folder(self, folder_name=""):
         """
         Get Surface Folder
 
@@ -689,6 +898,35 @@ class RimCellFilterCollection(PdmObjectBase):
         if RimCellFilterCollection.__custom_init__ is not None:
             RimCellFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class CommandRouter(PdmObjectBase):
+    """
+    The CommandRouter is used to call code independent to the project
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if CommandRouter.__custom_init__ is not None:
+            CommandRouter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def extract_surfaces(self, grid_model_filename="", layers=[], minimum_i=-1, maximum_i=-1, minimum_j=-1, maximum_j=-1):
+        """
+        Extract Layer Surface
+
+        Arguments:
+            grid_model_filename (str): 
+            layers (List of int): 
+            minimum_i (int): 
+            maximum_i (int): 
+            minimum_j (int): 
+            maximum_j (int): 
+        Returns:
+            
+        """
+        return self._call_pdm_method("ExtractSurfaces", grid_model_filename=grid_model_filename, layers=layers, minimum_i=minimum_i, maximum_i=maximum_i, minimum_j=minimum_j, maximum_j=maximum_j)
+
+
 class EclipseContourMap(EclipseView):
     """
     A contour map for Eclipse cases
@@ -738,6 +976,22 @@ class MudWeightWindowParameters(PdmObjectBase):
         if MudWeightWindowParameters.__custom_init__ is not None:
             MudWeightWindowParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class RimFractureTemplate(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if RimFractureTemplate.__custom_init__ is not None:
+            RimFractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimStimPlanFractureTemplate(RimFractureTemplate):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        RimFractureTemplate.__init__(self, pb2_object, channel)
+        if RimStimPlanFractureTemplate.__custom_init__ is not None:
+            RimStimPlanFractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class PlotCurve(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -769,7 +1023,6 @@ class StimPlanModel(CheckableNamedObject):
         auto_compute_barrier (str): Auto Compute Barrier
         azimuth_angle (float): Azimuth Angle
         barrier (str): Barrier
-        barrier_annotation (str): Barrier Annotation
         barrier_dip (float): Barrier Dip
         barrier_fault_name (str): Barrier Fault
         barrier_text_annotation (str): Barrier Text Annotation
@@ -777,13 +1030,16 @@ class StimPlanModel(CheckableNamedObject):
         bounding_box_vertical (float): Bounding Box Vertical
         distance_to_barrier (float): Distance To Barrier [m]
         eclipse_case (str): Dynamic Case
-        extraction_depth_bottom (float): Bottom
-        extraction_depth_top (float): Top
+        extraction_depth_bottom (float): Depth
+        extraction_depth_top (float): Depth
+        extraction_offset_bottom (float): Bottom Offset
+        extraction_offset_top (float): Top Offset
         extraction_type (str): Extraction Type
         formation_dip (float): Formation Dip
         fracture_orientation (str): Fracture Orientation
         initial_pressure_eclipse_case (str): Initial Pressure Case
         measured_depth (float): Measured Depth
+        perforation_interval (str): Perforation Interval
         perforation_length (float): Perforation Length [m]
         poro_elastic_constant (float): Poro-Elastic Constant
         relative_permeability_factor (float): Relative Permeability Factor
@@ -804,7 +1060,6 @@ class StimPlanModel(CheckableNamedObject):
         self.auto_compute_barrier = True
         self.azimuth_angle = 0
         self.barrier = True
-        self.barrier_annotation = ""
         self.barrier_dip = 0
         self.barrier_fault_name = ""
         self.barrier_text_annotation = ""
@@ -814,11 +1069,14 @@ class StimPlanModel(CheckableNamedObject):
         self.eclipse_case = ""
         self.extraction_depth_bottom = -1
         self.extraction_depth_top = -1
+        self.extraction_offset_bottom = -1
+        self.extraction_offset_top = -1
         self.extraction_type = "TST"
         self.formation_dip = 0
         self.fracture_orientation = "ALONG_WELL_PATH"
         self.initial_pressure_eclipse_case = ""
         self.measured_depth = 0
+        self.perforation_interval = ""
         self.perforation_length = 10
         self.poro_elastic_constant = 0
         self.relative_permeability_factor = 0.5
@@ -835,7 +1093,7 @@ class StimPlanModel(CheckableNamedObject):
         if StimPlanModel.__custom_init__ is not None:
             StimPlanModel.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def export_to_file(self, directory_path=None):
+    def export_to_file(self, directory_path=""):
         """
         Export StimPlan Model Plot to File
 
@@ -855,13 +1113,13 @@ class StimPlanModelCollection(CheckableNamedObject):
         if StimPlanModelCollection.__custom_init__ is not None:
             StimPlanModelCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_stim_plan_model(self, well_path=None, measured_depth=None, stim_plan_model_template=None):
+    def new_stim_plan_model(self, well_path="", measured_depth=0, stim_plan_model_template=""):
         """
         Create a new StimPlan Model
 
         Arguments:
             well_path (WellPathBase): Well Path
-            measured_depth (float): Measured Depth
+            measured_depth (float): 
             stim_plan_model_template (StimPlanModelTemplate): StimPlan Model Template
         Returns:
             StimPlanModel
@@ -949,7 +1207,7 @@ class StimPlanModelPlotCollection(PdmObjectBase):
         if StimPlanModelPlotCollection.__custom_init__ is not None:
             StimPlanModelPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_stim_plan_model_plot(self, stim_plan_model=None):
+    def new_stim_plan_model_plot(self, stim_plan_model=""):
         """
         Create a new StimPlan Model
 
@@ -970,7 +1228,7 @@ class StimPlanModelPlotCollection(PdmObjectBase):
         return self.children("StimPlanModelPlots", StimPlanModelPlot)
 
 
-class StimPlanModelTemplate(PdmObjectBase):
+class StimPlanModelTemplate(NamedObject):
     """
     Attributes:
         default_permeability (float): Default Permeability
@@ -1002,7 +1260,7 @@ class StimPlanModelTemplate(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.default_permeability = 1e-05
+        self.default_permeability = 0.0001
         self.default_porosity = 0.01
         self.dynamic_eclipse_case = ""
         self.id = -1
@@ -1027,7 +1285,7 @@ class StimPlanModelTemplate(PdmObjectBase):
         self.underburden_porosity = 0
         self.vertical_stress = 238
         self.vertical_stress_gradient = 0.238
-        PdmObjectBase.__init__(self, pb2_object, channel)
+        NamedObject.__init__(self, pb2_object, channel)
         if StimPlanModelTemplate.__custom_init__ is not None:
             StimPlanModelTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
@@ -1088,7 +1346,7 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
         if StimPlanModelTemplateCollection.__custom_init__ is not None:
             StimPlanModelTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_stim_plan_model_template(self, eclipse_case=None, time_step=None, facies_properties_file_path=None, elastic_properties_file_path=None):
+    def new_stim_plan_model_template(self, eclipse_case="", time_step=0, facies_properties_file_path="", elastic_properties_file_path=""):
         """
         Create a new StimPlan Model Template
 
@@ -1170,7 +1428,7 @@ class SummaryPlotCollection(PdmObjectBase):
         if SummaryPlotCollection.__custom_init__ is not None:
             SummaryPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_summary_plot(self, summary_cases=[], ensemble=None, address=None):
+    def new_summary_plot(self, summary_cases=[], ensemble="", address=""):
         """
         Create a new Summary Plot
 
@@ -1184,21 +1442,6 @@ class SummaryPlotCollection(PdmObjectBase):
         return self._call_pdm_method("NewSummaryPlot", summary_cases=summary_cases, ensemble=ensemble, address=address)
 
 
-class SurfaceInterface(PdmObjectBase):
-    """
-    Attributes:
-        depth_offset (float): Depth Offset
-        surface_user_decription (str): Name
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object=None, channel=None):
-        self.depth_offset = 0
-        self.surface_user_decription = ""
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if SurfaceInterface.__custom_init__ is not None:
-            SurfaceInterface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class Surface(SurfaceInterface):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1206,61 +1449,6 @@ class Surface(SurfaceInterface):
         SurfaceInterface.__init__(self, pb2_object, channel)
         if Surface.__custom_init__ is not None:
             Surface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class SurfaceCollection(PdmObjectBase):
-    """
-    Attributes:
-        surface_user_decription (str): Name
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object=None, channel=None):
-        self.surface_user_decription = "Surfaces"
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if SurfaceCollection.__custom_init__ is not None:
-            SurfaceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def add_folder(self, folder_name=None):
-        """
-        Add a new surface folder
-
-        Arguments:
-            folder_name (str): New surface folder name
-        Returns:
-            SurfaceCollection
-        """
-        return self._call_pdm_method("AddFolder", folder_name=folder_name)
-
-
-    def import_surface(self, file_name=None):
-        """
-        Import a new surface from file
-
-        Arguments:
-            file_name (str): Filename to import surface from
-        Returns:
-            Surface
-        """
-        return self._call_pdm_method("ImportSurface", file_name=file_name)
-
-
-    def sub_collections(self):
-        """Surfaces
-
-        Returns:
-             List of SurfaceCollection
-        """
-        return self.children("SubCollections", SurfaceCollection)
-
-
-    def surfaces_field(self):
-        """Surfaces
-
-        Returns:
-             List of SurfaceInterface
-        """
-        return self.children("SurfacesField", SurfaceInterface)
-
 
 class WbsParameters(PdmObjectBase):
     """
@@ -1334,7 +1522,7 @@ class WellLogPlot(DepthTrackPlot):
         if WellLogPlot.__custom_init__ is not None:
             WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_well_log_track(self, title=None, case=None, well_path=None):
+    def new_well_log_track(self, title="", case="", well_path=""):
         """
         Create a new well log track
 
@@ -1378,7 +1566,7 @@ class WellLogPlotCollection(PdmObjectBase):
         if WellLogPlotCollection.__custom_init__ is not None:
             WellLogPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_well_log_plot(self, case=None, well_path=None, property_type=None, property_name=None, time_step=None):
+    def new_well_log_plot(self, case="", well_path="", property_type="", property_name="", time_step=2142175568):
         """
         Create a new well log plot
 
@@ -1411,7 +1599,7 @@ class WellLogPlotTrack(Plot):
         if WellLogPlotTrack.__custom_init__ is not None:
             WellLogPlotTrack.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_extraction_curve(self, case=None, well_path=None, property_type=None, property_name=None, time_step=None):
+    def add_extraction_curve(self, case="", well_path="", property_type="", property_name="", time_step=2142175568):
         """
         Create a well log extraction curve
 
@@ -1466,7 +1654,7 @@ class WellPathGeometry(PdmObjectBase):
         if WellPathGeometry.__custom_init__ is not None:
             WellPathGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def append_well_target(self, coordinate=None, absolute=None):
+    def append_well_target(self, coordinate=[0, 0, 0], absolute=False):
         """
         Create and Add New Well Target
 
@@ -1549,6 +1737,7 @@ def class_dict():
     classes['Case'] = Case
     classes['CellColors'] = CellColors
     classes['CheckableNamedObject'] = CheckableNamedObject
+    classes['CommandRouter'] = CommandRouter
     classes['DataContainerFloat'] = DataContainerFloat
     classes['DataContainerString'] = DataContainerString
     classes['DataContainerTime'] = DataContainerTime
@@ -1560,18 +1749,25 @@ def class_dict():
     classes['ElasticProperties'] = ElasticProperties
     classes['ElasticPropertyScaling'] = ElasticPropertyScaling
     classes['ElasticPropertyScalingCollection'] = ElasticPropertyScalingCollection
+    classes['EnsembleStatisticsSurface'] = EnsembleStatisticsSurface
+    classes['EnsembleSurface'] = EnsembleSurface
     classes['EnsembleWellLogs'] = EnsembleWellLogs
     classes['FaciesInitialPressureConfig'] = FaciesInitialPressureConfig
     classes['FaciesProperties'] = FaciesProperties
     classes['FileSummaryCase'] = FileSummaryCase
     classes['FileWellPath'] = FileWellPath
+    classes['FractureDefinitionCollection'] = FractureDefinitionCollection
     classes['GeoMechCase'] = GeoMechCase
     classes['GeoMechContourMap'] = GeoMechContourMap
+    classes['GeoMechPart'] = GeoMechPart
+    classes['GeoMechPartCollection'] = GeoMechPartCollection
     classes['GeoMechView'] = GeoMechView
     classes['GridCaseGroup'] = GridCaseGroup
+    classes['GridCaseSurface'] = GridCaseSurface
     classes['GridSummaryCase'] = GridSummaryCase
     classes['ModeledWellPath'] = ModeledWellPath
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
+    classes['NamedObject'] = NamedObject
     classes['NonNetLayers'] = NonNetLayers
     classes['PdmObjectBase'] = PdmObjectBase
     classes['Plot'] = Plot
@@ -1583,6 +1779,8 @@ def class_dict():
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
     classes['RimCellFilterCollection'] = RimCellFilterCollection
+    classes['RimFractureTemplate'] = RimFractureTemplate
+    classes['RimStimPlanFractureTemplate'] = RimStimPlanFractureTemplate
     classes['RimWellLogExtractionCurve'] = RimWellLogExtractionCurve
     classes['SimulationWell'] = SimulationWell
     classes['StimPlanModel'] = StimPlanModel
