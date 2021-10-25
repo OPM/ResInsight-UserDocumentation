@@ -27,7 +27,7 @@ Click **OK** when you are ready
 ![]({{< relref "" >}}images/workflows/well_log_ensemble_plot.png)
 
 
-- If the well is crossing layers in the same order across the different ensembles, it is possible to apply a depth equalization from the Property Editor
+- If the geometry is different in the ensembles (structural uncertainty), a depth equalization method is implemented. If the well is crossing layers in the same order across the different ensembles, it is possible to apply a depth equalization from the **Property Editor**
 
 ![]({{< relref "" >}}images/workflows/property_editor_depth_eq.png)
 ![]({{< relref "" >}}images/workflows/well_log_ensemble_plot_depth_eq.png)

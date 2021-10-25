@@ -8,12 +8,21 @@ weight = 90
 
 ## Introduction
 
+To study the structural uncertainty, ResInsight enables the user to create and import an ensemble of surfaces and compute the statistical surfaces based on this ensemble. This page describes the interactive workflow, but in many cases it can be useful to create scripts related to mangement of **Ensemble Surfaces**. See  [Python Examples](https://api.resinsight.org/en/stable/PythonExamples.html) for more details.
 
-To study the structural uncertainty, ResInsight enables the user to import an ensemble of surfaces and compute the statistical surfaces based on this ensemble. 
+## Create Ensemble Surface
 
-How to create ensemble surfaces
+- From the right-click menu of surfaces, select **Import Ensemble Surface**
+![]({{< relref "" >}}images/workflows/create_ensemble_surface_menu.png)
 
-## Workflow
+- Select the ensemble grid models to create surfaces for, either **"*.EGRID"** or **"*.GRDECL"**
+
+- In the following dialog, select the K layers. Control if the generated surfaces should be imported into an ensemble surface immediately.
+![]({{< relref "" >}}images/workflows/ensemble_surface_select_k_layers.png)
+
+## Import Ensemble Surface
+
+An **Ensemble Surface** can be imported for one or multiple K-layers.
 
 - From the right-click menu of surfaces, select **Import Ensemble Surface**
 ![]({{< relref "" >}}images/surface/import-ensemble-surface.png)
@@ -32,7 +41,7 @@ How to create ensemble surfaces
 
 - Create a well path
 - Create an intersection along the well path
-- Select the intersection in the Property Editor
+- Select the intersection in the **Property Editor**
 - From the right-click menu, select **Create Intersection Band**
 ![]({{< relref "" >}}images/surface/create-surface-intersection-band.png)
 

@@ -10,6 +10,8 @@ Intersections are cross sections of the grid model that displays the grid cell v
 
 There are two main types of intersections. The first one which simply is called **Intersection**, is defined by a piece-wise linear curve and an extrusion direction. The curve can be either a Simulation Well, a Well Path, a user defined polyline, or a user defined line. These intersections can also be shown in their own separate [2D Intersection View]({{< relref "intersections" >}}#2d-intersection-views)
 
+Structural uncertainty can be visualized on intersections as described in [Ensemble Surface]({{< relref "ensemblesurface" >}}).
+
 The second intersection type is called an **Intersection Box**. An Intersection Box can be used as a box cutting the grid cells, or collapsed to a restricted axis aligned plane. 
 
 All types of intersections are stored in a folder named **Intersections** in a **View** as shown below. Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the right-click menu of each intersection.
