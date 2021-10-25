@@ -40,14 +40,14 @@ To make it easier to organize the surfaces you import into your project, ResInsi
 ## Surface Results
 
 Per default, ResInsight maps current **Cell Result** on a given surface. 
-If another result is to be displayed, specify the result under **Separate Surface Results** as shown below.
+If another result is to be displayed, specify the result under **Surface Results** as shown below.
 
 ![]({{< relref "" >}}images/3d-main-window/SurfacesSeparateSurfaceResults.png)
 
 Clicking a surface of a **View** in the **Project Tree** activates the Property Editor for allowing view settings as shown below. 
 
-To change result displayed on the surface, please specify the desired result in the **Separate Result Reference**
-section of the Property Editor.
+To change result displayed on the surface, please specify the desired result in the **Result Reference**
+section of the **Property Editor**.
 
 ![]({{< relref "" >}}images/3d-main-window/SurfacesViewPropertyEditor.png)
 

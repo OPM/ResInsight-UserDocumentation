@@ -173,14 +173,14 @@ Direct interaction in a 3D view is activated when **Show 3D manipulator** is pre
 
 ## Intersection Results
 
-To select a simulation result to display on an intersection, the first step is to right-click **Separate Intersection Results** in **Project Tree** and select **New Separate Intersection Result**.
+To select a simulation result to display on an intersection, the first step is to right-click **Intersection Results** in **Project Tree** and select **New Result Definition**.
 
 ![]({{< relref "" >}}images/3d-main-window/SeparateIntersectionResults.png)
 
-By selecting the entry of a specific **Separate Intersection Result**, the Property Editor allows to specify case, type or position etc depending on whether the result stem from an Eclipse case or a Geomechanical case.
+By selecting the entry of a specific ** Intersection Result**, the **Property Editor** allows to specify case, type or position etc depending on whether the result stem from an Eclipse case or a Geomechanical case.
 
-The next step is to select an **Intersection** in **Project Tree** and define **Separate Result Reference**. 
-In the example below, available sources are the two **Separate Intersections Results** of previous figure, one of which stems from a geomechanical case and the other from an Eclipse case.
+The next step is to select an **Intersection** in **Project Tree** and define **Result Reference**. 
+In the example below, available sources are the two **Intersections Results** of previous figure, one of which stems from a geomechanical case and the other from an Eclipse case.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionSeparateResultReference.png)
 

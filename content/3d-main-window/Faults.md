@@ -55,8 +55,8 @@ Faults can be hidden and shown in several ways.
 ### Fault Color
 Each named Fault is given a color on import. This color can be controlled by selecting the fault and edit its  **Fault color** in the **Property Editor.**
 
-### Separate Fault Result
-The default result mapping used on faults are to use the same as specified in **Cell Result**. If a different result mapping is wanted, enable the checkbox at **Separate Fault Result** and select the result from the result selection dialog in the **Property Editor**. A second legend for the fault result is then added to the view.
+### Fault Result
+The default result mapping used on faults are to use the same as specified in **Cell Result**. If a different result mapping is wanted, enable the checkbox at **Fault Result** and select the result from the result selection dialog in the **Property Editor**. A second legend for the fault result is then added to the view.
 
 Please note that the groups [Fault Face Visibility]({{< relref "#fault-face-visibility" >}}) and [NNC Visibility]({{< relref "#nnc-visibility" >}}) are available below result selection.
 
