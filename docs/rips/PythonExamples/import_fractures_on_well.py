@@ -18,8 +18,10 @@ cases = resinsight.project.cases()
 case = cases[0]
 
 # Create stim plan template
-fmt_collection = project.descendants(rips.FractureDefinitionCollection)[0]
-fracture_template = fmt_collection.new_fracture_template(file_path=stim_plan_file_path)
+fmt_collection = project.descendants(rips.FractureTemplateCollection)[0]
+fracture_template = fmt_collection.append_fracture_template(
+    file_path=stim_plan_file_path
+)
 
 well_name = "B-2 H"
 
@@ -33,7 +35,11 @@ for measured_depth in measured_depths:
 
     print("Placing fracture at {} depth (MD)".format(measured_depth))
     # Create stim plan  at a give measured depth
-    fracture = well_path.new_fracture(
+    fracture = well_path.add_fracture(
         measured_depth=measured_depth,
         stim_plan_fracture_template=fracture_template,
     )
+
+# Update the orientation of the fracture, call update() to propagate changes in Python to ResInsight
+fracture_template.orientation = "Az"
+fracture_template.update()
