@@ -487,7 +487,7 @@ class GeoMechPart(CheckableNamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.part_id = 1058441003
+        self.part_id = 0
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if GeoMechPart.__custom_init__ is not None:
             GeoMechPart.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -776,7 +776,7 @@ class Project(PdmObjectBase):
         return self._call_pdm_method("importSummaryCase", file_name=file_name)
 
 
-    def summary_case(self, case_id=1843491520):
+    def summary_case(self, case_id=2092987072):
         """
         Find Summary Case
 
@@ -979,12 +979,12 @@ class MudWeightWindowParameters(PdmObjectBase):
 class FractureTemplate(PdmObjectBase):
     """
     Attributes:
-        orientation (str): One of [Az, AlongWellPath, TransverseWellPath]
+        orientation (str): One of [Azimuth, Longitudinal, Transverse]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.orientation = "TransverseWellPath"
+        self.orientation = "Transverse"
         PdmObjectBase.__init__(self, pb2_object, channel)
         if FractureTemplate.__custom_init__ is not None:
             FractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -1017,7 +1017,7 @@ class StimPlanModel(CheckableNamedObject):
         extraction_offset_top (float): Top Offset
         extraction_type (str): One of [TVT, TST]
         formation_dip (float): Formation Dip
-        fracture_orientation (str): One of [ALONG_WELL_PATH, TRANSVERSE_WELL_PATH, AZIMUTH]
+        fracture_orientation (str): One of [Longitudinal, Transverse, Azimuth]
         initial_pressure_eclipse_case (str): Initial Pressure Case
         measured_depth (float): Measured Depth
         perforation_interval (str): Perforation Interval
@@ -1054,7 +1054,7 @@ class StimPlanModel(CheckableNamedObject):
         self.extraction_offset_top = -1
         self.extraction_type = "TST"
         self.formation_dip = 0
-        self.fracture_orientation = "ALONG_WELL_PATH"
+        self.fracture_orientation = "Longitudinal"
         self.initial_pressure_eclipse_case = ""
         self.measured_depth = 0
         self.perforation_interval = ""
@@ -1327,7 +1327,7 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
         if StimPlanModelTemplateCollection.__custom_init__ is not None:
             StimPlanModelTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def append_stim_plan_model_template(self, eclipse_case="", time_step=0, facies_properties_file_path="", elastic_properties_file_path=""):
+    def append_stim_plan_model_template(self, eclipse_case="", time_step=2097184, facies_properties_file_path="", elastic_properties_file_path=""):
         """
         Create a new StimPlan Model Template
 
@@ -1571,7 +1571,7 @@ class WellLogPlotCollection(PdmObjectBase):
         if WellLogPlotCollection.__custom_init__ is not None:
             WellLogPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_well_log_plot(self, case="", well_path="", property_type="", property_name="", time_step=0):
+    def new_well_log_plot(self, case="", well_path="", property_type="", property_name="", time_step=-1506042864):
         """
         Create a new well log plot
 
@@ -1604,7 +1604,7 @@ class WellLogPlotTrack(Plot):
         if WellLogPlotTrack.__custom_init__ is not None:
             WellLogPlotTrack.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_extraction_curve(self, case="", well_path="", property_type="", property_name="", time_step=0):
+    def add_extraction_curve(self, case="", well_path="", property_type="", property_name="", time_step=-1506042864):
         """
         Create a well log extraction curve
 
