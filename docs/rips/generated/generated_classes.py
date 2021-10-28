@@ -281,7 +281,7 @@ class SurfaceCollection(PdmObjectBase):
         return self._call_pdm_method("ImportSurface", file_name=file_name)
 
 
-    def new_surface(self, case="", k_index=0):
+    def new_surface(self, case="", k_index=-1):
         """
         Create a new surface
 
@@ -339,7 +339,7 @@ class FaciesInitialPressureConfig(PdmObjectBase):
 
     def __init__(self, pb2_object=None, channel=None):
         self.facies_name = ""
-        self.facies_value = 0
+        self.facies_value = -1
         self.fraction = 0
         PdmObjectBase.__init__(self, pb2_object, channel)
         if FaciesInitialPressureConfig.__custom_init__ is not None:
@@ -536,7 +536,7 @@ class View(ViewWindow):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#3b3b3b"
+        self.background_color = "#b0c4de"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
@@ -776,7 +776,7 @@ class Project(PdmObjectBase):
         return self._call_pdm_method("importSummaryCase", file_name=file_name)
 
 
-    def summary_case(self, case_id=2092987072):
+    def summary_case(self, case_id=-1):
         """
         Find Summary Case
 
@@ -979,11 +979,13 @@ class MudWeightWindowParameters(PdmObjectBase):
 class FractureTemplate(PdmObjectBase):
     """
     Attributes:
+        azimuth_angle (float): Azimuth Angle
         orientation (str): One of [Azimuth, Longitudinal, Transverse]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
+        self.azimuth_angle = 0
         self.orientation = "Transverse"
         PdmObjectBase.__init__(self, pb2_object, channel)
         if FractureTemplate.__custom_init__ is not None:
@@ -1327,7 +1329,7 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
         if StimPlanModelTemplateCollection.__custom_init__ is not None:
             StimPlanModelTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def append_stim_plan_model_template(self, eclipse_case="", time_step=2097184, facies_properties_file_path="", elastic_properties_file_path=""):
+    def append_stim_plan_model_template(self, eclipse_case="", time_step=0, facies_properties_file_path="", elastic_properties_file_path=""):
         """
         Create a new StimPlan Model Template
 
@@ -1571,7 +1573,7 @@ class WellLogPlotCollection(PdmObjectBase):
         if WellLogPlotCollection.__custom_init__ is not None:
             WellLogPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_well_log_plot(self, case="", well_path="", property_type="", property_name="", time_step=-1506042864):
+    def new_well_log_plot(self, case="", well_path="", property_type="", property_name="", time_step=0):
         """
         Create a new well log plot
 
@@ -1604,7 +1606,7 @@ class WellLogPlotTrack(Plot):
         if WellLogPlotTrack.__custom_init__ is not None:
             WellLogPlotTrack.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_extraction_curve(self, case="", well_path="", property_type="", property_name="", time_step=-1506042864):
+    def add_extraction_curve(self, case="", well_path="", property_type="", property_name="", time_step=0):
         """
         Create a well log extraction curve
 
