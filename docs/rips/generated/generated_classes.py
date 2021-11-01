@@ -487,7 +487,7 @@ class GeoMechPart(CheckableNamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.part_id = 0
+        self.part_id = -1
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if GeoMechPart.__custom_init__ is not None:
             GeoMechPart.__custom_init__(self, pb2_object=pb2_object, channel=channel)
