@@ -6,13 +6,6 @@ hidden = true
 +++
 
 
-## Performance
-Improved performance related to several text import features. Input of a grid model from **GRDECL** has improved significantly. Also surface geometry import has improved.
-
-![]({{< relref "" >}}images/3d-main-window/MultiLateralWell_3d_view.png)
-ResInsight lets the user create [Multilateral Well Paths]({{< relref "wells-and-completions/createmultilateralwellpaths" >}}) by clicking in the 3D view. Completions can be added to laterals, and the complete specification of the well can 
-be exported using the [Completion Export]({{< relref "completionexport" >}})
-
 ## Ensemble Surface
 ![]({{< relref "" >}}images/surface/surface-in-3d.png)
 
@@ -23,12 +16,8 @@ be exported using the [Completion Export]({{< relref "completionexport" >}})
 
 To study the uncertainty for well log extraction curves, ResInsight enables the user to import an [Ensemble Well Log]({{< relref "ensemblewelllog" >}}) and compute the statistical distribution in this ensemble. 
 
-
-## Ensemble Fractures
-![]({{< relref "" >}}images/plot-window/VFP_Plot.png)
-
-**TODO**
-
+## Performance
+Improved performance for grid model import from **GRDECL**. Improved performace for surface geometry import.
 
 ## Multiselect including Undo/Redo of Operations
 ![]({{< relref "" >}}images/getting-started/ResInsightPlotProjectTreeMultiSelectAction.png)
