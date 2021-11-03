@@ -2,12 +2,6 @@ As the Python interface is growing release by release, we are investigating how 
 
 More details on the command file operations, see https://resinsight.org/scripting/commandfile/
 
-## auto_group_well_paths
-
-Parameter | Type | Description
---------- | ---- | -----------
-well_paths | str | 
-
 ## clone_view
 
 Parameter | Type | Description
@@ -18,7 +12,7 @@ view_id | int | View Id
 
 Parameter | Type | Description
 --------- | ---- | -----------
-          |      |
+
 ## compute_case_group_statistics
 
 Parameter | Type | Description
@@ -28,9 +22,9 @@ case_ids | int | Case IDs
 
 ## create_grid_case_group
 
-Parameter      | Type        | Description
--------------- | ----------- | -----------
-case_paths     | List of str | List of Paths to Case Files
+Parameter | Type | Description
+--------- | ---- | -----------
+case_paths | str | List of Paths to Case Files
 
 ## create_lgr_for_completions
 
@@ -220,6 +214,7 @@ well_path_names | str | Well Path Names
 file_split | str | File Split
 compdat_export | str | Compdat Export
 combination_mode | str | Combination Mode
+include_msw | str | Export Multi Segment Well Model
 use_ntg_horizontally | str | Use NTG Horizontally
 include_perforations | str | Include Perforations
 include_fishbones | str | Include Fishbones
@@ -229,6 +224,9 @@ perform_trans_scaling | str | Perform Transmissibility Scaling
 trans_scaling_time_step | int | Transmissibility Scaling Pressure Time Step
 trans_scaling_wbhp_from_summary | str | Transmissibility Scaling WBHP from summary
 trans_scaling_wbhp | float | Transmissibility Scaling Constant WBHP Value
+export_comments | str | Export Data Source as Comments
+export_welspec | str | Export WELSPEC keyword
+custom_file_name | str | Custom Filename
 
 ## export_well_paths
 
@@ -237,27 +235,12 @@ Parameter | Type | Description
 well_path_names | str | Well Path Names
 md_step_size | float | MD Step Size
 
-## group_well_paths
-
-Parameter | Type | Description
---------- | ---- | -----------
-group | str | 
-well_paths | str | 
-
 ## import_formation_names
 
 Parameter | Type | Description
 --------- | ---- | -----------
 formation_files | str | 
 apply_to_case_id | int | 
-
-## import_grouped_well_paths
-
-Parameter | Type | Description
---------- | ---- | -----------
-well_path_folder | str | 
-well_path_files | str | 
-import_grouped | str | 
 
 ## import_well_log_files
 
@@ -279,6 +262,7 @@ import_grouped | str |
 Parameter | Type | Description
 --------- | ---- | -----------
 path | str | Path to Case File
+grid_only | str | Load Grid Data Only
 
 ## open_project
 
@@ -297,7 +281,7 @@ new_grid_file | str | New Grid File
 
 Parameter | Type | Description
 --------- | ---- | -----------
-          |      |
+
 ## replace_source_cases
 
 Parameter | Type | Description
