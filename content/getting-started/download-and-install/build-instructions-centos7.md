@@ -32,7 +32,7 @@ A workflow file is used to build using CentOS 7 on GitHub actions. A blank Cento
 ### gcc
     yum install -y centos-release-scl
     yum-config-manager --enable rhel-server-rhscl-7-rpms
-    yum install -y devtoolset-7
+    yum install -y devtoolset-10
 
 ### git
 	yum install -y https://repo.ius.io/ius-release-el7.rpm

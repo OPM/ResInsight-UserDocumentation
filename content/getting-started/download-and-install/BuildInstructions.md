@@ -18,9 +18,9 @@ Visual Studio 2019 and later is supported.
 
 ### GCC Compiler
 
-GCC version 4.9 or later is supported. On RedHat Linux 6 you need to install devtoolset-3, and enable it with 
+On RedHat Linux 7 or CentOS 7 you need to install devtoolset-10, and enable it with 
     
-    source /opt/rh/devtoolset-3/enable
+    source /opt/rh/devtoolset-10/enable
 
 ### Qt 5
 Qt 5.9 or later is supported, Qt 5.15 is recommended.
