@@ -24,6 +24,18 @@ Improved performance for grid model import from **GRDECL**. Improved performace 
 
 [Multiple selection]({{< relref "getting-started/projecttree" >}}) of items in ResInsight offers an entrance to powerful combinations and collective actions including [Undo and Redo]({{< relref "getting-started/projecttree" >}}) functionality {{< image-in-text src="images/getting-started//ResInsightPlotProjectTreeToolbarUndoRedo.png" >}}. If the user regrets an action, for instance the color setting for multiple wells as exemplified above, the collective action can be undone by pressing *Undo*.
 
+## Python API
+Several improvements and more examples
+
+- well path completion export
+- generate ensemble of well logs
+- generate ensemble of surfaces
+- modeled well path with laterals
+- create well path from well targets
+
+https://api.resinsight.org/en/stable/PythonExamples.html
+
+
 
 ## Additional New Features and Enhancements
 
