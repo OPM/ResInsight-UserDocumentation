@@ -36,7 +36,7 @@ Flow diagnostics calculations are embedded in the user interface and allows inst
 Integration with GNU Octave enables powerful and flexible result manipulation and computations. Derived results can be returned to ResInsight for further handling and visualization. Eventually, derived and computed properties can be directly exported to Eclipse input formats for further simulation cycles and parameter studies.
 
 ### Project organization
-ResInsight is developed by [Ceetron Solutions](https://www.ceetronsolutions.com/) in collaboration with with [Equinor] (https://www.equinor.com/).
+ResInsight is developed by [Ceetron Solutions](https://www.ceetronsolutions.com/) in collaboration with with [Equinor](https://www.equinor.com/).
 
 ResInsight is a part of the [Open Porous Media Initiative](http://opm-project.org/).
 The software is hosted at [GitHub](https://github.com/OPM/ResInsight), and the development progress can be monitored there. The GitHub issue tracker is heavily used to organize the development process.
