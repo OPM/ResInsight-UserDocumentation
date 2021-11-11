@@ -617,6 +617,21 @@ class WellPath(PdmObjectBase):
         return self._call_pdm_method("AddFracture", measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template)
 
 
+    def append_perforation_interval(self, start_md=0, end_md=0, diameter=0, skin_factor=0):
+        """
+        Append Perforation Interval
+
+        Arguments:
+            start_md (float): Start Measured Depth
+            end_md (float): End Measured Depth
+            diameter (float): Diameter
+            skin_factor (float): Skin Factor
+        Returns:
+            Perforation
+        """
+        return self._call_pdm_method("AppendPerforationInterval", start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor)
+
+
 class ModeledWellPath(WellPath):
     """
     A Well Path created interactively in ResInsight
@@ -640,21 +655,6 @@ class ModeledWellPath(WellPath):
             ModeledWellPath
         """
         return self._call_pdm_method("AppendLateral", tie_in_depth=tie_in_depth, lateral_name=lateral_name)
-
-
-    def append_perforation_interval(self, start_md=0, end_md=0, diameter=0, skin_factor=0):
-        """
-        Append Perforation Interval
-
-        Arguments:
-            start_md (float): Start Measured Depth
-            end_md (float): End Measured Depth
-            diameter (float): Diameter
-            skin_factor (float): Skin Factor
-        Returns:
-            Perforation
-        """
-        return self._call_pdm_method("AppendPerforationInterval", start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor)
 
 
     def well_path_geometry(self):
