@@ -22,3 +22,15 @@ Other available keyboard shortcuts are
 - **Ctrl-M** for single line measurement
 - **Ctrl-Shift-M** for poly line measurement
 
+
+
+## Summary Plot Manager
+
+[Summary Plot Manager]({{< relref "summaryplotmanager" >}})
+
+|Operation                 | Shortcut          |
+|--------------------------|-------------------|
+|Display Summary Manager   | **CTRL-K**        |
+|Append Curves             | **SHIFT-Enter**   |
+|Replace Curves            | **CTRL-Enter**    |
+|Create New Plot           | **ALT-Enter**     |
