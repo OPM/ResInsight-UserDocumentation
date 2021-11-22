@@ -74,12 +74,9 @@ Please refer to [Summary Origin]({{< relref "eclipsesummarydata#origin-files" >}
 ## Summary Data Import
 
 - **File Format**: Defines the file reader for summary data import
-  - **h5 (HDF5)** Import data from  h5 files
+  - **h5 (HDF5)** Import data from h5 files
   - **UNSMRY (libecl)** Import data from native UNSMRY files
-  - **LODSMRY (opm-common)** Experimental file format used by opm-flow
-- **Create h5 Summary Files** : If no **h5** file is present on disk, import curve data from **UNSMRY** and export to a **h5** file in the same folder
-- **Check File Timestamp** : Update content of **h5** file if **UNSMRY** has new data
-- **h5 Summary Export Thread Count** : Defines number of threads when creating **h5** files
+  - **ESMRY (opm-common)** Import data from ESMRY files
 
 Please refer to [Ensemble Summary]({{< relref "eclipsesummarydata#summary-data-file-formats" >}}) for more details.
 

@@ -6,12 +6,12 @@ weight = 10
  
 Summary data can be imported as a single summary file or an ensemble of summary files.
 
-### Basic Summary Import
+## Basic Summary Import
 Summary data is located in two files, summary vector names in **\*.SMSPEC** and curve data in **\*.UNSMRY**.  
 
-[Ensemble File Dialog]({{< relref "ensemblefiledialog" >}}).
+For import of ensemble datasets, see [Ensemble File Dialog]({{< relref "ensemblefiledialog" >}}).
 
-### Origin Files
+## Origin Files
 ![]({{< relref "" >}}images/plot-window/OriginFileDialog.png)
 
 During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the Origin Files dialog is displayed.
@@ -35,12 +35,24 @@ By default the file names are displayed using relative path based on the common 
 
 If the user selected multiple summary files or grid files, this dialog will be displayed for every file that has an origin summary file. In this case the button **OK to All** appears. When this button is clicked, the rest of the files will be imported silently using the same options.
 
-### Summary Data File Formats
+## Summary Data File Formats
 
-**h5 File Format**
+**ResInsight** is able to import summary data in three file formats. Default exported by *Eclipse* is **\*.SMSPEC/.UNSMRY**. In addition, *Eclipse* can export into **\*.h5** for improved performance.
 
-*Eclipse* is able to reorganize the summary data after a simulations has completed. This will produce an additional curve data file with the extension **h5**. The curve data in this file is identical to curve data in **UNSMRY**.
+For best performance, **ResInsight** has support for **\*.ESMRY** file format. **ResInsight** is able to produce this file format based on **\*.SMSPEC/UNSMRY** files.
 
-ResInsight will now by default use **H5** files to import summary data, as this format has good performance for large datasets. The native *Eclipse* **UNSMRY** reader can be used when configured in [Eclipse Summary Preferences]({{< relref "preferences#eclipse-summary" >}}).
+See configuration in [Eclipse Summary Preferences]({{< relref "preferences#eclipse-summary" >}}).
 
+### SMSPEC/UNSMRY File Format
 
+*Eclipse* will by default export summary data to **\*.SMSPEC** and **\*.UNSMRY**. Data is organized by simulation time step and extraction of data for one summary vector can be time consuming for large data sets.
+
+### ESMRY File Format
+
+**\*.ESMRY** files contains the same data as **SMSPEC/UNSMRY**. The data in these files are organized in a different way that will give significantly better performance when accessing single summary vectors compared to **SMSPEC/UNSMRY**.
+
+**ResInsight** will by default use this file format.
+
+### h5 File Format
+
+*Eclipse* is able to produce summary data in a file format with the extension **\*.H5** with the same content as **\*.UNSMRY**.
