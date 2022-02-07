@@ -34,7 +34,7 @@ release = '2020.10'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.napoleon', 'm2r', 'sphinx_automodapi.automodapi'
+    'sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.napoleon', 'm2r2', 'sphinx_automodapi.automodapi'
 ]
 
 master_doc = 'index'
