@@ -29,3 +29,23 @@ print("\nResampled data")
 
 for t, value in zip(summary_data_sampled.time_steps, summary_data_sampled.values):
     print(time.strftime("%a, %d %b %Y ", time.gmtime(t)) + " | " + str(value))
+
+test_values = summary_data.values
+offset = test_values[len(test_values) - 1] / 10
+
+for index, item in enumerate(test_values):
+    test_values[index] = test_values[index] + offset
+
+summary_case.set_summary_values("FOPT_M1", "myUnit", test_values)
+
+for index, item in enumerate(test_values):
+    test_values[index] = test_values[index] + offset
+summary_case.set_summary_values("FOPT_M2", "myUnit", test_values)
+
+for index, item in enumerate(test_values):
+    test_values[index] = test_values[index] + offset
+summary_case.set_summary_values("FOPT_M3", "myUnit", test_values)
+
+for index, item in enumerate(test_values):
+    test_values[index] = test_values[index] + offset
+summary_case.set_summary_values("FOPT_M4", "myUnit", test_values)

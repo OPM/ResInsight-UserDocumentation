@@ -60,6 +60,12 @@ Create And Export Stim Plan Model
 ===================================
 .. literalinclude:: ../rips/PythonExamples/create_and_export_stim_plan_model.py
 
+.. _create_intersection:
+
+Create Intersection
+===================================
+.. literalinclude:: ../rips/PythonExamples/create_intersection.py
+
 .. _create_wbs_plot:
 
 Create Wbs Plot

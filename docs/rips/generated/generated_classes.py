@@ -12,6 +12,51 @@ class CellFilterCollection(PdmObjectBase):
         if CellFilterCollection.__custom_init__ is not None:
             CellFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class CurveIntersection(PdmObjectBase):
+    """
+    Attributes:
+        name (str): Name
+        points (List of str): Points
+        simulation_well (str): Simulation Well
+        type (str): One of [CS_WELL_PATH, CS_SIMULATION_WELL, CS_POLYLINE, CS_AZIMUTHLINE]
+        well_path (str): Well Path        
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.name = "Intersection Name"
+        self.points = []
+        self.simulation_well = ""
+        self.type = "CS_POLYLINE"
+        self.well_path = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if CurveIntersection.__custom_init__ is not None:
+            CurveIntersection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def geometry(self, geometry_type="FULL_3D"):
+        """
+        
+
+        Arguments:
+            geometry_type (str): One of [FULL_3D, PROJECTED_TO_PLANE]
+        Returns:
+            TriangleGeometry
+        """
+        return self._call_pdm_method("geometry", geometry_type=geometry_type)
+
+
+    def geometry_result(self, geometry_type="FULL_3D"):
+        """
+        
+
+        Arguments:
+            geometry_type (str): One of [FULL_3D, PROJECTED_TO_PLANE]
+        Returns:
+            DataContainerFloat
+        """
+        return self._call_pdm_method("geometryResult", geometry_type=geometry_type)
+
+
 class DataContainerFloat(PdmObjectBase):
     """
     Attributes:
@@ -122,7 +167,7 @@ class ElasticProperties(PdmObjectBase):
         if ElasticProperties.__custom_init__ is not None:
             ElasticProperties.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_property_scaling(self, formation="", facies="", property="", scale=0):
+    def add_property_scaling(self, formation="", facies="", property="", scale=1):
         """
         Add Elastic Property Scaling
 
@@ -432,6 +477,20 @@ class SummaryCase(PdmObjectBase):
         return self._call_pdm_method("resampleValues", address=address, resampling_period=resampling_period)
 
 
+    def set_summary_values(self, address="", unit="", values=[]):
+        """
+        
+
+        Arguments:
+            address (str): Formatted address specifying the summary vector
+            unit (str): Unit
+            values (List of float): Values
+        Returns:
+            
+        """
+        return self._call_pdm_method("setSummaryValues", address=address, unit=unit, values=values)
+
+
     def summary_vector_values(self, address=""):
         """
         Get all values for a summary vector
@@ -588,6 +647,14 @@ class GridSummaryCase(SummaryCase):
         SummaryCase.__init__(self, pb2_object, channel)
         if GridSummaryCase.__custom_init__ is not None:
             GridSummaryCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class IntersectionCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if IntersectionCollection.__custom_init__ is not None:
+            IntersectionCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPath(PdmObjectBase):
     """
@@ -1392,6 +1459,7 @@ class SummaryPlot(Plot):
         is_using_auto_name (str): Auto Title
         normalize_curve_y_values (str): Normalize all curves
         plot_description (str): Name
+        use_qt_charts_plot (str): Use Qt Charts
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1399,6 +1467,7 @@ class SummaryPlot(Plot):
         self.is_using_auto_name = True
         self.normalize_curve_y_values = False
         self.plot_description = "Summary Plot"
+        self.use_qt_charts_plot = False
         Plot.__init__(self, pb2_object, channel)
         if SummaryPlot.__custom_init__ is not None:
             SummaryPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -1432,6 +1501,39 @@ class Surface(SurfaceInterface):
         SurfaceInterface.__init__(self, pb2_object, channel)
         if Surface.__custom_init__ is not None:
             Surface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class TriangleGeometry(PdmObjectBase):
+    """
+    Attributes:
+        connections (List of int): Indices to triangle vertices
+        display_model_offset (str): Display Model Offset
+        fault_mesh_x_coords (List of float): Fault Mesh X coords
+        faultmesh_y_coords (List of float): Fault Mesh Y coords
+        faultmesh_z_coords (List of float): Fault Mesh Z coords
+        mesh_x_coords (List of float): Mesh X coords
+        mesh_y_coords (List of float): Mesh Y coords
+        mesh_z_coords (List of float): Mesh Z coords
+        x_coords (List of float): X coords
+        y_coords (List of float): Y coords
+        z_coords (List of float): Z coords
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.connections = []
+        self.display_model_offset = [0, 0, 0]
+        self.fault_mesh_x_coords = []
+        self.faultmesh_y_coords = []
+        self.faultmesh_z_coords = []
+        self.mesh_x_coords = []
+        self.mesh_y_coords = []
+        self.mesh_z_coords = []
+        self.x_coords = []
+        self.y_coords = []
+        self.z_coords = []
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if TriangleGeometry.__custom_init__ is not None:
+            TriangleGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WbsParameters(PdmObjectBase):
     """
@@ -1746,6 +1848,7 @@ def class_dict():
     classes['CellFilterCollection'] = CellFilterCollection
     classes['CheckableNamedObject'] = CheckableNamedObject
     classes['CommandRouter'] = CommandRouter
+    classes['CurveIntersection'] = CurveIntersection
     classes['DataContainerFloat'] = DataContainerFloat
     classes['DataContainerString'] = DataContainerString
     classes['DataContainerTime'] = DataContainerTime
@@ -1774,6 +1877,7 @@ def class_dict():
     classes['GridCaseGroup'] = GridCaseGroup
     classes['GridCaseSurface'] = GridCaseSurface
     classes['GridSummaryCase'] = GridSummaryCase
+    classes['IntersectionCollection'] = IntersectionCollection
     classes['ModeledWellPath'] = ModeledWellPath
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
     classes['NamedObject'] = NamedObject
@@ -1802,6 +1906,7 @@ def class_dict():
     classes['Surface'] = Surface
     classes['SurfaceCollection'] = SurfaceCollection
     classes['SurfaceInterface'] = SurfaceInterface
+    classes['TriangleGeometry'] = TriangleGeometry
     classes['View'] = View
     classes['ViewWindow'] = ViewWindow
     classes['WbsParameters'] = WbsParameters
