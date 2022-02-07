@@ -4,3 +4,4 @@ grpcio-tools
 protobuf
 m2r
 sphinx-automodapi
+mistune==0.8.4
