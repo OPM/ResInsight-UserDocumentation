@@ -1508,8 +1508,8 @@ class TriangleGeometry(PdmObjectBase):
         connections (List of int): Indices to triangle vertices
         display_model_offset (str): Display Model Offset
         fault_mesh_x_coords (List of float): Fault Mesh X coords
-        faultmesh_y_coords (List of float): Fault Mesh Y coords
-        faultmesh_z_coords (List of float): Fault Mesh Z coords
+        fault_mesh_y_coords (List of float): Fault Mesh Y coords
+        fault_mesh_z_coords (List of float): Fault Mesh Z coords
         mesh_x_coords (List of float): Mesh X coords
         mesh_y_coords (List of float): Mesh Y coords
         mesh_z_coords (List of float): Mesh Z coords
@@ -1523,8 +1523,8 @@ class TriangleGeometry(PdmObjectBase):
         self.connections = []
         self.display_model_offset = [0, 0, 0]
         self.fault_mesh_x_coords = []
-        self.faultmesh_y_coords = []
-        self.faultmesh_z_coords = []
+        self.fault_mesh_y_coords = []
+        self.fault_mesh_z_coords = []
         self.mesh_x_coords = []
         self.mesh_y_coords = []
         self.mesh_z_coords = []
@@ -1763,17 +1763,21 @@ class WellPathGeometry(PdmObjectBase):
         if WellPathGeometry.__custom_init__ is not None:
             WellPathGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def append_well_target(self, coordinate=[0, 0, 0], absolute=False):
+    def append_well_target(self, coordinate=[0, 0, 0], absolute=False, use_fixed_azimuth=False, use_fixed_inclination=False, fixed_azimuth_value=0, fixed_inclination_value=0):
         """
         Create and Add New Well Target
 
         Arguments:
             coordinate (class cvf::Vector3<double>): Coordinate
             absolute (bool): Relative or Absolute Coordinate
+            use_fixed_azimuth (bool): 
+            use_fixed_inclination (bool): 
+            fixed_azimuth_value (float): [Degrees]
+            fixed_inclination_value (float): [Degrees]
         Returns:
             WellPathTarget
         """
-        return self._call_pdm_method("AppendWellTarget", coordinate=coordinate, absolute=absolute)
+        return self._call_pdm_method("AppendWellTarget", coordinate=coordinate, absolute=absolute, use_fixed_azimuth=use_fixed_azimuth, use_fixed_inclination=use_fixed_inclination, fixed_azimuth_value=fixed_azimuth_value, fixed_inclination_value=fixed_inclination_value)
 
 
     def auto_generated_target(self):
@@ -1803,9 +1807,15 @@ class WellPathTarget(PdmObjectBase):
         azimuth (float): Azi(deg)
         dogleg1 (float): DL in
         dogleg2 (float): DL out
+        estimated_azimuth (float): Est Azi(deg)
+        estimated_dogleg1 (float): Est DL in
+        estimated_dogleg2 (float): Est DL out
+        estimated_inclination (float): Est Inc(deg)
         inclination (float): Inc(deg)
         target_measured_depth (float): MD
         target_point (str): Relative Coord
+        use_fixed_azimuth (str): Azi
+        use_fixed_inclination (str): Inc
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1813,9 +1823,15 @@ class WellPathTarget(PdmObjectBase):
         self.azimuth = 0
         self.dogleg1 = 3
         self.dogleg2 = 3
+        self.estimated_azimuth = 0
+        self.estimated_dogleg1 = 0
+        self.estimated_dogleg2 = 0
+        self.estimated_inclination = 0
         self.inclination = 0
         self.target_measured_depth = 0
         self.target_point = [0, 0, 0]
+        self.use_fixed_azimuth = False
+        self.use_fixed_inclination = False
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathTarget.__custom_init__ is not None:
             WellPathTarget.__custom_init__(self, pb2_object=pb2_object, channel=channel)
