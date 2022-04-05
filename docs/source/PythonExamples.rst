@@ -60,6 +60,12 @@ Create And Export Stim Plan Model
 ===================================
 .. literalinclude:: ../rips/PythonExamples/create_and_export_stim_plan_model.py
 
+.. _create_intersection:
+
+Create Intersection
+===================================
+.. literalinclude:: ../rips/PythonExamples/create_intersection.py
+
 .. _create_wbs_plot:
 
 Create Wbs Plot
@@ -119,6 +125,12 @@ Generate Ensemble Surface Optimized
 Grid Information
 ===================================
 .. literalinclude:: ../rips/PythonExamples/grid_information.py
+
+.. _headless_plot_export:
+
+Headless Plot Export
+===================================
+.. literalinclude:: ../rips/PythonExamples/headless_plot_export.py
 
 .. _import_fractures_on_well:
 
