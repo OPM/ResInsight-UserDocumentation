@@ -11,7 +11,7 @@ The plot editor is a separate ResInsight dialog window where the user can select
 The upper part of the editor contains editors for selecting which vectors/summaries to display in the plot. The number of fields vary from 3 to 6 depending on the **Summary Type** currently highlighted. 
 
 {{% notice note %}}
-In this context <b>highlighted</b> means the marked item with a different background color, while <b>selected</b> means an item or items that have a ticked check box.
+Here <b>highlighted</b> means marked item with different background color, while <b>selected</b> means item(s) having  a ticked check box.
 {{% /notice %}}
 
 ## Selection Fields
@@ -28,31 +28,15 @@ In the mid-section of the dialog, the Summary Type and the corresponding Items c
 - **Network** -- Select Network category vectors only  
 - **Misc** -- Select vectors in the Misc category only 
 - **Region** -- Select Region related vectors only  
-   - **Region number** -- Select the Region number
 - **Region-Region** -- Select Region to Region related vectors only  
-   - **Region numbers** -- Select the Region to Region numbers
 - **Group** - Select Group related vectors only
-   - **Group name** --  Select Group name
 - **Well** -- Select Well related vectors only
-   - **Well name** --  Select Well name
 - **Completion**   -- Select Completion related vectors only
-   - **Well name** --  Select Well name
-   - **I, J, K** -- Select the I, J, K values of the completion
 - **Lgr-Completion** -- Select Completion in LGR related vectors only
-   - **Well name** --  Select Well name
-   - **Lgr name** -- Select Lgr name
-   - **I, J, K** -- Select the I, J, K values of the completion in the Lgr.
 - **Lgr-Well** -- Select Well in LGR related vectors only
-   - **Well name** -- Select Well name
-   - **Lgr name** -- Select Lgr name 
 - **Segment** -- Select Segment related vectors only
-   - **Well name** -- Select Well name
-   - **Segment number** -- Select the segment number
 - **Block** -- Select I, J, K -- Block related vectors only 
-   - **I, J, K** -- Select the I, J, K values of the Block. 
 - **Lgr-Block** -- Select I, J, K - Block in LGR related vectors only
-   - **Lgr name** -- Select Lgr name
-   - **I, J, K** -- Select the I, J, K values of the Block in the Lgr. 
 - **Calculated** -- Select calculated vectors created by the [curve calculator]({{< relref "curvecalculator" >}}).
 - **Imported** -- Select observed data vectors [imported from file]({{< relref "observeddata" >}}) (e.g. CSV, RSM files)
 

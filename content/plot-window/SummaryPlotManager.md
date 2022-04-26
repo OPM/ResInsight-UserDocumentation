@@ -1,7 +1,7 @@
 +++
-title = "Summary Plot Manager [BETA]"
+title = "Summary Plot Manager"
 published = true
-weight = 30
+weight = 15
 +++
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlotManagerOverview.png)

@@ -4,180 +4,79 @@ published = true
 weight = 10
 +++
 
-![]({{< relref "" >}}images/plot-window/ResInsightMainPlotMediumSize.png)
+![]({{< relref "" >}}images/plot-window/SummaryPlotsMain.png)
 
-A Summary Plot is a window displaying a graph in the main area of the **Plot Main Window**. As described below, a Summary Plot can contain Summary Curves, Grid time history curves, and pasted ascii curves.
-
-A new Summary Plot can be created by using the right-click menu of **Summary Plots** in the **Plot Project Tree** and activate 
-{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **Open Summary Plot Editor** or 
-{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot**. 
-
-{{% notice info %}}
-If you have many open plots, it can be useful to collapse all other plots by activating **Collapse Other Plots** from right-click menu of a plot in the <b>Plot Project Tree</b>.
-{{% /notice %}}
-
-## Plot Data
-
-ResInsight can create summary plots based on vectors from SUMMARY files ( _`*.SMSPEC`_ ), imported Observed Time History Data, Grid Cell Time history Curve, and pasted ascii curves. 
-
-### SUMMARY Files
-
-See [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) for description on how to import data.
-
-The input commands can also be accessed in the right-click menu for the **Summary Cases** entry in the **Plot Project Tree**.
-Notably, the right-click menu also allows creating a [delta ensemble]({{< relref "ensembleplotting" >}}#delta-ensemble) 
-and [delta summary case]({{< relref "summaryplots" >}}#delta-summary-case).
-
-During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the [Origin Files]({{< relref "eclipsesummarydata" >}}#origin-files) dialog is displayed.
+Summary Plots are a display of curves based on 
+[Eclipse Summary Data]({{< relref "eclipsesummarydata" >}})
+which can be combined with 
+[imported observed time history data]({{< relref "observeddata" >}}), 
+[grid cell time history curve]({{< relref "resultinspection" >}}#result-plot), and 
+[pasted ascii curves]({{< relref "pasteexceltimedata" >}}). 
 
 
-### Summary Case Groups
-A selection of cases can be grouped by right-clicking  a selection of summary cases and selecting the command **Group Summary Cases**. Summary cases can also be drag-dropped between summary groups. The groups will be used when listing the cases in the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
+Summary plots are displayed on screen by maximum four rows by four columns of plots. 
+In the example above, ResInsight displays two columns and two rows of plots, each plot comprising a single curve. However, a plot may contain an arbitrary number of curves.
+Essential helpers for setup of Summary Plots are:
+
+- *Plots*: overview of established plots and their components
+- [*Data Sources*]({{< relref "summaryplotdatasources" >}}):
+searching and sourcing data from case, field, regions, wells, groups, or ensemble
+- [*Plot Manager*]({{< relref "summaryplotmanager" >}}):
+powerful text-based selection of vectors for summary plotting 
+- *Property Editor*: settings for titles, legends, layout, axes etc
 
 
-### Delta Summary Case
-A **Delta Summary Case** can be created as either the sum or difference between two existing summary cases. 
-To create a delta summary case, select two existing summary cases in **Plot Project tree**, then right click and select **New Delta Summary Case**. 
-A new delta ensemble is created with the two selected summary cases as input and a default arithmetic operator. 
-An existing delta summary case may be input to a new delta summary case.
+## Creating Summary Plots
 
-The Property Editor for the new delta summary case allows to modify display name, the two base summary cases, and the arithmetic operator.
-In addition, it is possible to specify a specific time step to be used in delta computation.
-As an example according to the settings in the figure below, the delta computation between two cases for a given parameter, e.g. *WBHP*, will be:
-$$WBHP\_{delta}(t) = WBHP\_{case1}(@02.01.2000) - WBHP\_{case2}(t)$$
+### Using Data Sources to create Summary Plots
 
-![]({{< relref "" >}}images/plot-window/DeltaSummaryCasePropertyEditor.png)
+Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), the **Data Sources** window provides an easy approach to create Summary Plots:
 
+- Search or navigate **Data Sources** to find the desired source(s) and vector(s)
+- *Right-click* selected vector(s) and select **New Summary Plot** 
+- *Drag & Drop* additional vector(s) to append curves into an existing plot or vacant plot area
 
-### Replace Summary Case
-A summary case can be replaced by right-clicking on it and selecting the command **Replace**. This will redisplay all configured plots with data from the newly imported case.
+Please note the functionality of **Data Sources** to search for data sources and vectors across all available data.
 
-### Observed Data
+Creating a new summary plot of *WBHP* of *Well B-1H* and subsequent *Drag & Drop* of WGOR produces the following. 
 
-See [Observed Time History Data]({{< relref "observeddata" >}})
+![]({{< relref "" >}}images/plot-window/SummaryPlots_WBHP_WGOR.png)
 
-### Grid Cell Time History Curve
+When applicable, the data source of displayed curves is rapidly changed by using:
+- Toolbar buttons
+- Keyboard shortcuts, i.e. *CTRL &larr;/&rarr;* for well and *CTRL &uarr;/&darr;* for vector
 
-Time history curves from a grid cell property can also be added to a Summary Plot. 
-See [Result Inspection]({{< relref "resultinspection" >}}#result-plot).
+If a set of curves are pertinent to a single data source, you may easily append corresponding plots for other entries of the type. For instance, the above screenshot comprises plots for a single well so you may easily append corresponding plots for other wells by:
 
-### Pasted Ascii Curves
+- Right-clicking a set of wells, and select *Append Plots for Wells*
+  - Adjust the number of columns and rows for each page as desired
+  - Use PgUp/PgDown or scroll wheel to validate the plots
+- Ease visual comparison of individual curves by clicking the toolbar button *Sync axis Ranges in All Plots* to obtain plots with identical axes
+- Snapshot the curves or export to PDF-file via the toolbar-buttons and Edit-menu
 
-You can copy an ascii table directly from Excel or any text source and paste it directly into a Summary Plot using the command **Paste Excel Data to Summary Plot**. See [Paste Excel Time History Data]({{< relref "pasteexceltimedata" >}}).
-
-## Summary Plots
-
-Summary plots are created in the **Plot Project Tree** by right-clicking **Summary Plots** and selecting 
-{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **Open Summary Plot Editor** or 
-{{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Plot**. 
-Having created a Summary Plot, its entry is listed in the Plot Project Tree. 
-The settings of the Plot are controlled by its sub items in the **Plot Project Tree** and the **Property Editor** as described below.
-
-![]({{< relref "" >}}images/plot-window/SummaryPlotTree.png)
+![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendPlotsForWells.png)
 
 
-### Property Editor
+### Using Plot Manager to create Summary Plots
 
-The Property Editor allows **Text-Based Curve Creation** based on selected sources and setting **General Plot Options**.
+Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), the 
+[**Plot Manager**]({{< relref "summaryplotmanager" >}}) 
+provides an alternative and powerful approach to create Summary Plots by text-based selection of data sources and vectors to plot.
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotPropertyEditor.png)
 
-**Text-Based Curve Creation** allows specification of a list of vectors for plotting based on selected sources.
-The vectors to plot are specified by the following syntax:
-`<vectorshortname>[:<item>[:<subitem>[:i,j,k]]]`.
-The specification of vectors allows use of wildcards and multiple entries separated by space: 
-
-- `WOPT:*`: One total oil production curve for each well.
-- `FOPT FWPT`: Two curves with oil and water total production.
-- `BPR:15,28,*`: Oil phase pressure for all blocks along k as separate curves.
-
-**General Plot Options** allows the following settings:
-
-- **Show Title** -- Toggles whether to show the axis title 
-- **Auto Title** -- If enabled, the Plot title is derived automatically
-- **Name** -- Allows manual setting of plot title if **Auto Title** is disabled
-- **Show Legends** -- Toggles whether to legends
-- **Legend Font Size** -- Font size to be used in plot
-- **Normalize all curves** -- Scales all curves into the range 0.0-1.0
-
-### Time Axis Properties
-
-![]({{< relref "" >}}images/plot-window/SummaryTimeAxisProperties.png)
-
-- **Axis Title**
-  - **Show Title** -- Toggles whether to show the axis title
-  - **Title** -- A user defined name for the axis 
-  - **Title Position** --  Either *Center* or *At End* 
-  - **Font Size** -- The font size used for the axis title
-- **Time Values**
-  - **Time Mode** -- Option to show the time from *Simulation Start*, or as real date-times. 
-  - **Max**/**Min** -- The range of visible date/time in the Plot.
-  - **Automatic Date/Time labels** -- Option to invoke automatic date/time labels.
-  - **Font Size** -- The font size used for the date/time axis ticks, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
-- **Date/Time Label Format**
-  - **Date Label Format** -- Date format for the time axis, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
-  - **Time Label Format** -- Time format for the time axis, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
-
-### Y-axis Properties
-
-![]({{< relref "" >}}images/plot-window/summary_plot_yaxis_properties.png)
-
-- **Title Text**
-  - **Auto Title** -- If enabled, the y-axis title is derived automatically with the following options:
-     - **Names** -- Add quantity long name to y-axis title.
-     - **Acronyms** -- Add quantity acronym to y-axis title.
-	 - **Units** - Add unit of quantity to y-axis title.
-  - **Title** -- If **Auto Title** is disabled, the **Title** field emerges to facilitate manual setting of plot title.
-- **Title Layout**
-  - **Title Position** -- Controls the position of the title; *Center* or *At End*.
-  - **Font Size** --  Defines the font size used for the axis title. 
-- **Axis Values**
-  - **Logarithmic Scale**  - Draw plot curves using a logarithmic scale. 
-  - **Invert Axis**  - Invert the axis, e.g. when depth is represented by the Y-axis.
-  - **Number Format** -- Defines how the legend numbers are formatted.
-     - **Auto** -- Legend numbers are displayed by either scientific or decimal notation depending on actual value.
-     - **Decimal** -- Legend numbers are displayed using decimal notation.
-     - **Scientific** -- Legend numbers are displayed using scientific notation (e.g. 1.2e+6).
-  - **Number of Decimals** -- Controls the number of digits after "." for  **Decimal** and **Scientific**.
-  - **Scale Factor** -- Displays the y-axis values by multiplying with a specific scale factor for **Decimal** and **Scientific**.
-  - **Max and Min** -- Defines the visible y-range.
-  - **Font Size** -- The font size for showing values at the axis ticks.   
-
-### Plot Mouse Interaction
-
-- **Value Tracking** -- When the mouse cursor is close to a curve, the closest curve sample is highlighted and the curve sample value at this location is displayed in a tooltip. 
-- **Selection** -- Left mouse button click can be used to select several of the parts in the plot, and display them in the Property Editor:
-  - The closest curve.
-  - Each of the Plot Axes.
-  - The Plot itself if none of the above is hit and the Plot window is activated by the mouse click.
-- **Window Zoom** -- Window zoom is available by dragging the mouse when the left mouse button is pressed. Use {{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} **Zoom All** to restore default zoom level.
-- **Wheel Zoom** -- The mouse wheel will zoom the plot in and out towards the current mouse cursor position.
-
-### Curve Highlight
-
-![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
-
-Summary curves will be highlighted when left-clicked in a plot. This allows for detailed investigation on curve values when many curves are plotted. All other curves can be hidden by activating the right-click menu of a plot, and select **On - Others Off**
-
-### Accessing the Plot Data
-
-Right-clicking a plot and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
-This dialog supports plot data displayed by day, week, month, quarter, half year and year.
-
-The text content of this window is easy to copy and paste into Excel or other tools for further processing.
-It is also possible to save the text data to a file directly by using the right-click command **Export Plot Data to Text File**. 
-
-## Editing properties of single Summary Curve
-
-Selecting a specific Summary Curve is possible via the **Plot Project Tree**.
+## Overview and Editing Summary Plots
+The settings of each plot are listed in the **Plots** window for overview and are controlled by its sub-items and the **Property Editor**.
 
 ![]({{< relref "" >}}images/plot-window/SummaryCurveSelection.png)
 
-Having selected a Summary Curve, its properties are shown by the **Property Editor**.
+
+### Editing a Summary Curve
+
+By selecting a specific summary curve in the **Plots** window, its properties are displayed by the **Property Editor**.
 
 ![]({{< relref "" >}}images/plot-window/summary_curve_properties.png)
 
-As seen, the Property Editor organizes the available options into the following groups:
+The Property Editor organizes the available options into the following groups:
 
 - **Summary Vector** -- Options to select case, vector to plot, resampling, axis specification, and error bars.
 - **Stacking** - Options to control stacking of curves optionally with phase colors.
@@ -185,31 +84,69 @@ As seen, the Property Editor organizes the available options into the following 
 - **Curve Name** -- Controls how the curve is labeled in the legend.
 - **Advanced** -- Specification of additional options.
 
-### Summary Vector
-This group of options is used to define summary vector data that the curve will display. 
-
-- **Case** -- Selects the imported Summary or Observed Data case to use as source.
-- **Vector** -- Displays the acronym of the selected vector.
-- **Resampling** - Option to sample curve data per day, week, month, quarter, half year, year, or decade.
-- **Axis** -- Controls whether the curve is to be associated with the left or right Y-Axis. 
-
-Selection of vector is performed using a vector acronym or pressing the button to the right. 
-Pressing the button opens a dialog similar to the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
-
-{{% notice note %}}
-Switching the Y-Axis for several curves in one go can be done using the right-click command <b>Switch Plot Axis</b>.  
-{{% /notice %}}
+Other actions are available via right-click menu for selected curve. For instance, the Y-Axis for one or more curves can be switched for using the right-click command <b>Switch Plot Axis</b>.  
 
 
-### Curve Name 
-The user can control the curve name used in the plot legend by the following options:
+### Time Axis Properties
+Time axis properties are displayed by clicking the **Time Axis** subitem of a summary plot in **Plots** window. 
 
-- **Contribute To Legend** -- This option controls whether the curve will be visible in the plot legend. A curve with an empty name will be removed from legend. 
-- **Auto Name** -- If enabled, ResInsight will create a name for the curve automatically based on the settings in this option group.
-- **Curve Name** -- If **Auto Name** is off, you can enter a curve name here. If empty, the curve will be removed from the legend, but still visible in the plot.
-- **Case Name, Vector name ...** etc. -- These options controls what part of the summary vector information to use in the curve auto-name.
+![]({{< relref "" >}}images/plot-window/SummaryTimeAxisProperties.png)
 
-## Copy and Paste 
+The property groups are:
 
-Copy and Paste of selections of Summary Plots and Curves, is possible using the Project Tree right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V).
+- **Axis Title**: Toggle display of axis title, setting user defined name, position, and font. 
+- **Time Values**: Show time from *Simulation Start*, or real date-times, specific or automatic date/time range, and font.
+- **Date/Time Label Format**: Date and time format for the time axis, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
+
+
+### Y-axis Properties
+Y-axis properties are displayed by clicking one of the left/right axis subitems of a summary plot in **Plots** window.
+
+![]({{< relref "" >}}images/plot-window/summary_plot_yaxis_properties.png)
+
+The property groups are:
+
+- **Title Text**: Caters for automatic or user specification of title and inclusion of vector name, acronym, and units in plot.
+- **Title Layout**: Positioning of title (*Center* or *At End*) and font size. 
+- **Axis Values**: Logarithmic scale, inversion of axis, legend number formatting, scale factor, 
+max/max range, and font size.   
+
+
+### Changing content of a Summary Plot
+Right-clicking an existing summary plot in **Plots** and selecting *Edit Summary Plot* initiates the 
+[*Summary Plot Editor*]({{< relref "summaryploteditor" >}}) which offers complete functionality to navigate and select vectors from all summary types.
+
+
+## Summary Plot Functionality 
+
+### Plot Mouse Interaction
+
+- **Value Tracking**: When the mouse cursor is close to a curve, the closest curve sample is highlighted and the curve sample value at this location is displayed in a tooltip. 
+- **Selection**: Left mouse button click can be used to select several of the parts in the plot, and display them in the Property Editor:
+  - The closest curve.
+  - Each of the Plot Axes.
+  - The summary plot itself if none of the above is hit and the **Plots** window is activated by the mouse click.
+- **Window Zoom**: Available by dragging the mouse with left mouse button pressed. 
+Use toolbar button or *View* menu option 
+{{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} *Zoom All* to zoom all summary curves and restore default zoom level.
+- **Wheel Zoom**: The mouse wheel will zoom the plot in and out towards the current mouse cursor position presupposing use of mouse wheel is not disabled by toolbar button {{< image-in-text src="images/plot-window/ZoomDisableMouseWheelCapture.png" >}}.
+
+
+### Highlighting a curve or axis
+A summary curve is highlighted when left-clicked in a plot. This allows for detailed investigation of a specific curve among many others. Summary curves can also be activated and deactivated by clicking in **Plots** window. See also **Plots** right-click menu items, e.g. *On - Others Off* which is an effective way to deactivate all curves not selected.
+
+Another essential feature is to left-click an axis in a summary plot which will highlight the curves corresponding to the particular axis.
+
+![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
+
+
+### Accessing Plot Data
+Right-clicking a plot in **Plots** window and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
+The window displays plot data by day, week, month, quarter, half year and year.
+
+The text content of this window is easy to copy and paste into Excel or other tools for further processing.
+It is also possible to save the text data to a file by the right-click command **Export to File**. 
+
+### Copy and Paste 
+Copy and Paste of summary plots and curves is possible using the **Plots** right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V).
 
