@@ -16,45 +16,29 @@ which can be combined with
 
 Summary plots are displayed on screen by maximum four rows by four columns of plots. 
 In the example above, ResInsight displays two columns and two rows of plots, each plot comprising a single curve. However, a plot may contain an arbitrary number of curves.
-Essential helpers for setup of Summary Plots are:
+As shown in the screenshot above, essential helpers for setup of Summary Plots are:
 
 - *Plots*: overview of established plots and their components
 - [*Data Sources*]({{< relref "summaryplotdatasources" >}}):
 searching and sourcing data from case, field, regions, wells, groups, or ensemble
 - [*Plot Manager*]({{< relref "summaryplotmanager" >}}):
-powerful text-based selection of vectors for summary plotting 
+powerful text-based selection of vectors for summary plotting
 - *Property Editor*: settings for titles, legends, layout, axes etc
+
 
 
 ## Creating Summary Plots
 
 ### Using Data Sources to create Summary Plots
-
-Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), the **Data Sources** window provides an easy approach to create Summary Plots:
+Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), [**Data Sources**]({{< relref "summaryplotdatasources" >}}) provides an easy approach to create Summary Plots:
 
 - Search or navigate **Data Sources** to find the desired source(s) and vector(s)
 - *Right-click* selected vector(s) and select **New Summary Plot** 
 - *Drag & Drop* additional vector(s) to append curves into an existing plot or vacant plot area
 
-Please note the functionality of **Data Sources** to search for data sources and vectors across all available data.
-
 Creating a new summary plot of *WBHP* of *Well B-1H* and subsequent *Drag & Drop* of WGOR produces the following. 
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlots_WBHP_WGOR.png)
-
-When applicable, the data source of displayed curves is rapidly changed by using:
-- Toolbar buttons
-- Keyboard shortcuts, i.e. *CTRL &larr;/&rarr;* for well and *CTRL &uarr;/&darr;* for vector
-
-If a set of curves are pertinent to a single data source, you may easily append corresponding plots for other entries of the type. For instance, the above screenshot comprises plots for a single well so you may easily append corresponding plots for other wells by:
-
-- Right-clicking a set of wells, and select *Append Plots for Wells*
-  - Adjust the number of columns and rows for each page as desired
-  - Use PgUp/PgDown or scroll wheel to validate the plots
-- Ease visual comparison of individual curves by clicking the toolbar button *Sync axis Ranges in All Plots* to obtain plots with identical axes
-- Snapshot the curves or export to PDF-file via the toolbar-buttons and Edit-menu
-
-![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendPlotsForWells.png)
 
 
 ### Using Plot Manager to create Summary Plots
@@ -64,7 +48,71 @@ Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), the
 provides an alternative and powerful approach to create Summary Plots by text-based selection of data sources and vectors to plot.
 
 
-## Overview and Editing Summary Plots
+## Summary Plots and Functionality 
+
+### Multiple Summary Plots and Curves
+Using [**Data Sources**]({{< relref "summaryplotdatasources" >}}) enables efficient creation of multiple plots and curves by Right-clicking:
+
+- Use *Append Curves* to append curves for the selected vectors into all existing plots.
+- Use *Append Plots for Wells* to create separate plots for the selected vectors.
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendVectorsForWells.png)
+
+If a plot contains curves pertinent to a single data source, you may easily append corresponding plots for other entries of the type by right-clicking or Drag&Drop. In the examples above, the curves are pertinent to the single data source well B-1H. Thus you may easily append corresponding plots for other wells by right-clicking as shown below or Drag&Drop of other wells.
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendPlotsForWells.png)
+
+
+Subsequently, you may:
+- Adjust the number of columns and rows and preview the pages of plots using the toolbar {{< image-in-text src="images/plot-window/SummaryPlotToolbarRowColumnPreview.png" >}}
+- Use keyboard PgUp/PgDown or scroll wheel to browse and validate the pages of plots
+- Snapshot the curves or export to PDF-file via the toolbar-buttons {{< image-in-text src="images/plot-window/SummaryPlotToolbarSnapshot.png" >}} or *Edit* menu
+
+The data source of displayed curves is rapidly changed by [Summary Plot Source Stepping]({{< relref "SummarySourceStepping.md" >}}).
+
+### Visual comparison of multiple summary curves
+ResInsight may ease comparison of multiple summary curves by selecting a plot in **Plots** and using the settings in **Property Editor** group **Axes**.
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotPropertyEditorAxes.png)
+
+The different options are:
+
+- *Axis Range Aggregation*: Setting axes consideration span to either individual, all subplots, all wells, all regions, or all realizations.
+- *Link Sub Plot Axes*: When checked, the axes of all subplots will be treated to obtain plots with identical axes.
+- *Auto Adjust Appearance*: When checked, ResInsight creates axes with titles, ranges, tickmarks, and units for best possible appearance.
+
+
+### Plot Mouse Interaction
+- **Value Tracking**: When the mouse cursor is close to a curve, the closest curve sample is highlighted and the curve sample value is displayed in a tooltip. 
+- **Selection**: Left mouse button click can be used to select several items of the plot and display them in the Property Editor:
+  - The closest curve
+  - Each plot axis
+  - The summary plot itself if none of the above is hit and the **Plots** window is activated by the mouse click
+- **Window Zoom**: Available by dragging the mouse with left mouse button pressed. 
+Use toolbar button {{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} or *View* menu option *Zoom All* to zoom all summary curves and restore default zoom level.
+- **Wheel Zoom**: The mouse wheel will zoom the plot in and out towards the current mouse cursor position presupposing use of mouse wheel is not disabled by toolbar button {{< image-in-text src="images/plot-window/ZoomDisableMouseWheelCapture.png" >}}.
+
+### Highlighting a curve or axis
+A summary curve is highlighted when left-clicked in a plot. This allows for detailed investigation of a specific curve among many others. Summary curves can also be activated and deactivated by clicking in **Plots** window. See also **Plots** right-click menu items, e.g. *On - Others Off* which is an effective way to deactivate all curves not selected.
+
+Another essential feature is to left-click an axis in a summary plot which will highlight the curves corresponding to the particular axis.
+
+![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
+
+### Accessing Plot Data
+Right-clicking a plot in **Plots** window and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
+The window displays plot data by day, week, month, quarter, half year and year.
+
+The text content of this window is easy to copy and paste into Excel or other tools for further processing.
+It is also possible to save the text data to a file by the right-click command **Export to File**. 
+
+### Copy and Paste 
+Copy and Paste of a summary subplot (see below) or curve is possible using the **Plots** right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V).
+
+![]({{< relref "" >}}images/plot-window/SummarySubplotCopy.png)
+
+
+## Editing Summary Plots
 The settings of each plot are listed in the **Plots** window for overview and are controlled by its sub-items and the **Property Editor**.
 
 ![]({{< relref "" >}}images/plot-window/SummaryCurveSelection.png)
@@ -117,36 +165,6 @@ Right-clicking an existing summary plot in **Plots** and selecting *Edit Summary
 [*Summary Plot Editor*]({{< relref "summaryploteditor" >}}) which offers complete functionality to navigate and select vectors from all summary types.
 
 
-## Summary Plot Functionality 
-
-### Plot Mouse Interaction
-
-- **Value Tracking**: When the mouse cursor is close to a curve, the closest curve sample is highlighted and the curve sample value at this location is displayed in a tooltip. 
-- **Selection**: Left mouse button click can be used to select several of the parts in the plot, and display them in the Property Editor:
-  - The closest curve.
-  - Each of the Plot Axes.
-  - The summary plot itself if none of the above is hit and the **Plots** window is activated by the mouse click.
-- **Window Zoom**: Available by dragging the mouse with left mouse button pressed. 
-Use toolbar button or *View* menu option 
-{{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} *Zoom All* to zoom all summary curves and restore default zoom level.
-- **Wheel Zoom**: The mouse wheel will zoom the plot in and out towards the current mouse cursor position presupposing use of mouse wheel is not disabled by toolbar button {{< image-in-text src="images/plot-window/ZoomDisableMouseWheelCapture.png" >}}.
 
 
-### Highlighting a curve or axis
-A summary curve is highlighted when left-clicked in a plot. This allows for detailed investigation of a specific curve among many others. Summary curves can also be activated and deactivated by clicking in **Plots** window. See also **Plots** right-click menu items, e.g. *On - Others Off* which is an effective way to deactivate all curves not selected.
-
-Another essential feature is to left-click an axis in a summary plot which will highlight the curves corresponding to the particular axis.
-
-![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
-
-
-### Accessing Plot Data
-Right-clicking a plot in **Plots** window and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
-The window displays plot data by day, week, month, quarter, half year and year.
-
-The text content of this window is easy to copy and paste into Excel or other tools for further processing.
-It is also possible to save the text data to a file by the right-click command **Export to File**. 
-
-### Copy and Paste 
-Copy and Paste of summary plots and curves is possible using the **Plots** right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V).
 
