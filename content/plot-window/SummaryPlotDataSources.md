@@ -12,6 +12,12 @@ As seen above, **Data Sources** enables search and sourcing of data from case, f
 See [Summary Plots]({{< relref "summaryplots" >}}) which illustrates use of **Data Sources** for effective search and selection of data for summary plots.
 
 
+## Searching for data sources
+Atop the **Data Sources** window, there is a search field for effective searches across all available data sources. As exemplified below, typing just a few letters initiates a search for vectors prefixed by *wbh* across all data groups listing all hits.
+
+![]({{< relref "" >}}images/plot-window/DataSourcesSearching.png)
+
+
 ## Summary Cases functionality
 Right-clicking the **Summary Cases** entry in **Data Sources** displays the functionality pertinent to summary cases.
 
@@ -33,7 +39,7 @@ An existing delta summary case may be input to a new delta summary case.
 
 ### Curve calculator
 The [Curve Calculator]({{< relref "curvecalculator" >}})
-is a tool to do vector calculations on a set of curves. The created curves can be stored for later use in the project.
+is a tool to perform vector calculations on a set of curves. The created curves can be stored for later use.
 
 
 
@@ -43,5 +49,5 @@ Right-clicking a specific *Summary Case* in **Data Sources** displays the functi
 ![]({{< relref "" >}}images/plot-window/DataSourcesSummaryCaseSingle.png)
 
 The highlighted menu item, right-clicking a summary case in **Data Sources** and select *Replace* will redisplay all configured plots with data from another case.
-Please also note the menu options concerning the use of 
+Please also note the menu options concerning creation of 
 [Summary Plot Template]({{< relref "summaryplottemplate" >}})
