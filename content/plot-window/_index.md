@@ -4,13 +4,17 @@ published = true
 weight = 30
 +++
 
-![ResInsight User Interface]({{< relref "" >}}images/getting-started/ResInsightMainPlotMediumSize.png)
+![]({{< relref "" >}}images/plot-window/SummaryPlotsMain.png)
 
-This is the main window of ResInsight for 2D graphing and plotting. As seen, the **Plot Main Window** has a central area 
-and two docking windows surrounding it. The docking windows cover the following:
+The **Plot Main Window** is the main window of ResInsight for 2D graphing and plotting as shown above surrounded by the following docking windows:
 
-- **Plot Project Tree** -- contains all application objects in a tree structure.
-- **Property Editor** -- displays all properties for the selected object in the **Project Tree**
+- *Plots*: overview of the various types of plots and their components
+- [*Data Sources*]({{< relref "summaryplotdatasources" >}}):
+searching and sourcing data from case, field, regions, wells, groups, or ensemble
+- [*Plot Manager*]({{< relref "summaryplotmanager" >}}):
+powerful text-based selection of vectors for summary plotting
+- *Property Editor*: settings for titles, legends, layout, axes etc
 
-A selected subset of actions are presented as controls in the toolbar. 
-The following subchapters describe the functionality, graphs, and plots of the **Plot Main Window**.
+Essential actions are presented as controls in the toolbar for ease of use. 
+The following subchapters describe the capabilities, functionality, graphs, and plots in more detail. 
+
