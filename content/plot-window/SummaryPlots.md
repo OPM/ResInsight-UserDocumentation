@@ -18,13 +18,16 @@ Summary plots are displayed on screen by maximum four rows by four columns of pl
 In the example above, ResInsight displays two columns and two rows of plots, each plot comprising a single curve. However, a plot may contain an arbitrary number of curves.
 As shown in the screenshot above, essential helpers for setup of Summary Plots are:
 
-- *Plots*: overview of established plots and their components
-- [*Data Sources*]({{< relref "summaryplotdatasources" >}}):
+- **Plots**: overview of established plots and their components
+- **Property Editor**: settings for titles, legends, layout, axes, and appearance
+- [**Data Sources**]({{< relref "summaryplotdatasources" >}}):
 searching and sourcing data from case, field, regions, wells, groups, or ensemble
-- [*Plot Manager*]({{< relref "summaryplotmanager" >}}):
+- [**Templates**]({{< relref "summaryplottemplate" >}}):
+overview, management and use of templates for summary plotting
+- [**Plot Manager**]({{< relref "summaryplotmanager" >}}):
 powerful text-based selection of vectors for summary plotting
-- *Property Editor*: settings for titles, legends, layout, axes etc
 
+Essential actions are presented as controls in the toolbar to increase productivity and ease of use.
 
 
 ## Creating Summary Plots
@@ -36,7 +39,9 @@ Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), [**
 - *Right-click* selected vector(s) and select **New Summary Plot** 
 - *Drag & Drop* additional vector(s) to append curves into an existing plot or vacant plot area
 
-Creating a new summary plot of *WBHP* of *Well B-1H* and subsequent *Drag & Drop* of WGOR produces the following. 
+Creating a new summary plot of *WBHP* of *Well B-1H* and subsequent *Drag & Drop* of WGOR and WGORH into the same subplot produces the following. 
+ResInsight will automatically make new axes if necessary. If units are the same as for WGOR and WGORH, a new axis is unneccessary.
+
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlots_WBHP_WGOR.png)
 
@@ -58,7 +63,7 @@ Using [**Data Sources**]({{< relref "summaryplotdatasources" >}}) enables effici
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendVectorsForWells.png)
 
-If a plot contains curves pertinent to a single data source, you may easily append corresponding plots for other entries of the type by right-clicking or Drag&Drop. In the examples above, the curves are pertinent to the single data source well B-1H. Thus you may easily append corresponding plots for other wells by right-clicking as shown below or Drag&Drop of other wells.
+If a plot contains curves pertinent to a single data source, you may easily append corresponding plots for other entries of the type by right-clicking or Drag&Drop. In the examples above, the curves are pertinent to the single data source well B-1H. Thus you may easily append corresponding plots for other wells by right-clicking as shown below or using Drag&Drop.
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendPlotsForWells.png)
 
