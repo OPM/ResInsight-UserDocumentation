@@ -39,3 +39,14 @@ Right-clicking in **Data Sources** and clicking **Create Summary Plot from Templ
 {{% notice note %}}
 Summary templates made with prior versions are incompatible with ResInsight 2022 due to significant extensions of functionality. Please load summary plots of prior versions via project files or re-establish plots prior to saving templates with ResInsight 2022.
 {{% /notice %}}
+
+
+## Template window
+The template window enables overview of summary plot templates by directory and offers the following functionality:
+
+- rename of template
+- edit of template XML file in the text editor specified as *Script Editor* in 
+[Preferences]({{< relref "preferences#scripting" >}}) 
+- reload templates in ResInsight in case of directory or file changes on disk
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotTemplateWindow.png)
