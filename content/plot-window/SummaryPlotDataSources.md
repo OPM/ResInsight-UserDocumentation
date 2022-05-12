@@ -50,6 +50,5 @@ Right-clicking a specific *Summary Case* in **Data Sources** displays the functi
 
 The highlighted menu item, right-clicking a summary case in **Data Sources** and select *Replace* will redisplay all configured plots with data from another case.
 
-Please also note the menu options concerning creation of 
-[Summary Plot Template]({{< relref "summaryplottemplate" >}}) which is a powerful and effective way to create summary plots of a specific appearance and content. When invoking a well-specific template on Summary Case level as shown above, the convention is that ResInsight selects the first well listed under {{< image-in-text src="images/plot-window/DataSourcesWell.png" >}} as data source.
+Please also note the menu options to create summary plot from [Template]({{< relref "summaryplottemplate" >}}) which is a powerful and effective way to create summary plots with a specific appearance and content. When invoking a well-specific template on Summary Case level as shown above, the convention is that ResInsight selects the first well listed under {{< image-in-text src="images/plot-window/DataSourcesWell.png" >}} as data source.
 
