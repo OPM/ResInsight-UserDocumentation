@@ -16,7 +16,7 @@ The toolbar for source stepping is:
 
 Following this example, the available options are:
 
-- Explicitly setting **Step By** to vector WBHPH by 
+- Explicitly setting **Step By** to vector WBHP by 
 {{< image-in-text src="images/plot-window/SummarySourceSteppingToolbarExplicit.png" >}}
 - Change existing plot to display previous or next vector by pressing one of the buttons
 {{< image-in-text src="images/plot-window/SummarySourceSteppingToolbarPrevNext.png" >}}
