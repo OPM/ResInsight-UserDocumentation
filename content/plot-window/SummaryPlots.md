@@ -40,7 +40,7 @@ Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), [**
 - *Drag & Drop* additional vector(s) to append curves into an existing plot or vacant plot area
 
 Creating a new summary plot of *WBHP* of *Well B-1H* and subsequent *Drag & Drop* of WGOR and WGORH into the same subplot produces the following. 
-ResInsight will automatically make new axes if necessary. If units are the same as for WGOR and WGORH, a new axis is unneccessary.
+ResInsight will automatically make new axes if necessary. If units are the same as for WGOR and WGORH, a new axis is unnecessary.
 
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlots_WBHP_WGOR.png)
