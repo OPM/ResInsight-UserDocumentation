@@ -44,8 +44,9 @@ Summary templates made with prior versions are incompatible with ResInsight 2022
 ## Templates window
 The **Templates** window enables overview of summary plot templates by directory and offers the following functionality:
 
-- rename of template
-- edit of template XML file in the *Script Editor* specified in 
+- rename selected template
+- delete selected template
+- edit selected template XML file in the *Script Editor* specified in 
 [Preferences]({{< relref "preferences#scripting" >}}) 
 - reload templates in ResInsight in case of directory or file changes on disk
 
