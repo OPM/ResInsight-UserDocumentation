@@ -18,9 +18,9 @@ A Summary Plot Template can subsequently be used for summary plotting of various
 - case(s), ensemble(s), and realization(s)
 - well(s), group(s), and region(s)
 
-When saving a Summary Plot Template, ResInsight by default incorporates placeholders for using the template in conjuction with various wells, groups, and regions. 
+When saving a Summary Plot Template, ResInsight by default incorporates placeholders for using the template in conjunction with various wells, groups, and regions. 
 On the other hand, expand and check the appropriate boxes if you want to persist wells, groups, and/or regions.
-To exemplify, checking *Wells* for persistence enables plotting of data for the exact wells of the template in conjuction with any ensemble realization.
+To exemplify, checking *Wells* for persistence enables plotting of data for the exact wells of the template in conjunction with any ensemble realization.
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlotTemplateSavePersistentObjectNames.png)
 
