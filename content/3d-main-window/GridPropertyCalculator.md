@@ -21,7 +21,9 @@ As shown, the **Grid Property Calculator** is invoked by right-clicking
 {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** in **Project Tree**.
 As seen below, the **Grid Property Calculator** is per default prefilled with the simple summation 
 *Calculation_1 := x + y*. 
-Though you may add additional variables and arithmetic operators, the simple summation suffices for examplifying its use.
+This simple summation suffices for exemplifying its use.
+However, you may change name of the calculation and add additional variables and arithmetic operators in the **Expression** field.
+
 
 ![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorDefault.png)
 
@@ -38,14 +40,14 @@ The calculated result is accessable via **Property Editor** as **Type** ***Gener
 ![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorGeneratedProperty.png)
 
 
-## Reference Procedure for Grid Property Calculator
+## Reference Procedure using Grid Property Calculator
 
 1. Invoke the the **Grid Property Calculator** by right-clicking 
 {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** in **Project Tree**.
 1. Define the expression for calculation by the involved variables and arithmetic operators
-   - Type the required variables and aritmetic operators into the *Expression* field
+   - Type the name of calculation, required variables and aritmetic operators into **Expression**
    - Press button **Parse Expression** to verify the expression and referrals to actual variables
-1. Define each actual variable referred by the expression, e.g. by drag and drop from **Data Sources**
+1. Define each actual variable referred by the expression, either manually or by drag and drop from **Data Sources**
 1. Press **Calculate** to perform the actual calculation
 1. Access the calculated result in **Property Editor** as **Type** ***Generated*** **Result Property**
 
