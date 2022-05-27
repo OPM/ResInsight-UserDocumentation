@@ -56,17 +56,19 @@ provides an alternative and powerful approach to create Summary Plots by text-ba
 ## Summary Plots and Functionality 
 
 ### Multiple Summary Plots and Curves
-Using [**Data Sources**]({{< relref "summaryplotdatasources" >}}) enables efficient creation of multiple plots and curves by Right-clicking:
+The [**Data Sources**]({{< relref "summaryplotdatasources" >}}) window enables efficient creation of multiple plots and curves by Right-clicking:
 
 - Use *Append Curves* to append curves for the selected vectors into all existing plots.
 - Use *Append Plots for Wells* to create separate plots for the selected vectors.
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendVectorsForWells.png)
 
-If a plot contains curves pertinent to a single data source, you may easily append corresponding plots for other entries of the type by right-clicking or Drag&Drop. In the examples above, the curves are pertinent to the single data source well B-1H. Thus you may easily append corresponding plots for other wells by right-clicking as shown below or using Drag&Drop.
+If a plot contains curves pertinent to a single data source, you may easily append corresponding plots for other entries of the type by right-clicking or *drag and drop*. In the examples above, the curves are pertinent to the single data source well B-1H. Thus you may easily append corresponding plots for other wells by right-clicking as shown below.
 
 ![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendPlotsForWells.png)
 
+Alternatively, you may simply and efficiently **drag and drop** the selected wells into the plot area.
+In fact, you may drag the entire folder {{< image-in-text src="images/plot-window/DataSourcesWell.png" >}} into plot area to append plots for all wells.
 
 Subsequently, you may:
 - Adjust the number of columns and rows and preview the pages of plots using the toolbar {{< image-in-text src="images/plot-window/SummaryPlotToolbarRowColumnPreview.png" >}}
