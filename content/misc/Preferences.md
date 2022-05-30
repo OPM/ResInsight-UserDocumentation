@@ -6,6 +6,7 @@ weight = 10
 
 In this section the different settings that controls the default behavior of ResInsight is described. These settings can be controlled using the **Preferences** dialog available from the **Edit -> Preferences** menu.
 Preferences are not stored in project files, but in a platform specific way for each user.
+Essential preferences are listed below.
 
 ## General
 
@@ -19,15 +20,15 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 	- **Mesh Color Along Faults**
 	- **Well Label Color**
 
-- **Default Font Sizes**: This group contains the different fonts which are used through ResInsight:
+- **Default Font Sizes**: This group contains fonts preferences when using ResInsight:
 	- **Viewer Font Size** -- The fonts used for axes labels, legends and info boxes in the 3d View.
 	- **Annotation Font Size** -- The font used as default for Text Annotations.
 	- **Well Label Font Size** -- The font used for all Well Path labels.
-	- **Plot Font Size** - The font used for legends, axes labels, values in Plots. This affects the docked plots in the main 3D window as well (Result Plot, Relative Permeability etc), although because of the reduces space available in these plots, the font size applied will be one less than the **Plot Font Size**.
+	- **Plot Font Size** - The font used for plot legends, axes, and labels.
 
-- **3D Views**: This group of options controls visual settings that will be used when creating new views:
+- **3D Views**: This group of options controls visual settings to be used when creating new views:
 	- **Show Grid Lines** -- Controls whether to show the grid lines by default for all cells or just along faults.
-	- **Navigation mode** -- Defines how to use the mouse to interact with with the 3D model. Please refer to [Model Navigation]({{< relref "modelnavigation" >}}) for details.
+	- **Navigation mode** -- Defines the use of mouse for interaction with 3D model, c.f.  [Model Navigation]({{< relref "modelnavigation" >}}).
 	- **Default Z Scale Factor** -- Default depth scale for grid models.
 	- **Show Box around Legends** -- Create a semi-transparent box containing each legend in the 3D Views.
 	- **Enable Faults by Default** -- Controls default visibility of faults in views
@@ -36,20 +37,20 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 - **Other**: 
 	- **SSIHUB Address** -- Optional URL to Equinor internal web service used to import well paths
-	- **Show LAS Curve Without TVD Warning** - Turn off the warning displayed when showing LAS curves in TVD mode
+	- **Enable Undo/Redo for Property Editor Changes** -- enable undo/redo functionality
 
-## Eclipse Grid
+## Grid
 
 ![]({{< relref "" >}}images/misc/PreferencesEclipseGrid.png)
 
 - **Compute DEPTH Related Properties** -- If not present, compute DEPTH, DX, DY, DZ, TOP, BOTTOM when loading new cases.
-- **Load and Show SOIL** -- Control if SOIL is loaded and applied to grid.
-- **Import Faults/NNCs/Advanced MSW Data** -- Disable import of data for a case to reduce case import time.
+- **Load and Show SOIL** -- Control if SOIL is loaded and applied to grid per default.
+- **Import Faults/NNCs/Advanced MSW Data** -- Disable options to reduce case import time.
 - **Include File Absolute Path Prefix** -- Prefix used on Windows if include files use absolute UNIX paths.
-- **Use Result Index File** -- If enabled ResInsight will try to save a result index file when opening a new case. The file is stored in the same directory as the _`*.EGRID`_ file with filename _`<casename>.RESINSIGHT_IDX`_ If it exists, ResInsight will use this when loading the case, resulting in a significant speedup.
-- **Skip Import of Simulation Well Data** -- Disable import of simulation well data for a case to reduce case import time (opposite toggling than the other import commands).
+- **Use Result Index File** -- If enabled ResInsight will try to save a result index file when opening a new case (stored in the same directory as the _`*.EGRID`_ file with filename _`<casename>.RESINSIGHT_IDX`_) If existing, ResInsight will use the index file when loading the case resulting in a significant speedup.
+- **Skip Import of Simulation Well Data** -- Disable import of simulation well data for reducing case import time.
 
-## Eclipse Summary
+## Summary
 
 ![]({{< relref "" >}}images/misc/PreferencesEclipseSummary.png)
 
@@ -64,14 +65,21 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 ![]({{< relref "" >}}images/misc/PreferencesPlotting.png)
 
-- **Default Summary Curves**: Defines default curves for import when creating a new summary plot, e.g. `FOPT WOPT*`
-- **Default Curve Style for History Vectors**: allows specifying *symbols* and/or *lines* as preference.
-- **Date** and **Time** format preferences.
-- **Show resample time text** preference
-- **Use multiple threads** preference which may improve performance when loading summary data
-- **Plot Templates** allows setting preferences for:
-  - *Plot Template Folder(s)*: Allows to enter and delete folder(s) that are searched for plot templates. Press *Append* to browse for folder to append. 
-  - Checking *Search Plot Templates Recursively* instructs ResInsight to search subdirectories of specified folder(s) for templates.
+- **Summary Plots**: 
+  - **Create Plot On Summary Data Import**: governs automatic creation of summary plots when importing a summary case
+     - *No Plots*: do not automatically create summary plots
+     - *Use Data Vector Names*: Create summary plots automatically based on given vector names, e.g. `FOPT WOPT*`
+     - *Use Data Vector Names*: Create summary plots automatically based on default templates. 
+  - **Default Curve Style for History Vectors**: allows specifying *symbols* and/or *lines* as preference.
+  - **Curve Color By Phase**: distinguish each phase by separate color.
+  - **Show resample time text** preference
+- **Multi Plot Defaults**: specification of number of rows and columns for each page containing multiple summary plots.
+- **Plot Templates**: specification of folders and search for templates.
+  - Press **Append** to browse for folder to append. 
+  - Check **Search Plot Templates Recursively** to also search subdirectories for templates.
+- **General**
+  - **Date** and **Time** format preferences.
+  - **Page Setup**: Physical page size, orientation, and margins. 
 
 
 ## Scripting
@@ -79,11 +87,12 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 ![]({{< relref "" >}}images/misc/PreferencesScripting.png)
 
 - **Octave** c.f. [Octave Interface]({{< relref "octaveinterface.md" >}}) for details:
-  - **Octave Executable Location** -- Defines the binary file location for Octave, usually without path on Linux and including path on Windows.
+  - **Octave Executable Location** -- Define binary file location for Octave, usually without path on Linux and including path on Windows.
   - **Show text header when executing scripts** -- Enables the default output from octave when started.
 
 - **Python** c.f.  [ResInsight Python API](https://api.resinsight.org) for details:
   - **Enable Python Script Server**
+  - **Show Python Debug Info**
   - **Default Python Script Server Port**
   - **Python Executable Location** 
 

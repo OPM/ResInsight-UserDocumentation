@@ -95,16 +95,44 @@ The different options are:
   - The closest curve
   - Each plot axis
   - The summary plot itself if none of the above is hit and the **Plots** window is activated by the mouse click
-- **Window Zoom**: Available by dragging the mouse with left mouse button pressed. 
-Use toolbar button {{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} or *View* menu option *Zoom All* to zoom all summary curves and restore default zoom level.
+- **Window Zoom**: Available by dragging the mouse with left mouse button pressed across plot area of interest. 
 - **Wheel Zoom**: The mouse wheel will zoom the plot in and out towards the current mouse cursor position presupposing use of mouse wheel is not disabled by toolbar button {{< image-in-text src="images/plot-window/ZoomDisableMouseWheelCapture.png" >}}.
 
-### Highlighting a curve or axis
-A summary curve is highlighted when left-clicked in a plot. This allows for detailed investigation of a specific curve among many others. Summary curves can also be activated and deactivated by clicking in **Plots** window. See also **Plots** right-click menu items, e.g. *On - Others Off* which is an effective way to deactivate all curves not selected.
+You may simply **double click** a subplot to restore its default zoom level.
+Use toolbar button {{< image-in-text src="images/plot-window/ZoomAll16x16.png" >}} or *View* menu option **Zoom All** to restore default zoom level for the entire plot.
 
-Another essential feature is to left-click an axis in a summary plot which will highlight the curves corresponding to the particular axis.
+For scrolling multiple pages of plots by using the mouse wheel, disable *Wheel Zoom* by the toolbar button {{< image-in-text src="images/plot-window/ZoomDisableMouseWheelCapture.png" >}}.
+
+
+### Highlighting a curve or axis
+A summary curve is highlighted when left-clicked in a plot. This eases detailed investigation of a specific curve in plots comprising many curves. 
+
+Another essential feature is to left-click an axis in a summary plot which will highlight the curves corresponding to the particular axis. As exemplified below, clicking the axis *Gas Production Total* highlights the *WGPT* curve and dims the other curves.
 
 ![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
+
+Summary curves can also be activated and deactivated by clicking the check-boxes in **Plots** window. See also **Plots** right-click menu items, e.g. *On - Others Off* which is an effective way to deactivate all curves not selected.
+
+### Duplicate plot, Copy and Paste 
+An entire summary plot may be duplicated using the toolbar button 
+{{< image-in-text src="images/plot-window/ToolbarDuplicatePlot.png" >}} **Duplicate Plot**.
+
+Copy and Paste of a summary plot, subplot (see below) or curve is also possible using the **Plots** right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V). This enables pasting a subplot or curve to wherever desired in the the **Plots** tree.
+
+![]({{< relref "" >}}images/plot-window/SummarySubplotCopy.png)
+
+### Filtering of subplots
+Filtering of subplots allows the user to disable/hide subplots containing data below a user defined threshold.
+To activate filtering of subplots, click a plot in **Plots** window, set the *Y-axis Threshold* in Property Editor, and click *Apply Filter*.
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotVisibilityFilter.png)
+
+### Splitting a plot into subplots
+A plot with many curves can easily be split into multiple subplots. 
+Right-click a composite plot in **Plots** and select **Split Into Single Curve Plots** to split  into subplots each comprising one curve.
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotSplitIntoSingleCurvePlots.png)
+
 
 ### Accessing Plot Data
 Right-clicking a plot in **Plots** window and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
@@ -113,10 +141,6 @@ The window displays plot data by day, week, month, quarter, half year and year.
 The text content of this window is easy to copy and paste into Excel or other tools for further processing.
 It is also possible to save the text data to a file by the right-click command **Export to File**. 
 
-### Copy and Paste 
-Copy and Paste of a summary subplot (see below) or curve is possible using the **Plots** right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V).
-
-![]({{< relref "" >}}images/plot-window/SummarySubplotCopy.png)
 
 
 ## Editing Summary Plots

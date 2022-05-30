@@ -41,14 +41,24 @@ Summary templates made with prior versions are incompatible with ResInsight 2022
 {{% /notice %}}
 
 
-## Templates window
+## Default templates
+Default templates is a powerful feature to automate the generation of summary plots when importing a summary case. The basis for automation is the selection of one or more default templates.
+
+Specify each default template by right-clicking in the **Templates** window.
+Then activate the use of default templates by specifying **Use Plot Templates** in the **Plotting tab** of Preferences, c.f. menu option [**Edit&rarr;Preferences**]({{< relref "preferences#plotting" >}}).
+
+
+![]({{< relref "" >}}images/plot-window/SummaryPlotTemplateWindow.png)
+
+
+## Templates management
 The **Templates** window enables overview of summary plot templates by directory and offers the following functionality:
 
 - rename template
 - delete template
 - edit template XML file in the *Script Editor* specified in 
 [Preferences]({{< relref "preferences#scripting" >}}) 
-- setting default template
+- specifying default template as described above
 - reload templates in ResInsight in case of directory or file changes on disk
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotTemplateWindow.png)
+See also menu option [**Edit&rarr;Preferences**]({{< relref "preferences#plotting" >}}) for managing template folders and template searches.
