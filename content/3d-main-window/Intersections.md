@@ -6,30 +6,28 @@ weight = 80
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionOverview.png)
 
-Intersections are cross sections of the grid model that displays the grid cell values on planes that cut through the grid in various ways. 
+Intersections are cross sections of a grid model that cut the grid in various ways to display grid cell values. 
+There are two main types of intersections: 
 
-There are two main types of intersections. The first one which simply is called **Intersection**, is defined by a piece-wise linear curve and an extrusion direction. The curve can be either a Simulation Well, a Well Path, a user defined polyline, or a user defined line. These intersections can also be shown in their own separate [2D Intersection View]({{< relref "intersections" >}}#2d-intersection-views)
+1. **Intersection**: is defined by a piece-wise linear curve and a direction of extrusion. The curve can be either a simulation well, a well path, a user defined polyline, or a user defined line. An  intersection can also be shown in a separate [2D Intersection View]({{< relref "intersections" >}}#2d-intersection-views).
+
+1. **Intersection Box**: can be used as a box cutting grid cells or collapsed to a restricted axis aligned plane. 
 
 Structural uncertainty can be visualized on intersections as described in [Ensemble Surface]({{< relref "ensemblesurface" >}}).
 
-The second intersection type is called an **Intersection Box**. An Intersection Box can be used as a box cutting the grid cells, or collapsed to a restricted axis aligned plane. 
-
-All types of intersections are stored in a folder named **Intersections** in a **View** as shown below. Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the right-click menu of each intersection.
-
-Once created, the intersections may be copied to other views by selecting the **Copy intersections to all views in case** option from the right-click menu of each intersection.
+All types of intersections are stored in the folder **Intersections** of a **View**. Once created, an intersection may be copied to other views by **Copy and Paste** (Ctrl-C/Ctrl-V), or by selecting **Copy intersections to all views in case** in the right-click menu.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionInTreeCopy.png)
+
 
 ## Curve Based Intersections
 
 There are four types of curve based intersections: Well Path, Simulation Well, Polyline, and Azimuth and Dip. Azimuth and Dip differs from the other three curves, as it is defined just by one straight line. It is called Azimuth and Dip because the plane's extrusion direction can be defined by the two angles.
 
-Any of these intersections can be created by activating {{< image-in-text src="images/3d-main-window/CrossSection16x16.png" >}} **New Intersection** from the right-click menu of the **Intersections** item in the Project Tree.
-
-They can also be created from the right-click menu in the 3D view, as described below.
+Any of these intersections can be created by activating {{< image-in-text src="images/3d-main-window/CrossSection16x16.png" >}} **New Intersection** from the right-click menu of the **Intersections** item in the Project Tree. They can also be created from the right-click menu in the 3D view, as described below.
 
 {{% notice info %}}
-To be able to see the intersections in the 3D view, the grid cells can be hidden by disabling the <b>Grids</b> item in the Project Tree or activating the <b>Hide Grid Cells</b> toolbar button.
+To be able to see the intersections in the 3D view, the grid cells can be hidden by disabling the <b>Grids</b> item in **Project Tree** or activating the <b>Hide Grid Cells</b> toolbar button.
 {{% /notice %}}
 
 ### Common Curve Based Intersection Options
@@ -38,23 +36,15 @@ The property panel of a well path based intersection is shown below:
 
  ![]({{< relref "" >}}images/3d-main-window/IntersectionWellPath.png)
  
-- **Name** -- Automatically created based on the item specifying the intersection. The user can customize the name by editing, but will be updated if you change the well or well path.
-- **Intersecting Geometry** -- These options controls the curve to be used for the cross section, and depends on the type of intersection you choose.
+- **Name** -- Automatically created based on the item specifying the intersection. The user can edit the name, but it will be updated if you change well or well path.
+- **Intersecting Geometry** -- Options to control the curve used for the cross section dependant on the type of intersection.
 - **Direction** -- Horizontal, vertical or defined by two points.
 - **Extent Length** -- Defines how far an intersection for well path or simulation Well is extended at intersection ends.
-- **Show Inactive Cells** -- Controls if inactive cells are included when creating the intersection geometry.
+- **Show Inactive Cells** -- Controls if inactive cells are included when creating intersection geometry.
 
-#### Direction
+**Direction** is used to extrude the curve in the defined direction, and thereby create a set of planes. **Horizontal** implies the start and end point of the curve is used as a baseline, and the horizontal direction is thus perpendicular to that line.
+By **Defined by two points**, the user can define the direction based on any two points. The direction from the first to the second point defines the extrude direction. 
 
-The direction defined is used to extrude the curve in the defined direction, and thereby create a set of planes. 
-
-When selection the **Horizontal** option, the start and end point of the curve is used as a baseline, and the horizontal direction is thus perpendicular to that line.
-
-When **Defined by two points** is the active option, the user can define the direction based on any two points. The direction from the first to the second point defines the extrude direction. 
-
-- The background color of this list is set to light pink when adding points by picking in the 3D view is active. 
-- To finish adding points, click the button **Stop picking points** in the **Property Editor**. 
-- The background color of the point list is then set to white. 
 
 ### Well Path Intersection
 A new **Well Path** intersection can be created by right-clicking the well path in the 3D view or in the **Project Tree**. 
@@ -78,32 +68,30 @@ A new **Polyline** intersection can be created from the right-click menu in the 
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionPolyline.png)
 
-- The background color of this list is set to light pink when adding points by picking in the 3D view is active. 
-- To finish adding points, click the button **Stop picking points** in the **Property Editor**. 
-- The background color of the point list is then set to white. 
+- The background color of point list is light pink when additional points can be picked in 3D view. 
+- To finish adding points, click button **Stop picking points** (color of point list turns white). 
 
-The points in the list can be deleted and edited using the keyboard. To append more points (by clicking in the 3D view), push the button **Start picking points** again.
+The points in the list can be deleted and edited using the keyboard. To append more points (by clicking in the 3D view), press button **Start picking points** again.
 
-The points in the list can be copied to clipboard using **CTRL-C** when keyboard focus is inside the point list. A new list of points can be pasted into the point list by using **CTRL-V**.
+The point list can be copied to clipboard using **CTRL-C** when in keyboard focus. A new list of points can be pasted into the point list by using **CTRL-V**.
 
 ### Azimuth and Dip
 
-A new **Azimuth and Dip** intersection can be created from the right-click menu in the 3D view. Then, by left-clicking two points on reservoir geometry, a single line is created between the first point, and the second point projected down to the plane with same z-value as the first point. The two points are added to the point list in the **Property Editor**. 
+A new **Azimuth and Dip** intersection can be created from the right-click menu in 3D view. Then, by left-clicking two points on reservoir geometry, a single line is created between the first point, and the second point projected down to the plane with same z-value as the first point. The two points are added to the point list in the **Property Editor**. 
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionAzimuthDip.png)
 
-- The background color of this list is set to light pink when adding points by picking in the 3D view is active. 
-- To finish adding points, click the button **Stop picking points** in the **Property Editor**. 
-- The background color of the point list is then set to white. 
+- The background color of point list is light pink when additional points can be picked in 3D view. 
+- To finish adding points, click button **Stop picking points** (color of point list turns white). 
 
-The points in the list can be deleted and edited using the keyboard. To append more points by clicking in the 3D view, push the button **Start picking points** again.
+The points in the list can be deleted and edited using the keyboard. To append more points by clicking in the 3D view, press button **Start picking points** again.
 
-The points in the list can be copied to clipboard using **CTRL-C** when keyboard focus is inside the point list. A new list of points can be pasted into the point list by using **CTRL-V**.
+The points in the list can be copied to clipboard using **CTRL-C** when in keyboard focus. A new list of points can be pasted into the point list by using **CTRL-V**.
 
-When two points are picked, a plane between the points will appear in the 3D view, with a 90 degrees **Dip**, and the **Azimuth** angle calculated from the two points. The two angles can be edited in the **Property Editor** of the intersection, and is defined by the following:
+When two points are picked, a plane between the points will appear in the 3D view with a 90 degrees **Dip**, and the **Azimuth** angle calculated from the two points. The two angles can be edited in the **Property Editor** of the intersection:
 
-- **Dip** is the angle between the horizontal plane and down. 
-- **Azimuth** is the angle between North and the plane. Changing the azimuth will rotate the plane about the first point picked in the 3D view.
+- **Dip**: angle between the horizontal plane and down. 
+- **Azimuth**: angle between North and the plane. Changing azimuth will rotate the plane about the first point picked in 3D view.
 
 The length of the plane can also be set manually in the **Property Editor**.
 
@@ -120,20 +108,20 @@ A 2D Intersection View displays the intersection in a separate 2D view along wit
 
 Each of the curve based intersections have a corresponding **2D Intersection View**. Management of these views are automatic. They will be created and deleted along with the intersection.
 
-The view can be shown either by right clicking the intersection and select the command **Show 2D intersection View**, or by toggling the view in the project tree directly.
+A 2D Intersection View is shown either by right clicking an intersection and select **Show 2D intersection View** or by checking its entry in **Project tree**.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionViewsProjectTree.png)
 
 Scales along the edges of the view show the depth and the horizontal length of the intersection. The length is measured from the start of the wellpath or the well head of a simulation well. 
 
-The view is mostly controlled by the options in the 3D view where the intersection is defined. There are, however some independent controls, like drawstyle, timestep and Z-scale.
+The view is mostly controlled by the options in the 3D view where the intersection is defined. There are, however, some independent controls, like drawstyle, timestep and Z-scale:
 
 ![]({{< relref "" >}}images/3d-main-window/2DIntersectionViewProperties.png)
 
 - **Viewer**
-  - **Name** -- User editable name of the view. The default name is set by combining the name of the origin view and the intersection name.
+  - **Name** -- User editable name of view. The default name combines the name of the origin view and intersection name.
   - **Background** -- Color of the viewer background 
-  - **Disable Results Lighting** -- Toggle the light effect. When the lighting is turned off, the colors are easier to compare with the legend, but the colors carry no visual cue to visualize the 3D shape. The effect is tiny on 2D Intersection Views.
+  - **Disable Results Lighting** -- Toggle the light effect. When turned off, the colors are easier to compare with legend, but carry no visual cue to visualize 3D shape. The effect is tiny on 2D Intersection Views.
 - **Grid Appearance** -- Controls the drawstyle of the grid geometry
   - **Z Scale** -- Scales the view in Z(depth) direction to make slim K-layers easier to see
   - **Grid Lines** -- Controls what mesh lines to draw
@@ -159,25 +147,37 @@ The following list describes the properties for an **Intersection Box**:
 
 - **Name** -- Automatically created based on the item specifying the intersection
 - **Box Type** -- Box or x-plane, y-plane or z-plane
-- **Show Inactive Cells** -- Controls if inactive cells are included when creating the intersection geometry
+- **Show Inactive Cells** -- Controls if inactive cells are included when creating intersection geometry
 - **X Coordinates** -- Coordinates for x range
 - **Y Coordinates** -- Coordinates for y range
 - **Depth** -- Coordinates for depth range
-- **XY Slider Step Size** -- Defines how much the value changes when the slider for XY values is changed, default value 1.0
-- **Depth Slider Step Size** -- Defines how much the value changes when the slider for depth values is changed, default value 0.5
+- **XY Slider Step Size** -- Defines incremental changes for slider when XY values are changed (default value 1.0)
+- **Depth Slider Step Size** -- Defines incremental changes for slider when depth values are changed (default value 0.5)
 
 Direct interaction in a 3D view is activated when **Show 3D manipulator** is pressed. Handles are displayed at the sides of the intersection object, and interactive modification is done by dragging a handle in the 3D view.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionBoxWithHandles.png)
 
+## Depth Filter
+The visible parts of an intersection can be filtered (i.e. restricted) by user defined depths. 
+Depth filtering is performed by selecting an intersection in **Project Tree** and setting the **Depth Filter** properties in **Property Editor**:
+- **None**: no depth filtering
+- **Above**: filtering above the specified *Upper Depth*
+- **Below**: filtering below specified *Lower Depth*
+- **Between**: filtering between the specified upper and lower depths
+
+![]({{< relref "" >}}images/3d-main-window/IntersectionPropEdDepthFilter.png)
+
+ 
+
 
 ## Intersection Results
 
-To select a simulation result to display on an intersection, the first step is to right-click **Intersection Results** in **Project Tree** and select **New Result Definition**.
+To select a simulation result to display on an intersection, right-click **Intersection Results** in **Project Tree** and select **New Result Definition**.
 
 ![]({{< relref "" >}}images/3d-main-window/SeparateIntersectionResults.png)
 
-By selecting the entry of a specific ** Intersection Result**, the **Property Editor** allows to specify case, type or position etc depending on whether the result stem from an Eclipse case or a Geomechanical case.
+By selecting a specific **Intersection Result**, the **Property Editor** allows to specify case, type or position etc depending on whether the result stem from an Eclipse case or a Geomechanical case.
 
 The next step is to select an **Intersection** in **Project Tree** and define **Result Reference**. 
 In the example below, available sources are the two **Intersections Results** of previous figure, one of which stems from a geomechanical case and the other from an Eclipse case.
