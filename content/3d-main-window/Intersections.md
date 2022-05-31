@@ -158,17 +158,16 @@ Direct interaction in a 3D view is activated when **Show 3D manipulator** is pre
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionBoxWithHandles.png)
 
+
 ## Depth Filter
-The visible parts of an intersection can be filtered (i.e. restricted) by user defined depths. 
+An intersection can be visually filtered, i.e. partly hidden from display, by employing a user defined **Depth Filter**. 
 Depth filtering is performed by selecting an intersection in **Project Tree** and setting the **Depth Filter** properties in **Property Editor**:
 - **None**: no depth filtering
 - **Above**: filtering above the specified *Upper Depth*
 - **Below**: filtering below specified *Lower Depth*
-- **Between**: filtering between the specified upper and lower depths
+- **Between**: filtering above specified *Upper Depth* and below specified *Lower Depth*
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionPropEdDepthFilter.png)
-
- 
 
 
 ## Intersection Results
