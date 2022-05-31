@@ -15,7 +15,7 @@ There are two main types of intersections:
 
 Structural uncertainty can be visualized on intersections as described in [Ensemble Surface]({{< relref "ensemblesurface" >}}).
 
-All types of intersections are stored in the folder **Intersections** of a **View**. Once created, an intersection may be copied to other views by **Copy and Paste** (Ctrl-C/Ctrl-V), or by selecting **Copy intersections to all views in case** in the right-click menu.
+All types of intersections are stored in the folder **Intersections** of a **View**. An intersection may be copied to other views by the menu option **Copy intersections to all views in case** in the right-click menu.
 
 ![]({{< relref "" >}}images/3d-main-window/IntersectionInTreeCopy.png)
 
