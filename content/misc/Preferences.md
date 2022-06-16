@@ -74,13 +74,19 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
   - **Curve Color By Phase**: distinguish each phase by separate color.
   - **Show resample time text** preference
 - **Multi Plot Defaults**: specification of number of rows and columns for each page containing multiple summary plots.
-- **Plot Templates**: specification of folders and search for templates.
+- **Plot Templates**: specification of folders and folder search depth for templates.
   - Press **Append** to browse for folder to append. 
-  - Check **Search Plot Templates Recursively** to also search subdirectories for templates.
+  - Specify **Maximum Plot Template Folder Search Depth** to restrict the depth of subdirectories to be searched for templates.
 - **General**
   - **Date** and **Time** format preferences.
   - **Page Setup**: Physical page size, orientation, and margins. 
 
+ {{% notice note %}}
+Please consider the location and folders of your templates with care to cater for structured usage but also to limit the folder search depth for performance reasons.
+{{% /notice %}}
+
+  
+  
 
 ## Scripting
 
