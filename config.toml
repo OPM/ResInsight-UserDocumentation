@@ -35,6 +35,12 @@ disableShortcutsTitle = true
 	weight = 20
 
 [[menu.shortcuts]]
+	name = "<i class='fa fa-university'></i> Training"
+	identifier = "training"
+	url = "/training"
+	weight = 20
+	
+[[menu.shortcuts]]
 	name = "<i class='far fa-question-circle'></i> Support"
 	identifier = "support"
 	url = "/support"
