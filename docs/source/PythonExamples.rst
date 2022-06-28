@@ -126,6 +126,12 @@ Grid Information
 ===================================
 .. literalinclude:: ../rips/PythonExamples/grid_information.py
 
+.. _headless_plot_export:
+
+Headless Plot Export
+===================================
+.. literalinclude:: ../rips/PythonExamples/headless_plot_export.py
+
 .. _import_fractures_on_well:
 
 Import Fractures On Well

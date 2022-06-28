@@ -595,7 +595,7 @@ class View(ViewWindow):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#b0c4de"
+        self.background_color = "#3b3b3b"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
