@@ -69,10 +69,11 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
   - **Create Plot On Summary Data Import**: governs automatic creation of summary plots when importing a summary case
      - *No Plots*: do not automatically create summary plots
      - *Use Data Vector Names*: Create summary plots automatically based on given vector names, e.g. `FOPT WOPT*`
-     - *Use Data Vector Names*: Create summary plots automatically based on default templates. 
+     - *Use Plot Templates*: Create summary plots automatically based on default templates. 
   - **Default Curve Style for History Vectors**: allows specifying *symbols* and/or *lines* as preference.
+  - **Append History Vectors**: automatically include the corresponding history vector when appending a simulated summary vector.
   - **Curve Color By Phase**: distinguish each phase by separate color.
-  - **Show resample time text** preference
+  
 - **Multi Plot Defaults**: specification of number of rows and columns for each page containing multiple summary plots.
 - **Plot Templates**: specification of folders and folder search depth for templates.
   - Press **Append** to browse for folder to append. 
