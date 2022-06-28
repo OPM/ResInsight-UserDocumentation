@@ -84,8 +84,9 @@ ResInsight may ease comparison of multiple summary curves by selecting a plot in
 
 The different options are:
 
-- *Axis Range Aggregation*: Setting axes consideration span to either individual, all subplots, all wells, all regions, or all realizations.
+- *Axis Range Control*: Setting axes consideration span to either individual, all subplots, all wells, all regions, or all realizations.
 - *Link Sub Plot Axes*: When checked, the axes of all subplots will be treated to obtain plots with identical axes.
+- *Link Time Axis*: When checked, the time axes of all subplots will identical.
 - *Auto Adjust Appearance*: When checked, ResInsight creates axes with titles, ranges, tickmarks, and units for best possible appearance.
 
 
