@@ -64,25 +64,9 @@ The following are separated into individually dockable windows:
 - Scripts are now available as separate windows
 - Templates are available in a separate window
 
+## Display of RFT segment curves
+![]({{< relref "" >}}images/plot-window/RFTSegmentPlot.png)
 
-
-## Display of RFT segments and connections
-
-TODO
-
-## Python API
-Several improvements and more examples
-
-- TODO
-
-https://api.resinsight.org/en/stable/PythonExamples.html
-
-
-
-## Additional New Features and Enhancements
-
-- TODO
+RFT Segment Data can be plotted as horizontal Well Log Plots.
 
 See [**Release Notes on GitHub**](https://github.com/OPM/ResInsight/releases/) for further details and information.
-
-
