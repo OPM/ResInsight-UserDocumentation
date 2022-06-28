@@ -10,7 +10,8 @@ ResInsight offers a built-in property calculator for grid parameters.
 The **Grid Property Calculator** enables arithmetic expressions to be parsed and calculated for visualization purposes.
 
 ## Invoking the Grid Property Calculator
-Invoke the the **Grid Property Calculator** by right-clicking 
+
+Invoke the the **Grid Property Calculator** by pressing the calculator icon {{< image-in-text src="images/Calculator.svg" >}} in the menu bar or by right-clicking 
 {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** in **Project Tree**. 
 
 ![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorInvoke.png)
