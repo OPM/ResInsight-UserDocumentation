@@ -2,7 +2,7 @@ from rips.pdmobject import PdmObjectBase
 class CellFilterCollection(PdmObjectBase):
     """
     Attributes:
-        active (str): Active
+        active (bool): Active
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -155,7 +155,7 @@ class ElasticProperties(PdmObjectBase):
     Attributes:
         file_path (str): File Path
         properties_table (str): Properties Table
-        show_scaled_properties (str): Show Scaled Properties
+        show_scaled_properties (bool): Show Scaled Properties
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -208,7 +208,7 @@ class NamedObject(PdmObjectBase):
 class CheckableNamedObject(NamedObject):
     """
     Attributes:
-        is_checked (str): Active
+        is_checked (bool): Active
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -422,10 +422,11 @@ class SummaryCase(PdmObjectBase):
     The Base Class for all Summary Cases
 
     Attributes:
-        auto_shorty_name (str): Use Auto Display Name
+        auto_shorty_name (bool): Use Auto Display Name
         id (int): Case ID
         name_setting (str): One of [FULL_CASE_NAME, SHORT_CASE_NAME, CUSTOM_NAME]
         short_name (str): Display Name
+        show_sub_nodes_in_tree (bool): Show Summary Data Sub-Tree
         summary_header_filename (str): Summary Header File
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -435,6 +436,7 @@ class SummaryCase(PdmObjectBase):
         self.id = -1
         self.name_setting = "FULL_CASE_NAME"
         self.short_name = ""
+        self.show_sub_nodes_in_tree = False
         self.summary_header_filename = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SummaryCase.__custom_init__ is not None:
@@ -508,7 +510,7 @@ class FileSummaryCase(SummaryCase):
     A Summary Case based on SMSPEC files
 
     Attributes:
-        include_restart_files (str): Include Restart Files
+        include_restart_files (bool): Include Restart Files
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -546,7 +548,7 @@ class GeoMechPart(CheckableNamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.part_id = 0
+        self.part_id = -1
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if GeoMechPart.__custom_init__ is not None:
             GeoMechPart.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -585,17 +587,17 @@ class View(ViewWindow):
     Attributes:
         background_color (str): Background
         current_time_step (int): Current Time Step
-        disable_lighting (str): Disable Results Lighting
+        disable_lighting (bool): Disable Results Lighting
         grid_z_scale (float): Z Scale
         id (int): View ID
-        perspective_projection (str): Perspective Projection
-        show_grid_box (str): Show Grid Box
-        show_z_scale (str): Show Z Scale Label
+        perspective_projection (bool): Perspective Projection
+        show_grid_box (bool): Show Grid Box
+        show_z_scale (bool): Show Z Scale Label
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#3b3b3b"
+        self.background_color = "#b0c4de"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
@@ -624,7 +626,7 @@ class GridCaseSurface(SurfaceInterface):
     Attributes:
         slice_index (int): Slice Index (K)
         source_case (str): Source Case
-        watertight (str): Watertight Surface (fill gaps)
+        watertight (bool): Watertight Surface (fill gaps)
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -671,17 +673,19 @@ class WellPath(PdmObjectBase):
         if WellPath.__custom_init__ is not None:
             WellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_fracture(self, measured_depth=0, stim_plan_fracture_template=""):
+    def add_fracture(self, measured_depth=0, stim_plan_fracture_template="", align_dip=False, eclipse_case=""):
         """
         Add StimPlan Fracture
 
         Arguments:
             measured_depth (float): 
             stim_plan_fracture_template (StimPlanFractureTemplate): StimPlan Fracture Template
+            align_dip (bool): 
+            eclipse_case (RimReservoir): Eclipse Case
         Returns:
             WellPathFracture
         """
-        return self._call_pdm_method("AddFracture", measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template)
+        return self._call_pdm_method("AddFracture", measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template, align_dip=align_dip, eclipse_case=eclipse_case)
 
 
     def append_perforation_interval(self, start_md=0, end_md=0, diameter=0, skin_factor=0):
@@ -935,7 +939,7 @@ class EclipseResult(PdmObjectBase):
         selected_injector_tracers (List of str): Injector Tracers
         selected_producer_tracers (List of str): Producer Tracers
         selected_souring_tracers (List of str): Tracers
-        show_only_visible_categories_in_legend (str): Show Only Visible Categories In Legend
+        show_only_visible_categories_in_legend (bool): Show Only Visible Categories In Legend
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1070,9 +1074,9 @@ class StimPlanModel(CheckableNamedObject):
     """
     Attributes:
         anchor_position (str): Anchor Position
-        auto_compute_barrier (str): Auto Compute Barrier
+        auto_compute_barrier (bool): Auto Compute Barrier
         azimuth_angle (float): Azimuth Angle
-        barrier (str): Barrier
+        barrier (bool): Barrier
         barrier_dip (float): Barrier Dip
         barrier_fault_name (str): Barrier Fault
         barrier_text_annotation (str): Barrier Text Annotation
@@ -1089,18 +1093,19 @@ class StimPlanModel(CheckableNamedObject):
         fracture_orientation (str): One of [Longitudinal, Transverse, Azimuth]
         initial_pressure_eclipse_case (str): Initial Pressure Case
         measured_depth (float): Measured Depth
+        original_thickness_direction (str): Original Thickness Direction
         perforation_interval (str): Perforation Interval
         perforation_length (float): Perforation Length [m]
         poro_elastic_constant (float): Poro-Elastic Constant
         relative_permeability_factor (float): Relative Permeability Factor
-        show_all_faults (str): Show All Faults
-        show_only_barrier_fault (str): Show Only Barrier Fault
+        show_all_faults (bool): Show All Faults
+        show_only_barrier_fault (bool): Show Only Barrier Fault
         static_eclipse_case (str): Static Case
         thermal_expansion_coefficient (float): Thermal Expansion Coefficient [1/C]
         thickness_direction (str): Thickness Direction
         thickness_direction_well_path (str): Thickness Direction Well Path
         time_step (int): Time Step
-        use_detailed_fluid_loss (str): Use Detailed Fluid Loss
+        use_detailed_fluid_loss (bool): Use Detailed Fluid Loss
         well_penetration_layer (int): Well Penetration Layer
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -1126,6 +1131,7 @@ class StimPlanModel(CheckableNamedObject):
         self.fracture_orientation = "Longitudinal"
         self.initial_pressure_eclipse_case = ""
         self.measured_depth = 0
+        self.original_thickness_direction = [0, 0, 0]
         self.perforation_interval = ""
         self.perforation_length = 10
         self.poro_elastic_constant = 0
@@ -1204,7 +1210,7 @@ class PlotWindow(ViewWindow):
 class DepthTrackPlot(PlotWindow):
     """
     Attributes:
-        auto_scale_depth_enabled (str): Auto Scale
+        auto_scale_depth_enabled (bool): Auto Scale
         axis_title_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
         axis_value_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
         depth_type (str): One of [MEASURED_DEPTH, TRUE_VERTICAL_DEPTH, PSEUDO_LENGTH, CONNECTION_NUMBER, TRUE_VERTICAL_DEPTH_RKB]
@@ -1424,7 +1430,7 @@ class SummaryCaseSubCollection(PdmObjectBase):
     """
     Attributes:
         id (int): Ensemble ID
-        is_ensemble (str): Is Ensemble
+        is_ensemble (bool): Is Ensemble
         name_count (str): Name
         summary_collection_name (str): Name
     """
@@ -1456,10 +1462,10 @@ class SummaryPlot(Plot):
     A Summary Plot
 
     Attributes:
-        is_using_auto_name (str): Auto Title
-        normalize_curve_y_values (str): Normalize all curves
+        is_using_auto_name (bool): Auto Title
+        normalize_curve_y_values (bool): Normalize all curves
         plot_description (str): Name
-        use_qt_charts_plot (str): Use Qt Charts
+        use_qt_charts_plot (bool): Use Qt Charts
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1742,12 +1748,12 @@ class WellPathGeometry(PdmObjectBase):
 
     Attributes:
         air_gap (float): Air Gap
-        attached_to_parent_well (str): Attached to Parent Well
-        link_reference_point_updates (str): Link Reference Point
+        attached_to_parent_well (bool): Attached to Parent Well
+        link_reference_point_updates (bool): Link Reference Point
         md_at_first_target (float): MD at First Target
         reference_point (str): UTM Reference Point
-        show_spheres (str): Spheres
-        use_auto_generated_target_at_sea_level (str): Generate Target at Sea Level
+        show_spheres (bool): Spheres
+        use_auto_generated_target_at_sea_level (bool): Generate Target at Sea Level
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1814,8 +1820,8 @@ class WellPathTarget(PdmObjectBase):
         inclination (float): Inc(deg)
         target_measured_depth (float): MD
         target_point (str): Relative Coord
-        use_fixed_azimuth (str): Azi
-        use_fixed_inclination (str): Inc
+        use_fixed_azimuth (bool): Azi
+        use_fixed_inclination (bool): Inc
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
