@@ -5,7 +5,7 @@ hidden = false
 weight = 20
 +++
 
-### ResInsight Installation
+## ResInsight Installation
 
 1. Download ZIP binary distribution from [https://github.com/OPM/ResInsight/releases](https://github.com/OPM/ResInsight/releases "release section on GitHub")
 2. Extract content from ZIP file
@@ -17,7 +17,7 @@ The binary distribution does not support ABAQUS odb files. For building ResInsig
 {{% /notice %}}
 
 
-### Octave Installation (optional)
+## Octave Installation (optional)
 1. Download [Octave-4.0.0](ftp://ftp.gnu.org/gnu/octave/windows) and install it. (Newer versions will not work)
 2. Launch ResInsight.exe, open **Edit->Preferences**. 
 3. On the **Octave** tab, enter the path to the Octave command line interpreter executable.  
@@ -30,3 +30,20 @@ A binary package of ResInsight will normally <b>not</b> work with other Octave v
 {{% notice info %}}
 You <b>have</b> to point to the <b>cli</b> binary in the windows octave installation. The <code>octave.exe</code> will not work as it is launching the octave GUI.
 {{% /notice %}}
+
+## FAQ
+
+### Smartscreen warnings
+When launching ResInsight at the first time, a Smartscreen warning might be displayed. This is a security feature by Microsoft, and will warn the user when an unknown program is launched. This warning is displayed once for each installation.
+
+
+![]({{< relref "" >}}images/getting-started/Smartscreen_01.png)
+
+Press the **More info** link in the upper left section.
+
+
+![]({{< relref "" >}}images/getting-started/Smartscreen_02.png)
+
+Notice the information and digital signature by **Ceetron Solutions AS**.
+
+Press **Run anyway**, and the application starts. This warning is only displayed once.
