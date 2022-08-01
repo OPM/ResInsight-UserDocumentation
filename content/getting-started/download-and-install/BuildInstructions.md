@@ -23,14 +23,13 @@ On RedHat Linux 7 or CentOS 7 you need to install devtoolset-10, and enable it w
     source /opt/rh/devtoolset-10/enable
 
 ### Qt 5
-Qt 5.9 or later is supported, Qt 5.15 is recommended.
+Qt 5.12 or later is supported, Qt 5.15 is recommended.
 
 [Qt download](http://download.qt.io/archive/qt/)  
 
-On some configurations you will be asked to specify the location of Qt. Preferred method is to add Qt path to CMake variable CMAKE_PREFIX_PATH
+On some configurations you will be asked to specify the location of Qt. Preferred method is to add Qt path to CMake variable **CMAKE_PREFIX_PATH**
 
-Example for Windows :
-`CMAKE_PREFIX_PATH=F:/Qt/5.15.2/msvc2019_64`
+Example for Windows : `CMAKE_PREFIX_PATH=F:/Qt/5.15.2/msvc2019_64`
 
 ### CMake
 [CMake](https://cmake.org/download/) version 3.12 or later is supported.
