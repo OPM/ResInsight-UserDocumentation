@@ -27,8 +27,10 @@ Qt 5.9 or later is supported, Qt 5.15 is recommended.
 
 [Qt download](http://download.qt.io/archive/qt/)  
 
-On some configurations you will be asked to specify the location of Qt 5. Example for Windows :
-`Qt5_DIR=d:\Qt\5.15.0\msvc2019_64\lib\cmake\Qt5`
+On some configurations you will be asked to specify the location of Qt. Preferred method is to add Qt path to CMake variable CMAKE_PREFIX_PATH
+
+Example for Windows :
+`CMAKE_PREFIX_PATH=F:/Qt/5.15.2/msvc2019_64`
 
 ### CMake
 [CMake](https://cmake.org/download/) version 3.12 or later is supported.
