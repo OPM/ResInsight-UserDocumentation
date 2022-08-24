@@ -27,6 +27,10 @@ As seen below, the **Grid Property Calculator** is per default prefilled with th
 This simple summation suffices for exemplifying its use.
 However, you may change name of the calculation and add additional variables and arithmetic operators in the **Expression** field.
 
+{{% notice note %}}
+**If** statements is also supported with the following syntax `NEW_TRANX := if((TRANX < 0.01), 0.01, TRANX)`
+{{% /notice %}}
+
 
 ![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorDefault.png)
 
