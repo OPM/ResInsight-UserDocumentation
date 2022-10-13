@@ -27,15 +27,11 @@ Select the generated **Well Log Plot**. Adjust the data source to desired well o
 
 ## Additional settings and adjustments
 
-### Axis and legend settings
-![]({{< relref "" >}}images/plot-window/RFTSegmentPlotPropertyEditor.png)
+### General
+- Select the plot, and use **Data Source** to change wells, dates and branch numbers
 
-- Control if the depth axis should be visible for a single or all track from **Axis Visibility.**
-- Use the **Plot Title** group to adjust the text of the title. Define a Template Text for full flexibility. Available variable names can be seen when hoovering over the Template Text label.
-- Define where the location of curve legend using the **Legend Position** control.
+![]({{< relref "" >}}images/plot-window/RFTSegmentDataSourceStepping.png)
 
-
-### Other
 - If TVD depth is plotted, optionally invert the Y-axis when the track is selected
 
 ![]({{< relref "" >}}images/plot-window/RFTSegmentInvertAxis.png)
@@ -44,9 +40,13 @@ Select the generated **Well Log Plot**. Adjust the data source to desired well o
 
 ![]({{< relref "" >}}images/plot-window/RFTSegmentStackCurves.png)
 
-- Select the plot, and use **Data Source** to change wells, dates and branch numbers
 
-![]({{< relref "" >}}images/plot-window/RFTSegmentDataSourceStepping.png)
+### Axis and legend settings
+![]({{< relref "" >}}images/plot-window/RFTSegmentPlotPropertyEditor.png)
+
+- Control if the depth axis should be visible for a single or all track from **Axis Visibility.**
+- Use the **Plot Title** group to adjust the text of the title. Define a Template Text for full flexibility. Available variable names can be seen when hoovering over the Template Text label.
+- Define where the location of curve legend using the **Legend Position** control.
 
 
 ## Related documents
