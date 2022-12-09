@@ -193,7 +193,7 @@ Based on file *1_R001_REEK-0.SMSPEC*, the following command line performs a [sum
 for *FOPT* and any *WOPT*-vector for well *op_2*.
 The trailing option *-s* gathers the vectors into a single summary plot.
 ```
-ResInsight --summaryplot FOPT WOPT*:op_2 1_R001_REEK-0 -s 
+ResInsight --summaryplot -s FOPT WOPT*:op_2 1_R001_REEK-0
 ```
 
 Adding to previous example, the following command line also plots the 3D grid property `SOIL` for cell (20, 21, 1).
