@@ -186,19 +186,19 @@ The possibility to replace multiple cases can also be applied for single case re
 The following command line performs a [summary plot]({{< relref "summaryplots" >}}) for *FOPT* based on Eclipse summary file *1_R001_REEK-0.SMSPEC*.
 
 ```
-ResInsight --summaryplot 1_R001_REEK-0 FOPT
+ResInsight --summaryplot FOPT 1_R001_REEK-0 
 ```
 
 Based on file *1_R001_REEK-0.SMSPEC*, the following command line performs a [summary plot]({{< relref "summaryplots" >}}) 
 for *FOPT* and any *WOPT*-vector for well *op_2*.
 The trailing option *-s* gathers the vectors into a single summary plot.
 ```
-ResInsight --summaryplot 1_R001_REEK-0 FOPT WOPT*:op_2 -s
+ResInsight --summaryplot FOPT WOPT*:op_2 1_R001_REEK-0 -s 
 ```
 
 Adding to previous example, the following command line also plots the 3D grid property `SOIL` for cell (20, 21, 1).
 ```
-ResInsight --summaryplot 1_R001_REEK-0 FOPT WOPT*:op_2 SOIL:20,21,1
+ResInsight --summaryplot FOPT WOPT*:op_2 SOIL:20,21,1 1_R001_REEK-0 
 ```
 
 
