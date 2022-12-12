@@ -1,7 +1,7 @@
 +++
 title = "Grid Property Calculator"
 published = true
-weight = 105
+weight = 30
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorMain.png)
@@ -9,7 +9,7 @@ weight = 105
 ResInsight offers a built-in property calculator for grid parameters. 
 The **Grid Property Calculator** enables arithmetic expressions to be parsed and calculated for visualization purposes.
 
-More details on mathematical operations are described in [Curve Calculator]({{< ref "CurveCalculator.md" >}})
+More details on mathematical operations are described in [Calculator Expressions]({{< ref "CalculatorExpressions.md" >}})
 
 ## Invoking the Grid Property Calculator
 
