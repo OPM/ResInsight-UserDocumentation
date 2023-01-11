@@ -62,13 +62,9 @@ After clicking *Reload Case*, the time steps in the toolbar will be updated.
 ### Appending additional properties to a binary case
 If a binary or text Eclipse case is loaded, additional properties can be appended to this binary case. Make sure that the number of values in the GRDECL file matches the total number of cells in the binary case.
 
-For export of currently selected cell result values to text file, see [Export: Eclipse Properties]({{< relref "eclipseproperties" >}})
+[Appending Additional Properties]({{< relref "appendingadditionalproperties" >}})
 
-**Appending properties**
-1. Open an Eclipse case (binary or input)
-2. From the right-click menu of the case or Cell Result, select **Add Input Property**
-3. Select the text file with properties
-4. The imported data is then available in the **Cell Result** by activating the **Input Property** in the **Type** drop down list.
+For export of currently selected cell result values to text file, see [Export: Eclipse Properties]({{< relref "eclipseproperties" >}})
 
 ## Handling Missing or Wrong MAPAXES
 
