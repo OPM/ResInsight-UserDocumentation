@@ -21,7 +21,7 @@ Some cases require data from **WSEGLINK** keyword. When importing summary data, 
 
 
 ### Create Default Plot
-From the right-click menu of the summary case, select **Create RFT Segment Plot** or **Create RFT Multi Phase Segment Plot**
+From the right-click menu of the **RFT Case** object , select **Create RFT Segment Plot** or **Create RFT Multi Phase Segment Plot**
 
 Select the generated **Well Log Plot**. Adjust the data source to desired well or branch. These settings are also available from the toolbar above the plot. Useful options to adjust for a curve is color, line style and area fill.
 

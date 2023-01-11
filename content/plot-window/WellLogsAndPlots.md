@@ -40,6 +40,11 @@ The depth unit can be set using the **Depth unit** option. Currently ResInsight 
 The visible depth range can be panned using the mouse wheel while the mouse pointer hovers over the plot.
 Pressing and holding **CTRL** while using the mouse wheel will allow you to zoom in or out depth-wise, towards the mouse position.
 
+### Depth Marker Line
+If there are multiple tracks in the same plot, it can be useful to show a horizontal line across the plot based on the location of the mouse cursor. This can be activated from the **Property Editor** of a **Well Log Plot**.
+
+![]({{< relref "" >}}images/plot-window/well-log-track-depth-axis.png)
+
 ### Accessing Plot Data
 
 Right-click a Well Log Plot and select **Show Plot Data** to show a window containing the plot data in ascii format. The content of this window is easy to copy and paste into Excel or other tools for further processing.
