@@ -32,6 +32,18 @@ As seen, ResInsight per default lists the most probable stepping dimensions by a
 
 ![]({{< relref "" >}}images/plot-window/SummarySourceSteppingPropertyEditor.png)
 
+## Change Well Data Source from 3D View
+If multiple plots are using well as data source, the plot content can be uptedate by clicking on well geometry in 3D. This can be efficient if there are many wells in a model.
+
+- create plots based on well summary vectors
+- make sure source stepping dimension is set to **Well**
+- activate the update of plots by clicking on button with tool tip text *"Update wells used in plots from well selections in 3D view."*
+- open a 3D view, click on wells and the well data source in plots will be updated accordingly
+
+
+![]({{< relref "" >}}images/plot-window/SummarySourceStepping3dview.png)
+
+
 ## Source Stepping dimensions
 ResInsight decides default step dimensions based on a consideration of visible curves in the current plot or subplot. For instance, well stepping is set as default if all curves display data from the same well, c.f. examples above.
 However, the complete set of source stepping dimensions is always available in both the toolbar and Property Editor:
