@@ -35,7 +35,7 @@ When selecting a linked view in the project tree, the different options are avai
 #### Link Cell Filters
 
 - **Range Filters** -- Range filters in master view will be applied to all dependent views where this option is active. Normally this is done by a direct copy, but if the master and dependent view is of different types (Eclipse and Geomechanical views) and the Eclipse case is within the bounds of the Geomechanical case, ResInsight tries to map the range filters to the corresponding cells in the other case.
-- **Property Filters** -- Property filters in master view will be applied to all dependent views where this option is active. This option is only enabled between views of the *same case*. 
+- **Property Filters** -- Property filters in master view will be applied to all dependent views where this option is active. 
 
 ## Toggle Linking from the **Project Tree**
 

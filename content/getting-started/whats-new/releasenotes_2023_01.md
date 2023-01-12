@@ -10,11 +10,11 @@ hidden = true
 
 [Summary Plotting]({{< relref "summaryplots.md" >}}) is updated with new features and improved workflows:
 - Improved logarithmic legend and default ranges
-- Visual appearance of curves is stable when doing **Source Stepping**
+- Visual appearance of curves is now stable when doing **Source Stepping**
 - Curve name and plot name improvements 
 
 ## Change Data Source by Clicking in 3D
-If data is extracted along a well path and displayed as curves in a plot, the data source for multiple plots can be updated by clicking on a well path in 3D. This feature can be useful for large fields with many wells and you want to investigate a small subset of wells.
+The data source for multiple plots can be updated by clicking on a well path in 3D. This feature can be useful for large fields with many wells and you want to investigate a small subset of wells.
 
 [Source Stepping]({{< relref "summarysourcestepping" >}}#change-well-data-source-from-3d-view) 
 
@@ -61,9 +61,11 @@ ROFF files with properties can be imported, both in ASCII and binary form. Grid 
 [ROFF grid models]({{< relref "RoffGridModels" >}})
 
 
-## High Priority Issues Fixed
+## Other improvements
 
 [Wrong area for scaled fractures](https://github.com/OPM/ResInsight/issues/9473)
+
+[Improved Window Tiling]({{< relref "windowmanagement" >}})
 
 
 
