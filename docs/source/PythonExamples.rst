@@ -66,6 +66,12 @@ Create Intersection
 ===================================
 .. literalinclude:: ../rips/PythonExamples/create_intersection.py
 
+.. _create_surface_from_thermal_fracture:
+
+Create Surface From Thermal Fracture
+===================================
+.. literalinclude:: ../rips/PythonExamples/create_surface_from_thermal_fracture.py
+
 .. _create_wbs_plot:
 
 Create Wbs Plot
@@ -137,6 +143,12 @@ Headless Plot Export
 Import Fractures On Well
 ===================================
 .. literalinclude:: ../rips/PythonExamples/import_fractures_on_well.py
+
+.. _import_thermal_fracture_on_well:
+
+Import Thermal Fracture On Well
+===================================
+.. literalinclude:: ../rips/PythonExamples/import_thermal_fracture_on_well.py
 
 .. _import_well_paths_and_logs:
 

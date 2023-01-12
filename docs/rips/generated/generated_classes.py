@@ -540,6 +540,18 @@ class FractureTemplateCollection(PdmObjectBase):
         return self._call_pdm_method("AppendFractureTemplate", file_path=file_path)
 
 
+    def append_thermal_fracture_template(self, file_path=""):
+        """
+        Create a new Thermal Fracture Template
+
+        Arguments:
+            file_path (str): File Path to Thermal Fracture CSV File
+        Returns:
+            ThermalFractureTemplate
+        """
+        return self._call_pdm_method("AppendThermalFractureTemplate", file_path=file_path)
+
+
 class GeoMechPart(CheckableNamedObject):
     """
     Attributes:
@@ -597,7 +609,7 @@ class View(ViewWindow):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
-        self.background_color = "#b0c4de"
+        self.background_color = "#3b3b3b"
         self.current_time_step = 0
         self.disable_lighting = False
         self.grid_z_scale = 5
@@ -686,6 +698,20 @@ class WellPath(PdmObjectBase):
             WellPathFracture
         """
         return self._call_pdm_method("AddFracture", measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template, align_dip=align_dip, eclipse_case=eclipse_case)
+
+
+    def add_thermal_fracture(self, measured_depth=0, fracture_template="", place_using_template_data=True):
+        """
+        Add Thermal Fracture
+
+        Arguments:
+            measured_depth (float): 
+            fracture_template (ThermalFractureTemplate): Thermal Fracture Template
+            place_using_template_data (bool): 
+        Returns:
+            WellPathFracture
+        """
+        return self._call_pdm_method("AddThermalFracture", measured_depth=measured_depth, fracture_template=fracture_template, place_using_template_data=place_using_template_data)
 
 
     def append_perforation_interval(self, start_md=0, end_md=0, diameter=0, skin_factor=0):
@@ -1051,22 +1077,68 @@ class FractureTemplate(PdmObjectBase):
     """
     Attributes:
         azimuth_angle (float): Azimuth Angle
+        conductivity_factor (float): Conductivity
+        conductivity_type (str): One of [InfiniteConductivity, FiniteConductivity]
+        d_factor_scale_factor (float): D-factor
+        height_scale_factor (float): Height
         orientation (str): One of [Azimuth, Longitudinal, Transverse]
+        perforation_length (float): Perforation Length
+        user_defined_perforation_length (bool): User-defined Perforation Length
+        user_description (str): Name
+        width_scale_factor (float): Half Length
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
         self.azimuth_angle = 0
+        self.conductivity_factor = 1
+        self.conductivity_type = "FiniteConductivity"
+        self.d_factor_scale_factor = 1
+        self.height_scale_factor = 1
         self.orientation = "Transverse"
+        self.perforation_length = 1
+        self.user_defined_perforation_length = False
+        self.user_description = "Fracture Template"
+        self.width_scale_factor = 1
         PdmObjectBase.__init__(self, pb2_object, channel)
         if FractureTemplate.__custom_init__ is not None:
             FractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class StimPlanFractureTemplate(FractureTemplate):
+    def set_scale_factors(self, half_length=1, height=1, d_factor=1, conductivity=1):
+        """
+        Set Fracture Template Scale Factors.
+
+        Arguments:
+            half_length (float): 
+            height (float): 
+            d_factor (float): 
+            conductivity (float): 
+        Returns:
+            
+        """
+        return self._call_pdm_method("SetScaleFactors", half_length=half_length, height=height, d_factor=d_factor, conductivity=conductivity)
+
+
+class MeshFractureTemplate(FractureTemplate):
+    """
+    Attributes:
+        active_time_step_index (int): Active TimeStep Index
+        conductivity_result_name (str): Active Conductivity Result Name
+    """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
+        self.active_time_step_index = 0
+        self.conductivity_result_name = ""
         FractureTemplate.__init__(self, pb2_object, channel)
+        if MeshFractureTemplate.__custom_init__ is not None:
+            MeshFractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class StimPlanFractureTemplate(MeshFractureTemplate):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        MeshFractureTemplate.__init__(self, pb2_object, channel)
         if StimPlanFractureTemplate.__custom_init__ is not None:
             StimPlanFractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
@@ -1211,6 +1283,8 @@ class DepthTrackPlot(PlotWindow):
     """
     Attributes:
         auto_scale_depth_enabled (bool): Auto Scale
+        auto_zoom_max_depth_factor (float): Auto Zoom Maximum Factor
+        auto_zoom_min_depth_factor (float): Auto Zoom Minimum Factor
         axis_title_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
         axis_value_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
         depth_type (str): One of [MEASURED_DEPTH, TRUE_VERTICAL_DEPTH, PSEUDO_LENGTH, CONNECTION_NUMBER, TRUE_VERTICAL_DEPTH_RKB]
@@ -1218,12 +1292,15 @@ class DepthTrackPlot(PlotWindow):
         maximum_depth (float): Max
         minimum_depth (float): Min
         show_depth_grid_lines (str): One of [GRID_X_NONE, GRID_X_MAJOR, GRID_X_MAJOR_AND_MINOR]
+        show_depth_marker_line (bool): Show Depth Marker Line
         sub_title_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
         self.auto_scale_depth_enabled = True
+        self.auto_zoom_max_depth_factor = 0
+        self.auto_zoom_min_depth_factor = 0
         self.axis_title_font_size = "Medium"
         self.axis_value_font_size = "Medium"
         self.depth_type = "MEASURED_DEPTH"
@@ -1231,6 +1308,7 @@ class DepthTrackPlot(PlotWindow):
         self.maximum_depth = 1000
         self.minimum_depth = 0
         self.show_depth_grid_lines = "GRID_X_MAJOR"
+        self.show_depth_marker_line = False
         self.sub_title_font_size = "Medium"
         PlotWindow.__init__(self, pb2_object, channel)
         if DepthTrackPlot.__custom_init__ is not None:
@@ -1429,6 +1507,7 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
 class SummaryCaseSubCollection(PdmObjectBase):
     """
     Attributes:
+        create_auto_name (bool): Auto Name
         id (int): Ensemble ID
         is_ensemble (bool): Is Ensemble
         name_count (str): Name
@@ -1437,6 +1516,7 @@ class SummaryCaseSubCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
+        self.create_auto_name = True
         self.id = -1
         self.is_ensemble = False
         self.name_count = "Group"
@@ -1507,6 +1587,44 @@ class Surface(SurfaceInterface):
         SurfaceInterface.__init__(self, pb2_object, channel)
         if Surface.__custom_init__ is not None:
             Surface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class ThermalFractureTemplate(MeshFractureTemplate):
+    """
+    Attributes:
+        filter_cake_pressure_drop (str): One of [None, Relative, Absolute]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object=None, channel=None):
+        self.filter_cake_pressure_drop = "Relative"
+        MeshFractureTemplate.__init__(self, pb2_object, channel)
+        if ThermalFractureTemplate.__custom_init__ is not None:
+            ThermalFractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def export_to_file(self, file_path="", time_step=0):
+        """
+        Export Thermal Fracture Template to File
+
+        Arguments:
+            file_path (str): File Path
+            time_step (int): 
+        Returns:
+            ThermalFractureTemplate
+        """
+        return self._call_pdm_method("ExportToFile", file_path=file_path, time_step=time_step)
+
+
+    def time_steps(self, ):
+        """
+        Get Thermal Fracture Template Time Steps
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method("TimeSteps")
+
 
 class TriangleGeometry(PdmObjectBase):
     """
@@ -1900,6 +2018,7 @@ def class_dict():
     classes['GridCaseSurface'] = GridCaseSurface
     classes['GridSummaryCase'] = GridSummaryCase
     classes['IntersectionCollection'] = IntersectionCollection
+    classes['MeshFractureTemplate'] = MeshFractureTemplate
     classes['ModeledWellPath'] = ModeledWellPath
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
     classes['NamedObject'] = NamedObject
@@ -1928,6 +2047,7 @@ def class_dict():
     classes['Surface'] = Surface
     classes['SurfaceCollection'] = SurfaceCollection
     classes['SurfaceInterface'] = SurfaceInterface
+    classes['ThermalFractureTemplate'] = ThermalFractureTemplate
     classes['TriangleGeometry'] = TriangleGeometry
     classes['View'] = View
     classes['ViewWindow'] = ViewWindow
