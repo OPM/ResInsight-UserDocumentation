@@ -9,7 +9,7 @@ weight = 10
 Summary Plots are a display of curves based on 
 [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}})
 which can be combined with 
-[imported observed time history data]({{< relref "observeddata" >}}), 
+[imported observed data]({{< relref "observeddata" >}}), 
 [grid cell time history curve]({{< relref "resultinspection" >}}#result-plot), and 
 [pasted ascii curves]({{< relref "pasteexceltimedata" >}}). 
 

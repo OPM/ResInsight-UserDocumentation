@@ -9,16 +9,16 @@ Observed Time History Data, is data measured in time. On import of observed time
 ## Import Observed Time History Data
 Importing observed time history data to ResInsight may be performed in two different ways:
 
-- By selecting the main menu item **File -> Import -> Import Observed Time History Data**
-- By using the right-click command **Import Observed Time History Data** on the **Observed Time History Data** item in the **Plot Main Window Project Tree** 
+- By selecting the main menu item **File -> Import -> Import Observed Data**
+- By using the right-click command **Import Observed Data** on the **Observed Data** item in the **Plot Main Window Project Tree** 
 
 The following file types are supported:
 
 - RSM observed time history data file (_\*.rsm_)
 - Column based (Comma Separated Values, CSV) time history data file (_\*.csv/\*.txt_)
-The imported {{< image-in-text src="images/import/Default.png" >}} Observed Time History Data files will be added to {{< image-in-text src="images/import/Folder.png" >}} **Observed Time History Data**. 
+The imported {{< image-in-text src="images/import/Default.png" >}} Observed Data files will be added to {{< image-in-text src="images/import/Folder.png" >}} **Observed Data**. 
 
-Which summaries that has been detected in a Observed Time History Data file can be read in an Observed Time History Data's **Property Editor**. In the image below, time and year info has been found together with the summary "WBP9L" for the well "OP-1".
+Which summaries that has been detected in a Observed Data file can be read in an Observed Data's **Property Editor**. In the image below, time and year info has been found together with the summary "WBP9L" for the well "OP-1".
 
 ![]({{< relref "" >}}images/import/observedDataProperty.png)
 
@@ -119,7 +119,7 @@ DATE       ;FOPT ;ERR:FOPT
 
 
 ### Import RSM observed time history data
-To import RSM files, the only action needed from the user is to select one or more RSM files. When the import is finished, one tree node for each file will appear under the **Observed Time History Data** node in the project tree. RSM files can be either *Column based* or *Keyword based*.
+To import RSM files, the only action needed from the user is to select one or more RSM files. When the import is finished, one tree node for each file will appear under the **Observed Data** node in the project tree. RSM files can be either *Column based* or *Keyword based*.
 
 #### Column Based File Format
 
