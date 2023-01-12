@@ -40,7 +40,7 @@ The grid calculator and summary curve calculator is updated with more help and i
 
 ## Breaking changes for user defined well paths
 
-The calculation of the geometry for a user defined well path had some defects. These issues are now fixed, and can affect the generated geometry of a user-defined well path. If the ResInsight project file was stored with a version before 2023.01, loading the project in version 2023.01 and later can potentially generate a slightly different well path geometry (the location of well targets are unchanged). The location of perforation intervals and completions are specified by measured depth, and could be shifted to a different location due to this change of behaviour.
+The calculation of the geometry for a user defined well path had some defects. These issues are now fixed, and can affect the generated geometry of a user-defined well path. If the ResInsight project file was stored with a version before 2023.01, loading the project in version 2023.01 and later can potentially generate a slightly different well path geometry from the target at sea level to the first user-defined well target (the location of user-defined well targets are unchanged). The location of perforation intervals and completions are specified by measured depth, and could be shifted to a different location.
 
 Thanks to https://github.com/EdmundStephens for reporting this [issue](https://github.com/OPM/ResInsight/issues/9439).
 
