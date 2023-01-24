@@ -32,7 +32,7 @@ On some configurations you will be asked to specify the location of Qt. Preferre
 Example for Windows : `CMAKE_PREFIX_PATH=F:/Qt/5.15.2/msvc2019_64`
 
 ### CMake
-[CMake](https://cmake.org/download/) version 3.12 or later is supported.
+[CMake](https://cmake.org/download/) version 3.15 or later is supported.
 
 ## Build Instructions
 The ResInsight build may be configured in different ways, with optional support for Octave plugins, 
@@ -50,27 +50,11 @@ This makes it easier to see all of the options for ResInsight.
 - Run the compiler using the generated makefiles or solution file/project files to build ResInsight
 
 ### Windows
-ResInsight has been verified to build and run on Windows 10 using Microsoft Visual Studio 2017/2019. Typical usage on Windows is to follow the build instructions above, and then open the generated solution file in Visual Studio to build the application.
+ResInsight has been verified to build and run on Windows 10/11 using Microsoft Visual Studio 2019/2022. Typical usage on Windows is to follow the build instructions above, and then open the generated solution file in Visual Studio to build the application.
 
 ### Linux
 
-Typical usage is to follow the build instructions above to build the makefiles. Then go to the build directory, and run:
-
-- make
-- make install
-
-To build from the command line without using the CMake GUI:
-
-- mkdir ResInsight_build
-- cd ResInsight_build
-- ...
-- (set CMake options)
-- ...
-- cmake < path to ResInsight source folder >
-- make
-- make install
-
-You will find the ResInsight binary under the Install directory in your build directory.
+For a reference build instruction for Ubuntu, see [Reference installation description for Ubuntu]({{< ref "build-instructions-ubuntu.md" >}})
 
 ### CMake Options for ResInsight
 
@@ -126,7 +110,7 @@ ResInsight has been verified to build and run with Octave versions 3.4.3, 3.8.1,
 ##### Octave Dependencies for Debian Based Distributions
 
 The following command line can be used as a starting point to install required libraries
-`sudo apt-get install git cmake build-essential octave liboctave-dev qtbase5-dev qtscript5-dev`
+`sudo apt-get install git cmake build-essential octave liboctave-dev qtbase5-dev qtscript5-dev libqt5svg5-dev qtbase5-private-dev`
 
 #### ODB support
 

@@ -44,12 +44,6 @@ The binary distributions does not support ABAQUS odb files. For building ResInsi
 [Build Instructions]({{< ref "buildinstructions.md" >}}).
 {{% /notice %}}
 
-
-## Install From downloaded tarball
-1. Download TAR.GZ binary distribution from [https://github.com/OPM/ResInsight/releases](https://github.com/OPM/ResInsight/releases "release section on GitHub")
-2. Extract content from TAR file
-3. Start ./ResInsight
-
 ## Custom Qt configuration
 If you are using a version of Qt that is not available in system path, you need to do the following to make runtime Qt paths available to ResInsight
 
