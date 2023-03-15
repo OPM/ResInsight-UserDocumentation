@@ -3,6 +3,9 @@ title = "Derived Results - Geomechanical"
 published = true
 weight = 110
 hidden = false
+aliases = [
+    "/3d-main-window/derivedresultsgeomech/"
+]
 +++
 
 ResInsight computes several derived results. In this section we will explain what they are, and briefly how they are calculated.

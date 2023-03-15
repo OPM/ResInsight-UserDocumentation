@@ -2,6 +2,9 @@
 title = "Grid Property Calculator"
 published = true
 weight = 30
+aliases = [
+    "/3d-main-window/gridpropertycalculator/"
+]
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorMain.png)

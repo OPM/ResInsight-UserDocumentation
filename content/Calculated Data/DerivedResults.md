@@ -3,6 +3,9 @@ title = "Derived Results - Eclipse"
 published = true
 weight = 100
 hidden = false
+aliases = [
+    "/3d-main-window/derivedresults/"
+]
 +++
 
 ResInsight computes several derived results. In this section we will explain what they are, and briefly how they are calculated.

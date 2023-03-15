@@ -2,6 +2,9 @@
 title = "Curve Calculator"
 published = true
 weight = 20
+aliases = [
+    "/plot-window/curvecalculator/"
+]
 +++
 
 ![]({{< relref "" >}}images/plot-window/SummaryCurveCalculator.png)
