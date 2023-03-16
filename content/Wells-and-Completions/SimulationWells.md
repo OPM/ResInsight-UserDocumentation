@@ -125,16 +125,14 @@ The **Size Scaling** options, however, works relative to the scaling level set o
 		  	 
 ## Well Pipes of Multi Segment Wells
 
-ResInsight reads the MSW information in the result files and uses that to create a topologically correct visualization of the Multi Segment Well. Reading this information is somewhat time consuming, and can be turned off in the [ Preferences ]({{< relref "preferences" >}}).
- 
+![]({{< relref "" >}}images/getting-started/msw_with_valves.png)
+
+ResInsight reads the MSW information in the result files and uses that to create a topologically correct visualization of the Multi Segment Well. Valves are visulized on the pipe geometry.
+
+Reading this information is somewhat time consuming, and can be turned off in [ Preferences ]({{< relref "preferences" >}}).
+
 ### Geometry Approximation
-The pipe geometry generated for MSW's are based on the topology of the well (branch/segment structure) and the position of the cells being connected. The segment lengths are used as hints to place the branch points at sensible places. Thus the pipe geometry itself is not geometrically correct, but makes the topology of the well easier to see.
-
-### Dummy Branches
-Often MSW's are modeled using a long stem without connections and a multitude of small branches; one for each connection. ResInsight offsets the the pipe within the cell to clearly show how the topology of the well is defined.
-
-![]({{< relref "" >}}images/3d-main-window/MSWDummyBranchExample.png)
+If the import of MSW data is disabled, or MSW data is not present, the topology of the well is estimated. This feature works in most cases, but can generate invalid well geometry in some cases.
 
 ### Picking Reveals Segment/Branch Info
-
 Branch and segment info of a MSW-connected-Cell is shown in the **Result Info** window when picking a cell in the 3D View. This can be handy when relating the visualization to the input files.
