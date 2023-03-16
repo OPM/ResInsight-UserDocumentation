@@ -49,7 +49,7 @@ The [[Depth Plot]]({{< relref "depthplot" >}}) can be used to display values for
 ## Improved RFT Plotting
 
 - [[Pressure Depth Data]]({{< relref "pressuredata" >}}) can be imported from a custom file format.
-- More flexible RFT plotting; it is now possible to combine ensemble RFT data sith single RFT curves and other observed curves.
+- More flexible RFT plotting; it is now possible to combine ensemble RFT data with single RFT curves and other observed curves.
 
 
 ## Other improvements
