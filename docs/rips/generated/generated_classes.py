@@ -1747,7 +1747,7 @@ class WellLogPlot(DepthTrackPlot):
 
 class WellBoreStabilityPlot(WellLogPlot):
     """
-    A GeoMechanical Well Bore Stabilit Plot
+    A GeoMechanical Well Bore Stability Plot
 
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
