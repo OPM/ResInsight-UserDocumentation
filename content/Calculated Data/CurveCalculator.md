@@ -36,4 +36,11 @@ It is also possible to select the address by pressing the **Edit** button. This 
 After assigning summary addresses to all variables, click **Calculate** to evaluate the expression. The curve is saved and can be accessed in the Plot Editor.
 
 
+## Calculation for Ensembles
+![]({{< relref "" >}}images/calculated-data/calculated-well-curve-ensemble.png)
+
+All calculation expressions are available for ensemble plotting. Use the calculation objects the same way as they are used for single summary cases.
+
+
+## References
 The similar concept is also used for [Grid Property Calculator]({{< ref "GridPropertyCalculator.md" >}})

@@ -88,7 +88,7 @@ The total accumulation data can also be viewed in ascci format by the command **
 ## Well Allocation over Time
 ![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
 
-Use the Well Allocation over time to see how the allocation changes between time steps.
+Use **Well Allocation over time** to see the allocation over multiple restart time steps.
 
 ## Cumulative Phase Distribution Plot
 
