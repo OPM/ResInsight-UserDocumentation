@@ -105,13 +105,13 @@ When importing a line based CSV file, no dialog appears. Instead a more stict se
 The two examples below are equvalent and result in identical data after importing to ResInsight
 
 Line based CSV:
-```
+```txt
 DATE       ;VECTOR ;VALUE ;ERROR
 2018-04-16 ;FOPT   ;12.5  ;0.45
 2018-04-18 ;FOPT   ;8.6   ;0.31
 ```
 Normal CSV:
-```
+```txt
 DATE       ;FOPT ;ERR:FOPT
 2018-04-16 ;12.5 ;0.45
 2018-04-18 ;8.6  ;0.31
@@ -133,7 +133,7 @@ The next lines can define units, well/group names, region names, LGR names and b
 
 When interpreting column based files with fixed header width, ResInsight looks for left aligned column entries. These type of files are interpreted as we naturally read them. More than one table can be present in each file.
 
-```
+```txt
 1                                                                                                      
  -------------------------------------------------------------------------
  SUMMARY
@@ -156,7 +156,7 @@ When interpreting column based files with fixed header width, ResInsight looks f
 
 Column Based with Random Header Width will try to be parsed in the same way as fixed width, but it might fail in situations like the one below. We can see that SM3/SM3 *probably* belongs to WGORH, but it is parsed to WWCTH, as it is the second entry on that line.
 
-```
+```txt
 TIME      WWCTH      WGORH
 DAYS               SM3/SM3          
 
@@ -170,7 +170,7 @@ DAYS               SM3/SM3
 
 If the non-comment line includes the word "VECTOR", the file is interpreted as a keyword based file. In keyword based files, the content of the one-column tables is described in each header. Tables should be associated with a table containing time stamps. In the example below, *S-1AH-GOR* is associated with *YEARX*, since their origin is equal. ResInsight always interpret *ORIGIN* as well name, and look for a table with the line "VECTOR YEARX" to associate with it.
 
-```
+```txt
 ----------------------------------------------
 -- GOR data 
 ----------------------------------------------

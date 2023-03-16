@@ -39,7 +39,7 @@ If local coordinates are exported, the UTM coordinate offset is included as a co
 To anonymize the data, the UTM coordinate offset may be removed from file.
 
 Example file:
-```
+```txt
 # case name : 1_R001_REEK-0
 # sampling points : nx=90 ny=100
 # time and date : 01.Jan 2000

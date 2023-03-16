@@ -54,7 +54,7 @@ If you are using a version of Qt that is not available in system path, you need 
 ### Display Menu Icons in GNOME (Optional)
 By default, icons are not visible in menus in the GNOME desktop environment. ResInsight has icons for many menu items, and icons can be set visible by issuing the following commands (Tested on RHEL6) :
 
-```
+```txt
 gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true
 gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true
 ```

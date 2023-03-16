@@ -26,7 +26,7 @@ ResInsight then searches for the data block by ignoring lines
 
 When the datablock is found, the part of the line before `.` is stripped away, and first column is expected to be element ID
 
-```
+```txt
 ** ELASTIC SETTING FOR EACH ELEMENT
 *Distribution Table, name=RSV_Res-1_Elastic_Table
 MODULUS, RATIO
@@ -38,7 +38,7 @@ Res-1.209, 11207002032.1436, 0.19063
 Res-1.208, 11222989223.0933, 0.19104
 Res-1.207, 11202549454.349, 0.19051
 ```
-```
+```txt
 ** DENSITY SETTING FOR EACH ELEMENT
 *Distribution Table, name=RSV_Res-1_Density_Table
 Density

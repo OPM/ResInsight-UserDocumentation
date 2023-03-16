@@ -97,7 +97,7 @@ The file *layer_zone_table.txt* can be used to correlate each grid k-layer with 
 This file is identical for all cases in the same ensemble.
 
 Example file *layer_zone_table.txt*:
-```
+```txt
 1   UpperReek
 2   UpperReek
 3   UpperReek
@@ -119,7 +119,7 @@ For a given well name, the file *\<well_name>.obs* is a data file containing two
 Column one contains observed pressure and column two contains error. The observation data is valid for one and only one layer/formation.
 
 Example file  for well *OP_1*, i.e. *OP_1.obs*:
-```
+```txt
 303.000   3.000
 304.000   3.000
 305.000   3.000
@@ -136,7 +136,7 @@ Each line of data must contain:
 - Reservoir zone name
 
 Example file for well *OP_1*, i.e. *OP_1.txt*:
-```
+```txt
 461288.719   5933415.000   1816.200   1611.692   UpperReek
 461288.685   5933415.027   1824.560   1620.052   MidReek
 461288.683   5933415.029   1840.000   1635.492   LowerReek
@@ -154,7 +154,7 @@ The data file *well_date_rft.txt* contains well measurements. The file contains 
 There can be multiple measurement for each well.
 
 Example file *well_date_rft.txt*:
-```
+```txt
 OP_1   01 02 2000   1
 OP_2   01 02 2000   1
 OP_4   01 01 2001   1

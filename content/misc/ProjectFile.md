@@ -18,7 +18,7 @@ The <code>*.rsp</code> file is an XML file, and can be edited by any text editor
 
 Editing the **Project File** is one effective way to replace source cases and other file references. At top of a **Project File**, the section **ReferencedExternalFiles** contains aliases to file paths which can be modified using a text editor. It is also possible to use automated tools to modify these text strings.
 
-```
+```txt
 <ReferencedExternalFiles>
     $PathId_001$ D:/resinsight-data/norne/NORNE_ATW2013.EGRID;
     $PathId_002$ D:/resinsight-data/NorneODB/norne_case2.odb;

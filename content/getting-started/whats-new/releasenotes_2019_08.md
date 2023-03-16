@@ -11,7 +11,7 @@ ResInsight 2019.08 is the latest version of ResInsight, the professional quality
 
 Basic example on how to update views from Python
 
-```
+```python
 import rips
 # Connect to ResInsight instance
 resInsight = rips.Instance.find()

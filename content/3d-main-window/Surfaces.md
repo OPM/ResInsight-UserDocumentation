@@ -90,7 +90,7 @@ The GOCAD export file format supported by ResInsight is **TSURF** (*.ts).
 A TSURF data file is a triangle based surface format containing vertex coordinates and triangle to vertex connectivities as exemplified below. 
 ResInsight import vertex and triangle identifiers from the first TFACE section in such a file.
 
-```
+```txt
 GOCAD TSurf 1 
 HEADER { 
 name:MF_027_SU 
@@ -122,7 +122,7 @@ ResInsight is capable of importing a surface defined by a **PTL** (*.ptl) file f
 A PTL data file specifies the quads of a surface by *x*, *y*, *z* nodal coordinates and the *i* and *j* indices as exemplified below. 
 As seen, *#* denotes comment lines.
 
-```
+```txt
 #Type: scattered data
 #Version: 6
 #Description: No description
@@ -159,7 +159,7 @@ As seen, *#* denotes comment lines.
 ResInsight is capable of importing a surface defined by a **XYZ** (*.dat) file from OpenWorks.
 A XYZ data file specifies the quads of a surface by *x*, *y*, *z* nodal coordinates organized in a regular grid. 
 As seen, *#* and *@* denotes comment lines.
-```
+```txt
 @File_Version: 4
 @Coordinate_Type_is: 1
 @Export_Type_is: 1

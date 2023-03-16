@@ -75,7 +75,7 @@ The toggle **Generate Target at Sea Level** is on by default. If the well path i
 ### Well Plan
 A well plan can be displayed by selecting **Show Well Plan** from the right-click menu of a generated well path. 
 
-```
+```txt
 -- MDRKB          CL            Inc          Azi            TVDMSL         NS                EW               Dogleg      Build        Turn          
 0.00000        0.00000       91.23218     67.46458       2560.64104     7320830.60875     456093.37763     0.00000     0.00000      0.00000       
 109.69761      109.69761     91.23218     67.46458       2558.28210     7320872.64113     456194.67560     0.00000     0.00000      0.00000       

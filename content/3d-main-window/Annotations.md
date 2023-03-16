@@ -73,7 +73,7 @@ To import a polyline annotation from file, right click **Annotations** or **Poly
 
 Define each point as three double per line (**X Y Depth**). Comment lines are supported by using **#** at the start of the line
 
-```
+```txt
 # This is a comment
 # This is a comment
 58177.76 732.7 1643.6 

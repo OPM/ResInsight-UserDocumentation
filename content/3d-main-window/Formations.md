@@ -36,7 +36,7 @@ Formation color can be given as a World Wide Web Consortium [SVG color keyword n
 or a six-digit, three-byte hexadecimal number used in HTML, CSS, SVG, and other computing applications to represent the red, green and 
 blue components of the color, c.f. example below:
 
-```
+```txt
 -- Any text as comment
 'My First  Formation Name'                             4 - 12   red
 'My Second Formation Name'                            15 - 17   green
@@ -48,7 +48,7 @@ blue components of the color, c.f. example below:
 The FMU Layer Zone Table (_`layer_zone_table.txt`_) contains two columns to correlate each grid k-layer with a formation name. 
 Below is an example of a _`layer_zone_table.txt`_ file:
 
-```
+```txt
 1   UpperReek
 2   UpperReek
 3   UpperReek

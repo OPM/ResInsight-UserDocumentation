@@ -68,7 +68,7 @@ ResInsight stores data computed by statistics calculation in a cache file. When 
 ### Summary plotting
 The summary plotting command option follows the following syntax:
 
-```
+```txt
 resinsight --summaryplot [<plotOptions>] <eclipsesummaryvectorfilters> <eclipsedatafiles>
 
 where:
@@ -125,7 +125,7 @@ Most examples are also available from the [test section](https://github.com/OPM/
 ### Create snapshots of all views for multiple cases
 A list of cases is defined in **CaseList.txt**, containing the following
 
-```
+```txt
 Real0/BRUGGE_0000.EGRID
 Real10/BRUGGE_0010.EGRID
 Real30/BRUGGE_0030.EGRID
@@ -134,7 +134,7 @@ Real40/BRUGGE_0040.EGRID
 
 The command line used to run this example is shown here:
 
-```
+```txt
 ResInsight --project BatchTest.rsp --multiCaseSnapshots CaseList.txt --size 500 500
 ```
 
@@ -145,7 +145,7 @@ This will instruct ResInsight to read the project file **BatchTest.rsp**. All ca
 
 The command line used to run this example is shown here:
 
-```
+```txt
 ResInsight --project BatchTest.rsp --replaceCase "Real10\BRUGGE_0010.EGRID" --savesnapshots
 ```
 
@@ -155,14 +155,14 @@ This will instruct ResInsight to read the project file **BatchTest.rsp**. The sp
 ### Replace source cases in a case group and create snapshot
 A list of cases is defined in **CaseList2.txt**, containing the following
 
-```
+```txt
 Real0/BRUGGE_0000.EGRID
 Real10/BRUGGE_0010.EGRID
 ```
 
 The command line used to run this example is shown here:
 
-```
+```txt
 ResInsight --project BatchStatistics.rsp --replaceSourceCases CaseList2.txt --savesnapshots
 ```
 
@@ -173,7 +173,7 @@ Multiple source case groups can be updated by repeating the replaceSourceCases p
 
 The command line used to run this example is shown here:
 
-```
+```txt
 ResInsight --project BatchStatistics.rsp --replaceSourceCases 0 CaseList2.txt --replaceSourceCases 1 CaseList3.txt --savesnapshots
 ```
 This will instruct ResInsight to read the project file **BatchStatistics.rsp**. Source cases for case group 0 is given in CaseList2.txt, and source cases for case group 1 is given in CaseList3.txt. Statistics will be computed, and snapshots for all views will be written to file.
@@ -185,19 +185,19 @@ The possibility to replace multiple cases can also be applied for single case re
 
 The following command line performs a [summary plot]({{< relref "summaryplots" >}}) for *FOPT* based on Eclipse summary file *1_R001_REEK-0.SMSPEC*.
 
-```
+```txt
 ResInsight --summaryplot FOPT 1_R001_REEK-0 
 ```
 
 Based on file *1_R001_REEK-0.SMSPEC*, the following command line performs a [summary plot]({{< relref "summaryplots" >}}) 
 for *FOPT* and any *WOPT*-vector for well *op_2*.
 The trailing option *-s* gathers the vectors into a single summary plot.
-```
+```txt
 ResInsight --summaryplot -s FOPT WOPT*:op_2 1_R001_REEK-0
 ```
 
 Adding to previous example, the following command line also plots the 3D grid property `SOIL` for cell (20, 21, 1).
-```
+```txt
 ResInsight --summaryplot FOPT WOPT*:op_2 SOIL:20,21,1 1_R001_REEK-0 
 ```
 
