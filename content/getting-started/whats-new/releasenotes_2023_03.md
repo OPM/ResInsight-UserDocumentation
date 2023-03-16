@@ -13,8 +13,18 @@ hidden = true
 - Added optional visualization of valves
 
 
+## Calculator Improvements
+![]({{< relref "" >}}images/calculated-data/calculated-well-curve.png)
 
+A calculated summary vector for a well will now by default be available for all wells.
 
+[[Summary Calculator]]({{< relref "CurveCalculator" >}})  [[Calculator Expressions]]({{< relref "CalculatorExpressions" >}}) [[Grid Calculator]]({{< relref "GridPropertyCalculator" >}}) 
+
+## Radial Grids
+
+![]({{< relref "" >}}images/3d-main-window/radial-grid.png)
+
+Import of radial grids are now supported. Using I and J range filters will filter the model based on angle and radius (Theta and R).
 
 
 

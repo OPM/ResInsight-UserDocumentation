@@ -40,7 +40,7 @@ The available cell filters are:
 
 - **User Defined Filter**: Defining a filter by specifying explicit cells to include or exclude by their IJK-index.
 
-- **Range Filter**: Defining a filter to include or exclude cells by specifying IJK-ranges. 
+- **Range Filter**: Defining a filter to include or exclude cells by specifying IJK-ranges. For radial models, IJ represents angle and radius.
 
 - **Slice Filter**: Defining a filter to include or exclude a slice of cells in either I-, J-, or K-direction.
 
