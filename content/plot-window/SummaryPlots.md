@@ -167,17 +167,18 @@ The Property Editor organizes the available options into the following groups:
 Other actions are available via right-click menu for selected curve. For instance, the Y-Axis for one or more curves can be switched for using the right-click command <b>Switch Plot Axis</b>.  
 
 
-### Time Axis Properties
+### Default Time Axis Properties
 Time axis properties are displayed by clicking the **Time Axis** subitem of a summary plot in **Plots** window. 
 
 ![]({{< relref "" >}}images/plot-window/SummaryTimeAxisProperties.png)
 
-The property groups are:
+### Custom Time Axis Properties
 
-- **Axis Title**: Toggle display of axis title, setting user defined name, position, and font. 
-- **Time Values**: Show time from *Simulation Start*, or real date-times, specific or automatic date/time range, and font.
-- **Date/Time Label Format**: Date and time format for the time axis, c.f. [Preferences]({{< relref "preferences.md" >}}) for default.
+![]({{< relref "" >}}images/plot-window/summary-custom-tick-marks.png)
 
+The time labels are automatically defined based on the available date range. The tick marks can be controlled in details by setting **Tickmark Type** to **Custom**. Then a tickmark interval and tickmark interval step can be defined.
+
+In the screenshot above, the interval is set to three years, and the plot displays labesl with three years between each.
 
 ### Y-axis Properties
 Y-axis properties are displayed by clicking one of the left/right axis subitems of a summary plot in **Plots** window.

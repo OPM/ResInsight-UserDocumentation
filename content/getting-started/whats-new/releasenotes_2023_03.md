@@ -27,73 +27,31 @@ A calculated summary vector for a well will now by default be available for all 
 Import of radial grids are now supported. Using I and J range filters will filter the model based on angle and radius (Theta and R).
 
 
+## Well Allocation over Time
+![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
+
+Use the Well Allocation over time to see how the allocation changes between time steps.
+
+
+## Summary Plot Improvements
+
+- Make sure on/off state for ensemble statistics is stable during source stepping
+- Custom time axis tick marks [[Custom Time Axis Properties]]({{< relref "summaryplots" >}}#custom-time-axis-properties)
+- Show correct group name for group vectors
+- Blank space around legend items has been reduced, makes it possible to show legends on less screen space
+- Fixed issue for import of simulations for large time span into future (after year 2262)
+- Default name for summary vector is now a descriptive text (Oil Production instead of FOPT) The settings for curve names can be controlled from [[Curve Properties]]({{< relref "summaryplots" >}}#editing-a-summary-curve)
+
+## Import of Pressure Data
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-## Change Data Source by Clicking in 3D
-The data source for multiple plots can be updated by clicking on a well path in 3D. This feature can be useful for large fields with many wells and you want to investigate a small subset of wells.
-
-[Source Stepping]({{< relref "summarysourcestepping" >}}#change-well-data-source-from-3d-view) 
-
-
-
-## Linked Views Improvements
-It is now possible to get the result property values from all linked views when left-clicking on a cell in a view. Text is displayed in [Result Info]({{< relref "resultinfo" >}}), and values from other properties can also be appended. Property filters can now be linked between views, and will also work between multiple cases. 
-
-[Linked Views]({{< relref "linkedviews" >}}) 
-
-
-## Calculator Improvements
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorMain.png)
-
-The grid calculator and summary curve calculator is updated with more help and improved usability. The grid property calculations will now always calculate values for active cells and do nothing for other inactive cells.
-
-[Grid Calculator]({{< relref "GridPropertyCalculator" >}}) 
-
-[Summary Calculator]({{< relref "CurveCalculator" >}}) 
-
-[Calculator Expressions]({{< relref "CalculatorExpressions" >}}) 
-
-
-## Breaking changes for user defined well paths
-
-The calculation of the geometry for a user defined well path had some defects. These issues are now fixed, and can affect the generated geometry of a user-defined well path. If the ResInsight project file was stored with a version before 2023.01, loading the project in version 2023.01 and later can potentially generate a slightly different well path geometry from the target at sea level to the first user-defined well target (the location of user-defined well targets are unchanged). The location of perforation intervals and completions are specified by measured depth, and could be shifted to a different location.
-
-Thanks to https://github.com/EdmundStephens for reporting this [issue](https://github.com/OPM/ResInsight/issues/9439).
-
-[User defined well paths]({{< relref "createnewwellpaths" >}})
-
-
-## Display of RFT segment curves
-![]({{< relref "" >}}images/plot-window/RFTSegmentPlot.png)
-
-**RFT Segment Data** can be plotted as horizontal **Well Log Plots**. This feature is now improved with more tracks and improved visual quality.
-
-[RFT Segment plots]({{< relref "rftsegmentplot" >}})
-
-
-## Import of ROFF files (Preview)
-ROFF files with properties can be imported, both in ASCII and binary form. Grid geometry and properties per cell can be imported.
-
-[ROFF grid models]({{< relref "RoffGridModels" >}})
 
 
 ## Other improvements
 
-[Wrong area for scaled fractures](https://github.com/OPM/ResInsight/issues/9473)
-
-[Improved Window Tiling]({{< relref "windowmanagement" >}})
 
 
 

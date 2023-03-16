@@ -85,6 +85,10 @@ It is also possible to save the ascii data to a file directly by using the right
 
 The total accumulation data can also be viewed in ascci format by the command **Show Total Allocation Data**.
 
+## Well Allocation over Time
+![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
+
+Use the Well Allocation over time to see how the allocation changes between time steps.
 
 ## Cumulative Phase Distribution Plot
 
