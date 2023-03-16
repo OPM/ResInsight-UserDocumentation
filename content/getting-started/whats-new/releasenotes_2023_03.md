@@ -26,10 +26,10 @@ Import of radial grids including local grid refinement(LGR) are now supported. U
 - Fixes wrong well geometry for some cases
 - Added optional visualization of valves
 
-## Well Allocation over Time
+## Well Allocation Over Time
 ![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
 
-Use [Well Allocation over time]({{< relref "flowdiagnosticsplots" >}}#well-allocation-over-time) to see the allocation over multiple restart time steps.
+Use [Well Allocation Over Time]({{< relref "flowdiagnosticsplots" >}}#well-allocation-over-time) to see the allocation over multiple restart time steps.
 
 ## Depth Plot
 
