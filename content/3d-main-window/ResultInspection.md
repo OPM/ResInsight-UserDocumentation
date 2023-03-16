@@ -38,11 +38,13 @@ Formation names        | Displays name of formation the cell is part of
 
 ## Result Plot
 
-If a dynamic none-Flow Diagnostics result is active, the result values of the selected cells for all time steps are displayed in the docking window **Result Plot** as one curve for each cell. 
+The result values of the selected cells for all time steps are displayed in the docking window **Result Plot** as one curve for each cell. 
 
 Additional curves can be added to the plot if CTRL-key is pressed during picking. The different cells are highlighted in different colors, and the corresponding curve is colored using the same color.
 
 To clear the cell-selection, left-click outside the visible geometry.
+
+[[Result Info]]({{< relref "resultinfo" >}}) 
 
 ### Adding the Curves to a Summary Plot
 

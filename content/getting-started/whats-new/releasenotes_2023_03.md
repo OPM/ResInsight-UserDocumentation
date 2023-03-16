@@ -48,15 +48,18 @@ Pressure data in a custom file format can be imported.
 [[Pressure Depth Data]]({{< relref "pressuredata" >}})
 
 
-
-
-
-
-
 ## Other improvements
 
-
-
+- Fixed parsing of GRDECL files if a comment is added on the same line after a keyword end character ‘/’
+- Fixed freeze during import of grid model (Progress bar freezes at 28%)
+- New button next to file path to quickly copy text to clipboard
+- New [[Depth Plot]]({{< relref "depthplot" >}}) to show values for all K-cells for a selected IJ cell
+- Added more scaling factors to 3D view, and support for custom scale value in **Preferences**
+- GRDECL export: Added option to export NOECHO and ECHO to generated text file
+- `CTRL-E` as shortcut to open [[Summary Plot Editor]]({{< relref "summaryploteditor" >}}) 
+- Added slider to quickly switch between time step
+- Improved user interface for range filters
+- When clicking on a cell: Show center coordinates and corner coordinates [[Result Info]]({{< relref "resultinfo" >}}) 
 
 
 
