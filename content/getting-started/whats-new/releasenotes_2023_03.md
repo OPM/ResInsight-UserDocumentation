@@ -43,6 +43,9 @@ Use the Well Allocation over time to see how the allocation changes between time
 - Default name for summary vector is now a descriptive text (Oil Production instead of FOPT) The settings for curve names can be controlled from [[Curve Properties]]({{< relref "summaryplots" >}}#editing-a-summary-curve)
 
 ## Import of Pressure Data
+Pressure data in a custom file format can be imported.
+
+[[Pressure Depth Data]]({{< relref "pressuredata" >}})
 
 
 

@@ -5,7 +5,7 @@ weight = 30
 +++
 
 ## Import Pressure/Depth Data
-Importing observed time history data to ResInsight may be performed in two different ways:
+Importing pressure data to ResInsight may be performed in two different ways:
 
 - By selecting the main menu item **File -> Import -> Import Pressure Depth Data**
 - By using the right-click command **Import Pressure Data** on the **Observed Data** item in the **Plot Main Window Project Tree** 
