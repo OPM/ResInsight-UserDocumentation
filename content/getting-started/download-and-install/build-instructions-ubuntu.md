@@ -57,6 +57,12 @@ vcpkg is located in the folder ThirdParty/vcpkg
     make -j8
 
 
-### Other build descriptions
+### Notes for CentOS
+
+The dependency on `atomic` can be installed using the following code, adjust the devtoolset version to match your installation:
+    
+    sudo yum install devtoolset-11-libatomic-devel
+
+
 
 [Link to workflow for CentOS 7](https://github.com/OPM/ResInsight/blob/dev/.github/workflows/centos7.yml)
