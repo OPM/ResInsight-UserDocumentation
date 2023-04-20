@@ -14,7 +14,7 @@ weight = 30
 | Tool                    | Minimum version  | 
 |-------------------------|------------------|
 | git                     | 2.7.4            | 
-| gcc                     | 7                | 
+| gcc                     | 10               | 
 | python 				  | 3                | 
 
 
@@ -26,6 +26,9 @@ Install GCC and related tools
 
     sudo apt install build-essential
     sudo apt install curl zip unzip tar
+
+As gcc 10 is required, it can be useful to set the default compiler.
+[Set default compiler](https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa)
 
 Install Qt
 
