@@ -10,7 +10,6 @@ Dependencies and Prerequisites Windows Compiler Visual Studio 2019 and later is 
 GCC Compiler On RedHat Linux 7 or CentOS 7 you need to install devtoolset-10, and enable it with
 source /opt/rh/devtoolset-10/enable Qt 5 Qt 5.12 or later is supported, Qt 5.15 is recommended.
 Qt download
-On some configurations you will be asked to specify the location of Qt.</description></item><item><title>Build Instructions Ubuntu</title><link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-ubuntu/</guid><description>Dependencies and Prerequisites Configuration and build Tool Minimum version git 2.7.4 gcc 7 python 3 Update apt installer
+On some configurations you will be asked to specify the location of Qt.</description></item><item><title>Build Instructions Ubuntu</title><link>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-ubuntu/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://opm.github.io/ResInsight-UserDocumentation/getting-started/download-and-install/build-instructions-ubuntu/</guid><description>Dependencies and Prerequisites Configuration and build Tool Minimum version git 2.7.4 gcc 10 python 3 Update apt installer
 sudo apt update Install GCC and related tools
-sudo apt install build-essential sudo apt install curl zip unzip tar Install Qt
-sudo apt install -y qtbase5-dev libqt5svg5-dev qtbase5-private-dev Clone and update sub modules git clone git://github.</description></item></channel></rss>
+sudo apt install build-essential sudo apt install curl zip unzip tar As gcc 10 is required, it can be useful to set the default compiler. Set default compiler</description></item></channel></rss>
