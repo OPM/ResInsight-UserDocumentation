@@ -43,7 +43,7 @@ eqlnum_property_path = os.path.join(
 )
 roff_case.import_properties(file_names=[poro_property_path, eqlnum_property_path])
 
-# PORO and EQLNUM should now be among available properties yet
+# PORO and EQLNUM should now be among available properties
 for prop in roff_case.available_properties("INPUT_PROPERTY"):
   print(prop)
 
