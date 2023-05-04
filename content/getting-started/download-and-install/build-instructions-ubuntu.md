@@ -61,7 +61,7 @@ Open a command prompt for Visual Studio x64
     cmake \
     -DRESINSIGHT_ENABLE_GRPC=true \
     -DVCPKG_TARGET_TRIPLET=x64-linux \
-    -DCMAKE_TOOLCHAIN_FILE=..ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \
+    -DCMAKE_TOOLCHAIN_FILE=../ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \
     -DRESINSIGHT_GRPC_PYTHON_EXECUTABLE=python \
     ..
     
