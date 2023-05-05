@@ -13,7 +13,7 @@ ResInsight supports the following seismic file formats:
 - **VDS**: file format for fast random access to multi-dimensional volumetric data as supported by OSDU OpenVDS
 - **ZGY**:  file format developed by Schlumberger for storing 3D data for seismic interpretation
 
-A seismic file is imported by right-clicking the **Seismic** item in **Project Tree** or by using menu item **File->Import->Seismic Cases**. 
+A seismic file is imported by right-clicking the **Seismic** item in **Project Tree** or by using menu item **File->Import->Import Seismic**. 
 
 ![]({{< relref "" >}}images/import/SeismicImport.png)
 
