@@ -52,7 +52,11 @@ The options for conversion of SEG-Y files are:
   - *Header Definition File*: optional file specifying [OpenVDS SEG-Y Import Options](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html).
   
 Subsequent to SEG-Y conversion, please check resulting key information for correctness by inspecting **File Information** of the [**Property Editor**]({{< relref "seismicdata" >}}#property-editor), notably *Inline*, *Xline*, and *Z* ranges.
-In case of discrepancy, the conversion of SEG-Y file has to be performed anew by specifying **Depth (Z) Offset Override** or [OpenVDS SEG-Y Import Options](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html). 
+In case of discrepancy, the conversion of SEG-Y file has to be performed anew by specifying **Depth (Z) Offset Override** or specifying a JSON file as described in the documentation of the [OpenVDS SEG-Y Import Tool](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html).
+
+![]({{< relref "" >}}images/import/SeismicOpenVDSdoc_snip.png)
+
+A further option is to run the [OpenVDS SEG-Y Import Tool](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html) from command line as the OpenVDS *SEGYImport* tool is part of your ResInsight intallation.
 
 
 
