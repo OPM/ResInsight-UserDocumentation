@@ -29,6 +29,10 @@ The **Property Editor** of a Seismic Section is shown below.
 The properties are grouped as follows:
 
 - **General**: Enables the user to provide a description, select seismic data, type and position of a Seismic Section.
-- **Depth Filter**: Enables filtering of a Seismic Section above, below, and between specific depths.
-- **Outline**: Specifying line thickness, line color, and display outline of seismic data.
+- **Depth Filter**: Enables filtering of a Seismic Section by setting **Depth Filter** properties:
+  - **None**: no depth filtering
+  - **Above**: show above the specified *Depth*
+  - **Below**: show below the specified *Depth*
+  - **Between**: show between the specified *Upper Depth* and the specified *Lower Depth*
+- **Outline**: Specifying line thickness, line color, and display of seismic data outline.
 - **Show Image**: Displays the Seismic Section in a separate 2D view.
