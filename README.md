@@ -43,5 +43,5 @@ https://beta.resinsight.org redirects to https://opm.github.io/ResInsight-UserDo
 - Copy content from Hugo into gh-pages
 - Publish to https://github.com/OPM/ResInsight/tree/gh-pages
 
-## Tips and trics
+## Tips and tricks
 - If you want to publish a page, but avoid having an entry in the menu, add `hidden = true` to the header of the MD file. See about.md for an example.
