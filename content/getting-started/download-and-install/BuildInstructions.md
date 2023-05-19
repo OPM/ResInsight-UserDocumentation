@@ -62,7 +62,7 @@ For a reference build instruction for Ubuntu, see [Reference installation descri
 |---------------------------------------------------|---------|-----------------------------------------------------------------------|
 | `RESINSIGHT_BUILD_DOCUMENTATION`                  | OFF     | Use Doxygen to create the HTML based API documentation. Doxygen must be properly installed. |
 | `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable gRPC scripting server. Required to be able to use ResInsight from Python |
-| `RESINSIGHT_HDF5_DIR`                             | Blank   | Windows Only: Optional path to HDF5 libraries on Windows |
+| `RESINSIGHT_ENABLE_HDF5`                          | ON      | Windows Only: Download and use HDF5 library |
 | `RESINSIGHT_ODB_API_DIR`                          | Blank   | Optional path to the ABAQUS ODB API from Simulia. Needed for support of geomechanical models |
 | `RESINSIGHT_USE_OPENMP`                           | ON      | Enable OpenMP parallellization in the code |
 
@@ -72,6 +72,7 @@ To be able to modify **Advanced Options** from the CMake User Interface, tick th
 | CMake Name                                        | Default | Description                              |
 |---------------------------------------------------|---------|--------------------------------------------------------|
 | `RESINSIGHT_QT5_BUNDLE_LIBRARIES`                 | OFF     | Linux only: Include Qt5 libraries in the installation package |
+| `RESINSIGHT_BUILD_LIBS_FROM_SOURCE`               | ON      | If ON: Build some ThirdParty libs locally. If OFF: Download precompiled libraries
 | `RESINSIGHT_BUNDLE_OPENSSL`                       | OFF     | Bundle the OpenSSL library binaries |
 | `RESINSIGHT_ENABLE_UNITY_BUILD`                   | OFF     | Activate use of CMAKE_UNITY_BUILD on some libraries to improve build speed |
 | `RESINSIGHT_INCLUDE_APPFWK_TESTS`                 | OFF     | Include unit tests from thirdparty libraries AppFwk and VizFwk |
