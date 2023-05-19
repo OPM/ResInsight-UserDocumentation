@@ -79,6 +79,9 @@ To be able to modify **Advanced Options** from the CMake User Interface, tick th
 | `RESINSIGHT_INCLUDE_APPLICATION_UNIT_TESTS`       | OFF     | Include Application Code Unit Tests |
 | `RESINSIGHT_PRIVATE_INSTALL`                      | ON      | Linux only: Include libecl libraries in the installation package |
 | `RESINSIGHT_HDF5_BUNDLE_LIBRARIES`                | OFF     | Linux only: Include HDF5 libraries in the installation package |
+| `RESINSIGHT_TREAT_WARNINGS_AS_ERRORS`             | OFF     | Enable warnings as errors
+| `RESINSIGHT_UPDATE_SUBMODULES`                    | ON      | Automatically issue 'git submodule update --init --recursively' on ThirdParty folder |
+| `RESINSIGHT_VCPKG_AUTO_INSTALL`                   | OFF     | Automatically build required dependencies using 'vcpkg' |
 
 #### Configuration parameters for Python
 
