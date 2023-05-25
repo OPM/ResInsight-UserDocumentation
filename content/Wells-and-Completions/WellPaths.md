@@ -27,36 +27,39 @@ The supported ASCII format is quite flexible but the main requirements are:
 - If a well name is found, a new well is created and the following data points are added to it.
 
 #### Example 1:
-    WELLNAME: WELL1
-    6507.1	725	2542	2590
-    6523.5	757	2549	2626.6
-    6523.5	760	2559	2637.1
-    -999
-    WELLNAME: WELL2
-    550.7 1020.2  2410   2410
-    551   1004.1  2422.2 2430.2
-    555.2  993.9  2425   2441.6
-    -999
+```txt
+WELLNAME: WELL1
+6507.1	725	2542	2590
+6523.5	757	2549	2626.6
+6523.5	760	2559	2637.1
+-999
+WELLNAME: WELL2
+550.7 1020.2  2410   2410
+551   1004.1  2422.2 2430.2
+555.2  993.9  2425   2441.6
+-999
+```
 
 #### Example 2:
-    X Y TVD(MSL) MD(RKB)
-    Name Well_1
-    6507.1	725	2542	2542
-    6523.5	757	2549	2578.6
-    6523.5	760	2559	2589.1
-    
-    -- A Comment new well
-    This is not its name
-    Name Well_2
-    550.7	1020.2	2410	2520
-    551	1004.1	2422.2	2540.2
-    # a comment inside the data 
-    555.2	993.9	2425	2551.6
-    
-    3Q AHB-J
-    5507.0	4638.5	0.0	0.0
-    5507	4638.5	1628.6	1628.6
+```txt
+X Y TVD(MSL) MD(RKB)
+Name Well_1
+6507.1	725	2542	2542
+6523.5	757	2549	2578.6
+6523.5	760	2559	2589.1
 
+-- A Comment new well
+This is not its name
+Name Well_2
+550.7	1020.2	2410	2520
+551	1004.1	2422.2	2540.2
+# a comment inside the data 
+555.2	993.9	2425	2551.6
+
+3Q AHB-J
+5507.0	4638.5	0.0	0.0
+5507	4638.5	1628.6	1628.6
+```
     
 ### Well Path Files are Referenced
 The well path data is not copied into the ResInsight project as such. The project file only stores the file path, and the next time you open the project, ResInsight will try to read the well data from the file again.  

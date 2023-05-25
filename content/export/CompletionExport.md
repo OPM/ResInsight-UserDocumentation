@@ -79,10 +79,12 @@ At the top of the exported transmissibilities for fractures, a fracture report s
 
 One of the tables displays derived data, see the example here:
 
-                   Tr   #con       Fcd       Area     KfWf         Kf      Wf       Xf        H       Km
-    [cP.rm3/day/bars]               []       [m2]    [mDm]       [mD]     [m]      [m]      [m]     [mD]
-    ----------------------------------------------------------------------------------------------------
-              110.834     24   276.168   9315.748   54.889   3805.029   0.014   61.628   75.580   13.778
+```txt
+               Tr   #con       Fcd       Area     KfWf         Kf      Wf       Xf        H       Km
+[cP.rm3/day/bars]               []       [m2]    [mDm]       [mD]     [m]      [m]      [m]     [mD]
+----------------------------------------------------------------------------------------------------
+         110.834     24   276.168   9315.748   54.889   3805.029   0.014   61.628   75.580   13.778
+```
 
 - **Tr** -- Accumulated computed transmissibilies for all reservoir cells intersected by the fracture
 - **#con** -- Number of reservoir cells intersected by the fracture
@@ -99,81 +101,87 @@ One of the tables displays derived data, see the example here:
 
 In addition to scaling the transmissibilities in the fracture output, using pressure differential depletion scaling will also provide a table with information regarding the scaling performed for each well. This table will show the well name, fracture name and the source of the Well Bore Hole Pressure (**WBHP From Summary Case** or **Fixed User Defined WBHP**). For **WBHP From Summary Case** the **User WBHP** column will describe the well pressure used for all time steps before the production starts according to the summary case information and the **Actual WBHP** will describe the well pressure used in the scaling, which will be different from the **User WBHP** if the scaling is performed for a time step following the well productions start. Finally the columns **Min Pressure Drop** and **Max Pressure Drop** describes the minimum and maximum well drawdown for this particular fracture.
 
-    --
-    -- Pressure Depletion Time step: 01.Feb 2001
-    -- WBHP Source: WBHP From Summary Case
-    -- User Defined WBHP: 200
-    -- Well    Fracture      Actual WBHP   Min Pressure Drop   Max Pressure Drop   
-    ------------------------------------------------------------------------------
-    -- B-1H    Fracture_01   221.68147     0.04077             45.10402            
-    -- B-1H    Fracture_02   221.68147     0.00624             36.02608            
-    -- B-4DH   Fracture_07   200.00000     28.21733            97.34970            
-    -- 
-    
+```txt
+--
+-- Pressure Depletion Time step: 01.Feb 2001
+-- WBHP Source: WBHP From Summary Case
+-- User Defined WBHP: 200
+-- Well    Fracture      Actual WBHP   Min Pressure Drop   Max Pressure Drop   
+------------------------------------------------------------------------------
+-- B-1H    Fracture_01   221.68147     0.04077             45.10402            
+-- B-1H    Fracture_02   221.68147     0.00624             36.02608            
+-- B-4DH   Fracture_07   200.00000     28.21733            97.34970            
+-- 
+```
 ### Export of Fishbone Completion Data
 
 The transmissibility calculation for the fishbones is done following the above description except that when calculating the transmissibility for the laterals, the full cell volume is split among the laterals for calculation of the transmissibility. This is done by finding the direction of the main bore, and then dividing the cell size in this direction by the number of laterals in the cell when calculating the Peaceman radius. 
 
 An example of the exported COMPDAT file is shown below. The calculated transmissibility contribution to the cell connection factor from each lateral or main bore part is included as a comment. 
 
-    WELSPECS
-    -- Well          Grp   I   J    RefDepth   WellType   
-       Well Path B   GR    26  45   1230       Oil        \
-    \
-    COMPDAT
-    -- Well            I      J      K1     K2     Status     SAT     TR               DIAM     KH     S     Df     DIR     r0     
-    -- Well Path B main bore : 0.0569986
-       Well Path B     26     45     29     29     OPEN       1*      5.699858E-02      /
-    -- Fishbone 0: Sub: 0 Lateral: 0 : 0.0021382
-    -- Fishbone 0: Sub: 0 Lateral: 1 : 0.00228575
-    -- Fishbone 0: Sub: 0 Lateral: 2 : 0.0126269
-    -- Fishbone 0: Sub: 1 Lateral: 1 : 0.0112929
-    -- Fishbone 0: Sub: 2 Lateral: 0 : 0.00566964
-    -- Well Path B main bore : 0.230572
-       Well Path B     27     41     15     15     OPEN       1*      2.645858E-01      /
-    /
-    
+```txt
+WELSPECS
+-- Well          Grp   I   J    RefDepth   WellType   
+   Well Path B   GR    26  45   1230       Oil        \
+\
+COMPDAT
+-- Well            I      J      K1     K2     Status     SAT     TR               DIAM     KH     S     Df
+-- Well Path B main bore : 0.0569986
+   Well Path B     26     45     29     29     OPEN       1*      5.699858E-02      /
+-- Fishbone 0: Sub: 0 Lateral: 0 : 0.0021382
+-- Fishbone 0: Sub: 0 Lateral: 1 : 0.00228575
+-- Fishbone 0: Sub: 0 Lateral: 2 : 0.0126269
+-- Fishbone 0: Sub: 1 Lateral: 1 : 0.0112929
+-- Fishbone 0: Sub: 2 Lateral: 0 : 0.00566964
+-- Well Path B main bore : 0.230572
+   Well Path B     27     41     15     15     OPEN       1*      2.645858E-01      /
+/
+```
 
 For export with WPIMULT factors, the main bore diameter and direction are given in the export for cells which have both main bore and lateral contributions, while diameter and main direction of the first lateral is used for cells with no main bore contribution. Other parameters exported as part of COMPDAT are set to default. 
 
 The *WPIMULT* parameters are calculated, as for the perforation intervals, by ResInsight calculating both the transmissibility of the completion as described above, and in addition calculating the transmissibility based on the information exported in the COMPDAT keyword. The ratio between these two numbers is then exported as the *WPIMUT* keyword. 
 
-    WELSPEC
-    -- Well          Grp   I   J    RefDepth   WellType   
-       Well Path B   GR    26  45   1230       Oil        \
-    \
-    COMPDAT
-    -- Well            I      J      K1     K2     Status     SAT     TR     DIAM        KH     S           Df     DIR     r0     
-    -- Well Path B main bore : 0.0569986
-       Well Path B     26     45     29     29     OPEN       1*      1*     0.21600     1*     0.00000     1*     'Z'      /
-    -- Fishbone 0: Sub: 0 Lateral: 0 : 0.0021382
-    -- Fishbone 0: Sub: 0 Lateral: 1 : 0.00228575
-    -- Fishbone 0: Sub: 0 Lateral: 2 : 0.0126269
-    -- Fishbone 0: Sub: 1 Lateral: 1 : 0.0112929
-    -- Fishbone 0: Sub: 2 Lateral: 0 : 0.00566964
-    -- Well Path B main bore : 0.230572
-       Well Path B     27     41     15     15     OPEN       1*      1*     0.21600     1*     0.00000     1*     'Z'      /
-    /
-    WPIMULT
-    -- Well            Mult         I      J      K      
-       Well Path B     0.70133      25     45     29      /
-       Well Path B     25.11396     27     41     15      /
-    /
+```txt
+WELSPEC
+-- Well          Grp   I   J    RefDepth   WellType   
+   Well Path B   GR    26  45   1230       Oil        \
+\
+COMPDAT
+-- Well            I      J      K1     K2     Status     SAT     TR     DIAM        KH     S           Df     DIR     
+-- Well Path B main bore : 0.0569986
+   Well Path B     26     45     29     29     OPEN       1*      1*     0.21600     1*     0.00000     1*     'Z'  
+-- Fishbone 0: Sub: 0 Lateral: 0 : 0.0021382
+-- Fishbone 0: Sub: 0 Lateral: 1 : 0.00228575
+-- Fishbone 0: Sub: 0 Lateral: 2 : 0.0126269
+-- Fishbone 0: Sub: 1 Lateral: 1 : 0.0112929
+-- Fishbone 0: Sub: 2 Lateral: 0 : 0.00566964
+-- Well Path B main bore : 0.230572
+   Well Path B     27     41     15     15     OPEN       1*      1*     0.21600     1*     0.00000     1*     'Z'  
+/
+WPIMULT
+-- Well            Mult         I      J      K      
+   Well Path B     0.70133      25     45     29      /
+   Well Path B     25.11396     27     41     15      /
+/
+```
 
 ### Completions for LGR (WELSPECL and COMPDATL)
 Completion data for LGR grids are exported to a separate file having the same name as the main grid completions file postfixed by "_LGR". Instead of using the WELSPECS and COMPDAT keywords, the WELSPECL and COMPDATL keywords are used. Those tables are simlar to the WELSPECS and COMPDAT tables, except from including the columns **LGR** and **LgrName**, respectively. The extra columns contains the name of the LGR grid.
 
-    WELSPECL
-    -- Well      Grp   LGR      I   J   RefDepth   WellType   
-       UWell-1   1*    WELLI1   2   9   1*         OIL         /
-        /
-    COMPDATL
-    -- Well      LgrName   I   J   K1   K2   Status   SAT   TR             DIAM      KH   S         Df   DIR   
-    -- ---- Completions for completion type Perforation ----
-    -- Perforation Completion : MD In: 63.6509 - MD Out: 67.0264 Transmissibility: 6.10676
-       UWell-1   WELLI1    2   9   6    6    OPEN     1*    6.106763E+00   0.21600   1*   0.00000   1*   'Y'    /
-    -- Perforation Completion : MD In: 67.0264 - MD Out: 70.402 Transmissibility: 6.10679
-       UWell-1   WELLI1    2   8   6    6    OPEN     1*    6.106791E+00   0.21600   1*   0.00000   1*   'Y'    /
+```txt
+WELSPECL
+-- Well      Grp   LGR      I   J   RefDepth   WellType   
+   UWell-1   1*    WELLI1   2   9   1*         OIL         /
+   /
+COMPDATL
+-- Well      LgrName   I   J   K1   K2   Status   SAT   TR             DIAM      KH   S         Df   DIR   
+-- ---- Completions for completion type Perforation ----
+-- Perforation Completion : MD In: 63.6509 - MD Out: 67.0264 Transmissibility: 6.10676
+   UWell-1   WELLI1    2   9   6    6    OPEN     1*    6.106763E+00   0.21600   1*   0.00000   1*   'Y'    /
+-- Perforation Completion : MD In: 67.0264 - MD Out: 70.402 Transmissibility: 6.10679
+   UWell-1   WELLI1    2   8   6    6    OPEN     1*    6.106791E+00   0.21600   1*   0.00000   1*   'Y'    /
+```
 
 ### LGR for completions (Temporary LGRs)
 The previous section describes the export of COMPDATL for completions intersecting existing LGRs, loaded from file. This section will describe how to have ResInsight create temporary LGRs around completions, and then export COMPDATL for those LGRs.
@@ -198,23 +206,24 @@ In the output file there are data for three Eclipse keyword specified.
 ##### WELSEGS
 WELSEGS defines multi-segment wells. The list of entries contains information on the main stem, the ICDs at the fishbone subs and the fishbone laterals. A comment above each entry details which element (main bore / ICD / lateral) the entry is for.  Example: 
 
-    WELSEGS
-    -- Name            Dep 1          Tlen 1       Vol 1     Len&Dep     PresDrop     
-       Well Path A     4137.09154     87.00000     1*        ABS         H--           /
-    -- First Seg     Last Seg     Branch Num     Outlet Seg     Length        Depth Change     Diam        Rough       
-    -- Main stem
-    -- Segment for sub 0
-       2             2            1              1              13.00000      0.53667          0.15200     0.00001      /
-    -- Laterals
-    -- Diam: MSW - Tubing Radius
-    -- Rough: MSW - Open Hole Roughness Factor
-    -- ICD
-       3             3            2              2              0.10000       0                0.15200     0.00001      /
-    -- Fishbone 0 : Sub index 0 - Lateral 0
-       52            52           27             3              1.70326       -0.57276         0.00960     0.00100      /
-       53            53           27             52             2.34748       -0.81635         0.00960     0.00100      /
-    /
-   
+```txt
+WELSEGS
+-- Name            Dep 1          Tlen 1       Vol 1     Len&Dep     PresDrop     
+   Well Path A     4137.09154     87.00000     1*        ABS         H--           /
+-- First Seg     Last Seg     Branch Num     Outlet Seg     Length        Depth Change     Diam        Rough       
+-- Main stem
+-- Segment for sub 0
+   2             2            1              1              13.00000      0.53667          0.15200     0.00001      /
+-- Laterals
+-- Diam: MSW - Tubing Radius
+-- Rough: MSW - Open Hole Roughness Factor
+-- ICD
+   3             3            2              2              0.10000       0                0.15200     0.00001      /
+-- Fishbone 0 : Sub index 0 - Lateral 0
+   52            52           27             3              1.70326       -0.57276         0.00960     0.00100      /
+   53            53           27             52             2.34748       -0.81635         0.00960     0.00100      /
+/
+```   
 
 - The first *WELSEGS* entry contains information about the well: 
   - **Name** - Name of well
@@ -235,14 +244,16 @@ WELSEGS defines multi-segment wells. The list of entries contains information on
 ##### COMPSEGS
 An example of the COMPSEGS keyword as exported is shown below.  
 
-    COMPSEGS
-    -- Name            
-       Well Path A      /
-    -- I      J      K      Branch no     Start Length     End Length     Dir Pen     End Range     Connection Depth     
-       28     40     6      27            0.00000          1.70326         /
-       28     40     7      27            1.70326          2.34748         /
-       28     40     8      27            2.34748          2.96577         /
-    /
+```txt
+COMPSEGS
+-- Name            
+   Well Path A      /
+-- I      J      K      Branch no     Start Length     End Length     Dir Pen     End Range     Connection Depth     
+   28     40     6      27            0.00000          1.70326         /
+   28     40     7      27            1.70326          2.34748         /
+   28     40     8      27            2.34748          2.96577         /
+/
+```
 
 The first COMPSEGS entry is a line with the well path name. Each following entry is for the segments in the well, and containing the following field:
 
@@ -253,12 +264,14 @@ The first COMPSEGS entry is a line with the well path name. Each following entry
 ##### WSEGVALV
 An example of the WSEGVALV keyword as exported is shown below.  
 
-    WSEGVALV
-    -- Well Name       Seg No     Cv          Ac          
-       Well Path A     3          1.50000     0.00008      /
-       Well Path A     5          1.50000     0.00008      /
-       Well Path A     7          1.50000     0.00008      /
-    /
+```txt
+WSEGVALV
+-- Well Name       Seg No     Cv          Ac          
+   Well Path A     3          1.50000     0.00008      /
+   Well Path A     5          1.50000     0.00008      /
+   Well Path A     7          1.50000     0.00008      /
+/
+```
     
 The parameters exported in the WEGVALV keyword are
 
@@ -270,47 +283,51 @@ The parameters exported in the WEGVALV keyword are
 ### Export of Fractures and Perforations as Multi-Segment Wells
 Fractures and Perforations may also be exported as Multi-Segment Wells. In the case of Fractures, ResInsight will create one segment for the entire fracture, with a number of COMPSEGS-entries corresponding to the cells intersecting the fracture. In this case, the **Diam** and **Rough** parameters are not used for anything and the length of the fracture segment is nominal. An example of a Fracture entry is shown below.
 
-    WELSEGS
-    -- Name      Dep 1          Tlen 1         Vol 1     Len&Dep     PresDrop     
-       C-1 H     2575.39553     2919.53029     1*        INC         H--           /
-    -- First Seg     Last Seg     Branch Num     Outlet Seg     Length       Depth Change     Diam        Rough       
-    -- Fracture Segments
-    -- Diam: MSW - Default Dummy
-    -- Rough: MSW - Default Dummy
-    -- Traversal Fracture 02 connected to Main stem segment 11
-       25            25           2              11             0.01000      0.00000          0.15000     0.00005      /
-        /
-    COMPSEGS
-    -- Fractures
-    -- Name      
-       C-1 H      /
-    -- I      J      K      Branch no     Start Length     End Length     Dir Pen     End Range     Connection Depth     
-       27     43     1      2             11.27214         11.28214        /
-       26     44     1      2             11.27214         11.28214        /
+```txt
+WELSEGS
+-- Name      Dep 1          Tlen 1         Vol 1     Len&Dep     PresDrop     
+   C-1 H     2575.39553     2919.53029     1*        INC         H--           /
+-- First Seg     Last Seg     Branch Num     Outlet Seg     Length       Depth Change     Diam        Rough       
+-- Fracture Segments
+-- Diam: MSW - Default Dummy
+-- Rough: MSW - Default Dummy
+-- Traversal Fracture 02 connected to Main stem segment 11
+   25            25           2              11             0.01000      0.00000          0.15000     0.00005      /
+/
+COMPSEGS
+-- Fractures
+-- Name      
+   C-1 H      /
+-- I      J      K      Branch no     Start Length     End Length     Dir Pen     End Range     Connection Depth     
+   27     43     1      2             11.27214         11.28214        /
+   26     44     1      2             11.27214         11.28214        /
+```
 
 The entries for Perforations are simpler. No additional branches are created as the perforation intervals are all on the main bore and all perforated cells are listed as COMPSEG entries very similar to normal COMPDAT export of perforation intervals.
 
-    WELSEGS
-    -- Name       Dep 1          Tlen 1         Vol 1     Len&Dep     PresDrop     
-       B-1 AH     2530.38706     3137.28258     1*        INC         H--           /
-    -- First Seg     Last Seg     Branch Num     Outlet Seg     Length       Depth Change     Diam        Rough       
-    -- Main Stem Segments
-       2             2            1              1              16.33624     6.96924          0.15200     0.00001      /
-       3             3            1              2              11.77390     4.75668          0.15200     0.00001      /
-       4             4            1              3              9.49721      3.63598          0.15200     0.00001      /
-       5             5            1              4              6.77104      2.59228          0.15200     0.00001      /
-       6             6            1              5              29.44930     10.10431         0.15200     0.00001      /
-       7             7            1              6              27.93603     7.96718          0.15200     0.00001      /
-       8             8            1              7              13.95369     3.66086          0.15200     0.00001      /
-       /
-    COMPSEGS
-    -- Name       
-       B-1 AH      /
-    -- I      J      K     Branch no     Start Length     End Length     Dir Pen     End Range     Connection Depth     
-       10     24     1     1             3137.28258       3153.61882      /
-       10     24     2     1             3153.61882       3165.39273      /
-       9      24     2     1             3165.39273       3174.88994      /
-       9      25     2     1             3174.88994       3181.66098      /
-       9      25     3     1             3181.66098       3211.11028      /
-       9      25     5     1             3239.04631       3253.00000      /
-       /
+```txt
+WELSEGS
+-- Name       Dep 1          Tlen 1         Vol 1     Len&Dep     PresDrop     
+   B-1 AH     2530.38706     3137.28258     1*        INC         H--           /
+-- First Seg     Last Seg     Branch Num     Outlet Seg     Length       Depth Change     Diam        Rough       
+-- Main Stem Segments
+   2             2            1              1              16.33624     6.96924          0.15200     0.00001      /
+   3             3            1              2              11.77390     4.75668          0.15200     0.00001      /
+   4             4            1              3              9.49721      3.63598          0.15200     0.00001      /
+   5             5            1              4              6.77104      2.59228          0.15200     0.00001      /
+   6             6            1              5              29.44930     10.10431         0.15200     0.00001      /
+   7             7            1              6              27.93603     7.96718          0.15200     0.00001      /
+   8             8            1              7              13.95369     3.66086          0.15200     0.00001      /
+/
+COMPSEGS
+-- Name       
+   B-1 AH      /
+-- I      J      K     Branch no     Start Length     End Length     Dir Pen     End Range     Connection Depth     
+   10     24     1     1             3137.28258       3153.61882      /
+   10     24     2     1             3153.61882       3165.39273      /
+   9      24     2     1             3165.39273       3174.88994      /
+   9      25     2     1             3174.88994       3181.66098      /
+   9      25     3     1             3181.66098       3211.11028      /
+   9      25     5     1             3239.04631       3253.00000      /
+/
+```

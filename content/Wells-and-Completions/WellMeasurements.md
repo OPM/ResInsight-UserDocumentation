@@ -24,17 +24,18 @@ The format is comma-separated values with one measurement per line. The followin
 
 #### Example 1:
 
-    # Example well measurements csv file.
-    # This is a comment
-    #
-    # Well Name, MD, Date, Kind, Value, Quality, Comment
-    C-3 H, 1465.18, 2001-10-13, XLOT, 1.76, 3, Good test
-    C-3 H, 1865.18, 2002-10-13, XLOT, 1.91, 1, Poor test
-    C-3 H, 1995.18, 2002-10-13, XLOT, 2.45, 1, Poor test
-    C-3 H, 2065.18, 2002-10-13, XLOT, 2.91, 1, Poor test
-    E-3 H,  634.12, 2005-10-24, DP,    0.0, 0, Wash outs
-    E-3 H, 1000.12, 2005-10-24, DP,    0.0, 0, Wash outs
-
+```txt
+# Example well measurements csv file.
+# This is a comment
+#
+# Well Name, MD, Date, Kind, Value, Quality, Comment
+C-3 H, 1465.18, 2001-10-13, XLOT, 1.76, 3, Good test
+C-3 H, 1865.18, 2002-10-13, XLOT, 1.91, 1, Poor test
+C-3 H, 1995.18, 2002-10-13, XLOT, 2.45, 1, Poor test
+C-3 H, 2065.18, 2002-10-13, XLOT, 2.91, 1, Poor test
+E-3 H,  634.12, 2005-10-24, DP,    0.0, 0, Wash outs
+E-3 H, 1000.12, 2005-10-24, DP,    0.0, 0, Wash outs
+```
     
 ### Measurement properties
 
