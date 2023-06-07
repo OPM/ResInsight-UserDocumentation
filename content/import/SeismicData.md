@@ -17,6 +17,8 @@ A seismic file is imported by right-clicking the **Seismic** item in **Project T
 
 ![]({{< relref "" >}}images/import/SeismicImport.png)
 
+Display of data is described in [Seismic Sections]({{< relref "seismicsections" >}}) 
+
 
 ## Property Editor
 The Property Editor for seismic data lists the available properties:

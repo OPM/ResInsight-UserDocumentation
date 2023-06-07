@@ -7,8 +7,10 @@ weight = 82
 ![]({{< relref "" >}}images/3d-main-window/SeismicHeaderImage.png)
 
 ## Creating a Seismic Section
-Seismic Sections are cross sections that cut a grid model in various ways to display seismic data. 
-A Seismic Section is created by right-clicking the **Seismic Section** item in **Project Tree** 
+Import of data is described in [Seismic Data]({{< relref "seismicdata" >}})
+
+**Seismic Sections** are cross sections that cut a grid model in various ways to display seismic data. 
+A **Seismic Section** is created by right-clicking the **Seismic Section** item in **Project Tree** 
 
 ![]({{< relref "" >}}images/3d-main-window/SeismicSectionsNew.png)
 
@@ -36,3 +38,4 @@ The properties are grouped as follows:
   - **Between**: show between the specified *Upper Depth* and the specified *Lower Depth*
 - **Outline**: Specifying line thickness, line color, and display of seismic data outline.
 - **Show Image**: Displays the Seismic Section in a separate 2D view.
+
