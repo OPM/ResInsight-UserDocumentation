@@ -1,13 +1,12 @@
 +++
 title = "Summary Tables"
 published = true
-weight = 10
+weight = 46
 +++
 
 ![]({{< relref "" >}}images/plot-window/Summary_Table_WOPR.png)
 
 **Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*,  *Group* or *Region*.
-
 
 Summary tables are displayed with the summary vectors on each row, and time step values according to selected *Date Resampling* in each column - as shown with resampling *Year* in the screenshot above.
 
@@ -38,7 +37,7 @@ A default Summary Table can be created by *Right-click* on the Summary Table col
 
 ## Editing Summary Table
 
-The settings of each table is listed in the *Property Editor* for a Summary Table. By selecting a Summary Table, its properties can are displayed.
+The settings of each table is listed in the *Property Editor* for a Summary Table. By selecting a Summary Table, its properties are displayed.
 
 ![]({{< relref "" >}}images/plot-window/Summary_Table_PropertyEditor.png)
 

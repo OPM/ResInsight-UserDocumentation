@@ -34,7 +34,7 @@ Furthermore, the legend may display semi-transparent with a sorrounding box by s
 
 
 ## Legend configuration for category results
-As mentioned, the **Category** type of legend mapping concerns such as formation names and discrete numbered results (e.g. result names with trailing _`NUM`_).
+The **Category** type of legend mapping concerns such as formation names and discrete numbered results (e.g. result names with trailing _`NUM`_). 
 
 **Category** type of legends invoke the Property Editor shown below. 
 Here the default **Category Mode** *Interpolate* is shown to color all formations.

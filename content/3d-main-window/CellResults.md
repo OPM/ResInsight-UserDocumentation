@@ -59,7 +59,7 @@ ResInsight has embedded Flow Diagnostics calculations made available using the *
 These results make it easier to see how and where wells interact with the reservoir and each other. 
 It is possible to select exactly what wells to investigate, and even the possible *opposite flow* part of the well.
 
-See also [ Flow Diagnostics Plots]({{< relref "flowdiagnosticsplots" >}}) and [ Flow Characteristics Plot]({{< relref "flowdiagnosticsplots" >}}#flow-characteristics-plot) 
+See also [ Flow Diagnostics Plots]({{< relref "flow-diagnostics-plots" >}}) and [ Flow Characteristics Plot]({{< relref "flow-diagnostics-plots" >}}#flow-characteristics-plot) 
 
 #### Method
 

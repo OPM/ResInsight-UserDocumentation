@@ -21,7 +21,7 @@ ResInsight supports import of [ 3D Surfaces ]({{< relref "3d-main-window/surface
 ## Cumulative Phase Distribution Plots
 ![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionPlot.png)
 
-A [Cumulative Phase Distribution Plot]({{< relref "/plot-window/flowdiagnosticsplots" >}}#cumulative-phase-distribution-plot) shows the volumetric oil, gas, and water distribution from contributing wells to a target well.
+A [Cumulative Phase Distribution Plot]({{< relref "/plot-window/flow-diagnostics-plots" >}}#cumulative-phase-distribution-plot) shows the volumetric oil, gas, and water distribution from contributing wells to a target well.
 
 ## Delta Summary Case and Ensemble Case
 

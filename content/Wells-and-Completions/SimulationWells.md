@@ -19,7 +19,7 @@ Several commands are available as right-click commands on a simulation well. The
   ( See [Summary Plots]({{< relref "summaryplots" >}}) ) 
 - **Plot Well Allocation** -- Creates or modifies the default Well Allocation Plot to show the well.
   allocation for the selected well. If the case has no Fluxes the well flow rates are shown instead.  
-  ( See [ Flow Diagnostics Plots ]({{< relref "flowdiagnosticsplots" >}}) )
+  ( See [ Flow Diagnostics Plots ]({{< relref "flow-diagnostics-plots" >}}) )
 - **Show Contributing Wells** -- This command sets up a 3D View by adding filters and modifying the Cell Result based on Flow Diagnostic Calculations to show which regions and wells that contribute to the selected well by doing:
    - Add a property filter of **Time Of Flight** to/from the selected well to show only the cells that contribute to/are influenced by the well.
    - Sets the **Cell Result** to show **Tracer With Max Fraction** based on **All Injectors** or **All Producers** (the opposite of the selected well)

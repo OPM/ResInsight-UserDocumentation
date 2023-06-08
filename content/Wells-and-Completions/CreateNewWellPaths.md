@@ -6,7 +6,7 @@ weight = 30
 
 ![]({{< relref "" >}}images/3d-main-window/WellPathCreation.png)
 
-ResInsight lets the user create new/custom well paths by clicking in the 3D view. A self created well path will behave the same way as an ordinary imported well path.
+ResInsight lets the user create new/custom well paths by clicking in the 3D view. A self created well path will behave the same way as an imported well path.
 
 [Building a multilateral well path]({{< relref "createmultilateralwellpaths" >}}) 
 
@@ -33,23 +33,29 @@ Well targets property editor fields:
 
 Controls the visibility and appearance of spheres at well target locations in addition to 3D interaction handles. The 3D interaction handles will be visible only when the Well Target object is selected, but the spheres will be always be visible if enabled.
 
-
 **Well Targets**
 
 List of all defined well targets. The editor will have a contrast background color when in picking state.
 
-- **Point** - Target position relative to reference point.
+- **Relative Coord** - Target position relative to reference point. **UTM Coords** can be displayed using a checkbox option above the table.
+- **MD** - Measured depth along the well path.
 - **DL in** - Dog leg inwards [degrees/30m].
 - **DL out** - Dog leg outwards [degrees/30m].
-- **Dir** - Check box for overriding well path auto calculated directions.
-- **Azi (deg)** - Azimuth. Y axis is 0 degrees.
-- **Inc (deg)** - Inclination. Z axis is 0 degrees.
+- **Azi (deg)** - Azimuth. Y axis is 0 degrees. If the **Azi** checkbox is ticked, the user can provide a fixed value for Azimuth.
+- **Inc (deg)** - Inclination. Z axis is 0 degrees. If the **Inc** checkbox is ticked, the user can provide a fixed value for Inclination.
+
+The other columns defined by the "Est"-prefix displays the result of dog leg and direction values produced by the well path geometry estimation algorithm.
 
 A well path defined by well targets may be edited by either editing coordinates in the property editor or clicking and dragging targets in the 3D view.
 
 ![]({{< relref "" >}}images/3d-main-window/WellTargets.png)
 
 Clicking and dragging the blue part of a target, it can be moved along the Z axis only. Clicking and dragging the magenta part of a target, it can be moved freely around.
+
+### Well Path Duplication
+To duplicate an existing well path, select **Duplicate** from the right-click menu of a well path in the **Project Tree** or right-click on the well path geometry in the 3D view. This operation will create a new well path with a set of well targets.
+
+The full geometry of the new well path is an estimate of the source well path, so the geometry might differ slightly.
 
 ### Well Target Interaction Operations
 When the well target handles are active in the 3D view, the following operations are possible when pressing left mouse button on well target handles:

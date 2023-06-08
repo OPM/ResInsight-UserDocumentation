@@ -6,7 +6,7 @@ weight = 10
 
 ## Installation
 
-See the following for common install procedures and options: 
+See the following for common install procedures and options:
 
 - [ Linux Installation ]({{< ref "linux-installation.md" >}})
 

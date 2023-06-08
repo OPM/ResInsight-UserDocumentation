@@ -85,6 +85,11 @@ It is also possible to save the ascii data to a file directly by using the right
 
 The total accumulation data can also be viewed in ascci format by the command **Show Total Allocation Data**.
 
+## Producer/Injector Connectivity Table
+![]({{< relref "" >}}images/plot-window/Producer_Injector_Connectivity.png)
+
+Use [Producer/Injector Connectivity Table]({{< relref "producerinjectorconnectivitytable" >}}) to see the flow diagnostics communication between producer and injector wells for selected time steps.
+
 ## Well Allocation Over Time
 ![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
 

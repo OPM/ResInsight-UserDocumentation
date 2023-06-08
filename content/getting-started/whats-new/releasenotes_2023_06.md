@@ -24,14 +24,13 @@ ResInsight supports the following seismic file formats:
 
 ![]({{< relref "" >}}images/plot-window/Summary_Table_WOPR.png)
 
-**Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*,  *Group* or *Region*.
-
+**Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*, *Group* or *Region*.
 
 Summary tables are displayed with the summary vectors on each row, and time step values according to selected *Date Resampling* in each column - as shown with resampling *Year* in the screenshot above.
 
 [Summary Tables]({{< relref "summarytables" >}})
 
-## Injector/Producer Communication Table
+## Producer/Injector Connectivity Table
 
 
 ## Cell Filters for Faults and Intersections
@@ -50,25 +49,27 @@ Intersections and faults can now be visually filtered by using cell filters, and
 [Decline Curves]({{< relref "declinecurveanalysis" >}})
 
 ## Integer Cell Results
-Improved support for import and tagging of integer cell results. Improved legend for integer results.
-Improved support for named categories in color legend. Supported for both ROFF and Eclipse data.
+![]({{< relref "" >}}images/3d-main-window/CustomCategoryLegend.png)
 
+**Integer Cell Results** can now be visualized using [Integer Color Legends]({{< relref "colorlegends" >}}#integer-cell-results) and use custom color names that can be displayed in the 3D view.
 
-## Improved visual ensemble curves
+## Improved Visualisation of Ensemble Curves
 
 ![]({{< relref "" >}}images/plot-window/Ensemble.png)
 
-The visual appearance of ensemble curves has been improved. A color selection dialog can be opened by clicking on the color icon in the **Project Tree**. This feature is also supported for single summary curves.
+The visual appearance of ensemble curves has been improved. Ensemble curves are displayed using a brighter color than the statistics curves.
+
+A color selection dialog can be opened by clicking on the color icon in the **Project Tree**. This feature is also supported for single summary curves.
 ![]({{< relref "" >}}images/plot-window/ColorSelectionDialog.png)
 
 ## Other improvements
 
-- Create a new well with targets based on an existing static well path ##add doc##
+- [Create a new well]({{< relref "createnewwellpaths" >}}) based on an existing well path
 - Improve renaming of summary and ensemble models
 - Show Python version in About Dialog
 - Full screen mode to maximize screen space for 3D view
 - [Fault distance]({{< relref "faultdistance" >}}) calculations performs faster 
-- In some models, the size of well targets was to small to work with. A scaling factor well targets is added.
+- In some models, the size of well targets was to small to work with. A scaling factor for [Well Targets]({{< relref "createnewwellpaths" >}}) is now available.
 
 
 

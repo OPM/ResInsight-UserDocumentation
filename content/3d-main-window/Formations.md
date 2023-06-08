@@ -97,7 +97,7 @@ Formation can be used to annotate the following plot types:
 - [Well Log Plots]({{< relref "welllogsandplots" >}})
 - [RFT Plots]({{< relref "rftplot" >}})
 - [PLT Plots]({{< relref "pltplot" >}})
-- [Well Allocation Plots]({{< relref "flowdiagnosticsplots" >}})
+- [Well Allocation Plots]({{< relref "flow-diagnostics-plots" >}})
 
 ![]({{< relref "" >}}images/3d-main-window/formOnPlot.PNG) MANGLER BILDE
 
