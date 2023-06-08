@@ -23,7 +23,7 @@ During import of a summary case, ResInsight tries to find an associated **parame
 [Ensemble File Dialog]({{< relref "ensemblefiledialog" >}})
 
 ## Naming
-The name of an ensemble can be changed by interactive edit of the name in the **Project Tree** (by clicking or using **F2**) or selecting the ensemble changing the name in the **Property Editor**.
+The name of an ensemble can be changed by interactive edit of the name in the **Project Tree** (by clicking or using **F2**) or selecting the ensemble and changing the name in the **Property Editor**.
 
 ## Plotting
 Ensembles are plotted in the summary plot the same way as ordinary summary curves. Create a new summary plot using the [summary plot editor]({{< relref "summaryploteditor" >}}). Imported ensembles will appear in a separate group in the list of summary cases. When an ensemble is selected, a new curve set is created and plotted as multiple summary curves. By default all curves in an ensemble curve set will have the same color. 

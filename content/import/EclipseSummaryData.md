@@ -35,6 +35,10 @@ By default the file names are displayed using relative path based on the common 
 
 If the user selected multiple summary files or grid files, this dialog will be displayed for every file that has an origin summary file. In this case the button **OK to All** appears. When this button is clicked, the rest of the files will be imported silently using the same options.
 
+
+## Naming
+The name of a summary case can be changed by interactive edit of the name in the **Project Tree** (by clicking or using **F2**) or selecting the summary case in the **Property Editor** and edit the name.
+
 ## Summary Data File Formats
 
 **ResInsight** is able to import summary data in three file formats. Default exported by *Eclipse* is **\*.SMSPEC/.UNSMRY**. In addition, *Eclipse* can export into **\*.h5** for improved performance.
