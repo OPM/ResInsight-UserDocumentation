@@ -69,7 +69,7 @@ A color selection dialog can be opened by clicking on the color icon in the **Pr
 - Show Python version in About Dialog
 - Full screen mode to maximize screen space for 3D view
 - [Fault distance]({{< relref "faultdistance" >}}) calculations performs faster 
-- In some models, the size of well targets was to small to work with. A scaling factor well targets is added.
+- In some models, the size of well targets was to small to work with. A scaling factor for [Well Targets]({{< relref "createnewwellpaths" >}}) is now available.
 
 
 
