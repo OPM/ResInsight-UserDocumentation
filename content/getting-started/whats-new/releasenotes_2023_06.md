@@ -36,6 +36,9 @@ Intersections and faults can now be visually filtered by using cell filters, and
 
 
 ## Regression and Decline curves
+![]({{< relref "" >}}images/plot-window/DeclineCurves.png)
+
+[Decline Curves]({{< relref "declinecurveanalysis" >}})
 
 ## Integer Cell Results
 Improved support for import and tagging of integer cell results. Improved legend for integer results.
