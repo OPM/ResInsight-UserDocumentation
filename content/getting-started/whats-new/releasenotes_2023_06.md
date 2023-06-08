@@ -26,6 +26,14 @@ ResInsight supports the following seismic file formats:
 
 
 ## Cell Filters for Faults and Intersections
+![]({{< relref "" >}}images/release-notes/CellFilteredIntersection.png)
+
+Intersections and faults can now be visually filtered by using cell filters, and can be useful if faults and intersections obscure other interesting parts of the model. The filtering using cell filters is by default activated.
+
+[Intersection Filters]({{< relref "intersections" >}}#depth-and-range-filter)
+
+[Fault Filters]({{< relref "faults" >}}#faults-properties)
+
 
 ## Regression and Decline curves
 

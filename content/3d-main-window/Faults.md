@@ -77,12 +77,12 @@ By clicking the {{< image-in-text src="images/3d-main-window/draw_style_faults_2
 
  ![]({{< relref "" >}}images/3d-main-window/FaultProperties.png)
  
+##### Fault Options
+- **Use Cell filters for Faults** -- When checked, use the currently active cell filters to filter the visible faults. 
+
 ##### Fault Labels
 - **Show labels** -- Displays one label per fault with the name defined in the _`*.DATA`_ file
 - **Label color** -- Defines the label color
- 
-##### Fault Options
-- **Show faults outside filters** -- Turning this option on, will display faults outside the filter region, making the fault visualization completely ignore the Range and Property filters in action.
 
 ##### Fault Face Visibility
 This group of options controls the visibility of the fault faces. Since they work together, and in some cases are overridden by the system, they can be a bit confusing. 

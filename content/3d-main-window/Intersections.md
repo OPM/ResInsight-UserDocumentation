@@ -38,6 +38,11 @@ The property panel of a well path based intersection is shown below:
  
 - **Name** -- Automatically created based on the item specifying the intersection. The user can edit the name, but it will be updated if you change well or well path.
 - **Intersecting Geometry** -- Options to control the curve used for the cross section dependant on the type of intersection.
+- **Depth Filter** -- Controls the depth/z-range for visible geometry. Can be controlled from the **Intersections** folder object.
+- **K Range Filter** -- Controls the visible K slices. Can be controlled from the **Intersections** folder object.
+
+#### Advanced options
+
 - **Direction** -- Horizontal, vertical or defined by two points.
 - **Extent Length** -- Defines how far an intersection for well path or simulation Well is extended at intersection ends.
 - **Show Inactive Cells** -- Controls if inactive cells are included when creating intersection geometry.
@@ -46,17 +51,10 @@ The property panel of a well path based intersection is shown below:
 By **Defined by two points**, the user can define the direction based on any two points. The direction from the first to the second point defines the extrude direction. 
 
 
-### Well Path Intersection
+### Well Path Intersections
 A new **Well Path** intersection can be created by right-clicking the well path in the 3D view or in the **Project Tree**. 
- 
-![]({{< relref "" >}}images/3d-main-window/IntersectionWellPath.png)
- 
-When a well path intersection is created, the source well path can be changed by using the **Well Path** selection combo box in the **Property Editor**.
 
-### Simulation Well Intersection
 A new **Simulation Well** intersection can be created by right-clicking the simulation well in the 3D view or in the **Project Tree**.
-
-![]({{< relref "" >}}images/3d-main-window/IntersectionSimulationWellProperties.png)
 
 When a simulation well intersection is created, the source simulation well can be changed by using the **Simulation Well** selection combo box in the **Property Editor**. 
 
@@ -159,7 +157,7 @@ Direct interaction in a 3D view is activated when **Show 3D manipulator** is pre
 ![]({{< relref "" >}}images/3d-main-window/IntersectionBoxWithHandles.png)
 
 
-## Depth Filter
+## Depth and Range Filter
 An intersection can be visually filtered, i.e. partly hidden from display, by employing a user defined **Depth Filter**. 
 Depth filtering is performed by selecting an intersection in **Project Tree** and setting **Depth Filter** properties in **Property Editor**:
 - **None**: no depth filtering
@@ -167,8 +165,18 @@ Depth filtering is performed by selecting an intersection in **Project Tree** an
 - **Below**: show below the specified *Depth*
 - **Between**: show between the specified *Upper Depth* and the specified *Lower Depth*
 
+An intersection can be also be visually filtered by a user defined **K Range Filter**. 
+K Range filtering is performed by enabling **K Range Filter** of an intersection. The filtering is defined using a text string, i.e. "5,10-15,20:3", see [Advanced Text Input]({{< relref "advancedtextinput" >}}) for details.
+
 ![]({{< relref "" >}}images/3d-main-window/IntersectionPropEdDepthFilter.png)
 
+## Filter Options for all Intersections
+
+![]({{< relref "" >}}images/3d-main-window/IntersectionFolderOverrides.png)
+
+The filtering of all intersections can be controlled when selecting the **Intersections** folder object. Activating these options will override the settings defined locally on each intersection.
+
+Similar options can also be activated for **Faults**.
 
 ## Intersection Results
 
