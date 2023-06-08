@@ -34,14 +34,17 @@ Well targets property editor fields:
 Controls the visibility and appearance of spheres at well target locations in addition to 3D interaction handles. The 3D interaction handles will be visible only when the Well Target object is selected, but the spheres will be always be visible if enabled.
 
 **Well Targets**
+
 List of all defined well targets. The editor will have a contrast background color when in picking state.
 
-- **Point** - Target position relative to reference point.
+- **Relative Coord** - Target position relative to reference point. **UTM Coords** can be displayed using a checkbox option above the table.
+- **MD** - Measured depth along the well path.
 - **DL in** - Dog leg inwards [degrees/30m].
 - **DL out** - Dog leg outwards [degrees/30m].
-- **Dir** - Check box for overriding well path auto calculated directions.
-- **Azi (deg)** - Azimuth. Y axis is 0 degrees.
-- **Inc (deg)** - Inclination. Z axis is 0 degrees.
+- **Azi (deg)** - Azimuth. Y axis is 0 degrees. If the **Azi** checkbox is ticked, the user can provide a fixed value for Azimuth.
+- **Inc (deg)** - Inclination. Z axis is 0 degrees. If the **Inc** checkbox is ticked, the user can provide a fixed value for Inclination.
+
+The other columns defined by the "Est"-prefix displays the result of dog leg and direction values produced by the well path geometry estimation algorithm.
 
 A well path defined by well targets may be edited by either editing coordinates in the property editor or clicking and dragging targets in the 3D view.
 
