@@ -64,7 +64,7 @@ A color selection dialog can be opened by clicking on the color icon in the **Pr
 
 ## Other improvements
 
-- Create a new well with targets based on an existing static well path ##add doc##
+- [Create a new well]({{< relref "createnewwellpaths" >}}) based on an existing well path
 - Improve renaming of summary and ensemble models
 - Show Python version in About Dialog
 - Full screen mode to maximize screen space for 3D view
