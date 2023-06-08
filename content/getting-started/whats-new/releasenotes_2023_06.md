@@ -24,8 +24,7 @@ ResInsight supports the following seismic file formats:
 
 ![]({{< relref "" >}}images/plot-window/Summary_Table_WOPR.png)
 
-**Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*,  *Group* or *Region*.
-
+**Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*, *Group* or *Region*.
 
 Summary tables are displayed with the summary vectors on each row, and time step values according to selected *Date Resampling* in each column - as shown with resampling *Year* in the screenshot above.
 
@@ -54,11 +53,13 @@ Intersections and faults can now be visually filtered by using cell filters, and
 
 **Integer Cell Results** can now be visualized using [Integer Color Legends]({{< relref "colorlegends" >}}#integer-cell-results) and use custom color names that can be displayed in the 3D view.
 
-## Improved visual ensemble curves
+## Improved Visualisation of Ensemble Curves
 
 ![]({{< relref "" >}}images/plot-window/Ensemble.png)
 
-The visual appearance of ensemble curves has been improved. A color selection dialog can be opened by clicking on the color icon in the **Project Tree**. This feature is also supported for single summary curves.
+The visual appearance of ensemble curves has been improved. Ensemble curves are displayed using a brighter color than the statistics curves.
+
+A color selection dialog can be opened by clicking on the color icon in the **Project Tree**. This feature is also supported for single summary curves.
 ![]({{< relref "" >}}images/plot-window/ColorSelectionDialog.png)
 
 ## Other improvements
