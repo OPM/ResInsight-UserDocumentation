@@ -58,7 +58,7 @@ The visual appearance of ensemble curves has been improved. A color selection di
 - Improve renaming of summary and ensemble models
 - Show Python version in About Dialog
 - Full screen mode to maximize screen space for 3D view
-- Fault distance calculations performs faster (add doc) https://github.com/OPM/ResInsight/issues/10141
+- [Fault distance]({{< relref "faultdistance" >}}) calculations performs faster 
 - In some models, the size of well targets was to small to work with. A scaling factor well targets is added.
 
 
