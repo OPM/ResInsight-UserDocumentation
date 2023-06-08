@@ -42,3 +42,17 @@ The sequence of *Color Legend Items* can be modified by clicking the arrow symbo
 The listed *Custom Color Legend* is used to form the 3D visualization of formations seen by the top figure of this page.
 Activating this particular *Custom Color Legend* is performed by specifying it as 
 [Result Color Legend]({{< relref "ResultColorLegend" >}}).
+
+
+## Integer Cell Results
+
+When displaying interger cell results, the default color mapping will be set to a category color mapping. This color legend is used when displaying **Formation Names**. If an integer result is loaded, a custom color legend with names can be used.
+
+Example workflow
+- Select an integer cell result, i.e. FIPNUM
+- Create a custom color legend or create a copy of an existing color legend, name it **"MyColorLegend"**
+- Define colors and assign names to colors
+- Use the custom color legend. Note that the color item names are visible in the color legend in the view.
+
+
+![]({{< relref "" >}}images/3d-main-window/CustomCategoryLegend.png)

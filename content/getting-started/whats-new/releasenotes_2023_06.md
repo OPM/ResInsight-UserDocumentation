@@ -50,9 +50,9 @@ Intersections and faults can now be visually filtered by using cell filters, and
 [Decline Curves]({{< relref "declinecurveanalysis" >}})
 
 ## Integer Cell Results
-Improved support for import and tagging of integer cell results. Improved legend for integer results.
-Improved support for named categories in color legend. Supported for both ROFF and Eclipse data.
+![]({{< relref "" >}}images/3d-main-window/CustomCategoryLegend.png)
 
+**Integer Cell Results** can now be visualized using [Integer Color Legends]({{< relref "colorlegends" >}}#integer-cell-results) and use custom color names that can be displayed in the 3D view.
 
 ## Improved visual ensemble curves
 
