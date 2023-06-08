@@ -14,7 +14,7 @@ ResInsight supports the following seismic file formats:
 
 - **SEGY**: file format developed by the **Society of Exploration Geophysicists** for storing geophysical data
 - **VDS**: file format for fast random access to multi-dimensional volumetric data as supported by **OSDU OpenVDS**
-- **ZGY**:  file format developed by **Schlumberger** for storing 3D data for seismic interpretation
+- **ZGY**: file format for fast random access to multi-dimensional volumetric data as supported by **OSDU OpenZGY**
 
 [Seismic Data]({{< relref "seismicdata" >}})
 

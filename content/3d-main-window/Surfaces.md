@@ -118,7 +118,7 @@ END
 
 ### Petrel Surface PTL files
 
-ResInsight is capable of importing a surface defined by a **PTL** (*.ptl) file from Schlumberger Petrel.
+ResInsight is capable of importing a surface defined by a **PTL** (*.ptl) file format.
 A PTL data file specifies the quads of a surface by *x*, *y*, *z* nodal coordinates and the *i* and *j* indices as exemplified below. 
 As seen, *#* denotes comment lines.
 
