@@ -143,12 +143,13 @@ The text content of this window is easy to copy and paste into Excel or other to
 It is also possible to save the text data to a file by the right-click command **Export to File**. 
 
 
-
 ## Editing Summary Plots
+
+A color selection dialog can be opened by clicking on the color icon in the **Project Tree**.
+![]({{< relref "" >}}images/plot-window/ColorSelectionDialog.png)
+
 The settings of each plot are listed in the **Plots** window for overview and are controlled by its sub-items and the **Property Editor**.
-
 ![]({{< relref "" >}}images/plot-window/SummaryCurveSelection.png)
-
 
 ### Editing a Summary Curve
 

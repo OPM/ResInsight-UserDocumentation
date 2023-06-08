@@ -4,6 +4,8 @@ published = true
 weight = 50
 +++
 
+![]({{< relref "" >}}images/plot-window/Ensemble.png)
+
 An ensemble is a group of cases that are tightly coupled, only a set of ensemble input parameters differ between cases. This makes it relevant to perform calculations and statistics analysis on ensembles.
 
 ## Import
@@ -21,13 +23,22 @@ During import of a summary case, ResInsight tries to find an associated **parame
 [Ensemble File Dialog]({{< relref "ensemblefiledialog" >}})
 
 ## Plotting
-Ensembles are plotted in the summary plot the same way as ordinary summary curves. Create a new summary plot using the [summary plot editor]({{< relref "summaryploteditor" >}}). Imported ensembles will appear in a separate group in the list of summary cases. When an ensemble is selected, a new curve set is created and plotted as multiple summary curves. By default all curves in an ensemble curve set will have the same color. The coloring mode may be edited in the curve set's property editor in the project plot tree view. Two coloring modes are available:
+Ensembles are plotted in the summary plot the same way as ordinary summary curves. Create a new summary plot using the [summary plot editor]({{< relref "summaryploteditor" >}}). Imported ensembles will appear in a separate group in the list of summary cases. When an ensemble is selected, a new curve set is created and plotted as multiple summary curves. By default all curves in an ensemble curve set will have the same color. 
+
+A color selection dialog can be opened by clicking on the color icon in the **Project Tree**.
+![]({{< relref "" >}}images/plot-window/ColorSelectionDialog.png)
+
+The coloring mode may be edited in the curve set's property editor in the project plot tree view. Two coloring modes are available:
 
 - **Single color** Use the same color for all curves in a curve set
+- **Single color with Transparency** Use transparency for the ensemble curves
 - **By Ensemble Parameter** One ensemble parameter is selected to control coloring. The ensemble parameter value for each case is used to pick a color in a color range. In this case a color legend appears.
+- **By Objective Function** Use the value of an objective function for colors.
+- **By Custom Objective Function** Use the value of an objective function for colors.
 
 Stepping of data source for ensemble curves is described in [Summary Plot Source Stepping]({{< relref "summarysourcestepping" >}})
 
+[Objective Functions]({{< relref "ObjectiveFunctions" >}})
 
 ### Resampling
 Resampling of curves is possibly by selecting the actual curve(s) listed by the *Ensemble Curve Sets* item in **Plot Project Tree** and using the **Resampling** feature of **Property Editor**.
@@ -43,10 +54,6 @@ If the number of curves in a curve set is sufficient, ResInsight will calculate 
 - **P90** -- 90% of the curves in the curve set are above this curve
 
 Statistics curves may be toggled on or off in the curve set's property editor.
-
-Example:
-
-![]({{< relref "" >}}images/plot-window/Ensemble.png)
 
 ## Delta Ensemble
 A new ensemble can be created based on calculations on two or more ensembles. 

@@ -46,15 +46,11 @@ Improved support for named categories in color legend. Supported for both ROFF a
 
 
 ## Improved visual ensemble curves
-use bright transparent curves
-allow direct access to curve colors in tree
-https://github.com/OPM/ResInsight/issues/10214
 
+![]({{< relref "" >}}images/plot-window/Ensemble.png)
 
-
-
-
-
+The visual appearance of ensemble curves has been improved. A color selection dialog can be opened by clicking on the color icon in the **Project Tree**. This feature is also supported for single summary curves.
+![]({{< relref "" >}}images/plot-window/ColorSelectionDialog.png)
 
 ## Other improvements
 
