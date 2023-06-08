@@ -22,6 +22,15 @@ ResInsight supports the following seismic file formats:
  
 ## Summary Table
 
+![]({{< relref "" >}}images/plot-window/Summary_Table_WOPR.png)
+
+**Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*,  *Group* or *Region*.
+
+
+Summary tables are displayed with the summary vectors on each row, and time step values according to selected *Date Resampling* in each column - as shown with resampling *Year* in the screenshot above.
+
+[Summary Tables]({{< relref "summarytables" >}})
+
 ## Injector/Producer Communication Table
 
 
