@@ -8,9 +8,9 @@ weight = 111
 
 **Producer/Injector Connectivity Tables** is a display of [Flow Diagnostics Data]({{< relref "flow-diagnostics-plots" >}}) as a color map in table format. The table either shows flow rate data for a single time step, or accumulated flow volume data over a range of time steps.
 
-The table lists one producer well per row and one injection well per column. The cell data is the flow rate data or accumulated flow volume data based on the selected **Time Step Type**. This table data provides an overview of the communicating wells in the reservoir, and shows which injection well contributes to which producing well, and who are the largest contributors to production.
+The table lists one producer per row and one injector per column. The cell data is the flow rate data or accumulated flow volume data based on the selected **Time Step Type**. This table data provides an overview of the communicating wells in the reservoir, and shows which injector contributes to which producer, and who are the largest contributors to production.
 
-The table can be formatted by use of the **Property Editor**, shown below. The cell data type is controlled by **Value Type** and the rows/columns can be filtered by selectedin producers and injectors in the **Tracer Selection**. Columns are controlled by the selection of resampling, and rows are controlled by selected *Threshold* value and *Exclude Rows*. 
+The table can be formatted by use of the **Property Editor**, shown below. The cell data type is controlled by **Value Type** and the rows/columns can be filtered by selectecting producers and injectors in the **Tracer Selection**. Columns are controlled by the selection of resampling, and rows are controlled by selected *Threshold* value and *Exclude Rows*. 
 
 ## Creating Producer/Injector Connectivity Tables
 

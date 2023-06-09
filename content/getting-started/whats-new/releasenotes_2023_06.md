@@ -31,6 +31,9 @@ Summary tables are displayed with the summary vectors on each row, and time step
 [Summary Tables]({{< relref "summarytables" >}})
 
 ## Producer/Injector Connectivity Table
+![]({{< relref "" >}}images/plot-window/Producer_Injector_Connectivity.png)
+
+[Producer/Injector Connectivity Tables]({{< relref "producerinjectorconnectivitytable" >}}) is a display of [Flow Diagnostics Data]({{< relref "flow-diagnostics-plots" >}}) as a color map in table format. The table either shows flow rate data for a single time step, or accumulated flow volume data over a range of time steps.
 
 
 ## Cell Filters for Faults and Intersections
