@@ -39,6 +39,9 @@ Based on the value of $b$ in the function, Arps classified the decline curves in
  - The harmonic decline has $b = 1$.
  - The hyperbolic decline has $b$ ranges between 0 and 1.
 
+It is important to note that the decline curve is an empirical model and assumes a simplified representation of the complex physical and geological factors affecting production decline.
+
+
 ## Rate-Time Decline Curves
 
 
@@ -49,6 +52,8 @@ Exponential decline is the production decline when $ b = 0 $. This gives a const
 $$q_0 = q_i e^{-Dt }$$
 
 ### Hyperbolic Decline
+
+Hyperbolic decline is the generic case where $ 0 < b < 1 $.
 
 $$q_0 = \frac{q_i}{ (1+bD_i t )^\frac{1}{b} }$$
 
@@ -70,6 +75,8 @@ Exponential decline is the production decline when $b = 0$. This gives a constan
 $$N_p = \frac{q_i - q_0}{D}$$
 
 ### Hyperbolic Decline
+
+Hyperbolic decline is the generic case where $ 0 < b < 1 $.
 
 $$N_p = \frac{q_i^b}{D_i(1-b)} [q_i^{(1-b)} - q_0^{(1-b)}]$$
 
