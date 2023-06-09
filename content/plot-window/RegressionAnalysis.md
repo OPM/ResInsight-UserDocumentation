@@ -13,6 +13,8 @@ weight = 80
 Regression analysis curves can be created from the right-click menu for a curve in the **Plot Project Tree**.
 
 
+![]({{< relref "" >}}images/plot-window/RegressionAnalysis_create.png)
+
 
 ## Regression Types
 
@@ -72,7 +74,6 @@ The equation for exponential regression can be written as:
 
 $$ y = ae^{bx} $$
 
-where:
 where:
 - $y$ is the dependent variable, 
 - $x$ is the independent variable, 

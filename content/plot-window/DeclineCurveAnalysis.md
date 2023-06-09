@@ -14,6 +14,8 @@ Decline curves can be created from the right-click menu for a curve in the **Plo
 
 Three decline curves are created, and the values for the decline curves can be inspected visually in the plot and values can be displayed using **Show Plot Data** from the menu inside the plot window.
 
+![]({{< relref "" >}}images/plot-window/DeclineCurves_create.png)
+
 ## Origins
 
 J.J. Arps [[1]](#1) concluded that the decline in oil production rate ($q_i$) over time can be described by these equations:

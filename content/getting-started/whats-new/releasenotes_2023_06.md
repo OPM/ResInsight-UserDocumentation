@@ -46,10 +46,12 @@ Intersections and faults can now be visually filtered by using cell filters, and
 [Fault Filters]({{< relref "faults" >}}#faults-properties)
 
 
-## Regression and Decline curves
+## Regression Analysis and Decline Curve Analysis
 ![]({{< relref "" >}}images/plot-window/DeclineCurves.png)
 
-[Decline Curves]({{< relref "declinecurveanalysis" >}})
+[Decline Curve Analysis]({{< relref "declinecurveanalysis" >}})
+
+[Regression Analysis]({{< relref "regressionanalysis" >}})
 
 ## Integer Cell Results
 ![]({{< relref "" >}}images/3d-main-window/CustomCategoryLegend.png)
