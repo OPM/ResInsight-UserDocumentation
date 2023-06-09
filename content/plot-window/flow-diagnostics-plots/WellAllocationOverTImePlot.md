@@ -33,7 +33,7 @@ The settings for the Well Allocation Over Time Plot is listed in the *Property E
 
 ![]({{< relref "" >}}images/plot-window/WellAllocationOverTimePlot_PropertyEditor.png)
 
-The main controls for a Producer/Injector Connectivity Table is listed below:
+The main controls for a Well Allocation Over Time Plot is listed below:
 
 #### Plot Data
 - **Case** - Select case to retrieve data from.
