@@ -93,7 +93,7 @@ Use [Producer/Injector Connectivity Table]({{< relref "producerinjectorconnectiv
 ## Well Allocation Over Time
 ![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
 
-Use **Well Allocation Over Time** to see the allocation over multiple restart time steps.
+Use [Well Allocation Over Time]({{< relref "wellallocationovertimeplot" >}}) to see the allocation over multiple restart time steps.
 
 ## Cumulative Phase Distribution Plot
 

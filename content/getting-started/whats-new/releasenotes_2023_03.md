@@ -29,7 +29,7 @@ Import of radial grids including local grid refinement(LGR) are now supported. U
 ## Well Allocation Over Time
 ![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
 
-Use [Well Allocation Over Time]({{< relref "flow-diagnostics-plots" >}}#well-allocation-over-time) to see the allocation over multiple restart time steps.
+Use [Well Allocation Over Time]({{< relref "wellallocationovertimeplot" >}}) to see the allocation over multiple restart time steps.
 
 ## Depth Plot
 
