@@ -14,7 +14,7 @@ The table can be formatted by use of the **Property Editor**, shown below. The c
 
 ## Creating Producer/Injector Connectivity Tables
 
-The Producer/Injector Connectivity Tables are a part of the *Flow Diagnostics Plots*. Click [here]({{< relref "flow-diagnostics-plots/#creating-well-allocation-plots" >}}) for how to generate the plots from 3D view.
+The Producer/Injector Connectivity Tables are a part of the *Flow Diagnostics Plots*. Click [here]({{< relref "flow-diagnostics-plots" >}}#creating-well-allocation-plots) for how to generate the plots from 3D view.
 
 ## Editing Table
 
@@ -72,7 +72,7 @@ The content of flow diagnostics configuration is dependent on the selected **Tim
 #### Tracer Selection
 Select which **Producers** and **Injectors** to include in the table. If no wells are selected, no filtering is active - thereby all producers and injectors present among the selected time steps are visible in the table when values are above *threshold*.
 
-An example of applying a [Slice Filter]({{< relref "filters/#cell-filters" >}}) in *Filter by 3D View* and select *Filter Type: Filter Producers*, produces the following *Tracer Selection* and table view:
+An example of applying a [Slice Filter]({{< relref "filters" >}}#cell-filters) in *Filter by 3D View* and select *Filter Type: Filter Producers*, produces the following *Tracer Selection* and table view:
 
 ![]({{< relref "" >}}images/plot-window/Producer_Injector_Connectivity_FilterProducerTracerSelection.png)
 ![]({{< relref "" >}}images/plot-window/Producer_Injector_Connectivity_FilterProducerTable.png)
