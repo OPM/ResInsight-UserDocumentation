@@ -9,6 +9,8 @@ weight = 60
 The results mapped on the 3D model can be inspected in detail by left clicking cells in the 3D view. 
 The selected cells will be highlighted, text information displayed in the **Result Info** docking window, and the time-history values plotted in the **Result Plot**, if available.
 
+The values along the different K-layers is available in the [Depth Plot]({{< relref "depthplot" >}})
+
 {{% notice note %}}
 Visibility of the docking widows can be controlled from the <b>Windows</b> menu.
 {{% /notice %}}
