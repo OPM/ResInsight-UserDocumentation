@@ -19,6 +19,14 @@ A seismic file is imported by right-clicking the **Seismic** item in **Project T
 
 Display of data is described in [Seismic Sections]({{< relref "seismicsections" >}}) 
 
+## Difference Cube
+The difference between two seismic cubes can be created using the following workflow:
+- Select two seismic cubes with identical geometry (same count of **XLines** and **Inlines** located at identical geometrical locations)
+- From the right-click menu select "Create Seismic Difference"
+- A new seismic data source is created, and data can be mapped onto seismic intersections
+
+![]({{< relref "" >}}images/import/SeismicCreateDifference.png)
+
 
 ## Property Editor
 The Property Editor for seismic data lists the available properties:
@@ -34,7 +42,9 @@ To improve visualization of seismic data, the data range can be overridden by ch
 
 ![]({{< relref "" >}}images/import/SeismicOverrideDataRange.png)
 
-The **Seismic Histogram** may provide valuable information for deciding **Clip Value**.
+The **Seismic Histogram** may provide valuable information for deciding how to map the data values to colors.
+- **Clip Value**: Defines the maximum and minimum value for color legend
+- **Mute Value**: All values below the specified threshold is set to zero
 
 ![]({{< relref "" >}}images/import/SeismicHistogram.png)
 
