@@ -138,6 +138,12 @@ Headless Plot Export
 ===================================
 .. literalinclude:: ../rips/PythonExamples/headless_plot_export.py
 
+.. _import_case_properties:
+
+Import Case Properties
+===================================
+.. literalinclude:: ../rips/PythonExamples/import_case_properties.py
+
 .. _import_fractures_on_well:
 
 Import Fractures On Well

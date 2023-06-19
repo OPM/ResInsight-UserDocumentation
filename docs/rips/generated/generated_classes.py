@@ -119,7 +119,7 @@ class Case(PdmObjectBase):
 
 class Reservoir(Case):
     """
-    Abtract base class for Eclipse Cases
+    Abstract base class for Eclipse Cases
 
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -128,6 +128,18 @@ class Reservoir(Case):
         Case.__init__(self, pb2_object, channel)
         if Reservoir.__custom_init__ is not None:
             Reservoir.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def import_properties(self, file_names=[]):
+        """
+        Import Properties
+
+        Arguments:
+            file_names (List of str): 
+        Returns:
+            
+        """
+        return self._call_pdm_method("import_properties", file_names=file_names)
+
 
     def views(self):
         """All Eclipse Views in the case
@@ -636,6 +648,7 @@ class GeoMechView(View):
 class GridCaseSurface(SurfaceInterface):
     """
     Attributes:
+        include_inactive_cells (bool): Include Inactive Cells
         slice_index (int): Slice Index (K)
         source_case (str): Source Case
         watertight (bool): Watertight Surface (fill gaps)
@@ -643,6 +656,7 @@ class GridCaseSurface(SurfaceInterface):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
+        self.include_inactive_cells = False
         self.slice_index = 1
         self.source_case = ""
         self.watertight = False
@@ -1365,6 +1379,7 @@ class StimPlanModelPlotCollection(PdmObjectBase):
 class StimPlanModelTemplate(NamedObject):
     """
     Attributes:
+        default_facies (str): Default Facies
         default_permeability (float): Default Permeability
         default_porosity (float): Default Porosity
         dynamic_eclipse_case (str): Dynamic Case
@@ -1394,6 +1409,7 @@ class StimPlanModelTemplate(NamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object=None, channel=None):
+        self.default_facies = ""
         self.default_permeability = 0.0001
         self.default_porosity = 0.01
         self.dynamic_eclipse_case = ""
