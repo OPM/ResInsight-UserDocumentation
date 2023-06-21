@@ -86,6 +86,7 @@
     {{ end }}
     <section id="footer">
       {{ partial "menu-footer.html" . }}
+      
     </section>
   </div>
 </nav>
@@ -95,7 +96,7 @@
 {{ $showvisitedlinks := .showvisitedlinks }}
 {{ $currentNode := .currentnode }}
  {{with .sect}}
-  {{if and .IsSection ((not .Params.hidden) or $.showhidden)}}
+  {{if and .IsSection }}
     {{safeHTML .Params.head}}
     <li data-nav-id="{{.RelPermalink}}" title="{{.Title}}" class="dd-item 
         {{if .IsAncestor $currentNode }}parent{{end}}
