@@ -3,9 +3,9 @@
 # source: Project.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf import reflection as _reflection
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import symbol_database as _symbol_database
+from google.protobuf.internal import builder as _builder
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -16,95 +16,14 @@ import Case_pb2 as Case__pb2
 import PdmObject_pb2 as PdmObject__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='Project.proto',
-  package='rips',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rProject.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\x1a\nCase.proto\x1a\x0fPdmObject.proto2\xc8\x02\n\x07Project\x12\x32\n\x0eGetCurrentCase\x12\x0b.rips.Empty\x1a\x11.rips.CaseRequest\"\x00\x12\x36\n\x10GetSelectedCases\x12\x0b.rips.Empty\x1a\x13.rips.CaseInfoArray\"\x00\x12\x33\n\x10GetAllCaseGroups\x12\x0b.rips.Empty\x1a\x10.rips.CaseGroups\"\x00\x12\x31\n\x0bGetAllCases\x12\x0b.rips.Empty\x1a\x13.rips.CaseInfoArray\"\x00\x12\x39\n\x0fGetCasesInGroup\x12\x0f.rips.CaseGroup\x1a\x13.rips.CaseInfoArray\"\x00\x12.\n\x0cGetPdmObject\x12\x0b.rips.Empty\x1a\x0f.rips.PdmObject\"\x00\x62\x06proto3'
-  ,
-  dependencies=[Definitions__pb2.DESCRIPTOR,Case__pb2.DESCRIPTOR,PdmObject__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rProject.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\x1a\nCase.proto\x1a\x0fPdmObject.proto2\xc8\x02\n\x07Project\x12\x32\n\x0eGetCurrentCase\x12\x0b.rips.Empty\x1a\x11.rips.CaseRequest\"\x00\x12\x36\n\x10GetSelectedCases\x12\x0b.rips.Empty\x1a\x13.rips.CaseInfoArray\"\x00\x12\x33\n\x10GetAllCaseGroups\x12\x0b.rips.Empty\x1a\x10.rips.CaseGroups\"\x00\x12\x31\n\x0bGetAllCases\x12\x0b.rips.Empty\x1a\x13.rips.CaseInfoArray\"\x00\x12\x39\n\x0fGetCasesInGroup\x12\x0f.rips.CaseGroup\x1a\x13.rips.CaseInfoArray\"\x00\x12.\n\x0cGetPdmObject\x12\x0b.rips.Empty\x1a\x0f.rips.PdmObject\"\x00\x62\x06proto3')
 
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'Project_pb2', _globals)
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-
-
-_PROJECT = _descriptor.ServiceDescriptor(
-  name='Project',
-  full_name='rips.Project',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=72,
-  serialized_end=400,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='GetCurrentCase',
-    full_name='rips.Project.GetCurrentCase',
-    index=0,
-    containing_service=None,
-    input_type=Definitions__pb2._EMPTY,
-    output_type=Case__pb2._CASEREQUEST,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetSelectedCases',
-    full_name='rips.Project.GetSelectedCases',
-    index=1,
-    containing_service=None,
-    input_type=Definitions__pb2._EMPTY,
-    output_type=Case__pb2._CASEINFOARRAY,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetAllCaseGroups',
-    full_name='rips.Project.GetAllCaseGroups',
-    index=2,
-    containing_service=None,
-    input_type=Definitions__pb2._EMPTY,
-    output_type=Case__pb2._CASEGROUPS,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetAllCases',
-    full_name='rips.Project.GetAllCases',
-    index=3,
-    containing_service=None,
-    input_type=Definitions__pb2._EMPTY,
-    output_type=Case__pb2._CASEINFOARRAY,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetCasesInGroup',
-    full_name='rips.Project.GetCasesInGroup',
-    index=4,
-    containing_service=None,
-    input_type=Case__pb2._CASEGROUP,
-    output_type=Case__pb2._CASEINFOARRAY,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetPdmObject',
-    full_name='rips.Project.GetPdmObject',
-    index=5,
-    containing_service=None,
-    input_type=Definitions__pb2._EMPTY,
-    output_type=PdmObject__pb2._PDMOBJECT,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_PROJECT)
-
-DESCRIPTOR.services_by_name['Project'] = _PROJECT
-
+  DESCRIPTOR._options = None
+  _globals['_PROJECT']._serialized_start=72
+  _globals['_PROJECT']._serialized_end=400
 # @@protoc_insertion_point(module_scope)

@@ -3,9 +3,9 @@
 # source: SimulationWell.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf import reflection as _reflection
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import symbol_database as _symbol_database
+from google.protobuf.internal import builder as _builder
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -14,266 +14,22 @@ _sym_db = _symbol_database.Default()
 import Definitions_pb2 as Definitions__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='SimulationWell.proto',
-  package='rips',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x14SimulationWell.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"M\n\x15SimulationWellRequest\x12\x0f\n\x07\x63\x61se_id\x18\x01 \x01(\x05\x12\x11\n\twell_name\x18\x02 \x01(\t\x12\x10\n\x08timestep\x18\x03 \x01(\x05\":\n\x14SimulationWellStatus\x12\x11\n\twell_type\x18\x01 \x01(\t\x12\x0f\n\x07is_open\x18\x02 \x01(\x08\"~\n\x16SimulationWellCellInfo\x12\x18\n\x03ijk\x18\x01 \x01(\x0b\x32\x0b.rips.Vec3i\x12\x12\n\ngrid_index\x18\x02 \x01(\x05\x12\x0f\n\x07is_open\x18\x03 \x01(\x08\x12\x11\n\tbranch_id\x18\x04 \x01(\x05\x12\x12\n\nsegment_id\x18\x05 \x01(\x05\"I\n\x1bSimulationWellCellInfoArray\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.rips.SimulationWellCellInfo2\xc2\x01\n\x0eSimulationWell\x12T\n\x17GetSimulationWellStatus\x12\x1b.rips.SimulationWellRequest\x1a\x1a.rips.SimulationWellStatus\"\x00\x12Z\n\x16GetSimulationWellCells\x12\x1b.rips.SimulationWellRequest\x1a!.rips.SimulationWellCellInfoArray\"\x00\x62\x06proto3'
-  ,
-  dependencies=[Definitions__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14SimulationWell.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"M\n\x15SimulationWellRequest\x12\x0f\n\x07\x63\x61se_id\x18\x01 \x01(\x05\x12\x11\n\twell_name\x18\x02 \x01(\t\x12\x10\n\x08timestep\x18\x03 \x01(\x05\":\n\x14SimulationWellStatus\x12\x11\n\twell_type\x18\x01 \x01(\t\x12\x0f\n\x07is_open\x18\x02 \x01(\x08\"~\n\x16SimulationWellCellInfo\x12\x18\n\x03ijk\x18\x01 \x01(\x0b\x32\x0b.rips.Vec3i\x12\x12\n\ngrid_index\x18\x02 \x01(\x05\x12\x0f\n\x07is_open\x18\x03 \x01(\x08\x12\x11\n\tbranch_id\x18\x04 \x01(\x05\x12\x12\n\nsegment_id\x18\x05 \x01(\x05\"I\n\x1bSimulationWellCellInfoArray\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.rips.SimulationWellCellInfo2\xc2\x01\n\x0eSimulationWell\x12T\n\x17GetSimulationWellStatus\x12\x1b.rips.SimulationWellRequest\x1a\x1a.rips.SimulationWellStatus\"\x00\x12Z\n\x16GetSimulationWellCells\x12\x1b.rips.SimulationWellRequest\x1a!.rips.SimulationWellCellInfoArray\"\x00\x62\x06proto3')
 
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'SimulationWell_pb2', _globals)
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-
-
-_SIMULATIONWELLREQUEST = _descriptor.Descriptor(
-  name='SimulationWellRequest',
-  full_name='rips.SimulationWellRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='case_id', full_name='rips.SimulationWellRequest.case_id', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='well_name', full_name='rips.SimulationWellRequest.well_name', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='timestep', full_name='rips.SimulationWellRequest.timestep', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=49,
-  serialized_end=126,
-)
-
-
-_SIMULATIONWELLSTATUS = _descriptor.Descriptor(
-  name='SimulationWellStatus',
-  full_name='rips.SimulationWellStatus',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='well_type', full_name='rips.SimulationWellStatus.well_type', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='is_open', full_name='rips.SimulationWellStatus.is_open', index=1,
-      number=2, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=128,
-  serialized_end=186,
-)
-
-
-_SIMULATIONWELLCELLINFO = _descriptor.Descriptor(
-  name='SimulationWellCellInfo',
-  full_name='rips.SimulationWellCellInfo',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='ijk', full_name='rips.SimulationWellCellInfo.ijk', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='grid_index', full_name='rips.SimulationWellCellInfo.grid_index', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='is_open', full_name='rips.SimulationWellCellInfo.is_open', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='branch_id', full_name='rips.SimulationWellCellInfo.branch_id', index=3,
-      number=4, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='segment_id', full_name='rips.SimulationWellCellInfo.segment_id', index=4,
-      number=5, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=188,
-  serialized_end=314,
-)
-
-
-_SIMULATIONWELLCELLINFOARRAY = _descriptor.Descriptor(
-  name='SimulationWellCellInfoArray',
-  full_name='rips.SimulationWellCellInfoArray',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='data', full_name='rips.SimulationWellCellInfoArray.data', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=316,
-  serialized_end=389,
-)
-
-_SIMULATIONWELLCELLINFO.fields_by_name['ijk'].message_type = Definitions__pb2._VEC3I
-_SIMULATIONWELLCELLINFOARRAY.fields_by_name['data'].message_type = _SIMULATIONWELLCELLINFO
-DESCRIPTOR.message_types_by_name['SimulationWellRequest'] = _SIMULATIONWELLREQUEST
-DESCRIPTOR.message_types_by_name['SimulationWellStatus'] = _SIMULATIONWELLSTATUS
-DESCRIPTOR.message_types_by_name['SimulationWellCellInfo'] = _SIMULATIONWELLCELLINFO
-DESCRIPTOR.message_types_by_name['SimulationWellCellInfoArray'] = _SIMULATIONWELLCELLINFOARRAY
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-SimulationWellRequest = _reflection.GeneratedProtocolMessageType('SimulationWellRequest', (_message.Message,), {
-  'DESCRIPTOR' : _SIMULATIONWELLREQUEST,
-  '__module__' : 'SimulationWell_pb2'
-  # @@protoc_insertion_point(class_scope:rips.SimulationWellRequest)
-  })
-_sym_db.RegisterMessage(SimulationWellRequest)
-
-SimulationWellStatus = _reflection.GeneratedProtocolMessageType('SimulationWellStatus', (_message.Message,), {
-  'DESCRIPTOR' : _SIMULATIONWELLSTATUS,
-  '__module__' : 'SimulationWell_pb2'
-  # @@protoc_insertion_point(class_scope:rips.SimulationWellStatus)
-  })
-_sym_db.RegisterMessage(SimulationWellStatus)
-
-SimulationWellCellInfo = _reflection.GeneratedProtocolMessageType('SimulationWellCellInfo', (_message.Message,), {
-  'DESCRIPTOR' : _SIMULATIONWELLCELLINFO,
-  '__module__' : 'SimulationWell_pb2'
-  # @@protoc_insertion_point(class_scope:rips.SimulationWellCellInfo)
-  })
-_sym_db.RegisterMessage(SimulationWellCellInfo)
-
-SimulationWellCellInfoArray = _reflection.GeneratedProtocolMessageType('SimulationWellCellInfoArray', (_message.Message,), {
-  'DESCRIPTOR' : _SIMULATIONWELLCELLINFOARRAY,
-  '__module__' : 'SimulationWell_pb2'
-  # @@protoc_insertion_point(class_scope:rips.SimulationWellCellInfoArray)
-  })
-_sym_db.RegisterMessage(SimulationWellCellInfoArray)
-
-
-
-_SIMULATIONWELL = _descriptor.ServiceDescriptor(
-  name='SimulationWell',
-  full_name='rips.SimulationWell',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=392,
-  serialized_end=586,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='GetSimulationWellStatus',
-    full_name='rips.SimulationWell.GetSimulationWellStatus',
-    index=0,
-    containing_service=None,
-    input_type=_SIMULATIONWELLREQUEST,
-    output_type=_SIMULATIONWELLSTATUS,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetSimulationWellCells',
-    full_name='rips.SimulationWell.GetSimulationWellCells',
-    index=1,
-    containing_service=None,
-    input_type=_SIMULATIONWELLREQUEST,
-    output_type=_SIMULATIONWELLCELLINFOARRAY,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_SIMULATIONWELL)
-
-DESCRIPTOR.services_by_name['SimulationWell'] = _SIMULATIONWELL
-
+  DESCRIPTOR._options = None
+  _globals['_SIMULATIONWELLREQUEST']._serialized_start=49
+  _globals['_SIMULATIONWELLREQUEST']._serialized_end=126
+  _globals['_SIMULATIONWELLSTATUS']._serialized_start=128
+  _globals['_SIMULATIONWELLSTATUS']._serialized_end=186
+  _globals['_SIMULATIONWELLCELLINFO']._serialized_start=188
+  _globals['_SIMULATIONWELLCELLINFO']._serialized_end=314
+  _globals['_SIMULATIONWELLCELLINFOARRAY']._serialized_start=316
+  _globals['_SIMULATIONWELLCELLINFOARRAY']._serialized_end=389
+  _globals['_SIMULATIONWELL']._serialized_start=392
+  _globals['_SIMULATIONWELL']._serialized_end=586
 # @@protoc_insertion_point(module_scope)
