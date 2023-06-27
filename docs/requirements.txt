@@ -1,7 +1,7 @@
-docutils<0.18
+docutils
 grpcio
 grpcio-tools
-protobuf<=3.20
+protobuf
 m2r2
 sphinx-automodapi
-mistune==0.8.4
+mistune
