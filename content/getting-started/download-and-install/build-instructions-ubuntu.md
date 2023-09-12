@@ -37,7 +37,7 @@ Install Qt
 
 ### Clone and update sub modules
 
-	git clone git://github.com/OPM/ResInsight.git ResInsight
+	git clone https://github.com/OPM/ResInsight
     cd ResInsight
     git submodule update --init
 
