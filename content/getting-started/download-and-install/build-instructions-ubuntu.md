@@ -55,6 +55,11 @@ Open a command prompt for Visual Studio x64
 
     [Developer notes](https://ceetronsolutions.github.io/resinsight-system-doc/editor/vcpkg)
 
+### Python dependencies
+Install Python version 3.8 or newer
+
+    python3 -m pip install -r GrpcInterface/Python/requirements.txt
+
 ### Build ResInsight
 	mkdir cmakebuild
     cd cmakebuild
