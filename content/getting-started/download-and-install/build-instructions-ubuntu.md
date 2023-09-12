@@ -60,10 +60,20 @@ Install Python version 3.8 or newer
 
     python3 -m pip install -r GrpcInterface/Python/requirements.txt
 
+### Installation of custom Qt
+
+Go to a folder to install custom Qt
+In this folder, execute
+    
+    python3 -m pip install aqtinstall
+    aqt install-qt linux desktop 5.15.2
+    
+
 ### Build ResInsight
 	mkdir cmakebuild
     cd cmakebuild
     cmake \
+    -DCMAKE_PREFIX_PATH=/your_qt_path/5.15.2/gcc_64/lib/cmake \
     -DRESINSIGHT_ENABLE_GRPC=true \
     -DVCPKG_TARGET_TRIPLET=x64-linux \
     -DCMAKE_TOOLCHAIN_FILE=../ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \
