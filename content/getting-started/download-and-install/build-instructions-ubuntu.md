@@ -66,7 +66,7 @@ Go to a folder to install custom Qt
 In this folder, execute
     
     python3 -m pip install aqtinstall
-    aqt install-qt linux desktop 5.15.2
+    aqt install-qt linux desktop 5.15.2 -m qtcharts
     
 
 ### Build ResInsight
