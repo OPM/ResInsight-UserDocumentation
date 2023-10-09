@@ -6,20 +6,28 @@ weight = 40
 
 ![]({{< relref "" >}}images/plot-window/SummaryCrossPlot.png)
 
-A Summary Cross Plot is a window displaying a graph in the main area of the **Plot Main Window**. It is very similar to an ordinary [Summary Plot]({{< relref "summaryplots" >}}), but there are some differences:
-
-- Summary Cross Plot displays one vector against another vector, not one vector against time.
-- Not possible to paste Excel/CSV data to a summary cross plot.
-- Summary cross plots have no [Plot Editor]({{< relref "summaryploteditor" >}}).
-
-The only way to create a new Summary Cross Plot, is to select the right-click command {{< image-in-text src="images/plot-window/SummaryPlot16x16.png" >}} **New Summary Cross Plot** on the **Plot Main Window -> Project Tree -> Summary Cross Plots** item. 
+A **Summary Cross Plot** is a window displaying a graph in the main area of the **Plot Main Window**. It is very similar to an ordinary [Summary Plot]({{< relref "summaryplots" >}}), but the x-axis displays summary vector values instead of time. [Regression analysis]({{< relref "regressionanalysis" >}}) is supported on single cross plot curves and ensemble statistics curves.
 
 ## Summary Cross Plot Curves
-New Summary Cross Plot curves are created by using the right-click command {{< image-in-text src="images/plot-window/SummaryCurve16x16.png" >}} **New Summary Cross Plot Curve** on a summary cross plot. To be able to display a Summary Cross Plot curve, ResInsight needs two data vectors, which are selected using the **Summary Cross Plot Curve** property editor.
+New cross plot curves are created by using the right-click command {{< image-in-text src="images/plot-window/SummaryCurve16x16.png" >}} **New Summary Cross Plot Curve** on a summary plot. 
+
+Cross plot curves can also be created from the right-click menu in the **Summary Data Sources**. 
+![]({{< relref "" >}}images/plot-window/SummaryCrossPlot_createFromSubMenu.png)
+
+The combination of cross plot curves are defined in [Plotting Preferences]({{< relref "preferences" >}}#plotting). Select the cross plot curve object to modify the properties for the curve. Make sure that the **Axis Type** is set to **Summary Vector**.
 
 ![]({{< relref "" >}}images/plot-window/SummaryCrossPlotCurvePropertyEditor.png)
 
-In this property editor, the editor group called **Summary Vector**, has been replaced by two vector selection groups **Summary Vector Y** and **Summary Vector X**, compared to an ordinary summary plot. Like the other property editor groups, the vector selection groups works the same way as in the ordinary summary plot. However, there is one exception. The **Summary Vector X** group is missing the **Axis** field. This is because the X values have one axis only, below the plot, as opposed to the Y values, which have the left and right axis. See the [detailed description]({{< relref "summaryplots" >}}#summary-curves).
+In this property editor, there is an additional group called **Summary Vector X Axis**. Like the other property editor groups, the vector selection groups works the same way as in the ordinary summary plot. 
+
+See the [detailed description]({{< relref "summaryplots" >}}#summary-curves).
+
+## Summary Cross Plot Ensemble
+
+When creating cross plots based on ensembles, the appearance of curves can be adjusted in the property editor. Note that the appearance of statistics curves also can be customized in the **Statistics** group. [Regression analysis]({{< relref "regressionanalysis" >}}) is supported on ensemble statistics curves.
+
+![]({{< relref "" >}}images/plot-window/SummaryCrossPlot_ensemble.png)
+
 
 ### Cross Plotting
 Cross plotting creates a new vector from two input vectors. Each vector entry in the resulting vector consists of one vector item value from each of the two input vectors, having equal time steps. However, in most cases the two input vectors do not share the same time steps. To be able to create a resulting cross plot vector in such cases, linear interpolation between adjacent input vector items is being used.
