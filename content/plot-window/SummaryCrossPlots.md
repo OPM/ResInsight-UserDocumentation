@@ -30,7 +30,7 @@ When creating cross plots based on ensembles, the appearance of curves can be ad
 
 
 ### Cross Plotting
-Cross plotting creates a new vector from two input vectors. Each vector entry in the resulting vector consists of one vector item value from each of the two input vectors, having equal time steps. However, in most cases the two input vectors do not share the same time steps. To be able to create a resulting cross plot vector in such cases, linear interpolation between adjacent input vector items is being used.
+A cross plot is established based on two input summary vectors. Each entry in the cross plot consists of one vector item value from each of the two input vectors having equal time steps. However, in most cases the two input vectors do not share the same time steps. To be able to create a cross plot in such cases, linear interpolation between adjacent input vector items is being used.
 
 When a current time step **T** in input vector **A** is not found in input vector **B**, ResInsight interpolates between the time steps before and after **T** in vector **B**. In this way, ResInsight calculates an interpolated value for time step **T** from vector **B**. The same happens when a time step in vector **B** is not found in vector **A**.
 
