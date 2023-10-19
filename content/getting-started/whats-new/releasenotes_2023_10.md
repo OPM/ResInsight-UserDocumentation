@@ -24,19 +24,24 @@ When working with seismic data, it is no longer required to have a grid model op
 
 [Summary Cross Plot]({{< relref "summarycrossplots" >}}) curves are now easily available as part of a summary plot. Cross plot of ensemble curves is now supported, and [Regression Curves]({{< relref "regressionanalysis" >}}) can be created on both single cross plot curves and ensemble statistics curves.
 
+## Regression Analysis for Grid Cross Plots
+![]({{< relref "" >}}images/plot-window/GridCrossPlot_ResgressionCurve.png)
+
+[Grid Cross Plots]({{< relref "gridcrossplots" >}}) have now support for display of regression curves.
+
 ## Performance improvements
 - Huge performance improvements for summary cases with many objects (wells, groups, regions, ...)
 - Using the [Polygon Cell Filter]({{< relref "filters" >}}#cell-filters) is now performing much better
 
 ## Stacking of Curves
 - Fixed a crash when stacking was enabled
-- Do a zoom all when stacking option is changed to make sure that all curves are visible
+- Make sure all curves are visible when stacking is changed
 - Improve performance when selecting multiple curves and toggle stacking state of all curves in one operation
 
 ## Other improvements
 
 - [Valve Import]({{< relref "completions" >}}#perforation-interval-valves) is now supported from Completor and Eclipse schedule files.
-- Show plot data is not supported for [Analysis Plots]({{< relref "analysisplots" >}}) [Correlation Plots]({{< relref "correlationplots" >}}).
+- Add text export using **Show Plot Data** for [Analysis Plots]({{< relref "analysisplots" >}}) and [Correlation Plots]({{< relref "correlationplots" >}}).
 - Text labels can be visualized on surface intersection lines
 - Ensemble RFT plots are improved to handle horizontal wells correctly
 - Avoid setting curve color to full white when highlighting a curve

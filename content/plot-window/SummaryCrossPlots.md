@@ -24,6 +24,8 @@ See the [detailed description]({{< relref "summaryplots" >}}#summary-curves).
 
 ## Summary Cross Plot Ensemble
 
+When computing statistics curves for the ensemble, the x-axis is divided into bins. For each bin, all values are collected. A minimum realization count is used descide if there are enough realizations to compute statistics. The number of bins and realization count threshold can be set in the **Property Editor** for the ensemble.
+
 When creating cross plots based on ensembles, the appearance of curves can be adjusted in the property editor. Note that the appearance of statistics curves also can be customized in the **Statistics** group. [Regression analysis]({{< relref "regressionanalysis" >}}) is supported on ensemble statistics curves.
 
 ![]({{< relref "" >}}images/plot-window/SummaryCrossPlot_ensemble.png)
