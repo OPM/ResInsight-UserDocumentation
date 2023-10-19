@@ -48,7 +48,7 @@ vcpkg is located in the folder ThirdParty/vcpkg
     ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3
 
 ### (Windows) Build and install required dependencies using vcpkg 
-Open a command prompt for Visual Studio x64
+Open a command prompt using "Run as Administrator" for Visual Studio x64
 
     ThirdParty/vcpkg/bootstrap-vcpkg.bat
     ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 --triplet x64-windows
