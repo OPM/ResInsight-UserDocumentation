@@ -25,7 +25,7 @@ When working with seismic data, it is no longer required to have a grid model op
 [Summary Cross Plot]({{< relref "summarycrossplots" >}}) curves are now easily available as part of a summary plot. Cross plot of ensemble curves is now supported, and [Regression Curves]({{< relref "regressionanalysis" >}}) can be created on both single cross plot curves and ensemble statistics curves.
 
 ## Regression Analysis for Grid Cross Plots
-![]({{< relref "" >}}images/plot-window/GridCrossPlot_ResgressionCurve.png)
+![]({{< relref "" >}}images/plot-window/GridCrossPlot_RegressionCurve.png)
 
 [Grid Cross Plots]({{< relref "gridcrossplots" >}}) have now support for display of regression curves.
 
@@ -43,7 +43,7 @@ When working with seismic data, it is no longer required to have a grid model op
 - [Valve Import]({{< relref "completions" >}}#perforation-interval-valves) is now supported from Completor and Eclipse schedule files.
 - Add text export using **Show Plot Data** for [Analysis Plots]({{< relref "analysisplots" >}}) and [Correlation Plots]({{< relref "correlationplots" >}}).
 - Text labels can be visualized on surface intersection lines
-- Ensemble RFT plots are improved to handle horizontal wells correctly
+- Ensemble RFT plots are improved to handle horizontal wells by using 3D grid model data
 - Avoid setting curve color to full white when highlighting a curve
 - Make sure summary data type **Network** is available in summary data source
 - Duplicate a well path to a user-defined well path that can be manipulated - [Well Path Duplication]({{< relref "createnewwellpaths" >}}#well-path-duplication)
