@@ -90,9 +90,9 @@ wbs_parameters | str | WbsParameters
 Parameter | Type | Description
 --------- | ---- | -----------
 export_file_name | str | 
-export_local_coordinates | str | 
+export_local_coordinates | bool | 
 undefined_value_label | str | 
-exclude_undefined_values | str | 
+exclude_undefined_values | bool | 
 view_id | int | View Id
 
 ## export_flow_characteristics
@@ -125,9 +125,9 @@ Parameter | Type | Description
 --------- | ---- | -----------
 case_id | int | Case ID
 well_path | str | Well Path Name
-include_perforations | str | Include Perforations
-include_fishbones | str | Include Fishbones
-include_fractures | str | Include Fractures
+include_perforations | bool | Include Perforations
+include_fishbones | bool | Include Fishbones
+include_fractures | bool | Include Fractures
 file_split | str | File Split
 
 ## export_multi_case_snapshots
@@ -199,10 +199,10 @@ export_format | str |
 view_id | int | 
 export_folder | str | 
 file_prefix | str | 
-export_tvd_rkb | str | 
-capitalize_file_names | str | 
+export_tvd_rkb | bool | 
+capitalize_file_names | bool | 
 resample_interval | float | 
-convert_curve_units | str | 
+convert_curve_units | bool | 
 
 ## export_well_path_completions
 
@@ -214,18 +214,18 @@ well_path_names | str | Well Path Names
 file_split | str | File Split
 compdat_export | str | Compdat Export
 combination_mode | str | Combination Mode
-include_msw | str | Export Multi Segment Well Model
-use_ntg_horizontally | str | Use NTG Horizontally
-include_perforations | str | Include Perforations
-include_fishbones | str | Include Fishbones
-include_fractures | str | Include Fractures
-exclude_main_bore_for_fishbones | str | Exclude Main Bore for Fishbones
-perform_trans_scaling | str | Perform Transmissibility Scaling
+include_msw | bool | Export Multi Segment Well Model
+use_ntg_horizontally | bool | Use NTG Horizontally
+include_perforations | bool | Include Perforations
+include_fishbones | bool | Include Fishbones
+include_fractures | bool | Include Fractures
+exclude_main_bore_for_fishbones | bool | Exclude Main Bore for Fishbones
+perform_trans_scaling | bool | Perform Transmissibility Scaling
 trans_scaling_time_step | int | Transmissibility Scaling Pressure Time Step
 trans_scaling_wbhp_from_summary | str | Transmissibility Scaling WBHP from summary
 trans_scaling_wbhp | float | Transmissibility Scaling Constant WBHP Value
-export_comments | str | Export Data Source as Comments
-export_welspec | str | Export WELSPEC keyword
+export_comments | bool | Export Data Source as Comments
+export_welspec | bool | Export WELSPEC keyword
 custom_file_name | str | Custom Filename
 
 ## export_well_paths
@@ -255,14 +255,13 @@ Parameter | Type | Description
 --------- | ---- | -----------
 well_path_folder | str | 
 well_path_files | str | 
-import_grouped | str | 
 
 ## load_case
 
 Parameter | Type | Description
 --------- | ---- | -----------
 path | str | Path to Case File
-grid_only | str | Load Grid Data Only
+grid_only | bool | Load Grid Data Only
 
 ## open_project
 
@@ -325,7 +324,7 @@ Parameter | Type | Description
 --------- | ---- | -----------
 type | str | Type
 path | str | Path
-create_folder | str | Create Folder
+create_folder | bool | Create Folder
 
 ## set_fracture_containment
 
