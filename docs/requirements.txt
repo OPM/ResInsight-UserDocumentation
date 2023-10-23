@@ -5,3 +5,4 @@ protobuf
 m2r2
 sphinx-automodapi
 mistune
+sphinx-rtd-theme
