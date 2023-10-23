@@ -97,9 +97,6 @@ Formation can be used to annotate the following plot types:
 - [Well Log Plots]({{< relref "welllogsandplots" >}})
 - [RFT Plots]({{< relref "rftplot" >}})
 - [PLT Plots]({{< relref "pltplot" >}})
-- [Well Allocation Plots]({{< relref "flow-diagnostics-plots" >}})
-
-![]({{< relref "" >}}images/3d-main-window/formOnPlot.PNG) MANGLER BILDE
 
 For RFT and PLT Plots, **Zonation/Formation Names** can be found in the plot's **Property Editor**. Tick "Show Formations" and choose the case with the desired formations. 
 
