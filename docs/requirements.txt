@@ -1,7 +1,8 @@
-docutils
 grpcio
 grpcio-tools
 protobuf
+typing-extensions
+docutils
 m2r2
 sphinx-automodapi
 mistune
