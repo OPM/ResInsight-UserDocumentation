@@ -110,6 +110,8 @@ An example of the ICD parameters can be seen below:
 An example of the AICD parameters:
 ![]({{< relref "" >}}images/3d-main-window/ValveTemplate_AICD.png)  
 
+**AICD** valves can be imported from **Completor** or **Eclipse** text files from the right-click menu of **Valves**.
+
 New templates can also be added by selecting the **New Valve Template** option from the right-click menu of the **Valve Templates** entry in the **Completion Templates** Project Tree item.
 
 ![]({{< relref "" >}}images/3d-main-window/NewValveTemplate.png)  

@@ -33,6 +33,9 @@ Having created a Grid Cross Plot, the appearance of the Legends, the Info box an
 
 The plot also have some available settings for the two plot axes (X and Y), where the title position and font size can be altered plus the axis range may be controlled and the axis may be set as logarithmic and inverted so the smallest value is first (default for DEPTH on the Y-axis).
 
+## Regression Curves
+![]({{< relref "" >}}images/plot-window/GridCrossPlot_RegressionCurve.png)
+A regression curve can be displayed for each data group. The display of regression curves is controlled from the **Regression Curves** folder.
 
 ## Grid Cross Plot Data Sets
 Further Grid Cross Plot data sets can be added to a Plot by right clicking on the plot in the Project Tree and selecting **New Data Set**.

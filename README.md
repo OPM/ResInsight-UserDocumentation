@@ -45,3 +45,11 @@ https://beta.resinsight.org redirects to https://opm.github.io/ResInsight-UserDo
 
 ## Tips and tricks
 - If you want to publish a page, but avoid having an entry in the menu, add `hidden = true` to the header of the MD file. See about.md for an example.
+
+- Use the following syntax to define a text region with fixed font size
+```txt
+row a   row b   rov c
+1       2       2   
+2       2       5
+34      23      2
+```

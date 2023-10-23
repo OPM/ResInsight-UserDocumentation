@@ -37,7 +37,7 @@ Install Qt
 
 ### Clone and update sub modules
 
-	git clone git://github.com/OPM/ResInsight.git ResInsight
+	git clone https://github.com/OPM/ResInsight
     cd ResInsight
     git submodule update --init
 
@@ -48,17 +48,32 @@ vcpkg is located in the folder ThirdParty/vcpkg
     ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3
 
 ### (Windows) Build and install required dependencies using vcpkg 
-Open a command prompt for Visual Studio x64
+Open a command prompt using "Run as Administrator" for Visual Studio x64
 
     ThirdParty/vcpkg/bootstrap-vcpkg.bat
     ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 --triplet x64-windows
 
     [Developer notes](https://ceetronsolutions.github.io/resinsight-system-doc/editor/vcpkg)
 
+### Python dependencies
+Install Python version 3.8 or newer
+
+    python3 -m pip install -r GrpcInterface/Python/requirements.txt
+
+### Installation of custom Qt
+
+Go to a folder to install custom Qt
+In this folder, execute
+    
+    python3 -m pip install aqtinstall
+    aqt install-qt linux desktop 5.15.2 -m qtcharts
+    
+
 ### Build ResInsight
 	mkdir cmakebuild
     cd cmakebuild
     cmake \
+    -DCMAKE_PREFIX_PATH=/your_qt_path/5.15.2/gcc_64/lib/cmake \
     -DRESINSIGHT_ENABLE_GRPC=true \
     -DVCPKG_TARGET_TRIPLET=x64-linux \
     -DCMAKE_TOOLCHAIN_FILE=../ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \

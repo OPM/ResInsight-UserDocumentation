@@ -69,7 +69,7 @@ def test_10k(rips_instance, initialize_test):
     check_corner(cell_corners[cell_index].c7, expected_corners[7])
 
 
-def check_reek_grid_box(case: Case):
+def check_reek_grid_box(case: rips.Case):
     assert len(case.grids()) == 1
     grid = case.grid(index=0)
 
@@ -107,7 +107,7 @@ def test_load_grdecl_grid(rips_instance, initialize_test):
 
 
 def verify_load_grid_and_separate_properties(
-    case: Case, property_name_and_paths: NameAndPath
+    case: rips.Reservoir, property_name_and_paths: NameAndPath
 ):
     # Load case without properties
     available_properties = case.available_properties("INPUT_PROPERTY")

@@ -36,6 +36,12 @@ Case Grid Group
 ===================================
 .. literalinclude:: ../rips/PythonExamples/case_grid_group.py
 
+.. _case_grid_group_generated_results:
+
+Case Grid Group Generated Results
+===================================
+.. literalinclude:: ../rips/PythonExamples/case_grid_group_generated_results.py
+
 .. _case_info_streaming_example:
 
 Case Info Streaming Example

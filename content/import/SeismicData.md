@@ -17,7 +17,7 @@ A seismic file is imported by right-clicking the **Seismic** item in **Project T
 
 ![]({{< relref "" >}}images/import/SeismicImport.png)
 
-Display of data is described in [Seismic Sections]({{< relref "seismicsections" >}}) 
+To look at seismic data, create a [Seismic View]({{< relref "seismicview" >}}). Combined display of both grid model geometry and seismid data is  described in [Seismic Sections]({{< relref "seismicsections" >}}).
 
 ## Difference Cube
 The difference between two seismic cubes can be created using the following workflow:

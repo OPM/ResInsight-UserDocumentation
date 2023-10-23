@@ -22,7 +22,8 @@ The dialog consists of the following fields:
   - **?** Matches one character exception the directory separator
   - **[abc]** Matches one of the specified characters. Ex. a, b or c
   - **\*[!D]** Exclude files ending with the character 'D' (file extension is not considered)
-- **File Extensions**: List of file extensions, ie ".EGRID .GRID" 
+- **File Type**: The available file types will depend on the type of data to import. When importing summary data, there will be several items, and one with **SMSPEC**. 
+- **File Extensions**: List of file extensions, ie ".EGRID .GRID". The extension text is independent to the file type defined above, e.g. _CSV_ data can be imported from a file with extension "TXT"
 - Use 'realization-*' in filter : Replace the text "realization-12" with "realization-\*"
 - Ensemble grouping : Group ensemble by Main folder or Sub Folder (Used by FMU workflow)
 - **Effective Filter**: The effective filter displays the resulting full path search pattern. It is updated on the fly as the user edits the pattern fields. A text string of "..." indicates a complete recursive directory search.

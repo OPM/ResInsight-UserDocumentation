@@ -1,7 +1,10 @@
-docutils<0.18
 grpcio
 grpcio-tools
-protobuf<=3.20
+protobuf
+typing-extensions
+sphinx == 6.2.1
+docutils
 m2r2
 sphinx-automodapi
-mistune==0.8.4
+mistune
+sphinx-rtd-theme

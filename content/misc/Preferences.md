@@ -70,6 +70,7 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
      - *No Plots*: do not automatically create summary plots
      - *Use Data Vector Names*: Create summary plots automatically based on given vector names, e.g. `FOPT WOPT*`
      - *Use Plot Templates*: Create summary plots automatically based on default templates. 
+  - **Cross Plot Addresses**: List of vector pairs defining cross plot curves separated by semicolon. If a well or group is selected, the corresponding well or group address is displayed and used.
   - **Default Curve Style for History Vectors**: allows specifying *symbols* and/or *lines* as preference.
   - **Append History Vectors**: automatically include the corresponding history vector when appending a simulated summary vector.
   - **Curve Color By Phase**: distinguish each phase by separate color.

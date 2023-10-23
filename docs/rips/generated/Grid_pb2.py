@@ -3,9 +3,9 @@
 # source: Grid.proto
 """Generated protocol buffer code."""
 from google.protobuf import descriptor as _descriptor
-from google.protobuf import message as _message
-from google.protobuf import reflection as _reflection
+from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import symbol_database as _symbol_database
+from google.protobuf.internal import builder as _builder
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -15,154 +15,18 @@ import Definitions_pb2 as Definitions__pb2
 import Case_pb2 as Case__pb2
 
 
-DESCRIPTOR = _descriptor.FileDescriptor(
-  name='Grid.proto',
-  package='rips',
-  syntax='proto3',
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nGrid.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\x1a\nCase.proto\"J\n\x0bGridRequest\x12\'\n\x0c\x63\x61se_request\x18\x01 \x01(\x0b\x32\x11.rips.CaseRequest\x12\x12\n\ngrid_index\x18\x02 \x01(\x05\"1\n\x0eGridDimensions\x12\x1f\n\ndimensions\x18\x01 \x01(\x0b\x32\x0b.rips.Vec3i2\xbf\x01\n\x04Grid\x12:\n\x0eGetCellCenters\x12\x11.rips.GridRequest\x1a\x11.rips.CellCenters\"\x00\x30\x01\x12?\n\x0eGetCellCorners\x12\x11.rips.GridRequest\x1a\x16.rips.CellCornersArray\"\x00\x30\x01\x12:\n\rGetDimensions\x12\x11.rips.GridRequest\x1a\x14.rips.GridDimensions\"\x00\x62\x06proto3'
-  ,
-  dependencies=[Definitions__pb2.DESCRIPTOR,Case__pb2.DESCRIPTOR,])
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nGrid.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\x1a\nCase.proto\"J\n\x0bGridRequest\x12\'\n\x0c\x63\x61se_request\x18\x01 \x01(\x0b\x32\x11.rips.CaseRequest\x12\x12\n\ngrid_index\x18\x02 \x01(\x05\"1\n\x0eGridDimensions\x12\x1f\n\ndimensions\x18\x01 \x01(\x0b\x32\x0b.rips.Vec3i2\xbf\x01\n\x04Grid\x12:\n\x0eGetCellCenters\x12\x11.rips.GridRequest\x1a\x11.rips.CellCenters\"\x00\x30\x01\x12?\n\x0eGetCellCorners\x12\x11.rips.GridRequest\x1a\x16.rips.CellCornersArray\"\x00\x30\x01\x12:\n\rGetDimensions\x12\x11.rips.GridRequest\x1a\x14.rips.GridDimensions\"\x00\x62\x06proto3')
 
+_globals = globals()
+_builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
+_builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'Grid_pb2', _globals)
+if _descriptor._USE_C_DESCRIPTORS == False:
 
-
-
-_GRIDREQUEST = _descriptor.Descriptor(
-  name='GridRequest',
-  full_name='rips.GridRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='case_request', full_name='rips.GridRequest.case_request', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='grid_index', full_name='rips.GridRequest.grid_index', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=51,
-  serialized_end=125,
-)
-
-
-_GRIDDIMENSIONS = _descriptor.Descriptor(
-  name='GridDimensions',
-  full_name='rips.GridDimensions',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='dimensions', full_name='rips.GridDimensions.dimensions', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=127,
-  serialized_end=176,
-)
-
-_GRIDREQUEST.fields_by_name['case_request'].message_type = Case__pb2._CASEREQUEST
-_GRIDDIMENSIONS.fields_by_name['dimensions'].message_type = Definitions__pb2._VEC3I
-DESCRIPTOR.message_types_by_name['GridRequest'] = _GRIDREQUEST
-DESCRIPTOR.message_types_by_name['GridDimensions'] = _GRIDDIMENSIONS
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-GridRequest = _reflection.GeneratedProtocolMessageType('GridRequest', (_message.Message,), {
-  'DESCRIPTOR' : _GRIDREQUEST,
-  '__module__' : 'Grid_pb2'
-  # @@protoc_insertion_point(class_scope:rips.GridRequest)
-  })
-_sym_db.RegisterMessage(GridRequest)
-
-GridDimensions = _reflection.GeneratedProtocolMessageType('GridDimensions', (_message.Message,), {
-  'DESCRIPTOR' : _GRIDDIMENSIONS,
-  '__module__' : 'Grid_pb2'
-  # @@protoc_insertion_point(class_scope:rips.GridDimensions)
-  })
-_sym_db.RegisterMessage(GridDimensions)
-
-
-
-_GRID = _descriptor.ServiceDescriptor(
-  name='Grid',
-  full_name='rips.Grid',
-  file=DESCRIPTOR,
-  index=0,
-  serialized_options=None,
-  create_key=_descriptor._internal_create_key,
-  serialized_start=179,
-  serialized_end=370,
-  methods=[
-  _descriptor.MethodDescriptor(
-    name='GetCellCenters',
-    full_name='rips.Grid.GetCellCenters',
-    index=0,
-    containing_service=None,
-    input_type=_GRIDREQUEST,
-    output_type=Definitions__pb2._CELLCENTERS,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetCellCorners',
-    full_name='rips.Grid.GetCellCorners',
-    index=1,
-    containing_service=None,
-    input_type=_GRIDREQUEST,
-    output_type=Definitions__pb2._CELLCORNERSARRAY,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetDimensions',
-    full_name='rips.Grid.GetDimensions',
-    index=2,
-    containing_service=None,
-    input_type=_GRIDREQUEST,
-    output_type=_GRIDDIMENSIONS,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-])
-_sym_db.RegisterServiceDescriptor(_GRID)
-
-DESCRIPTOR.services_by_name['Grid'] = _GRID
-
+  DESCRIPTOR._options = None
+  _globals['_GRIDREQUEST']._serialized_start=51
+  _globals['_GRIDREQUEST']._serialized_end=125
+  _globals['_GRIDDIMENSIONS']._serialized_start=127
+  _globals['_GRIDDIMENSIONS']._serialized_end=176
+  _globals['_GRID']._serialized_start=179
+  _globals['_GRID']._serialized_end=370
 # @@protoc_insertion_point(module_scope)
