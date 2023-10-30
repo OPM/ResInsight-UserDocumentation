@@ -142,7 +142,7 @@ Example file for well *OP_1*, i.e. *OP_1.txt*:
 461288.683   5933415.029   1840.000   1635.492   LowerReek
 ```
 
-#### Well measurements
+#### Well measurements - date format 1
 The data file *well_date_rft.txt* contains well measurements. The file contains four columns for each well measurement:
 
 - Well Name
@@ -160,4 +160,22 @@ OP_2   01 02 2000   1
 OP_4   01 01 2001   1
 WI_1   01 02 2000   1
 WI_3   01 03 2001   1
+```
+
+#### Well measurements - date format 2
+The data file *well_date_rft.txt* contains well measurements. The file contains four columns for each well measurement:
+
+- Well Name
+- Date on the format \<YYYY-MM-DD>
+- Measurement index
+
+There can be multiple measurement for each well.
+
+Example file *well_date_rft.txt*:
+```txt
+R_A2 2018-03-01 1
+R_A2 2019-03-01 2
+R_A6 2018-11-07 1
+R_A6 2018-11-07 2
+R_A6 2018-11-07 3
 ```
