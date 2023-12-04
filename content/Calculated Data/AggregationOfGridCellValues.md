@@ -1,10 +1,10 @@
 +++
-title = "Statistics on Sum of Grid Cell Values"
+title = "Aggregation of Grid Cell Values"
 published = true
 weight = 20
 +++
 
-## Statistics on Sum of Grid Cell Values
+## Aggregation of of Grid Cell Values and Statistics
 - import a grid case ensemble
 - define a summation in the grid calculator, mySum := sum(cellProperty)
 - in the Statistics case, select the grid calculation expression

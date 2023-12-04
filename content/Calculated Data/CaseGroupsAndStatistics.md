@@ -59,6 +59,8 @@ After creating a grid case group, an empty **Statistics Case** is created for yo
 - **Grid Calculation** -- List of all defined calculations in the project.
 - **Filter By View** -- Limit the calculation to visible cells in a selected view.
 
+Cell values in a selection of cells can be aggregated as described in [Aggregation of Grid Cell Values]({{< relref "aggregationofgridcellvalues" >}})
+
 **Settings for when statistics has been computed**
 
 ![]({{< relref "" >}}images/calculated-data/StatisticsCaseGridAfterComputations.png )
