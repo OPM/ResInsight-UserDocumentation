@@ -8,7 +8,7 @@ weight = 120
 
 **Grid Case Group**'s are designed to make it easy to calculate statistics per cell and per time step of a large number of Eclipse simulation Cases with identical Grids (often labeled *realizations*).
  
-If you have several Eclipse simulations with different input parameters available, you can put all the realizations into a Grid Case Group and easily calculate each of the cells mean value, range and max/min values at each time step between the realizations.
+If you have several Eclipse simulations with different input parameters available, you can put all the realizations into a Grid Case Group and easily calculate each of the cells mean value, range and max/min values at each time step. Grid calculations can optionally be used as a data source for computations.
 
 ## Creating Grid Case Groups
 
@@ -38,9 +38,10 @@ To reduce memory usage, project loading time etc. remember to delete the 3D View
 After creating a grid case group, an empty **Statistics Case** is created for you in the **Derived Statistics** folder of the **Grid Case Group**. 
 
 ### Setting Up and Calculate
-The properties of non-calculated and calculated **Statistics Case** is shown below:
 
-![]({{< relref "" >}}images/3d-main-window/StatisticsCaseProperties.png)  ![]({{< relref "" >}}images/3d-main-window/StatisticsCasePropertiesCalculated.png)
+**Settings for grid case property statistics**
+
+![]({{< relref "" >}}images/calculated-data/StatisticsCaseProperties.png  )  
 
 - **Compute** --  Starts to calculate requested statistical Properties.
 - **Edit** -- Deletes the calculated results, and makes the controls to edit the setup available.
@@ -48,6 +49,20 @@ The properties of non-calculated and calculated **Statistics Case** is shown bel
 - **Properties to consider** -- These options makes it possible to select what Eclipse properties to include in the Statistical calculations. Adding variables increase the memory usage and the computational time.
 - **Percentile Setup** -- Selects whether to calculate percentiles, what method and what percentile levels should be used. Turning this off speeds up the calculations.
 - **Well Data Source Case** -- This option selects which set of **Simulation Wells** to be shown along with the statistical results. You can select one of the **Source Cases**.
+
+
+**Settings for grid cell calculations**
+
+![]({{< relref "" >}}images/calculated-data/StatisticsCaseGridCalculation.png  )  
+
+- **Data Source** --  Defines either a cell property or a grid calculation expression to be used as data source for the statistical calculations.
+- **Grid Calculation** -- List of all defined calculations in the project.
+- **Filter By View** -- Limit the calculation to visible cells in a selected view.
+
+**Settings for when statistics has been computed**
+
+![]({{< relref "" >}}images/calculated-data/StatisticsCaseGridAfterComputations.png )
+
  
 #### Percentile Methods
 

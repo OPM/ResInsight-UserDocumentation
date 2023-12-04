@@ -7,8 +7,8 @@ hidden = true
 
 ## Grid Calculations
 
-- Grid calculations can now be performed on multiple grids at the same time. 
-- A grid calculation can be used as input to a derived statistics calculation. The data source for statistics computations can either be a cell property or a grid calculation expression.
+- Grid calculations can now be applied to multiple grid cases.
+- A grid calculation can be used as data source for [Grid Case Statistics]({{< relref "casegroupsandstatistics" >}})  . The data source for statistics computations can either be a cell property or a grid calculation expression.
 - Time step selection is added to the statistics dialog to make it possible to limit the resource usage.
 - Expressions can be stored to a file and loaded from a file. This makes it possible to reuse expressions in multiple projects.
  
