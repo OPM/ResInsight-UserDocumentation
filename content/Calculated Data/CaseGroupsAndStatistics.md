@@ -2,6 +2,9 @@
 title = "Grid Case Groups and Statistics"
 published = true
 weight = 120
+aliases = [
+    "/3d-main-window/casegroupsandstatistics/"
+]
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/GridCaseGroupTree.png)

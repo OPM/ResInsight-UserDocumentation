@@ -13,6 +13,8 @@ The summary curve calculator is a tool to do calculations on a set of curves. Th
 
 The calculator can be run by pressing the calculator icon {{< image-in-text src="images/Calculator.svg" >}} in the menu bar, or by right-clicking on either a summary case or the summary plot collection.
 
+Expressions can be saved to a text file using the **Export Calculations** button. The default location for calculations can be set in **Preference->Import/Export**.
+
 More details on mathematical operations are described in [Calculator Expressions]({{< ref "CalculatorExpressions.md" >}})
 
 ## Calculation Settings

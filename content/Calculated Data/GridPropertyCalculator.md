@@ -12,6 +12,8 @@ aliases = [
 ResInsight offers a built-in property calculator for grid parameters. 
 The **Grid Property Calculator** enables arithmetic expressions to be parsed and calculated for visualization purposes. The expression can be applied to one or multiple grid models, and the expression text can be stored to a file for later use.
 
+Expressions can be saved to a text file using the **Export Calculations** button. The default location for calculations can be set in **Preference->Import/Export**.
+
 More details on mathematical operations are described in [Calculator Expressions]({{< ref "CalculatorExpressions.md" >}})
 
 ## Invoking the Grid Property Calculator
