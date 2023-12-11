@@ -12,17 +12,21 @@ An RFT (_Repeated Formation Tester_) plot is a special well plot for comparing o
 ## Create New RFT Plot
 There are several ways to create new RFT Plots.
 
-**From the Project Tree in the Plot Main Window**
+- From the Project Tree in the Plot Main Window
+  - Select right-click command **New RFT Plot** for _Well Path_ node or _RFT Plots_ node.
+- From the Project Tree in the 3D Main Window
+  - Select right-click command **New RFT plot** for a simulation well.
+- From a 3D view
+  - Right-click a simulation well select **Well Plots -> New RFT Plot**.
 
-- Select right-click command **New RFT Plot** for _Well Path_ node or _RFT Plots_ node.
+## Create Multiple RFT Plots
+ResInsight can automate the creation of multiple plots based on an already exising RFT plot.
 
-**From the Project Tree in the 3D Main Window**
-
-- Select right-click command **New RFT plot** for a simulation well.
-
-**From a 3D view**
-
-- Right-click a simulation well select **Well Plots -> New RFT Plot**.
+Description of the workflow:
+- create a RFT plot for one well
+- on the right-click menu of this plot, select **Create Multiple RFT Plots**
+- a list of available wells is displayed, and the user can select the wells
+- click OK, and the plots for selected wells are created
 
 ## Import Observed RFT Data
 

@@ -27,6 +27,10 @@ Transmissibility can be set or adjusted with multiple keywords in an Eclipse dat
 
 The TRANX, TRANY and TRANZ used in the simulation are divided by the ResInsight calculated transmissibilities and the resulting multiplicators are named **riMULTX**, **riMULTY** and **riMULTZ** respectively. The derived properties are listed under **Static** properties. The riMULT-properties are useful for quality checking consistence in user input for fault seal along a fault plane. 
 
+### Classification of Cells having NNCs
+
+The static result **riNncCells** use 1 to represent cells having a NNC and 0 for other cells.
+
 ### Directional Combined Results
 
 Cell properties with names ending in I, J, K, X, Y, or Z, and an optional "+" or "-" are combined into derived results post-fixed with IJK, or XYZ depending on their origin. (Eg. the static cell properties MULTX, MULTY, MULTZ, and their negatives are combined into the result MULTXYZ, while the dynamic cell properties FLRGASI, FLRGASJ, FLRGASK are combined to FLRGASIJK). 

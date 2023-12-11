@@ -125,6 +125,23 @@ Example file  for well *OP_1*, i.e. *OP_1.obs*:
 305.000   3.000
 ```
 
+#### Observed pressure and error - multiple observations for a well
+If there are multiple observations for a well at different dates, the naming of the files include a measurement ID
+
+Example file *well_date_rft.txt*:
+```txt
+R_A2 2018-03-01 1
+R_A2 2019-03-01 2
+```
+
+Measurement ID is the last column. The corresponding observations files are named as follows, the measurement ID is appended to the well name.
+```txt
+R_A2_1.obs
+R_A2_1.txt
+R_A2_2.obs
+R_A2_2.txt
+```
+
 #### Reservoir zone name
 For a given well name, the file *\<well_name>.txt* is a data file containing five columns that specify its correlation with reservoir zones. 
 Each line of data must contain:
@@ -142,7 +159,7 @@ Example file for well *OP_1*, i.e. *OP_1.txt*:
 461288.683   5933415.029   1840.000   1635.492   LowerReek
 ```
 
-#### Well measurements
+#### Well measurements - date format 1
 The data file *well_date_rft.txt* contains well measurements. The file contains four columns for each well measurement:
 
 - Well Name
@@ -160,4 +177,22 @@ OP_2   01 02 2000   1
 OP_4   01 01 2001   1
 WI_1   01 02 2000   1
 WI_3   01 03 2001   1
+```
+
+#### Well measurements - date format 2
+The data file *well_date_rft.txt* contains well measurements. The file contains four columns for each well measurement:
+
+- Well Name
+- Date on the format \<YYYY-MM-DD>
+- Measurement index
+
+There can be multiple measurement for each well.
+
+Example file *well_date_rft.txt*:
+```txt
+R_A2 2018-03-01 1
+R_A2 2019-03-01 2
+R_A6 2018-11-07 1
+R_A6 2018-11-07 2
+R_A6 2018-11-07 3
 ```
