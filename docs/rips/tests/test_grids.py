@@ -3,8 +3,6 @@ import os
 from typing import Any, Dict, List, TypedDict
 import math
 
-from generated.generated_classes import Case
-
 sys.path.insert(1, os.path.join(sys.path[0], "../../"))
 import rips
 

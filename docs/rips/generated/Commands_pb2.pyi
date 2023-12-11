@@ -37,6 +37,12 @@ class CompdatCombinationMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     INDIVIDUALLY: _ClassVar[CompdatCombinationMode]
     COMBINED: _ClassVar[CompdatCombinationMode]
 
+class ExportVisibleCellsKeywordType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = []
+    FLUXNUM: _ClassVar[ExportVisibleCellsKeywordType]
+    MULTNUM: _ClassVar[ExportVisibleCellsKeywordType]
+    ACTNUM: _ClassVar[ExportVisibleCellsKeywordType]
+
 class ExportFolderType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = []
     COMPLETIONS: _ClassVar[ExportFolderType]
@@ -76,6 +82,9 @@ WPIMULT_AND_DEFAULT_CONNECTION_FACTORS: CompdatExportType
 NO_COMPLETIONS: CompdatExportType
 INDIVIDUALLY: CompdatCombinationMode
 COMBINED: CompdatCombinationMode
+FLUXNUM: ExportVisibleCellsKeywordType
+MULTNUM: ExportVisibleCellsKeywordType
+ACTNUM: ExportVisibleCellsKeywordType
 COMPLETIONS: ExportFolderType
 SNAPSHOTS: ExportFolderType
 PROPERTIES: ExportFolderType
@@ -240,11 +249,11 @@ class ExportVisibleCellsRequest(_message.Message):
     INACTIVECELLSVALUE_FIELD_NUMBER: _ClassVar[int]
     caseId: int
     viewId: int
-    exportKeyword: str
+    exportKeyword: ExportVisibleCellsKeywordType
     visibleActiveCellsValue: int
     hiddenActiveCellsValue: int
     inactiveCellsValue: int
-    def __init__(self, caseId: _Optional[int] = ..., viewId: _Optional[int] = ..., exportKeyword: _Optional[str] = ..., visibleActiveCellsValue: _Optional[int] = ..., hiddenActiveCellsValue: _Optional[int] = ..., inactiveCellsValue: _Optional[int] = ...) -> None: ...
+    def __init__(self, caseId: _Optional[int] = ..., viewId: _Optional[int] = ..., exportKeyword: _Optional[_Union[ExportVisibleCellsKeywordType, str]] = ..., visibleActiveCellsValue: _Optional[int] = ..., hiddenActiveCellsValue: _Optional[int] = ..., inactiveCellsValue: _Optional[int] = ...) -> None: ...
 
 class SetExportFolderRequest(_message.Message):
     __slots__ = ["type", "path", "createFolder"]

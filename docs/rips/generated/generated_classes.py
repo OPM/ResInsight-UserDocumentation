@@ -756,6 +756,16 @@ class WellPath(PdmObjectBase):
         return self._call_pdm_method_return_value("AppendPerforationInterval", Perforation, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor)
 
 
+    def completion_settings(self) -> Optional[WellPathCompletionSettings]:
+        """Completion Settings
+
+        Returns:
+             WellPathCompletionSettings
+        """
+        children = self.children("CompletionSettings", WellPathCompletionSettings)
+        return children[0] if len(children) > 0 else None
+
+
     def completions(self) -> Optional[WellPathCompletions]:
         """Completions
 
@@ -1197,6 +1207,7 @@ class RimStatisticalCalculation(Reservoir):
         percentile_calculation_type (str): One of [NearestObservationPercentile, HistogramEstimatedPercentile, InterpolatedObservationPercentile]
         porosity_model (str): One of [MATRIX_MODEL, FRACTURE_MODEL]
         result_type (str): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+        selected_time_steps (List[int]): Time Step Selection
         static_properties_to_calculate (List[str]): Stat Prop
         use_zero_as_inactive_cell_value (bool): Use Zero as Inactive Cell Value
         well_data_source_case (str): Well Data Source Case
@@ -1218,6 +1229,7 @@ class RimStatisticalCalculation(Reservoir):
         self.percentile_calculation_type: str = "InterpolatedObservationPercentile"
         self.porosity_model: str = "MATRIX_MODEL"
         self.result_type: str = "DYNAMIC_NATIVE"
+        self.selected_time_steps: List[int] = []
         self.static_properties_to_calculate: List[str] = []
         self.use_zero_as_inactive_cell_value: bool = False
         self.well_data_source_case: str = "None"
@@ -1275,7 +1287,7 @@ class FractureTemplate(PdmObjectBase):
     Attributes:
         azimuth_angle (float): Azimuth Angle
         conductivity_factor (float): Conductivity
-        conductivity_type (str): One of [InfiniteConductivity, FiniteConductivity]
+        conductivity_type (str): One of [InfiniteConductivity, FiniteConductivity, FiniteConductivityInfiniteWellPI]
         d_factor_scale_factor (float): D-factor
         height_scale_factor (float): Height
         orientation (str): One of [Azimuth, Longitudinal, Transverse]
@@ -2065,6 +2077,27 @@ class FileWellPath(WellPath):
         if FileWellPath.__custom_init__ is not None:
             FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class WellPathCompletionSettings(PdmObjectBase):
+    """
+    Attributes:
+        group_name_for_export (str): Group Name
+        msw_liner_diameter (float): MSW Liner Diameter
+        msw_roughness (float): MSW Roughness
+        well_name_for_export (str): Well Name
+        well_type_for_export (str): One of [OIL, GAS, WATER, LIQUID]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.group_name_for_export: str = ""
+        self.msw_liner_diameter: float = 0.152
+        self.msw_roughness: float = 1e-05
+        self.well_name_for_export: str = ""
+        self.well_type_for_export: str = "OIL"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathCompletionSettings.__custom_init__ is not None:
+            WellPathCompletionSettings.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathCompletions(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -2306,6 +2339,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellLogPlotTrack'] = WellLogPlotTrack
     classes['WellPath'] = WellPath
     classes['WellPathCollection'] = WellPathCollection
+    classes['WellPathCompletionSettings'] = WellPathCompletionSettings
     classes['WellPathCompletions'] = WellPathCompletions
     classes['WellPathFracture'] = WellPathFracture
     classes['WellPathGeometry'] = WellPathGeometry
