@@ -1,9 +1,10 @@
 +++
 title = "Grid Property Calculator"
 published = true
-weight = 30
+weight = 20
 aliases = [
-    "/3d-main-window/gridpropertycalculator/"
+    "/3d-main-window/gridpropertycalculator/",
+    "/calculated-data/gridpropertycalculator/"
 ]
 +++
 

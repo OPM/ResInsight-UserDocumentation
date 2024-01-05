@@ -1,7 +1,7 @@
 +++
 title = "Aggregation of Grid Cell Values"
 published = true
-weight = 20
+weight = 30
 +++
 
 ### Calculate statistics for sum of mobile oil for an ensemble
