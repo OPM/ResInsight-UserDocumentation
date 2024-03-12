@@ -14,15 +14,6 @@ weight = 10
 Please not that the distribution by the OPM Project will be updated some time after the release of a new version on GitHub.
 {{% /notice %}}
 
-### Red Hat Enterprise Linux 6 or 7
-Login as root and do:
-
-    yum-config-manager --add-repo https://opm-project.org/package/opm.repo
-    yum install resinsight
-    yum install resinsight-octave
-
-Launch the application using the command `ResInsight`
-
 ### Ubuntu 
 On the command line do: 
 

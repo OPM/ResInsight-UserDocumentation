@@ -20,3 +20,4 @@ This chapter provides an overview of its functionality and installation.
 - [resinsight.org](https://resinsight.org/) - Documentation for latest stable release
 - [api.resinsight.org](https://api.resinsight.org/) - Documentation of Python API
 - [beta.resinsight.org](http://beta.resinsight.org) - Latest documentation (not yet released)
+- [https://github.com/CeetronSolutions/resinsight-tutorials](https://github.com/CeetronSolutions/resinsight-tutorials/) - Tutorials and Examples

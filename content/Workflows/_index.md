@@ -1,7 +1,7 @@
 +++
 title = "Workflows"
 published = true
-weight = 32
+weight = 62
 +++
 
 ![ResInsight User Interface]({{< relref "" >}}images/getting-started/ResInsightUIMediumSize.png)

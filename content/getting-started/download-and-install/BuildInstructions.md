@@ -1,5 +1,5 @@
 +++
-title = "Build Instructions"
+title = "Building ResInsight from Source"
 published = true
 hidden = false
 weight = 30
@@ -34,7 +34,7 @@ Example for Windows : `CMAKE_PREFIX_PATH=F:/Qt/5.15.2/msvc2019_64`
 ### CMake
 [CMake](https://cmake.org/download/) version 3.15 or later is supported.
 
-## Build Instructions
+## Build Overview
 The ResInsight build may be configured in different ways, with optional support for Octave plugins, 
 ABAQUS ODB API, HDF5, Pyton, and OpenMP. This is configured using options in CMake.
 

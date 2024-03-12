@@ -28,15 +28,6 @@ Several options are available for multi selection of items which can be used in 
 ![]({{< relref "" >}}images/getting-started/ResInsightPlotProjectTreeItemMenu.png)
 
   
-## Undo and Redo
-**Undo** and **Redo** is available via: 
-
-- Toolbar icons {{< image-in-text src="images/getting-started//ResInsightPlotProjectTreeToolbarUndoRedo.png" >}}
-- **Edit menu** items **Undo** and **Redo**
-- Shortcuts **Ctrl-Z** and **Ctrl-Y**
-
-
-
 ## Context sensitive help
 ResInsight offers context sensitive help for any item in project tree. Most convenient is just to press the **F1** help key for any selected item. Alternatively, you may right-click an item and invoke menu item **Search Help For**.
 
