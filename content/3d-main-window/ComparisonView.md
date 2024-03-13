@@ -1,7 +1,7 @@
 +++
 title = "Comparison View"
 published = true
-weight = 35
+weight = 135
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/3DComparisonView.png)

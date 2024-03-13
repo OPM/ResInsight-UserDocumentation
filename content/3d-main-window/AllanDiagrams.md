@@ -1,7 +1,7 @@
 +++
 title = "Allan Diagram"
 published = true
-weight = 90
+weight = 91
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/AllanDiagram.png)

@@ -1,7 +1,7 @@
 +++
 title = "Streamlines"
 published = true
-weight = 50
+weight = 143
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/Streamlines.png)

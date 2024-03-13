@@ -1,7 +1,8 @@
 +++
 title = "Measurement"
 published = true
-weight = 140
+weight = 152
+
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/Measurement.png)

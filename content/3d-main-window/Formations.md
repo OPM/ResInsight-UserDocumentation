@@ -1,7 +1,7 @@
 +++
 title = " Zonations/Formations"
 published = true
-weight = 100
+weight = 95
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/formations_legend.PNG)

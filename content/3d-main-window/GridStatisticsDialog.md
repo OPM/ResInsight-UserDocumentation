@@ -1,7 +1,7 @@
 +++
 title = "Grid Statistics Dialog"
 published = true
-weight = 110
+weight = 158
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/GridStatisticsDialog.png)

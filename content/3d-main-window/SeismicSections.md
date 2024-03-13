@@ -1,7 +1,7 @@
 +++
 title = "Seismic Sections"
 published = true
-weight = 83
+weight = 113
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/SeismicHeaderImage.png)

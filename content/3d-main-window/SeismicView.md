@@ -1,7 +1,7 @@
 +++
 title = "Seismic View"
 published = true
-weight = 82
+weight = 112
 +++
 
 ![]({{< relref "" >}}images/3d-main-window/SeismicView.png)

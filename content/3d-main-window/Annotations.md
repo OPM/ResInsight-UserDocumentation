@@ -1,7 +1,7 @@
 +++
 title = "Annotations"
 published = true
-weight = 150
+weight = 154
 +++
 
 ResInsight supports displaying a few types of annotations in 3D views and Contour Map view.
