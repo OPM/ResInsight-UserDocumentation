@@ -22,6 +22,8 @@ ResInsight is under continuous development targeting two major releases per year
 For an overview of some of its new and exciting features, see the following: 
 
 
+- [ ResInsight 2024.03 ]({{< ref "releasenotes_2024_03.md" >}})
+
 - [ ResInsight 2023.12 ]({{< ref "releasenotes_2023_12.md" >}})
 
 - [ ResInsight 2023.10 ]({{< ref "releasenotes_2023_10.md" >}})
