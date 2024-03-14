@@ -50,15 +50,10 @@ A well path defined by well targets may be edited by either editing coordinates 
 
 ![]({{< relref "" >}}images/3d-main-window/WellTargets.png)
 
-Clicking and dragging the blue part of a target, it can be moved along the Z axis only. Clicking and dragging the magenta part of a target, it can be moved freely around.
-
-### Well Path Duplication
-To duplicate an existing well path, select **Duplicate** from the right-click menu of a well path in the **Project Tree** or right-click on the well path geometry in the 3D view. This operation will create a new well path with a set of well targets.
-
-The full geometry of the new well path is an estimate of the source well path, so the geometry might differ slightly.
-
 ### Well Target Interaction Operations
 When the well target handles are active in the 3D view, the following operations are possible when pressing left mouse button on well target handles:
+
+Clicking and dragging the blue part of a target, it can be moved along the Z axis only. Clicking and dragging the magenta part of a target, it can be moved horizontally in the XY-plane. 
 
 |User Interaction           | Description |
 |---------------------------|-------------|
@@ -66,6 +61,10 @@ When the well target handles are active in the 3D view, the following operations
 |Mouse Move + CTRL          | Modification of all well target on selected well (laterals excluded) |
 |Mouse Move + CTRL + SHIFT  | Modification of all well targets (laterals included) |
 
+### Well Path Duplication
+To duplicate an existing well path, select **Duplicate** from the right-click menu of a well path in the **Project Tree** or right-click on the well path geometry in the 3D view. This operation will create a new well path with a set of well targets.
+
+The full geometry of the new well path is an estimate of the source well path, so the geometry might differ slightly.
 
 ### Starting well path at a fixed position
 
