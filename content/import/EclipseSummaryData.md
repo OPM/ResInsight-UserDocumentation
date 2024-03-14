@@ -41,11 +41,9 @@ The name of a summary case can be changed by interactive edit of the name in the
 
 ## Summary Data File Formats
 
-**ResInsight** is able to import summary data in three file formats. Default exported by *Eclipse* is **\*.SMSPEC/.UNSMRY**. In addition, *Eclipse* can export into **\*.h5** for improved performance.
+**ResInsight** is able to import summary data in several file formats. Default exported by *Eclipse* is **\*.SMSPEC/.UNSMRY**. 
 
-For best performance, **ResInsight** has support for **\*.ESMRY** file format. **ResInsight** is able to produce this file format based on **\*.SMSPEC/UNSMRY** files.
-
-See configuration in [Eclipse Summary Preferences]({{< relref "preferences#eclipse-summary" >}}).
+For best performance, consider using the [ESMRY File Format]({{< relref "summarydata" >}}).
 
 ### SMSPEC/UNSMRY File Format
 

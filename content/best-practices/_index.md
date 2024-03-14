@@ -1,7 +1,7 @@
 +++
-title = "Workflows"
+title = "Best Practices"
 published = true
-weight = 95
+weight = 90
 +++
 
 ![ResInsight User Interface]({{< relref "" >}}images/getting-started/ResInsightUIMediumSize.png)
