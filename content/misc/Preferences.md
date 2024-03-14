@@ -108,3 +108,9 @@ Please consider the location and folders of your templates with care to cater fo
   - **Shared Script Folder(s)** -- Defines the search paths for octave scripts
   - **Script Editor** -- The text editor to invoke when editing scripts
 
+
+## Import/Export
+
+![]({{< relref "" >}}images/misc/PreferencesImportExport.png)
+
+Logging to file can be enabled by specifying the destination log file.

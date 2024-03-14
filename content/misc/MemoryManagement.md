@@ -19,6 +19,9 @@ If the available physical memory dips below 5% of the total physical memory on W
 
 It is possible to click on the memory used indicator to open up a dialog allowing the user to clear results from memory when they are no longer required. Any tool that is not currently used in a view may be cleared by selecting the result and clicking the **Clear Checked Data From Memory**. Note that, depending on your operating system, this may not result in a reduction in the memory reserved by the application. However, the actual use will have gone down and it may now be possible to run more operations without running out of memory.
 
+Detailed usage of memory can be seen by clicking **Show Memory Report**.
+![]({{< relref "" >}}images/misc/MemoryUsage.png)
+
 By default, results will be shown for the active case. However, a specific case may be selected in the top drop down list. The pictures below show the dialog for both Eclipse and Abaqus results.
 
 ![]({{< relref "" >}}images/3d-main-window/MemoryTool.png) ![]({{< relref "" >}}images/3d-main-window/MemoryToolGeoMech.png)
