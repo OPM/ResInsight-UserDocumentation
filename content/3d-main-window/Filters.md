@@ -36,7 +36,7 @@ A new cell filter can be added by invoking the right-click menu for the **Cell F
 
 The available cell filters are:
 
-- **Polygon Filter**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. 
+- **Polygon Filter**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. The polygon can be defined as part of the filter or referencing a polygon defined in the [Polygons]({{< relref "polygons" >}}) collection.
 
 - **User Defined Filter**: Defining a filter by specifying explicit cells to include or exclude by their IJK-index.
 

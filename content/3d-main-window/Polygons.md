@@ -12,6 +12,8 @@ ResInsight supports import, export and creation of polygons and polylines.
 ## Polygons in Project
 A polygon is available for all views in a project. The polygons can be imported from file, exported to file or created by interactively clicking in a view.
 
+![]({{< relref "" >}}images/3d-main-window/PolygonInProject.png)
+
 ## Create a Polygon
 To create a polygon, the user clicks on a set of locations in 3D. This operation can be started by:
 - Right-click on some geometry in a view, from the menu select **Polygon**
