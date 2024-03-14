@@ -249,6 +249,14 @@ Angle of the total in-plane shear relative to the Quasi Vertical direction
 
 $TPinc = acos (\frac {TPQV} {TP}) $
 
+### FAULTMOB
+
+$FAULTMOB = \frac{TP}{tan(frictionAngle) * (TS\_{ZZ} + \frac{cohesion}{tan(frictionAngle)} )}$
+
+### PCRIT
+
+$PCRIT = TS\_{ZZ} - \frac{TP}{tan(frictionAngle)} $
+
 ### Pinc and Pazi - Face Inclination and Azimuth
 
 These are the directional angles of the face-normal itself. 

@@ -22,6 +22,8 @@ During import of a summary case, ResInsight tries to find an associated **parame
 
 [Ensemble File Dialog]({{< relref "ensemblefiledialog" >}})
 
+[Best Practices Summary Data]({{< relref "summarydata" >}})
+
 ## Naming
 The name of an ensemble can be changed by interactive edit of the name in the **Project Tree** (by clicking or using **F2**) or selecting the ensemble and changing the name in the **Property Editor**.
 
