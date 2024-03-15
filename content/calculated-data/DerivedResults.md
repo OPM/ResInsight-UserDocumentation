@@ -72,3 +72,14 @@ In the process of normalizing transmissibility by the overlapping flow area, the
 
 Water Flooded PV, also called _Number of flooded porevolumes_ shows the amount of flow from a selected set of simulation tracers into a particular cell, compared to the cells mobile pore volume. A value of 1.0 will tell that the tracers accumulated flow into the cell has reached a volume equal to the mobile pore volume in the cell.   
 
+### Mobile Pore Volume
+
+Mobile Pore Volume **MOBPORV** is computed based on the grid cell properties **PORV**, **SWCR** and **MULTPV**.
+
+If **MULTPV** is missing, **MULTPV** is set to 1.0.
+If **SWCR** is missing, **SWCR** is et to 0.0.
+
+$ MOBPORV = MULTPV * PORV * (1.0 - SWCR) $
+
+
+
