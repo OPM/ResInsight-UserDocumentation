@@ -58,7 +58,7 @@ Open a command prompt using "Run as Administrator" for Visual Studio x64.
 
 
 ### Python dependencies
-Install Python version 3.8 or newer
+Install Python version 3.8 or newer, and use dev-requirements.txt
 
     python3 -m pip install -r GrpcInterface/Python/dev-requirements.txt
 
