@@ -48,17 +48,19 @@ vcpkg is located in the folder ThirdParty/vcpkg
     ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3
 
 ### (Windows) Build and install required dependencies using vcpkg 
-Open a command prompt using "Run as Administrator" for Visual Studio x64
+Open a command prompt using "Run as Administrator" for Visual Studio x64.
+
+[Detailed Developer notes](https://ceetronsolutions.github.io/resinsight-system-doc/editor/vcpkg)
 
     ThirdParty/vcpkg/bootstrap-vcpkg.bat
     ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 --triplet x64-windows
 
-    [Developer notes](https://ceetronsolutions.github.io/resinsight-system-doc/editor/vcpkg)
+
 
 ### Python dependencies
 Install Python version 3.8 or newer
 
-    python3 -m pip install -r GrpcInterface/Python/requirements.txt
+    python3 -m pip install -r GrpcInterface/Python/dev-requirements.txt
 
 ### Installation of custom Qt
 

@@ -56,17 +56,7 @@ This fix was taken from reply number 11 in this [thread](https://bbs.archlinux.o
 
 1. Install Octave directly from the package manager in Linux. See the documentation for your particular distribution. 
 2. Launch ResInsight, open **Edit->Preferences** 
-3. Enter the path to the Octave command line interpreter executable `octave-cli` (for older version of octave use `octave`)
-
-{{% notice info %}}
-The precompiled octave interface distributed in the tarball is only tested for RedHat 6. <br>
-It is <b>not</b> expected to work for other configurations.
-(ResInsight 1.3.2-dev and earlier, was also tested on RedHat 5)<br>
-<br>
-If you need the octave interface to work on a different OS, you need to build ResInsight yourself.<br> 
-See <a href="{{< relref "buildinstructions.md" >}}">Build Instructions</a> 
-{{% /notice %}}
-
+3. Enter the path to the Octave command line interpreter executable `octave-cli`
 
 ## Workaround for crash using Virtual Box
 Uncheck **Settings->Display->Enable 3D Acceleration**. Disabling this option will cause OpenGL operations to be executed in software, so the the performance of graphics operations in ResInsight will be slower, but will not crash.
