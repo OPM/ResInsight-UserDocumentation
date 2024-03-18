@@ -10,7 +10,7 @@ weight = 80
 
 ## Create Decline Curves
 
-Decline curves can be created from the right-click menu for a curve in the **Plot Project Tree**.
+**Decline Curve Analysis** (DCA) can be created from the right-click menu for a curve in the **Plot Project Tree**.
 
 Three decline curves are created, and the values for the decline curves can be inspected visually in the plot and values can be displayed using **Show Plot Data** from the menu inside the plot window.
 
