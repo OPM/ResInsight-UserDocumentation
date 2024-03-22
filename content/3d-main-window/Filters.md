@@ -16,7 +16,7 @@ The visibility of cells connected to wells, and fences can be controlled from <b
 <small><i>(Not applicable for Geomechanical cases)</i></small>
 {{% /notice %}}
 
-## Common Properties Cell and Property Filters
+## Filters Settings
 
 Filters can be turned on and off using their check-boxes in **Project Tree** and controlled by their corresponding **Property Editor**. The sequence of the filters can be rearranged by clicking the arrow icons of selected filter.
 
@@ -27,8 +27,12 @@ The *Include* setting marks the cells as visible while the *Exclude* setting is 
 The icon in front of each filter show a + or - sign to indicate *Include* or *Exclude* {{< image-in-text src="images/3d-main-window/FilterIncEx.png" >}}.
 
 ## Cell Filters
-Cell Filters enables the user to define a set of visible regions in the 3D view.
+**Cell Filters** enables the user to define a set of visible regions in the 3D view.
 Each *Include* cell filter will add cells to the visualization and the resulting 3D view will show the union of all the *Include* cell filters.
+
+The logical operation combining multiple **Cell Filters** is defined by *"Combine Polygon and Range Filters Using Operation"*
+
+![]({{< relref "" >}}images/3d-main-window/cellfilters_combine.png)
 
 A new cell filter can be added by invoking the right-click menu for the **Cell Filters** collection in **Project Tree**. 
 
@@ -44,7 +48,7 @@ The available cell filters are:
 
 - **Slice Filter**: Defining a filter to include or exclude a slice of cells in either I-, J-, or K-direction.
 
-The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as decribed in [User Defined Polyline Annotations]({{< relref "Annotations.md" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
+The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as decribed in [Polygons]({{< relref "polygons" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
 
 ![]({{< relref "" >}}images/3d-main-window/CellFilter_Polygon.png)
 
