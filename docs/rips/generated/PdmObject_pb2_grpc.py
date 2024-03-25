@@ -55,6 +55,11 @@ class PdmObjectServiceStub(object):
                 request_serializer=PdmObject__pb2.PdmObjectMethodRequest.SerializeToString,
                 response_deserializer=PdmObject__pb2.PdmObject.FromString,
                 )
+        self.DeleteExistingPdmObject = channel.unary_unary(
+                '/rips.PdmObjectService/DeleteExistingPdmObject',
+                request_serializer=PdmObject__pb2.PdmObject.SerializeToString,
+                response_deserializer=Definitions__pb2.Empty.FromString,
+                )
 
 
 class PdmObjectServiceServicer(object):
@@ -108,6 +113,12 @@ class PdmObjectServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def DeleteExistingPdmObject(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PdmObjectServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -150,6 +161,11 @@ def add_PdmObjectServiceServicer_to_server(servicer, server):
                     servicer.CallPdmObjectMethod,
                     request_deserializer=PdmObject__pb2.PdmObjectMethodRequest.FromString,
                     response_serializer=PdmObject__pb2.PdmObject.SerializeToString,
+            ),
+            'DeleteExistingPdmObject': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteExistingPdmObject,
+                    request_deserializer=PdmObject__pb2.PdmObject.FromString,
+                    response_serializer=Definitions__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -294,5 +310,22 @@ class PdmObjectService(object):
         return grpc.experimental.unary_unary(request, target, '/rips.PdmObjectService/CallPdmObjectMethod',
             PdmObject__pb2.PdmObjectMethodRequest.SerializeToString,
             PdmObject__pb2.PdmObject.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteExistingPdmObject(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/rips.PdmObjectService/DeleteExistingPdmObject',
+            PdmObject__pb2.PdmObject.SerializeToString,
+            Definitions__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

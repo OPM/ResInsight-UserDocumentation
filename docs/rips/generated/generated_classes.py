@@ -31,7 +31,7 @@ class CurveIntersection(PdmObjectBase):
         name (str): Name
         points (List[List[float]]): Points
         simulation_well (Optional[SimulationWell]): Simulation Well
-        type (str): One of [CS_WELL_PATH, CS_SIMULATION_WELL, CS_POLYLINE, CS_AZIMUTHLINE]
+        type (str): One of [CS_WELL_PATH, CS_SIMULATION_WELL, CS_POLYLINE, CS_AZIMUTHLINE, CS_POLYGON]
         well_path (Optional[WellPath]): Well Path        
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -461,7 +461,7 @@ class SummaryCase(PdmObjectBase):
         self.id: int = -1
         self.name_setting: str = "FULL_CASE_NAME"
         self.short_name: str = ""
-        self.show_sub_nodes_in_tree: bool = False
+        self.show_sub_nodes_in_tree: bool = True
         self.summary_header_filename: Optional[str] = None
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SummaryCase.__custom_init__ is not None:
@@ -1132,6 +1132,14 @@ class EclipseContourMap(EclipseView):
         EclipseView.__init__(self, pb2_object, channel)
         if EclipseContourMap.__custom_init__ is not None:
             EclipseContourMap.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimEmCase(Reservoir):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        Reservoir.__init__(self, pb2_object, channel)
+        if RimEmCase.__custom_init__ is not None:
+            RimEmCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class GeoMechContourMap(GeoMechView):
     """
@@ -2308,6 +2316,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['Project'] = Project
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
+    classes['RimEmCase'] = RimEmCase
     classes['RimRoffCase'] = RimRoffCase
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RimTextAnnotation'] = RimTextAnnotation
