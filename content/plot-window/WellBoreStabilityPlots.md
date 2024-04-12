@@ -87,9 +87,9 @@ To estimate the fracture gradient *FG*, first step is to find the principal effe
 
 $$\sigma'_1 = \sigma'_1 (\theta)= \sigma'_r = p_w - p_0$$
 
-$$\sigma'_2 = \sigma'_2 (\theta) = \sigma\_{t \max} = \frac{1}{2} \left( (\sigma_z + \sigma\_\theta) + \sqrt{(\sigma_z + \sigma\_\theta)^2 + 4\tau\_{\theta z}^2} \right) - p_0$$
+$$\sigma'_2 = \sigma'_2 (\theta) = \sigma\_{t \max} = \frac{1}{2} \left( (\sigma_z + \sigma\_\theta) + \sqrt{(\sigma_z - \sigma\_\theta)^2 + 4\tau\_{\theta z}^2} \right) - p_0$$
 
-$$\sigma'_2 = \sigma'_3 (\theta) = \sigma\_{t \min} = \frac{1}{2} \left( (\sigma_z + \sigma\_\theta) - \sqrt{(\sigma_z + \sigma\_\theta)^2 + 4\tau\_{\theta z}^2} \right) - p_0$$
+$$\sigma'_2 = \sigma'_3 (\theta) = \sigma\_{t \min} = \frac{1}{2} \left( (\sigma_z + \sigma\_\theta) - \sqrt{(\sigma_z - \sigma\_\theta)^2 + 4\tau\_{\theta z}^2} \right) - p_0$$
 
 Next step is to solve for the value of $\theta \in [0 - 180]$ that yields $\sigma'_3 (\theta) = 0$ which in turn gives us $\sigma\_\theta$ which can be used to solve for $P_w$ in the Kirsch equations.
 
