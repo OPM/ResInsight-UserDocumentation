@@ -77,7 +77,7 @@ To be able to modify **Advanced Options** from the CMake User Interface, tick th
 | `RESINSIGHT_ENABLE_UNITY_BUILD`                   | OFF     | Activate use of CMAKE_UNITY_BUILD on some libraries to improve build speed |
 | `RESINSIGHT_INCLUDE_APPFWK_TESTS`                 | OFF     | Include unit tests from thirdparty libraries AppFwk and VizFwk |
 | `RESINSIGHT_INCLUDE_APPLICATION_UNIT_TESTS`       | OFF     | Include Application Code Unit Tests |
-| `RESINSIGHT_PRIVATE_INSTALL`                      | ON      | Linux only: Include libecl libraries in the installation package |
+| `RESINSIGHT_PRIVATE_INSTALL`                      | ON      | Linux only: Include resdata libraries in the installation package |
 | `RESINSIGHT_HDF5_BUNDLE_LIBRARIES`                | OFF     | Linux only: Include HDF5 libraries in the installation package |
 | `RESINSIGHT_TREAT_WARNINGS_AS_ERRORS`             | OFF     | Enable warnings as errors
 | `RESINSIGHT_UPDATE_SUBMODULES`                    | ON      | Automatically issue 'git submodule update --init --recursively' on ThirdParty folder |
