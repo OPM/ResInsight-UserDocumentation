@@ -49,7 +49,7 @@ Select the well to display in the plot. Only observed well paths are displayed.
 After a well has been selected in the Well Name field, sources for that well should appear in the sources field. The sources are placed in one of three different groups:
 
 
-- **RFT File Cases** -- Simulation cases may have associated PLT data in _\*.rft_ file(s). If the simulation case contains such files, those are imported together with the simulation case (See the keyword `WRFTPLT` in the Eclipse manual for information)
+- **RFT File Cases** -- Simulation cases may have associated PLT data in _\*.rft_ file(s). If the simulation case contains such files, those are imported together with the simulation case (See the keyword `WRFTPLT` for details)
 - **Grid Cases** -- Simulation cases
 - **Observed Cases** -- Observed data imported from well log files and well path files
 

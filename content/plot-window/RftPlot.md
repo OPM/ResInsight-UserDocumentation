@@ -54,7 +54,7 @@ Select the well to display in the plot. Wells postfixed by _'(Well Path)'_ have 
 ### Sources
 After a well has been selected in the Well Name field, the relevant sources for that well will appear in the sources field. The sources are placed in one of three different groups:
 
-- **RFT File Cases** -- Simulation cases may have associated formation pressure data in _\*.rft_ file(s). If the simulation case contains such files, those are imported together with the simulation case (See the keyword `WRFTPLT` in the Eclipse manual for information).
+- **RFT File Cases** -- Simulation cases may have associated formation pressure data in _\*.rft_ file(s). If the simulation case contains such files, those are imported together with the simulation case (See the keyword `WRFTPLT` for more information).
 - **Grid Cases** -- The PRESSURE property in the 3D grid.
 - **Observed Cases** -- Observed data imported from well log files.
 
