@@ -45,7 +45,7 @@ Install Qt
 vcpkg is located in the folder ThirdParty/vcpkg
 
     ThirdParty/vcpkg/bootstrap-vcpkg.sh
-    ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3
+    ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 arrow
 
 ### (Windows) Build and install required dependencies using vcpkg 
 Open a command prompt using "Run as Administrator" for Visual Studio x64.
@@ -53,7 +53,7 @@ Open a command prompt using "Run as Administrator" for Visual Studio x64.
 [Detailed Developer notes](https://ceetronsolutions.github.io/resinsight-system-doc/editor/vcpkg)
 
     ThirdParty/vcpkg/bootstrap-vcpkg.bat
-    ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 --triplet x64-windows
+    ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 arrow --triplet x64-windows
 
 
 
@@ -68,7 +68,7 @@ Go to a folder to install custom Qt
 In this folder, execute
     
     python3 -m pip install aqtinstall
-    aqt install-qt linux desktop 5.15.2 -m qtcharts
+    aqt install-qt linux desktop 5.15.2 -m qtcharts qtnetworkauth
     
 
 ### Build ResInsight
