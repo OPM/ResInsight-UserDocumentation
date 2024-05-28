@@ -25,14 +25,14 @@ Update apt installer
 Install GCC and related tools
 
     sudo apt install build-essential
-    sudo apt install curl zip unzip tar
+    sudo apt install curl zip unzip tar flex bison
 
 As gcc 10 is required, it can be useful to set the default compiler.
 [Set default compiler](https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa)
 
 Install Qt
 
-    sudo apt install -y qtbase5-dev libqt5svg5-dev qtbase5-private-dev
+    sudo apt install -y qtbase5-dev libqt5svg5-dev qtbase5-private-dev libqt5networkauth5-dev
 
 
 ### Clone and update sub modules
