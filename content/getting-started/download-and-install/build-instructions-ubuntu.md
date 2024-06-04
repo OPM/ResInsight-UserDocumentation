@@ -24,16 +24,14 @@ Update apt installer
 
 Install GCC and related tools
 
-    sudo apt install build-essential
-    sudo apt install curl zip unzip tar flex bison
+    sudo apt install build-essential curl zip unzip tar flex bison
 
 As gcc 10 is required, it can be useful to set the default compiler.
 [Set default compiler](https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa)
 
-Install Qt
+Dependencies for RHEL8
 
-    sudo apt install -y qtbase5-dev libqt5svg5-dev qtbase5-private-dev libqt5networkauth5-dev
-
+    yum install curl zip unzip tar flex bison perl-IPC-Cmd gcc-toolset-12 freeglut
 
 ### Clone and update sub modules
 
@@ -45,7 +43,6 @@ Install Qt
 vcpkg is located in the folder ThirdParty/vcpkg
 
     ThirdParty/vcpkg/bootstrap-vcpkg.sh
-    ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 arrow
 
 ### (Windows) Build and install required dependencies using vcpkg 
 Open a command prompt using "Run as Administrator" for Visual Studio x64.
@@ -53,16 +50,24 @@ Open a command prompt using "Run as Administrator" for Visual Studio x64.
 [Detailed Developer notes](https://ceetronsolutions.github.io/resinsight-system-doc/editor/vcpkg)
 
     ThirdParty/vcpkg/bootstrap-vcpkg.bat
-    ThirdParty/vcpkg/vcpkg install grpc boost-filesystem boost-spirit eigen3 arrow --triplet x64-windows
-
-
 
 ### Python dependencies
 Install Python version 3.8 or newer, and use dev-requirements.txt
 
     python3 -m pip install -r GrpcInterface/Python/dev-requirements.txt
 
-### Installation of custom Qt
+### Qt
+
+System packages Ubuntu
+
+    sudo apt install -y qtbase5-dev libqt5svg5-dev qtbase5-private-dev libqt5networkauth5-dev
+
+System packages RHEL8
+
+    sudo yum install -y qt5-devel qt5-qtnetworkauth-devel qt5-qtcharts-devel qt5-qtbase-private-devel
+    gcc-toolset-12-libatomic-devel
+
+Installation of custom Qt
 
 Go to a folder to install custom Qt
 In this folder, execute
@@ -77,8 +82,6 @@ In this folder, execute
     cmake \
     -DCMAKE_PREFIX_PATH=/your_qt_path/5.15.2/gcc_64/lib/cmake \
     -DRESINSIGHT_ENABLE_GRPC=true \
-    -DVCPKG_TARGET_TRIPLET=x64-linux \
-    -DCMAKE_TOOLCHAIN_FILE=../ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \
     -DRESINSIGHT_GRPC_PYTHON_EXECUTABLE=python \
     ..
     
