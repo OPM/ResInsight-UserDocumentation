@@ -7,6 +7,7 @@ weight = 30
 
 ## Dependencies and Prerequisites
 
+This page is mainly build instructions for Ubuntu, but some comments are also added for RHEL8 and Windows. 
 
 
 ### Configuration and build
@@ -31,7 +32,7 @@ As gcc 10 is required, it can be useful to set the default compiler.
 
 Dependencies for RHEL8
 
-    yum install curl zip unzip tar flex bison perl-IPC-Cmd gcc-toolset-12 freeglut
+    yum install curl zip unzip tar flex bison perl-IPC-Cmd gcc-toolset-10 freeglut
 
 ### Clone and update sub modules
 
@@ -40,7 +41,7 @@ Dependencies for RHEL8
     git submodule update --init
 
 ### Build and install required dependencies using vcpkg
-vcpkg is located in the folder ThirdParty/vcpkg
+vcpkg is located in the folder ThirdParty/vcpkg. The packages to be installed is specified in vcpkg.json. The actual install of the selected packages are done in the CMake configure step.
 
     ThirdParty/vcpkg/bootstrap-vcpkg.sh
 
@@ -64,8 +65,7 @@ System packages Ubuntu
 
 System packages RHEL8
 
-    sudo yum install -y qt5-devel qt5-qtnetworkauth-devel qt5-qtcharts-devel qt5-qtbase-private-devel
-    gcc-toolset-12-libatomic-devel
+    sudo yum install -y qt5-devel qt5-qtnetworkauth-devel qt5-qtcharts-devel qt5-qtbase-private-devel gcc-toolset-10 gcc-toolset-10-libatomic-devel
 
 Installation of custom Qt
 
@@ -86,14 +86,3 @@ In this folder, execute
     ..
     
     make -j8
-
-
-### Notes for CentOS
-
-The dependency on `atomic` can be installed using the following code, adjust the devtoolset version to match your installation:
-    
-    sudo yum install devtoolset-11-libatomic-devel
-
-
-
-[Link to workflow for CentOS 7](https://github.com/OPM/ResInsight/blob/dev/.github/workflows/centos7.yml)
