@@ -6,65 +6,90 @@ weight = 105
 
 ![]({{< relref "" >}}images/plot-window/VFP_Plot.png)
 
-A Vertical Flow Performance Plot (VFP Plot) shows the relationship between bottom hole well conditions and wellhead pressure describing a well's ability to lift fluids to the surface. ResInsight can display both production and injection VFP plots.
+A Vertical Flow Performance Plot (VFP Plot) shows the relationship between bottom hole well conditions and wellhead pressure describing a well's ability to lift fluids to the surface. ResInsight can display both production and injection VFP plots:
 
-## Creating VFP Plots
-VFP Plots are created by right-clicking the **VFP Plots** item in **Plot Project Tree**.
-
-![]({{< relref "" >}}images/plot-window/VFP_PlotNew.png)
-
-## Production VFP Plot
-
-The production VFP Plot shows  the outflow or downstream pressure based on the inlet or upstream pressure and the phases flowing through the system. For a well this means the table relates the flowing bottom-hole pressure
+- **Production VFP Plots** show the outflow or downstream pressure based on the inlet or upstream pressure and the phases flowing. For a well, this means the table relates the flowing bottom-hole pressure
 (*BHP*) to the well's tubing head pressure (*THP*) based on the oil, gas and water rates (and any artificial
 lift quantities like gas lift gas), or phases ratios, flowing up the wellbore. The data is read from files containing the *VFPPROD* Eclipse keyword.
 
-The following is an example of a production VFP Plot and corresponding Property Editor.
+- **Injection VFP Plots** show the outflow or downstream pressure based on the inlet or upstream pressure and the phases being injected into the system. For a well, this means the table relates the flowing bottom-hole pressure (*BHP*) to the well's tubing head pressure (*THP*) based on the oil, gas or water injection rates. The data can be read from files containing the *VFPINJ* Eclipse keyword.
 
-![]({{< relref "" >}}images/plot-window/VFP_Production.png)
 
-The available settings of the production Property Editor are:
+## Importing VFP data
 
-- **File Path**: The VFP data file(s) to plot. Multi-selection of files is possible.
+VFP Plot data can be imported by right-clicking the **VFP Data** item in **Data Sources** to select VFP data from either text files (.ecl or .vfp) or from simulator files (.data). Multi-selection of files is possible.
 
-- **Table Number**: The table number, i.e. VFPTAB keyword in Eclipse data.
+![]({{< relref "" >}}images/plot-window/VFP_DataSource_Import.png)
 
-- **Reference Depth**: The reference depth used to generate the table, i.e. VFPREF keyword in Eclipse data.
+Alternatively, VFP Plot data can be imported by right-clicking the **VFP Plots** item in **Plot Project Tree**.
 
-- **Interpolated Variable**: Y-axis variable. 
+![]({{< relref "" >}}images/plot-window/VFP_PlotTree_Import.png)
 
-- **Flowing Phase**: The flowing phase in the system, i.e. FLO keyword in Eclipse data.
+## Creating VFP Plots
 
-- **Flowing Water Fraction**: Corresponds to the WFR keyword in Eclipse data.
+Having imported VFP data, **Data Sources** lists all available VFP table numbers (c.f. VFPTAB keyword in Eclipse). A VFP plot can be created by right-clicking select VFP table entries.
 
-- **Flowing Gas Fraction**: Corresponds to the GFR keyword in Eclipse data.
+![]({{< relref "" >}}images/plot-window/VFP_DataSource_Create.png)
 
-- **Primary Variable**: Variable on X-axis.
+Plot data can be exported by right-clicking a VFP plot and selecting *Show Plot Data*.
 
-- **Family Variable**: Variable for grouping of properties.
 
-- **Fixed Variables**: Used to choose which table to display.
+## List of VFP Plots and settings
+The **VFP Plots** item in **Plot Project Tree** lists existing VFP plots. 
 
-Plot data can be exported by right-clicking the actual plot and selecting *Show Plot Data*.
+![]({{< relref "" >}}images/plot-window/VFP_PlotTree_Listing.png)
 
-## Injection VFP Plot
+Available controls for each VFP plot are:
 
-The Injection VFP Plot shows the outflow or downstream pressure based on the inlet or upstream pressure and the phases being injected into the system. For a well this means the table relates the flowing bottom-hole pressure (*BHP*) to the well's tubing head pressure (*THP*) based on the oil, gas or water injection rates. The data can be read from files containing the *VFPINJ* Eclipse keyword.
+- **X-Axis** and **Y-Axis**: controls title, layout, fonts, and values of X- and Y-axes, respectively. 
 
-The following is an example of a production VFP Plot and corresponding Property Editor.
+- **Curve Colors**: When curves are plotted, the curve color is taken from the depicted list of colors. The curve colors can be changed by the user.
 
-![]({{< relref "" >}}images/plot-window/VFP_Injection.png)
+Most plot mouse interactions are available to VFP plots, c.f. [*Summary Plots*]({{< relref "summaryplots" >}}#plot-mouse-interaction).
+Notably, interactive value tracking and zoom is available and double-clicking a VFP plot resets zoom.
 
-The available settings of the injection VFP Property Editor are:
+## Property Editor
 
-- **File Path**: The VFP data file(s) to plot. Multi-selection of files is possible.
+#### Production VFP Plot Property Editor
 
-- **Table Number**: The table number, i.e. VFPTAB keyword in Eclipse data.
+The Production VFP Plot Property Editor allows the following essential settings:
 
-- **Reference Depth**: The reference depth used to generate the table, i.e. VFPREF keyword in Eclipse data.
+- **Configuration**
 
-- **Interpolated Variable**: Y-axis variable. 
+  -- *Curve Matching Type*: Defines curve matching, e.g. in case *Table A*: THP 200, 250, 300, 400 and *Table B*: THP 210, 300, 450.
 
-- **Flowing Phase**: The flowing phase in the system, i.e. FLO keyword in Eclipse data.
+  -- *Curve Value Options*: Defines if the options in the currently selected *Family variable* is defined by the Main VFP table, or a union of family values from all selected tables.
 
-Plot data can be exported by right-clicking the actual plot and selecting *Show Plot Data*.
+  -- *Interpolated Variable*: Y-axis variable. 
+  
+  -- *Primary Variable*: X-axis variable.
+  
+  -- *Family Variable*: Variable for grouping of properties. Available values for *Family Variable* may differ if multiple tables are selected.
+
+- **Table Details**
+
+  -- *Table Number*: The table number, c.f. VFPTAB keyword of Eclipse.
+
+  -- *Reference Depth*: The reference depth used to generate the table, i.e. VFPREF keyword of Eclipse.
+
+  -- *Flowing Phase*: The flowing phase in the system, i.e. FLO keyword of Eclipse.
+
+  -- *Flowing Water Fraction*: Corresponds to the WFR keyword of Eclipse.
+
+  -- *Flowing Gas Fraction*: Corresponds to the GFR keyword of Eclipse.
+
+- **Comparison Tables**: Enables plots for comparison with other VFP production table numbers.
+
+- **Selection Details**: Check-boxes for selection of numeric values per variable.
+
+![]({{< relref "" >}}images/plot-window/VFP_PROD_PropEd.png)
+
+## Injection VFP Plot Property Editor
+
+Referring to the detailing above, the injection VFP Plot Property Editor allows the following groups of settings: 
+
+- **Configuration**
+
+- **Table Details**
+
+- **Comparison Tables**
