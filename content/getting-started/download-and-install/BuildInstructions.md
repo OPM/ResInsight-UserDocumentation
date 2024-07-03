@@ -119,9 +119,9 @@ The following command line can be used as a starting point to install required l
 #### ODB support
 
 ResInsight can be built with support for ABAQUS ODB files. This requires an installation of the ABAQUS ODB API 
-from Simulia on the build computer. The path to the ABAQUS ODB API folder containing header files and library 
-files must be specified. Leaving this option blank gives a build without ODB support. 
-ResInsight has been built and tested with ABAQUS ODB API version 6.14-3 on Windows 7/8/10 and RedHat Linux 6.
+from Simulia on the build computer. The path to an ABAQUS ODB API folder containing header files in an *include* sub-folder and the library 
+files in a *lib* sub-folder must be specified. Leaving this option blank gives a build without ODB support. 
+ResInsight has been built and tested with ABAQUS ODB versions 2020 and 2024 on Windows 10/11, Redhat Linux 7/8 and Ubuntu 22/24.
 
 #### HDF5
 
