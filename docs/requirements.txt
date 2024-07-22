@@ -2,7 +2,7 @@ grpcio
 grpcio-tools
 protobuf
 typing-extensions
-sphinx == 6.2.1
+sphinx
 docutils
 m2r2
 sphinx-automodapi
