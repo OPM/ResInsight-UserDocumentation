@@ -84,6 +84,7 @@ In this folder, execute
     -DRESINSIGHT_ENABLE_GRPC=true \
     -DRESINSIGHT_GRPC_PYTHON_EXECUTABLE=python \
     -DCMAKE_TOOLCHAIN_FILE=../ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \
+    -DVCPKG_TARGET_TRIPLET=x64-linux-release \
     ..
     
     make -j8
