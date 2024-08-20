@@ -83,6 +83,7 @@ In this folder, execute
     -DCMAKE_PREFIX_PATH=/your_qt_path/5.15.2/gcc_64/lib/cmake \
     -DRESINSIGHT_ENABLE_GRPC=true \
     -DRESINSIGHT_GRPC_PYTHON_EXECUTABLE=python \
+    -DCMAKE_TOOLCHAIN_FILE=../ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \
     ..
     
     make -j8
