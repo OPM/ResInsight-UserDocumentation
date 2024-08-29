@@ -35,10 +35,6 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 	- **Show Info Box in New Projects** -- Controls default visibility Info Box in upper right corner
 	- **Show Grid Box in New Projects** -- Controls default visibility of grid box
 
-- **Other**: 
-	- **SSIHUB Address** -- Optional URL to Equinor internal web service used to import well paths
-	- **Enable Undo/Redo for Property Editor Changes** -- enable undo/redo functionality
-
 ## Grid
 
 ![]({{< relref "" >}}images/misc/PreferencesEclipseGrid.png)
