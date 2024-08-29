@@ -5,7 +5,7 @@ weight = 20
 +++
 
 ## Summary Data
-Summary data is usually available as **SMSPEC** and **UNSRMY** files. Data in **UNSMRY** files are store in a binary format, and all data for one time step is stored one section. When extracting data for all time steps for a single summary vector, data must be read from multiple sections. This can give bad performance for large datasets.
+Summary data is usually available as **SMSPEC** and **UNSRMY** files. **UNSMRY** files are stored in a binary format, and all data for one time step is stored one section. When extracting data for all time steps for a single summary vector, data must be read from multiple sections. This can give bad performance for large datasets.
 
 ### ESMRY File Format
 

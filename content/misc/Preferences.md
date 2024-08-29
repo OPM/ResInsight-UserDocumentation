@@ -46,15 +46,22 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 - Behaviour When Loading Data
   - **Compute DEPTH Related Properties** -- If not present, compute DEPTH, DX, DY, DZ, TOP, BOTTOM when loading new cases.
   - **Load and Show SOIL** -- Control if SOIL is loaded and applied to grid per default.
+
 - Fault Import
   - **Import Faults** -- Controls import of Faults.
   - **Include Inactive Cells in Fault Geometry** -- Controls display of inactive cells in Fault Geometry.
   - **Include File Absolute Path Prefix** -- Windows platform: Additional prefix used when searching for files on the file system. The prefix is used when searching for keywords like FAULTS and EQUIL.
+
 - Well Import
   - **Skip Import of Simulation Well Data** -- Disable import of simulation well data for reducing case import time.
   - **Import Advanced MSW Data**
 
-- **Use Result Index File** -- If enabled ResInsight will try to save a result index file when opening a new case (stored in the same directory as the _`*.EGRID`_ file with filename _`<casename>.RESINSIGHT_IDX`_) If existing, ResInsight will use the index file when loading the case resulting in a significant speedup.
+- EGRID Settings
+  - **Use Result Index File** -- If enabled ResInsight will try to save a result index file when opening a new case (stored in the same directory as the _`*.EGRID`_ file with filename _`<casename>.RESINSIGHT_IDX`_) If existing, ResInsight will use the index file when loading the case resulting in a significant speedup.
+
+- OPM Common Reader Settings
+  - **Only Load Active Cell Geometry** -- Active cells is often a small subset of total number of cells in a grid model. When this mode is activated, all inactive cells are skipped. Only geometry for active cells is imported, and all operations related to grid computations will perform better. 
+
 
 ## Summary
 
