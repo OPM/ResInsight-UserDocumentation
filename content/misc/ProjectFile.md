@@ -28,7 +28,3 @@ Editing the **Project File** is one effective way to replace source cases and ot
 </ReferencedExternalFiles>
 ```
 
-
-### The Cache Directory
-
-Statistics calculations, octave generated property sets, and SSI-hub imported well paths are saved to a folder named _`<ProjectFileName>_cache`_ in the same directory as the project file. If you need to move your project, make sure you move this folder along. If you do not, the calculations or well path import needs to be done again.
