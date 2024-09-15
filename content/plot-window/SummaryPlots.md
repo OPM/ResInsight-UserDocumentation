@@ -170,7 +170,11 @@ The Property Editor organizes the available options into the following groups:
 - **Stacking** - Options to control stacking of curves optionally with phase colors.
 - **Appearance** -- Options to control curve color, symbols, line style etc.
 - **Curve Name** -- Controls how the curve is labeled in the legend.
-- **Advanced** -- Specification of additional options.
+
+
+#### Curve Type
+
+The **Curve Type** can automatically be derived based on the name of the summary vector name, either **Accumulated**(ends with "T") or **Rate**. The curve type can be manually specified if **Custom** curve type is selected. This option can be especially useful for imported curves.
 
 Other actions are available via right-click menu for selected curve. For instance, the Y-Axis for one or more curves can be switched for using the right-click command <b>Switch Plot Axis</b>.  
 

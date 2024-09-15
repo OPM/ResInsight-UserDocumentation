@@ -22,6 +22,16 @@ Which summaries that has been detected in a Observed Data file can be read in an
 
 ![]({{< relref "" >}}images/import/observedDataProperty.png)
 
+## Viewing Observed Time History Data
+
+![]({{< relref "" >}}images/import/observedDataCurveCreator.png)
+
+To plot **Observed Time History Data**, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the **Plot Editor** is covered in [Summary Plot Editor]({{< relref "summaryploteditor" >}}). Observed time history data points are plotted without lines by default.
+
+When inspecting resampled data, it can be useful to manually specify if this curve is **Accumulated** or **Rate**.
+ [Summary Curve Properties]({{< relref "summaryplots" >}}/#editing-a-summary-curve).
+
+
 ## File Formats
 
 ### Import CSV/txt Observed Time History Data
@@ -222,8 +232,3 @@ UNITS YEAR
 2000.4966
 ```
 
-## Viewing Observed Time History Data
-
-![]({{< relref "" >}}images/import/observedDataCurveCreator.png)
-
-To plot Observed Time History Data, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the Plot Editor is covered in [Summary Plot Editor]({{< relref "summaryploteditor" >}}). Observed time history data points are plotted without lines by default.
