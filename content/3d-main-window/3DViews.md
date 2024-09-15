@@ -83,6 +83,14 @@ Selected overlay items in the 3D view can activate a corresponding item in the *
 
 ## Eclipse features
 
+### Change Data Source for View
+
+![]({{< relref "" >}}images/3d-main-window/TopLevelView.png)
+
+A view is usually located in the **Views** folder below the Eclipse case. If you create a view in the top level **Views** folder, it is possible to switch the case the view is connected to. Views created in a **Grid Case Ensemble** has the same property, making it easy to quickly navigate between the different cases in an ensemble.
+
+If you need to keep individual view settings for each case, the rotation and zoom can be stored using the option **Store View Settings for Case**.
+
 ### Cell Edge Results 
 
 ![]({{< relref "" >}}images/3d-main-window/CellEdgeExample.png)

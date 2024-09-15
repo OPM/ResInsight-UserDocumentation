@@ -20,7 +20,10 @@ ResInsight offers several ways to import Eclipse (grid) files. Use one of the fo
 - **Import Eclipse Cases Recursively**: Brings up the recursive file selection dialog. This dialog is described in detail on the [Summary Plots page]({{< relref "eclipsesummarydata" >}}#ensemble-file-import).
 - **Import Eclipse Case (Time Step Filtered)**: See [description](#time-step-filtered-eclipse-result)
 - **Import Input Eclipse Case**: See [description](#eclipse-ascii-input-data)
-- **Create Grid Case Group** : Import a number of Eclipse files and places the cases in a [grid case group]({{< relref "casegroupsandstatistics" >}}#creating-grid-case-groups) See [File Selection Dialog]({{< relref "eclipsesummarydata" >}}#ensemble-file-import) for how to import multiple files.
+- **Create Grid Case Group** : Import a set of Eclipse files and places the cases in a [grid case group]({{< relref "casegroupsandstatistics" >}}#creating-grid-case-groups) See [File Selection Dialog]({{< relref "eclipsesummarydata" >}}#ensemble-file-import) for how to import multiple files. All cases must have identical IJK to be part of a grid case group.
+- **Create Grid Case Ensemble** : Import a set of Eclipse files and places the cases in a grid case ensemble. The grid models can have varying IJK resolution. If you have identical IJK for all cases, consider uting a **Grid Case Group** for reduced memory usage and improved performance.
+
+Changing the grid case a view is connected to is described in [3D Views]({{< relref "3d-main-window/3dviews" >}}#change-data-source-for-view)
 
 The **Reload Case** command can be used to reload a previously imported case, to make sure it is up to date. This is useful if the grid or result files changes while a ResInsight session is active.
 
