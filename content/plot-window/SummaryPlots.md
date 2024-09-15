@@ -139,14 +139,15 @@ Right-click a composite plot in **Plots** and select **Split Into Single Curve P
 Right-clicking a plot in **Plots** window and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
 The window displays plot data by day, week, month, quarter, half year and year.
 
-**Resampling Method Description**
+**Resampling Method**
 1. For aggregated values (**\*OPT** and similar), the resampled value is calculated based on linear resampling.
 2. For rate values (**\*OPR**), the total volume in the requested resample interval is computed. The rate value is then computed by
 
       $Rate\_{period} = \frac{TotalVolumePeriod}{period}$
+      
+      No extrapolation of rate values is performed. This means that the rate for the last time period can appear lower than the previous time period if the last reported rate is early in the last resampling period.
 
-The text content of this window is easy to copy and paste into Excel or other tools for further processing.
-It is also possible to save the text data to a file by the right-click command **Export to File**. 
+The text content of this window is easy to copy and paste into Excel or other tools for further processing. It is also possible to save the text data to a file by the right-click command **Export to File**. 
 
 
 ## Editing Summary Plots
