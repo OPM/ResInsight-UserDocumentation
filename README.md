@@ -21,6 +21,7 @@ Download Hugo and install locally from
 https://github.com/gohugoio/hugo/releases
 
 It is also possible to install Hugo using package managers
+
     sudo apt install hugo
 
 **Last known working version is **
