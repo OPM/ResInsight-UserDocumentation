@@ -4,23 +4,34 @@ published = true
 weight = 10
 +++
  
+![]({{< relref "" >}}images/cloud-services/sumo-summary-plot.png)
 
-## SUMO
+Configuration of cloud services is described in [Cloud Services - Authorization]({{< relref "cloudservicesauthorization" >}}).
 
-- Select Cloud Data
-- Select Field and Case
-- Select Ensembles and push **Add Ensembles**
-- Use the summary ensemble similar to ensembles from file
 
-## OSDU
-From the right-click menu of Wells, select Import Well Paths from OSDU
-A wizard will be displayed where field and well can be selected for import.
+## Summary Ensembles from SUMO
 
-## Configuration
-The configuration settings can be seen in **Preferences->Import/Export**. The settings can be loaded from a **JSON** file in the home folder or on a shared folder on the file system. 
+![]({{< relref "" >}}images/cloud-services/sumo-data-sources.png)
 
-    home_folder/.resinsight/osdu_config.json
-    home_folder/.resinsight/sumo_config.json
+Summary ensemble data can be accessed from SUMO. ResInsight will store the required information to the data source, and fetch data from the cloud during project import.
 
-    location_of_executable/../share/cloud_services/osdu_config.json
-    location_of_executable/../share/cloud_services/osdu_config.json
+- Select **Cloud Data**, this will show available fields with cases in the **Data Source Property Editor**
+- Select **Field** and **Case**, and a list of available ensembles are displayed
+- Select **Ensembles** and push **Add Ensembles**. This operation creates a cloud ensemble data source and a summary plot connected to this data source.
+- Use the button **Add Data Sources** if you want to avoid creation of summary plots
+
+### Example of summary ensembles
+![]({{< relref "" >}}images/cloud-services/sumo-ensembles.png)
+
+### Example of summary plot with SUMO data
+![]({{< relref "" >}}images/cloud-services/sumo-summary-plot.png)
+
+## Well Paths from OSDU
+![]({{< relref "" >}}images/cloud-services/osdu-well-path-import.png)
+
+From the right-click menu of **Wells**, select **Import Well Paths from OSDU**. A wizard will be displayed where field and well can be selected for import.
+
+The imported well path will store required information to the location in OSDU, and the well path trajectory will be fethed during project import.
+
+### Example of well paths from OSDU
+![]({{< relref "" >}}images/cloud-services/osdu-well-path-3dview.png)
