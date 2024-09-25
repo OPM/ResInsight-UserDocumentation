@@ -81,5 +81,6 @@ If **SWCR** is missing, **SWCR** is et to 0.0.
 
 $ MOBPORV = MULTPV * PORV * (1.0 - SWCR) $
 
+### Cell Volume
 
-
+The static property **riCellVolume** contains the geometrical volume of a cell.
