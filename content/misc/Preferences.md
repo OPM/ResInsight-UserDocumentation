@@ -55,9 +55,6 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 - EGRID Settings
   - **Use Result Index File** -- If enabled ResInsight will try to save a result index file when opening a new case (stored in the same directory as the _`*.EGRID`_ file with filename _`<casename>.RESINSIGHT_IDX`_) If existing, ResInsight will use the index file when loading the case resulting in a significant speedup.
 
-- OPM Common Reader Settings
-  - **Only Load Active Cell Geometry** -- Active cells is often a small subset of total number of cells in a grid model. When this mode is activated, all inactive cells are skipped. Only geometry for active cells is imported, and all operations related to grid computations will perform better. 
-
 
 ## Summary
 

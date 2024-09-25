@@ -18,6 +18,4 @@ For best performance, transform these data files to **ESMRY File Format**
 ## Grid Data
 ResInsight has two grid import readers, **ResData** and **opm-common**. For best performance, use **opm-common**. 
 
-Active cells is often a small subset of total number of cells in a grid model. When this mode is activated, all inactive cells are skipped. Only geometry for active cells is imported, and all operations related to grid computations will perform better. 
-
 [Preferences]({{< relref "preferences" >}})
