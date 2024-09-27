@@ -1,7 +1,7 @@
 +++
-title = "Build Instructions Ubuntu Qt6 - Basic"
+title = "Build Instructions Ubuntu Qt6"
 published = true
-hidden = true
+hidden = false
 weight = 30
 +++
 
