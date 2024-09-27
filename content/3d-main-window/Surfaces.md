@@ -74,6 +74,10 @@ A grid case surface has the same properties as a surface imported from file, but
 
 ![]({{< relref "" >}}images/3d-main-window/surfaces_gridcaseproperties.png)
 
+## Depth Surfaces
+
+A flat surface at a specified depth can be created from the right-click menu and select **Create Depth Surface**. A transparent surface is created, and color and transparency can be adjusted.
+
 
 ## Exporting Surfaces
 

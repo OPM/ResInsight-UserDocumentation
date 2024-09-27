@@ -9,7 +9,7 @@ hidden = true
 
 ![]({{< relref "" >}}images/cloud-services/osdu-well-path-3dview.png)
 
-ResInsight has now support for import of data from two cloud services, ensemble summary data from **SUMO** and well path geometry from **OSDU**. Configuration of these services is specified in **JSON** files.
+ResInsight has now support for import of data from two cloud services, ensemble summary data from **SUMO** and well path geometry from **OSDU**.
 
 [Cloud Services]({{< relref "cloudservices" >}})
 
@@ -22,6 +22,13 @@ An ensemble of grid cases can be imported into a grid case ensemble. Creating a 
 [Change Data Source for View]({{< relref "3dviews" >}}/#change-data-source-for-view)
 
 If you have identical IJK for all grid cases, consider using [Grid Case Group]({{< relref "casegroupsandstatistics" >}})
+
+## Improved VFP Plot
+![]({{< relref "" >}}images/plot-window/VFP_Plot.png)
+
+The import of VFP data is changed, and the management of VFP Plots is now improved.
+
+[VFP Plots]({{< relref "vfpplot" >}})
 
 
 ## PFLOTRAN Faults
@@ -38,6 +45,13 @@ Import of faults defined in a PFLOTRAN simulation is now supported.
 Several improvements has been done related to the opm-common grid importer, especially simulation well data and LGR support. We recommend using opm-common for best performance.
 
 [Performance Hints]({{< relref "performancehints" >}})
+
+## Depth Surface
+![]({{< relref "" >}}images/3d-main-window/SurfacesOverview.png)
+
+A flat surface at a specified depth can be created, useful to indicate oil-water contact depth.
+
+[Depth Surface]({{< relref "surfaces" >}}/#depth-surfaces)
 
 ## Other improvements
 - Make sure summary ensemble statistics is calculated correctly if the first realization is partial
