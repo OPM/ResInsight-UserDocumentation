@@ -33,6 +33,9 @@ You <b>have</b> to point to the <b>cli</b> binary in the windows octave installa
 
 ## FAQ
 
+### Windows Firewall notice
+ResInsight can communicate with Python and other cloud services. A Windows Firewall message might appear when you launch the application. Choose **Allow** to ensure correct behavior for these features.
+
 ### Smartscreen warnings
 When launching ResInsight at the first time, a Smartscreen warning might be displayed. This is a security feature by Microsoft, and will warn the user when an unknown program is launched. This warning is displayed once for each installation.
 
