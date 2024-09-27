@@ -44,7 +44,7 @@ The NNC's are sorted onto the Fault's and their visibility is controlled along w
 When the NNCs are imported from file, ResInsight will identify NNCs not defined in the input file (Faces with zero transmissibility is not exported from the simulator). See [Derived Results]({{< relref "derivedresults" >}}) for details on other NNC related results.
 
 ### Information from `PFLOTRAN` simulations
-If not `*.DATA file` is found, the folder is searched for `*.IN` file. If found, this file is parsed based on the file structure of a **PFLOTRAN** simulation. Identified faults will be imported simular to the import from `*.DATA` files.
+If the `*.DATA file` is not found, the folder is searched for `*.IN` file. This file is parsed based on the file structure of a **PFLOTRAN** simulation. Identified faults will be imported simular to the import from `*.DATA` files.
 
 https://www.pflotran.org/
 
