@@ -154,15 +154,6 @@ class Reservoir(Case):
         self._call_pdm_method_void("import_properties", file_names=file_names)
 
 
-    def views(self) -> List[EclipseView]:
-        """All Eclipse Views in the case
-
-        Returns:
-             List[EclipseView]
-        """
-        return self.children("Views", EclipseView)
-
-
 class EclipseCase(Reservoir):
     """
     The Regular Eclipse Results Case
@@ -836,6 +827,18 @@ class NonNetLayers(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+class OsduWellPath(WellPath):
+    """
+    Well Path Loaded From Osdu
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if OsduWellPath.__custom_init__ is not None:
+            OsduWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class Perforation(CheckableNamedObject):
     """
     Attributes:
@@ -1013,10 +1016,13 @@ class EclipseView(View):
     """
     The Eclipse 3d Reservoir View
 
+    Attributes:
+        eclipse_case (Optional[Reservoir]): Eclipse Case
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.eclipse_case: Optional[Reservoir] = None
         View.__init__(self, pb2_object, channel)
         if EclipseView.__custom_init__ is not None:
             EclipseView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -1132,6 +1138,29 @@ class EclipseContourMap(EclipseView):
         EclipseView.__init__(self, pb2_object, channel)
         if EclipseContourMap.__custom_init__ is not None:
             EclipseContourMap.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimDepthSurface(SurfaceInterface):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        SurfaceInterface.__init__(self, pb2_object, channel)
+        if RimDepthSurface.__custom_init__ is not None:
+            RimDepthSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class EclipseCaseEnsemble(NamedObject):
+    """
+    Grid Ensemble
+
+    Attributes:
+        id (int): Id
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.id: int = -1
+        NamedObject.__init__(self, pb2_object, channel)
+        if EclipseCaseEnsemble.__custom_init__ is not None:
+            EclipseCaseEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class RimEmCase(Reservoir):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -1281,6 +1310,14 @@ class RimStatisticalCalculation(Reservoir):
         """
         self._call_pdm_method_void("set_source_properties", property_type=property_type, property_names=property_names)
 
+
+class RimSummaryCaseSumo(SummaryCase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        SummaryCase.__init__(self, pb2_object, channel)
+        if RimSummaryCaseSumo.__custom_init__ is not None:
+            RimSummaryCaseSumo.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class RimTextAnnotation(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -2275,6 +2312,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['DataContainerTime'] = DataContainerTime
     classes['DepthTrackPlot'] = DepthTrackPlot
     classes['EclipseCase'] = EclipseCase
+    classes['EclipseCaseEnsemble'] = EclipseCaseEnsemble
     classes['EclipseContourMap'] = EclipseContourMap
     classes['EclipseResult'] = EclipseResult
     classes['EclipseView'] = EclipseView
@@ -2305,6 +2343,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
     classes['NamedObject'] = NamedObject
     classes['NonNetLayers'] = NonNetLayers
+    classes['OsduWellPath'] = OsduWellPath
     classes['PdmObjectBase'] = PdmObjectBase
     classes['Perforation'] = Perforation
     classes['PerforationCollection'] = PerforationCollection
@@ -2316,9 +2355,11 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['Project'] = Project
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
+    classes['RimDepthSurface'] = RimDepthSurface
     classes['RimEmCase'] = RimEmCase
     classes['RimRoffCase'] = RimRoffCase
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
+    classes['RimSummaryCaseSumo'] = RimSummaryCaseSumo
     classes['RimTextAnnotation'] = RimTextAnnotation
     classes['SimulationWell'] = SimulationWell
     classes['StimPlanFractureTemplate'] = StimPlanFractureTemplate

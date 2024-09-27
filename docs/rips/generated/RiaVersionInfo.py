@@ -17,7 +17,7 @@
 #  Just sets version constants
 
 RESINSIGHT_MAJOR_VERSION : str = "2024"
-RESINSIGHT_MINOR_VERSION : str = "03"
+RESINSIGHT_MINOR_VERSION : str = "09"
 RESINSIGHT_PATCH_VERSION : str = "0"
 
 PYTHON_GRPC_PROTOC_VERSION : str = "libprotoc 23.4"
