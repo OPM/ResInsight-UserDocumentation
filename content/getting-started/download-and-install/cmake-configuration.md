@@ -1,35 +1,13 @@
 +++
-title = "Building ResInsight from Source"
+title = "CMake Configuration"
 published = true
 hidden = false
-weight = 30
+weight = 35
+aliases = [
+    "/getting-started/buildinstructions/"
+]
 +++
 
-## Source code
-The source code is hosted at [GitHub](https://github.com/opm/resinsight)
-
-In a git enabled shell do: `git clone https://github.com/OPM/ResInsight.git`
-
-## Dependencies and Prerequisites
-
-### Windows Compiler
-
-Visual Studio 2019 and later is supported.
-
-### GCC Compiler
-
-On RedHat Linux 7 or CentOS 7 you need to install devtoolset-10, and enable it with 
-    
-    source /opt/rh/devtoolset-10/enable
-
-### Qt 5
-Qt 5.12 or later is supported, Qt 5.15 is recommended.
-
-[Qt download](http://download.qt.io/archive/qt/)  
-
-On some configurations you will be asked to specify the location of Qt. Preferred method is to add Qt path to CMake variable **CMAKE_PREFIX_PATH**
-
-Example for Windows : `CMAKE_PREFIX_PATH=F:/Qt/5.15.2/msvc2019_64`
 
 ### CMake
 [CMake](https://cmake.org/download/) version 3.15 or later is supported.
@@ -37,24 +15,6 @@ Example for Windows : `CMAKE_PREFIX_PATH=F:/Qt/5.15.2/msvc2019_64`
 ## Build Overview
 The ResInsight build may be configured in different ways, with optional support for Octave plugins, 
 ABAQUS ODB API, HDF5, Pyton, and OpenMP. This is configured using options in CMake.
-
-If you check the button 'Grouped' in the CMake GUI, the CMake variables are grouped by prefix. 
-This makes it easier to see all of the options for ResInsight.
-
-- Open the CMake GUI
-- Set the path to the source code
-- Set the path to the build directory
-- Click **Configure** and select your preferred compiler
-- Set the build options and click "Configure" again (see ResInsight specific options below)
-- Click **Generate** to generate the makefiles or solution file and project files in the build directory
-- Run the compiler using the generated makefiles or solution file/project files to build ResInsight
-
-### Windows
-ResInsight has been verified to build and run on Windows 10/11 using Microsoft Visual Studio 2019/2022. Typical usage on Windows is to follow the build instructions above, and then open the generated solution file in Visual Studio to build the application.
-
-### Linux
-
-For a reference build instruction for Ubuntu, see [Reference installation description for Ubuntu]({{< ref "build-instructions-ubuntu.md" >}})
 
 ### CMake Options for ResInsight
 

@@ -7,17 +7,20 @@ weight = 30
 
 ## Dependencies and Prerequisites
 
-This page is mainly build instructions for Ubuntu, but some comments are also added for RHEL8 and Windows. 
+This page is mainly build instructions for Ubuntu, but some comments are also added for **RHEL8**.
+
+Basic instructions without Python binding and GRPC.
 
 
 ### Configuration and build
 
 | Tool                    | Minimum version  | 
 |-------------------------|------------------|
-| git                     | 2.7.4            | 
-| gcc                     | 10               | 
-| python 				  | 3                | 
+| gcc                     | 11               | 
+| python 				  | 3.8              | 
+| Qt 	    			  | 6.4              | 
 
+It is possible to use Qt 6.4 for building ResInsight, but some install features introduced in Qt 6.5 are not supported.
 
 Update apt installer
 
@@ -27,7 +30,6 @@ Install GCC and related tools
 
     sudo apt install build-essential curl zip unzip tar flex bison
 
-As gcc 10 is required, it can be useful to set the default compiler.
 [Set default compiler](https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa)
 
 Dependencies for RHEL8
@@ -45,46 +47,36 @@ vcpkg is located in the folder ThirdParty/vcpkg. The packages to be installed is
 
     ThirdParty/vcpkg/bootstrap-vcpkg.sh
 
-### (Windows) Build and install required dependencies using vcpkg 
-Open a command prompt using "Run as Administrator" for Visual Studio x64.
-
-[Detailed Developer notes](https://ceetronsolutions.github.io/resinsight-system-doc/editor/vcpkg)
-
-    ThirdParty/vcpkg/bootstrap-vcpkg.bat
-
-### Python dependencies
-Install Python version 3.8 or newer, and use dev-requirements.txt
-
-    python3 -m pip install -r GrpcInterface/Python/dev-requirements.txt
-
 ### Qt
 
-System packages Ubuntu
+The version of Qt  ResInsight depends on is probably not available as a package for the Linux distribution you are working with. Here is a short description on how to install a custom Qt version.
 
-    sudo apt install -y qtbase5-dev libqt5svg5-dev qtbase5-private-dev libqt5networkauth5-dev
+[aqtinstall](https://github.com/miurahr/aqtinstall) is a Python tool used to install precompiled versions of Qt. Other ways to install Qt is described [official Qt documentation](https://www.qt.io/download-qt-installer-oss)
 
-System packages RHEL8
 
-    sudo yum install -y qt5-devel qt5-qtnetworkauth-devel qt5-qtcharts-devel qt5-qtbase-private-devel gcc-toolset-10 gcc-toolset-10-libatomic-devel
+Create a root folder for Qt installations. In this folder, create a virtual environment for **aqtinstall**:
 
-Installation of custom Qt
-
-Go to a folder to install custom Qt
-In this folder, execute
-    
-    python3 -m pip install aqtinstall
-    aqt install-qt linux desktop 5.15.2 -m qtcharts qtnetworkauth
-    
+    python3 -m venv myvenv
+    source myvenv/bin/activate
+    pip3 install aqtinstall
+    aqt install-qt linux desktop 6.6.3 -m qtcharts qt5compat qtnetworkauth
+   
 
 ### Build ResInsight
-	mkdir cmakebuild
-    cd cmakebuild
-    cmake \
-    -DCMAKE_PREFIX_PATH=/your_qt_path/5.15.2/gcc_64/lib/cmake \
-    -DRESINSIGHT_ENABLE_GRPC=true \
-    -DRESINSIGHT_GRPC_PYTHON_EXECUTABLE=python \
-    -DCMAKE_TOOLCHAIN_FILE=../ThirdParty/vcpkg/scripts/buildsystems/vcpkg.cmake \
-    -DVCPKG_TARGET_TRIPLET=x64-linux-release \
-    ..
+
+Install Ninja build tool
     
-    make -j8
+    sudo apt-get install ninja-build
+
+The configuration flags for a basic build is given in `CMakePresets.json` in the root of the repository. Configuration flags specific for the system to build on can be specified in `CMakeUserPresets.json`. This file is ignored by git.
+
+- Create a copy of `CMakeUserPresets-example.json` and rename to `CMakeUserPresets.json`
+- Update the path to your local installation of Qt6 for the key `CMAKE_PREFIX_PATH` in `CMakeUserPresets.json`
+
+Set current working folder to the root folder of the ResInsight repository. Execute the following commands to build ResInsight:
+
+    cmake . --preset=linux-base
+    cd build
+    ninja
+
+[CMake Configuration]({{< relref "cmake-configuration" >}})

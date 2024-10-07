@@ -106,7 +106,7 @@ When ResInsight is compiled with ABAQUS-odb support, _`*.odb`_ files can be impo
 
 The geomechanical cases are sorted into its own folder in the project tree named **Geomechanical Models** {{< image-in-text src="images/getting-started/GeoMechCases24x24.png" >}} as opposed to the **Grid Models** folder where the Eclipse cases and **Grid Case Groups** resides.
 
-See [Build Instructions]({{< ref "buildinstructions.md" >}}) on how to compile ResInsight with odb-support.
+See [Build Instructions]({{< ref "cmake-configuration.md" >}}) on how to compile ResInsight with odb-support.
 
 #### Grid Case Groups
 

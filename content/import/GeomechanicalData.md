@@ -6,7 +6,7 @@ weight = 20
 
 ResInsight can be built with support for reading and displaying geomechanical analysis models produced by ABAQUS in the _`*.odb`_ format. This is only possible if you or your organization has a copy of the ODB-Api from Simulia, and a valid license to use it. 
 
-If you have, and would like to a use these features, please see [ Build Instructions ]({{< relref "buildinstructions.md" >}}) for a description on how to build ResInsight and how to include the support for odb-files.
+If you have, and would like to a use these features, please see [ Build Instructions ]({{< relref "cmake-configuration.md" >}}) for a description on how to build ResInsight and how to include the support for odb-files.
 
 ### Geo Mechanical Data Support
 Geo-mechanical data can be imported using the **Import -> Geo Mechanical Cases menu**. Here three options are present: **Import Geo Mechanical Model**, **Import Geo Mechanical Model (Time Step Filtered)**  (both for odb files) and **Import Element Property Table**.
