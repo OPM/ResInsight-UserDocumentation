@@ -47,9 +47,19 @@ vcpkg is located in the folder ThirdParty/vcpkg. The packages to be installed is
 
     ThirdParty/vcpkg/bootstrap-vcpkg.sh
 
-### Qt
+### Qt - package manager
 
-The version of Qt  ResInsight depends on is probably not available as a package for the Linux distribution you are working with. Here is a short description on how to install a custom Qt version.
+Qt6 can be installed using the package manager for Ubuntu
+
+    apt install qt6-base-dev qt6-base-private-dev qt6-charts-dev qt6-networkauth-dev libqt6svg6 qt6-5compat-dev
+
+    Ubuntu 22.04 : Qt 6.2.4
+    Ubuntu 24.04 : Qt 6.4.2
+
+Please note that 6.4 is fully supported for build, but some install features are not supported.
+
+### Qt - aqtinstall
+Here is a short description on how to install a custom Qt version.
 
 [aqtinstall](https://github.com/miurahr/aqtinstall) is a Python tool used to install precompiled versions of Qt. Other ways to install Qt is described [official Qt documentation](https://www.qt.io/download-qt-installer-oss)
 
