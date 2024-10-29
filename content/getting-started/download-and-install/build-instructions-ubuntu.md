@@ -51,7 +51,7 @@ vcpkg is located in the folder ThirdParty/vcpkg. The packages to be installed is
 
 Qt6 can be installed using the package manager for Ubuntu
 
-    apt install qt6-base-dev qt6-base-private-dev qt6-charts-dev qt6-networkauth-dev libqt6svg6 qt6-5compat-dev
+    apt install qt6-base-dev qt6-base-private-dev qt6-charts-dev qt6-networkauth-dev libqt6svg6
 
     Ubuntu 22.04 : Qt 6.2.4
     Ubuntu 24.04 : Qt 6.4.2
@@ -69,7 +69,7 @@ Create a root folder for Qt installations. In this folder, create a virtual envi
     python3 -m venv myvenv
     source myvenv/bin/activate
     pip3 install aqtinstall
-    aqt install-qt linux desktop 6.6.3 -m qtcharts qt5compat qtnetworkauth
+    aqt install-qt linux desktop 6.6.3 -m qtcharts qtnetworkauth
    
 
 ### Build ResInsight
