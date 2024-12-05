@@ -394,7 +394,7 @@ class FaciesInitialPressureConfig(PdmObjectBase):
     Attributes:
         facies_name (str): Facies
         facies_value (int): Value
-        fraction (float): ? Pressure Fraction
+        fraction (float): Δ Pressure Fraction
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -765,6 +765,18 @@ class WellPath(PdmObjectBase):
         """
         children = self.children("Completions", WellPathCompletions)
         return children[0] if len(children) > 0 else None
+
+
+    def msw_settings(self, ) -> Optional[MswSettings]:
+        """
+        Multi Segment Well Settings
+
+        Arguments:
+            
+        Returns:
+            RimMswCompletionParameters
+        """
+        return self._call_pdm_method_return_optional_value("MswSettings", MswSettings)
 
 
 class ModeledWellPath(WellPath):
@@ -1210,6 +1222,37 @@ class GridCaseGroup(PdmObjectBase):
         """
         return self._call_pdm_method_return_value("create_statistics_case", RimStatisticalCalculation)
 
+
+class MswSettings(PdmObjectBase):
+    """
+    Multi Segment Well Completion Settings
+
+    Attributes:
+        custom_values_for_lateral (bool): Custom Values for Lateral
+        enforce_max_segment_length (bool): Enforce Max Segment Length
+        length_and_depth (str): One of [INC, ABS]
+        liner_diameter (float): Liner Inner Diameter
+        max_segment_length (float): Max Segment Length
+        pressure_drop (str): One of [H--, HF-, HFA]
+        reference_md_type (str): One of [GridEntryPoint, UserDefined]
+        roughness_factor (float): Roughness Factor
+        user_defined_reference_md (float): User Defined Reference MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.custom_values_for_lateral: bool = False
+        self.enforce_max_segment_length: bool = False
+        self.length_and_depth: str = "ABS"
+        self.liner_diameter: float = 0.152
+        self.max_segment_length: float = 200
+        self.pressure_drop: str = "HF-"
+        self.reference_md_type: str = "GridEntryPoint"
+        self.roughness_factor: float = 1e-05
+        self.user_defined_reference_md: float = 0
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if MswSettings.__custom_init__ is not None:
+            MswSettings.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class MudWeightWindowParameters(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -2125,18 +2168,34 @@ class FileWellPath(WellPath):
 class WellPathCompletionSettings(PdmObjectBase):
     """
     Attributes:
+        allow_well_cross_flow (bool): Allow Well Cross-Flow
+        auto_well_shut_in (str): One of [SHUT, STOP]
+        drainage_radius_for_pi (str): Drainage Radius for PI
+        fluid_in_place_region (int): Fluid In-Place Region
+        gas_inflow_eq (str): One of [STD, R-G, P-P, GPP]
         group_name_for_export (str): Group Name
+        hydrostatic_density (str): One of [SEG, AVG]
         msw_liner_diameter (float): MSW Liner Diameter
         msw_roughness (float): MSW Roughness
+        reference_depth_for_export (str): Reference Depth for BHP
+        well_bore_fluid_pvt_table (int): Wellbore Fluid PVT table
         well_name_for_export (str): Well Name
         well_type_for_export (str): One of [OIL, GAS, WATER, LIQUID]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.allow_well_cross_flow: bool = True
+        self.auto_well_shut_in: str = "STOP"
+        self.drainage_radius_for_pi: str = "0.0"
+        self.fluid_in_place_region: int = 0
+        self.gas_inflow_eq: str = "STD"
         self.group_name_for_export: str = ""
+        self.hydrostatic_density: str = "SEG"
         self.msw_liner_diameter: float = 0.152
         self.msw_roughness: float = 1e-05
+        self.reference_depth_for_export: str = ""
+        self.well_bore_fluid_pvt_table: int = 0
         self.well_name_for_export: str = ""
         self.well_type_for_export: str = "OIL"
         PdmObjectBase.__init__(self, pb2_object, channel)
@@ -2340,6 +2399,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['IntersectionCollection'] = IntersectionCollection
     classes['MeshFractureTemplate'] = MeshFractureTemplate
     classes['ModeledWellPath'] = ModeledWellPath
+    classes['MswSettings'] = MswSettings
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
     classes['NamedObject'] = NamedObject
     classes['NonNetLayers'] = NonNetLayers
