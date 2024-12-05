@@ -3,7 +3,7 @@ grpcio-tools
 protobuf
 typing-extensions
 sphinx
-docutils
+docutils==0.20 # https://github.com/sphinx-doc/sphinx/issues/12340
 m2r2
 sphinx-automodapi
 mistune
