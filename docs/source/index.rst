@@ -12,6 +12,10 @@ This enables you to:
 * Export snapshots of graphics.
 * And lots of other things...
 
+Programming support in ResInsight
+=================================
+If a field is available in Python, the Python code to access this field can be copied using the right-click menu on the label in the **Property Editor**
+
 Documentation Sites
 ===================
 Please refer to https://resinsight.org for documentation on the graphical user interface, features and capabilites of **ResInsight**.
