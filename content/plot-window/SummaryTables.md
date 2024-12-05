@@ -48,6 +48,6 @@ The main controls for a Summary Table is listed below:
 - **Date Resampling** - Select date resampling to control number data values for each vector - i.e. number of columns. The resampling is ensuring equal time stamps across all summary vectors in table.
 - **Threshold** - Set threshold value for summary vector. Exclude row (vector) if each time stamp value are below selected threshold.
 - **Exclude Rows** - Select which rows (vectors) to exclude from the table.
-
+- **Time Filter** - Define the visible time range
 
 
