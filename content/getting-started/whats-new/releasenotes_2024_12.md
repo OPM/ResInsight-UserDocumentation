@@ -20,9 +20,9 @@ ResInsight now offers the option to import geometry exclusively for active cells
 
 When we access cloud services, an authentication token is stored to a file in your home folder. In some situations this token can become invalid causing the cloud connection to fail. If this happens, a button in Preferences can be used to delete this token. The next time you try to access cloud services, the normal authentication dialog will be displayed and a fresh token is created.
 
-TODO: Add description in preferences
-
 [Cloud Services]({{< relref "cloudservices" >}})
+
+[Cloud Services Preferences]({{< relref "preferences" >}}#importexport)
 
 
 ## Quick Access View

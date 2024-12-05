@@ -119,6 +119,7 @@ Please consider the location and folders of your templates with care to cater fo
 
 ![]({{< relref "" >}}images/misc/PreferencesImportExport.png)
 
-Logging to file can be enabled by specifying the destination log file.
-
+### Cloud Services
 An authorization token is created and stored in your home folder for access to cloud services. If you experience issues with the cloud service, the token can be deleted using a button. The standard authentication dialog will be displayed the next time you try to access the related cloud service.
+
+[Cloud Services]({{< relref "cloudservices" >}})
