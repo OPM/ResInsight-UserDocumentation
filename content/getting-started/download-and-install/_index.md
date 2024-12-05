@@ -21,6 +21,8 @@ Octave plugins, ABAQUS ODB API, and HDF5.
 ResInsight is under continuous development targeting two major releases per year. 
 For an overview of some of its new and exciting features, see the following: 
 
+- [ ResInsight 2024.12 ]({{< ref "releasenotes_2024_12.md" >}})
+
 - [ ResInsight 2024.09 ]({{< ref "releasenotes_2024_09.md" >}})
 
 - [ ResInsight 2024.03.1 ]({{< ref "releasenotes_2024_03_1.md" >}})
@@ -40,28 +42,6 @@ For an overview of some of its new and exciting features, see the following:
 - [ ResInsight 2022.06.1 ]({{< ref "releasenotes_2022_06_1.md" >}})
 
 - [ ResInsight 2022.06 ]({{< ref "releasenotes_2022_06.md" >}})
-
-- [ ResInsight 2021.10 ]({{< ref "releasenotes_2021_10.md" >}})
-
-- [ ResInsight 2021.06 ]({{< ref "releasenotes_2021_06.md" >}})
-
-- [ ResInsight 2020.10.1 ]({{< ref "releasenotes_2020_10_1.md" >}})
-
-- [ ResInsight 2020.10 ]({{< ref "releasenotes_2020_10.md" >}})
-
-- [ ResInsight 2020.04.1 ]({{< ref "releasenotes_2020_04_1.md" >}})
-
-- [ ResInsight 2020.04 ]({{< ref "releasenotes_2020_04.md" >}})
-
-- [ ResInsight 2019.12.1 ]({{< ref "releasenotes_2019_12_1.md" >}})
-
-- [ ResInsight 2019.12 ]({{< ref "releasenotes_2019_12.md" >}})
-
-- [ ResInsight 2019.08 ]({{< ref "releasenotes_2019_08.md" >}})
-
-- [ ResInsight 2019.04 ]({{< ref "releasenotes_2019_04.md" >}})
-
-- [ ResInsight 2018.11 ]({{< ref "releasenotes_2018_11.md" >}})
 
 [ Sign up to be notified of new releases ]({{< ref "releasenotification.md" >}})
 

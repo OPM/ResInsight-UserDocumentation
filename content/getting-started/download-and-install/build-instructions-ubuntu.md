@@ -20,7 +20,8 @@ Basic instructions without Python binding and GRPC.
 | python 				  | 3.8              | 
 | Qt 	    			  | 6.4              | 
 
-It is possible to use Qt 6.4 for building ResInsight, but some install features introduced in Qt 6.5 are not supported.
+It is possible to use Qt 6.4 for building ResInsight, but some install features introduced in Qt 6.5 are not supported. Qt 6.7 has some changes related to theming that is causing some unwanted visual effects. This is currently investigated.
+
 
 Update apt installer
 
