@@ -13,17 +13,6 @@ ResInsight now offers the option to import geometry exclusively for active cells
 
 [Performance Hints]({{< relref "performancehints" >}})
 
-## Cloud Services
-
-![]({{< relref "" >}}images/cloud-services/osdu-well-path-3dview.png)
-
-When accessing cloud services, an authentication token is saved to a file in your home folder. Occasionally, this token may become invalid, leading to a failure in establishing a cloud connection. If this occurs, you can resolve the issue by using the **Delete Token** button in the **Preferences** menu. Once the token is deleted, the authentication dialog will appear the next time you attempt to access cloud services, and a new token will be generated automatically.
-
-[Cloud Services]({{< relref "cloudservices" >}})
-
-[Cloud Services Preferences]({{< relref "preferences" >}}#importexport)
-
-
 ## Quick Access View
 
 ![]({{< relref "" >}}images/3d-main-window/quick-access-main.png)
@@ -33,6 +22,16 @@ For large projects with numerous views and grid models, navigating to specific i
 By default, the **Quick Access** dialog is located to the right of the 3D views.  
 
 [Quick Access]({{< relref "quickaccess" >}})
+
+## Cloud Services
+
+![]({{< relref "" >}}images/cloud-services/osdu-well-path-3dview.png)
+
+When accessing cloud services, an authentication token is saved to a file in your home folder. Occasionally, this token may become invalid, leading to a failure in establishing a cloud connection. If this occurs, you can resolve the issue by using the **Delete Token** button in the **Preferences** menu. Once the token is deleted, the authentication dialog will appear the next time you attempt to access cloud services, and a new token will be generated automatically.
+
+[Cloud Services]({{< relref "cloudservices" >}})
+
+[Cloud Services Preferences]({{< relref "preferences" >}}#importexport)
 
 ## Framework Updates
 Qt has been upgraded from version 5 to version 6, bringing significant changes that impact several aspects of ResInsight, particularly its application engine. This update affects certain visual features of the user interface:  
