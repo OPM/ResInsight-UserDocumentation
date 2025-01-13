@@ -1374,12 +1374,23 @@ class FractureTemplate(PdmObjectBase):
     """
     Attributes:
         azimuth_angle (float): Azimuth Angle
+        beta_factor_type (str): One of [UserDefinedBetaFactor, FractureBetaFactor]
         conductivity_factor (float): Conductivity
         conductivity_type (str): One of [InfiniteConductivity, FiniteConductivity, FiniteConductivityInfiniteWellPI]
         d_factor_scale_factor (float): D-factor
+        effective_permeability (float): Effective Permeability (Ke) [mD]
+        fracture_width (float): Fracture Width (h)
+        fracture_width_type (str): One of [UserDefinedWidth, FractureWidth]
+        gas_viscosity (float): <html>Gas Viscosity (&mu;)</html> [cP]
         height_scale_factor (float): Height
+        inertial_coefficient (float): <html>Inertial Coefficient (&beta;)</html> [Forch. unit]
+        non_darcy_flow_type (str): One of [None, Computed, UserDefined]
         orientation (str): One of [Azimuth, Longitudinal, Transverse]
         perforation_length (float): Perforation Length
+        permeability_type (str): One of [UserDefinedPermeability, FractureConductivity]
+        relative_gas_density (float): <html>Relative Gas Density (&gamma;)</html>
+        relative_permeability (float): Relative Permeability
+        user_defined_d_factor (float): D Factor
         user_defined_perforation_length (bool): User-defined Perforation Length
         user_description (str): Name
         width_scale_factor (float): Half Length
@@ -1388,12 +1399,23 @@ class FractureTemplate(PdmObjectBase):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.azimuth_angle: float = 0
+        self.beta_factor_type: str = "UserDefinedBetaFactor"
         self.conductivity_factor: float = 1
         self.conductivity_type: str = "FiniteConductivity"
         self.d_factor_scale_factor: float = 1
+        self.effective_permeability: float = 0
+        self.fracture_width: float = 0.01
+        self.fracture_width_type: str = "FractureWidth"
+        self.gas_viscosity: float = 0.02
         self.height_scale_factor: float = 1
+        self.inertial_coefficient: float = 0.00608324
+        self.non_darcy_flow_type: str = "None"
         self.orientation: str = "Transverse"
         self.perforation_length: float = 1
+        self.permeability_type: str = "FractureConductivity"
+        self.relative_gas_density: float = 0.8
+        self.relative_permeability: float = 1
+        self.user_defined_d_factor: float = 1
         self.user_defined_perforation_length: bool = False
         self.user_description: str = "Fracture Template"
         self.width_scale_factor: float = 1
@@ -1970,16 +1992,16 @@ class WbsParameters(PdmObjectBase):
         df_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         fg_multiplier (float): SH Multiplier for FG in Shale
         fg_shale_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        k0_fg_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        k0_sh_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        obg0_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        kfg_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        ksh_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        obg_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         poission_ratio_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         pore_pressure_non_reservoir_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         pore_pressure_reservoir_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         ucs_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         user_df (float): User Defined DF
-        user_k0_fg (float): User Defined K0_FG
-        user_k0_sh (float): User Defined K0_SH
+        user_kfg (float): User Defined K0_FG
+        user_ksh (float): User Defined K0_SH
         user_poisson_ratio (float): User Defined Poisson Ratio
         user_pp_non_reservoir (float):   Multiplier of hydrostatic PP
         user_ucs (float): User Defined UCS [bar]
@@ -1991,16 +2013,16 @@ class WbsParameters(PdmObjectBase):
         self.df_source: str = "LAS_FILE"
         self.fg_multiplier: float = 1.05
         self.fg_shale_source: str = "DERIVED_FROM_K0FG"
-        self.k0_fg_source: str = "LAS_FILE"
-        self.k0_sh_source: str = "LAS_FILE"
-        self.obg0_source: str = "GRID"
+        self.kfg_source: str = "LAS_FILE"
+        self.ksh_source: str = "LAS_FILE"
+        self.obg_source: str = "GRID"
         self.poission_ratio_source: str = "LAS_FILE"
         self.pore_pressure_non_reservoir_source: str = "LAS_FILE"
         self.pore_pressure_reservoir_source: str = "GRID"
         self.ucs_source: str = "LAS_FILE"
         self.user_df: float = 0.7
-        self.user_k0_fg: float = 0.75
-        self.user_k0_sh: float = 0.65
+        self.user_kfg: float = 0.75
+        self.user_ksh: float = 0.65
         self.user_poisson_ratio: float = 0.35
         self.user_pp_non_reservoir: float = 1
         self.user_ucs: float = 100
