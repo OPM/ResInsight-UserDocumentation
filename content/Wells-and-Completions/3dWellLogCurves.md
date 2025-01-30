@@ -1,6 +1,6 @@
 +++
 title = "3D Well Log Plots"
-published = true
+
 weight = 40
 +++
 

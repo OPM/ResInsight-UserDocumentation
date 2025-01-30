@@ -1,6 +1,6 @@
 +++
 title = "Regression Analysis"
-published = true
+
 weight = 80
 +++
 

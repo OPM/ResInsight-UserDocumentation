@@ -1,6 +1,6 @@
 +++
 title = "Log ASCII Standard File"
-published = true
+
 weight = 15
 +++
 

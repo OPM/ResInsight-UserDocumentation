@@ -1,6 +1,6 @@
 +++
 title = "Decline Curve Analysis"
-published = true
+
 weight = 80
 +++
 

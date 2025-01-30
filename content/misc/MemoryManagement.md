@@ -1,6 +1,6 @@
 +++
 title = "Memory Management"
-published = true
+
 weight = 20
 +++
 

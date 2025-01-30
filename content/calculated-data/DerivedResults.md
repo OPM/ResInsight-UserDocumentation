@@ -1,6 +1,6 @@
 +++
 title = "Derived Results - Eclipse"
-published = true
+
 weight = 100
 hidden = false
 aliases = [

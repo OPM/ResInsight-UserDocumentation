@@ -1,6 +1,6 @@
 +++
 title = "Windows Installation"
-published = true
+
 hidden = false
 weight = 20
 +++

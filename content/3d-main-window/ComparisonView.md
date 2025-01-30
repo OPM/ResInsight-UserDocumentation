@@ -1,6 +1,6 @@
 +++
 title = "Comparison View"
-published = true
+
 weight = 135
 +++
 

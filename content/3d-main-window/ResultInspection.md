@@ -1,6 +1,6 @@
 +++
 title = "Result Inspection"
-published = true
+
 weight = 60
 +++
 

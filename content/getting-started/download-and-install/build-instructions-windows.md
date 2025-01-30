@@ -1,6 +1,6 @@
 +++
 title = "Build Instructions Windows"
-published = true
+
 hidden = false
 weight = 31
 +++

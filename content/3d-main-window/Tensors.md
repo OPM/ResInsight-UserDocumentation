@@ -1,6 +1,6 @@
 +++
 title = "Tensor Results"
-published = true
+
 weight = 157
 +++
 

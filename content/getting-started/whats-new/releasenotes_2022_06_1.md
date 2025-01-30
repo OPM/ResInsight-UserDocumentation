@@ -1,6 +1,6 @@
 +++
 title = "What's New in 2022.06.1"
-published = true
+
 weight = 10
 hidden = true
 +++

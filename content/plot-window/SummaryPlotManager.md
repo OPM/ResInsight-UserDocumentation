@@ -1,6 +1,6 @@
 +++
 title = "Summary Plot Manager"
-published = true
+
 weight = 15
 +++
 

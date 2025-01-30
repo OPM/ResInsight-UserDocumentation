@@ -1,6 +1,6 @@
 +++
 title = "Grid Property Calculator"
-published = true
+
 weight = 10
 +++
 

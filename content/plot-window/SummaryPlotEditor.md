@@ -1,6 +1,6 @@
 +++
 title = "Summary Plot Editor"
-published = true
+
 weight = 30
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Seismic Data"
-published = true
+
 weight = 12
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Surfaces"
-published = true
+
 weight = 85
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Summary Cross Plot"
-published = true
+
 weight = 40
 +++
 

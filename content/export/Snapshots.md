@@ -1,6 +1,6 @@
 +++
 title = "Snapshots"
-published = true
+
 weight = 10
 +++
 

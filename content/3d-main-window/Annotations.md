@@ -1,6 +1,6 @@
 +++
 title = "Annotations"
-published = true
+
 weight = 154
 +++
 

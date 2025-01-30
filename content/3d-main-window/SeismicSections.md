@@ -1,6 +1,6 @@
 +++
 title = "Seismic Sections"
-published = true
+
 weight = 113
 +++
 

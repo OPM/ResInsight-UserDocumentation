@@ -1,6 +1,6 @@
 +++
 title = "Create Well Paths"
-published = true
+
 weight = 30
 +++
 

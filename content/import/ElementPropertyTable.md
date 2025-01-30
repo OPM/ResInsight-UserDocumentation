@@ -1,6 +1,6 @@
 +++
 title = "Element Property Table"
-published = true
+
 weight = 30
 +++
 

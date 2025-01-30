@@ -1,6 +1,6 @@
 +++
 title = "Cloud Services"
-published = true
+
 weight = 10
 +++
  

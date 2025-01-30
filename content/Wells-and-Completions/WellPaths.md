@@ -1,6 +1,6 @@
 +++
 title = "Well Paths"
-published = true
+
 weight = 20
 +++
 

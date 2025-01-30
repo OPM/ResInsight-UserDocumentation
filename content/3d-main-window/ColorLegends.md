@@ -1,6 +1,6 @@
 +++
 title = "Color Legends"
-published = true
+
 weight = 32
 +++
 

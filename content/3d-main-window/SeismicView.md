@@ -1,6 +1,6 @@
 +++
 title = "Seismic View"
-published = true
+
 weight = 112
 +++
 

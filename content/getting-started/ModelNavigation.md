@@ -1,6 +1,6 @@
 +++
 title = "Model Navigation"
-published = true
+
 weight = 30
 +++
 

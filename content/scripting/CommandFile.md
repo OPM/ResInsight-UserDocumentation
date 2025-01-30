@@ -1,6 +1,6 @@
 +++
 title = "Command File"
-published = true
+
 weight = 30
 +++
 

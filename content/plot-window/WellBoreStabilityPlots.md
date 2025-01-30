@@ -1,6 +1,6 @@
 +++
 title = "Well Bore Stability Plots"
-published = true
+
 weight = 80
 +++
 

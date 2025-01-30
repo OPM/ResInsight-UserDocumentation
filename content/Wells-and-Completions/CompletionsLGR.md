@@ -1,6 +1,6 @@
 +++
 title = "Completions LGR"
-published = true
+
 weight = 60
 +++
 

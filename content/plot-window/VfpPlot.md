@@ -1,6 +1,6 @@
 +++
 title = "VFP Plot"
-published = true
+
 weight = 105
 +++
 

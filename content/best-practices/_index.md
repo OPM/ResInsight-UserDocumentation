@@ -1,6 +1,6 @@
 +++
 title = "Best Practices"
-published = true
+
 weight = 90
 +++
 

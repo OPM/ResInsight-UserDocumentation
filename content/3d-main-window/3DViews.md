@@ -1,6 +1,6 @@
 +++
 title = "3D Views"
-published = true
+
 weight = 10
 +++
 

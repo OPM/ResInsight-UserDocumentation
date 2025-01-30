@@ -1,6 +1,6 @@
 +++
 title = "Producer/Injector Connectivity Tables"
-published = true
+
 weight = 111
 +++
 

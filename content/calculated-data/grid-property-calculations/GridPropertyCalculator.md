@@ -1,6 +1,6 @@
 +++
 title = "Grid Property Calculator"
-published = true
+
 weight = 20
 aliases = [
     "/3d-main-window/gridpropertycalculator/",

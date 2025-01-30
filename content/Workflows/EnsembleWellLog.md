@@ -1,6 +1,6 @@
 +++
 title = "Ensemble Well Log"
-published = true
+
 weight = 90
 +++
 

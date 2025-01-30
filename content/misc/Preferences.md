@@ -1,6 +1,6 @@
 +++
 title = "Preferences"
-published = true
+
 weight = 10
 +++
 

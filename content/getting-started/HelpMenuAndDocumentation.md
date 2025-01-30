@@ -1,6 +1,6 @@
 +++
 title = "Help Menu and Documentation"
-published = true
+
 weight = 25
 +++
 

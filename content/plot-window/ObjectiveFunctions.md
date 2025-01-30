@@ -1,6 +1,6 @@
 +++
 title = "Objective Functions"
-published = true
+
 weight = 51
 +++
 

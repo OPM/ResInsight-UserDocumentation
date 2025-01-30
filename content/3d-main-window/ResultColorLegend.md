@@ -1,6 +1,6 @@
 +++
 title = "Result Color Legend"
-published = true
+
 weight = 30
 +++
 

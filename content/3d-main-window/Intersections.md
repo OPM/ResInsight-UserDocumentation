@@ -1,6 +1,6 @@
 +++
 title = "Intersections"
-published = true
+
 weight = 80
 +++
 

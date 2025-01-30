@@ -1,6 +1,6 @@
 +++
 title = "Cell Results"
-published = true
+
 weight = 20
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "What's New in 2020.04"
-published = true
+
 weight = 10
 hidden = true
 +++

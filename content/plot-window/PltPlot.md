@@ -1,6 +1,6 @@
 +++
 title = "PLT Plot"
-published = true
+
 weight = 100
 +++
 

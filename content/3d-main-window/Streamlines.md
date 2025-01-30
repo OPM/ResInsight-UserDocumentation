@@ -1,6 +1,6 @@
 +++
 title = "Streamlines"
-published = true
+
 weight = 143
 +++
 

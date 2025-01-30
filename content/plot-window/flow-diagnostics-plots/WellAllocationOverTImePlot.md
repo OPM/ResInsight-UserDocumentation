@@ -1,6 +1,6 @@
 +++
 title = "Well Allocation Over Time Plot"
-published = true
+
 weight = 112
 +++
 

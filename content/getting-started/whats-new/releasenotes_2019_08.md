@@ -1,6 +1,6 @@
 +++
 title = "What's New in 2019.08"
-published = true
+
 weight = 10
 hidden = true
 +++

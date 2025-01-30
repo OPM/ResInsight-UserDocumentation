@@ -1,6 +1,6 @@
 +++
 title = "Cloud Services - Authorization"
-published = true
+
 weight = 10
 +++
  

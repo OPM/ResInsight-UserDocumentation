@@ -1,6 +1,6 @@
 +++
 title = "What's New in 2023.01"
-published = true
+
 weight = 10
 hidden = true
 +++

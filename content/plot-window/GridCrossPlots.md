@@ -1,6 +1,6 @@
 +++
 title = "Grid Cross Plots"
-published = true
+
 weight = 120
 +++
 

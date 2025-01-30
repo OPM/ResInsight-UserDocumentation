@@ -1,6 +1,6 @@
 +++
 title = "Contour Map Export"
-published = true
+
 weight = 95
 +++
 

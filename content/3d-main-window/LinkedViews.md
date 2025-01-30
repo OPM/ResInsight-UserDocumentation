@@ -1,6 +1,6 @@
 +++
 title = "Linked Views"
-published = true
+
 weight = 130
 +++
 

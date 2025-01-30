@@ -1,6 +1,6 @@
 +++
 title = "Well Log Plots"
-published = true
+
 weight = 70
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Eclipse Cases"
-published = true
+
 weight = 10
 +++
  

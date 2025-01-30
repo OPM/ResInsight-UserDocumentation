@@ -1,6 +1,6 @@
 +++
 title = "Analysis Plots"
-published = true
+
 weight = 52
 +++
 

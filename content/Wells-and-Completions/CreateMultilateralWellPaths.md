@@ -1,6 +1,6 @@
 +++
 title = "Create Multilaterals Well Paths"
-published = true
+
 weight = 32
 +++
 

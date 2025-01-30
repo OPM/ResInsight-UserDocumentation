@@ -1,6 +1,6 @@
 +++
 title = "Eclipse Summary Data"
-published = true
+
 weight = 10
 +++
  

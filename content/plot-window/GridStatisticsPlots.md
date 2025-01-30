@@ -1,6 +1,6 @@
 +++
 title = "Grid Statistics Plots"
-published = true
+
 weight = 52
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Linux Installation"
-published = true
+
 hidden = false
 weight = 10
 +++

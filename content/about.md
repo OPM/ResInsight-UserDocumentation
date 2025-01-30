@@ -1,6 +1,6 @@
 +++
 title = "About"
-published = true
+
 hidden = true
 +++
 

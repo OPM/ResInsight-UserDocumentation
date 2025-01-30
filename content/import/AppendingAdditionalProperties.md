@@ -1,6 +1,6 @@
 +++
 title = "Appending Additional Properties"
-published = true
+
 weight = 40
 +++
 

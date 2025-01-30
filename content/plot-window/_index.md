@@ -1,6 +1,6 @@
 +++
 title = "Plot Main Window"
-published = true
+
 weight = 30
 +++
 

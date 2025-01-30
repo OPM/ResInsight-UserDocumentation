@@ -1,6 +1,6 @@
 +++
 title = "Result Info"
-published = true
+
 weight = 30
 +++
 

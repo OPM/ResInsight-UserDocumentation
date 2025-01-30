@@ -1,6 +1,6 @@
 +++
 title = "Geomechanical Data"
-published = true
+
 weight = 20
 +++
 

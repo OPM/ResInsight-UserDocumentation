@@ -1,6 +1,6 @@
 +++
 title = "Polygons"
-published = true
+
 weight = 81
 +++
 

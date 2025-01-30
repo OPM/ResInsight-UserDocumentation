@@ -1,6 +1,6 @@
 +++
 title = "Contour Maps"
-published = true
+
 weight = 40
 +++
 

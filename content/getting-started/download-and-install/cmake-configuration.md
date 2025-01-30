@@ -1,6 +1,6 @@
 +++
 title = "CMake Configuration"
-published = true
+
 hidden = false
 weight = 35
 aliases = [

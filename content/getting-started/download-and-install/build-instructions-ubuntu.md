@@ -1,6 +1,6 @@
 +++
 title = "Build Instructions Ubuntu"
-published = true
+
 hidden = false
 weight = 30
 +++

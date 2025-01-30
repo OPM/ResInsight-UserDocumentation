@@ -1,6 +1,6 @@
 +++
 title = "Filters"
-published = true
+
 weight = 70
 +++
 

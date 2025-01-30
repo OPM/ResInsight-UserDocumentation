@@ -1,6 +1,6 @@
 +++
 title = "Multi Plots"
-published = true
+
 weight = 47
 +++
 

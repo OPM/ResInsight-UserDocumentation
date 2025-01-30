@@ -1,6 +1,6 @@
 +++
 title = "Command Line Interface"
-published = true
+
 weight = 20
 +++
 

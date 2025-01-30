@@ -1,6 +1,6 @@
 +++
 title = "Summary Plot Template"
-published = true
+
 weight = 45
 +++
 

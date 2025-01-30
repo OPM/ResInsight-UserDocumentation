@@ -1,6 +1,6 @@
 +++
 title = "Measurement"
-published = true
+
 weight = 152
 
 +++

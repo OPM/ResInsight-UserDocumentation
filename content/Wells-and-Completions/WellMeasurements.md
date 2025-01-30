@@ -1,6 +1,6 @@
 +++
 title = "Well Measurements"
-published = true
+
 weight = 70
 +++
 

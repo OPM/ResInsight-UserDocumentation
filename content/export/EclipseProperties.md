@@ -1,6 +1,6 @@
 +++
 title = "Eclipse Properties"
-published = true
+
 weight = 20
 +++
 

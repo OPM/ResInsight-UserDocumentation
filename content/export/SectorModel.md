@@ -1,6 +1,6 @@
 +++
 title = "Sector Model"
-published = true
+
 weight = 60
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Download and Install"
-published = true
+
 weight = 10
 +++
 

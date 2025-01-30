@@ -1,6 +1,6 @@
 +++
 title = "Allan Diagram"
-published = true
+
 weight = 91
 +++
 

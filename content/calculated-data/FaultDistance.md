@@ -1,6 +1,6 @@
 +++
 title = "Fault Distance"
-published = true
+
 weight = 100
 hidden = false
 +++

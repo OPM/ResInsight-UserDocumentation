@@ -1,6 +1,6 @@
 +++
 title = "Completions"
-published = true
+
 weight = 50
 +++
 

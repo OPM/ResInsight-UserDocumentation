@@ -1,6 +1,6 @@
 +++
 title = "Windows Subsystem for Linux"
-published = true
+
 hidden = false
 weight = 20
 +++

@@ -1,6 +1,6 @@
 +++
 title = "Keyboard Shortcuts"
-published = true
+
 weight = 30
 +++
 

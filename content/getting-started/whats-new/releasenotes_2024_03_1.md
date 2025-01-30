@@ -1,6 +1,6 @@
 +++
 title = "What's New in 2024.03.1"
-published = true
+
 weight = 10
 hidden = true
 +++

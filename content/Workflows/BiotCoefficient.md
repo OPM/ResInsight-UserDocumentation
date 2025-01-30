@@ -1,6 +1,6 @@
 +++
 title = "Biot Coefficient"
-published = true
+
 weight = 90
 +++
 

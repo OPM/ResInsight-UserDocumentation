@@ -1,6 +1,6 @@
 +++
 title = "Training Courses"
-published = true
+
 hidden = true
 +++
 

@@ -1,6 +1,6 @@
 +++
 title = "Testimonials"
-published = true
+
 weight = 60
 +++
 

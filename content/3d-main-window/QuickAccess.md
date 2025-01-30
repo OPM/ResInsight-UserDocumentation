@@ -1,6 +1,6 @@
 +++
 title = "Quick Access"
-published = true
+
 weight = 71
 +++
 

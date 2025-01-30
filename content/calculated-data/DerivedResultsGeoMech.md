@@ -1,6 +1,6 @@
 +++
 title = "Derived Results - Geomechanical"
-published = true
+
 weight = 110
 hidden = false
 aliases = [
