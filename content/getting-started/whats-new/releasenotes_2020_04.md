@@ -25,7 +25,7 @@ A [Cumulative Phase Distribution Plot]({{< relref "/plot-window/flow-diagnostics
 
 ## Delta Summary Case and Ensemble Case
 
-The difference between two summary cases or two ensembles can be established using [Delta Ensemble]({{< relref "/ensembleplotting" >}}#delta-ensemble) and [Delta Summary Case]({{< relref "/summaryplots" >}}#delta-summary-case).
+The difference between two summary cases or two ensembles can be established using [Delta Ensemble]({{< ref "ensembleplotting" >}}#delta-ensemble) and [Delta Summary Case]({{< ref "summaryplots" >}}#delta-summary-case).
 
 ## Well Disks
 ![]({{< relref "" >}}images/3d-main-window/WellDisks.png)
