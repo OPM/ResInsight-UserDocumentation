@@ -30,9 +30,9 @@ Ensemble Templates are listed with the icon
 {{< image-in-text src="images/plot-window/IconEnsembleTemplate.png" >}} 
 while Summary Case templates are listed with the icon
 {{< image-in-text src="images/plot-window/IconSummaryCaseTemplate.png" >}}
-in the [Templates Window]({{< relref "summaryplottemplate#templates-window" >}}), c.f. below.
+in the [Templates Window]({{% relref "summaryplottemplate#templates-window" %}}), c.f. below.
 
-Each summary plot template is stored in a single file on disk. ResInsight searches a set of directories for template files which are listed and managed by [**Plotting Preferences**]({{< relref "preferences#plotting" >}}). 
+Each summary plot template is stored in a single file on disk. ResInsight searches a set of directories for template files which are listed and managed by [**Plotting Preferences**]({{% relref "preferences#plotting" %}}). 
 Given a new path, ResInsight will ask the user to confirm whether the path of the stored template is to be included in subsequent searches for templates. 
 
 ![](/images/plot-window/SummaryPlotTemplatePath.png)
@@ -53,7 +53,7 @@ Summary templates made with prior versions are incompatible with ResInsight 2022
 Default templates is a powerful feature to automate the generation of summary plots when importing a summary case or ensemble. The basis for automation is the selection of one or more default templates.
 
 Specify each default template by right-clicking in the **Templates** window.
-Then activate the use of default templates by specifying **Use Plot Templates** in the **Plotting tab** of Preferences, c.f. menu option [**Edit&rarr;Preferences**]({{< relref "preferences#plotting" >}}).
+Then activate the use of default templates by specifying **Use Plot Templates** in the **Plotting tab** of Preferences, c.f. menu option [**Edit&rarr;Preferences**]({{% relref "preferences#plotting" %}}).
 
 ![](/images/plot-window/SummaryPlotTemplateWindow.png)
 
@@ -69,8 +69,8 @@ As seen above, the **Templates** window enables management and overview of summa
 - rename template
 - delete template
 - edit template XML file in the *Script Editor* specified in 
-[Preferences]({{< relref "preferences#scripting" >}}) 
+[Preferences]({{% relref "preferences#scripting" %}}) 
 - specifying default template as described above
 - reload templates in ResInsight in case of directory or file changes on disk
 
-See also menu option [**Edit&rarr;Preferences**]({{< relref "preferences#plotting" >}}) for managing template folders and template searches.
+See also menu option [**Edit&rarr;Preferences**]({{% relref "preferences#plotting" %}}) for managing template folders and template searches.

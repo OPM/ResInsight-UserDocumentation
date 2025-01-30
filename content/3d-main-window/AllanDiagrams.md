@@ -13,7 +13,7 @@ weight = 91
 The **Allan Diagram** is dispayed by selecting the **Separate Fault Result** in the project tree. 
 ![](/images/3d-main-window/AllanDiagramPropertyEditor.png)
 
-See [Faults ]({{< relref "faults/#separate-fault-result" >}}) for more details.
+See [Faults ]({{% relref "faults/#separate-fault-result" %}}) for more details.
 
 ## Property Editor Settings
 
@@ -27,4 +27,4 @@ When clicking on an NNC area multiple times, the highlighted cell switched from 
 
 ## Other related results
 
-Other useful NNC results are descrived in [Derived Results]({{< relref "derivedresults" >}}) 
+Other useful NNC results are descrived in [Derived Results]({{% relref "derivedresults" %}}) 

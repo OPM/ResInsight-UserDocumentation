@@ -6,7 +6,7 @@ weight: 15
 
 {{% notice note %}}
 Cette page est une copie de la [doc de Grav](http://learn.getgrav.org/content/markdown).
-La seule différence porte sur la personalisation des images ([taille]({{< relref "#resizing-image" >}}), [ajout de classes CSS]({{< relref "#add-css-classes" >}})...)
+La seule différence porte sur la personalisation des images ([taille]({{% relref "#resizing-image" %}}), [ajout de classes CSS]({{% relref "#add-css-classes" %}})...)
 Pour des raisons évidentes, cette page n'a pas été traduites en français 😁
 {{% /notice%}}
 

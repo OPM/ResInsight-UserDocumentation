@@ -10,7 +10,7 @@ ResInsight provides a flexible interface to [Octave](http://www.gnu.org/software
 - Features to simplify management and editing of Octave scripts from ResInsight
 - Commands to execute scripts using Octave.  
 
-The Octave functions are documented in [Octave Interface Reference]({{< relref "octaveinterfacereference" >}}).
+The Octave functions are documented in [Octave Interface Reference]({{% relref "octaveinterfacereference" %}}).
 
 {{% notice info %}} 
 <b>Note:</b> The Octave interface does not support Flow diagnostics and Injection flooding results in addition to Geomechanical cases. 
@@ -37,7 +37,7 @@ If you add a script file directly by creating a new file, the new script can be 
 
 ## Executing Octave Scripts
 
-ResInsight can be instructed to execute an Octave script once as a one shot operation, or several times, one time for each selected case. The [Octave Interface Reference]({{< relref "octaveinterfacereference" >}}) highlights in more depth how to design your Octave scripts to utilize these features.
+ResInsight can be instructed to execute an Octave script once as a one shot operation, or several times, one time for each selected case. The [Octave Interface Reference]({{% relref "octaveinterfacereference" %}}) highlights in more depth how to design your Octave scripts to utilize these features.
 
 ### Executing a Script Once
 

@@ -6,7 +6,7 @@ weight = 40
 
 ![](/images/3d-main-window/3dWellLogCurves.png)
 
-ResInsight can display well logs curves directly in the 3D view with a subset of the functionality of the full [2D Well Log Plot Editor]({{< relref "welllogsandplots" >}}). The curves will be drawn in a plane next to or centered on the well trajectory they belong to and can display well log data from a simulation model and from imported LAS-files.
+ResInsight can display well logs curves directly in the 3D view with a subset of the functionality of the full [2D Well Log Plot Editor]({{% relref "welllogsandplots" %}}). The curves will be drawn in a plane next to or centered on the well trajectory they belong to and can display well log data from a simulation model and from imported LAS-files.
 
 ## Creating new 3D Well Log Curves
 Add a new 3D well log curve by selecting a Well Path in the Project Tree, right-clicking and selecting **3D Well Log Curves** and **Add 3D Well Log Curve**.

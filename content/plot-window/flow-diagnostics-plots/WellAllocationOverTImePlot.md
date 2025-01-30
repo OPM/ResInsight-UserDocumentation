@@ -6,7 +6,7 @@ weight = 112
 
 ![](/images/plot-window/WellAllocationOverTime.png)
 
-**Well Allocation Over Time Plot** is a plot displaying the flow data of [Well Allocation Plots]({{< relref "flow-diagnostics-plots" >}}#well-allocation-plots) over a range of time steps. The plot provides the union of wells existing across all time steps for the selected case. 
+**Well Allocation Over Time Plot** is a plot displaying the flow data of [Well Allocation Plots]({{% relref "flow-diagnostics-plots" %}}#well-allocation-plots) over a range of time steps. The plot provides the union of wells existing across all time steps for the selected case. 
 
 The plot utilize the *Flow Diagnostics* to provide an overview of which well or phase contributes most to the flow in a selected well. One can e.g. see which injectors are contributing to production of a producing well, and vice versa, over the selected time step range. The plot can be configured with a *From* and *To* time step to create the defined time step range. One can either utilize all time steps in the defined range, or one can down sample the date resolution by defining a number of time steps to utilize. Specific time steps flow values can be excluded by selection - the flow rate value for next time step is then utilized for calculations for excluded time step.
 
@@ -25,7 +25,7 @@ Further plot configuration is performed by use of the **Property Editor**, shown
 
 ## Creating Well Allocation Over Time Plot
 
-The Well Allocation Over Time Plot is a part of the *Flow Diagnostics Plots*. Click [here]({{< relref "flow-diagnostics-plots" >}}#creating-well-allocation-plots) for how to generate the plots from 3D view.
+The Well Allocation Over Time Plot is a part of the *Flow Diagnostics Plots*. Click [here]({{% relref "flow-diagnostics-plots" %}}#creating-well-allocation-plots) for how to generate the plots from 3D view.
 
 ## Editing Table
 

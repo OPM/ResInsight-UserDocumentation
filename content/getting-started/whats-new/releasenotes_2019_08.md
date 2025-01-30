@@ -38,7 +38,7 @@ For more information and examples, please see the [ResInsight Python API](https:
 
 It is now possible to launch ResInsight as a console application with no user interface. Some workflows might include servers with no graphics card, and the console mode enables use of ResInsight in this context.
 
-See [Command Line Interface]({{< relref "CommandLineInterface.md" >}})
+See [Command Line Interface]({{% relref "CommandLineInterface.md" %}})
 
 ## Plotting improvements
 
@@ -48,5 +48,5 @@ See [Command Line Interface]({{< relref "CommandLineInterface.md" >}})
 - To easily see the difference between history vectors and other vectors, the default style for history vector is symbols without lines
 - Curves in a plot will be hightlighted when left-clicking the curve
 
-See [Summary Plotting]({{< relref "summaryplots.md#curve-hightlight" >}})
+See [Summary Plotting]({{% relref "summaryplots.md#curve-hightlight" %}})
 

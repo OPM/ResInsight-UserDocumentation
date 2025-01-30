@@ -26,7 +26,7 @@ Other available keyboard shortcuts are
 
 ## Summary Plot Manager
 
-[Summary Plot Manager]({{< relref "summaryplotmanager" >}})
+[Summary Plot Manager]({{% relref "summaryplotmanager" %}})
 
 |Operation                 | Shortcut          |
 |--------------------------|-------------------|

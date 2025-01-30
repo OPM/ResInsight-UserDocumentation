@@ -26,10 +26,10 @@ Which summaries that has been detected in a Observed Data file can be read in an
 
 ![](/images/import/observedDataCurveCreator.png)
 
-To plot **Observed Time History Data**, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the **Plot Editor** is covered in [Summary Plot Editor]({{< relref "summaryploteditor" >}}). Observed time history data points are plotted without lines by default.
+To plot **Observed Time History Data**, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the **Plot Editor** is covered in [Summary Plot Editor]({{% relref "summaryploteditor" %}}). Observed time history data points are plotted without lines by default.
 
 When inspecting resampled data, it can be useful to manually specify if this curve is **Accumulated** or **Rate**.
- [Summary Curve Properties]({{< relref "summaryplots" >}}/#editing-a-summary-curve).
+ [Summary Curve Properties]({{% relref "summaryplots" %}}/#editing-a-summary-curve).
 
 
 ## File Formats
@@ -52,7 +52,7 @@ Dialog fields description:
 - **Preview** -- Preview the first 30 lines of the file contents. The view will reflect the currently selected Cell Separator and the selected time column is marked in yellow.
 
 #### Column data
-Each column must have a header text, which may be a name/description for the data in the column. By formatting the header text to a valid Eclipse address, ResInsight recognizes the column data and will be able to categorize the data in the same way as grid data. So when plotting these data later, the user will find the data in the correct category in the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
+Each column must have a header text, which may be a name/description for the data in the column. By formatting the header text to a valid Eclipse address, ResInsight recognizes the column data and will be able to categorize the data in the same way as grid data. So when plotting these data later, the user will find the data in the correct category in the [Summary Plot Editor]({{% relref "summaryploteditor" %}}).
 
 ##### Eclipse address format
 An Eclipse address consists of a vector name and zero or more parameters. The number of parameters are defined by the category of the vector. The category is determined by looking up the category in an internal vector table. A valid standard vector name has 3 to 5 characters. Optionally it may be postfixed by a user defined name of 3 characters. A vector name having both a standard part and a user part must have 8 characters (5+3). In this case, if the standard part has less than 5 characters, it must be padded with underscores up to 5 characters. Example: 'RPR__WEL'. Vector names having only the standard part are not padded.

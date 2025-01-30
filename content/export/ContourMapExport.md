@@ -6,7 +6,7 @@ weight = 95
 
 ![](/images/export/ExportContourMap.png)
 
-ResInsight can create [contour maps]({{< relref "contourmaps" >}}) based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as oil, gas and hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
+ResInsight can create [contour maps]({{% relref "contourmaps" %}}) based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as oil, gas and hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
 
 
 ## Export of Contour Map Data

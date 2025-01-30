@@ -17,7 +17,7 @@ A seismic file is imported by right-clicking the **Seismic** item in **Project T
 
 ![](/images/import/SeismicImport.png)
 
-To look at seismic data, create a [Seismic View]({{< relref "seismicview" >}}). Combined display of both grid model geometry and seismid data is  described in [Seismic Sections]({{< relref "seismicsections" >}}).
+To look at seismic data, create a [Seismic View]({{% relref "seismicview" %}}). Combined display of both grid model geometry and seismid data is  described in [Seismic Sections]({{% relref "seismicsections" %}}).
 
 ## Difference Cube
 The difference between two seismic cubes can be created using the following workflow:
@@ -32,7 +32,7 @@ The difference between two seismic cubes can be created using the following work
 The Property Editor for seismic data lists the available properties:
 - **General**: Name and file for fast random access
 - **Color Mapping**: 
-  - **Colors**: [Color Legend]({{< relref "colorlegends" >}}) applicable to all [Seismic Sections]({{< relref "seismicsections" >}}) using this data set 
+  - **Colors**: [Color Legend]({{% relref "colorlegends" %}}) applicable to all [Seismic Sections]({{% relref "seismicsections" %}}) using this data set 
   - **Override Data Range**: option to override data range by specifying clip value, c.f. below
 - **File Information**: key information such as ranges and data channels 
 
@@ -63,7 +63,7 @@ The options for conversion of SEG-Y files are:
   - *Depth (Z) Offset Override*: correction of incorrect or missing depth offset on file 
   - *Header Definition File*: optional file specifying [OpenVDS SEG-Y Import Options](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html).
   
-Subsequent to SEG-Y conversion, please check resulting key information for correctness by inspecting **File Information** of the [**Property Editor**]({{< relref "seismicdata" >}}#property-editor), notably *Inline*, *Xline*, and *Z* ranges.
+Subsequent to SEG-Y conversion, please check resulting key information for correctness by inspecting **File Information** of the [**Property Editor**]({{% relref "seismicdata" %}}#property-editor), notably *Inline*, *Xline*, and *Z* ranges.
 In case of discrepancy, the conversion of SEG-Y file has to be performed anew by specifying **Depth (Z) Offset Override** or specifying a JSON file as described in the documentation of the [OpenVDS SEG-Y Import Tool](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html).
 
 ![](/images/import/SeismicOpenVDSdoc_snip.png)

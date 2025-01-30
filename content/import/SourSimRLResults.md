@@ -9,4 +9,4 @@ Results from SourSimRL in its *sourres* binary format can be imported using the 
 
 ![](/images/import/soursim_import.PNG) 
 
-Importing such a file will enable result type called **SourSimRL** as explained in [Eclipse Result Types]({{< ref "cellresults.md#eclipse-result-types" >}})   
+Importing such a file will enable result type called **SourSimRL** as explained in [Eclipse Result Types]({{% ref "cellresults.md#eclipse-result-types" %}})   

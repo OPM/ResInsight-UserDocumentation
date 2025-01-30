@@ -6,7 +6,7 @@ weight = 7
 
 ![](/images/getting-started/ResInsightPlotProjectTreeAndWindow.png)
 
-As described in [Overview]({{< relref "Overview.md" >}}), ResInsight has two main windows, one for 3D related visualizations and one for 2D graphs and plots. The content and appearance of displayed information is managed and controlled by the **Project Tree** and the **Plots** windows. Some of their general functionality is described and exemplified below.
+As described in [Overview]({{% relref "Overview.md" %}}), ResInsight has two main windows, one for 3D related visualizations and one for 2D graphs and plots. The content and appearance of displayed information is managed and controlled by the **Project Tree** and the **Plots** windows. Some of their general functionality is described and exemplified below.
 
 
 ## Multiple selection and collective actions

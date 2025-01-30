@@ -30,13 +30,13 @@ Visibility of the grid box with labels displaying the coordinates for the reserv
 
 The **Cell Result** {{< image-in-text src="images/3d-main-window/CellResult.png" >}} item defines which Eclipse or Geomechanical property the 3D View uses for the main cell color. The property can be chosen in the property panel of the **Cell Result** item. The mapping between cell values and color is defined by the **Legend Definition**{{< image-in-text src="images/3d-main-window/Legend.png" >}} along with some appearance settings on the Legend itself. (Number format etc.)
 
-Please refer to [Result Color Legend]({{< relref "resultcolorlegend" >}}) for details.
+Please refer to [Result Color Legend]({{% relref "resultcolorlegend" %}}) for details.
 
 
 
 ### Range Filters and Property Filters
 
-In order to see different sets of cells, and cells inside the reservoir, Views use cell filters. Please refer to [Cell Filters]({{< relref "filters" >}}) to read more about them.
+In order to see different sets of cells, and cells inside the reservoir, Views use cell filters. Please refer to [Cell Filters]({{% relref "filters" %}}) to read more about them.
 
 ### Info Box
 
@@ -70,12 +70,12 @@ The <b>Info Box</b> settings can be activated by clicking on the Info Text in th
 
 ![](/images/3d-main-window/ViewTreeGrids.png)
 
-The **Grids** {{< image-in-text src="images/3d-main-window/draw_style_meshlines_24x24.png" >}} node contains child nodes for **Main Grid**, **LGRs** and **Temporary LGRs** where each grid's visibilty can be controlled. The **LGRs** node contains all LGRs loaded from file, while **Temporary LGRs** contains all temporary LGRs (see [Completions LGR]({{< relref "completionslgr" >}})).
+The **Grids** {{< image-in-text src="images/3d-main-window/draw_style_meshlines_24x24.png" >}} node contains child nodes for **Main Grid**, **LGRs** and **Temporary LGRs** where each grid's visibilty can be controlled. The **LGRs** node contains all LGRs loaded from file, while **Temporary LGRs** contains all temporary LGRs (see [Completions LGR]({{% relref "completionslgr" %}})).
 Toggling **Grids** off will hide all grids cell geometry. This option is used to display geometry for faults and intersections. This feature is also available as a toolbutton called *Hide grid cells*.
 
 ### Intersections 
 Intersections {{< image-in-text src="images/3d-main-window/CrossSections16x16.png" >}} are used to cut the geometry and show result values mapped onto this geometry.
-Please refer to [Intersections]({{< relref "intersections" >}}) for details.
+Please refer to [Intersections]({{% relref "intersections" %}}) for details.
 
 ### Activate items by clicking
 Selected overlay items in the 3D view can activate a corresponding item in the **Property Editor**. This is implemented for Info box and result color legends. Please note that this feature is activated by clicking inside the texture/colored part of the legend. 
@@ -109,16 +109,16 @@ Default result mapping on faults is using the result specified in **Cell Result*
 
 ### Simulation Wells
 This item controls the visualization of the Eclipse simulation wells.
-Please refer to [Simulation Wells]({{< relref "simulationwells" >}}) to read more.
+Please refer to [Simulation Wells]({{% relref "simulationwells" %}}) to read more.
 
 ### Well Connection Factors
 This item controls the visualization of well connection factors.
-See [Visualization and Inspection of Well Connection Factors]({{< relref "completions" >}}#visualization-and-inspection-of-well-connection-factors) for details.
+See [Visualization and Inspection of Well Connection Factors]({{% relref "completions" %}}#visualization-and-inspection-of-well-connection-factors) for details.
 
 ### Fractures
 This item controls the visualization of fractures.
-See [Fractures]({{< relref "completions" >}}#fractures) for details.
+See [Fractures]({{% relref "completions" %}}#fractures) for details.
 
 ### Faults
 Visualization of the faults in the model is controlled by this item. 
-Please refer to [Faults]({{< relref "faults" >}}) to read more.
+Please refer to [Faults]({{% relref "faults" %}}) to read more.

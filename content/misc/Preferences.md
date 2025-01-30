@@ -28,7 +28,7 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 - **3D Views**: This group of options controls visual settings to be used when creating new views:
 	- **Show Grid Lines** -- Controls whether to show the grid lines by default for all cells or just along faults.
-	- **Navigation mode** -- Defines the use of mouse for interaction with 3D model, c.f.  [Model Navigation]({{< relref "modelnavigation" >}}).
+	- **Navigation mode** -- Defines the use of mouse for interaction with 3D model, c.f.  [Model Navigation]({{% relref "modelnavigation" %}}).
 	- **Default Z Scale Factor** -- Default depth scale for grid models.
 	- **Show Box around Legends** -- Create a semi-transparent box containing each legend in the 3D Views.
 	- **Enable Faults by Default** -- Controls default visibility of faults in views
@@ -60,8 +60,8 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 ![](/images/misc/PreferencesEclipseSummary.png)
 
-- **Origin Files**: c.f. [Origin Files]({{< relref "eclipsesummarydata#origin-files" >}}) for details.
-- **Summary Data Import** including file format for summary data import, c.f. [Ensemble Summary]({{< relref "eclipsesummarydata#summary-data-file-formats" >}}):
+- **Origin Files**: c.f. [Origin Files]({{% relref "eclipsesummarydata#origin-files" %}}) for details.
+- **Summary Data Import** including file format for summary data import, c.f. [Ensemble Summary]({{% relref "eclipsesummarydata#summary-data-file-formats" %}}):
   - **ESMRY (opm-common)** Import data from ESMRY files
   - **UNSMRY (resdata)** Import data from native UNSMRY files
   - **h5 (HDF5)** Import data from h5 files
@@ -100,7 +100,7 @@ Please consider the location and folders of your templates with care to cater fo
 
 ![](/images/misc/PreferencesScripting.png)
 
-- **Octave** c.f. [Octave Interface]({{< relref "octaveinterface.md" >}}) for details:
+- **Octave** c.f. [Octave Interface]({{% relref "octaveinterface.md" %}}) for details:
   - **Octave Executable Location** -- Define binary file location for Octave, usually without path on Linux and including path on Windows.
   - **Show text header when executing scripts** -- Enables the default output from octave when started.
 
@@ -122,4 +122,4 @@ Please consider the location and folders of your templates with care to cater fo
 ### Cloud Services
 An authorization token is created and stored in your home folder for access to cloud services. If you experience issues with the cloud service, the token can be deleted using a button. The standard authentication dialog will be displayed the next time you try to access the related cloud service.
 
-[Cloud Services]({{< relref "cloudservices" >}})
+[Cloud Services]({{% relref "cloudservices" %}})

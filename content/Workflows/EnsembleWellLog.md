@@ -37,5 +37,5 @@ In the plot above, the part where the crossing of K-layers is consistent, we get
 
 ## Related documentation
 
-[Well Log Extraction]({{< relref "welllogsandplots" >}})
-[Ensemble File Dialog]({{< relref "ensemblefiledialog" >}})
+[Well Log Extraction]({{% relref "welllogsandplots" %}})
+[Ensemble File Dialog]({{% relref "ensemblefiledialog" %}})

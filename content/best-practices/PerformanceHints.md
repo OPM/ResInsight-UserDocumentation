@@ -13,7 +13,7 @@ Summary data is usually available as **SMSPEC** and **UNSRMY** files. **UNSMRY**
 
 For best performance, transform these data files to **ESMRY File Format**
 
-[Summary Data Import]({{< relref "summarydata" >}})
+[Summary Data Import]({{% relref "summarydata" %}})
 
 ## Grid Data
 ResInsight has two grid import readers, **ResData** and **opm-common**. 
@@ -26,4 +26,4 @@ Features currently not supported when using **opm-common**
 - PVT plots
 - Flow Diagnostics
 
-[Preferences]({{< relref "preferences" >}})
+[Preferences]({{% relref "preferences" %}})

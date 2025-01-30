@@ -6,15 +6,15 @@ weight = 80
 
 ![](/images/plot-window/WellBoreStability.png)
 
-ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{< relref "welllogsandplots" >}}) to visualize [Formations]({{< relref "formations" >}}), [Well Measurements]({{< relref "wellmeasurements" >}}), [Well Path Attributes]({{< relref "wellpaths" >}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
+ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{% relref "welllogsandplots" %}}) to visualize [Formations]({{% relref "formations" %}}), [Well Measurements]({{% relref "wellmeasurements" %}}), [Well Path Attributes]({{% relref "wellpaths" %}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
 
-In the figure above, the first track contains [Formations]({{< relref "formations" >}}) and an indication of sea level.
+In the figure above, the first track contains [Formations]({{% relref "formations" %}}) and an indication of sea level.
 
 | Sea Level | Formations |
 |-----------|------------|
 |![](/images/plot-window/WaterLevel.png) | ![](/images/plot-window/FormationLevels.png) |
 
-The second track contains a visualisation of the well, with well attributes of [Casing Design]({{< relref "wellpaths" >}}#casing-design) as well [Completions]({{< relref "Completions" >}})
+The second track contains a visualisation of the well, with well attributes of [Casing Design]({{% relref "wellpaths" %}}#casing-design) as well [Completions]({{% relref "Completions" %}})
 
 The third track, which is disabled by default, contains the input parameters of the plot as described in the [Input Requirements](#input-requirements) section.
 
@@ -29,11 +29,11 @@ The fourth track (third visible by default) shows the following stability gradie
 
 The fifth track contains curves showing the angular orientation of the well path as azimuth (deviation from vertical) and inclination (deviation from x-axis) in degrees.
 
-If any [Well Measurements]({{< relref "wellmeasurements" >}}) are present, they will be visible as symbols in the track **Stability Curves**.
+If any [Well Measurements]({{% relref "wellmeasurements" %}}) are present, they will be visible as symbols in the track **Stability Curves**.
 
 ## Create Well Bore Stability plots
 
-Well Bore Stability plots can be created from the right-click menu for a well path in **Project Tree** or from the the right-click menu of the Well Log Plots entry in **Plot Project Tree**. In the former case, the well bore stability plot will be created for the selected **Well Path**. In the latter case, it will be created for the first well path in the well path list and the well path for the entire plot can be changed with the [Change Data Source Feature]({{< relref "welllogsandplots" >}}#change-data-source-for-plots-and-curves).
+Well Bore Stability plots can be created from the right-click menu for a well path in **Project Tree** or from the the right-click menu of the Well Log Plots entry in **Plot Project Tree**. In the former case, the well bore stability plot will be created for the selected **Well Path**. In the latter case, it will be created for the first well path in the well path list and the well path for the entire plot can be changed with the [Change Data Source Feature]({{% relref "welllogsandplots" %}}#change-data-source-for-plots-and-curves).
 
 ![](/images/plot-window/WellBoreStabilityCreation.png) 
 ![](/images/plot-window/WellBoreStabilityCreation2.png)

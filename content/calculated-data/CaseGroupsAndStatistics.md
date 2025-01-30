@@ -19,7 +19,7 @@ If you have several Eclipse simulations with different input parameters availabl
 The easiest way to create a **Grid Case Group** is to use the Import command:
 **File->Import->Eclipse Cases->Create Grid Case Group**
 
-This command will display the recursive file import dialog described on the [Summary Plots page]({{< relref "eclipsesummarydata" >}}#ensemble-file-import).
+This command will display the recursive file import dialog described on the [Summary Plots page]({{% relref "eclipsesummarydata" %}}#ensemble-file-import).
 
 ResInsight then creates a **Grid Case Group** for you, and populates its **Source Cases** with the Cases you selected. Then the first of those Cases are read completely, while the others are just scanned to verify that the Grids match and to detect changes in the Active Cells layout. This makes it quite fast to load even a quite large number of realizations.
 
@@ -62,7 +62,7 @@ After creating a grid case group, an empty **Statistics Case** is created for yo
 - **Grid Calculation** -- List of all defined calculations in the project.
 - **Filter By View** -- Limit the calculation to visible cells in a selected view.
 
-Cell values in a selection of cells can be aggregated as described in [Aggregation of Grid Cell Values]({{< relref "aggregationofgridcellvalues" >}})
+Cell values in a selection of cells can be aggregated as described in [Aggregation of Grid Cell Values]({{% relref "aggregationofgridcellvalues" %}})
 
 **Settings for when statistics has been computed**
 

@@ -26,7 +26,7 @@ The files generated are stored in a folder named _`snapshots`_ within the folder
 
 {{% notice note %}}
  Snapshots of existing views can also be created and saved from the command line 
- ( See <a href="{{< relref "commandlineinterface" >}}">Command Line Interface</a> ).
+ ( See <a href="{{% relref "commandlineinterface" %}}">Command Line Interface</a> ).
 {{% /notice %}}
 
 ## Advanced Snapshot Export

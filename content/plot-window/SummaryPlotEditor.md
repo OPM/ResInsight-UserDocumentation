@@ -37,8 +37,8 @@ In the mid-section of the dialog, the Summary Type and the corresponding Items c
 - **Segment** -- Select Segment related vectors only
 - **Block** -- Select I, J, K -- Block related vectors only 
 - **Lgr-Block** -- Select I, J, K - Block in LGR related vectors only
-- **Calculated** -- Select calculated vectors created by the [curve calculator]({{< relref "curvecalculator" >}}).
-- **Imported** -- Select observed data vectors [imported from file]({{< relref "observeddata" >}}) (e.g. CSV, RSM files)
+- **Calculated** -- Select calculated vectors created by the [curve calculator]({{% relref "curvecalculator" %}}).
+- **Imported** -- Select observed data vectors [imported from file]({{% relref "observeddata" %}}) (e.g. CSV, RSM files)
 
 ### Summaries
 This field contains the summaries/vectors for the highlighted summary category.

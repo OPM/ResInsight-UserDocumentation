@@ -9,7 +9,7 @@ When text have been copied to the operating system's clipboard, it will be possi
 ## Paste Options Dialog
 ![](/images/import/PasteExcelData.png)
 
-Most of the fields in this dialog are the same as in the [CSV/txt import options dialog]({{< relref "observeddata" >}}#csv-txt-import-options-dialog). Please see that section for documentation on those fields. The fields specific to the paste options dialog are as follows:
+Most of the fields in this dialog are the same as in the [CSV/txt import options dialog]({{% relref "observeddata" %}}#csv-txt-import-options-dialog). Please see that section for documentation on those fields. The fields specific to the paste options dialog are as follows:
 
 - **Curve Prefix** -- Curve name prefix for all curves created from the pasted data.
 - **Line Style** -- Line style to use for the curves created from the pasted data.

@@ -9,9 +9,9 @@ weight = 10
 
 Two similar calculators use expressions, summary curve calculator and grid cell calculator. These two variants share the text parsing for calculator expressions.
 
-[Grid Property Calculator]({{< ref "GridPropertyCalculator.md" >}})
+[Grid Property Calculator]({{% ref "GridPropertyCalculator.md" %}})
 
-[Summary Curve Calculator]({{< ref "CurveCalculator.md" >}})
+[Summary Curve Calculator]({{% ref "CurveCalculator.md" %}})
 
 ResInsight supports a subset of the features supported in the **exprtk**  parsing library. Scripting features like for/while loops are not supported. The full documentation for the expression parser is available at [C++ Mathematical Expression Toolkit Library](https://github.com/ArashPartow/exprtk)
 

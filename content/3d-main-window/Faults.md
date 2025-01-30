@@ -10,9 +10,9 @@ This section describes how Faults are detected and visualized. NNC's are a part 
 
 **Related pages :**
 
-[Allan Diagrams]({{< relref "allandiagrams" >}})
+[Allan Diagrams]({{% relref "allandiagrams" %}})
 
-[Derived Results]({{< relref "derivedresults" >}}) 
+[Derived Results]({{% relref "derivedresults" %}}) 
 
 ## Fault Detection
 
@@ -41,7 +41,7 @@ As import of faults can be time consuming, reading of faults can be disabled fro
 If enabled in **Preferences**, ResInsight will read Non Neighbor Connections from the Eclipse output file (_`*.INIT`_), and create explicit visualizations of those. 
 The NNC's are sorted onto the Fault's and their visibility is controlled along with them.
 
-When the NNCs are imported from file, ResInsight will identify NNCs not defined in the input file (Faces with zero transmissibility is not exported from the simulator). See [Derived Results]({{< relref "derivedresults" >}}) for details on other NNC related results.
+When the NNCs are imported from file, ResInsight will identify NNCs not defined in the input file (Faces with zero transmissibility is not exported from the simulator). See [Derived Results]({{% relref "derivedresults" %}}) for details on other NNC related results.
 
 ### Information from `PFLOTRAN` simulations
 If the `*.DATA file` is not found, the folder is searched for `*.IN` file. This file is parsed based on the file structure of a **PFLOTRAN** simulation. Identified faults will be imported simular to the import from `*.DATA` files.
@@ -63,9 +63,9 @@ Each named Fault is given a color on import. This color can be controlled by sel
 ### Fault Result
 The default result mapping used on faults are to use the same as specified in **Cell Result**. If a different result mapping is wanted, enable the checkbox at **Fault Result** and select the result from the result selection dialog in the **Property Editor**. A second legend for the fault result is then added to the view.
 
-Please note that the groups [Fault Face Visibility]({{< relref "#fault-face-visibility" >}}) and [NNC Visibility]({{< relref "#nnc-visibility" >}}) are available below result selection.
+Please note that the groups [Fault Face Visibility]({{% relref "#fault-face-visibility" %}}) and [NNC Visibility]({{% relref "#nnc-visibility" %}}) are available below result selection.
 
-Useful NNC results are descrived in [Derived Results]({{< relref "derivedresults" >}}) 
+Useful NNC results are descrived in [Derived Results]({{% relref "derivedresults" %}}) 
 
 ### Toolbar Control
 Visualization mode and mesh lines can be controlled from the toolbar.

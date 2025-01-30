@@ -32,12 +32,12 @@ Description of the workflow:
 
 **Pressure Depth Data**
 
-A custom file format for [Pressure Depth Data]({{< relref "pressuredata" >}}) is supported.
+A custom file format for [Pressure Depth Data]({{% relref "pressuredata" %}}) is supported.
 
 
 **LAS Pressure Data**
 
-To be able to plot observed pressure data for a well in an RFT plot, at least one well log file from that well (e.g. \*.las) has to be imported to ResInsight. This file must contain a pressure column, which must have the name _PRESSURE_ or _PRES_FORM_. If the well log file itself does not contain a TVD column (named _TVDMSL_), a well path file (See [Well Trajectories]({{< relref "wellpaths" >}})) for the same well must also be imported to ResInsight.
+To be able to plot observed pressure data for a well in an RFT plot, at least one well log file from that well (e.g. \*.las) has to be imported to ResInsight. This file must contain a pressure column, which must have the name _PRESSURE_ or _PRES_FORM_. If the well log file itself does not contain a TVD column (named _TVDMSL_), a well path file (See [Well Trajectories]({{% relref "wellpaths" %}})) for the same well must also be imported to ResInsight.
 
 If no TVD data for a well is found when the user tries to plot a curve, ResInsight will present a warning dialog to the user.
 
@@ -83,7 +83,7 @@ This property editor lets the user control the visibility of formations lines. T
 
 ![](/images/plot-window/RftPltFormationNames.png)
 
-Please see the [full documentation]({{< relref "formations" >}}) on the formations property editor for details about formations.
+Please see the [full documentation]({{% relref "formations" %}}) on the formations property editor for details about formations.
 
 {{% notice note %}}
   When the formation names property editor is used in the context of RFT plots, the fields <b>Trajectory</b> and <b>Simulation Well</b> are hidden because those values are given by the RFT plot definition.

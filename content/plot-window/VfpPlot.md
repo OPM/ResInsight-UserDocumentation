@@ -45,7 +45,7 @@ Available controls for each VFP plot are:
 
 - **Curve Colors**: When curves are plotted, the curve color is taken from the depicted list of colors. The curve colors can be changed by the user.
 
-Most plot mouse interactions are available to VFP plots, c.f. [*Summary Plots*]({{< relref "summaryplots" >}}#plot-mouse-interaction).
+Most plot mouse interactions are available to VFP plots, c.f. [*Summary Plots*]({{% relref "summaryplots" %}}#plot-mouse-interaction).
 Notably, interactive value tracking and zoom is available and double-clicking a VFP plot resets zoom.
 
 ## Property Editor

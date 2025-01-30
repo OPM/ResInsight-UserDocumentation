@@ -59,6 +59,6 @@ The configuration flags for a basic build is given in `CMakePresets.json` in the
 
 Start Visual Studio, and open the ResInsight source folder. When you open the ResInsight folder for the first time, **vcpkg** may spend a few minutes building the required dependencies specified in `vcpkg.json`.
 
-[CMake Configuration]({{< relref "cmake-configuration" >}})
+[CMake Configuration]({{% relref "cmake-configuration" %}})
 
 [Configure and build with CMake Presets in Visual Studio](https://learn.microsoft.com/en-us/cpp/build/cmake-presets-vs?view=msvc-170)

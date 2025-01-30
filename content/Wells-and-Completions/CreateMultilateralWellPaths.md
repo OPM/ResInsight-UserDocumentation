@@ -6,11 +6,11 @@ weight = 32
 
 ![](/images/3d-main-window/MultiLateralWell_3d_view.png)
 
-ResInsight lets the user create additional well path laterals by clicking in the 3D view. Completions can be added to laterals, and the complete specification of the well can be exported using the [Completion Export]({{< relref "completionexport" >}})
+ResInsight lets the user create additional well path laterals by clicking in the 3D view. Completions can be added to laterals, and the complete specification of the well can be exported using the [Completion Export]({{% relref "completionexport" %}})
 
 ## Building a well path
 
-1. Start from an existing well path, either imported or [create a new well path]({{< relref "createnewwellpaths" >}}) 
+1. Start from an existing well path, either imported or [create a new well path]({{% relref "createnewwellpaths" %}}) 
 2. In the 3D view, right-click on the well path at the depth location for your lateral
 ![](/images/3d-main-window/MultiLateralWell_create.png)
 3. A new well path lateral is created, and click in the 3D scene to define targets for the lateral

@@ -51,4 +51,4 @@ Select the generated **Well Log Plot**. Adjust the data source to desired well o
 
 ## Related documents
 
-[Well Log Plots]({{< relref "WellLogsAndPlots.md" >}})
+[Well Log Plots]({{% relref "WellLogsAndPlots.md" %}})

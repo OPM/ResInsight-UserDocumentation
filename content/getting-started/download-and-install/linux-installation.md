@@ -32,7 +32,7 @@ For further installation details, see the ResInsight distribution on [Opm Projec
  
 {{% notice info %}}
 The binary distributions does not support ABAQUS odb files. For building ResInsight with ABAQUS support, see 
-[Build Instructions]({{< ref "cmake-configuration.md" >}}).
+[Build Instructions]({{% ref "cmake-configuration.md" %}}).
 {{% /notice %}}
 
 ## Custom Qt configuration

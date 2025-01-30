@@ -8,7 +8,7 @@ ResInsight supports several command line parameters that can be used to automate
 
 Command line parameters are prefixed using a double dash. This convention is used on all platforms to make it possible to reuse scripts across different platforms. See GNU Standards for [Command Line Interfaces](http://www.gnu.org/prep/standards/html_node/Command_002dLine-Interfaces.html#Command_002dLine-Interfaces).
 
-Examples on how command line options are used are given [below]({{< relref "commandlineinterface" >}}#examples)
+Examples on how command line options are used are given [below]({{% relref "commandlineinterface" %}}#examples)
 
 
 ## Command line options
@@ -29,7 +29,7 @@ Examples on how command line options are used are given [below]({{< relref "comm
 
 | Parameter | Description |
 |-----------|-------------|
-| &#45;&#45;commandFile &lt;commandFile&gt; | Execute a command file. See [command file documentation.]({{< relref "commandfile" >}}) |
+| &#45;&#45;commandFile &lt;commandFile&gt; | Execute a command file. See [command file documentation.]({{% relref "commandfile" %}}) |
 | &#45;&#45;commandFileProject &lt;filename&gt; | Project to use if performing case looping for command file. Used in conjunction with `commandFileReplaceCases`. |
 
 ### Snapshots
@@ -87,7 +87,7 @@ Wildcards can be used in the specification. Brief examples are:
 - `FOPT FWPT`: Two curves with oil and water total production.
 - `BPR:15,28,*`: Oil phase pressure for all blocks along k as separate curves. Please note no space in expression.
 
-[Examples]({{< relref "commandlineinterface#summary-plotting-1" >}}) are listed below.
+[Examples]({{% relref "commandlineinterface#summary-plotting-1" %}}) are listed below.
 
 As long as only summary vectors are requested, only the corresponding SMSPEC file will be opened for each case.
 However, if a grid property is requested, the corresponding EGRID and restart data will be loaded as well.
@@ -115,7 +115,7 @@ Specifying summary plot options is optional, c.f. table below.
 | &#45;&#45;unittest | Execute integration tests |
 | &#45;&#45;ignoreArgs | System command |
 
-See also the [Regression Test System ]({{< relref "regressiontestsystem" >}}) for a more in-depth explanation.
+See also the [Regression Test System ]({{% relref "regressiontestsystem" %}}) for a more in-depth explanation.
 
 
 ## Examples 
@@ -183,13 +183,13 @@ The possibility to replace multiple cases can also be applied for single case re
 
 ### Summary plotting
 
-The following command line performs a [summary plot]({{< relref "summaryplots" >}}) for *FOPT* based on Eclipse summary file *1_R001_REEK-0.SMSPEC*.
+The following command line performs a [summary plot]({{% relref "summaryplots" %}}) for *FOPT* based on Eclipse summary file *1_R001_REEK-0.SMSPEC*.
 
 ```txt
 ResInsight --summaryplot FOPT 1_R001_REEK-0 
 ```
 
-Based on file *1_R001_REEK-0.SMSPEC*, the following command line performs a [summary plot]({{< relref "summaryplots" >}}) 
+Based on file *1_R001_REEK-0.SMSPEC*, the following command line performs a [summary plot]({{% relref "summaryplots" %}}) 
 for *FOPT* and any *WOPT*-vector for well *op_2*.
 The trailing option *-s* gathers the vectors into a single summary plot.
 ```txt

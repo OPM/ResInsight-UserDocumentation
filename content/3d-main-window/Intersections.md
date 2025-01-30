@@ -9,11 +9,11 @@ weight = 80
 Intersections are cross sections of a grid model that cut the grid in various ways to display grid cell values. 
 There are two main types of intersections: 
 
-1. **Intersection**: is defined by a piece-wise linear curve and a direction of extrusion. The curve can be either a simulation well, a well path, a user defined polyline, or a user defined line. An intersection can also be shown in a separate [2D Intersection View]({{< relref "intersections" >}}#2d-intersection-views).
+1. **Intersection**: is defined by a piece-wise linear curve and a direction of extrusion. The curve can be either a simulation well, a well path, a user defined polyline, or a user defined line. An intersection can also be shown in a separate [2D Intersection View]({{% relref "intersections" %}}#2d-intersection-views).
 
 1. **Intersection Box**: can be used as a box cutting grid cells or collapsed to a restricted axis aligned plane. 
 
-Structural uncertainty can be visualized on intersections as described in [Ensemble Surface]({{< relref "ensemblesurface" >}}).
+Structural uncertainty can be visualized on intersections as described in [Ensemble Surface]({{% relref "ensemblesurface" %}}).
 
 All types of intersections are stored in the folder **Intersections** of a **View**. An intersection may be copied to other views by the menu option **Copy intersections to all views in case** in the right-click menu.
 
@@ -74,7 +74,7 @@ The points in the list can be deleted and edited using the keyboard. To append m
 The point list can be copied to clipboard using **CTRL-C** when in keyboard focus. A new list of points can be pasted into the point list by using **CTRL-V**.
 
 ### Polygon Intersection
-A polyline or polygon intersection can also be based on a [Polygons]({{< relref "polygons" >}}) in the project. The polygon is then used as the polyline. This is done by selecting the polygon in the **Property Editor**.
+A polyline or polygon intersection can also be based on a [Polygons]({{% relref "polygons" %}}) in the project. The polygon is then used as the polyline. This is done by selecting the polygon in the **Property Editor**.
 
 ![](/images/3d-main-window/IntersectionProjectPolygon.png)
 
@@ -138,7 +138,7 @@ The view is mostly controlled by the options in the 3D view where the intersecti
 - **Defining Points**
   - **Show points** -- Toggle the display of the defining points for Polyline or Azimuth and Dip intersections.
 
-These options are similar to the options for a regular 3D view (See [View Properties]({{< relref "3dviews" >}}#view-properties) ) 
+These options are similar to the options for a regular 3D view (See [View Properties]({{% relref "3dviews" %}}#view-properties) ) 
 
 ## Intersection Box and Intersection Planes
 
@@ -171,7 +171,7 @@ Depth filtering is performed by selecting an intersection in **Project Tree** an
 - **Between**: show between the specified *Upper Depth* and the specified *Lower Depth*
 
 An intersection can be also be visually filtered by a user defined **K Range Filter**. 
-K Range filtering is performed by enabling **K Range Filter** of an intersection. The filtering is defined using a text string, i.e. "5,10-15,20:3", see [Advanced Text Input]({{< relref "advancedtextinput" >}}) for details.
+K Range filtering is performed by enabling **K Range Filter** of an intersection. The filtering is defined using a text string, i.e. "5,10-15,20:3", see [Advanced Text Input]({{% relref "advancedtextinput" %}}) for details.
 
 ![](/images/3d-main-window/IntersectionPropEdDepthFilter.png)
 

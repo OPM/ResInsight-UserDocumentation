@@ -88,7 +88,7 @@ This property editor lets the user control how formations are handled. This is w
 
 ![](/images/plot-window/RftPltFormationNames.png)
 
-Please see the [full documentation]({{< relref "formations" >}}) on the formations property editor for details.
+Please see the [full documentation]({{% relref "formations" %}}) on the formations property editor for details.
 
 {{% notice note %}}
   When the formation names property editor is used in the context of PLT plots, the fields <b>Trajectory</b> and <b>Simulation Well</b> are hidden because those values are given by the PLT plot definition.

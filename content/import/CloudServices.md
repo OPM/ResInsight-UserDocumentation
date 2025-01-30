@@ -6,7 +6,7 @@ weight = 10
  
 ![](/images/cloud-services/sumo-summary-plot.png)
 
-Configuration of cloud services is described in [Cloud Services - Authorization]({{< relref "cloudservicesauthorization" >}}).
+Configuration of cloud services is described in [Cloud Services - Authorization]({{% relref "cloudservicesauthorization" %}}).
 
 
 ## Summary Ensembles from SUMO

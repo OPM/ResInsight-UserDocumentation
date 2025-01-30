@@ -11,9 +11,9 @@ hidden = true
 
 ResInsight now offers the option to import geometry exclusively for active cells. This feature is particularly beneficial for large grids where active cells constitute only a small fraction of the total, significantly reducing memory usage. This optimization ensures efficient handling of large models while maintaining full functionality for active cells.
 
-[Preferences]({{< relref "preferences" >}}#grid)
+[Preferences]({{% relref "preferences" %}}#grid)
 
-[Performance Hints]({{< relref "performancehints" >}})
+[Performance Hints]({{% relref "performancehints" %}})
 
 ## Quick Access View
 
@@ -23,7 +23,7 @@ For large projects with numerous views and grid models, navigating to specific i
 
 By default, the **Quick Access** dialog is located to the right of the 3D views.  
 
-[Quick Access]({{< relref "quickaccess" >}})
+[Quick Access]({{% relref "quickaccess" %}})
 
 ## Cloud Services
 
@@ -31,9 +31,9 @@ By default, the **Quick Access** dialog is located to the right of the 3D views.
 
 When accessing cloud services, an authentication token is saved to a file in your home folder. Occasionally, this token may become invalid, leading to a failure in establishing a cloud connection. If this occurs, you can resolve the issue by using the **Delete Token** button in the **Preferences** menu. Once the token is deleted, the authentication dialog will appear the next time you attempt to access cloud services, and a new token will be generated automatically.
 
-[Cloud Services]({{< relref "cloudservices" >}})
+[Cloud Services]({{% relref "cloudservices" %}})
 
-[Cloud Services Preferences]({{< relref "preferences" >}}#importexport)
+[Cloud Services Preferences]({{% relref "preferences" %}}#importexport)
 
 ## Framework Updates
 Qt has been upgraded from version 5 to version 6, bringing significant changes that impact several aspects of ResInsight, particularly its application engine. This update affects certain visual features of the user interface:  
@@ -43,7 +43,7 @@ Qt has been upgraded from version 5 to version 6, bringing significant changes t
 
 Additionally, the build instructions have been updated to align with Qt 6. Building with Qt 5 is no longer supported.
 
-[Build Instructions Ubuntu]({{< relref "build-instructions-ubuntu" >}})
+[Build Instructions Ubuntu]({{% relref "build-instructions-ubuntu" %}})
 
 ## Other improvements
 - Summary Table: Add user option to set time range on x-axis [#11803](https://github.com/OPM/ResInsight/issues/11803)

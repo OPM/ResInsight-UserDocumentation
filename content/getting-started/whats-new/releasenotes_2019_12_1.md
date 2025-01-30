@@ -19,9 +19,9 @@ Version 2019.12.1 consists of a few critical issues and minor functionality chan
 ### WELSEGS 
 Output of segment depth is based on center of segment. Previously the segment end was reported.
 
-[ Export of Completions and MSW ]({{< ref "completionexport.md#exported-msw-data" >}})
+[ Export of Completions and MSW ]({{% ref "completionexport.md#exported-msw-data" %}})
 
 ### Multiple completions in same cell
 In previous releases, no connection factor has been reported if multiple fracture completions has been detected in the same cell. Now, when multiple fracture are detected, they are combined and reported similar to other completion types.
 
-[ Export of Completions ]({{< ref "completionexport.md" >}})
+[ Export of Completions ]({{% ref "completionexport.md" %}})

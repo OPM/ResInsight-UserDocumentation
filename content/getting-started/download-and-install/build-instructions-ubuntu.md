@@ -90,4 +90,4 @@ Set current working folder to the root folder of the ResInsight repository. Exec
     cd build
     ninja
 
-[CMake Configuration]({{< relref "cmake-configuration" >}})
+[CMake Configuration]({{% relref "cmake-configuration" %}})

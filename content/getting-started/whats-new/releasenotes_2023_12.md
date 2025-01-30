@@ -9,15 +9,15 @@ hidden = true
 
 ## Grid Calculations
 
-- [Grid Property Calculations]({{< relref "gridpropertycalculator" >}}) can now be applied to multiple grid cases.
-- A grid calculation can be used as data source for [Grid Case Statistics]({{< relref "casegroupsandstatistics" >}}). The data source for statistics computations can either be a cell property or a grid calculation expression.
+- [Grid Property Calculations]({{% relref "gridpropertycalculator" %}}) can now be applied to multiple grid cases.
+- A grid calculation can be used as data source for [Grid Case Statistics]({{% relref "casegroupsandstatistics" %}}). The data source for statistics computations can either be a cell property or a grid calculation expression.
 - Time step selection is added to the **Grid Case Statistics** settings to reduce computation demand.
 - Expressions can be stored to a file and loaded from a file. This makes it possible to reuse expressions in multiple projects.
  
 ## Aggregated Grid Calculations
 When using a aggregation expression like **sum** the resulting value will be available as a cell result (the single value is duplicated and displayed for all cells used in the calculation). If the calculation is applied to multiple grids, the aggregated value for each realization will be displayed in the **Messages** dialog. For each time step, the statistical values are also computed and displayed as text.
 
-[Aggregation of Grid Cell Values Example]({{< relref "aggregationofgridcellvalues" >}})
+[Aggregation of Grid Cell Values Example]({{% relref "aggregationofgridcellvalues" %}})
 
 ## Summary Improvements
 - The summary plot editor has been reworked to make it easier to use and to make it more consistent with the generated plots. The preview plot title is removed, and preview curves are using multiple axes similar to other plots.
@@ -31,7 +31,7 @@ Multiple RFT plots can now be created using the **Create Multiple RFT Plots** me
 
 ## Other improvements
 - Fixed a crash issue when using the summary toolbar
-- Fixed a crash when toggling on [Well Allocation Over Time]({{< relref "wellallocationovertimeplot" >}}) plot
+- Fixed a crash when toggling on [Well Allocation Over Time]({{% relref "wellallocationovertimeplot" %}}) plot
 - Regression Analysis: Fixed crash after modifying the expression
 - Completion export: Exclude COMPDAT for deactivated laterals
 

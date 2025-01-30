@@ -187,8 +187,8 @@ COMPDATL
 The previous section describes the export of COMPDATL for completions intersecting existing LGRs, loaded from file. This section will describe how to have ResInsight create temporary LGRs around completions, and then export COMPDATL for those LGRs.
 To accomplish this, do the following:
 
-- Create LGRs for completions on selected well paths. See [Completions LGR]({{< relref "completionslgr" >}})
-- Export completions the usual way. See [Completion Export]({{< relref "completionexport" >}})
+- Create LGRs for completions on selected well paths. See [Completions LGR]({{% relref "completionslgr" %}})
+- Export completions the usual way. See [Completion Export]({{% relref "completionexport" %}})
 
 {{% notice info %}}
 In addition to the completion data, the geometrical definition of all temporary LGRs is also exported into "*.dat" files.

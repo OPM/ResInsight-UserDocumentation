@@ -7,7 +7,7 @@ weight = 40
 ![](/images/3d-main-window/ContourMaps.png)
 
 ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
-ResInsight is able to [export a contour map]({{< relref "contourmapexport" >}}) to a text file. 
+ResInsight is able to [export a contour map]({{% relref "contourmapexport" %}}) to a text file. 
 
 ## Creating New Contour Maps
 
@@ -68,9 +68,9 @@ For the **Arithmetic Mean**, **Geometric Mean** and **Harmonic Mean** it is also
 Creating a Contour Map as a difference with a specific base case and/or base time step is performed by clicking the 
 {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** item
 underneath the actual **Contour Map** in the project tree. This will display the {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** [Property Editor]
-({{< relref "cellresults" >}}#eclipse-result-types) to specify base case and/or base time step.
+({{% relref "cellresults" %}}#eclipse-result-types) to specify base case and/or base time step.
 
 
 ## Contour Map Export
 
-ResInsight is able to [export a contour map]({{< relref "contourmapexport" >}}) to a text file. 
+ResInsight is able to [export a contour map]({{% relref "contourmapexport" %}}) to a text file. 

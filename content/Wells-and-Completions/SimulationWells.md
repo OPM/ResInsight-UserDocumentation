@@ -12,21 +12,21 @@ This section describes how wells defined in the simulation are displayed, and ho
 
 Several commands are available as right-click commands on a simulation well. These commands are available either by right-clicking  the well in the **3D View** or in the **Project Tree**.
 
-- **New Well Log Extraction Curve** -- Creates a new Well Log curve based on the selected simulation well, the current time step and cell property.  ( See [Well Log Plots]({{< relref "welllogsandplots" >}}#well-log-extraction-curves) )
-- **New Well Log RFT Curve** -- Creates a new RFT curve in a well log plot based on the selected simulation well. This option is only present if the current simulation well has RFT data. ( See [Well Log Plots]({{< relref "welllogsandplots" >}}#well-log-rft-curves) )
-- **New RFT Plot** --  See [Well Log Plots]({{< relref "rftplot" >}}.
+- **New Well Log Extraction Curve** -- Creates a new Well Log curve based on the selected simulation well, the current time step and cell property.  ( See [Well Log Plots]({{% relref "welllogsandplots" %}}#well-log-extraction-curves) )
+- **New Well Log RFT Curve** -- Creates a new RFT curve in a well log plot based on the selected simulation well. This option is only present if the current simulation well has RFT data. ( See [Well Log Plots]({{% relref "welllogsandplots" %}}#well-log-rft-curves) )
+- **New RFT Plot** --  See [Well Log Plots]({{% relref "rftplot" %}}.
 - **Plot Production Rates** -- Creates a summary plot of the selected wells production rates, along  with the bottom hole pressure.  
-  ( See [Summary Plots]({{< relref "summaryplots" >}}) ) 
+  ( See [Summary Plots]({{% relref "summaryplots" %}}) ) 
 - **Plot Well Allocation** -- Creates or modifies the default Well Allocation Plot to show the well.
   allocation for the selected well. If the case has no Fluxes the well flow rates are shown instead.  
-  ( See [ Flow Diagnostics Plots ]({{< relref "flow-diagnostics-plots" >}}) )
+  ( See [ Flow Diagnostics Plots ]({{% relref "flow-diagnostics-plots" %}}) )
 - **Show Contributing Wells** -- This command sets up a 3D View by adding filters and modifying the Cell Result based on Flow Diagnostic Calculations to show which regions and wells that contribute to the selected well by doing:
    - Add a property filter of **Time Of Flight** to/from the selected well to show only the cells that contribute to/are influenced by the well.
    - Sets the **Cell Result** to show **Tracer With Max Fraction** based on **All Injectors** or **All Producers** (the opposite of the selected well)
    - Toggles the visibility of the other Simulation wells to show only wells contributing to/influenced by the selected well.
-- **New Fracture** -- Creates a new fracture along the simulation well. (See [Fracture instances]({{< relref "welllogsandplots" >}}#fracture-instances))
+- **New Fracture** -- Creates a new fracture along the simulation well. (See [Fracture instances]({{% relref "welllogsandplots" %}}#fracture-instances))
 - **New Intersection** -- creates a new intersection based on the selected simulation well.  
-  ( See [Well Log Plots]({{< relref "intersections" >}}) )
+  ( See [Well Log Plots]({{% relref "intersections" %}}) )
   
 ## Overall Settings for Simulation Wells
 
@@ -129,7 +129,7 @@ The **Size Scaling** options, however, works relative to the scaling level set o
 
 ResInsight reads the MSW information in the result files and uses that to create a topologically correct visualization of the Multi Segment Well. Valves are visulized on the pipe geometry.
 
-Reading this information is somewhat time consuming, and can be turned off in [ Preferences ]({{< relref "preferences" >}}).
+Reading this information is somewhat time consuming, and can be turned off in [ Preferences ]({{% relref "preferences" %}}).
 
 ### Geometry Approximation
 If the import of MSW data is disabled, or MSW data is not present, the topology of the well is estimated. This feature works in most cases, but can generate invalid well geometry in some cases.

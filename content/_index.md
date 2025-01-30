@@ -40,7 +40,7 @@ title = "ResInsight"
       <a href="{{< ref "getting-started" >}}">Getting Started &rarr;</a>
       <p>Sign up to be notified of new releases:
         <br>
-        <a href="{{< relref "releasenotification" >}}">Release Notification &rarr;</a>
+        <a href="{{% relref "releasenotification" %}}">Release Notification &rarr;</a>
       </p>
       </div>
     <div class="clear"></div>
@@ -48,7 +48,7 @@ title = "ResInsight"
 
   <div class="grid">
     <div class="unit whole center-on-mobiles">
-      <p>Here are some words from a few of the happy ResInsight users <a href="{{< relref "testimonials" >}}">Testimonials &rarr;</a> </p>
+      <p>Here are some words from a few of the happy ResInsight users <a href="{{% relref "testimonials" %}}">Testimonials &rarr;</a> </p>
     </div>
   </div>
 </section>

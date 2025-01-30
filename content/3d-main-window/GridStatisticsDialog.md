@@ -6,7 +6,7 @@ weight = 158
 
 ![](/images/3d-main-window/GridStatisticsDialog.png)
 
-ResInsight 3D Views has an [info box]({{< relref "3dviews" >}}#info-box) in the upper right corner displaying statistics for the current view. A more detailed version of this information may also be displayed in a separate dialog window. Right click on the 3D view background and select **Grid Statistics** to bring up the dialog.
+ResInsight 3D Views has an [info box]({{% relref "3dviews" %}}#info-box) in the upper right corner displaying statistics for the current view. A more detailed version of this information may also be displayed in a separate dialog window. Right click on the 3D view background and select **Grid Statistics** to bring up the dialog.
 
 ## Grid Statistics Dialog Fields
 The dialog consist of three information parts.
@@ -42,6 +42,6 @@ The options in the Visibility group apply to the info box only and do not affect
 The Grid Statistics dialog has a toolbar containing two buttons for snapshot functionality. The leftmost button copies a snapshot of the dialog contents to the operating system's clipboard, while the rightmost button creates a file containing the snapshot.
 
 {{% notice note %}}
-The main window also has a snapshot toolbar containing the button <a href="{{< relref "snapshots" >}}#snapshot-all-viewsplots-to-file-">Snapshot All Views</a>. This button will include a snapshot of the Grid Statistics dialog if opened.
+The main window also has a snapshot toolbar containing the button <a href="{{% relref "snapshots" %}}#snapshot-all-viewsplots-to-file-">Snapshot All Views</a>. This button will include a snapshot of the Grid Statistics dialog if opened.
 {{% /notice %}}
 

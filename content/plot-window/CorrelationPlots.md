@@ -13,7 +13,7 @@ Several visualizations can be created, including tornado plots, correlation matr
 ## Creating a Correlation Plot
 
 The most convenient way to create a Correlation Plot at a given time step is often to right-click an 
-[Ensemble Plot]({{< relref "ensembleplotting" >}}) and invoke the submenu shown below. 
+[Ensemble Plot]({{% relref "ensembleplotting" %}}) and invoke the submenu shown below. 
 
 ![](/images/plot-window/CorrelationPlotsCreateFromEnsemblePlot.png)
 

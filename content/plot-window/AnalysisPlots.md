@@ -12,7 +12,7 @@ Analysis Plots are bar charts used to compare summary data at specific timesteps
 ## Creating an Analysis Plot
 
 The most convenient way to create an Analysis Plot at a given time step is often to right-click an 
-[Ensemble Plot]({{< relref "ensembleplotting" >}}) and invoke *New Analysis Plot* as shown below. 
+[Ensemble Plot]({{% relref "ensembleplotting" %}}) and invoke *New Analysis Plot* as shown below. 
 
 ![](/images/plot-window/AnalysisPlotsCreateFromEnsemblePlot.png)
 

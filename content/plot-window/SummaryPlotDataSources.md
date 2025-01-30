@@ -9,7 +9,7 @@ weight = 12
 **Data Sources** provides an overview of all data sources for summary plots by category to provide search, selection, and essential functionality pertinent to summary cases. 
 
 As seen above, **Data Sources** enables search and sourcing of data from case, field, regions, wells, groups, or ensemble.
-See [Summary Plots]({{< relref "summaryplots" >}}) which illustrates use of **Data Sources** for effective search and selection of data for summary plots.
+See [Summary Plots]({{% relref "summaryplots" %}}) which illustrates use of **Data Sources** for effective search and selection of data for summary plots.
 
 
 ## Searching for data sources
@@ -38,7 +38,7 @@ An existing delta summary case may be input to a new delta summary case.
 
 
 ### Curve calculator
-The [Curve Calculator]({{< relref "curvecalculator" >}})
+The [Curve Calculator]({{% relref "curvecalculator" %}})
 is a tool to perform vector calculations on a set of curves. The created curves can be stored for later use.
 
 
@@ -50,5 +50,5 @@ Right-clicking a specific *Summary Case* in **Data Sources** displays the functi
 
 The highlighted menu item, right-clicking a summary case in **Data Sources** and select *Replace* will redisplay all configured plots with data from another case.
 
-Please also note the menu options to create summary plot from [Template]({{< relref "summaryplottemplate" >}}) which is a powerful and effective way to create summary plots with a specific appearance and content. When invoking a well-specific template on Summary Case level as shown above, the convention is that ResInsight selects the first well listed under {{< image-in-text src="images/plot-window/DataSourcesWell.png" >}} as data source.
+Please also note the menu options to create summary plot from [Template]({{% relref "summaryplottemplate" %}}) which is a powerful and effective way to create summary plots with a specific appearance and content. When invoking a well-specific template on Summary Case level as shown above, the convention is that ResInsight selects the first well listed under {{< image-in-text src="images/plot-window/DataSourcesWell.png" >}} as data source.
 

@@ -15,7 +15,7 @@ The calculator can be run by pressing the calculator icon {{< image-in-text src=
 
 Expressions can be saved to a text file using the **Export Calculations** button. The default location for calculations can be set in **Preference->Import/Export**.
 
-More details on mathematical operations are described in [Calculator Expressions]({{< ref "CalculatorExpressions.md" >}})
+More details on mathematical operations are described in [Calculator Expressions]({{% ref "CalculatorExpressions.md" %}})
 
 ## Calculation Settings
 To make a new calculated curve, click on **New Calculation**. This will add a new calculation to **Calculated Summaries**. Before choosing which curves to do calculations on, a calculation expression must be made. The default expression *Calculation_1 := x + y* will do a vector addition on the curves which *x* and *y* are placeholders for, and assign it to the calculation *Calculation_1*. 
@@ -45,4 +45,4 @@ All calculation expressions are available for ensemble plotting. Use the calcula
 
 
 ## References
-The similar concept is also used for [Grid Property Calculator]({{< ref "GridPropertyCalculator.md" >}})
+The similar concept is also used for [Grid Property Calculator]({{% ref "GridPropertyCalculator.md" %}})

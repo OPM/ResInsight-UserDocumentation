@@ -7,11 +7,11 @@ weight = 10
 ![](/images/plot-window/SummaryPlotsMain.png)
 
 Summary Plots are a display of curves based on 
-[Eclipse Summary Data]({{< relref "eclipsesummarydata" >}})
+[Eclipse Summary Data]({{% relref "eclipsesummarydata" %}})
 which can be combined with 
-[imported observed data]({{< relref "observeddata" >}}), 
-[grid cell time history curve]({{< relref "resultinspection" >}}#result-plot), and 
-[pasted ascii curves]({{< relref "pasteexceltimedata" >}}). 
+[imported observed data]({{% relref "observeddata" %}}), 
+[grid cell time history curve]({{% relref "resultinspection" %}}#result-plot), and 
+[pasted ascii curves]({{% relref "pasteexceltimedata" %}}). 
 
 
 Summary plots are displayed on screen by maximum four rows by four columns of plots. 
@@ -20,11 +20,11 @@ As shown in the screenshot above, essential helpers for setup of Summary Plots a
 
 - **Plots**: overview of established plots and their components
 - **Property Editor**: settings for titles, legends, layout, axes, and appearance
-- [**Data Sources**]({{< relref "summaryplotdatasources" >}}):
+- [**Data Sources**]({{% relref "summaryplotdatasources" %}}):
 searching and sourcing data from case, field, regions, wells, groups, or ensemble
-- [**Templates**]({{< relref "summaryplottemplate" >}}):
+- [**Templates**]({{% relref "summaryplottemplate" %}}):
 overview, management and use of templates for summary plotting
-- [**Plot Manager**]({{< relref "summaryplotmanager" >}}):
+- [**Plot Manager**]({{% relref "summaryplotmanager" %}}):
 powerful text-based selection of vectors for summary plotting
 
 Essential actions are presented as controls in the toolbar to increase productivity and ease of use.
@@ -33,7 +33,7 @@ Essential actions are presented as controls in the toolbar to increase productiv
 ## Creating Summary Plots
 
 ### Using Data Sources to create Summary Plots
-Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), [**Data Sources**]({{< relref "summaryplotdatasources" >}}) provides an easy approach to create Summary Plots:
+Having imported [Eclipse Summary Data]({{% relref "eclipsesummarydata" %}}), [**Data Sources**]({{% relref "summaryplotdatasources" %}}) provides an easy approach to create Summary Plots:
 
 - Search or navigate **Data Sources** to find the desired source(s) and vector(s)
 - *Right-click* selected vector(s) and select **New Summary Plot** 
@@ -48,15 +48,15 @@ ResInsight will automatically make new axes if necessary. If units are the same 
 
 ### Using Plot Manager to create Summary Plots
 
-Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), the 
-[**Plot Manager**]({{< relref "summaryplotmanager" >}}) 
+Having imported [Eclipse Summary Data]({{% relref "eclipsesummarydata" %}}), the 
+[**Plot Manager**]({{% relref "summaryplotmanager" %}}) 
 provides an alternative and powerful approach to create Summary Plots by text-based selection of data sources and vectors to plot.
 
 
 ## Summary Plots and Functionality 
 
 ### Multiple Summary Plots and Curves
-The [**Data Sources**]({{< relref "summaryplotdatasources" >}}) window enables efficient creation of multiple plots and curves by Right-clicking:
+The [**Data Sources**]({{% relref "summaryplotdatasources" %}}) window enables efficient creation of multiple plots and curves by Right-clicking:
 
 - Use *Append Curves* to append curves for the selected vectors into all existing plots.
 - Use *Append Plots for Wells* to create separate plots for the selected vectors.
@@ -75,7 +75,7 @@ Subsequently, you may:
 - Use keyboard PgUp/PgDown or scroll wheel to browse and validate the pages of plots
 - Snapshot the curves or export to PDF-file via the toolbar-buttons {{< image-in-text src="images/plot-window/SummaryPlotToolbarSnapshot.png" >}} or *Edit* menu
 
-The data source of displayed curves is rapidly changed by [Summary Plot Source Stepping]({{< relref "SummarySourceStepping.md" >}}).
+The data source of displayed curves is rapidly changed by [Summary Plot Source Stepping]({{% relref "SummarySourceStepping.md" %}}).
 
 ### Visual comparison of multiple summary curves
 ResInsight may ease comparison of multiple summary curves by selecting a plot in **Plots** and using the settings in **Property Editor** group **Axes**.
@@ -207,7 +207,7 @@ max/max range, and font size.
 
 ### Changing content of a Summary Plot
 Right-clicking an existing summary plot in **Plots** and selecting *Edit Summary Plot* initiates the 
-[*Summary Plot Editor*]({{< relref "summaryploteditor" >}}) which offers complete functionality to navigate and select vectors from all summary types.
+[*Summary Plot Editor*]({{% relref "summaryploteditor" %}}) which offers complete functionality to navigate and select vectors from all summary types.
 
 
 

@@ -2,4 +2,4 @@
 
 +++
 
-<a href="{{< relref "" >}}">![logo](/images/ResInsightCroppedIconPicture.png)</a>
+<a href="{{% relref "" %}}">![logo](/images/ResInsightCroppedIconPicture.png)</a>

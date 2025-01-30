@@ -15,7 +15,7 @@ As shown above, the Legend configuration for cell results allows the following s
 - **Number of levels** -- Defines the number of tick marks displayed next to the color legend
 - **Significant digits** -- Defines the number of significant digits in the number formatting
 - **Number format** -- Defines how the numbers are formatted
-- **Colors** -- Defines the color palette for the legend by selecting from [Color Legends]({{< relref "colorlegends" >}})
+- **Colors** -- Defines the color palette for the legend by selecting from [Color Legends]({{% relref "colorlegends" %}})
 - **Mapping** -- Defines the mapping of numerical values to legend colors:
   - **Discrete Linear** -- Legend divided into linear levels defined by **Number of levels**
   - **Continuous Linear** -- Continuous linear legend with tick mark count defined by **Number of levels**
@@ -28,7 +28,7 @@ As shown above, the Legend configuration for cell results allows the following s
   - **User Defined Range** -- user specified range from minimum to maximum numerical value
 
 Furthermore, the legend may display semi-transparent with a sorrounding box by selecting the **Show Box around Legends** option of the 
-[Preferences dialog]({{< relref "preferences" >}}).
+[Preferences dialog]({{% relref "preferences" %}}).
 
 ![Legend Background](/images/3d-main-window/legend_background.png) ![Show Box around legends](/images/3d-main-window/legend_with_background.png)
 
@@ -43,7 +43,7 @@ Here the default **Category Mode** *Interpolate* is shown to color all formation
 
 In the example below, the **Category Mode** *Exclusively Category Colors* has been selected to produce a 3D visualization of formations according to the category numbers of *Selected Formations Legend*. 
 As seen, formations according to the category numbers are displayed in colors while the others are displayed in grey. 
-Please see [Color Legends]({{< relref "colorlegends" >}}) for more information about legends and category numbers.
+Please see [Color Legends]({{% relref "colorlegends" %}}) for more information about legends and category numbers.
 
 ![Legend Configuration](/images/3d-main-window/LegendConfigCategoryExclusive.png)
 

@@ -12,7 +12,7 @@ When possible, ResInsight avoids loading the grid when reading ensemble RFT data
 
 ## Create New Ensemble RFT Plot
 
-When a [summary ensemble has been imported]({{< relref "ensembleplotting" >}}#import),
+When a [summary ensemble has been imported]({{% relref "ensembleplotting" %}}#import),
 observed FMU data can be imported via right-clicking **Observed Data** in the **Plot Project Tree**, 
 and selecting **Import Observed FMU Data**.
 
@@ -61,11 +61,11 @@ Each time step is postfixed by letter(s) to indicate source type(s) of each time
 More than one letter for one single time step, means that the time step comes from multiple case types.
 
 ### Zonation/Formation Names
-The display of formations lines is controlled in the same manner as for [RFT plots]({{< relref "RftPlot" >}}#zonation-formation-names).
-Please see the [full documentation]({{< relref "formations" >}}) of the formations property editor for details about formations.
+The display of formations lines is controlled in the same manner as for [RFT plots]({{% relref "RftPlot" %}}#zonation-formation-names).
+Please see the [full documentation]({{% relref "formations" %}}) of the formations property editor for details about formations.
 
 ### Legend and Axis
-Visual properties of legend and axes is controlled in the same manner as for [RFT plots]({{< relref "RftPlot" >}}#legend-and-axis).
+Visual properties of legend and axes is controlled in the same manner as for [RFT plots]({{% relref "RftPlot" %}}#legend-and-axis).
 
 ### Color by Ensemble Parameter
 One ensemble parameter is selected to control coloring. The ensemble parameter value for each case is used to pick a color in a color range. In this case a color legend appears.

@@ -6,7 +6,7 @@ weight = 46
 
 ![](/images/plot-window/Summary_Table_WOPR.png)
 
-**Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*,  *Group* or *Region*.
+**Summary Tables** are a display of curve data based on [Eclipse Summary Data]({{% relref "eclipsesummarydata" %}}) as a color map in table format. It shows summary data of vectors for the selectable categories: *Well*,  *Group* or *Region*.
 
 Summary tables are displayed with the summary vectors on each row, and time step values according to selected *Date Resampling* in each column - as shown with resampling *Year* in the screenshot above.
 
@@ -15,7 +15,7 @@ The table can be formatted by use of the **Property Editor**, shown below. Colum
 ## Creating Summary Tables
 
 ### Using Data Sources to create Summary Tables
-Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), [**Data Sources**]({{< relref "summaryplotdatasources" >}}) provides an easy approach to create Summary Tables:
+Having imported [Eclipse Summary Data]({{% relref "eclipsesummarydata" %}}), [**Data Sources**]({{% relref "summaryplotdatasources" %}}) provides an easy approach to create Summary Tables:
 
 - Search or navigate **Data Sources** to find the desired source and vector
 - *Right-click* selected vector and select **New Summary Table** 
@@ -25,7 +25,7 @@ Having imported [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}}), [**
 
 
 ### Duplicate Summary Table
-When a Summary Table is created and configured, the table can be duplicated by *Right-click* on the respective table in the [Project Tree]({{< relref "projecttree" >}}) and selecting **Duplicate Summary Table**. This creates a new Summary Table with the same configuration, and a new table can be created with minor adjustments in the *Property Editor*.
+When a Summary Table is created and configured, the table can be duplicated by *Right-click* on the respective table in the [Project Tree]({{% relref "projecttree" %}}) and selecting **Duplicate Summary Table**. This creates a new Summary Table with the same configuration, and a new table can be created with minor adjustments in the *Property Editor*.
 
 ![](/images/plot-window/Summary_Table_DuplicateSummaryTable.png)
 

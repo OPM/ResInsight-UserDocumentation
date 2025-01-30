@@ -6,7 +6,7 @@ weight = 30
 
 
 
-ResInsight comes with four navigation modes. The active mode can be selected in the [Preferences dialog] ({{< ref "preferences.md" >}}).
+ResInsight comes with four navigation modes. The active mode can be selected in the [Preferences dialog] ({{% ref "preferences.md" %}}).
 
 Note that changing the navigation mode applies to the currently active view only, and views created after the change.
 

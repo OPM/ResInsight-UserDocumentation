@@ -52,6 +52,6 @@ An **Ensemble Surface** can be imported for one or multiple K-layers.
 
 ## Related documentation
 
-[Create a Well Path]({{< relref "CreateNewWellPaths.md" >}})
+[Create a Well Path]({{% relref "CreateNewWellPaths.md" %}})
 
-[Intersections]({{< relref "Intersections.md" >}})
+[Intersections]({{% relref "Intersections.md" %}})

@@ -15,7 +15,7 @@ The **Grid Property Calculator** enables arithmetic expressions to be parsed and
 
 Expressions can be saved to a text file using the **Export Calculations** button. The default location for calculations can be set in **Preference->Import/Export**.
 
-More details on mathematical operations are described in [Calculator Expressions]({{< ref "CalculatorExpressions.md" >}})
+More details on mathematical operations are described in [Calculator Expressions]({{% ref "CalculatorExpressions.md" %}})
 
 ## Invoking the Grid Property Calculator
 

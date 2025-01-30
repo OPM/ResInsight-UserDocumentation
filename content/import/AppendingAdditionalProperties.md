@@ -15,6 +15,6 @@ A grid model can be imported from several sources, either **Eclipse** binary/asc
 
 ![](/images/import/additional-properties.png)
 
-[Eclipse Grid Models]({{< relref "eclipsecases" >}})
+[Eclipse Grid Models]({{% relref "eclipsecases" %}})
 
-[ROFF Grid Models]({{< relref "roffgridmodels" >}})
+[ROFF Grid Models]({{% relref "roffgridmodels" %}})

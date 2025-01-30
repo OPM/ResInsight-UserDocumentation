@@ -6,7 +6,7 @@ weight: 15
 
 {{% notice note %}}
 This page is a shameful copy of the great [Grav original page](http://learn.getgrav.org/content/markdown).
-Only difference is information about image customization ([resizing]({{< relref "#resizing-image" >}}), [add CSS classes]({{< relref "#add-css-classes" >}})...)
+Only difference is information about image customization ([resizing]({{% relref "#resizing-image" %}}), [add CSS classes]({{% relref "#add-css-classes" %}})...)
 {{% /notice%}}
 
 Let's face it: Writing content for the Web is tiresome. WYSIWYG editors help alleviate this task, but they generally result in horrible code, or worse yet, ugly web pages.

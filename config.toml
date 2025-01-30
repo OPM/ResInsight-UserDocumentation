@@ -12,6 +12,7 @@ disableHomeIcon = true
 ordersectionsby = "weight"
 disableShortcutsTitle = true
 themeVariant = 'relearn'
+disablePathToLower = true
 
 [markup]
   defaultMarkdownHandler = "goldmark"

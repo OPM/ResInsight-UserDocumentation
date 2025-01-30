@@ -6,7 +6,7 @@ weight = 111
 
 ![](/images/plot-window/Producer_Injector_Connectivity.png)
 
-**Producer/Injector Connectivity Tables** is a display of [Flow Diagnostics Data]({{< relref "flow-diagnostics-plots" >}}) as a color map in table format. The table either shows flow rate data for a single time step, or accumulated flow volume data over a range of time steps.
+**Producer/Injector Connectivity Tables** is a display of [Flow Diagnostics Data]({{% relref "flow-diagnostics-plots" %}}) as a color map in table format. The table either shows flow rate data for a single time step, or accumulated flow volume data over a range of time steps.
 
 The table lists one producer per row and one injector per column. The cell data is the flow rate data or accumulated flow volume data based on the selected **Time Step Type**. This table data provides an overview of the communicating wells in the reservoir, and shows which injector contributes to which producer, and who are the largest contributors to production.
 
@@ -14,7 +14,7 @@ The table can be formatted by use of the **Property Editor**, shown below. The c
 
 ## Creating Producer/Injector Connectivity Tables
 
-The Producer/Injector Connectivity Tables are a part of the *Flow Diagnostics Plots*. Click [here]({{< relref "flow-diagnostics-plots" >}}#creating-well-allocation-plots) for how to generate the plots from 3D view.
+The Producer/Injector Connectivity Tables are a part of the *Flow Diagnostics Plots*. Click [here]({{% relref "flow-diagnostics-plots" %}}#creating-well-allocation-plots) for how to generate the plots from 3D view.
 
 ## Editing Table
 
@@ -28,7 +28,7 @@ The main controls for a Producer/Injector Connectivity Table is listed below:
 
 The plot data can be configured, and controls are depending on selections in **Filter by 3D View**.
 
-- **Filter by 3D View** - Utilize the active filters in 3D view (see [Filter]({{< relref "filters" >}})) to collect which wells are present in the visible cells.
+- **Filter by 3D View** - Utilize the active filters in 3D view (see [Filter]({{% relref "filters" %}})) to collect which wells are present in the visible cells.
 - **Time Step Type** - Select between single time step or a range of time steps.
     - **Single Time Step** - Shows flow rate - as raw value, fraction or percentage.
     - **Time Step Range** - Shows accumulated flow volume - as raw value, fraction or percentage.
@@ -72,7 +72,7 @@ The content of flow diagnostics configuration is dependent on the selected **Tim
 #### Tracer Selection
 Select which **Producers** and **Injectors** to include in the table. If no wells are selected, no filtering is active - thereby all producers and injectors present among the selected time steps are visible in the table when values are above *threshold*.
 
-An example of applying a [Slice Filter]({{< relref "filters" >}}#cell-filters) in *Filter by 3D View* and select *Filter Type: Filter Producers*, produces the following *Tracer Selection* and table view:
+An example of applying a [Slice Filter]({{% relref "filters" %}}#cell-filters) in *Filter by 3D View* and select *Filter Type: Filter Producers*, produces the following *Tracer Selection* and table view:
 
 ![](/images/plot-window/Producer_Injector_Connectivity_FilterProducerTracerSelection.png)
 ![](/images/plot-window/Producer_Injector_Connectivity_FilterProducerTable.png)

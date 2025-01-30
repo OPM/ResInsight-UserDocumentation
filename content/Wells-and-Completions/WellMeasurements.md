@@ -39,7 +39,7 @@ E-3 H, 1000.12, 2005-10-24, DP,    0.0, 0, Wash outs
     
 ### Measurement properties
 
-- **Well Name** -- The name of the well. ResInsight will try to associate each measurement with a well path with a matching name. The well name should be the same as imported [here]({{< relref "wellpaths" >}}).
+- **Well Name** -- The name of the well. ResInsight will try to associate each measurement with a well path with a matching name. The well name should be the same as imported [here]({{% relref "wellpaths" %}}).
 - **MD** -- Measured depth.
 - **Date** -- The date of the measurement. Expects [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) extended format: `yyyy-MM-dd`, e.g. `2019-12-24`.
 - **Kind** -- The type of measurement.

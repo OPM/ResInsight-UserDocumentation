@@ -8,7 +8,7 @@ hidden = true
 ## Summary Plotting
 ![](/images/plot-window/SummaryPlotsMain.png)
 
-[Summary Plotting]({{< relref "summaryplots.md" >}}) is updated with new features and improved workflows:
+[Summary Plotting]({{% relref "summaryplots.md" %}}) is updated with new features and improved workflows:
 - Improved logarithmic legend and default ranges
 - Visual appearance of curves is now stable when doing **Source Stepping**
 - Curve name and plot name improvements 
@@ -16,14 +16,14 @@ hidden = true
 ## Change Data Source by Clicking in 3D
 The data source for multiple plots can be updated by clicking on a well path in 3D. This feature can be useful for large fields with many wells and you want to investigate a small subset of wells.
 
-[Source Stepping]({{< relref "summarysourcestepping" >}}#change-well-data-source-from-3d-view) 
+[Source Stepping]({{% relref "summarysourcestepping" %}}#change-well-data-source-from-3d-view) 
 
 
 
 ## Linked Views Improvements
-It is now possible to get the result property values from all linked views when left-clicking on a cell in a view. Text is displayed in [Result Info]({{< relref "resultinfo" >}}), and values from other properties can also be appended. Property filters can now be linked between views, and will also work between multiple cases. 
+It is now possible to get the result property values from all linked views when left-clicking on a cell in a view. Text is displayed in [Result Info]({{% relref "resultinfo" %}}), and values from other properties can also be appended. Property filters can now be linked between views, and will also work between multiple cases. 
 
-[Linked Views]({{< relref "linkedviews" >}}) 
+[Linked Views]({{% relref "linkedviews" %}}) 
 
 
 ## Calculator Improvements
@@ -31,11 +31,11 @@ It is now possible to get the result property values from all linked views when 
 
 The grid calculator and summary curve calculator is updated with more help and improved usability. The grid property calculations will now always calculate values for active cells and do nothing for other inactive cells.
 
-[Grid Calculator]({{< relref "GridPropertyCalculator" >}}) 
+[Grid Calculator]({{% relref "GridPropertyCalculator" %}}) 
 
-[Summary Calculator]({{< relref "CurveCalculator" >}}) 
+[Summary Calculator]({{% relref "CurveCalculator" %}}) 
 
-[Calculator Expressions]({{< relref "CalculatorExpressions" >}}) 
+[Calculator Expressions]({{% relref "CalculatorExpressions" %}}) 
 
 
 ## Breaking changes for user defined well paths
@@ -44,7 +44,7 @@ The calculation of the geometry for a user defined well path had some defects. T
 
 Thanks to https://github.com/EdmundStephens for reporting this [issue](https://github.com/OPM/ResInsight/issues/9439).
 
-[User defined well paths]({{< relref "createnewwellpaths" >}})
+[User defined well paths]({{% relref "createnewwellpaths" %}})
 
 
 ## Display of RFT segment curves
@@ -52,20 +52,20 @@ Thanks to https://github.com/EdmundStephens for reporting this [issue](https://g
 
 **RFT Segment Data** can be plotted as horizontal **Well Log Plots**. This feature is now improved with more tracks and improved visual quality.
 
-[RFT Segment plots]({{< relref "rftsegmentplot" >}})
+[RFT Segment plots]({{% relref "rftsegmentplot" %}})
 
 
 ## Import of ROFF files (Preview)
 ROFF files with properties can be imported, both in ASCII and binary form. Grid geometry and properties per cell can be imported.
 
-[ROFF grid models]({{< relref "RoffGridModels" >}})
+[ROFF grid models]({{% relref "RoffGridModels" %}})
 
 
 ## Other improvements
 
 [Wrong area for scaled fractures](https://github.com/OPM/ResInsight/issues/9473)
 
-[Improved Window Tiling]({{< relref "windowmanagement" >}})
+[Improved Window Tiling]({{% relref "windowmanagement" %}})
 
 
 

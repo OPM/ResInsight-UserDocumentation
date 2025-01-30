@@ -17,9 +17,9 @@ ResInsight incorporates a powerful Python interface which allows you to interact
 
 
 ## Command Line Interface and Command files
-ResInsight supports several [command line parameters] ({{< ref "CommandLineInterface.md" >}}) for automation via shell scripts. 
-By gathering commands into a [Command file]({{< ref "CommandFile.md" >}}), you may run a sequence of commands by supplying the 
-command file as a [command line parameter]({{< ref "CommandLineInterface.md" >}}). 
+ResInsight supports several [command line parameters] ({{% ref "CommandLineInterface.md" %}}) for automation via shell scripts. 
+By gathering commands into a [Command file]({{% ref "CommandFile.md" %}}), you may run a sequence of commands by supplying the 
+command file as a [command line parameter]({{% ref "CommandLineInterface.md" %}}). 
 
 ## Octave Interface
 By the interface to [Octave](http://www.gnu.org/software/octave/ "Octave") you will find:

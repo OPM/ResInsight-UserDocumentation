@@ -86,7 +86,7 @@ The formations can be visualized as a result property in **Cell Results**, **Cel
 #### Property Filter Based on Formations
 Formation names are available in Property Filters as Result Type **Formation Names**. This makes it easy to filter geometry based on formation specifications.
 
-See [ Cell Filters ]({{< relref "filters" >}}) for details.
+See [ Cell Filters ]({{% relref "filters" %}}) for details.
 
 #### Picking in 3D View
 Picking on a cell being part of a formation will display the formation name in the **Result Info** windows, in addition to other pick info for the cell.
@@ -94,9 +94,9 @@ Picking on a cell being part of a formation will display the formation name in t
 #### Annotations on Plots
 Formation can be used to annotate the following plot types:
 
-- [Well Log Plots]({{< relref "welllogsandplots" >}})
-- [RFT Plots]({{< relref "rftplot" >}})
-- [PLT Plots]({{< relref "pltplot" >}})
+- [Well Log Plots]({{% relref "welllogsandplots" %}})
+- [RFT Plots]({{% relref "rftplot" %}})
+- [PLT Plots]({{% relref "pltplot" %}})
 
 For RFT and PLT Plots, **Zonation/Formation Names** can be found in the plot's **Property Editor**. Tick "Show Formations" and choose the case with the desired formations. 
 

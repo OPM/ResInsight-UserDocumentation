@@ -5,6 +5,7 @@ weight = 32
 +++
 
 ![](/images/3d-main-window/ColorLegendCollections.png)
+![](/images/3d-main-window/ContourMaps.png)
 
 ResInsight offers both a rich set of built-in color legends and functionality for import and customizing color legends. 
 All color legends are available from the **Color Legends** item in **Project Tree**.
@@ -17,7 +18,7 @@ As *Standard Color Legends* cannot be modified, you must create a *Custom Color 
 
 ## Create a Custom Color Legend
 Custom Color Legends are created by right-clicking the **Color Legends** item in **Project Tree** to either import a 
-[Formation file]({{< relref "formations" >}}) with color settings or create a new *Custom Color Legend*. 
+[Formation file]({{% relref "formations" %}}) with color settings or create a new *Custom Color Legend*. 
 
 ![](/images/3d-main-window/ColorLegendCreateCustomColorLegend.png)
 
@@ -25,7 +26,7 @@ It is also possible to copy a standard legend to create a *Custom Color Legend* 
 
 ![](/images/3d-main-window/ColorLegendCollectionCopyStandardLegend.png)
 
-When importing a [Formation Names]({{< relref "formations" >}}) description files (_`*.lyr`_) with colors, ResInsight automatically creates a color legend and use this as default color legend when visualizing formations in the 3D view.
+When importing a [Formation Names]({{% relref "formations" %}}) description files (_`*.lyr`_) with colors, ResInsight automatically creates a color legend and use this as default color legend when visualizing formations in the 3D view.
 
 ## Customizing a Color Legend
 
@@ -41,7 +42,7 @@ The sequence of *Color Legend Items* can be modified by clicking the arrow symbo
 
 The listed *Custom Color Legend* is used to form the 3D visualization of formations seen by the top figure of this page.
 Activating this particular *Custom Color Legend* is performed by specifying it as 
-[Result Color Legend]({{< relref "ResultColorLegend" >}}).
+[Result Color Legend]({{% relref "ResultColorLegend" %}}).
 
 
 ## Integer Cell Results

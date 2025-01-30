@@ -12,7 +12,7 @@ Filters are used to control the visibility of cells in the 3D view. Two types of
 - **Property Filter** -- Extracts cells with a property value matching a value range
 
 {{% notice note %}}
-The visibility of cells connected to wells, and fences can be controlled from <b> <a href="{{< relref "simulationwells" >}}">Simulation Wells</a></b>.<br> 
+The visibility of cells connected to wells, and fences can be controlled from <b> <a href="{{% relref "simulationwells" %}}">Simulation Wells</a></b>.<br> 
 <small><i>(Not applicable for Geomechanical cases)</i></small>
 {{% /notice %}}
 
@@ -40,7 +40,7 @@ A new cell filter can be added by invoking the right-click menu for the **Cell F
 
 The available cell filters are:
 
-- **Polygon Filter**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. The polygon can be defined as part of the filter or referencing a polygon defined in the [Polygons]({{< relref "polygons" >}}) collection.
+- **Polygon Filter**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. The polygon can be defined as part of the filter or referencing a polygon defined in the [Polygons]({{% relref "polygons" %}}) collection.
 
 - **User Defined Filter**: Defining a filter by specifying explicit cells to include or exclude by their IJK-index.
 
@@ -48,7 +48,7 @@ The available cell filters are:
 
 - **Slice Filter**: Defining a filter to include or exclude a slice of cells in either I-, J-, or K-direction.
 
-The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as decribed in [Polygons]({{< relref "polygons" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
+The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as decribed in [Polygons]({{% relref "polygons" %}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
 
 ![](/images/3d-main-window/CellFilter_Polygon.png)
 
@@ -93,7 +93,7 @@ Normally the available range in the sliders is the max and min of all the values
 We still need to keep the range somewhat fixed while moving from time step to time step, so in order to do so ResInsight tries to keep the intentions of your range settings, as the available range changes. If either the max or min value is set to the limit, ResInsight will keep that setting at the limit even when the limit changes. If you set a specific value for the max or the min, that setting will keep its value, even if it happens to end up outside the available range at a time step.   
 
 ### Category Selection
-If the property is representing integer values, well tracer names or [ formation names ]({{< relref "" >}}3d-main-window/formations), the property filter displays a list of available categories used to filter cells. The separate values can then be toggled on or off using the list in the Property Editor.
+If the property is representing integer values, well tracer names or [ formation names ]({{% relref "" %}}3d-main-window/formations), the property filter displays a list of available categories used to filter cells. The separate values can then be toggled on or off using the list in the Property Editor.
 
 ![](/images/3d-main-window/PropertyFilterWithCategories.png)
 

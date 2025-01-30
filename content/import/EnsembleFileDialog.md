@@ -65,6 +65,6 @@ When the **OK** button is pressed, all checked files are imported.
 
 ## Examples of Use of Ensemble Import Dialog
 
-[Ensemble Surface]({{< relref "ensemblesurface" >}})
+[Ensemble Surface]({{% relref "ensemblesurface" %}})
 
-[Ensemble Summary]({{< relref "ensembleplotting" >}})
+[Ensemble Summary]({{% relref "ensembleplotting" %}})

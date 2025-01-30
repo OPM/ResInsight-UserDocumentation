@@ -29,6 +29,6 @@ The state of an active Biot coefficient is indicated in the info box in upper ri
 
 ## Related documents
 
-[Element Property Table]({{< relref "ElementPropertyTable.md" >}})
+[Element Property Table]({{% relref "ElementPropertyTable.md" %}})
 
-[Derived Results]({{< relref "DerivedResultsGeoMech.md" >}}#st---total-stress)
+[Derived Results]({{% relref "DerivedResultsGeoMech.md" %}}#st---total-stress)

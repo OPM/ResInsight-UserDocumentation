@@ -15,21 +15,21 @@ ResInsight 2018.11 is the latest version of ResInsight, the professional quality
 
 Local Grid Refinement (LGR) can be created based on Eclipse simulations. The refined grids can also be visualised in 3D.
 
-See [Completions LGR]({{< relref "completionslgr" >}})
+See [Completions LGR]({{% relref "completionslgr" %}})
 
 ## Well Path Creation
 ![Well Path Creation](/images/introduction/WellPathCreation.png)
 
 ResInsight lets the user create new/custom well paths by clicking in the 3D view. A self-established well path will behave in the same way as a regular imported well path.
 
-See [Create Well Paths]({{< relref "createnewwellpaths" >}})
+See [Create Well Paths]({{% relref "createnewwellpaths" %}})
 
 ## Contour Maps
 ![Contour Maps](/images/introduction/ContourMaps1.png)
 
 ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D map.
 
-See [Contour Maps]({{< relref "contourmaps" >}})
+See [Contour Maps]({{% relref "contourmaps" %}})
 
 ## Summary Plotting
 
@@ -38,11 +38,11 @@ See [Contour Maps]({{< relref "contourmaps" >}})
 
 ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized **Well Log Plots** and contain a visualization of Formations, Well Path Attributes as well as a set of well path derived curves in two different tracks.
 
-See [Well Bore Stability Plots]({{< relref "wellborestabilityplots" >}})
+See [Well Bore Stability Plots]({{% relref "wellborestabilityplots" %}})
 
 ## Memory Management
 ![Memory Management](/images/introduction/MemoryManagementBanner.png)
 
 ResInsight can require a considerable amount of memory to hold all the grids and necessary result variables. A Memory Management system is now in place to help the user if available memory is low.
 
-See [Memory Management]({{< relref "memorymanagement" >}})
+See [Memory Management]({{% relref "memorymanagement" %}})

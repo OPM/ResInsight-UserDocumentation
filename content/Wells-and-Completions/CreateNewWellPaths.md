@@ -8,7 +8,7 @@ weight = 30
 
 ResInsight lets the user create new/custom well paths by clicking in the 3D view. A self created well path will behave the same way as an imported well path.
 
-[Building a multilateral well path]({{< relref "createmultilateralwellpaths" >}}) 
+[Building a multilateral well path]({{% relref "createmultilateralwellpaths" %}}) 
 
 ### Building a well path
 

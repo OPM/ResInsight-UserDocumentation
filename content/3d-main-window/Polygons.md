@@ -34,9 +34,9 @@ The user can create a grid intersection by using the **Create Polygon Intersecti
 
 The user can also create a polygon cell filter by using the **Create Polygon Cell Filter**. This will create a polygon that represents the cells that are inside the polygon.
 
-[Polygon Intersection]({{< relref "intersections" >}}) 
+[Polygon Intersection]({{% relref "intersections" %}}) 
 
-[Polygon Filter]({{< relref "filters" >}}) 
+[Polygon Filter]({{% relref "filters" %}}) 
 
 ## Appearance 
 Appearance settings are available by selecting the project polygon. Name, color, line style and other visual settings can be set in the **Property Editor**.

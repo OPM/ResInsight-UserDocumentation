@@ -9,7 +9,7 @@ weight = 20
 ResInsight can import well paths from simple Ascii files. 
 In addition, ResInsight is able to retrieve well paths from an Equinor internal web service.
 
-ResInsight also supports creation of your own user-defined well paths. See [Create Well Paths]({{< relref "createnewwellpaths" >}})
+ResInsight also supports creation of your own user-defined well paths. See [Create Well Paths]({{% relref "createnewwellpaths" %}})
 
 ## Ascii Well Paths
 
@@ -24,7 +24,7 @@ Download of OSDU trajectories will not work if the project is used on a server, 
 The command **File -> Import -> Well Data -> Import Well Paths From OSDU** launches a wizard to guide you through the process of selecting the well paths you need.
 Having completed the wizard, the imported wells are accessible as Items under the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**.
 
-[OSDU Cloud Service]({{< relref "cloudservices" >}})
+[OSDU Cloud Service]({{% relref "cloudservices" %}})
 
 {{% notice info %}}
 <strong>Access to Cloud Data </strong>
@@ -49,7 +49,7 @@ The visible wells are always shown in all the 3D Views in the complete project, 
 A well path will hold well log data and well path data imported from files. A well path file is placed inside the well path item, while one or more well log files are placed as child items under the well path in the project tree.
 
 ### Importing Well Log Files
-Well log data is [imported from LAS-files]({{< relref "lasfile" >}}#importing-a-las-file).
+Well log data is [imported from LAS-files]({{% relref "lasfile" %}}#importing-a-las-file).
 
 ### Well Path Property Editor
 The well path property editor lets the user control the appearance of the well path and associate the well path to a simulation well. It also gives some information about the well path metadata.
@@ -60,7 +60,7 @@ The well path property editor lets the user control the appearance of the well p
 - **File group** -- Information about the well path file
 - **Simulation Well group** -- Associated simulation well. ResInsight will try to associate each well path with a simulation well. This is done in the exact same way as looking up an existing well path. If the auto-association fails, the user can set the correct simulation well here.
 - **Well Info group** -- Metadata for the well path
-- **Well Picks group** -- Information about imported [well picks]({{< relref "formations" >}}#well-picks) file containing data for the current well path
+- **Well Picks group** -- Information about imported [well picks]({{% relref "formations" %}}#well-picks) file containing data for the current well path
 
 ### Casing Design
 Some Casing Design elements can be assigned to the well path by selecting **Create Casign Design** from the right-click menu of the well path.
@@ -70,7 +70,7 @@ well path containment properties such as Casing (with Casing Shoe) and Liner can
 
 ![](/images/3d-main-window/CasignDesign.png)
 
-These can be visualised in the 3D View and Well Log Plots on a [Well Log Track]({{< relref "welllogsandplots" >}}#tracks).
+These can be visualised in the 3D View and Well Log Plots on a [Well Log Track]({{% relref "welllogsandplots" %}}#tracks).
 
 ![](/images/3d-main-window/CasignDesign3D.png) 
 

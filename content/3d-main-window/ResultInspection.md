@@ -9,7 +9,7 @@ weight = 60
 The results mapped on the 3D model can be inspected in detail by left clicking cells in the 3D view. 
 The selected cells will be highlighted, text information displayed in the **Result Info** docking window, and the time-history values plotted in the **Result Plot**, if available.
 
-The values along the different K-layers is available in the [Depth Plot]({{< relref "depthplot" >}})
+The values along the different K-layers is available in the [Depth Plot]({{% relref "depthplot" %}})
 
 {{% notice note %}}
 Visibility of the docking widows can be controlled from the <b>Windows</b> menu.
@@ -46,7 +46,7 @@ Additional curves can be added to the plot if CTRL-key is pressed during picking
 
 To clear the cell-selection, left-click outside the visible geometry.
 
-[[Result Info]]({{< relref "resultinfo" >}}) 
+[[Result Info]]({{% relref "resultinfo" %}}) 
 
 ### Adding the Curves to a Summary Plot
 

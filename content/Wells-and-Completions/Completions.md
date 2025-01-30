@@ -8,13 +8,13 @@ weight = 50
 
 Three types of completions are available for modeling and export: Perforation intervals, fishbone wells and fractures. The purpose of modeling these completions, is that it enables ResInsight to export Eclipse keywords for doing more refined simulations.
 
-Completions can be modeled by adding new perforation intervals, fishbones subs or fractures. Details about the completions must then be specified, such as the length of the perforation interval or number of fishbone subs and laterals. After modeling the completions, the transmissibility (cell connection factors) can be calculated and exported to the Eclipse COMPDAT Keyword. See [ Export Completions]({{< relref "completionexport" >}})
+Completions can be modeled by adding new perforation intervals, fishbones subs or fractures. Details about the completions must then be specified, such as the length of the perforation interval or number of fishbone subs and laterals. After modeling the completions, the transmissibility (cell connection factors) can be calculated and exported to the Eclipse COMPDAT Keyword. See [ Export Completions]({{% relref "completionexport" %}})
 
 For fishbones completions, multi-segment well information can even be exported to the Eclipse Keywords WELSEGS, COMPSEGS and WSEGVALV,
-c.f. [Export Well Segments]({{< relref "completionexport" >}}).
+c.f. [Export Well Segments]({{% relref "completionexport" %}}).
 
 {{% notice note %}}
-  The derived cell property [Completion Type]({{< relref "derivedresults#completion-type" >}}) displays wich cells are intersected by the completions.
+  The derived cell property [Completion Type]({{% relref "derivedresults#completion-type" %}}) displays wich cells are intersected by the completions.
 {{% /notice %}}
 
 
@@ -30,7 +30,7 @@ The **Property Panel** of the **Well Connection Factors** item has a few options
 - **Geometry Scale Factor** -- Scales the connection factor symbols relative to the displayed well path radius
 - **Show on Closed Connections** -- Show the connection factors calculated for closed simulation well cells in addition to the ones at open cells.
 
-A combined view of well connection factors and the derived result [Completion Type]({{< relref "derivedresults#completion-type" >}}) 
+A combined view of well connection factors and the derived result [Completion Type]({{% relref "derivedresults#completion-type" %}}) 
 enables the user to see the completion type contributing to connection factor in a cell.
 
 
@@ -45,7 +45,7 @@ A new perforation interval on a well can be set up by right-clicking on the well
 After creating the perforation interval, the following properties of the perforation can be set in the property editor:
 
 - **Start MD**, **End MD** -- Measured depth along the well path for the perforation to start/stop. 
-- **Diameter** -- Well bore diameter for the perforation interval, used in calculation of transmissibility ( For details on the transmissibility calculation, see [Transmissibility Calculations]({{< relref "completionexport" >}}#transmissibility-calculations)). 
+- **Diameter** -- Well bore diameter for the perforation interval, used in calculation of transmissibility ( For details on the transmissibility calculation, see [Transmissibility Calculations]({{% relref "completionexport" %}}#transmissibility-calculations)). 
 - **Skin Factor** -- Skin factor for the perforation, used in calculation of transmissibility. 
 - **All Timesteps** -- If on, the perforation interval will be present for all time steps
 - **Start Date** -- The perforation will be included in the model for all time steps after this date. If "All TimeSteps" is turned on, this option is not available and the perforation is included for all time steps. 
@@ -214,7 +214,7 @@ The new **Fishbones Subs Definition** (a group of fishbone subs) is created in t
     - **Fixed Angle** -- The user can specify the angle for the first lateral
     - **Random angle** -- Each sub will have a random orientation. Notice that the angle between each of the laterals will be constant, with the laterals equally spaced. 
   - **Install Success Rate** -- Gives the probability of success for installation of each of the fishbones laterals. If 1, all laterals are installed.  
-- **Well Properties** -- Settings to control the connection factor calculation used in [Completion Export]({{< relref "completionexport" >}}))
+- **Well Properties** -- Settings to control the connection factor calculation used in [Completion Export]({{% relref "completionexport" %}}))
   - **Hole Diameter** -- The hole diameter of the lateral
   - **Skin Factor** -- The skin factor used in the transmissibility calculation for the lateral. 
 - **Multi Segment Wells** -- Settings used for Well Segment Export
@@ -372,7 +372,7 @@ Instances of fractures can be created along well paths and simulation wells by r
 - **Properties**
   - **Fracture Unit System** -- Read only display of the units used for the current template
   - **StimPlan Time Step** -- Displays the time step used by the template 
-  - **Perforation Length** / **Perforation Efficiency** / **Well Diameter** -- These values are copied from the new template when selecting a different one. See [Common Fracture Template Options]({{< relref "completions" >}}#common-fracture-template-options)  
+  - **Perforation Length** / **Perforation Efficiency** / **Well Diameter** -- These values are copied from the new template when selecting a different one. See [Common Fracture Template Options]({{% relref "completions" %}}#common-fracture-template-options)  
 - **Fracture Center Info** -- This group displays info on where the center of the fracture is positioned. The center is defined to be where the well path intersects the fracture.
 
 ### Multiple Fracture Creation
@@ -394,4 +394,4 @@ Select one or more well paths in the project tree, right click and select **Crea
 - **Replace Fractures** -- Press this button to delete all existing fractures on the selected wells before creating new fractures
 - **Add Fractures** -- Press this button to add the new fractures to all selected wells (not deleting existing fractures)
 
-The Create Multiple Fractures function is also available as a CommandFile command. See the [CommandFile section]({{< relref "commandfile" >}})
+The Create Multiple Fractures function is also available as a CommandFile command. See the [CommandFile section]({{% relref "commandfile" %}})
