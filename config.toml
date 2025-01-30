@@ -11,6 +11,7 @@ disableSearch = false
 disableHomeIcon = true
 ordersectionsby = "weight"
 disableShortcutsTitle = true
+themeVariant = 'relearn'
 
 [markup]
   defaultMarkdownHandler = "goldmark"
