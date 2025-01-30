@@ -3,6 +3,8 @@ title = "What's New in 2024.03.1"
 
 weight = 10
 hidden = true
+[build]
+  list = 'never'
 +++
 
 ## Bugs fixed

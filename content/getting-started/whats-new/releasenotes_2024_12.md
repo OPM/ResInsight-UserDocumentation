@@ -1,8 +1,10 @@
 +++
 title = "What's New in 2024.12"
-
 weight = 10
 hidden = true
+
+[build]
+  list = 'never'
 +++
 
 ## Grid Import Performance

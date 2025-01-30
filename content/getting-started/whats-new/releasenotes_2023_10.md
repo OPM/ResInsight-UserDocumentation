@@ -3,6 +3,8 @@ title = "What's New in 2023.10"
 
 weight = 10
 hidden = true
+[build]
+  list = 'never'
 +++
 
 
