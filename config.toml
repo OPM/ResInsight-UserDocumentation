@@ -8,11 +8,9 @@ googleAnalytics = "G-6BNMNQQY0H"
 
 [params]
 disableSearch = false
-disableHomeIcon = true
 ordersectionsby = "weight"
 disableShortcutsTitle = true
 themeVariant = 'relearn'
-disablePathToLower = true
 
 [markup]
   defaultMarkdownHandler = "goldmark"
