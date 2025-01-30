@@ -40,12 +40,12 @@ ResInsight can communicate with Python and other cloud services. A Windows Firew
 When launching ResInsight at the first time, a Smartscreen warning might be displayed. This is a security feature by Microsoft, and will warn the user when an unknown program is launched. This warning is displayed once for each installation.
 
 
-![]({{< relref "" >}}images/getting-started/Smartscreen_01.png)
+![](/images/getting-started/Smartscreen_01.png)
 
 Press the **More info** link in the upper left section.
 
 
-![]({{< relref "" >}}images/getting-started/Smartscreen_02.png)
+![](/images/getting-started/Smartscreen_02.png)
 
 Notice the information and digital signature by **Ceetron Solutions AS**.
 

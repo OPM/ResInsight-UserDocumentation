@@ -6,7 +6,7 @@ title = "ResInsight"
 
 # Post Processing of Reservoir Simulations
 
-![]({{< relref "" >}}images/FrontPageImage.png)
+![](/images/FrontPageImage.png)
 
 <section class="features">
   <div class="grid">

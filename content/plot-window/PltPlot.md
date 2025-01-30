@@ -4,7 +4,7 @@ title = "PLT Plot"
 weight = 100
 +++
 
-![]({{< relref "" >}}images/plot-window/PltPlot.png)
+![](/images/plot-window/PltPlot.png)
 
 A PLT (Production Log Tool) plot is a special well plot for comparing observed production (well flow rates) and simulated production. The curves are plotted as production against measured depth (MD). Simulated production data is retrieved directly from the grid model or from the corresponding (\*.rft) files, while observed production data are loaded from well log files (\*.las).
 
@@ -35,12 +35,12 @@ To be able to plot observed production data for a well, a well log file containi
 
 To be able to plot simulated data for a well, the trajectory for that well have to be imported. If no well trajectory is found, ResInsight will present a warning dialog to the user.
 
-![]({{< relref "" >}}images/plot-window/NoMdWarningDialog.png)
+![](/images/plot-window/NoMdWarningDialog.png)
 
 ## Property Editor
 The property editor lets the user select which curves to display in the PLT plot.
 
-![]({{< relref "" >}}images/plot-window/PltPlotPropertyEditor.png)
+![](/images/plot-window/PltPlotPropertyEditor.png)
 
 ### Well Name
 Select the well to display in the plot. Only observed well paths are displayed.
@@ -86,7 +86,7 @@ The curve selection group lets the user control which component(s) of the PLT da
 ### Zonation/Formation Names
 This property editor lets the user control how formations are handled. This is what it looks like in the PLT plot context.
 
-![]({{< relref "" >}}images/plot-window/RftPltFormationNames.png)
+![](/images/plot-window/RftPltFormationNames.png)
 
 Please see the [full documentation]({{< relref "formations" >}}) on the formations property editor for details.
 
@@ -95,7 +95,7 @@ Please see the [full documentation]({{< relref "formations" >}}) on the formatio
 {{% /notice %}}
 
 ### Legend and Axis
-![]({{< relref "" >}}images/plot-window/PltLegendAndAxis.png)
+![](/images/plot-window/PltLegendAndAxis.png)
 
 This property editor lets the user control visual properties for the legend and axis.
 

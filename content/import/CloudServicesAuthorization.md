@@ -16,7 +16,7 @@ Use of cloud services is supported on both Windows and Linux.
 https://auth0.com/intro-to-iam/what-is-oauth-2
 
 
-![]({{< relref "" >}}images/cloud-services/web-authentication.png)
+![](/images/cloud-services/web-authentication.png)
 
 ## Configuration
 The configuration settings for cloud services can be seen in **Preferences->Import/Export**. The settings can be loaded from a **JSON** file in your home folder or on a shared folder on the file system.

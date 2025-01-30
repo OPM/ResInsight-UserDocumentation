@@ -7,7 +7,7 @@ aliases = [
 ]
 +++
 
-![]({{< relref "" >}}images/3d-main-window/GridCaseGroupTree.png)
+![](/images/3d-main-window/GridCaseGroupTree.png)
 
 **Grid Case Group**'s are designed to make it easy to calculate statistics per cell and per time step of a large number of Eclipse simulation Cases with identical Grids (often labeled *realizations*).
  
@@ -44,7 +44,7 @@ After creating a grid case group, an empty **Statistics Case** is created for yo
 
 **Settings for grid case property statistics**
 
-![]({{< relref "" >}}images/calculated-data/StatisticsCaseProperties.png  )  
+![](/images/calculated-data/StatisticsCaseProperties.png  )  
 
 - **Compute** --  Starts to calculate requested statistical Properties.
 - **Edit** -- Deletes the calculated results, and makes the controls to edit the setup available.
@@ -56,7 +56,7 @@ After creating a grid case group, an empty **Statistics Case** is created for yo
 
 **Settings for grid cell calculations**
 
-![]({{< relref "" >}}images/calculated-data/StatisticsCaseGridCalculation.png  )  
+![](/images/calculated-data/StatisticsCaseGridCalculation.png  )  
 
 - **Data Source** --  Defines either a cell property or a grid calculation expression to be used as data source for the statistical calculations.
 - **Grid Calculation** -- List of all defined calculations in the project.
@@ -66,7 +66,7 @@ Cell values in a selection of cells can be aggregated as described in [Aggregati
 
 **Settings for when statistics has been computed**
 
-![]({{< relref "" >}}images/calculated-data/StatisticsCaseGridAfterComputations.png )
+![](/images/calculated-data/StatisticsCaseGridAfterComputations.png )
 
  
 #### Percentile Methods

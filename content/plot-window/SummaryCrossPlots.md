@@ -4,7 +4,7 @@ title = "Summary Cross Plot"
 weight = 40
 +++
 
-![]({{< relref "" >}}images/plot-window/SummaryCrossPlot.png)
+![](/images/plot-window/SummaryCrossPlot.png)
 
 A **Summary Cross Plot** is a window displaying a graph in the main area of the **Plot Main Window**. It is very similar to an ordinary [Summary Plot]({{< relref "summaryplots" >}}), but the x-axis displays summary vector values instead of time. [Regression analysis]({{< relref "regressionanalysis" >}}) is supported on single cross plot curves and ensemble statistics curves.
 
@@ -12,11 +12,11 @@ A **Summary Cross Plot** is a window displaying a graph in the main area of the 
 New cross plot curves are created by using the right-click command {{< image-in-text src="images/plot-window/SummaryCurve16x16.png" >}} **New Summary Cross Plot Curve** on a summary plot. 
 
 Cross plot curves can also be created from the right-click menu in the **Summary Data Sources**. 
-![]({{< relref "" >}}images/plot-window/SummaryCrossPlot_createFromSubMenu.png)
+![](/images/plot-window/SummaryCrossPlot_createFromSubMenu.png)
 
 The combination of cross plot curves are defined in [Plotting Preferences]({{< relref "preferences" >}}#plotting). Select the cross plot curve object to modify the properties for the curve. Make sure that the **Axis Type** is set to **Summary Vector**.
 
-![]({{< relref "" >}}images/plot-window/SummaryCrossPlotCurvePropertyEditor.png)
+![](/images/plot-window/SummaryCrossPlotCurvePropertyEditor.png)
 
 In this property editor, there is an additional group called **Summary Vector X Axis**. Like the other property editor groups, the vector selection groups works the same way as in the ordinary summary plot. 
 
@@ -28,7 +28,7 @@ When computing statistics curves for the ensemble, the x-axis is divided into bi
 
 When creating cross plots based on ensembles, the appearance of curves can be adjusted in the property editor. Note that the appearance of statistics curves also can be customized in the **Statistics** group. [Regression analysis]({{< relref "regressionanalysis" >}}) is supported on ensemble statistics curves.
 
-![]({{< relref "" >}}images/plot-window/SummaryCrossPlot_ensemble.png)
+![](/images/plot-window/SummaryCrossPlot_ensemble.png)
 
 
 ### Cross Plotting

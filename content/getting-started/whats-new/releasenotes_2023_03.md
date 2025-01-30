@@ -8,32 +8,32 @@ hidden = true
 
 
 ## Calculator Improvements
-![]({{< relref "" >}}images/calculated-data/calculated-well-curve-ensemble.png)
+![](/images/calculated-data/calculated-well-curve-ensemble.png)
 
 A calculated summary vector is now by default available for all wells, all cases and all ensembles.
 
 [[Summary Calculator]]({{< relref "CurveCalculator" >}})  [[Calculator Expressions]]({{< relref "CalculatorExpressions" >}}) [[Grid Calculator]]({{< relref "GridPropertyCalculator" >}}) 
 
 ## Radial Grids
-![]({{< relref "" >}}images/3d-main-window/radial-grid.png)
+![](/images/3d-main-window/radial-grid.png)
 
 Import of radial grids including local grid refinement(LGR) are now supported. Using I and J range filters will filter the grid case based on angle and radius (Theta and R).
 
 ## Multi Segment Well Improvements
-![]({{< relref "" >}}images/getting-started/msw_with_valves.png)
+![](/images/getting-started/msw_with_valves.png)
 
 [Multi Segmented Wells - MSW]({{< relref "simulationwells" >}}) is updated with new features and improved visualization
 - Fixes wrong well geometry for some cases
 - Added optional visualization of valves
 
 ## Well Allocation Over Time
-![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
+![](/images/plot-window/WellAllocationOverTime.png)
 
 Use [Well Allocation Over Time]({{< relref "wellallocationovertimeplot" >}}) to see the allocation over multiple restart time steps.
 
 ## Depth Plot
 
-![]({{< relref "" >}}images/3d-main-window/DepthPlotIn3D.png)
+![](/images/3d-main-window/DepthPlotIn3D.png)
 
 The [[Depth Plot]]({{< relref "depthplot" >}}) can be used to display values for all K-cells for one or multiple selected IJ cells.
 

@@ -5,7 +5,7 @@ weight = 80
 +++
 
 
-![]({{< relref "" >}}images/plot-window/DeclineCurves.png)
+![](/images/plot-window/DeclineCurves.png)
 
 
 ## Create Decline Curves
@@ -14,7 +14,7 @@ weight = 80
 
 Three decline curves are created, and the values for the decline curves can be inspected visually in the plot and values can be displayed using **Show Plot Data** from the menu inside the plot window.
 
-![]({{< relref "" >}}images/plot-window/DeclineCurves_create.png)
+![](/images/plot-window/DeclineCurves_create.png)
 
 ## Origins
 

@@ -28,7 +28,7 @@ where:
 
 Select the appropriate **Base Time Step** option in the **Difference Options** group to enable the time lapse result.
 
-![]({{< relref "" >}}images/appendix/DerivedRelativeResults.png)
+![](/images/appendix/DerivedRelativeResults.png)
 
 Note: Relative Results calculated based on Gamma values and Stress Anisotropy are calculated slightly differently:
 
@@ -98,7 +98,7 @@ Two constants can be assigned to a Geomechanical case:
 
 In the following they are denoted s0 and fa respectively. Some of the derived results use these constants, that can be changed in the property panel of the Case.
 
-![]({{< relref "" >}}images/appendix/GeoMechCasePropertyPanel.png)
+![](/images/appendix/GeoMechCasePropertyPanel.png)
 
 ### COMPACTION
 

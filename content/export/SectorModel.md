@@ -11,11 +11,11 @@ Simulations on the sub-section.
 
 To launch the export dialog, right-click on either the **3D-view** in question or the **Cell Result**.
 
-![]({{< relref "" >}}images/export/ExportSectorModel_RightClick.png) 
+![](/images/export/ExportSectorModel_RightClick.png) 
 
 ### Exporting Grid and Faults
 
-![]({{< relref "" >}}images/export/ExportSectorModel_Grid.png) 
+![](/images/export/ExportSectorModel_Grid.png) 
 
 #### Grid Export
 
@@ -46,7 +46,7 @@ Optionally export fault data to a separate fault file or append to the existing 
 
 ### Exporting Parameters
 
-![]({{< relref "" >}}images/export/ExportSectorModel_Parameters.png) 
+![](/images/export/ExportSectorModel_Parameters.png) 
 
 The Static result values in the Grid may be exported as Eclipse Input Parameters. The default parameters are 
 EQLNUM, FIPNUM, NTG, PERMX, PERMY, PERMZ, PORO, PVTNUM, SATNUM and SWATINIT. ACTNUM is exported by default in the Grid Export file.

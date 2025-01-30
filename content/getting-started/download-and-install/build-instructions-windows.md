@@ -36,7 +36,7 @@ Open a command prompt using "Run as Administrator" for Visual Studio x64.
 
 Qt can be installed using the `MaintenanceTool.exe`, and select the following modules:
 
-![]({{< relref "" >}}images/getting-started/qtmaintenancetool.png)
+![](/images/getting-started/qtmaintenancetool.png)
 
 **aqtinstall**
 

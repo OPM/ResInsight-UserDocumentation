@@ -6,7 +6,7 @@ weight = 40
 
 The completions defined in ResInsight can be exported to Eclipse for use in new simulation runs. The commands **Export Completion Data For Visible Wells**, **Export Completion Data For Visible Simulation Wells** and **Export Completion Data For Selected Wells** can be used to invoke the export. The commands are available by right clicking Well Paths or Simulation Wells in the **Project Tree**. The first command is available from the **File->Import** menu as well.
 
-![]({{< relref "" >}}images/export/Completions_ExportCompletionData.png)
+![](/images/export/Completions_ExportCompletionData.png)
 
 - **Export Settings**
     - **Calculated Transmissibilities** -- The transmissibilities calculated based on the case and completion data are exported directly
@@ -37,19 +37,19 @@ The transmissibility calculation is performed for each direction, X, Y and Z, in
 
 Taking the X direction as an example, we first calculate the relevant permeability *K* from the Eclipse properties *PERMY* (K<sub>y</sub>) and PERMZ (K<sub>z</sub>): 
 
-![]({{< relref "" >}}images/export/Equation_PerfInterval_K.png)
+![](/images/export/Equation_PerfInterval_K.png)
 
 The Peacman radius (pressure equivalent radius) for the cell is then calculated, using permeabilities and cell sizes (D<sub>y</sub> and D<sub>z</sub>): 
 
-![]({{< relref "" >}}images/export/Equation_PerfInterval_Peaceman.png)
+![](/images/export/Equation_PerfInterval_Peaceman.png)
 
 The x-component of the transmissibility vector is calculated, using the length of the perforation in the x direction (l<sub>x</sub>), the well radius (r<sub>w</sub>) and skin factor (S):
 
-![]({{< relref "" >}}images/export/Equation_PerfInterval_Trans.png)
+![](/images/export/Equation_PerfInterval_Trans.png)
 
 The y and z component of the transmissibility are calculated in the same manner, and the total transmissibility is then calculated as: 
 
-![]({{< relref "" >}}images/export/Equation_PerfInterval_TotalT.png)
+![](/images/export/Equation_PerfInterval_TotalT.png)
 
 If the *Export Calculated Transmissibilities* is chosen in the export setting (see [Exporting Completion Data to Eclipse](#exporting-completion-data-to-eclipse)), this value is exported in the COMPDAT/COMPDATL keywords directly. If the *Export Default Connection Factors and WPIMULT* the transmissibility is chosen, the transmissibility is calculated as above, and in addition the transmissibility is calculated as Eclipse would do it using values other than transmissibility in the COMPDAT/COMPDATL keywords (perforation length, well radius etc). The ratio between these transmissibilities is then exported as the WPIMULT value. 
 
@@ -61,15 +61,15 @@ For an example of *COMPDAT* files exported with calculated transmissibilities an
 
 For cases with high differential depletion, it is possible to scale the transmissibilities from the grid cells into the well (via the fracture) by the well drawdown. This enables the simulation to take into account that the flow will take different paths into the well as the pressure differential between the surrounding grid cells increases. If enabled, a time step for the grid pressures have to be selected. The list of time steps will also show the time step in which the wells first show a **Well Bore Hole Pressure** (**WBHP**) larger than zero in the Summary Case information.
 
-![]({{< relref "" >}}images/export/Completions_Export_PDD_TimeStep.png)
+![](/images/export/Completions_Export_PDD_TimeStep.png)
 
 Having chosen a time step for differential depletion scaling a source for the well pressures can be chosen. If **WBHP From Summary Case** is picked, the **WBHP** value in the summary case for the chosen time step is used. However, if the chosen time step precedes the production start of a well, the value set in **WBHP Before Production Start** is used.
 
-![]({{< relref "" >}}images/export/Completions_Export_PDD_WBHP.png)
+![](/images/export/Completions_Export_PDD_WBHP.png)
 
 If, however, a **Fixed User Defined WBHP** is chosen, the provided **WBHP** value is used for all wells.
 
-![]({{< relref "" >}}images/export/Completions_Export_PDD_User_WBHP.png)
+![](/images/export/Completions_Export_PDD_User_WBHP.png)
 
 #### Fracture Report Header
 

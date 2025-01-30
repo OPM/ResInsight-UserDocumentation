@@ -15,7 +15,7 @@ ResInsight computes several derived results. In this section we will explain wha
 ResInsight calculates several derived cell properties that is made available as **Static** or **Dynamic** cell properties.
 The derived results listed at the bottom of the **Static** result properties, are shown below.
 
-![]({{< relref "" >}}images/appendix/DerivedStaticResults.png)
+![](/images/appendix/DerivedStaticResults.png)
 
 ### Transmissibility Normalized by Area
 The transmissibility for cells and Non-Neighbor Connections (NNCs) are dependent on both cell properties and geometry. ResInsight normalizes TRANX, TRANY and TRANZ with the overlapping flow area for both neighbor cells and NNC-cells. The results are named **riTRANXbyArea**, **riTRANYbyArea** and **riTRANZbyArea** respectively.
@@ -57,7 +57,7 @@ The directional combined parameters available are:
 
 ### Completion Type
 
-![]({{< relref "" >}}images/appendix/CompletionTypes.png)
+![](/images/appendix/CompletionTypes.png)
 
 The dynamic cell property named **Completion Type** is calculated from the intersections between [Completions]({{< relref "completions" >}}) and the grid cells. All grid cells intersected by a completion will be assigned a color based on the type of completion that intersects the cell.
 
@@ -66,7 +66,7 @@ If a cell is completed with multiple completions, the following priority is used
 ### Identification of Questionable NNCs
 In the process of normalizing transmissibility by the overlapping flow area, the NNCs in the model without any shared surface between two cells are identified. These NNCs are listed in the **Faults/NNCs With No Common Area** folder. These NNCs are questionable since flow normally is associated with a flow area.
 
-![]({{< relref "" >}}images/appendix/ResInsight_NNCsWithNoCommonArea.png)
+![](/images/appendix/ResInsight_NNCsWithNoCommonArea.png)
  
 ### Water Flooded PV
 

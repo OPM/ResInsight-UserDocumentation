@@ -4,7 +4,7 @@ title = "Ensemble RFT Plot"
 weight = 95
 +++
 
-![]({{< relref "" >}}images/plot-window/EnsembleRftPlot.png)
+![](/images/plot-window/EnsembleRftPlot.png)
 
 ResInsight allows the user to create a ensemble RFT plot similar to summary ensemble plots. 
 The functionality also computes statistics, e.g. P10, P90, and mean.
@@ -16,11 +16,11 @@ When a [summary ensemble has been imported]({{< relref "ensembleplotting" >}}#im
 observed FMU data can be imported via right-clicking **Observed Data** in the **Plot Project Tree**, 
 and selecting **Import Observed FMU Data**.
 
-![]({{< relref "" >}}images/plot-window/EnsembleRftImportObservedData.png)
+![](/images/plot-window/EnsembleRftImportObservedData.png)
 
 To create ensemble RFT plot, right-click **RFT Plots** and select **New RFT Plot**.
 
-![]({{< relref "" >}}images/plot-window/EnsembleRftNewRftPlot.png)
+![](/images/plot-window/EnsembleRftNewRftPlot.png)
 
 
 
@@ -28,7 +28,7 @@ To create ensemble RFT plot, right-click **RFT Plots** and select **New RFT Plot
 ## Property Editor
 The property editor lets the user select which curves to display in the RFT plot.
 
-![]({{< relref "" >}}images/plot-window/EnsembleRftPlotPropertyEditor.png)
+![](/images/plot-window/EnsembleRftPlotPropertyEditor.png)
 
 ### Well Name
 Select the well to display in the plot. Wells postfixed by _'(Well Path)'_ have an associated well trajectory loaded.
@@ -71,7 +71,7 @@ Visual properties of legend and axes is controlled in the same manner as for [RF
 One ensemble parameter is selected to control coloring. The ensemble parameter value for each case is used to pick a color in a color range. In this case a color legend appears.
 
 
-![]({{< relref "" >}}images/plot-window/EnsembleRftPlotColors.png)
+![](/images/plot-window/EnsembleRftPlotColors.png)
 
 
 ## Import of Observed Ensemble RFT data from FMU  

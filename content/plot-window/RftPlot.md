@@ -4,7 +4,7 @@ title = "RFT Plot"
 weight = 90
 +++
 
-![]({{< relref "" >}}images/plot-window/RftPlot.png)
+![](/images/plot-window/RftPlot.png)
 
 An RFT (_Repeated Formation Tester_) plot is a special well plot for comparing observed formation pressure and simulated formation pressure. The curves are plotted as pressure against true vertical depth (TVD) or measured depth (MD). Simulated pressure data is retrieved directly from the grid model or from the corresponding (\*.rft) files, while observed pressure data are loaded from well log files (\*.las).
 
@@ -41,12 +41,12 @@ To be able to plot observed pressure data for a well in an RFT plot, at least on
 
 If no TVD data for a well is found when the user tries to plot a curve, ResInsight will present a warning dialog to the user.
 
-![]({{< relref "" >}}images/plot-window/NoTvdWarningDialog.png)
+![](/images/plot-window/NoTvdWarningDialog.png)
 
 ## Property Editor
 The property editor lets the user select which curves to display in the RFT plot.
 
-![]({{< relref "" >}}images/plot-window/RftPlotPropertyEditor.png)
+![](/images/plot-window/RftPlotPropertyEditor.png)
 
 ### Well Name
 Select the well to display in the plot. Wells postfixed by _'(Well Path)'_ have an associated well trajectory loaded.
@@ -81,7 +81,7 @@ More than one letter for one single time step, means that the time steps comes f
 ### Zonation/Formation Names
 This property editor lets the user control the visibility of formations lines. This is what it looks like in the RFT plot context.
 
-![]({{< relref "" >}}images/plot-window/RftPltFormationNames.png)
+![](/images/plot-window/RftPltFormationNames.png)
 
 Please see the [full documentation]({{< relref "formations" >}}) on the formations property editor for details about formations.
 
@@ -90,7 +90,7 @@ Please see the [full documentation]({{< relref "formations" >}}) on the formatio
 {{% /notice %}}
 
 ### Legend and Axis
-![]({{< relref "" >}}images/plot-window/RftLegendAndAxis.png)
+![](/images/plot-window/RftLegendAndAxis.png)
 
 This property editor lets the user control visual properties for the legend and axis.
 

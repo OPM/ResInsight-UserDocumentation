@@ -4,7 +4,7 @@ title = "Filters"
 weight = 70
 +++
 
-![]({{< relref "" >}}images/3d-main-window/FiltersOverview.png)
+![](/images/3d-main-window/FiltersOverview.png)
 
 Filters are used to control the visibility of cells in the 3D view. Two types of filters exist:
 
@@ -20,7 +20,7 @@ The visibility of cells connected to wells, and fences can be controlled from <b
 
 Filters can be turned on and off using their check-boxes in **Project Tree** and controlled by their corresponding **Property Editor**. The sequence of the filters can be rearranged by clicking the arrow icons of selected filter.
 
-![]({{< relref "" >}}images/3d-main-window/FiltersInTreeView.png)
+![](/images/3d-main-window/FiltersInTreeView.png)
 
 Cell Filters and Property filters can either be set to **Include** or **Exclude** the matching cells. 
 The *Include* setting marks the cells as visible while the *Exclude* setting is used to remove cells from visualization regardless of other filters. 
@@ -32,11 +32,11 @@ Each *Include* cell filter will add cells to the visualization and the resulting
 
 The logical operation combining multiple **Cell Filters** is defined by *"Combine Polygon and Range Filters Using Operation"*
 
-![]({{< relref "" >}}images/3d-main-window/cellfilters_combine.png)
+![](/images/3d-main-window/cellfilters_combine.png)
 
 A new cell filter can be added by invoking the right-click menu for the **Cell Filters** collection in **Project Tree**. 
 
-![]({{< relref "" >}}images/3d-main-window/CellFilterTypes.png)
+![](/images/3d-main-window/CellFilterTypes.png)
 
 The available cell filters are:
 
@@ -50,7 +50,7 @@ The available cell filters are:
 
 The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as decribed in [Polygons]({{< relref "polygons" >}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
 
-![]({{< relref "" >}}images/3d-main-window/CellFilter_Polygon.png)
+![](/images/3d-main-window/CellFilter_Polygon.png)
 
 {{% notice note %}}
 A filter can be added directly from <b>3D View</b> by right-clicking a cell using the displayed menu. 
@@ -58,7 +58,7 @@ A filter can be added directly from <b>3D View</b> by right-clicking a cell usin
 
 Below is a snapshot of the **Property Editor** for the **Range Filter** type of Cell Filter:
 
-![]({{< relref "" >}}images/3d-main-window/RangeFilterProperties.png)
+![](/images/3d-main-window/RangeFilterProperties.png)
 
  - **Filter Type** -- The filter can either make the specified range visible ( *Include* ), or remove the range from the View ( *Exclude* ).
  - **Grid** --  This option selects which of the grids the range is addressing.
@@ -82,7 +82,7 @@ The right-click command <b>Apply As Cell Result</b> on a property filter, sets t
 
 Below is a snapshot of the **Property Editor** of the **Property Filter**.
   
-![]({{< relref "" >}}images/3d-main-window/PropertyFilterProperties.png)
+![](/images/3d-main-window/PropertyFilterProperties.png)
 
 ### Property Value Range
 The filter is based on a property value range (Min - Max). Cells in the range are either shown or hidden depending on the **Filter Type** (*Include*/*Exclude*). Exclude-filters removes the selected cells from the **View** even if some other filter includes them.
@@ -95,7 +95,7 @@ We still need to keep the range somewhat fixed while moving from time step to ti
 ### Category Selection
 If the property is representing integer values, well tracer names or [ formation names ]({{< relref "" >}}3d-main-window/formations), the property filter displays a list of available categories used to filter cells. The separate values can then be toggled on or off using the list in the Property Editor.
 
-![]({{< relref "" >}}images/3d-main-window/PropertyFilterWithCategories.png)
+![](/images/3d-main-window/PropertyFilterWithCategories.png)
 
 If it is more convenient to filter the values using a value range, toggle the **Category Selection** option off.
 

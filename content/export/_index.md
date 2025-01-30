@@ -4,7 +4,7 @@ title = "Export"
 weight = 60
 +++
 
-![]({{< relref "" >}}images/export/ExportSectorModel_RightClick.png) 
+![](/images/export/ExportSectorModel_RightClick.png) 
 
 ResInsight features the following capabilities for export of data to reporting or further analysis:
 

@@ -4,7 +4,7 @@ title = "Well Measurements"
 weight = 70
 +++
 
-![]({{< relref "" >}}images/3d-main-window/ResInsight_WellMeasurements.png)
+![](/images/3d-main-window/ResInsight_WellMeasurements.png)
 
 ResInsight can import well measurements from a comma-separated values file. 
 
@@ -60,7 +60,7 @@ Reloading measurements from a file will delete all the previously imported measu
 
 All the imported well measurements are available **Project Tree** under the **Well Measurements** for each 3D view.
 
-![]({{< relref "" >}}images/3d-main-window/WellMeasurementsInTree.png)
+![](/images/3d-main-window/WellMeasurementsInTree.png)
 
 The measurements are shown in all the 3D Views in the project as cylinders on the well path at the specified MD. Double-clicking on measurement will show details in the **Result Info** panel.
 
@@ -69,7 +69,7 @@ The measurements are shown in all the 3D Views in the project as cylinders on th
 
 The well measurement property editor lets the user filter which measurement to show based on quality, value and measurement kind. The value of the measurement is used to determine the color, and this changed in the **Color Legend**.
 
-![]({{< relref "" >}}images/3d-main-window/WellMeasurementsPropertyEditor.png)
+![](/images/3d-main-window/WellMeasurementsPropertyEditor.png)
 
 - **Value Filter Settings** -- Filter measurements by value range.
 - **Wells** -- Show this measurement kind for the selected wells.

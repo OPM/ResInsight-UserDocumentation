@@ -36,7 +36,7 @@ The **Advanced Snapshot Export**  {{< image-in-text src="images/export/SnapShotS
 The **Advanced Snapshot Export** is available from the **File**->**Export** menu in the **3D Main Window** 
 Invoking the command will display the following dialog: 
 
- ![]({{< relref "" >}}images/export/SnapshotAdvancedExport.png)
+ ![](/images/export/SnapshotAdvancedExport.png)
 
 This table defines which 3D Views to modify, and how to modify them. Each row defines the modifications of a specific view, and for all the combinations a row specifies, a snapshot is generated. 
 

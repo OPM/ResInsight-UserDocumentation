@@ -4,7 +4,7 @@ title = "Scripting"
 weight = 70
 +++
 
-![]({{< relref "" >}}images/scripting/ExecuteOctaveScriptOnSelectedCases.png)
+![](/images/scripting/ExecuteOctaveScriptOnSelectedCases.png)
 
 ResInsight provides powerful and flexible mechanisms for post-processing of results and automation by its scripting interfaces:
 

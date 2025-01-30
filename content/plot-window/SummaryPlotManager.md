@@ -4,7 +4,7 @@ title = "Summary Plot Manager"
 weight = 15
 +++
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotManagerOverview.png)
+![](/images/plot-window/SummaryPlotManagerOverview.png)
 
 The **Summary Plot Manager** is a separate **ResInsight** dialog window where the user can select which vectors to plot in a summary plot. This dialog is intented to be used from the keyboard with easy access to operations for management of summary plots. This dialog can be opened by using **CTRL-K** from anywhere in the **Plot Window**.
 

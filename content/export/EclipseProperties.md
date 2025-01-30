@@ -12,11 +12,11 @@ The generated property can be exported for further use in the simulator.
 
 To export the property currently active in the 3D View, activate the right-click menu on a **Cell Result** item in the **Project Tree**. 
 
-![]({{< relref "" >}}images/export/ExportProperty.png) 
+![](/images/export/ExportProperty.png) 
 
 The following dialog will appear:
 
-![]({{< relref "" >}}images/export/ExportPropertyDialog.png) 
+![](/images/export/ExportPropertyDialog.png) 
 
 - **Export File Name** -- The path to exported file
 - **Eclipse Keyword** -- The keyword to use for the property in the eclipse file

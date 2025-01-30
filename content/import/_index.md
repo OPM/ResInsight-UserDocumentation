@@ -5,7 +5,7 @@ weight = 50
 +++
 
 
-![]({{< relref "" >}}images/import/GeoMechImport.png)
+![](/images/import/GeoMechImport.png)
 
 ResInsight is able to import a wide span of Eclipse files, seismic data files, and ROFF grid models.
 

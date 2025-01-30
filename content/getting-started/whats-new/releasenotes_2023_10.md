@@ -8,7 +8,7 @@ hidden = true
 
 
 ## Seismic View
-![]({{< relref "" >}}images/3d-main-window/SeismicView.png)
+![](/images/3d-main-window/SeismicView.png)
 
 When working with seismic data, it is no longer required to have a grid model open. Import a seismic cube and surfaces, add some well paths and interact with seismic data.
 
@@ -20,12 +20,12 @@ When working with seismic data, it is no longer required to have a grid model op
  
 
 ## Summary Cross Plot Curves
-![]({{< relref "" >}}images/plot-window/SummaryCrossPlot.png)
+![](/images/plot-window/SummaryCrossPlot.png)
 
 [Summary Cross Plot]({{< relref "summarycrossplots" >}}) curves are now easily available as part of a summary plot. Cross plot of ensemble curves is now supported, and [Regression Curves]({{< relref "regressionanalysis" >}}) can be created on both single cross plot curves and ensemble statistics curves.
 
 ## Regression Analysis for Grid Cross Plots
-![]({{< relref "" >}}images/plot-window/GridCrossPlot_RegressionCurve.png)
+![](/images/plot-window/GridCrossPlot_RegressionCurve.png)
 
 [Grid Cross Plots]({{< relref "gridcrossplots" >}}) have now support for display of regression curves.
 

@@ -13,7 +13,7 @@ A grid model can be imported from several sources, either **Eclipse** binary/asc
 3. The imported data is then available in the **Cell Result** by activating the **Input Property** in the **Type** drop down list.
 
 
-![]({{< relref "" >}}images/import/additional-properties.png)
+![](/images/import/additional-properties.png)
 
 [Eclipse Grid Models]({{< relref "eclipsecases" >}})
 

@@ -4,7 +4,7 @@ title = "Project Tree"
 weight = 7
 +++
 
-![]({{< relref "" >}}images/getting-started/ResInsightPlotProjectTreeAndWindow.png)
+![](/images/getting-started/ResInsightPlotProjectTreeAndWindow.png)
 
 As described in [Overview]({{< relref "Overview.md" >}}), ResInsight has two main windows, one for 3D related visualizations and one for 2D graphs and plots. The content and appearance of displayed information is managed and controlled by the **Project Tree** and the **Plots** windows. Some of their general functionality is described and exemplified below.
 
@@ -13,7 +13,7 @@ As described in [Overview]({{< relref "Overview.md" >}}), ResInsight has two mai
 Multiple selection of items in ResInsight offers an entrance to powerful combinations and collective actions. 
 To exemplify, consider the plot of *Bottom Hole Pressure* for a number of wells atop this page. By multi-selection in **Plots**, you may for instance change the color of multiple curves as shown below.
 
-![]({{< relref "" >}}images/getting-started/ResInsightPlotProjectTreeMultiSelectAction.png)
+![](/images/getting-started/ResInsightPlotProjectTreeMultiSelectAction.png)
 
 Several options are available for multi selection of items which can be used in combination for efficiency and convenience:
 
@@ -25,11 +25,11 @@ Several options are available for multi selection of items which can be used in 
   - **Toggle Sub Items**: deselect previously selected sub-items and select previously not selected sub-items
   - **On - Others Off**: Turns on selected plot and turns off all other plots
 
-![]({{< relref "" >}}images/getting-started/ResInsightPlotProjectTreeItemMenu.png)
+![](/images/getting-started/ResInsightPlotProjectTreeItemMenu.png)
 
   
 ## Context sensitive help
 ResInsight offers context sensitive help for any item in project tree. Most convenient is just to press the **F1** help key for any selected item. Alternatively, you may right-click an item and invoke menu item **Search Help For**.
 
-![]({{< relref "" >}}images/getting-started/ContextSensitiveHelp.png)
+![](/images/getting-started/ContextSensitiveHelp.png)
 

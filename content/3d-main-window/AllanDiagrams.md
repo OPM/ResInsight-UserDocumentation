@@ -4,14 +4,14 @@ title = "Allan Diagram"
 weight = 91
 +++
 
-![]({{< relref "" >}}images/3d-main-window/AllanDiagram.png)
+![](/images/3d-main-window/AllanDiagram.png)
 
 **Allan Diagrams** displays the overlap of formations and layers across fault faces.
 
 ## Separate Fault Result
 
 The **Allan Diagram** is dispayed by selecting the **Separate Fault Result** in the project tree. 
-![]({{< relref "" >}}images/3d-main-window/AllanDiagramPropertyEditor.png)
+![](/images/3d-main-window/AllanDiagramPropertyEditor.png)
 
 See [Faults ]({{< relref "faults/#separate-fault-result" >}}) for more details.
 
@@ -23,7 +23,7 @@ See [Faults ]({{< relref "faults/#separate-fault-result" >}}) for more details.
 ## Mouse interaction
 When clicking on an NNC area multiple times, the highlighted cell switched from the cell in front of the formation and behind the fault. The Result Info text is updated when the selected cell is changed.
 
-![]({{< relref "" >}}images/3d-main-window/AllanDiagramCellHighlight.png)
+![](/images/3d-main-window/AllanDiagramCellHighlight.png)
 
 ## Other related results
 

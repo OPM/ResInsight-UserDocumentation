@@ -4,7 +4,7 @@ title = "Calculator Expressions"
 weight = 10
 +++
 
-![]({{< relref "" >}}images/calculated-data/calculator-text-expression.png)
+![](/images/calculated-data/calculator-text-expression.png)
 
 
 Two similar calculators use expressions, summary curve calculator and grid cell calculator. These two variants share the text parsing for calculator expressions.

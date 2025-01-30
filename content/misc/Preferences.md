@@ -10,7 +10,7 @@ Essential preferences are listed below.
 
 ## General
 
-![]({{< relref "" >}}images/misc/PreferencesGeneral.png)
+![](/images/misc/PreferencesGeneral.png)
 
 When changing the preferences, any default color, font or Z-scale Factor that has not been changed by the user in the various views, will be applied immediately. If the user has changed font sizes in specific plots or annotations from the default value, ResInsight will ask if the user wants the new defaults applied to all existing views and plots even where custom settings have been set.
 
@@ -37,7 +37,7 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 ## Grid
 
-![]({{< relref "" >}}images/misc/PreferencesEclipseGrid.png)
+![](/images/misc/PreferencesEclipseGrid.png)
 
 - Behaviour When Loading Data
   - **Compute DEPTH Related Properties** -- If not present, compute DEPTH, DX, DY, DZ, TOP, BOTTOM when loading new cases.
@@ -58,7 +58,7 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 ## Summary
 
-![]({{< relref "" >}}images/misc/PreferencesEclipseSummary.png)
+![](/images/misc/PreferencesEclipseSummary.png)
 
 - **Origin Files**: c.f. [Origin Files]({{< relref "eclipsesummarydata#origin-files" >}}) for details.
 - **Summary Data Import** including file format for summary data import, c.f. [Ensemble Summary]({{< relref "eclipsesummarydata#summary-data-file-formats" >}}):
@@ -69,7 +69,7 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 ## Plotting
 
-![]({{< relref "" >}}images/misc/PreferencesPlotting.png)
+![](/images/misc/PreferencesPlotting.png)
 
 - **Summary Plots**: 
   - **Create Plot On Summary Data Import**: governs automatic creation of summary plots when importing a summary case
@@ -98,7 +98,7 @@ Please consider the location and folders of your templates with care to cater fo
 
 ## Scripting
 
-![]({{< relref "" >}}images/misc/PreferencesScripting.png)
+![](/images/misc/PreferencesScripting.png)
 
 - **Octave** c.f. [Octave Interface]({{< relref "octaveinterface.md" >}}) for details:
   - **Octave Executable Location** -- Define binary file location for Octave, usually without path on Linux and including path on Windows.
@@ -117,7 +117,7 @@ Please consider the location and folders of your templates with care to cater fo
 
 ## Import/Export
 
-![]({{< relref "" >}}images/misc/PreferencesImportExport.png)
+![](/images/misc/PreferencesImportExport.png)
 
 ### Cloud Services
 An authorization token is created and stored in your home folder for access to cloud services. If you experience issues with the cloud service, the token can be deleted using a button. The standard authentication dialog will be displayed the next time you try to access the related cloud service.

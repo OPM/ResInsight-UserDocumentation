@@ -20,11 +20,11 @@ The imported {{< image-in-text src="images/import/Default.png" >}} Observed Data
 
 Which summaries that has been detected in a Observed Data file can be read in an Observed Data's **Property Editor**. In the image below, time and year info has been found together with the summary "WBP9L" for the well "OP-1".
 
-![]({{< relref "" >}}images/import/observedDataProperty.png)
+![](/images/import/observedDataProperty.png)
 
 ## Viewing Observed Time History Data
 
-![]({{< relref "" >}}images/import/observedDataCurveCreator.png)
+![](/images/import/observedDataCurveCreator.png)
 
 To plot **Observed Time History Data**, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the **Plot Editor** is covered in [Summary Plot Editor]({{< relref "summaryploteditor" >}}). Observed time history data points are plotted without lines by default.
 
@@ -38,7 +38,7 @@ When inspecting resampled data, it can be useful to manually specify if this cur
 CSV/txt files are generic ascii files where data is arranged in columns. Some variations in formatting is supported, for instance deifferent cell separators, date and time format, decimal separator etc. When importing these types of files the user is presented a dialog, where the user may tell ResInsight how to import the selected file(s). If more than one file is selected, the dialog appears once for each file.
 
 #### CSV/txt Import Options Dialog
-![]({{< relref "" >}}images/import/ImportObservedTimeHistoryDataDialog.png)
+![](/images/import/ImportObservedTimeHistoryDataDialog.png)
 
 Dialog fields description:
 
@@ -97,7 +97,7 @@ Any address may have associated error data. Those type of data will have the sam
 
 Example:
 
-![]({{< relref "" >}}images/import/ErrorBars.png)
+![](/images/import/ErrorBars.png)
 
 ### CSV Line Based Format
 ResInsight supports a 'line based' CSV file format variant as well. As opposed to the normal CSV format, data values are organized in lines. Each line must contain at least a date (and time), a vector address and a sample value. Optionally it may also contain an error value and a comment. The information carried by this format is equivalent to the normal CSV format, it is only a different file layout.

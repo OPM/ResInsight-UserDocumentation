@@ -4,7 +4,7 @@ title = "Faults"
 weight = 90
 +++
 
-![]({{< relref "" >}}images/3d-main-window/FaultsIllustration.png)
+![](/images/3d-main-window/FaultsIllustration.png)
 
 This section describes how Faults are detected and visualized. NNC's are a part of the Faults visualization and are thus also mentioned in this section. 
 
@@ -80,7 +80,7 @@ Visualization mode and mesh lines can be controlled from the toolbar.
 ### Faults Properties
 By clicking the {{< image-in-text src="images/3d-main-window/draw_style_faults_24x24.png" >}} **Faults** item in the **Project Tree**, the following options common to all the faults are displayed: 
 
- ![]({{< relref "" >}}images/3d-main-window/FaultProperties.png)
+ ![](/images/3d-main-window/FaultProperties.png)
  
 ##### Fault Options
 - **Use Cell filters for Faults** -- When checked, use the currently active cell filters to filter the visible faults. 
@@ -118,7 +118,7 @@ Faults can be exported to separate files in the _`*grdecl`_ file format. This is
 
 To export some faults, select the faults you want to export in the **Project Tree**, and select the command **Export Faults ...** from the right-click menu.
 
- ![]({{< relref "" >}}images/3d-main-window/ExportFaultsMenu.png)
+ ![](/images/3d-main-window/ExportFaultsMenu.png)
 
 You are then prompted to select a destination folder. Each Fault is exported to a file named _`Faults_<fault name>_<case name>.grdecl`_ and stored in the selected folder. 
 

@@ -4,7 +4,7 @@ title = "Seismic Sections"
 weight = 113
 +++
 
-![]({{< relref "" >}}images/3d-main-window/SeismicHeaderImage.png)
+![](/images/3d-main-window/SeismicHeaderImage.png)
 
 ## Creating a Seismic Section
 Import of data is described in [Seismic Data]({{< relref "seismicdata" >}})
@@ -12,7 +12,7 @@ Import of data is described in [Seismic Data]({{< relref "seismicdata" >}})
 **Seismic Sections** are cross sections that cut a grid model in various ways to display seismic data. 
 A **Seismic Section** is created by right-clicking the **Seismic Section** item in **Project Tree** 
 
-![]({{< relref "" >}}images/3d-main-window/SeismicSectionsNew.png)
+![](/images/3d-main-window/SeismicSectionsNew.png)
 
 The following types of Seismic Sections are available:
 
@@ -26,7 +26,7 @@ The following types of Seismic Sections are available:
 ## Property Editor
 The **Property Editor** of a Seismic Section is shown below.
 
-![]({{< relref "" >}}images/3d-main-window/SeismicSectionsPropertyEditor.png)
+![](/images/3d-main-window/SeismicSectionsPropertyEditor.png)
 
 The properties are grouped as follows:
 

@@ -4,13 +4,13 @@ title = "Flow Diagnostics Plots"
 weight = 110
 +++
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsPlotsOverview.png)
+![](/images/plot-window/FlowDiagnosticsPlotsOverview.png)
 
 Flow Diagnostics Plots can be used to view well allocation, well inflow rates, cumulative saturation along time of flight and flow characteristics. 
 
 They are managed from the folder **Flow Diagnostics Plots** located in **Plot Project Tree** in the **Plot Main Window**. 
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsPlotsProjectTree.png)
+![](/images/plot-window/FlowDiagnosticsPlotsProjectTree.png)
 
 This folder contains a default **Flow Characteristics Plot** and **Well Allocation Plot**. In addition, two folders with stored  well allocation and flow characteristics plots will show up if there are any of those in the model.
 
@@ -31,7 +31,7 @@ Multi Segment Wells will be displayed according to their branch information, but
 
 To plot the Well allocation for a well, right-click the well in the **Project Tree** or in the **3D View** and invoke the command **Plot Well Allocation**.
 
-![]({{< relref "" >}}images/plot-window/SimulationWellContextMenu.png)
+![](/images/plot-window/SimulationWellContextMenu.png)
 
 The command updates the default **Well Allocation Plot** with new values based on the selection and the settings in the active view. This plot can then be copied to the **Stored Plots** folder by the right-click command **Add Stored Well Allocation Plot**. 
 
@@ -39,7 +39,7 @@ The command updates the default **Well Allocation Plot** with new values based o
 
 The **Legend**, **Total Allocation** pie chart, **Cumulative Saturation**, and the **Well Flow/Allocation** can be turned on or off from the toggles in the **Project Tree**. The other options are controlled from the property panel of a Well Allocation Plot:
 
-![]({{< relref "" >}}images/plot-window/WellAllocationProperties.png)
+![](/images/plot-window/WellAllocationProperties.png)
 
 - **Name** -- Auto generated name used as plot title
 - **Show Plot Title** -- Toggles whether to show the title in the plot
@@ -62,7 +62,7 @@ The **Legend**, **Total Allocation** pie chart, **Cumulative Saturation**, and t
 
 The depth value in the plot can be controlled by selecting the **Accumulated Flow**/**Inflow Rates** item in the **Project Tree**. This item represents the Well-Log-like part of the Well Allocation Plot and its properties are shown below:
 
-![]({{< relref "" >}}images/plot-window/WellAllocationWellLogProperties.png)
+![](/images/plot-window/WellAllocationWellLogProperties.png)
 
 - **Name** -- The plot name, updated automatically based on the **Flow Type** and well.
 - **Depth Type**
@@ -86,12 +86,12 @@ It is also possible to save the ascii data to a file directly by using the right
 The total accumulation data can also be viewed in ascci format by the command **Show Total Allocation Data**.
 
 ## Producer/Injector Connectivity Table
-![]({{< relref "" >}}images/plot-window/Producer_Injector_Connectivity.png)
+![](/images/plot-window/Producer_Injector_Connectivity.png)
 
 Use [Producer/Injector Connectivity Table]({{< relref "producerinjectorconnectivitytable" >}}) to see the flow diagnostics communication between producer and injector wells for selected time steps.
 
 ## Well Allocation Over Time
-![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
+![](/images/plot-window/WellAllocationOverTime.png)
 
 Use [Well Allocation Over Time]({{< relref "wellallocationovertimeplot" >}}) to see the allocation over multiple restart time steps.
 
@@ -100,19 +100,19 @@ Use [Well Allocation Over Time]({{< relref "wellallocationovertimeplot" >}}) to 
 A Cumulative Phase Distribution Plot shows the volumetric oil, gas, and water distribution from contributing wells to a target well.
 For producer B-2H, for instance, such a plot can be created by right-clicking its entry under **Simulation Wells** in **Project Tree**.
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionCreate.png)
+![](/images/plot-window/FlowDiagnosticsCumulativePhaseDistributionCreate.png)
 
 A Cumulative Phase Distribution Plot can also be created by right-clicking a Cumulative Saturation plot, c.f. figure below. 
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionPlot.png)
+![](/images/plot-window/FlowDiagnosticsCumulativePhaseDistributionPlot.png)
 
 Clicking its entry in **Plot Project Tree**, displays content and settings of the Cumulative Phase Distribution Plot.
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionProperties.png)
+![](/images/plot-window/FlowDiagnosticsCumulativePhaseDistributionProperties.png)
 
 ## Flow Characteristics Plot
 
-![]({{< relref "" >}}images/plot-window/FlowCharacteristicsPlot.png)
+![](/images/plot-window/FlowCharacteristicsPlot.png)
 
 This window displays three different graphs describing the overall behavior of the reservoir for each time step from a flow diagnostics point of view. 
 
@@ -122,7 +122,7 @@ This window displays three different graphs describing the overall behavior of t
 
 ### Settings
 
-![]({{< relref "" >}}images/plot-window/FlowCharacteristicsPropertyPanel.png)
+![](/images/plot-window/FlowCharacteristicsPropertyPanel.png)
 
 - **Case** -- Selects the source case for the plot.
 - **Time Steps** -- These options selects the time steps to be used in the plot.

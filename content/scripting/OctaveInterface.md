@@ -19,7 +19,7 @@ The Octave functions are documented in [Octave Interface Reference]({{< relref "
 ## Octave Script Management 
 Octave scripts are available in the **Scripts** folder in the **Project Tree**. 
 
-![]({{< relref "" >}}images/scripting/OctaveScriptTree.png)
+![](/images/scripting/OctaveScriptTree.png)
 
 This folder contains an entry for each of the directories you have added as a **Script Folder**. Each of the folder lists available _`*.m`_ files and sub directories.
 
@@ -47,13 +47,13 @@ A script can be started by navigating to the script in the **Project Tree**, and
 
 One script can be executed on many cases by first selecting a set of cases, and then activating **Execute script** from the right-click menu on the case selection. The script is then executed once per selected case setting the ResInsight's *Current Case* each time. 
 
-![]({{< relref "" >}}images/scripting/ExecuteOctaveScriptOnSelectedCases.png)
+![](/images/scripting/ExecuteOctaveScriptOnSelectedCases.png)
 
 ### Process Monitor
 
 When an Octave script is executed, the **Process Monitor** pops up and displays the output from Octave during the script execution as displayed below:
 
-![]({{< relref "" >}}images/scripting/ProcessMonitor.png)
+![](/images/scripting/ProcessMonitor.png)
 
 In addition to the output from the script, it prints a start and stop time stamp. The **Clear**-button deletes all the text in the monitor, and the **Stop**-button tries to kill the running Octave process.
 

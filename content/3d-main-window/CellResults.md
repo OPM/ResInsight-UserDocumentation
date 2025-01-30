@@ -4,7 +4,7 @@ title = "Cell Results"
 weight = 20
 +++
 
-![]({{< relref "" >}}images/3d-main-window/CellResultsOverview.png)
+![](/images/3d-main-window/CellResultsOverview.png)
 
 The main results to post process in ResInsight are Cell Results. A Cell Result is one value, or a small set of values per 
 cell over a region of the grid. A Cell Result is also referred to as a *Property*.
@@ -25,7 +25,7 @@ In the following we will describe these options.
 
 Results and difference options are displayed by the Property Editor.
 
-![]({{< relref "" >}}images/3d-main-window/CellResultTypes.png)
+![](/images/3d-main-window/CellResultTypes.png)
 
 The different result types are:
 
@@ -83,7 +83,7 @@ In this way, a producer will have two tracer names: The "well name" as a produce
 
 There are several options available to define the particular result you want to target, as shown below:
 
-![]({{< relref "" >}}images/3d-main-window/CellResultFlowDiagnostics.png)
+![](/images/3d-main-window/CellResultFlowDiagnostics.png)
 
 There are two main selections you need to make: The tracers and the result property 
 
@@ -121,7 +121,7 @@ The flow diagnostics results are only calculated when asked for, and only for re
 
 This result type is used to plot derived results based on a selection of simulated tracers, typically seawater injection. Currently the only derived property available is **Water Flooded PV**. Please refer to [Derived Results]({{< relref "derivedresults" >}}) for more information.
 
-![]({{< relref "" >}}images/3d-main-window/InjectionFloodingPropertyPanel.png)
+![](/images/3d-main-window/InjectionFloodingPropertyPanel.png)
 
 - **Tracers** -- Lists the available simulation tracers from the Eclipse Case. The list is produced by showing only the properties with names ending with the letter "F". Select the tracers you want to investigate.
 - **Result Property** -- Select the variable you want to calculate. (_Number Of Flooded PV_ is currently the only one) 
@@ -145,8 +145,8 @@ Several derived cell properties are calculated. Please refer to [Derived Results
 This group of options controls time-lapse results to be calculated. ( See [Relative Results]({{< ref "derivedresultsgeomech.md#relative-results-time-lapse-results" >}}) for more information ) 
 
 ## Select Color Result
-![]({{< relref "" >}}images/3d-main-window/SelectColorResult.png)
+![](/images/3d-main-window/SelectColorResult.png)
 
 In the 3D view, the result property for a selected cell can be found by right-clicking on the 3D view and choosing **Select Color Result**. The corresponding result property will be shown in the Property Editor.
 
-![]({{< relref "" >}}images/3d-main-window/SelectColorResultPropertyEditor.png)
+![](/images/3d-main-window/SelectColorResultPropertyEditor.png)

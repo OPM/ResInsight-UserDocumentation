@@ -6,7 +6,7 @@ hidden = true
 +++
 
 ## Summary Plotting
-![]({{< relref "" >}}images/plot-window/SummaryPlotsMain.png)
+![](/images/plot-window/SummaryPlotsMain.png)
 
 [Summary Plotting]({{< relref "summaryplots.md" >}}) is updated with new features and improved workflows:
 - Improved logarithmic legend and default ranges
@@ -27,7 +27,7 @@ It is now possible to get the result property values from all linked views when 
 
 
 ## Calculator Improvements
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorMain.png)
+![](/images/3d-main-window/GridPropertyCalculatorMain.png)
 
 The grid calculator and summary curve calculator is updated with more help and improved usability. The grid property calculations will now always calculate values for active cells and do nothing for other inactive cells.
 
@@ -48,7 +48,7 @@ Thanks to https://github.com/EdmundStephens for reporting this [issue](https://g
 
 
 ## Display of RFT segment curves
-![]({{< relref "" >}}images/plot-window/RFTSegmentPlot.png)
+![](/images/plot-window/RFTSegmentPlot.png)
 
 **RFT Segment Data** can be plotted as horizontal **Well Log Plots**. This feature is now improved with more tracks and improved visual quality.
 

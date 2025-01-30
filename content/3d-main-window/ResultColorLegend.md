@@ -4,7 +4,7 @@ title = "Result Color Legend"
 weight = 30
 +++
 
-![Legend Configuration]({{< relref "" >}}images/3d-main-window/legend_configuration.PNG)
+![Legend Configuration](/images/3d-main-window/legend_configuration.PNG)
 
 The color mapping of the displayed cell result is controlled by the **Color Legend** item in **Project Tree**. 
 The legend can be shown or hidden by checking or unchecking the box in front of the **Color Legend** item.
@@ -30,7 +30,7 @@ As shown above, the Legend configuration for cell results allows the following s
 Furthermore, the legend may display semi-transparent with a sorrounding box by selecting the **Show Box around Legends** option of the 
 [Preferences dialog]({{< relref "preferences" >}}).
 
-![Legend Background]({{< relref "" >}}images/3d-main-window/legend_background.png) ![Show Box around legends]({{< relref "" >}}images/3d-main-window/legend_with_background.png)
+![Legend Background](/images/3d-main-window/legend_background.png) ![Show Box around legends](/images/3d-main-window/legend_with_background.png)
 
 
 ## Legend configuration for category results
@@ -39,12 +39,12 @@ The **Category** type of legend mapping concerns such as formation names and dis
 **Category** type of legends invoke the Property Editor shown below. 
 Here the default **Category Mode** *Interpolate* is shown to color all formations.
 
-![Legend Configuration]({{< relref "" >}}images/3d-main-window/LegendConfigCategoryInterpolate.png)
+![Legend Configuration](/images/3d-main-window/LegendConfigCategoryInterpolate.png)
 
 In the example below, the **Category Mode** *Exclusively Category Colors* has been selected to produce a 3D visualization of formations according to the category numbers of *Selected Formations Legend*. 
 As seen, formations according to the category numbers are displayed in colors while the others are displayed in grey. 
 Please see [Color Legends]({{< relref "colorlegends" >}}) for more information about legends and category numbers.
 
-![Legend Configuration]({{< relref "" >}}images/3d-main-window/LegendConfigCategoryExclusive.png)
+![Legend Configuration](/images/3d-main-window/LegendConfigCategoryExclusive.png)
 
 

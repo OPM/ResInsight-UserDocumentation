@@ -12,7 +12,7 @@ If you have, and would like to a use these features, please see [ Build Instruct
 Geo-mechanical data can be imported using the **Import -> Geo Mechanical Cases menu**. Here three options are present: **Import Geo Mechanical Model**, **Import Geo Mechanical Model (Time Step Filtered)**  (both for odb files) and **Import Element Property Table**.
 
 
-![]({{< relref "" >}}images/import/GeoMechImport.png)
+![](/images/import/GeoMechImport.png)
 
 ResInsight supports the elements C3D8R, C3D8 and C3D8P which are all HEX8 cells. It is also assumed that there are *no other element topologies* present in the odb file, and that there are only one part. For IJK-based range filters to work, it is also assumed that the elements in the part is topologically arranged as a complete box.
  
@@ -32,6 +32,6 @@ The Octave interface, however, does not support the odb-data yet.
 ### Time Step Filtered Import
 By choosing the **Import Geo Mechanical Model (Time Step Filtered)** option, it is possible to limit the amount of time steps that are imported to improve the speed and reduce the memory use. If this option is chosen a tile step filter dialog is shown after selecting the file to import.
 
-![]({{< relref "" >}}images/import/GeoMechFilter.png)
+![](/images/import/GeoMechFilter.png)
 
 The data can be filtered by skipping Days, Weeks, Months or Years in the top **Filter Type** drop down list and the range of time steps can be picked in the **First Time Step** and **Last Time Steps** lists. Furthermore, the final selection can be fine tuned by selecting or deselecting individual time steps in the **Select From N Time Steps** list. ResInsight will ignore any data that doesn't match these time steps and will thus reduce the amount of data imported.

@@ -42,7 +42,7 @@ See [Command Line Interface]({{< relref "CommandLineInterface.md" >}})
 
 ## Plotting improvements
 
-![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
+![](/images/plot-window/SummaryCurveHighlight.png)
 
 - Date and time can now be customized to exactly the format you prefer
 - To easily see the difference between history vectors and other vectors, the default style for history vector is symbols without lines

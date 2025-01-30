@@ -5,7 +5,7 @@ weight = 80
 +++
 
 
-![]({{< relref "" >}}images/plot-window/RegressionAnalysis.png)
+![](/images/plot-window/RegressionAnalysis.png)
 
 
 ## Create Regression Analysis
@@ -14,7 +14,7 @@ Regression analysis curves can be created from the right-click menu for a curve 
 
 
 
-![]({{< relref "" >}}images/plot-window/RegressionAnalysis_create.png)
+![](/images/plot-window/RegressionAnalysis_create.png)
 
 
 ## Regression Types

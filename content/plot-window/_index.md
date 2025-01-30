@@ -4,7 +4,7 @@ title = "Plot Main Window"
 weight = 30
 +++
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotsMain.png)
+![](/images/plot-window/SummaryPlotsMain.png)
 
 The **Plot Main Window** is the main window of ResInsight for 2D graphing and plotting as shown above surrounded by the following docking windows:
 

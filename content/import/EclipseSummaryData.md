@@ -12,7 +12,7 @@ Summary data is located in two files, summary vector names in **\*.SMSPEC** and 
 For import of ensemble datasets, see [Ensemble File Dialog]({{< relref "ensemblefiledialog" >}}).
 
 ## Origin Files
-![]({{< relref "" >}}images/plot-window/OriginFileDialog.png)
+![](/images/plot-window/OriginFileDialog.png)
 
 During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the Origin Files dialog is displayed.
 

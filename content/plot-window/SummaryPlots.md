@@ -4,7 +4,7 @@ title = "Summary Plots"
 weight = 10
 +++
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotsMain.png)
+![](/images/plot-window/SummaryPlotsMain.png)
 
 Summary Plots are a display of curves based on 
 [Eclipse Summary Data]({{< relref "eclipsesummarydata" >}})
@@ -43,7 +43,7 @@ Creating a new summary plot of *WBHP* of *Well B-1H* and subsequent *Drag & Drop
 ResInsight will automatically make new axes if necessary. If units are the same as for WGOR and WGORH, a new axis is unnecessary.
 
 
-![]({{< relref "" >}}images/plot-window/SummaryPlots_WBHP_WGOR.png)
+![](/images/plot-window/SummaryPlots_WBHP_WGOR.png)
 
 
 ### Using Plot Manager to create Summary Plots
@@ -61,11 +61,11 @@ The [**Data Sources**]({{< relref "summaryplotdatasources" >}}) window enables e
 - Use *Append Curves* to append curves for the selected vectors into all existing plots.
 - Use *Append Plots for Wells* to create separate plots for the selected vectors.
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendVectorsForWells.png)
+![](/images/plot-window/SummaryPlotsAppendVectorsForWells.png)
 
 If a plot contains curves pertinent to a single data source, you may easily append corresponding plots for other entries of the type by right-clicking or *drag and drop*. In the examples above, the curves are pertinent to the single data source well B-1H. Thus you may easily append corresponding plots for other wells by right-clicking as shown below.
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotsAppendPlotsForWells.png)
+![](/images/plot-window/SummaryPlotsAppendPlotsForWells.png)
 
 Alternatively, you may simply and efficiently **drag and drop** the selected wells into the plot area.
 In fact, you may drag the entire folder {{< image-in-text src="images/plot-window/DataSourcesWell.png" >}} into plot area to append plots for all wells.
@@ -80,7 +80,7 @@ The data source of displayed curves is rapidly changed by [Summary Plot Source S
 ### Visual comparison of multiple summary curves
 ResInsight may ease comparison of multiple summary curves by selecting a plot in **Plots** and using the settings in **Property Editor** group **Axes**.
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotPropertyEditorAxes.png)
+![](/images/plot-window/SummaryPlotPropertyEditorAxes.png)
 
 The different options are:
 
@@ -110,7 +110,7 @@ A summary curve is highlighted when left-clicked in a plot. This eases detailed 
 
 Another essential feature is to left-click an axis in a summary plot which will highlight the curves corresponding to the particular axis. As exemplified below, clicking the axis *Gas Production Total* highlights the *WGPT* curve and dims the other curves.
 
-![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
+![](/images/plot-window/SummaryCurveHighlight.png)
 
 Summary curves can also be activated and deactivated by clicking the check-boxes in **Plots** window. See also **Plots** right-click menu items, e.g. *On - Others Off* which is an effective way to deactivate all curves not selected.
 
@@ -120,19 +120,19 @@ An entire summary plot may be duplicated using the toolbar button
 
 Copy and Paste of a summary plot, subplot (see below) or curve is also possible using the **Plots** right-click menu and standard keyboard shortcuts (CTRL-C/CTRL-V). This enables pasting a subplot or curve to wherever desired in the the **Plots** tree.
 
-![]({{< relref "" >}}images/plot-window/SummarySubplotCopy.png)
+![](/images/plot-window/SummarySubplotCopy.png)
 
 ### Filtering of subplots
 Filtering of subplots allows the user to disable/hide subplots containing data below a user defined threshold.
 To activate filtering of subplots, click a plot in **Plots** window, set the *Y-axis Threshold* in Property Editor, and click *Apply Filter*.
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotVisibilityFilter.png)
+![](/images/plot-window/SummaryPlotVisibilityFilter.png)
 
 ### Splitting a plot into subplots
 A plot with many curves can easily be split into multiple subplots. 
 Right-click a composite plot in **Plots** and select **Split Into Single Curve Plots** to split  into subplots each comprising one curve.
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotSplitIntoSingleCurvePlots.png)
+![](/images/plot-window/SummaryPlotSplitIntoSingleCurvePlots.png)
 
 
 ### Accessing Plot Data
@@ -153,16 +153,16 @@ The text content of this window is easy to copy and paste into Excel or other to
 ## Editing Summary Plots
 
 A color selection dialog can be opened by clicking on the color icon in the **Project Tree**.
-![]({{< relref "" >}}images/plot-window/ColorSelectionDialog.png)
+![](/images/plot-window/ColorSelectionDialog.png)
 
 The settings of each plot are listed in the **Plots** window for overview and are controlled by its sub-items and the **Property Editor**.
-![]({{< relref "" >}}images/plot-window/SummaryCurveSelection.png)
+![](/images/plot-window/SummaryCurveSelection.png)
 
 ### Editing a Summary Curve
 
 By selecting a specific summary curve in the **Plots** window, its properties are displayed by the **Property Editor**.
 
-![]({{< relref "" >}}images/plot-window/summary_curve_properties.png)
+![](/images/plot-window/summary_curve_properties.png)
 
 The Property Editor organizes the available options into the following groups:
 
@@ -182,11 +182,11 @@ Other actions are available via right-click menu for selected curve. For instanc
 ### Default Time Axis Properties
 Time axis properties are displayed by clicking the **Time Axis** subitem of a summary plot in **Plots** window. 
 
-![]({{< relref "" >}}images/plot-window/SummaryTimeAxisProperties.png)
+![](/images/plot-window/SummaryTimeAxisProperties.png)
 
 ### Custom Time Axis Properties
 
-![]({{< relref "" >}}images/plot-window/summary-custom-tick-marks.png)
+![](/images/plot-window/summary-custom-tick-marks.png)
 
 The time labels are automatically defined based on the available date range. The tick marks can be controlled in details by setting **Tickmark Type** to **Custom**. Then a tickmark interval and tickmark interval step can be defined.
 
@@ -195,7 +195,7 @@ In the screenshot above, the interval is set to three years, and the plot displa
 ### Y-axis Properties
 Y-axis properties are displayed by clicking one of the left/right axis subitems of a summary plot in **Plots** window.
 
-![]({{< relref "" >}}images/plot-window/summary_plot_yaxis_properties.png)
+![](/images/plot-window/summary_plot_yaxis_properties.png)
 
 The property groups are:
 

@@ -11,7 +11,7 @@ Release 2022.06.1 is mainly a bug fix release in addition to a few new features.
 
 ## Window Management
 
-![]({{< relref "" >}}images/misc/WindowManagementSystem.png)
+![](/images/misc/WindowManagementSystem.png)
 
 The [Window Management]({{< relref "windowmanagement" >}}) was updated allowing an easy to use and powerful management system. ResInsight stores application window visibility and location between sessions. It is also possible to store the window configuration to a file for later reuse.
 
@@ -19,7 +19,7 @@ Icons are added to the docking windows to make it easy to find a window.
 
 ## Adjustments to Summary Plotting
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotsMain.png)
+![](/images/plot-window/SummaryPlotsMain.png)
 
 [Summary Plotting]({{< relref "summaryplots.md" >}}) is updated with new features and improved workflows:
 - Settings for how to use the automation for naming of plots and axis range has been updated and is now easiser to use.

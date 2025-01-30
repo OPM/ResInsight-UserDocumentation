@@ -8,7 +8,7 @@ aliases = [
 ]
 +++
 
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorMain.png)
+![](/images/3d-main-window/GridPropertyCalculatorMain.png)
 
 ResInsight offers a built-in property calculator for grid parameters. 
 The **Grid Property Calculator** enables arithmetic expressions to be parsed and calculated for visualization purposes. The expression can be applied to one or multiple grid models, and the expression text can be stored to a file for later use.
@@ -22,7 +22,7 @@ More details on mathematical operations are described in [Calculator Expressions
 Invoke the the **Grid Property Calculator** by pressing the calculator icon {{< image-in-text src="images/Calculator.svg" >}} in the menu bar or by right-clicking 
 {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** in **Project Tree**. 
 
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorInvoke.png)
+![](/images/3d-main-window/GridPropertyCalculatorInvoke.png)
 
 
 ## Example using Grid Property Calculator
@@ -38,19 +38,19 @@ However, you may change name of the calculation and add additional variables and
 {{% /notice %}}
 
 
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorDefault.png)
+![](/images/3d-main-window/GridPropertyCalculatorDefault.png)
 
 The next step is to define the variables *x* and *y*. 
 An easy way to define each variable is to drag and drop properties from **Data Sources**. See screenshot below for drag and drop of *SOIL* from **Data Sources** to the row of variable *x* in **Grid Property Calculator** (emphasized in red). 
 Continue with drag and drop of *SGAS* to define *y*.
 
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorDragDrop.png)
+![](/images/3d-main-window/GridPropertyCalculatorDragDrop.png)
 
 Finally, press **Calculate** to perform the actual calculation. 
 
 The calculated result is accessable via **Property Editor** as **Type** ***Generated*** **Result Property**.
 
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorGeneratedProperty.png)
+![](/images/3d-main-window/GridPropertyCalculatorGeneratedProperty.png)
 
 
 ## Reference Procedure using Grid Property Calculator
@@ -64,7 +64,7 @@ The calculated result is accessable via **Property Editor** as **Type** ***Gener
 1. Press **Calculate** to perform the actual calculation
 1. Access the calculated result in **Property Editor** as **Type** ***Generated*** **Result Property**
 
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorSolo.png)
+![](/images/3d-main-window/GridPropertyCalculatorSolo.png)
 
 ## Storage of Expressions to File
 Use **Import Calculations** and **Export Calculations** to store and load expressions to and from a file.

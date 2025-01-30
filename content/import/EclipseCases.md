@@ -41,7 +41,7 @@ Some Eclipse files have an enormous amount of time steps. If only a selection of
 
 Select **File->Import->Eclipse Cases-> {{< image-in-text src="images/getting-started/Case24x24.png" >}} Import Eclipse Case (Time Step Filtered)** and select an _`*.EGRID`_ or _`*.GRID`_ Eclipse file for import. A dialog will appear.
 
-![]({{< relref "" >}}images/getting-started/timeStepFilter.png)
+![](/images/getting-started/timeStepFilter.png)
 
 Filtering can be done by adjusting the following parameters:
 * First and last time step
@@ -53,7 +53,7 @@ First and last time step to include in the import can be chosen in their respect
 
 Filtering can also be done after import, in a case's **Property Window**.
 
-![]({{< relref "" >}}images/getting-started/timeStepFilterPropEditor.png)
+![](/images/getting-started/timeStepFilterPropEditor.png)
 
 After clicking *Reload Case*, the time steps in the toolbar will be updated.
 
@@ -73,4 +73,4 @@ For export of currently selected cell result values to text file, see [Export: E
 
 The X and Y grid data can be negated in order to make the Grid model appear correctly in ResInsight. This functionality is accessible in the **Property Editor** for all Eclipse Case types as the toggle buttons **Flip X Axis** and **Flip Y Axis** as shown in the example below.
  
-![]({{< relref "" >}}images/getting-started/CaseProperties.png)
+![](/images/getting-started/CaseProperties.png)

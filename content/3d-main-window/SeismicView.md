@@ -4,7 +4,7 @@ title = "Seismic View"
 weight = 112
 +++
 
-![]({{< relref "" >}}images/3d-main-window/SeismicView.png)
+![](/images/3d-main-window/SeismicView.png)
 
 ## Seismic View
 Import of data is described in [Seismic Data]({{< relref "seismicdata" >}}). A seismic view can be created based on a seismic cube. This view can display seismic data, wells and annotation object. To visualize both grid data and seismic data in the same view, see [Seismic Sections]({{< relref "seismicsections" >}}).

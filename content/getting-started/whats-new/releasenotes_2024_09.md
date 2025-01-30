@@ -7,7 +7,7 @@ hidden = true
 
 ## Cloud Services
 
-![]({{< relref "" >}}images/cloud-services/osdu-well-path-3dview.png)
+![](/images/cloud-services/osdu-well-path-3dview.png)
 
 ResInsight has now support for import of data from two cloud services, ensemble summary data from **SUMO** and well path geometry from **OSDU**.
 
@@ -24,7 +24,7 @@ An ensemble of grid cases can be imported into a grid case ensemble. Creating a 
 If you have identical IJK for all grid cases, consider using [Grid Case Group]({{< relref "casegroupsandstatistics" >}})
 
 ## Improved VFP Plot
-![]({{< relref "" >}}images/plot-window/VFP_Plot.png)
+![](/images/plot-window/VFP_Plot.png)
 
 The import of VFP data is changed, and the management of VFP Plots is now improved.
 
@@ -47,7 +47,7 @@ Several improvements has been done related to the opm-common grid importer, espe
 [Performance Hints]({{< relref "performancehints" >}})
 
 ## Depth Surface
-![]({{< relref "" >}}images/3d-main-window/SurfacesOverview.png)
+![](/images/3d-main-window/SurfacesOverview.png)
 
 A flat surface at a specified depth can be created, useful to indicate oil-water contact depth.
 

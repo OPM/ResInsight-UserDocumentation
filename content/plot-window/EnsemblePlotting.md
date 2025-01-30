@@ -4,7 +4,7 @@ title = "Ensemble Plotting"
 weight = 50
 +++
 
-![]({{< relref "" >}}images/plot-window/Ensemble.png)
+![](/images/plot-window/Ensemble.png)
 
 An ensemble is a group of cases that are tightly coupled, only a set of ensemble input parameters differ between cases. This makes it relevant to perform calculations and statistics analysis on ensembles.
 
@@ -31,7 +31,7 @@ The name of an ensemble can be changed by interactive edit of the name in the **
 Ensembles are plotted in the summary plot the same way as ordinary summary curves. Create a new summary plot using the [summary plot editor]({{< relref "summaryploteditor" >}}). Imported ensembles will appear in a separate group in the list of summary cases. When an ensemble is selected, a new curve set is created and plotted as multiple summary curves. By default all curves in an ensemble curve set will have the same color. 
 
 A color selection dialog can be opened by clicking on the color icon in the **Project Tree**.
-![]({{< relref "" >}}images/plot-window/ColorSelectionDialog.png)
+![](/images/plot-window/ColorSelectionDialog.png)
 
 The coloring mode may be edited in the curve set's property editor in the project plot tree view. Two coloring modes are available:
 
@@ -48,7 +48,7 @@ Stepping of data source for ensemble curves is described in [Summary Plot Source
 ### Resampling
 Resampling of curves is possibly by selecting the actual curve(s) listed by the *Ensemble Curve Sets* item in **Plot Project Tree** and using the **Resampling** feature of **Property Editor**.
 
-![]({{< relref "" >}}images/plot-window/EnsemblePlottingResampling.png)
+![](/images/plot-window/EnsemblePlottingResampling.png)
 
 ### Statistics curves
 If the number of curves in a curve set is sufficient, ResInsight will calculate statistics for the curve set. The following statistics curves may be displayed:
@@ -73,6 +73,6 @@ Checking *Match On Parameters* ensures strict match on ensemble parameters.
 In addition, it is possible to specify a fixed time step to be used in delta computation, see 
 [Delta Summary Case]({{< relref "summaryplots" >}}#delta-summary-case) for an example.
 
-![]({{< relref "" >}}images/plot-window/DeltaEnsemblePropertyEditor.png)
+![](/images/plot-window/DeltaEnsemblePropertyEditor.png)
 
 If the two input ensembles differs in which cases they consist of, ResInsight will display a warning and let the user decide whether to create the delta ensemble or not.

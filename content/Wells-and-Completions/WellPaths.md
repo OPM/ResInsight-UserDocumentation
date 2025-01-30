@@ -4,7 +4,7 @@ title = "Well Paths"
 weight = 20
 +++
 
-![]({{< relref "" >}}images/3d-main-window/ResInsight_WellPathWithSimulationWell.png)
+![](/images/3d-main-window/ResInsight_WellPathWithSimulationWell.png)
 
 ResInsight can import well paths from simple Ascii files. 
 In addition, ResInsight is able to retrieve well paths from an Equinor internal web service.
@@ -35,11 +35,11 @@ Make sure you have access to "OSDU - Base acces" and "Linux Exclusion Conditiona
 
 All the imported well paths are available below the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**. 
 
-![]({{< relref "" >}}images/3d-main-window/WellsInTree.png)
+![](/images/3d-main-window/WellsInTree.png)
 
 The visible wells are always shown in all the 3D Views in the complete project, so the toggles and settings control the overall project visibility of the Well Paths. The **Property Editor** of the **Wells** item is shown below 
 
-![]({{< relref "" >}}images/3d-main-window/WellPathCollectionProperties.png)
+![](/images/3d-main-window/WellPathCollectionProperties.png)
 
 - **Global well path visibility** -- This option forces the well paths on or off, ignoring the individual settings unless it is set to Individual.
 - **Clip Well Paths** -- This option hides the top of the Well Paths to avoid displaying the very long lines from the reservoir to the sea surface.
@@ -54,7 +54,7 @@ Well log data is [imported from LAS-files]({{< relref "lasfile" >}}#importing-a-
 ### Well Path Property Editor
 The well path property editor lets the user control the appearance of the well path and associate the well path to a simulation well. It also gives some information about the well path metadata.
 
-![]({{< relref "" >}}images/3d-main-window/WellPathPropertyEditor.png)
+![](/images/3d-main-window/WellPathPropertyEditor.png)
 
 - **Appearance group** -- Settings in this group affect the well path appearance in the 3D view
 - **File group** -- Information about the well path file
@@ -68,13 +68,13 @@ Some Casing Design elements can be assigned to the well path by selecting **Crea
 This will create a new child object for the Well Path, named **Casing Design**. In the **Casign Design** Property editor 
 well path containment properties such as Casing (with Casing Shoe) and Liner can be added to the well path along with a start and end depth and a diameter. 
 
-![]({{< relref "" >}}images/3d-main-window/CasignDesign.png)
+![](/images/3d-main-window/CasignDesign.png)
 
 These can be visualised in the 3D View and Well Log Plots on a [Well Log Track]({{< relref "welllogsandplots" >}}#tracks).
 
-![]({{< relref "" >}}images/3d-main-window/CasignDesign3D.png) 
+![](/images/3d-main-window/CasignDesign3D.png) 
 
-![]({{< relref "" >}}images/3d-main-window/CasignDesignPlot.png)
+![](/images/3d-main-window/CasignDesignPlot.png)
 
 
 ## Ascii Well Paths File Format

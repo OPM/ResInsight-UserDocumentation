@@ -4,7 +4,7 @@ title = "Multi Plots"
 weight = 47
 +++
 
-![]({{< relref "" >}}images/plot-window/MultiPlotHeading.png)
+![](/images/plot-window/MultiPlotHeading.png)
 
 A Multi Plot allows the user to combine multiple plots in a grid layout. Plots from different types can be combined. This plot type is tailored for export to PDF.
 
@@ -12,7 +12,7 @@ A Multi Plot allows the user to combine multiple plots in a grid layout. Plots f
 
 A new Multi Plot can be created by selecting a set of plots and from the right-click menu select **Create Multi Plot from Selected Plots** 
 
-![]({{< relref "" >}}images/plot-window/MultiPlotCreate.png)
+![](/images/plot-window/MultiPlotCreate.png)
 
 The currenly supported types of plots to be part of a **Multi Plot** are:
 - Summary Plots
@@ -25,14 +25,14 @@ The currenly supported types of plots to be part of a **Multi Plot** are:
 ## Properties
 
 The main page layout is controlled from **Preferences**
-![]({{< relref "" >}}images/misc/PreferencesPlotting.png )
+![](/images/misc/PreferencesPlotting.png )
 
 The property editor of a multi plot allows further customization  
 
-![]({{< relref "" >}}images/plot-window/MultiPlotPropertyEditor.png)
+![](/images/plot-window/MultiPlotPropertyEditor.png)
 
 The number of columns can also be controlled from the **Multi Plot** toolbar.
-![]({{< relref "" >}}images/plot-window/MultiPlotToolbar.png)
+![](/images/plot-window/MultiPlotToolbar.png)
 
 ## Export to PDF
 

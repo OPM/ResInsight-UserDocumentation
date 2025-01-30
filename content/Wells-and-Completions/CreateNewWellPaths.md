@@ -4,7 +4,7 @@ title = "Create Well Paths"
 weight = 30
 +++
 
-![]({{< relref "" >}}images/3d-main-window/WellPathCreation.png)
+![](/images/3d-main-window/WellPathCreation.png)
 
 ResInsight lets the user create new/custom well paths by clicking in the 3D view. A self created well path will behave the same way as an imported well path.
 
@@ -17,9 +17,9 @@ ResInsight lets the user create new/custom well paths by clicking in the 3D view
 3. Click in the 3D view on locations where the well path should pass (well path targets)
 4. When finished placing targets, click on "Stop Picking Targets" in the property editor
 
-![]({{< relref "" >}}images/3d-main-window/WellTargetsTree.png)
+![](/images/3d-main-window/WellTargetsTree.png)
 
-![]({{< relref "" >}}images/3d-main-window/WellTargetsPropertyEditor.png)
+![](/images/3d-main-window/WellTargetsPropertyEditor.png)
 
 Well targets property editor fields:
 
@@ -48,7 +48,7 @@ The other columns defined by the "Est"-prefix displays the result of dog leg and
 
 A well path defined by well targets may be edited by either editing coordinates in the property editor or clicking and dragging targets in the 3D view.
 
-![]({{< relref "" >}}images/3d-main-window/WellTargets.png)
+![](/images/3d-main-window/WellTargets.png)
 
 ### Well Target Interaction Operations
 When the well target handles are active in the 3D view, the following operations are possible when pressing left mouse button on well target handles:

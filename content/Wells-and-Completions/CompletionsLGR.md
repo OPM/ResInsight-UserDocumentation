@@ -4,14 +4,14 @@ title = "Completions LGR"
 weight = 60
 +++
 
-![]({{< relref "" >}}images/3d-main-window/TemporaryLGR_CompletionType_12_combined.png)
+![](/images/3d-main-window/TemporaryLGR_CompletionType_12_combined.png)
 
 ResInsight supports creating and exporting LGRs (Local Grid Refinement) in main grid cells intersected by completions.
 
 ## Create Temporary LGRs
 To create temporary LGR(s), first select one or more well paths in the project tree, right click and select 'Create Temporary LGR'. This command brings up the following dialog.
 
-![]({{< relref "" >}}images/3d-main-window/TemporaryLgrDialog.png)
+![](/images/3d-main-window/TemporaryLgrDialog.png)
 
 The dialog contains several input fields
 

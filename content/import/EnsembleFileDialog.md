@@ -12,7 +12,7 @@ When using the standard file selection dialog, the user is limited to select fil
 This dialog is used for import of different file types like *.EGRID, *.SMSPEC, *.TS, *.GRDECL, ...
 {{% /notice %}}
 
-![]({{< relref "" >}}images/plot-window/RecursiveImportDialog2.png)
+![](/images/plot-window/RecursiveImportDialog2.png)
 
 The dialog consists of the following fields:
 

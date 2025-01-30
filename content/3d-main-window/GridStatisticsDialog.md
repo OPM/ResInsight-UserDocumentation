@@ -4,7 +4,7 @@ title = "Grid Statistics Dialog"
 weight = 158
 +++
 
-![]({{< relref "" >}}images/3d-main-window/GridStatisticsDialog.png)
+![](/images/3d-main-window/GridStatisticsDialog.png)
 
 ResInsight 3D Views has an [info box]({{< relref "3dviews" >}}#info-box) in the upper right corner displaying statistics for the current view. A more detailed version of this information may also be displayed in a separate dialog window. Right click on the 3D view background and select **Grid Statistics** to bring up the dialog.
 
@@ -30,7 +30,7 @@ The cumulative histogram shows av accumulated version of the histogram above.
 ## Grid Statistics Configuration
 A grid statistics dialog is always connected to the 3D view from where it was opened. When the contents of the 3D view changes due to user interactions, the grid statistics dialog contents will be updated automatically along with the info box. The Statistics Options of the info box is shown in the figure below with default settings. These settings become available by clicking in the info box or the info box node in **Project Tree**.
 
-![]({{< relref "" >}}images/3d-main-window/InfoBoxConfig.png)
+![](/images/3d-main-window/InfoBoxConfig.png)
 
 The options in the Visibility group apply to the info box only and do not affect the Grid Statistics dialog, while the options in the Statistics Options group affect both.
 

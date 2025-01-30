@@ -6,7 +6,7 @@ hidden = true
 +++
 
 ## Summary Plotting
-![]({{< relref "" >}}images/plot-window/SummaryPlotsMain.png)
+![](/images/plot-window/SummaryPlotsMain.png)
 
 [Summary Plotting]({{< relref "summaryplots.md" >}}) is updated with new features and improved workflows:
 - data sources for summary data can be used for drag/drop operations and efficient and easy production of plots
@@ -17,41 +17,41 @@ hidden = true
 - easy and efficient documentation and paging of multiple summary plots to PDF file
 
 ## Plot Templates
-![]({{< relref "" >}}images/plot-window/SummaryPlotTemplate.png)
+![](/images/plot-window/SummaryPlotTemplate.png)
 
 [Plot Templates]({{< relref "summaryplottemplate.md" >}}) now offer extended features and support for multiplots. For instance, [Default templates]({{< relref "summaryplottemplate.md" >}}#default-templates)
 is a powerful feature to automate the generation of summary plots when importing a summary case.
 
 
 ## Improved data source stepping 
-![]({{< relref "" >}}images/plot-window/SummarySourceSteppingToolbar.png)
+![](/images/plot-window/SummarySourceSteppingToolbar.png)
 
 The new release offers improved features for [data source stepping]({{< relref "summarySourceStepping.md" >}}).
 The new functionality includes, for instance, support for multiple plots and addition of new plots and curves while source stepping.
 
 
 ## Multiple Axes
-![]({{< relref "" >}}images/plot-window/SummaryCurveHighlight.png)
+![](/images/plot-window/SummaryCurveHighlight.png)
 
 Summary plots can now have [Multiple Axes]({{< relref "summaryplots.md" >}}#highlighting-a-curve-or-axis) on both left and right side. Clicking on a curve will highlight the curve and connected axis. Clicking on an axis highlights the axis and related curves.
 
 When a new curve is added to a plot, ResInsight automatically creates a new axis if needed.
 
 ## Plot Manager
-![]({{< relref "" >}}images/plot-window/SummaryPlotManagerOverview.png)
+![](/images/plot-window/SummaryPlotManagerOverview.png)
 
 The new [Plot Manager]({{< relref "summaryplotmanager.md" >}}) offers a powerful approach to create multiple summary plots based on a user specified text filter.
 
 
 ## Grid Property Calculator
-![]({{< relref "" >}}images/3d-main-window/GridPropertyCalculatorMain.png)
+![](/images/3d-main-window/GridPropertyCalculatorMain.png)
 
 The new [Grid Property Calculator]({{< relref "gridpropertycalculator.md" >}}) can be used to create derived results based on arithmetic expressions. 
 One of the features are easy definition of derived results by drag and drop of grid properties from data sources window. 
 
  
 ## Filter intersection
-![]({{< relref "" >}}images/3d-main-window/IntersectionPropEdDepthFilter.png)
+![](/images/3d-main-window/IntersectionPropEdDepthFilter.png)
 
 An intersection can be visually filtered by employing a user defined 
 [Depth Filter]({{< relref "intersections.md" >}}#depth-filter).
@@ -65,7 +65,7 @@ The following are separated into individually dockable windows:
 - Templates are available in a separate window
 
 ## Display of RFT segment curves
-![]({{< relref "" >}}images/plot-window/RFTSegmentPlot.png)
+![](/images/plot-window/RFTSegmentPlot.png)
 
 RFT Segment Data can be plotted as horizontal Well Log Plots.
 

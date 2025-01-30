@@ -4,7 +4,7 @@ title = "Simulation Wells"
 weight = 10
 +++
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWells.png)
+![](/images/3d-main-window/SimulationWells.png)
 
 This section describes how wells defined in the simulation are displayed, and how to control the different aspects of their visualization.
 
@@ -38,7 +38,7 @@ In the following are the different parts of the **Simulation Wells** property pa
 
 ### Visibility
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWellsVisibilityProperties.png)
+![](/images/3d-main-window/SimulationWellsVisibilityProperties.png)
 
 These options controls the visibility of different aspects of the simulation wells.
 
@@ -56,7 +56,7 @@ These options controls the visibility of different aspects of the simulation wel
 
 ### Well Cells and Fence
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWellsWellCellsProperties.png)
+![](/images/3d-main-window/SimulationWellsWellCellsProperties.png)
 
 - **Show Well Cells** -- This option toggles whether to add the well connection cells to the set of visible cells. If no cell filters are active, toggling this option will conveniently hide all other cells, displaying only the requested well cells.   
 -  **Show Well Cell Fence** -- This options toggles whether to add all cells in a given direction ( I, J or K) to the set of visible cells, which has a connecting cell within its set.
@@ -65,7 +65,7 @@ These options controls the visibility of different aspects of the simulation wel
   
 ### Size Scaling
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWellsScalingProperties.png)
+![](/images/3d-main-window/SimulationWellsScalingProperties.png)
 
 - **Well Head Scale** -- Scales the arrow displaying the production status of the well
 - **Pipe Radius Scale** -- Scaling the pipe radius by the average i,j cell size.
@@ -75,9 +75,9 @@ Open Simulation Wells will be drawn with a slightly larger radius than closed we
 
 ### Colors
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWellsColorsProperties.png)
+![](/images/3d-main-window/SimulationWellsColorsProperties.png)
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWellsColorsProperties_Uniform.png)
+![](/images/3d-main-window/SimulationWellsColorsProperties_Uniform.png)
 
 - **Color Pipe Connections** -- Applies a red, green, blue or gray color to the section of the pipe touching a connection cell indicating the production status of the connection. Gas injection, oil production, water injection or closed respectively.  
 - **Label Color** -- Sets the well label color in the 3D view.
@@ -90,14 +90,14 @@ The **Individual Pipe Color** setting has two different options:
 
 ### Well Pipe Geometry
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWellsPipeGeometryProperties.png)
+![](/images/3d-main-window/SimulationWellsPipeGeometryProperties.png)
 
 - **Type** -- Controls whether the pipe will go from cell center to cell center or in a smoother trajectory.
 - **Branch Detection** -- Enables splitting of wells into branches based on the positions of the connection cells.  This option applies to ordinary wells only and has no effect on multi segment wells (MSW).
 
 ### Advanced
 
-![]({{< relref "" >}}images/3d-main-window/SimulationWellsAdvancedProperties.png)
+![](/images/3d-main-window/SimulationWellsAdvancedProperties.png)
 
 - **Well Cell Transparency** -- Controls the transparency level for the well cells.
 - **Well Head Position** -- Controls the depth position of the wellhead. Either relative to the top of the active cells in the relevant IJ-column, or relative to the highest active cell overall.  
@@ -109,13 +109,13 @@ Disks may be used to visualize production and injection rates and cumulative pro
 
 Display of **Disks** are enabled from **Simulations Wells**, c.f. figure below. *Property Type* defaults to predefined production and injection properties but also allows for selection of a single property. When showing *Quantity Labels*, it is often useful to also activate *Show Label Background*.
 
-![]({{< relref "" >}}images/3d-main-window/WellDisks.png)
+![](/images/3d-main-window/WellDisks.png)
 
 
 
 ## Individual Simulation Well options 
 
-![]({{< relref "" >}}images/3d-main-window/WellProperties.png)
+![](/images/3d-main-window/WellProperties.png)
 
 Each of the wells has a set of individual settings which corresponds to the setting on the global level. See the documentation of [Overall Settings for Simulation Wells](#overall-settings-for-simulation-wells). 
 
@@ -125,7 +125,7 @@ The **Size Scaling** options, however, works relative to the scaling level set o
 		  	 
 ## Well Pipes of Multi Segment Wells
 
-![]({{< relref "" >}}images/getting-started/msw_with_valves.png)
+![](/images/getting-started/msw_with_valves.png)
 
 ResInsight reads the MSW information in the result files and uses that to create a topologically correct visualization of the Multi Segment Well. Valves are visulized on the pipe geometry.
 

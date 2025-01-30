@@ -4,7 +4,7 @@ title = "Python Interface"
 weight = 15
 +++
 
-![]({{< relref "" >}}images/scripting/python-logo-master-v3-TM.png)
+![](/images/scripting/python-logo-master-v3-TM.png)
 
 ResInsight provides a robust programming interface that allows you to interact with a running ResInsight instance using [Python 3](https://www.python.org/download/releases/3.0/). This interface enables you to:
 

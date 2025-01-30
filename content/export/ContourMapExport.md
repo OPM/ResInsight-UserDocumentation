@@ -4,7 +4,7 @@ title = "Contour Map Export"
 weight = 95
 +++
 
-![]({{< relref "" >}}images/export/ExportContourMap.png)
+![](/images/export/ExportContourMap.png)
 
 ResInsight can create [contour maps]({{< relref "contourmaps" >}}) based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as oil, gas and hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
 
@@ -18,7 +18,7 @@ To export a contour map, invoke one of the following options (c.f. figure above)
 
 This initiates the following dialog for export options:
 
-![]({{< relref "" >}}images/export/ExportContourMapDialog.png)
+![](/images/export/ExportContourMapDialog.png)
 
 As seen, the dialog facilitates the following options: 
 

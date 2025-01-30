@@ -4,7 +4,7 @@ title = "Well Allocation Over Time Plot"
 weight = 112
 +++
 
-![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
+![](/images/plot-window/WellAllocationOverTime.png)
 
 **Well Allocation Over Time Plot** is a plot displaying the flow data of [Well Allocation Plots]({{< relref "flow-diagnostics-plots" >}}#well-allocation-plots) over a range of time steps. The plot provides the union of wells existing across all time steps for the selected case. 
 
@@ -31,7 +31,7 @@ The Well Allocation Over Time Plot is a part of the *Flow Diagnostics Plots*. Cl
 
 The settings for the Well Allocation Over Time Plot is listed in the *Property Editor*. 
 
-![]({{< relref "" >}}images/plot-window/WellAllocationOverTimePlot_PropertyEditor.png)
+![](/images/plot-window/WellAllocationOverTimePlot_PropertyEditor.png)
 
 The main controls for a Well Allocation Over Time Plot is listed below:
 

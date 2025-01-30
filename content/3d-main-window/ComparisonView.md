@@ -4,7 +4,7 @@ title = "Comparison View"
 weight = 135
 +++
 
-![]({{< relref "" >}}images/3d-main-window/3DComparisonView.png)
+![](/images/3d-main-window/3DComparisonView.png)
 
 ResInsight offers a **Comparison View** to compare two existing views in terms of grid geometry, results, intersections and more. 
 The Comparison View allows comparison of information of different grids and different solutions on the same grid in a single view.
@@ -25,13 +25,13 @@ A Comparison View can be created as follows:
 - Right-click a 3D View, and select **Compare To...**
 
 
-![]({{< relref "" >}}images/3d-main-window/3DComparisonViewCreate.png)
+![](/images/3d-main-window/3DComparisonViewCreate.png)
 
 ## Comparison View Divider
 
 In the figure below, the Comparison View is used to compare two different grids in the same view, one to the left and the other to the right of the  divider between them.  The screen aligned divider is  possible to drag right and left by clicking the handle marked by a green circle.
 
-![]({{< relref "" >}}images/3d-main-window/3DComparisonViewDividerHandle.png)
+![](/images/3d-main-window/3DComparisonViewDividerHandle.png)
 
 ## View Properties and Settings
 

@@ -7,7 +7,7 @@ weight = 40
 When text have been copied to the operating system's clipboard, it will be possible to paste that text into a summary plot. Right click on a summary plot in the **Plot Main Window Project Tree** and select **Paste Excel Data to Summary Plot**. Then a paste options dialog will appear.
 
 ## Paste Options Dialog
-![]({{< relref "" >}}images/import/PasteExcelData.png)
+![](/images/import/PasteExcelData.png)
 
 Most of the fields in this dialog are the same as in the [CSV/txt import options dialog]({{< relref "observeddata" >}}#csv-txt-import-options-dialog). Please see that section for documentation on those fields. The fields specific to the paste options dialog are as follows:
 
