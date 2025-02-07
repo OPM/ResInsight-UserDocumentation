@@ -1,8 +1,9 @@
 +++
 title = "What's New in 2023.03"
 
-weight = 10
-hidden = true
+weight = 107
+hidden = false
+search_ignore = true
 +++
 
 

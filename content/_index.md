@@ -45,10 +45,4 @@ title = "ResInsight"
       </div>
     <div class="clear"></div>
   </div>
-
-  <div class="grid">
-    <div class="unit whole center-on-mobiles">
-      <p>Here are some words from a few of the happy ResInsight users <a href="{{% relref "testimonials" %}}">Testimonials &rarr;</a> </p>
-    </div>
-  </div>
 </section>

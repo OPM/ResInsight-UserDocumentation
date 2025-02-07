@@ -2,7 +2,7 @@
 title = "Windows Subsystem for Linux"
 
 hidden = false
-weight = 20
+weight = 50
 +++
 
 

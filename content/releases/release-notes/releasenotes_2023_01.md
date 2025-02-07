@@ -1,8 +1,9 @@
 +++
 title = "What's New in 2023.01"
 
-weight = 10
-hidden = true
+weight = 108
+hidden = false
+search_ignore = true
 +++
 
 ## Summary Plotting

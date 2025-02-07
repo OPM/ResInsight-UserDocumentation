@@ -1,10 +1,9 @@
 +++
 title = "What's New in 2024.03"
 
-weight = 10
-hidden = true
-[build]
-  list = 'never'
+weight = 102
+hidden = false
+search_ignore = true
 +++
 
 ## Grid Calculations
