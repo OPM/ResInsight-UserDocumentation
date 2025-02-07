@@ -1,7 +1,7 @@
 +++
-title = "Download and Install"
+title = "Build From Source"
 
-weight = 10
+weight = 80
 +++
 
 ## Installation
