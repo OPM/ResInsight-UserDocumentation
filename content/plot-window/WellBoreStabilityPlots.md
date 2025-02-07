@@ -1,20 +1,20 @@
 +++
 title = "Well Bore Stability Plots"
-published = true
+
 weight = 80
 +++
 
-![]({{< relref "" >}}images/plot-window/WellBoreStability.png)
+![](/images/plot-window/WellBoreStability.png)
 
-ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{< relref "welllogsandplots" >}}) to visualize [Formations]({{< relref "formations" >}}), [Well Measurements]({{< relref "wellmeasurements" >}}), [Well Path Attributes]({{< relref "wellpaths" >}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
+ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{% relref "welllogsandplots" %}}) to visualize [Formations]({{% relref "formations" %}}), [Well Measurements]({{% relref "wellmeasurements" %}}), [Well Path Attributes]({{% relref "wellpaths" %}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
 
-In the figure above, the first track contains [Formations]({{< relref "formations" >}}) and an indication of sea level.
+In the figure above, the first track contains [Formations]({{% relref "formations" %}}) and an indication of sea level.
 
 | Sea Level | Formations |
 |-----------|------------|
-|![]({{< relref "" >}}images/plot-window/WaterLevel.png) | ![]({{< relref "" >}}images/plot-window/FormationLevels.png) |
+|![](/images/plot-window/WaterLevel.png) | ![](/images/plot-window/FormationLevels.png) |
 
-The second track contains a visualisation of the well, with well attributes of [Casing Design]({{< relref "wellpaths" >}}#casing-design) as well [Completions]({{< relref "Completions" >}})
+The second track contains a visualisation of the well, with well attributes of [Casing Design]({{% relref "wellpaths" %}}#casing-design) as well [Completions]({{% relref "Completions" %}})
 
 The third track, which is disabled by default, contains the input parameters of the plot as described in the [Input Requirements](#input-requirements) section.
 
@@ -29,14 +29,14 @@ The fourth track (third visible by default) shows the following stability gradie
 
 The fifth track contains curves showing the angular orientation of the well path as azimuth (deviation from vertical) and inclination (deviation from x-axis) in degrees.
 
-If any [Well Measurements]({{< relref "wellmeasurements" >}}) are present, they will be visible as symbols in the track **Stability Curves**.
+If any [Well Measurements]({{% relref "wellmeasurements" %}}) are present, they will be visible as symbols in the track **Stability Curves**.
 
 ## Create Well Bore Stability plots
 
-Well Bore Stability plots can be created from the right-click menu for a well path in **Project Tree** or from the the right-click menu of the Well Log Plots entry in **Plot Project Tree**. In the former case, the well bore stability plot will be created for the selected **Well Path**. In the latter case, it will be created for the first well path in the well path list and the well path for the entire plot can be changed with the [Change Data Source Feature]({{< relref "welllogsandplots" >}}#change-data-source-for-plots-and-curves).
+Well Bore Stability plots can be created from the right-click menu for a well path in **Project Tree** or from the the right-click menu of the Well Log Plots entry in **Plot Project Tree**. In the former case, the well bore stability plot will be created for the selected **Well Path**. In the latter case, it will be created for the first well path in the well path list and the well path for the entire plot can be changed with the [Change Data Source Feature]({{% relref "welllogsandplots" %}}#change-data-source-for-plots-and-curves).
 
-![]({{< relref "" >}}images/plot-window/WellBoreStabilityCreation.png) 
-![]({{< relref "" >}}images/plot-window/WellBoreStabilityCreation2.png)
+![](/images/plot-window/WellBoreStabilityCreation.png) 
+![](/images/plot-window/WellBoreStabilityCreation2.png)
 
 ## Input requirements
 
@@ -66,7 +66,7 @@ For parameters with multiple available sources, the sources will be tried in num
 
 In addition to the units above, it LAS-files it is possible to supply PP in Bar and UCS in Pascal or MPa. Conversion will be handled automatically.
 
-![]({{< relref "" >}}images/plot-window/WellBoreStabilityParameters.png)
+![](/images/plot-window/WellBoreStabilityParameters.png)
 
 ## Equations and calculations
 
@@ -74,7 +74,7 @@ In addition to the units above, it LAS-files it is possible to supply PP in Bar 
 
 The basic input to wellbore stability models is the stresses at the borehole wall given by the Kirsch equations in cylindrical coordinates:
 
-![]({{< relref "" >}}images/plot-window/WellBoreStabilityKirschEquations.png)
+![](/images/plot-window/WellBoreStabilityKirschEquations.png)
 
 The transformation of stresses from cartesian coordinate system to x', y', z' is performed by pre- and transposed postmultiplication of the stress tensor with a 3x3 transformation matrix **M**, i.e. 
 {{< image-in-text src="images/plot-window/WellBoreStabilityStressTransformation.png" >}}. 
@@ -107,7 +107,7 @@ $$SH\_{MK} = K0\_{SH} \times (OBG0 - PP0) + PP0 + DF \times (PP-PP0)$$
 Stassi-d'Alia failure criterion in shale is calculated by finding the well pressure $P_w$ that satisfies the following equation 
 for  $\theta \in [0 - 180]$:
 
-![]({{< relref "" >}}images/plot-window/WellBoreStabilityStassiEquations.png)
+![](/images/plot-window/WellBoreStabilityStassiEquations.png)
 
 where {{< image-in-text src="images/plot-window/WellBoreStabilityPrincipalStresses.png" >}} are the effective principal stresses from the Fracture Gradient calculation.
 and *UCS* is the *uniaxial compressive strength*.

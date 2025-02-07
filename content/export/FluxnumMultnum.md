@@ -1,6 +1,6 @@
 +++
 title = "FLUXNUM/MULTNUM"
-published = true
+
 weight = 30
 +++
 
@@ -14,7 +14,7 @@ You can do this by using the command **Export Visible Cells as FLUXNUM/MULTNUM**
 
 The command can also be found in **File -> Export**. If the command is used in the project tree, the visible cells from the selected view are used for calculation. In the 3D view and from File -> Export, the visible cells from the currently active 3D view are used.
 
-![]({{< relref "" >}}images/export/fluxnumMultnum.png)
+![](/images/export/fluxnumMultnum.png)
 
 - **Export Filename** -- Name of the file to export to.
 - **Export Keyword** -- Selects the Eclipse keyword to export.

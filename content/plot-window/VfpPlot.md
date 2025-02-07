@@ -1,10 +1,10 @@
 +++
 title = "VFP Plot"
-published = true
+
 weight = 105
 +++
 
-![]({{< relref "" >}}images/plot-window/VFP_Plot.png)
+![](/images/plot-window/VFP_Plot.png)
 
 A Vertical Flow Performance Plot (VFP Plot) shows the relationship between bottom hole well conditions and wellhead pressure describing a well's ability to lift fluids to the surface. ResInsight can display both production and injection VFP plots:
 
@@ -19,17 +19,17 @@ lift quantities like gas lift gas), or phases ratios, flowing up the wellbore. T
 
 VFP Plot data can be imported by right-clicking the **VFP Data** item in **Data Sources** to select VFP data from either text files (.ecl or .vfp) or from simulator files (.data). Multi-selection of files is possible.
 
-![]({{< relref "" >}}images/plot-window/VFP_DataSource_Import.png)
+![](/images/plot-window/VFP_DataSource_Import.png)
 
 Alternatively, VFP Plot data can be imported by right-clicking the **VFP Plots** item in **Plot Project Tree**.
 
-![]({{< relref "" >}}images/plot-window/VFP_PlotTree_Import.png)
+![](/images/plot-window/VFP_PlotTree_Import.png)
 
 ## Creating VFP Plots
 
 Having imported VFP data, **Data Sources** lists all available VFP table numbers (c.f. VFPTAB keyword in Eclipse). A VFP plot can be created by right-clicking select VFP table entries.
 
-![]({{< relref "" >}}images/plot-window/VFP_DataSource_Create.png)
+![](/images/plot-window/VFP_DataSource_Create.png)
 
 Plot data can be exported by right-clicking a VFP plot and selecting *Show Plot Data*.
 
@@ -37,7 +37,7 @@ Plot data can be exported by right-clicking a VFP plot and selecting *Show Plot 
 ## List of VFP Plots and settings
 The **VFP Plots** item in **Plot Project Tree** lists existing VFP plots. 
 
-![]({{< relref "" >}}images/plot-window/VFP_PlotTree_Listing.png)
+![](/images/plot-window/VFP_PlotTree_Listing.png)
 
 Available controls for each VFP plot are:
 
@@ -45,7 +45,7 @@ Available controls for each VFP plot are:
 
 - **Curve Colors**: When curves are plotted, the curve color is taken from the depicted list of colors. The curve colors can be changed by the user.
 
-Most plot mouse interactions are available to VFP plots, c.f. [*Summary Plots*]({{< relref "summaryplots" >}}#plot-mouse-interaction).
+Most plot mouse interactions are available to VFP plots, c.f. [*Summary Plots*]({{% relref "summaryplots" %}}#plot-mouse-interaction).
 Notably, interactive value tracking and zoom is available and double-clicking a VFP plot resets zoom.
 
 ## Property Editor
@@ -82,7 +82,7 @@ The Production VFP Plot Property Editor allows the following essential settings:
 
 - **Selection Details**: Check-boxes for selection of numeric values per variable.
 
-![]({{< relref "" >}}images/plot-window/VFP_PROD_PropEd.png)
+![](/images/plot-window/VFP_PROD_PropEd.png)
 
 ## Injection VFP Plot Property Editor
 

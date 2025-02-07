@@ -1,6 +1,6 @@
 +++
 title = "Window Management"
-published = true
+
 weight = 15
 +++
 

@@ -1,27 +1,27 @@
 +++
 title = "Completions"
-published = true
+
 weight = 50
 +++
 
-![]({{< relref "" >}}images/3d-main-window/CompletionsIllustration.png)
+![](/images/3d-main-window/CompletionsIllustration.png)
 
 Three types of completions are available for modeling and export: Perforation intervals, fishbone wells and fractures. The purpose of modeling these completions, is that it enables ResInsight to export Eclipse keywords for doing more refined simulations.
 
-Completions can be modeled by adding new perforation intervals, fishbones subs or fractures. Details about the completions must then be specified, such as the length of the perforation interval or number of fishbone subs and laterals. After modeling the completions, the transmissibility (cell connection factors) can be calculated and exported to the Eclipse COMPDAT Keyword. See [ Export Completions]({{< relref "completionexport" >}})
+Completions can be modeled by adding new perforation intervals, fishbones subs or fractures. Details about the completions must then be specified, such as the length of the perforation interval or number of fishbone subs and laterals. After modeling the completions, the transmissibility (cell connection factors) can be calculated and exported to the Eclipse COMPDAT Keyword. See [ Export Completions]({{% relref "completionexport" %}})
 
 For fishbones completions, multi-segment well information can even be exported to the Eclipse Keywords WELSEGS, COMPSEGS and WSEGVALV,
-c.f. [Export Well Segments]({{< relref "completionexport" >}}).
+c.f. [Export Well Segments]({{% relref "completionexport" %}}).
 
 {{% notice note %}}
-  The derived cell property [Completion Type]({{< relref "derivedresults#completion-type" >}}) displays wich cells are intersected by the completions.
+  The derived cell property [Completion Type]({{% relref "derivedresults#completion-type" %}}) displays wich cells are intersected by the completions.
 {{% /notice %}}
 
 
 
 ## Visualization and Inspection of Well Connection Factors
 
-![]({{< relref "" >}}images/3d-main-window/Completions_WellConnectionFactors.png)
+![](/images/3d-main-window/Completions_WellConnectionFactors.png)
 
 Connection factors both from the Simulation Wells and the ones calculated from the modeled completions can be visualized in the 3D view by enabling **Well Connection Factors** in the **Project Tree**. The connection factors are displayed with a symbol as in the example shown above. The color of the symbol displays the magnitude of the connection factor and can be controlled by the legend settings.  Additional details of the connection factor are displayed in the **Result Info** window when clicking on the connection factor symbol.
 
@@ -30,7 +30,7 @@ The **Property Panel** of the **Well Connection Factors** item has a few options
 - **Geometry Scale Factor** -- Scales the connection factor symbols relative to the displayed well path radius
 - **Show on Closed Connections** -- Show the connection factors calculated for closed simulation well cells in addition to the ones at open cells.
 
-A combined view of well connection factors and the derived result [Completion Type]({{< relref "derivedresults#completion-type" >}}) 
+A combined view of well connection factors and the derived result [Completion Type]({{% relref "derivedresults#completion-type" %}}) 
 enables the user to see the completion type contributing to connection factor in a cell.
 
 
@@ -38,29 +38,29 @@ enables the user to see the completion type contributing to connection factor in
 
 A new perforation interval on a well can be set up by right-clicking on the well in the **3D View** or in the **Project Tree**, and choosing the command **Create Perforation interval** in the **Create Completions** sub-menu. In the 3D View the completion will be created at the specific depth the right-click occurred at.
 
-![]({{< relref "" >}}images/3d-main-window/CreateCompletionOnWellPath.png)
+![](/images/3d-main-window/CreateCompletionOnWellPath.png)
 
-![]({{< relref "" >}}images/3d-main-window/PerforationIntervals_propEditor.png)
+![](/images/3d-main-window/PerforationIntervals_propEditor.png)
 
 After creating the perforation interval, the following properties of the perforation can be set in the property editor:
 
 - **Start MD**, **End MD** -- Measured depth along the well path for the perforation to start/stop. 
-- **Diameter** -- Well bore diameter for the perforation interval, used in calculation of transmissibility ( For details on the transmissibility calculation, see [Transmissibility Calculations]({{< relref "completionexport" >}}#transmissibility-calculations)). 
+- **Diameter** -- Well bore diameter for the perforation interval, used in calculation of transmissibility ( For details on the transmissibility calculation, see [Transmissibility Calculations]({{% relref "completionexport" %}}#transmissibility-calculations)). 
 - **Skin Factor** -- Skin factor for the perforation, used in calculation of transmissibility. 
 - **All Timesteps** -- If on, the perforation interval will be present for all time steps
 - **Start Date** -- The perforation will be included in the model for all time steps after this date. If "All TimeSteps" is turned on, this option is not available and the perforation is included for all time steps. 
 
 The perforation intervals will be indicated by different color along the well path. 
 
-![]({{< relref "" >}}images/3d-main-window/WellPerforationIntervalColor.png)
+![](/images/3d-main-window/WellPerforationIntervalColor.png)
 
 For each well path there is a top level folder in the **Project Tree** containing all the perforation intervals definitions containing settings that applies to all the perforation intervals for this well path. 
 
-![]({{< relref "" >}}images/3d-main-window/Perforations_PropEdit.png)
+![](/images/3d-main-window/Perforations_PropEdit.png)
 
 For multi-segment wells there are additional parameters which should be set. These are used in the export of WELSEGS data. 
 
-![]({{< relref "" >}}images/3d-main-window/PerfIntervalMsw.PNG)
+![](/images/3d-main-window/PerfIntervalMsw.PNG)
 
 - **Multi Segment Well Options** - Options used by the Well Segments Export
   - **Liner Inner Diameter** -- The liner inner diameter for the completion intervals.
@@ -73,7 +73,7 @@ For multi-segment wells there are additional parameters which should be set. The
   
 There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas given Dake´s (1976) radiel inflow model and correlation for calculating matrix beta factor depending on permeability and porosity.
 
-![]({{< relref "" >}}images/3d-main-window/PerfIntervalNonDarcy.PNG)
+![](/images/3d-main-window/PerfIntervalNonDarcy.PNG)
 
 - **Non-Darcy Flow** - Non-Darcy settings for D factor computation
   - **Grid Permeability Kr Scaling Factor** -- Rel.perm. scaling factor to calculate effective permeability.
@@ -88,15 +88,15 @@ There are three options for Non-Darcy Flow. **None**, **User defined D-factor** 
 
 Perforation Intervals can have valves (ICDs/AICDs/ICVs) associated with them.
 
-![]({{< relref "" >}}images/3d-main-window/ValveVisualisation.png)  
+![](/images/3d-main-window/ValveVisualisation.png)  
 
 These valves can be created by right-clicking on the Perforation Interval and selecting **Create Valve**.
 
-![]({{< relref "" >}}images/3d-main-window/NewValve.png)  
+![](/images/3d-main-window/NewValve.png)  
 
 Each Valve require a **Valve Template** containing properties which can be shared among multiple Valves. If you have no Valve Template, a new one can be created by clicking the **New** button next to the Valve Template selection list.
 
-![]({{< relref "" >}}images/3d-main-window/NewValveWithoutTemplate.png)  
+![](/images/3d-main-window/NewValveWithoutTemplate.png)  
 
 This will create a new **Valve Template** which can be of three different types:
 
@@ -105,24 +105,24 @@ This will create a new **Valve Template** which can be of three different types:
 - **ICV** - Interval Control Valves. Contains the same parameters as ICDs. The difference between the two in ResInsight is that many ICDs can be added at the same time, while there is only expected to be one ICV per perforation interval. ICVs are displayed in Pink.
   
 An example of the ICD parameters can be seen below:
-![]({{< relref "" >}}images/3d-main-window/ValveTemplate.png)  
+![](/images/3d-main-window/ValveTemplate.png)  
 
 An example of the AICD parameters:
-![]({{< relref "" >}}images/3d-main-window/ValveTemplate_AICD.png)  
+![](/images/3d-main-window/ValveTemplate_AICD.png)  
 
 **AICD** valves can be imported from **Completor** or **Eclipse** text files from the right-click menu of **Valves**.
 
 New templates can also be added by selecting the **New Valve Template** option from the right-click menu of the **Valve Templates** entry in the **Completion Templates** Project Tree item.
 
-![]({{< relref "" >}}images/3d-main-window/NewValveTemplate.png)  
+![](/images/3d-main-window/NewValveTemplate.png)  
 
 For ICDs and AICDs, multiple valves can be added in the same go by specifying the number of valves, spacing of valves or specific positions of valves as chosen in the **Location Defined By** drop down list.
 
-![]({{< relref "" >}}images/3d-main-window/ValveProperties_ICD.png)
+![](/images/3d-main-window/ValveProperties_ICD.png)
 
 For ICVs only one valve is added at a time so only the measured depth of that valve can be chosen.
 
-![]({{< relref "" >}}images/3d-main-window/ValveProperties_ICV.png)
+![](/images/3d-main-window/ValveProperties_ICV.png)
 
 When you have a valid valve template selected, there is an **Edit** button next to the valve template selection. Clicking this will take you straight to modify the valve template.
 
@@ -171,7 +171,7 @@ Each set of holes created at the same location along the main bore, is referred 
 
 For each well path there is a top level folder in the **Project Tree** containing all the Fishbones definitions containing settings that applies to all the fishbones for this well path. To make use of the Multi Segment Well option for pressure loss along laterals, the grid resolution needs to be fine enough to allow a grid cell to be connected to only one lateral. 
 
-![]({{< relref "" >}}images/3d-main-window/Fishbones_PropEdit.png)
+![](/images/3d-main-window/Fishbones_PropEdit.png)
 
 - **Fishbone Well Properties** -- Settings used when exporting well connection factors
   - **StartMD** -- the start position for the fishbones. This will be set to the highest possible value automatically, but can be set lower by the user. Gives the point along the well from which the transmissibility from the matrix to the main bore will be calculated.  
@@ -190,11 +190,11 @@ For multi-segment wells there are additional parameters which should be set. The
 
 To add new fishbones completions, select the **New Fishbones Subs Definition** command. This menu item is available by right clicking on **Wells** in the Project Tree or right clicking on the well trajectory in the 3D View. 
 
-![]({{< relref "" >}}images/3d-main-window/CreateCompletionOnWellPath.png)
+![](/images/3d-main-window/CreateCompletionOnWellPath.png)
 
 The new **Fishbones Subs Definition** (a group of fishbone subs) is created in the Project tree. Several subs definitions can be created on the same well trajectory to give more flexibility in placing of the fishbones. The default sub definition is based on the Fishbones Drilling System with 3 laterals exiting per sub in a 8 1/2" main bore. 
 
-![]({{< relref "" >}}images/3d-main-window/Fishbones_SubDefPropEdit.png)
+![](/images/3d-main-window/Fishbones_SubDefPropEdit.png)
 
 - **Appearance**
   - **Fishbones Color** -- The 3D View color of the fishbones created by this definition
@@ -214,7 +214,7 @@ The new **Fishbones Subs Definition** (a group of fishbone subs) is created in t
     - **Fixed Angle** -- The user can specify the angle for the first lateral
     - **Random angle** -- Each sub will have a random orientation. Notice that the angle between each of the laterals will be constant, with the laterals equally spaced. 
   - **Install Success Rate** -- Gives the probability of success for installation of each of the fishbones laterals. If 1, all laterals are installed.  
-- **Well Properties** -- Settings to control the connection factor calculation used in [Completion Export]({{< relref "completionexport" >}}))
+- **Well Properties** -- Settings to control the connection factor calculation used in [Completion Export]({{% relref "completionexport" %}}))
   - **Hole Diameter** -- The hole diameter of the lateral
   - **Skin Factor** -- The skin factor used in the transmissibility calculation for the lateral. 
 - **Multi Segment Wells** -- Settings used for Well Segment Export
@@ -229,7 +229,7 @@ The new **Fishbones Subs Definition** (a group of fishbone subs) is created in t
 
 The command **Import Completions From File** can be used to import well trajectories in the _`*.dev`_ format as fishbone laterals.  The imported laterals are listed under the folder **Imported Laterals** in the **Project Tree**. These laterals behave as completions, and will be exported when exporting completion data using the settings in the property panel of the **Imported Laterals** folder.
 
-![]({{< relref "" >}}images/3d-main-window/Fishbones_LateralsMSWprop.png)
+![](/images/3d-main-window/Fishbones_LateralsMSWprop.png)
 
 ### Export Fishbones as Well Trajectories
 
@@ -249,7 +249,7 @@ Fractures in ResInsight can be added both to simulation wells and Well Trajector
 
 The **Fractures** item in the **Project Tree** controls whether to show the modeled fractures or not. For fractures along the well path the **Perforation Length** is shown as an olive green cylinder around the well path as shown in the image below.
 
-![]({{< relref "" >}}images/3d-main-window/FractureVizControl.png) 
+![](/images/3d-main-window/FractureVizControl.png) 
 
 - **Colors** -- Control the color settings for the fractures in the View
   - **Result Variable** -- Selects the fracture result to use for coloring the fracture. This is most interesting when you have imported a StimPlan fracture with varying width, conductivity and other parameters. The legend item in the **Project Tree** controls how the legend is set up.
@@ -264,15 +264,15 @@ To create a functioning fracture you first need a **Fracture Template**. The tem
 
 Fracture Templates are listed in a folder with the same name in the **Project Tree**.
 
-![]({{< relref "" >}}images/3d-main-window/FractureTemplates.png)
+![](/images/3d-main-window/FractureTemplates.png)
 
 To create a new fracture template, right-click the **Fracture Template** item in the tree, and select either **New Ellipse Fracture Template** or **New StimPlan Fracture Template**. If you have no existing fracture templates, you will be given the opportunity to create such templates through two buttons in the Fracture Property Editor as seen below.
 
-![]({{< relref "" >}}images/3d-main-window/CreateFractureTemplate.png)
+![](/images/3d-main-window/CreateFractureTemplate.png)
 
 #### Common Fracture Template Options
 
-![]({{< relref "" >}}images/3d-main-window/CommonFractureTemplateProperties.png)
+![](/images/3d-main-window/CommonFractureTemplateProperties.png)
 
 - **Name** -- User defined name for the template. Used when selecting which template to use in the Fracture
 - **ID** -- Assigned ID to be used when addressing this template form a Command file script
@@ -302,7 +302,7 @@ To create a new fracture template, right-click the **Fracture Template** item in
 
 #### Non-Darcy Flow
 
-![]({{< relref "" >}}images/3d-main-window/FractureNonDarcyFlow.png)
+![](/images/3d-main-window/FractureNonDarcyFlow.png)
 
 Non-Darcy Flow is used to improve the computation of connection factors for cells penetrated by well pipes. A pre-computed D-factor can be set using **User Defined D-factor**. Selecting the option **Compute D-factor** displays the following set of properties:
   
@@ -322,7 +322,7 @@ Non-Darcy Flow is used to improve the computation of connection factors for cell
 
 #### Ellipse Fracture Template
 
-![]({{< relref "" >}}images/3d-main-window/EllipseFractureTemplateProperties.png)
+![](/images/3d-main-window/EllipseFractureTemplateProperties.png)
 
 - **Name** -- User name of this particular fracture template
 - **Geometry** 
@@ -340,7 +340,7 @@ Non-Darcy Flow is used to improve the computation of connection factors for cell
 
 StimPlan fracture templates imports XML output from the StimPlan software. These XML files contains results from a simulated hydraulic fracture, describing both geometry, varying crack width, resulting conductivity etc. as time varying quantities. Both symmetric and asymmetric StimPlan fracture templates are supported.
 
-![]({{< relref "" >}}images/3d-main-window/StimplanFractureTemplateProperties.png)
+![](/images/3d-main-window/StimplanFractureTemplateProperties.png)
 
 - **Name** -- User name of this particular fracture template
 - **Show StimPlan Mesh** -- Show or hide the mesh lines on the fracture in the 3D View
@@ -360,7 +360,7 @@ StimPlan fracture templates imports XML output from the StimPlan software. These
 
 Instances of fractures can be created along well paths and simulation wells by right clicking the well pipe in the 3D view, or the corresponding items in the **Project Tree**. 
 
-![]({{< relref "" >}}images/3d-main-window/FractureInstancePropertyPanel.png)
+![](/images/3d-main-window/FractureInstancePropertyPanel.png)
 
 - **Name** -- User editable name
 - **Fracture Template** -- Select the fracture template to use for this fracture. Click the **Edit** shortcut next to the template selection list to go directly to modify the selected template.
@@ -372,7 +372,7 @@ Instances of fractures can be created along well paths and simulation wells by r
 - **Properties**
   - **Fracture Unit System** -- Read only display of the units used for the current template
   - **StimPlan Time Step** -- Displays the time step used by the template 
-  - **Perforation Length** / **Perforation Efficiency** / **Well Diameter** -- These values are copied from the new template when selecting a different one. See [Common Fracture Template Options]({{< relref "completions" >}}#common-fracture-template-options)  
+  - **Perforation Length** / **Perforation Efficiency** / **Well Diameter** -- These values are copied from the new template when selecting a different one. See [Common Fracture Template Options]({{% relref "completions" %}}#common-fracture-template-options)  
 - **Fracture Center Info** -- This group displays info on where the center of the fracture is positioned. The center is defined to be where the well path intersects the fracture.
 
 ### Multiple Fracture Creation
@@ -380,7 +380,7 @@ In some cases the user wants to create a number of fractures on one or more well
 
 Select one or more well paths in the project tree, right click and select **Create Multiple Fractures** from the right-click menu. Then the **Create Multiple Fractures** dialog appears. In this dialog, the user defines where fractures will be created on the selected well paths. Different fracture templates and spacing can be used for different K layer ranges in the grid, by adding new options lines to the table. To edit an option line, double click the field to edit. Adding and deleting option lines are done by right clicking the table.
 
-![]({{< relref "" >}}images/3d-main-window/CreateMultipleFracturesDialog.png)
+![](/images/3d-main-window/CreateMultipleFracturesDialog.png)
 
 - **Case** -- Current grid case
 - **Min Distance From Well TD** -- Minimum distance from well tip for created fractures
@@ -394,4 +394,4 @@ Select one or more well paths in the project tree, right click and select **Crea
 - **Replace Fractures** -- Press this button to delete all existing fractures on the selected wells before creating new fractures
 - **Add Fractures** -- Press this button to add the new fractures to all selected wells (not deleting existing fractures)
 
-The Create Multiple Fractures function is also available as a CommandFile command. See the [CommandFile section]({{< relref "commandfile" >}})
+The Create Multiple Fractures function is also available as a CommandFile command. See the [CommandFile section]({{% relref "commandfile" %}})

@@ -1,15 +1,15 @@
 +++
 title = "Keyboard Shortcuts"
-published = true
+
 weight = 30
 +++
 
 ResInsight supports a selection of Keyboard Shortcuts for convenience. These include **Delete** for removing deletable items
 from the project tree, **Ctrl-Alt-A** for Zoom All and **Ctrl-Alt-S/N/W/E/D/U** for changing the camera view to South, North, West, East, Down and Up respectively.
 
-![]({{< relref "" >}}images/3d-main-window/KeyboardDel.png)
-![]({{< relref "" >}}images/3d-main-window/KeyboardEast.png)
-![]({{< relref "" >}}images/3d-main-window/KeyboardPlot.png)
+![](/images/3d-main-window/KeyboardDel.png)
+![](/images/3d-main-window/KeyboardEast.png)
+![](/images/3d-main-window/KeyboardPlot.png)
 
 Other available keyboard shortcuts are
 
@@ -26,7 +26,7 @@ Other available keyboard shortcuts are
 
 ## Summary Plot Manager
 
-[Summary Plot Manager]({{< relref "summaryplotmanager" >}})
+[Summary Plot Manager]({{% relref "summaryplotmanager" %}})
 
 |Operation                 | Shortcut          |
 |--------------------------|-------------------|

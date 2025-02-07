@@ -1,10 +1,10 @@
 +++
 title = "Miscellaneous"
-published = true
+
 weight = 80
 +++
 
-![]({{< relref "" >}}images/3d-main-window/MemoryManagementBanner.png)
+![](/images/3d-main-window/MemoryManagementBanner.png)
 
 This chapter of the ResInsight documentation describes the following:
 

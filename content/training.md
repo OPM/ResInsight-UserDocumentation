@@ -1,6 +1,6 @@
 +++
 title = "Training Courses"
-published = true
+
 hidden = true
 +++
 
@@ -25,7 +25,7 @@ The course is offered online on both Windows and Linux systems.
 ### Contact information
 Please contact Ceetron Solutions for requests, phone +47 73 60 43 00, e-mail: info@ceetronsolutions.com
 
-![]({{< relref "" >}}images/ResInsightIntroductionCourse.png)
+![](/images/ResInsightIntroductionCourse.png)
 
 
 ## ResInsight Advanced Course
@@ -50,4 +50,4 @@ The course is offered online on both Windows and Linux systems.
 ### Contact information
 Please contact Ceetron Solutions for requests, phone +47 73 60 43 00, e-mail: info@ceetronsolutions.com
 
-![]({{< relref "" >}}images/ResInsightAdvancedCourse.png)
+![](/images/ResInsightAdvancedCourse.png)

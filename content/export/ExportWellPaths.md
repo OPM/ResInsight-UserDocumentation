@@ -1,6 +1,6 @@
 +++
 title = "Well Paths"
-published = true
+
 weight = 50
 +++
 
@@ -8,7 +8,7 @@ In order to export well paths to dev files, select the menu item **File -> Expor
 
 A dialog appears after selecting an export well path command.
 
-![]({{< relref "" >}}images/export/ExportWellPathsDialog.png)
+![](/images/export/ExportWellPathsDialog.png)
 
 - **Export Folder** - Folder for the exported well path file(s). The folder will be created when performing the export and the names of the exported file(s) will be on the format \<well name\>.dev
 - **MD Step Size** - Spacing (measured depth) between samples along the well path in the exported file

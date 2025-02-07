@@ -1,10 +1,10 @@
 +++
 title = "Linked Views"
-published = true
+
 weight = 130
 +++
 
-![]({{< relref "" >}}images/3d-main-window/LinkedViewsOverview.png)
+![](/images/3d-main-window/LinkedViewsOverview.png)
 
 One or more views can be linked together to allow some settings like camera position and range filters, propagate from one view to another.
 
@@ -12,17 +12,17 @@ One or more views can be linked together to allow some settings like camera posi
 
 To establish a link between views, select {{< image-in-text src="images/3d-main-window/chain.png">}}**Link Visible Views** from the View toolbar. This will open a dialog where the Master View is selected. When pressing Ok in this dialog, the **Linked Views** items are displayed in the top of the **Project Tree**.
 
-![]({{< relref "" >}}images/3d-main-window/LinkedViewsInProjectTree.png)
+![](/images/3d-main-window/LinkedViewsInProjectTree.png)
 
 It is also possible to link specific views by selecting them and choosing **Link Selected Views** from the right-click menu. The following image shows the linking of a regular view with a **Contour Map**. Note that contour maps can never be the Master View.
 
-![]({{< relref "" >}}images/3d-main-window/LinkedContourMap.png)
+![](/images/3d-main-window/LinkedContourMap.png)
 
 ## Linked View Options
 
 When selecting a linked view in the project tree, the different options are available in the **Property Editor**. 
 
-![]({{< relref "" >}}images/3d-main-window/LinkedViewsProperties.png)
+![](/images/3d-main-window/LinkedViewsProperties.png)
 
 #### Link Options
 

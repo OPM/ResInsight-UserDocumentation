@@ -1,6 +1,6 @@
 +++
 title = "Octave Interface Reference"
-published = true
+
 weight = 60
 +++
 

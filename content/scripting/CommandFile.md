@@ -1,11 +1,11 @@
 +++
 title = "Command File"
-published = true
+
 weight = 30
 +++
 
 The command file interface allows a sequence of specified commands to be run in order from the command line.
-The interface is used by supplying the command file as a [command line parameter]({{< relref "commandlineinterface" >}}).
+The interface is used by supplying the command file as a [command line parameter]({{% relref "commandlineinterface" %}}).
 Once the command file is finished executing, ResInsight will exit.
 
 It is possible to use these commands directly from a Python script. For further details, please see 

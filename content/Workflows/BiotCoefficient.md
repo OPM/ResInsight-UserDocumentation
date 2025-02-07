@@ -1,6 +1,6 @@
 +++
 title = "Biot Coefficient"
-published = true
+
 weight = 90
 +++
 
@@ -21,7 +21,7 @@ These settings are controlled from the **Property Editor** when a **Geomechanica
 - Select Biot Coefficient from element properties
 - Select the property to be used for Biot coefficient values
 
-![]({{< relref "" >}}images/3d-main-window/GeoMechCasePropertyPanel.png)
+![](/images/3d-main-window/GeoMechCasePropertyPanel.png)
 
 {{% notice note %}}
 The state of an active Biot coefficient is indicated in the info box in upper right coner in the 3D view. This will  make sure the Biot coefficient information is availalbe when a snapshot is produced.
@@ -29,6 +29,6 @@ The state of an active Biot coefficient is indicated in the info box in upper ri
 
 ## Related documents
 
-[Element Property Table]({{< relref "ElementPropertyTable.md" >}})
+[Element Property Table]({{% relref "ElementPropertyTable.md" %}})
 
-[Derived Results]({{< relref "DerivedResultsGeoMech.md" >}}#st---total-stress)
+[Derived Results]({{% relref "DerivedResultsGeoMech.md" %}}#st---total-stress)

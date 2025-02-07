@@ -1,10 +1,10 @@
 +++
 title = "Summary Plot Source Stepping"
-published = true
+
 weight = 20
 +++
 
-![]({{< relref "" >}}images/plot-window/SummarySourceSteppingBanner.png)
+![](/images/plot-window/SummarySourceSteppingBanner.png)
 
 Summary Plot Source Stepping enables the user to efficiently step through multiple vectors, wells, summary cases, ensembles, groups, regions, blocks, and aquifers for plotting purposes.
 Source stepping is available from both the **Source Stepping Toolbar** and the **Property editor** as described below.
@@ -12,7 +12,7 @@ Source stepping is available from both the **Source Stepping Toolbar** and the *
 ## Source Stepping using the toolbar
 The toolbar for source stepping is:
 
-![]({{< relref "" >}}images/plot-window/SummarySourceSteppingToolbar.png)
+![](/images/plot-window/SummarySourceSteppingToolbar.png)
 
 Following this example, the available options are:
 
@@ -30,7 +30,7 @@ Source Stepping is also available through the **Property Editor**.
 By selecting a subplot in **Plots** as in the example below, the *Data Sources* section of the **Property editor** emerges.
 As seen, ResInsight per default lists the most probable stepping dimensions by a consideration of the actual plot being a vector of a specific well. 
 
-![]({{< relref "" >}}images/plot-window/SummarySourceSteppingPropertyEditor.png)
+![](/images/plot-window/SummarySourceSteppingPropertyEditor.png)
 
 ## Change Well Data Source from 3D View
 If multiple plots are using well as data source, the plot content can be uptedate by clicking on well geometry in 3D. This can be efficient if there are many wells in a model.
@@ -42,7 +42,7 @@ If multiple plots are using well as data source, the plot content can be uptedat
 - The well data source in changed, and plot content will be updated accordingly
 
 
-![]({{< relref "" >}}images/plot-window/SummarySourceStepping3dview.png)
+![](/images/plot-window/SummarySourceStepping3dview.png)
 
 
 ## Source Stepping dimensions

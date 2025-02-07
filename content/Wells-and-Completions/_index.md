@@ -1,10 +1,10 @@
 +++
 title = "Wells and Completions"
-published = true
+
 weight = 40
 +++
 
-![]({{< relref "" >}}images/3d-main-window/ValveVisualisation.png)
+![](/images/3d-main-window/ValveVisualisation.png)
 
 This chaper describes the following aspects of wells and completions:
 

@@ -25,7 +25,7 @@ It is also possible to install Hugo using package managers
     sudo apt install hugo
 
 **Last known working version is **
-https://github.com/gohugoio/hugo/releases/tag/v0.113.0
+https://github.com/gohugoio/hugo/releases/tag/v0.142.0
 
 The **next-major-release** branch is intended to represent the new features not yet released. The content of this branch is automatically published to **gh-pages** of this repository. This website can be reached by https://beta.resinsight.org
 
@@ -49,6 +49,8 @@ https://beta.resinsight.org redirects to https://opm.github.io/ResInsight-UserDo
 
 ## Tips and tricks
 - If you want to publish a page, but avoid having an entry in the menu, add `hidden = true` to the header of the MD file. See about.md for an example.
+
+- Disable a page from search index using `search_ignore = true`
 
 - Use the following syntax to define a text region with fixed font size
 ```txt

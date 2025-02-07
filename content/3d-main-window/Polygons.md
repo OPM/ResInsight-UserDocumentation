@@ -1,18 +1,18 @@
 +++
 title = "Polygons"
-published = true
+
 weight = 81
 +++
 
 ResInsight supports import, export and creation of polygons and polylines.
 
 
-![]({{< relref "" >}}images/3d-main-window/PolygonHeading.png)
+![](/images/3d-main-window/PolygonHeading.png)
 
 ## Polygons in Project
 A polygon is available for all views in a project. The polygons can be imported from file, exported to file or created by interactively clicking in a view.
 
-![]({{< relref "" >}}images/3d-main-window/PolygonInProject.png)
+![](/images/3d-main-window/PolygonInProject.png)
 
 ## Create a Polygon
 To create a polygon, the user clicks on a set of locations in 3D. This operation can be started by:
@@ -23,7 +23,7 @@ This will enable a mode where the user can click in the view to create a polygon
 
 When completed, the user can click on the button **Stop Picking Points** in the **Property Editor**.
 
-![]({{< relref "" >}}images/3d-main-window/PolygonEdit.png)
+![](/images/3d-main-window/PolygonEdit.png)
 
 
 ## Duplication and Simplification
@@ -34,9 +34,9 @@ The user can create a grid intersection by using the **Create Polygon Intersecti
 
 The user can also create a polygon cell filter by using the **Create Polygon Cell Filter**. This will create a polygon that represents the cells that are inside the polygon.
 
-[Polygon Intersection]({{< relref "intersections" >}}) 
+[Polygon Intersection]({{% relref "intersections" %}}) 
 
-[Polygon Filter]({{< relref "filters" >}}) 
+[Polygon Filter]({{% relref "filters" %}}) 
 
 ## Appearance 
 Appearance settings are available by selecting the project polygon. Name, color, line style and other visual settings can be set in the **Property Editor**.

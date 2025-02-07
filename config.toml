@@ -3,14 +3,13 @@ baseURL = "https://opm.github.io/ResInsight-UserDocumentation/"
 
 languageCode = "en-us"
 title = "ResInsight"
-theme = "learn"
-googleAnalytics = "G-6BNMNQQY0H"
+theme = "hugo-theme-relearn"
 
 [params]
 disableSearch = false
-disableHomeIcon = true
 ordersectionsby = "weight"
 disableShortcutsTitle = true
+themeVariant = 'relearn'
 
 [markup]
   defaultMarkdownHandler = "goldmark"

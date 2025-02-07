@@ -1,6 +1,6 @@
 +++
 title = "Aggregation of Grid Cell Values"
-published = true
+
 weight = 30
 +++
 

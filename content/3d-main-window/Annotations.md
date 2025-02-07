@@ -1,6 +1,6 @@
 +++
 title = "Annotations"
-published = true
+
 weight = 154
 +++
 
@@ -12,17 +12,17 @@ ResInsight supports displaying a few types of annotations in 3D views and Contou
   - User defined polylines
   - Polylines imported from file
 
-![]({{< relref "" >}}images/3d-main-window/Annotations.png)
+![](/images/3d-main-window/Annotations.png)
 
 ## Global scope vs local scope annotations
 Global annotations may be displayed in all views and are located in the **Annotations** project tree node right below **Grid Models** (Global annotations sub tree). Local annotations are associated with a specific view and are located in the **Annotations** project tree node below the view node (Local annotations sub tree). All annotation types except text annotations are global only. Text annotation may be either global or local.
 
 All global annotations also have a representation in the local **Annotation** tree node in order to toggle visibilty per view. Those annotations are located in tree nodes starting with **Global**.
 
-![]({{< relref "" >}}images/3d-main-window/LocalAnnotationsTree.png)<br/>
+![](/images/3d-main-window/LocalAnnotationsTree.png)<br/>
 Local annotations sub tree
 
-![]({{< relref "" >}}images/3d-main-window/GlobalAnnotationsTree.png)<br/>
+![](/images/3d-main-window/GlobalAnnotationsTree.png)<br/>
 Global annotations sub tree
 
 ## Text Annotations
@@ -31,7 +31,7 @@ There are two ways of creating a new text annotation.
 - Right click **Annotations** or **Text Annotations** tree node in either the global annotatyion sub tree or the local annotations sub tree. The scope of the annotation depends on which node was clicked. When text annotations are created this way, all text annotation fields must be entered manunally in the property editor.
 - Right click on an object in the view and select **Create Text Annotation**. ResInsight will then create a text annotation at the clicked point. In this case, only th text must be entered manually in the property editor. When creating a text annotation this way, it will become a local annotation by default.
 
-![]({{< relref "" >}}images/3d-main-window/TextAnnotationPropertyEditor.png)
+![](/images/3d-main-window/TextAnnotationPropertyEditor.png)
 
 - **Anchor Point** - The interesting point in the view
 - **Label Point** - The point where the text label is placed
@@ -43,7 +43,7 @@ When a text annotation tree node is selected, target markers in each end of the 
 ## Reach Circle Annotations
 To create a reach circle annotation, right click **Annotations** or **Reach Circle Annotations** tree node in the global annotations sub tree. Then enter values in the property editor.
 
-![]({{< relref "" >}}images/3d-main-window/CircleAnnotationPropertyEditor.png)
+![](/images/3d-main-window/CircleAnnotationPropertyEditor.png)
 
 - **Name** - Name of the circle annotation
 - **Center Point** - Center point of the circle. Format 'x-pos y-pos depth'
@@ -53,7 +53,7 @@ To create a reach circle annotation, right click **Annotations** or **Reach Circ
 ## User Defined Polyline Annotations
 To create a user defined polyline annotation, right click **Annotations** or **User Defined Polyline Annotations** tree node in the global annotations sub tree. The property editor for the newly created annotation is displayed and is in picking points mode. The user may now click on objects in the view to create polyline points. When finished, click **Stop Picking Points** in the property editor.
 
-![]({{< relref "" >}}images/3d-main-window/UserDefinedPolylineAnnotationPropertyEditor.png)
+![](/images/3d-main-window/UserDefinedPolylineAnnotationPropertyEditor.png)
 
 - **Targets** - Polyline points. Can be edited in the table or interactively in the view
 - **Start Picking Points / Stop Picking Points** - Button to start / stop picking mode
@@ -64,7 +64,7 @@ When a user defined polyline annotation tree node is selected, the polyline targ
 ## Polyline Imported From File
 To import a polyline annotation from file, right click **Annotations** or **Polylines From File** tree node in the global annotations sub tree. Then select the file to import and click OK. Imported polyline annotations are not editable.
 
-![]({{< relref "" >}}images/3d-main-window/PolylineFromFileAnnotationPropertyEditor.png)
+![](/images/3d-main-window/PolylineFromFileAnnotationPropertyEditor.png)
 
 - **File** - Name of the imported file
 - **Line Appearance** - Set line color and line thickness

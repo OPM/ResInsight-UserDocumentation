@@ -1,20 +1,20 @@
 +++
 title = "Flow Diagnostics Plots"
-published = true
+
 weight = 110
 +++
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsPlotsOverview.png)
+![](/images/plot-window/FlowDiagnosticsPlotsOverview.png)
 
 Flow Diagnostics Plots can be used to view well allocation, well inflow rates, cumulative saturation along time of flight and flow characteristics. 
 
 They are managed from the folder **Flow Diagnostics Plots** located in **Plot Project Tree** in the **Plot Main Window**. 
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsPlotsProjectTree.png)
+![](/images/plot-window/FlowDiagnosticsPlotsProjectTree.png)
 
 This folder contains a default **Flow Characteristics Plot** and **Well Allocation Plot**. In addition, two folders with stored  well allocation and flow characteristics plots will show up if there are any of those in the model.
 
-Please refer to [Cell Results-> Flow Diagnostic Results]({{< relref "cellresults" >}}#flow-diagnostic-results) for a description of the results and references to more information about the methodology.
+Please refer to [Cell Results-> Flow Diagnostic Results]({{% relref "cellresults" %}}#flow-diagnostic-results) for a description of the results and references to more information about the methodology.
 
 ## Well Allocation Plots
 
@@ -24,14 +24,14 @@ In addition a **Cumulative Saturation by Time of Flight** plot may be shown. Thi
 
 ### Branches
 
-Each branch of the well will be assigned a separate **Track**. For normal wells this is based on the branch detection algorithm used for Well Pipe visualization, and will correspond to the pipe visualization with **Branch Detection** *On* ( See [Well Pipe Geometry]({{< relref "simulationwells" >}}#well-pipe-geometry) ).
-Multi Segment Wells will be displayed according to their branch information, but tiny branches consisting of only one connection are lumped into the main branch to make the visualization more understandable ( See  [Dummy branches]({{< relref "simulationwells" >}}#dummy-branches) ).
+Each branch of the well will be assigned a separate **Track**. For normal wells this is based on the branch detection algorithm used for Well Pipe visualization, and will correspond to the pipe visualization with **Branch Detection** *On* ( See [Well Pipe Geometry]({{% relref "simulationwells" %}}#well-pipe-geometry) ).
+Multi Segment Wells will be displayed according to their branch information, but tiny branches consisting of only one connection are lumped into the main branch to make the visualization more understandable ( See  [Dummy branches]({{% relref "simulationwells" %}}#dummy-branches) ).
 
 ### Creating Well Allocation Plots
 
 To plot the Well allocation for a well, right-click the well in the **Project Tree** or in the **3D View** and invoke the command **Plot Well Allocation**.
 
-![]({{< relref "" >}}images/plot-window/SimulationWellContextMenu.png)
+![](/images/plot-window/SimulationWellContextMenu.png)
 
 The command updates the default **Well Allocation Plot** with new values based on the selection and the settings in the active view. This plot can then be copied to the **Stored Plots** folder by the right-click command **Add Stored Well Allocation Plot**. 
 
@@ -39,7 +39,7 @@ The command updates the default **Well Allocation Plot** with new values based o
 
 The **Legend**, **Total Allocation** pie chart, **Cumulative Saturation**, and the **Well Flow/Allocation** can be turned on or off from the toggles in the **Project Tree**. The other options are controlled from the property panel of a Well Allocation Plot:
 
-![]({{< relref "" >}}images/plot-window/WellAllocationProperties.png)
+![](/images/plot-window/WellAllocationProperties.png)
 
 - **Name** -- Auto generated name used as plot title
 - **Show Plot Title** -- Toggles whether to show the title in the plot
@@ -62,7 +62,7 @@ The **Legend**, **Total Allocation** pie chart, **Cumulative Saturation**, and t
 
 The depth value in the plot can be controlled by selecting the **Accumulated Flow**/**Inflow Rates** item in the **Project Tree**. This item represents the Well-Log-like part of the Well Allocation Plot and its properties are shown below:
 
-![]({{< relref "" >}}images/plot-window/WellAllocationWellLogProperties.png)
+![](/images/plot-window/WellAllocationWellLogProperties.png)
 
 - **Name** -- The plot name, updated automatically based on the **Flow Type** and well.
 - **Depth Type**
@@ -70,7 +70,7 @@ The depth value in the plot can be controlled by selecting the **Accumulated Flo
   In this mode the curves are extended somewhat above zero depth keeping the curve 
   values constant. This is done to make it easier to see the final values of the curves relative to each other.  
   The depth are calculated with **Branch detection** *On* and using the **Interpolated** well pipe geometry.  
-  ( See [Well Pipe Geometry]({{< relref "simulationwells" >}}#well-pipe-geometry) )
+  ( See [Well Pipe Geometry]({{% relref "simulationwells" %}}#well-pipe-geometry) )
   - **TVD** -- Use True Vertical Depth on the depth-axis. This will produce distorted plots for horizontal or near horizontal wells. 
   - **Connection Number** -- Use the number of connections counted from the top on the depth-axis.
 - **Visible Depth Range** -- These options control the depth zoom.
@@ -86,33 +86,33 @@ It is also possible to save the ascii data to a file directly by using the right
 The total accumulation data can also be viewed in ascci format by the command **Show Total Allocation Data**.
 
 ## Producer/Injector Connectivity Table
-![]({{< relref "" >}}images/plot-window/Producer_Injector_Connectivity.png)
+![](/images/plot-window/Producer_Injector_Connectivity.png)
 
-Use [Producer/Injector Connectivity Table]({{< relref "producerinjectorconnectivitytable" >}}) to see the flow diagnostics communication between producer and injector wells for selected time steps.
+Use [Producer/Injector Connectivity Table]({{% relref "producerinjectorconnectivitytable" %}}) to see the flow diagnostics communication between producer and injector wells for selected time steps.
 
 ## Well Allocation Over Time
-![]({{< relref "" >}}images/plot-window/WellAllocationOverTime.png)
+![](/images/plot-window/WellAllocationOverTime.png)
 
-Use [Well Allocation Over Time]({{< relref "wellallocationovertimeplot" >}}) to see the allocation over multiple restart time steps.
+Use [Well Allocation Over Time]({{% relref "wellallocationovertimeplot" %}}) to see the allocation over multiple restart time steps.
 
 ## Cumulative Phase Distribution Plot
 
 A Cumulative Phase Distribution Plot shows the volumetric oil, gas, and water distribution from contributing wells to a target well.
 For producer B-2H, for instance, such a plot can be created by right-clicking its entry under **Simulation Wells** in **Project Tree**.
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionCreate.png)
+![](/images/plot-window/FlowDiagnosticsCumulativePhaseDistributionCreate.png)
 
 A Cumulative Phase Distribution Plot can also be created by right-clicking a Cumulative Saturation plot, c.f. figure below. 
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionPlot.png)
+![](/images/plot-window/FlowDiagnosticsCumulativePhaseDistributionPlot.png)
 
 Clicking its entry in **Plot Project Tree**, displays content and settings of the Cumulative Phase Distribution Plot.
 
-![]({{< relref "" >}}images/plot-window/FlowDiagnosticsCumulativePhaseDistributionProperties.png)
+![](/images/plot-window/FlowDiagnosticsCumulativePhaseDistributionProperties.png)
 
 ## Flow Characteristics Plot
 
-![]({{< relref "" >}}images/plot-window/FlowCharacteristicsPlot.png)
+![](/images/plot-window/FlowCharacteristicsPlot.png)
 
 This window displays three different graphs describing the overall behavior of the reservoir for each time step from a flow diagnostics point of view. 
 
@@ -122,18 +122,18 @@ This window displays three different graphs describing the overall behavior of t
 
 ### Settings
 
-![]({{< relref "" >}}images/plot-window/FlowCharacteristicsPropertyPanel.png)
+![](/images/plot-window/FlowCharacteristicsPropertyPanel.png)
 
 - **Case** -- Selects the source case for the plot.
 - **Time Steps** -- These options selects the time steps to be used in the plot.
-  - **All With Calculated FlowDiagnostics** -- Plot data from all the time steps already solved by the Flow Diagnostics Solver, but nothing more. The solver will be run implicitly when the user requests any Flow Diagnostics results on a particular time step using  [Cell Results]({{< relref "cellresults" >}}), Well Allocation Plots, or [Well Log Extraction Curves]({{< relref "welllogsandplots" >}}#well-log-extraction-curves).  
+  - **All With Calculated FlowDiagnostics** -- Plot data from all the time steps already solved by the Flow Diagnostics Solver, but nothing more. The solver will be run implicitly when the user requests any Flow Diagnostics results on a particular time step using  [Cell Results]({{% relref "cellresults" %}}), Well Allocation Plots, or [Well Log Extraction Curves]({{% relref "welllogsandplots" %}}#well-log-extraction-curves).  
   - **Selected** -- Use the selected time steps only. Activating this options displays a listbox with all the available time steps in the 3D case. Time steps already solved by the Flow Diagnostics Solver are marked with an asterix _`*`_. Select the interesting time steps and press apply to invoke the solver for unsolved time steps, and to show them in the plot.
 - **Region** -- These group of options controls the cell region of interest for the plot.
   - **Cell Filter** -- Selects the type of cell filtering to apply. Sub-options are displayed depending on the selection.
     - **All Active Cells** -- Use all the active cells in the model (default)
     - **Visible Cells** -- Use the visible cells in a particular predefined view as cell region. This option will respect all the filter settings in the view, and use the correct cell set for each time step. 
       - **View** -- The view to use as cell filter
-    - **Injector Producer Communication** -- The region of communication between selected producers and injectors. See  [Flow Diagnostic Results]({{< relref "cellresults" >}}#Flow-Diagnostic-Results)
+    - **Injector Producer Communication** -- The region of communication between selected producers and injectors. See  [Flow Diagnostic Results]({{% relref "cellresults" %}}#Flow-Diagnostic-Results)
       - **Tracer Filter** -- Wild card based filter-text to filter the list of tracers
       - **list** -- Producer and injector tracers to select
       - **Show Region** -- Button to create (or edit) a 3D View showing the selected region of cells.
