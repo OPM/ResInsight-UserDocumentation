@@ -30,7 +30,7 @@ themeVariant = 'relearn'
 [[menu.shortcuts]]
 	name = "<i class='fas fa-download'></i> Download and Install"
 	identifier = "download"
-	url = "/getting-started/download-and-install"
+	url = "/releases"
 	weight = 20
 
 [[menu.shortcuts]]
