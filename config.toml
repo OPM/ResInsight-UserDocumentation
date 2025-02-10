@@ -10,6 +10,7 @@ disableSearch = false
 ordersectionsby = "weight"
 disableShortcutsTitle = true
 themeVariant = 'relearn'
+disableLandingPageButton = true
 
 [markup]
   defaultMarkdownHandler = "goldmark"
