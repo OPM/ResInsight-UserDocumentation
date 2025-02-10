@@ -16,7 +16,7 @@ jobs:
           submodules: true
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.142.0'
 
@@ -24,7 +24,7 @@ jobs:
         run: hugo --minify
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: Check for broken links
         id: link-report
-        uses: celinekurpershoek/link-checker@v1.0.1
+        uses: celinekurpershoek/link-checker@v1.0.2
         with:
           # Required:
           url: 'https://opm.github.io/ResInsight-UserDocumentation/'
