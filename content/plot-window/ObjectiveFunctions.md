@@ -1,10 +1,10 @@
 +++
 title = "Objective Functions"
-published = true
+
 weight = 51
 +++
 
-![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsPlotColoring.png)
+![](/images/plot-window/ObjectiveFunctionsPlotColoring.png)
 
 An **Objective Function** is used to color the curves of an ensemble plot in ResInsight to highlight characteristics by a function definition based on individual summary vectors. As shown in the example above, the legend relates colours to values as calculated by a particular objective function and shows the use and formula of the objective function in the plot.
 
@@ -12,7 +12,7 @@ An **Objective Function** is used to color the curves of an ensemble plot in Res
 
 Curve coloring by **Objective Function** is activated as shown below. 
 
-![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsPlotProjectTree.png)
+![](/images/plot-window/ObjectiveFunctionsPlotProjectTree.png)
 
 
 **Objective Function**
@@ -46,20 +46,20 @@ It is also possible to create a **Custom Objective Function** to customize the c
 
 A Custom Objective Function is created by invoking the context menu on the **Custom Objective Functions** item in **Plot Project Tree**.
 
-![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsCustomFunction.png)
+![](/images/plot-window/ObjectiveFunctionsCustomFunction.png)
 
 Adding a new weighted function expression to an existing objective function is performed by invoking the context menu as shown below.
 
-![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsWeightsNaming.png)
+![](/images/plot-window/ObjectiveFunctionsWeightsNaming.png)
 
 
 ## Display settings
 Changing objective function can be performed by the property editor of actual ensemble. The property editor also allows toggling the display of formula by the *Show Formula in Plot* check-box and setting of time step range.
 
-![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsSettings.png)
+![](/images/plot-window/ObjectiveFunctionsSettings.png)
 
 As seen below, selected range is displayed by color frame and labels in plot background. The range determines the  time range for which the objective function is utilized for coloring the curves.
 
-![]({{< relref "" >}}images/plot-window/ObjectiveFunctionsRangeDisplay.png)
+![](/images/plot-window/ObjectiveFunctionsRangeDisplay.png)
 
 

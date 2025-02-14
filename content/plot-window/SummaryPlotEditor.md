@@ -1,10 +1,10 @@
 +++
 title = "Summary Plot Editor"
-published = true
+
 weight = 30
 +++
 
-![]({{< relref "" >}}images/plot-window/SummaryPlotEditor.png)
+![](/images/plot-window/SummaryPlotEditor.png)
 
 The plot editor is a separate ResInsight dialog window where the user can select which vectors to display in a summary plot. It is also possible to edit an existing plot in this editor.
 
@@ -37,8 +37,8 @@ In the mid-section of the dialog, the Summary Type and the corresponding Items c
 - **Segment** -- Select Segment related vectors only
 - **Block** -- Select I, J, K -- Block related vectors only 
 - **Lgr-Block** -- Select I, J, K - Block in LGR related vectors only
-- **Calculated** -- Select calculated vectors created by the [curve calculator]({{< relref "curvecalculator" >}}).
-- **Imported** -- Select observed data vectors [imported from file]({{< relref "observeddata" >}}) (e.g. CSV, RSM files)
+- **Calculated** -- Select calculated vectors created by the [curve calculator]({{% relref "curvecalculator" %}}).
+- **Imported** -- Select observed data vectors [imported from file]({{% relref "observeddata" %}}) (e.g. CSV, RSM files)
 
 ### Summaries
 This field contains the summaries/vectors for the highlighted summary category.
@@ -47,7 +47,7 @@ This field contains the summaries/vectors for the highlighted summary category.
 When a complete/valid vector exists, one or more curves will appear in the preview plot. Each curve will also have a corresponding item in the curves field in the lower left corner. Visibility for the curves may be controlled by the checkboxes. Each curve is automatically assigned a name and appearance. However the user may modify these settings in the *Curve Name Configuration* and *Curve Appearance Assignment* fields.
 
 ### Plot and Curve Name Configuration
-![]({{< relref "" >}}images/plot-window/CurveNameConfig.png)
+![](/images/plot-window/CurveNameConfig.png)
 
 The checkboxes in this field control which information elements to include in the curve name. Toggling some of the checkboxes will have no effect on some curves depending on which information elements are relevant for each curve.
 
@@ -56,7 +56,7 @@ Curves created are assigned individual visual properties like colors and symbols
 
 These assignments can be controlled using the options in the **Curve Appearance Assignment** group. 
 
-![]({{< relref "" >}}images/plot-window/CurveAppearanceAssignment.png)
+![](/images/plot-window/CurveAppearanceAssignment.png)
 
 When set to **Auto**, ResInsight assigns visual properties based on the present vector categories and the number of different values in each category.
 
@@ -72,15 +72,15 @@ Press the <b>Apply</b> button to apply consistent appearance settings according 
 {{% /notice %}}
 
 ### Curves
-![]({{< relref "" >}}images/plot-window/SummaryPreviewCurves.png)
+![](/images/plot-window/SummaryPreviewCurves.png)
 
 The curves field displays all summary curves and ensemble curve sets matching the settings in the selection fields. Those are separated in two groups, **Summary Curves** and **Ensemble Curve Sets**. The check box at each item controls which items are displayed in the preview plot.
 
 If the user make a selection that will result in a huge number of ensemble curves, ResInsight will display a drawing performance warning, and the newly created curve set(s) are toggled off by default.
 
 ### Target Plot
-![]({{< relref "" >}}images/plot-window/TargetPlot_new.png)
-![]({{< relref "" >}}images/plot-window/TargetPlot_1.png)
+![](/images/plot-window/TargetPlot_new.png)
+![](/images/plot-window/TargetPlot_1.png)
 
 In the bottom of the dialog window **Target Plot** may be specified. The target plot is the summary plot that will receive the selected curves when the **OK** or **Apply** button is clicked. 
 

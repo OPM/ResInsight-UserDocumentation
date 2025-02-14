@@ -1,6 +1,6 @@
 +++
 title = "Regression Test System"
-published = true
+
 weight = 40
 +++
 
@@ -18,7 +18,7 @@ To be able to run regression tests you need the **compare** tool from the [Image
 You can start the tests either from the command line or from the ResInsight Gui.
 From the ResInsight Gui select : **File->Testing->Regression Test Dialog**
 
-![]({{< relref "" >}}images/appendix/RegressionTestDialog.png)
+![](/images/appendix/RegressionTestDialog.png)
 
 Specify location of compare tool in **Folder containing compare**. The current working directory of ResInsight is temporarily changed to this path during execution.
 

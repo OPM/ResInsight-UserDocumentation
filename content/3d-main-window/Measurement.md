@@ -1,16 +1,16 @@
 +++
 title = "Measurement"
-published = true
+
 weight = 152
 
 +++
 
-![]({{< relref "" >}}images/3d-main-window/Measurement.png)
+![](/images/3d-main-window/Measurement.png)
 
 ResInsight supports measurements in the 3D views. To enter measurement mode, press the ruler toolbar button {{< image-in-text src="images/3d-main-window/MeasurementButton.png" >}} or the keyboard shortcut **Ctrl-M**. This mode can also be activated from the right-click menu in a 3D view.
 
 
-![]({{< relref "" >}}images/3d-main-window/MeasurementToolbar.png)
+![](/images/3d-main-window/MeasurementToolbar.png)
 
 When ResInsight is in measurement mode, clicking on an surface in the 3D view will set the first measurement point. Clicking on a different surface will set the second measurement point, and display a label with measurements. Additional clicking will start a new measurement between two points.
 
@@ -21,7 +21,7 @@ The measurement label contains the following:
 
 ResInsight also supports measuring a polyline (a set of line segments), which can be activated with the polyline ruler toolbar button {{< image-in-text src="images/3d-main-window/PolylineMeasurementButton.png" >}} or **Ctrl-Shift-M**. The measurement label will now contain additional measurements.
 
-![]({{< relref "" >}}images/3d-main-window/PolylineMeasurement.png)
+![](/images/3d-main-window/PolylineMeasurement.png)
 
 The measurement label contains several lengths.
 

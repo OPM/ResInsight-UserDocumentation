@@ -1,54 +1,31 @@
 +++
 title = "ResInsight"
-published = true
+
 +++
 <title>ResInsight • 3D viewer and post processing of reservoir models</title>
 
-# Post Processing of Reservoir Simulations
+# 3D viewer and post processing of reservoir models
 
-![]({{< relref "" >}}images/FrontPageImage.png)
+![](/images/FrontPageImage.png)
 
-<section class="features">
-  <div class="grid">
-    <div class="unit one-third">
-      <h3>Fast and Free</h3>
-      <p>
-        &#x2713; Open source<br>
-        &#x2713; Efficient user interface<br>
-	&#x2713; Handles large Eclipse cases<br>
-        &#x2713; Plotting of summary vectors<br>
-	&#x2713; Embedded Flow Diagnostics<br>
-        &#x2713; Python API for scripting<br>
-      </p>
-    </div>
-    <div class="unit one-third">
-      <h3>Unique Features</h3>
-      <p>
-        &#x2713; NNC visualization<br>
-        &#x2713; Cell Edge Coloring<br>
-        &#x2713; Detailed MSW visualization<br>
-        &#x2713; Seamless <a href="http://www.gnu.org/software/octave/"> Octave</a> integration<br>
-        &#x2713; Supports geomechanical ABAQUS simulations<br>
-      </p>
-    </div>
-    <div class="unit one-third">
-      <h3>Getting started</h3>
-      <p>
-        It's easy and free, both on Linux and Windows:
-      </p>
-      <a href="{{< ref "getting-started/Download-and-Install/" >}}">Download and Install &rarr;</a><br>
-      <a href="{{< ref "getting-started" >}}">Getting Started &rarr;</a>
-      <p>Sign up to be notified of new releases:
-        <br>
-        <a href="{{< relref "releasenotification" >}}">Release Notification &rarr;</a>
-      </p>
-      </div>
-    <div class="clear"></div>
-  </div>
 
-  <div class="grid">
-    <div class="unit whole center-on-mobiles">
-      <p>Here are some words from a few of the happy ResInsight users <a href="{{< relref "testimonials" >}}">Testimonials &rarr;</a> </p>
-    </div>
-  </div>
-</section>
+### Fast and Free
+- Open Source
+- Efficient user interface
+- Handles large simulation cases
+- Plotting of summary vectors
+- Embedded Flow Diagnostics
+- Python API for scripting
+
+### Unique Features
+- NNC visualization
+- Cell Edge Coloring
+- Detailed MSW visualization
+- Supports geomechanical ABAQUS simulations
+
+### Getting Started
+
+[Download and Release Info]({{% ref "releases" %}})
+
+[Getting Started]({{% ref "getting-started" %}})
+

@@ -1,17 +1,17 @@
 +++
 title = "Cloud Services"
-published = true
+
 weight = 10
 +++
  
-![]({{< relref "" >}}images/cloud-services/sumo-summary-plot.png)
+![](/images/cloud-services/sumo-summary-plot.png)
 
-Configuration of cloud services is described in [Cloud Services - Authorization]({{< relref "cloudservicesauthorization" >}}).
+Configuration of cloud services is described in [Cloud Services - Authorization]({{% relref "cloudservicesauthorization" %}}).
 
 
 ## Summary Ensembles from SUMO
 
-![]({{< relref "" >}}images/cloud-services/sumo-data-sources.png)
+![](/images/cloud-services/sumo-data-sources.png)
 
 Summary ensemble data can be accessed from SUMO. ResInsight will store the required information to the data source, and fetch data from the cloud during project import.
 
@@ -21,17 +21,17 @@ Summary ensemble data can be accessed from SUMO. ResInsight will store the requi
 - Use the button **Add Data Sources** if you want to avoid creation of summary plots
 
 ### Example of summary ensembles
-![]({{< relref "" >}}images/cloud-services/sumo-ensembles.png)
+![](/images/cloud-services/sumo-ensembles.png)
 
 ### Example of summary plot with SUMO data
-![]({{< relref "" >}}images/cloud-services/sumo-summary-plot.png)
+![](/images/cloud-services/sumo-summary-plot.png)
 
 ## Well Paths from OSDU
-![]({{< relref "" >}}images/cloud-services/osdu-well-path-import.png)
+![](/images/cloud-services/osdu-well-path-import.png)
 
 From the right-click menu of **Wells**, select **Import Well Paths from OSDU**. A wizard will be displayed where field and well can be selected for import.
 
 The imported well path will store required information to the location in OSDU, and the well path trajectory will be fethed during project import.
 
 ### Example of well paths from OSDU
-![]({{< relref "" >}}images/cloud-services/osdu-well-path-3dview.png)
+![](/images/cloud-services/osdu-well-path-3dview.png)

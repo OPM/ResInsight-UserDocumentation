@@ -1,15 +1,15 @@
 +++
 title = "Result Inspection"
-published = true
+
 weight = 60
 +++
 
-![]({{< relref "" >}}images/3d-main-window/ResultInspectionOverview.png)
+![](/images/3d-main-window/ResultInspectionOverview.png)
 
 The results mapped on the 3D model can be inspected in detail by left clicking cells in the 3D view. 
 The selected cells will be highlighted, text information displayed in the **Result Info** docking window, and the time-history values plotted in the **Result Plot**, if available.
 
-The values along the different K-layers is available in the [Depth Plot]({{< relref "depthplot" >}})
+The values along the different K-layers is available in the [Depth Plot]({{% relref "depthplot" %}})
 
 {{% notice note %}}
 Visibility of the docking widows can be controlled from the <b>Windows</b> menu.
@@ -46,25 +46,25 @@ Additional curves can be added to the plot if CTRL-key is pressed during picking
 
 To clear the cell-selection, left-click outside the visible geometry.
 
-[[Result Info]]({{< relref "resultinfo" >}}) 
+[[Result Info]]({{% relref "resultinfo" %}}) 
 
 ### Adding the Curves to a Summary Plot
 
 The time history curves of the selected cells can be added to a Summary Plot by right-clicking in the **Result Plot** or in the 3D View.
 
-![]({{< relref "" >}}images/3d-main-window/ResultPlotToSummaryPlotCommand.png)
+![](/images/3d-main-window/ResultPlotToSummaryPlotCommand.png)
 
 A dialog will appear to prompt you to select an existion plot, or to create a new one.
 
-![]({{< relref "" >}}images/3d-main-window/ResultPlotToSummaryPlotDialog.png)
+![](/images/3d-main-window/ResultPlotToSummaryPlotDialog.png)
 
 ## PVT Plot (Eclipse Cases Only)
 
 Show the PVT Plot window by selecting **Windows -> PVT Plot**. When it is turned on, it will only be visible when the active view is a view of an Eclipse case.
 
-![]({{< relref "" >}}images/3d-main-window/pvtOil.png)
+![](/images/3d-main-window/pvtOil.png)
 
-![]({{< relref "" >}}images/3d-main-window/pvtGas.png)
+![](/images/3d-main-window/pvtGas.png)
 
 The PVT plot window shows two plots, based on PVTNUM in the selected cell. One plots *Phase Formation Volume Factor* and the other plots *Phase Viscosity*, both against pressure. The *Phase* can be either oil or gas, and can be selected in the top left corner of the window.
 
@@ -74,7 +74,7 @@ Pressure for the selected cell, at the current time step, is marked on the plot 
 
 Show the Relative Permeability Plot window by selecting **Windows -> Relative Permeability Plot**.  When it is turned on, it will only be visible when the active view is a view of an Eclipse case.
 
-![]({{< relref "" >}}images/3d-main-window/RelativePermeability.png)
+![](/images/3d-main-window/RelativePermeability.png)
 
 The Relative Permeability Plot window shows up to six curves, based on SATNUM in the selected cell. The curves can be turned on/off in the top left corner of the window, and they are described in the following table:
 
@@ -100,6 +100,6 @@ Fixed [0, 1] Kr-axis  | Use a fixed range on Kr-axis
 
 Show the Mohr's Circle Plot window by selecting **Windows -> Mohr's Circle Plot**.  When it is turned on, it will only be visible when the active view is a view of an Geo Mech case.
 
-![]({{< relref "" >}}images/3d-main-window/mohrsCircles.png)
+![](/images/3d-main-window/mohrsCircles.png)
 
 The Mohr's circle plot shows three circles representing the 3D state of stress for a selected cell. In addition, it shows the envelope, calculated from the *cohesion* and *friction angle* given in the geo mechanical view's property editor. Several sets of circles and envelopes can be added by selecting more than one cell in any view (as in image above).

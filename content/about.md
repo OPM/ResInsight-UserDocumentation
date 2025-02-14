@@ -1,6 +1,6 @@
 +++
 title = "About"
-published = true
+
 hidden = true
 +++
 
@@ -30,7 +30,7 @@ ResInsight contains several pre-processing tools for updating and improving Ecli
 - The generation of Eclipse **Multi Segment Well**-models for well path completions.
 
 ### Flow Diagnostics
-Flow diagnostics calculations are embedded in the user interface and allows instant visualization of several well-based flow diagnostics properties, such as : Time of flight, flooding and drainage regions, well pair communication, well tracer fractions, well allocation plots and well communication lines. The calculations are performed by a library called [opm-flowdiagnostics](https://github.com/OPM/opm-flowdiagnostics) developed by [SINTEF Digital](http://www.sintef.no/digital). [More...]({{< ref "/3d-main-window/cellresults.md#flow-diagnostic-results" >}})
+Flow diagnostics calculations are embedded in the user interface and allows instant visualization of several well-based flow diagnostics properties, such as : Time of flight, flooding and drainage regions, well pair communication, well tracer fractions, well allocation plots and well communication lines. The calculations are performed by a library called [opm-flowdiagnostics](https://github.com/OPM/opm-flowdiagnostics) developed by [SINTEF Digital](http://www.sintef.no/digital). [More...]({{% ref "/3d-main-window/cellresults.md#flow-diagnostic-results" %}})
 
 ### Octave Integration
 Integration with GNU Octave enables powerful and flexible result manipulation and computations. Derived results can be returned to ResInsight for further handling and visualization. Eventually, derived and computed properties can be directly exported to Eclipse input formats for further simulation cycles and parameter studies.

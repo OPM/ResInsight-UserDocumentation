@@ -3,14 +3,14 @@ baseURL = "https://opm.github.io/ResInsight-UserDocumentation/"
 
 languageCode = "en-us"
 title = "ResInsight"
-theme = "learn"
-googleAnalytics = "G-6BNMNQQY0H"
+theme = "hugo-theme-relearn"
 
 [params]
 disableSearch = false
-disableHomeIcon = true
 ordersectionsby = "weight"
 disableShortcutsTitle = true
+themeVariant = 'relearn'
+disableLandingPageButton = true
 
 [markup]
   defaultMarkdownHandler = "goldmark"
@@ -31,7 +31,7 @@ disableShortcutsTitle = true
 [[menu.shortcuts]]
 	name = "<i class='fas fa-download'></i> Download and Install"
 	identifier = "download"
-	url = "/getting-started/download-and-install"
+	url = "/releases"
 	weight = 20
 
 [[menu.shortcuts]]

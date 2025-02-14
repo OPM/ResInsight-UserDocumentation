@@ -1,10 +1,10 @@
 +++
 title = "Grid Statistics Plots"
-published = true
+
 weight = 52
 +++
 
-![]({{< relref "" >}}images/plot-window/GridStatisticsPlots.png)
+![](/images/plot-window/GridStatisticsPlots.png)
 
 
 Grid Statistics Plots displays the histogram and statistics values for grid cells.
@@ -13,11 +13,11 @@ Grid Statistics Plots displays the histogram and statistics values for grid cell
 
 The most convenient way to create an Grid Statistics Plot is often to right-click in the 3D view and invoke *Create Grid Statistics Plot* as shown below. 
 
-![]({{< relref "" >}}images/plot-window/GridStatisticsPlots_create_from_3d.png)
+![](/images/plot-window/GridStatisticsPlots_create_from_3d.png)
 
 Alternatively, Grid Statistics Plots can be created by right-clicking the **Grid Statistics Plots** item in **Plot Project Tree**.
 
-![]({{< relref "" >}}images/plot-window/GridStatisticsPlots_create_from_project_tree.png)
+![](/images/plot-window/GridStatisticsPlots_create_from_project_tree.png)
 
 
 ##  Filter by 3d View Visibility

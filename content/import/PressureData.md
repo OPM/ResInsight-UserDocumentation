@@ -1,6 +1,6 @@
 +++
 title = "Pressure/Depth Data"
-published = true
+
 weight = 30
 +++
 
@@ -11,7 +11,7 @@ Importing pressure data to ResInsight may be performed in two different ways:
 - By using the right-click command **Import Pressure Data** on the **Observed Data** item in the **Plot Main Window Project Tree** 
 
 
-The imported pressure data can visualized in [[RFT Plots]]({{< relref "rftplot" >}})
+The imported pressure data can visualized in [[RFT Plots]]({{% relref "rftplot" %}})
 
 
 

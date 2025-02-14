@@ -9,7 +9,9 @@
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
     TeX: { equationNumbers: { autoNumber: "AMS" },
          extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
+  },
+    // Set default renderer to HTML-CSS
+    menuSettings: { renderer: "CommonHTML" }
   });
   MathJax.Hub.Queue(function() {
     // Fix <code> tags after MathJax finishes running. This is a

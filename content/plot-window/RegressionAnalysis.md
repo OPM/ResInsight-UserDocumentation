@@ -1,20 +1,20 @@
 +++
 title = "Regression Analysis"
-published = true
+
 weight = 80
 +++
 
 
-![]({{< relref "" >}}images/plot-window/RegressionAnalysis.png)
+![](/images/plot-window/RegressionAnalysis.png)
 
 
 ## Create Regression Analysis
 
-Regression analysis curves can be created from the right-click menu for a curve in the **Plot Project Tree**. In addition to single curves, regression anaysis is also supported on ensemble statistics curves and [Cross Plot]({{< relref "summarycrossplots" >}}) curves.
+Regression analysis curves can be created from the right-click menu for a curve in the **Plot Project Tree**. In addition to single curves, regression anaysis is also supported on ensemble statistics curves and [Cross Plot]({{% relref "summarycrossplots" %}}) curves.
 
 
 
-![]({{< relref "" >}}images/plot-window/RegressionAnalysis_create.png)
+![](/images/plot-window/RegressionAnalysis_create.png)
 
 
 ## Regression Types

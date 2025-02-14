@@ -1,10 +1,10 @@
 +++
 title = "Streamlines"
-published = true
+
 weight = 143
 +++
 
-![]({{< relref "" >}}images/3d-main-window/Streamlines.png)
+![](/images/3d-main-window/Streamlines.png)
 
 Streamlines lets the user investigate the flow of different phases through a reservoar. It allows for selecting both an individual phase or a combination of phases colored by the dominant phase or velocity. The visualization and animation of streamlines requires the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**.
 
@@ -12,13 +12,13 @@ Streamlines lets the user investigate the flow of different phases through a res
 
 To display streamlines, select a time step and check the **Streamlines** checkbox in **Project Tree**.
 
-![]({{< relref "" >}}images/3d-main-window/StreamlinesProjectTreeCheckBox.png)
+![](/images/3d-main-window/StreamlinesProjectTreeCheckBox.png)
 
 
 ## Property Editor
 The display and animation of streamlines is controlled by the **Property Editor**.
 
-![]({{< relref "" >}}images/3d-main-window/StreamlinesPropertyEditor.png)
+![](/images/3d-main-window/StreamlinesPropertyEditor.png)
 
 The following groups of settings control the content, display and animation of streamlines:
 

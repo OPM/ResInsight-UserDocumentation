@@ -1,10 +1,10 @@
 +++
 title = "Well Measurements"
-published = true
+
 weight = 70
 +++
 
-![]({{< relref "" >}}images/3d-main-window/ResInsight_WellMeasurements.png)
+![](/images/3d-main-window/ResInsight_WellMeasurements.png)
 
 ResInsight can import well measurements from a comma-separated values file. 
 
@@ -39,7 +39,7 @@ E-3 H, 1000.12, 2005-10-24, DP,    0.0, 0, Wash outs
     
 ### Measurement properties
 
-- **Well Name** -- The name of the well. ResInsight will try to associate each measurement with a well path with a matching name. The well name should be the same as imported [here]({{< relref "wellpaths" >}}).
+- **Well Name** -- The name of the well. ResInsight will try to associate each measurement with a well path with a matching name. The well name should be the same as imported [here]({{% relref "wellpaths" %}}).
 - **MD** -- Measured depth.
 - **Date** -- The date of the measurement. Expects [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Calendar_dates) extended format: `yyyy-MM-dd`, e.g. `2019-12-24`.
 - **Kind** -- The type of measurement.
@@ -60,7 +60,7 @@ Reloading measurements from a file will delete all the previously imported measu
 
 All the imported well measurements are available **Project Tree** under the **Well Measurements** for each 3D view.
 
-![]({{< relref "" >}}images/3d-main-window/WellMeasurementsInTree.png)
+![](/images/3d-main-window/WellMeasurementsInTree.png)
 
 The measurements are shown in all the 3D Views in the project as cylinders on the well path at the specified MD. Double-clicking on measurement will show details in the **Result Info** panel.
 
@@ -69,7 +69,7 @@ The measurements are shown in all the 3D Views in the project as cylinders on th
 
 The well measurement property editor lets the user filter which measurement to show based on quality, value and measurement kind. The value of the measurement is used to determine the color, and this changed in the **Color Legend**.
 
-![]({{< relref "" >}}images/3d-main-window/WellMeasurementsPropertyEditor.png)
+![](/images/3d-main-window/WellMeasurementsPropertyEditor.png)
 
 - **Value Filter Settings** -- Filter measurements by value range.
 - **Wells** -- Show this measurement kind for the selected wells.

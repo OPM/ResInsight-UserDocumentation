@@ -1,6 +1,6 @@
 +++
 title = "Snapshots"
-published = true
+
 weight = 10
 +++
 
@@ -26,7 +26,7 @@ The files generated are stored in a folder named _`snapshots`_ within the folder
 
 {{% notice note %}}
  Snapshots of existing views can also be created and saved from the command line 
- ( See <a href="{{< relref "commandlineinterface" >}}">Command Line Interface</a> ).
+ ( See <a href="{{% relref "commandlineinterface" %}}">Command Line Interface</a> ).
 {{% /notice %}}
 
 ## Advanced Snapshot Export
@@ -36,7 +36,7 @@ The **Advanced Snapshot Export**  {{< image-in-text src="images/export/SnapShotS
 The **Advanced Snapshot Export** is available from the **File**->**Export** menu in the **3D Main Window** 
 Invoking the command will display the following dialog: 
 
- ![]({{< relref "" >}}images/export/SnapshotAdvancedExport.png)
+ ![](/images/export/SnapshotAdvancedExport.png)
 
 This table defines which 3D Views to modify, and how to modify them. Each row defines the modifications of a specific view, and for all the combinations a row specifies, a snapshot is generated. 
 

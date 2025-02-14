@@ -1,5 +1,5 @@
 +++
-published = true
+
 +++
 
-<a href="{{< relref "" >}}">![logo]({{< relref "" >}}images/ResInsightCroppedIconPicture.png)</a>
+<a href="{{% relref "" %}}">![logo](/images/ResInsightCroppedIconPicture.png)</a>

@@ -1,6 +1,6 @@
 +++
 title = "Summary Data Import"
-published = true
+
 weight = 20
 +++
 
@@ -13,4 +13,4 @@ Summary data is usually available as **SMSPEC** and **UNSRMY** files. **UNSMRY**
 
 **ResInsight** will by default use this file format.
 
-If no **ESMRY** files are available, **ResInsight** can produce these files. This can be configured in [Preferences]({{< relref "preferences" >}}#summary). Note that all summmary data is read and write into a new **ESMRY** file. This operation will take some time, and can take minutes for a large ensemble.
+If no **ESMRY** files are available, **ResInsight** can produce these files. This can be configured in [Preferences]({{% relref "preferences" %}}#summary). Note that all summmary data is read and write into a new **ESMRY** file. This operation will take some time, and can take minutes for a large ensemble.

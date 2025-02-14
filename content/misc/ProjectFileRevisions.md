@@ -1,6 +1,6 @@
 +++
 title = "Project File Revisions"
-published = true
+
 weight = 15
 +++
 

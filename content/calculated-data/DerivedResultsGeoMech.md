@@ -1,6 +1,6 @@
 +++
 title = "Derived Results - Geomechanical"
-published = true
+
 weight = 110
 hidden = false
 aliases = [
@@ -28,7 +28,7 @@ where:
 
 Select the appropriate **Base Time Step** option in the **Difference Options** group to enable the time lapse result.
 
-![]({{< relref "" >}}images/appendix/DerivedRelativeResults.png)
+![](/images/appendix/DerivedRelativeResults.png)
 
 Note: Relative Results calculated based on Gamma values and Stress Anisotropy are calculated slightly differently:
 
@@ -98,7 +98,7 @@ Two constants can be assigned to a Geomechanical case:
 
 In the following they are denoted s0 and fa respectively. Some of the derived results use these constants, that can be changed in the property panel of the Case.
 
-![]({{< relref "" >}}images/appendix/GeoMechCasePropertyPanel.png)
+![](/images/appendix/GeoMechCasePropertyPanel.png)
 
 ### COMPACTION
 
@@ -280,7 +280,7 @@ Where:
 
 The Biot porelastic coefficient ($\alpha$) defines the compressibility of sand grains: $\alpha = 1.0$ for incompressible grains,
 and $\alpha < 1.0$ for compressible grains. $\alpha$ is not used for the initial (Geostatic) time step. The default value is 1.0, but values
-per element can be imported as an [element property table]({{< relref "ElementPropertyTable.md" >}}).
+per element can be imported as an [element property table]({{% relref "ElementPropertyTable.md" %}}).
 
 
 The bulk modulus for solid material is defined as:
@@ -289,8 +289,8 @@ $ K\_s = \frac{ K\_{fr} }{ 1 - \alpha}, K\_{fr} = \frac{ E }{ 3(1-2\nu)} $
 
 Where:
 
-- $ E $ is the elastic modulus (Young's modulus) from element property table [MODULUS]({{< relref "ElementPropertyTable.md" >}}).
-- $ \nu $ is Poisson's ratio imported from element property table [RATIO]({{< relref "ElementPropertyTable.md" >}}).
+- $ E $ is the elastic modulus (Young's modulus) from element property table [MODULUS]({{% relref "ElementPropertyTable.md" %}}).
+- $ \nu $ is Poisson's ratio imported from element property table [RATIO]({{% relref "ElementPropertyTable.md" %}}).
 
 
 #### Vertical Compressibility
@@ -368,7 +368,7 @@ The UMWL is either the fracture gradient (FG) or minimum horizontal stress (SHmi
 The LMWL is defined as the maximum of shear fracture gradient (SFG) and/or pore pressure in shale, and as pore pressure in sand.
 
 The calculations for fracture gradient and shear fracture gradient, and the needed input, are described in detail
-in [Well Bore Stability Plots]({{< relref "WellBoreStabilityPlots.md" >}}).
+in [Well Bore Stability Plots]({{% relref "WellBoreStabilityPlots.md" %}}).
 
 
 #### Mud Weight Window

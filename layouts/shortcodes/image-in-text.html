@@ -1,1 +1,6 @@
+
+{{ with resources.Match "/images/**" }}
+    {{ range . }} {{  $foo := .RelPermalink }} {{ end }}
+{{ end }}
+
 <img src="{{ .Site.BaseURL}}{{ .Get "src" }}" style="display:inline; vertical-align:middle; margin:0">

@@ -1,6 +1,6 @@
 +++
 title = "Observed Time History Data"
-published = true
+
 weight = 30
 +++
 
@@ -20,16 +20,16 @@ The imported {{< image-in-text src="images/import/Default.png" >}} Observed Data
 
 Which summaries that has been detected in a Observed Data file can be read in an Observed Data's **Property Editor**. In the image below, time and year info has been found together with the summary "WBP9L" for the well "OP-1".
 
-![]({{< relref "" >}}images/import/observedDataProperty.png)
+![](/images/import/observedDataProperty.png)
 
 ## Viewing Observed Time History Data
 
-![]({{< relref "" >}}images/import/observedDataCurveCreator.png)
+![](/images/import/observedDataCurveCreator.png)
 
-To plot **Observed Time History Data**, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the **Plot Editor** is covered in [Summary Plot Editor]({{< relref "summaryploteditor" >}}). Observed time history data points are plotted without lines by default.
+To plot **Observed Time History Data**, choose **New Summary Plot** in the right-click menu of **Summary Plots**, in **Plot Object Project Tree**. Observed time history data will appear in **Sources** together with summary cases. How to use the **Plot Editor** is covered in [Summary Plot Editor]({{% relref "summaryploteditor" %}}). Observed time history data points are plotted without lines by default.
 
 When inspecting resampled data, it can be useful to manually specify if this curve is **Accumulated** or **Rate**.
- [Summary Curve Properties]({{< relref "summaryplots" >}}/#editing-a-summary-curve).
+ [Summary Curve Properties]({{% relref "summaryplots" %}}/#editing-a-summary-curve).
 
 
 ## File Formats
@@ -38,7 +38,7 @@ When inspecting resampled data, it can be useful to manually specify if this cur
 CSV/txt files are generic ascii files where data is arranged in columns. Some variations in formatting is supported, for instance deifferent cell separators, date and time format, decimal separator etc. When importing these types of files the user is presented a dialog, where the user may tell ResInsight how to import the selected file(s). If more than one file is selected, the dialog appears once for each file.
 
 #### CSV/txt Import Options Dialog
-![]({{< relref "" >}}images/import/ImportObservedTimeHistoryDataDialog.png)
+![](/images/import/ImportObservedTimeHistoryDataDialog.png)
 
 Dialog fields description:
 
@@ -52,7 +52,7 @@ Dialog fields description:
 - **Preview** -- Preview the first 30 lines of the file contents. The view will reflect the currently selected Cell Separator and the selected time column is marked in yellow.
 
 #### Column data
-Each column must have a header text, which may be a name/description for the data in the column. By formatting the header text to a valid Eclipse address, ResInsight recognizes the column data and will be able to categorize the data in the same way as grid data. So when plotting these data later, the user will find the data in the correct category in the [Summary Plot Editor]({{< relref "summaryploteditor" >}}).
+Each column must have a header text, which may be a name/description for the data in the column. By formatting the header text to a valid Eclipse address, ResInsight recognizes the column data and will be able to categorize the data in the same way as grid data. So when plotting these data later, the user will find the data in the correct category in the [Summary Plot Editor]({{% relref "summaryploteditor" %}}).
 
 ##### Eclipse address format
 An Eclipse address consists of a vector name and zero or more parameters. The number of parameters are defined by the category of the vector. The category is determined by looking up the category in an internal vector table. A valid standard vector name has 3 to 5 characters. Optionally it may be postfixed by a user defined name of 3 characters. A vector name having both a standard part and a user part must have 8 characters (5+3). In this case, if the standard part has less than 5 characters, it must be padded with underscores up to 5 characters. Example: 'RPR__WEL'. Vector names having only the standard part are not padded.
@@ -97,7 +97,7 @@ Any address may have associated error data. Those type of data will have the sam
 
 Example:
 
-![]({{< relref "" >}}images/import/ErrorBars.png)
+![](/images/import/ErrorBars.png)
 
 ### CSV Line Based Format
 ResInsight supports a 'line based' CSV file format variant as well. As opposed to the normal CSV format, data values are organized in lines. Each line must contain at least a date (and time), a vector address and a sample value. Optionally it may also contain an error value and a comment. The information carried by this format is equivalent to the normal CSV format, it is only a different file layout.

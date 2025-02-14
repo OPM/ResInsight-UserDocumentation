@@ -1,10 +1,10 @@
 +++
 title = "3D Main Window"
-published = true
+
 weight = 20
 +++
 
-![ResInsight User Interface]({{< relref "" >}}images/getting-started/ResInsightUIMediumSize.png)
+![ResInsight User Interface](/images/getting-started/ResInsightUIMediumSize.png)
 
 This is the main window of ResInsight for all 3D related functionality and visualization. 
 As seen, the **3D Main Window** has a central area and several docking windows surrounding it. 

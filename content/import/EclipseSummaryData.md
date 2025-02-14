@@ -1,6 +1,6 @@
 +++
 title = "Eclipse Summary Data"
-published = true
+
 weight = 10
 +++
  
@@ -9,10 +9,10 @@ Summary data can be imported as a single summary file or an ensemble of summary 
 ## Basic Summary Import
 Summary data is located in two files, summary vector names in **\*.SMSPEC** and curve data in **\*.UNSMRY**.  
 
-For import of ensemble datasets, see [Ensemble File Dialog]({{< relref "ensemblefiledialog" >}}).
+For import of ensemble datasets, see [Ensemble File Dialog]({{% relref "ensemblefiledialog" %}}).
 
 ## Origin Files
-![]({{< relref "" >}}images/plot-window/OriginFileDialog.png)
+![](/images/plot-window/OriginFileDialog.png)
 
 During summary file import, ResInsight checks whether the summary file is restarted, i.e. has an origin file. If an origin file is found, the Origin Files dialog is displayed.
 
@@ -43,7 +43,7 @@ The name of a summary case can be changed by interactive edit of the name in the
 
 **ResInsight** is able to import summary data in several file formats. Default exported by *Eclipse* is **\*.SMSPEC/.UNSMRY**. 
 
-For best performance, consider using the [ESMRY File Format]({{< relref "summarydata" >}}).
+For best performance, consider using the [ESMRY File Format]({{% relref "summarydata" %}}).
 
 ### SMSPEC/UNSMRY File Format
 

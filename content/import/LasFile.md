@@ -1,10 +1,10 @@
 +++
 title = "Log ASCII Standard File"
-published = true
+
 weight = 15
 +++
 
-![]({{< relref "" >}}images/3d-main-window/3dWellLogCurves.png)
+![](/images/3d-main-window/3dWellLogCurves.png)
 
 Log ASCII Standard (LAS) is a standard file format common in the oil-and-gas industry to store well log information. 
 
@@ -15,14 +15,14 @@ Log ASCII Standard (LAS) files can be imported using the command: **File->Import
 ResInsight will look for the the well name in the imported LAS-files among the existing **Well Paths**.
 If a match is found, the LAS-file is placed as a child of that well path. If not, a new empty well path entry is created with the imported LAS-file under it. A well path may have more than one LAS-files as children.
 
-![]({{< relref "" >}}images/3d-main-window/LasFilesInTree.png)
+![](/images/3d-main-window/LasFilesInTree.png)
 
 If the LAS-file does not contain a well name, the file name is used instead. 
 
 ### Moving a LAS file
 If ResInsight's automatic well matching fails and a LAS-file is matched with the wrong well path, it is possible to move the LAS-file to the correct well path. Select the LAS-file right-click menu click **Move LAS File to Well Path** and select destination well path.
 
-![]({{< relref "" >}}images/3d-main-window/MoveLasFileMenu.png)
+![](/images/3d-main-window/MoveLasFileMenu.png)
 
 
 ### Look for an Existing Well Path

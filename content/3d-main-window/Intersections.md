@@ -1,23 +1,23 @@
 +++
 title = "Intersections"
-published = true
+
 weight = 80
 +++
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionOverview.png)
+![](/images/3d-main-window/IntersectionOverview.png)
 
 Intersections are cross sections of a grid model that cut the grid in various ways to display grid cell values. 
 There are two main types of intersections: 
 
-1. **Intersection**: is defined by a piece-wise linear curve and a direction of extrusion. The curve can be either a simulation well, a well path, a user defined polyline, or a user defined line. An intersection can also be shown in a separate [2D Intersection View]({{< relref "intersections" >}}#2d-intersection-views).
+1. **Intersection**: is defined by a piece-wise linear curve and a direction of extrusion. The curve can be either a simulation well, a well path, a user defined polyline, or a user defined line. An intersection can also be shown in a separate [2D Intersection View]({{% relref "intersections" %}}#2d-intersection-views).
 
 1. **Intersection Box**: can be used as a box cutting grid cells or collapsed to a restricted axis aligned plane. 
 
-Structural uncertainty can be visualized on intersections as described in [Ensemble Surface]({{< relref "ensemblesurface" >}}).
+Structural uncertainty can be visualized on intersections as described in [Ensemble Surface]({{% relref "ensemblesurface" %}}).
 
 All types of intersections are stored in the folder **Intersections** of a **View**. An intersection may be copied to other views by the menu option **Copy intersections to all views in case** in the right-click menu.
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionInTreeCopy.png)
+![](/images/3d-main-window/IntersectionInTreeCopy.png)
 
 
 ## Curve Based Intersections
@@ -34,7 +34,7 @@ To be able to see the intersections in the 3D view, the grid cells can be hidden
 
 The property panel of a well path based intersection is shown below:
 
- ![]({{< relref "" >}}images/3d-main-window/IntersectionWellPath.png)
+ ![](/images/3d-main-window/IntersectionWellPath.png)
  
 - **Name** -- Automatically created based on the item specifying the intersection. The user can edit the name, but it will be updated if you change well or well path.
 - **Intersecting Geometry** -- Options to control the curve used for the cross section dependant on the type of intersection.
@@ -64,7 +64,7 @@ If the well contains more than one branch, the intersection geometry will be cre
 
 A new **Polyline** intersection can be created from the right-click menu in the 3D view. Then, by left-clicking on reservoir geometry, a polyline is created. The points are added to the point list in the **Property Editor**. 
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionPolyline.png)
+![](/images/3d-main-window/IntersectionPolyline.png)
 
 - The background color of point list is light pink when additional points can be picked in 3D view. 
 - To finish adding points, click button **Stop picking points** (color of point list turns white). 
@@ -74,15 +74,15 @@ The points in the list can be deleted and edited using the keyboard. To append m
 The point list can be copied to clipboard using **CTRL-C** when in keyboard focus. A new list of points can be pasted into the point list by using **CTRL-V**.
 
 ### Polygon Intersection
-A polyline or polygon intersection can also be based on a [Polygons]({{< relref "polygons" >}}) in the project. The polygon is then used as the polyline. This is done by selecting the polygon in the **Property Editor**.
+A polyline or polygon intersection can also be based on a [Polygons]({{% relref "polygons" %}}) in the project. The polygon is then used as the polyline. This is done by selecting the polygon in the **Property Editor**.
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionProjectPolygon.png)
+![](/images/3d-main-window/IntersectionProjectPolygon.png)
 
 ### Azimuth and Dip
 
 A new **Azimuth and Dip** intersection can be created from the right-click menu in 3D view. Then, by left-clicking two points on reservoir geometry, a single line is created between the first point, and the second point projected down to the plane with same z-value as the first point. The two points are added to the point list in the **Property Editor**. 
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionAzimuthDip.png)
+![](/images/3d-main-window/IntersectionAzimuthDip.png)
 
 - The background color of point list is light pink when additional points can be picked in 3D view. 
 - To finish adding points, click button **Stop picking points** (color of point list turns white). 
@@ -101,25 +101,25 @@ The length of the plane can also be set manually in the **Property Editor**.
 - **Length Up** is the distance from the user defined horizontal line, to the top of the plane intersecting the model.
 - **Length Down** is the distance from the user defined horizontal line, to the bottom of the plane intersecting the model.
 
-![]({{< relref "" >}}images/3d-main-window/azimuthDip3DView.PNG)
+![](/images/3d-main-window/azimuthDip3DView.PNG)
 
 ### 2D Intersection Views
 
 A 2D Intersection View displays the intersection in a separate 2D view along with the defining curve. The intersection and the defining well path, simulation well or polyline is flattened to make it easier to see the intersected grid and how the well traverses it. 
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionView.png)
+![](/images/3d-main-window/IntersectionView.png)
 
 Each of the curve based intersections have a corresponding **2D Intersection View**. Management of these views are automatic. They will be created and deleted along with the intersection.
 
 A 2D Intersection View is shown either by right clicking an intersection and select **Show 2D intersection View** or by checking its entry in **Project tree**.
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionViewsProjectTree.png)
+![](/images/3d-main-window/IntersectionViewsProjectTree.png)
 
 Scales along the edges of the view show the depth and the horizontal length of the intersection. The length is measured from the start of the wellpath or the well head of a simulation well. 
 
 The view is mostly controlled by the options in the 3D view where the intersection is defined. There are, however, some independent controls, like drawstyle, timestep and Z-scale:
 
-![]({{< relref "" >}}images/3d-main-window/2DIntersectionViewProperties.png)
+![](/images/3d-main-window/2DIntersectionViewProperties.png)
 
 - **Viewer**
   - **Name** -- User editable name of view. The default name combines the name of the origin view and intersection name.
@@ -138,13 +138,13 @@ The view is mostly controlled by the options in the 3D view where the intersecti
 - **Defining Points**
   - **Show points** -- Toggle the display of the defining points for Polyline or Azimuth and Dip intersections.
 
-These options are similar to the options for a regular 3D view (See [View Properties]({{< relref "3dviews" >}}#view-properties) ) 
+These options are similar to the options for a regular 3D view (See [View Properties]({{% relref "3dviews" %}}#view-properties) ) 
 
 ## Intersection Box and Intersection Planes
 
 A new **Intersection Box** or **Intersection Plane** can be created from the right-click menu in the 3D view or the right-click menu in the **Project Tree**.
 
-![]({{< relref "" >}}images/3d-main-window/3d_view_context_menu.png)
+![](/images/3d-main-window/3d_view_context_menu.png)
 
 The following list describes the properties for an **Intersection Box**:
 
@@ -159,7 +159,7 @@ The following list describes the properties for an **Intersection Box**:
 
 Direct interaction in a 3D view is activated when **Show 3D manipulator** is pressed. Handles are displayed at the sides of the intersection object, and interactive modification is done by dragging a handle in the 3D view.
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionBoxWithHandles.png)
+![](/images/3d-main-window/IntersectionBoxWithHandles.png)
 
 
 ## Depth and Range Filter
@@ -171,13 +171,13 @@ Depth filtering is performed by selecting an intersection in **Project Tree** an
 - **Between**: show between the specified *Upper Depth* and the specified *Lower Depth*
 
 An intersection can be also be visually filtered by a user defined **K Range Filter**. 
-K Range filtering is performed by enabling **K Range Filter** of an intersection. The filtering is defined using a text string, i.e. "5,10-15,20:3", see [Advanced Text Input]({{< relref "advancedtextinput" >}}) for details.
+K Range filtering is performed by enabling **K Range Filter** of an intersection. The filtering is defined using a text string, i.e. "5,10-15,20:3", see [Advanced Text Input]({{% relref "advancedtextinput" %}}) for details.
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionPropEdDepthFilter.png)
+![](/images/3d-main-window/IntersectionPropEdDepthFilter.png)
 
 ## Filter Options for all Intersections
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionFolderOverrides.png)
+![](/images/3d-main-window/IntersectionFolderOverrides.png)
 
 The filtering of all intersections can be controlled when selecting the **Intersections** folder object. Activating these options will override the settings defined locally on each intersection.
 
@@ -187,14 +187,14 @@ Similar options can also be activated for **Faults**.
 
 To select a simulation result to display on an intersection, right-click **Intersection Results** in **Project Tree** and select **New Result Definition**.
 
-![]({{< relref "" >}}images/3d-main-window/SeparateIntersectionResults.png)
+![](/images/3d-main-window/SeparateIntersectionResults.png)
 
 By selecting a specific **Intersection Result**, the **Property Editor** allows to specify case, type or position etc depending on whether the result stem from an Eclipse case or a Geomechanical case.
 
 The next step is to select an **Intersection** in **Project Tree** and define **Result Reference**. 
 In the example below, available sources are the two **Intersections Results** of previous figure, one of which stems from a geomechanical case and the other from an Eclipse case.
 
-![]({{< relref "" >}}images/3d-main-window/IntersectionSeparateResultReference.png)
+![](/images/3d-main-window/IntersectionSeparateResultReference.png)
 
 
 

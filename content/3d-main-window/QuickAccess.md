@@ -1,10 +1,10 @@
 +++
 title = "Quick Access"
-published = true
+
 weight = 71
 +++
 
-![]({{< relref "" >}}images/3d-main-window/quick-access-main.png)
+![](/images/3d-main-window/quick-access-main.png)
 
 For large projects with numerous views and grid models, navigating to the desired information can be time-consuming. To address this, we have introduced a special dialog named **Quick Access**, which displays selected information from a view. By default, this dialog is located to the right of the 3D views.
 
