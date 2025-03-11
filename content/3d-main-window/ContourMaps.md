@@ -9,6 +9,8 @@ weight = 40
 ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
 ResInsight is able to [export a contour map]({{% relref "contourmapexport" %}}) to a text file. 
 
+Polygons can be created from visible areas.
+
 ## Creating New Contour Maps
 
 Contour Maps can be created in many different ways:
@@ -59,20 +61,25 @@ Max Value            | The maximum cell result value in the volume underneath th
 
 For the Column options, no **Cell Result** is available in the property tree under the Contour Map.
 
+### Value Filtering
+
+The resulting contour map values can be filtered by activating a value filter in the **Property Editor**. Either **Above**, **Below** or **Between** can be selected. This can be useful as a preprocessing step before creating polygons.
+
 ### Weighting Means by Cell Result
 
 ![](/images/3d-main-window/ContourMapProjectionWeights.png)
 
 For the **Arithmetic Mean**, **Geometric Mean** and **Harmonic Mean** it is also possible to specify a cell result as a weighting parameter in addition to the regular weighting by volume of intersection. The total weight will then be the volume of intersection multiplied by the specified cell result. The full range of regular cell results is available for this use.
 
-
 ## Difference options
 
 Creating a Contour Map as a difference with a specific base case and/or base time step is performed by clicking the 
 {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** item
-underneath the actual **Contour Map** in the project tree. This will display the {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** [Property Editor]
-({{% relref "cellresults" %}}#eclipse-result-types) to specify base case and/or base time step.
+underneath the actual **Contour Map** in the project tree. This will display the {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** [Property Editor]({{% relref "cellresults" %}}#eclipse-result-types) to specify base case and/or base time step.
 
+## Polygons of Visible Areas
+
+Polygons of visible contour map areas can be created from the *"Create Polygons from Contour Map"* in the right-click menu.
 
 ## Contour Map Export
 
