@@ -42,13 +42,16 @@ A set of parameters governs this projection:
 
 Aggregation Type     | Description                     
 ---------------------|-------------------------------------------------------------------------------------------------------
-Oil Column           | A sum of SOIL * NTG * PORO * dZ
-Gas Column           | A sum of SGAS * NTG * PORO * dZ
-Hydrocarbon Column   | A sum of (SOIL + SGAS)* NTG * PORO * dZ
-Arithmetic Mean      | A volume weighted arithmetic mean of the specified cell result
-Harmonic Mean        | A volume weighted harmonic mean of the specified cell result
-Geometric Mean       | A volume weighted geometric mean of the specified cell result
-Volume Weighted Sum  | A volume weighted sum of the specified cell result. Suitable for volume fractions such as SOIL or PORO
+Oil Column           | $\sum_{i=1}^{n} SOIL * NTG * PORO * dZ$
+Gas Column           | $\sum_{i=1}^{n} SGAS * NTG * PORO * dZ$
+Hydrocarbon Column   | $\sum_{i=1}^{n} (SGAS+SOIL) * NTG * PORO * dZ$
+Mobile Oil Column    | $\sum_{i=1}^{n} (SOIL - SO?CR) * NTG * PORO * dZ$, where **SO?CR** is either **SOWCR**, **SOGCR** or a user defined constant
+Mobile Gas Column    | $\sum_{i=1}^{n} (SGAS - SGCR) * NTG * PORO * dZ$, where **SGCR** can be a user defined constant
+Mobile Hydrocarbon Column   | $\sum_{i=1}^{n} ((SOIL - SO?CR) + (SGAS - SGCR)) * NTG * PORO * dZ$, where options are described above
+Arithmetic Mean      | $A_w = \frac{1}{n} \sum_{i=1}^{n} w_i*x_i$, where the weight is 1.0 by default
+Harmonic Mean        | $H_w = \frac{\sum_{i=1}^{n} w_i}{\sum_{i=1}^{n} \frac{w_i}{x_i}}$, where the weight is 1.0 by default
+Geometric Mean       | $G_w = \left(\prod_{i=1}^{n} x_i^{w_i}\right)^{\frac{1}{\sum_{i=1}^{n} w_i}}$, where the weight is 1.0 by default
+Volume Weighted Sum  | $S = \sum_{i=1}^{n} w_i*x_i$, where the weight is 1.0 by default. Suitable for volume fractions such as **SOIL** or **PORO**
 Sum                  | A sum of the specified cell result. Suitable for absolute quantities.
 Top Value            | The first value encountered downwards vertically
 Min Value            | The minimum cell result value in the volume underneath the 2D Element
