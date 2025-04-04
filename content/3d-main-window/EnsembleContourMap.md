@@ -9,11 +9,11 @@ ResInsight can create contour maps from an ensemble of grid models based on diff
 
 ## Creating Contour Maps
 
-Import grid models using the **Create Grid Case Ensemble**. The grid models can have individually specified geometry. For grids with equal geometry, consider using [Grid Case Group]({{% relref "casegroupsandstatistics" %}}). The formation information is imported for each grid.
+Import grid models using the **Import->Eclipse Cases->Create Grid Case Ensemble**. The grid models can have individually specified geometry. For grids with equal geometry, consider using [Grid Case Group]({{% relref "casegroupsandstatistics" %}}). The formation information is imported for each grid.
 
 ![](/images/3d-main-window/import-grid-case-ensemble.png)
 
-Select "New Ensemble Contour Map" from the right-click menu on the grid ensemble.
+Select **"New Ensemble Contour Map"** from the right-click menu on the grid ensemble.
 
 ## Properties of the Contour Maps
 
@@ -39,7 +39,7 @@ Select the property to compute the contour map for.
 
 When working with multiple grid models, importing and processing data will take time. Understand how to limit the data involved in calculations, and consider a test run with a small number of realizations before using the full ensemble.
 
-Consider setting the **Sampling Resolution** to coarse to improve performance. Note that this option will introduce interpolation effects.
+Consider setting the **Sampling Resolution** to coarse to improve performance. Note that this option will introduce some interpolation effects.
 
 Click the **Compute** button in the **Property Editor** to start the computation.
 
@@ -60,3 +60,5 @@ Select "*Create Polygon from Contour Map*" from the right-click menu. This will 
 [Contour Map]({{% relref "contourmaps" %}})
 
 [Grid Case Group]({{% relref "casegroupsandstatistics" %}})
+
+[Ensemble File Dialog]({{% relref "ensemblefiledialog" %}})
