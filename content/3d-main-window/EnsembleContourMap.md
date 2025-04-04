@@ -13,7 +13,7 @@ Import grid models using the **Create Grid Case Ensemble**. The grid models can 
 
 ![](/images/3d-main-window/import-grid-case-ensemble.png)
 
-Select "New Statistics Contour Map" from the right-click menu on the grid ensemble.
+Select "New Ensemble Contour Map" from the right-click menu on the grid ensemble.
 
 ## Properties of the Contour Maps
 
@@ -39,15 +39,13 @@ Select the property to compute the contour map for.
 
 When working with multiple grid models, importing and processing data will take time. Understand how to limit the data involved in calculations, and consider a test run with a small number of realizations before using the full ensemble.
 
-As the grid geometry can be defined individually, grid cell geometry needs to be imported for each case. To ensure the import of only required geometry, use the **opm-common (beta)** grid reader and make sure to import only active cell geometry, as configured in [Preferences]({{% relref "performancehints" %}}).
-
 Consider setting the **Sampling Resolution** to coarse to improve performance. Note that this option will introduce interpolation effects.
 
 Click the **Compute** button in the **Property Editor** to start the computation.
 
 ## Display of Contour Map Data
 
-A view is automatically created and displayed when the computation is completed. Select the **Map Projection** object to control the display. Create additional views from the right-click menu of the **Statistics Contour Map** object.
+A view is automatically created and displayed when the computation is completed. Select the **Map Projection** object to control the display. Create additional views from the right-click menu of the **Ensemble Contour Map** object.
 
 ![](/images/3d-main-window/ensemble-grid-map-projection.png)
 

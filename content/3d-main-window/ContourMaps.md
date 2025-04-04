@@ -9,7 +9,7 @@ weight = 40
 ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
 ResInsight is able to [export a contour map]({{% relref "contourmapexport" %}}) to a text file. 
 
-Polygons can be created from visible areas.
+Polygons can be created from visible areas. If you want to compute contour maps for ensembles, look at [Ensemble Contour Maps]({{% relref "ensemblecontourmap" %}})
 
 ## Creating New Contour Maps
 
@@ -84,3 +84,8 @@ Polygons of visible contour map areas can be created from the *"Create Polygons 
 ## Contour Map Export
 
 ResInsight is able to [export a contour map]({{% relref "contourmapexport" %}}) to a text file. 
+
+### References
+
+[Ensemble Contour Map]({{% relref "ensemblecontourmap" %}})
+
