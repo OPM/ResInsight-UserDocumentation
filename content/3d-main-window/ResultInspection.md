@@ -46,6 +46,8 @@ Additional curves can be added to the plot if CTRL-key is pressed during picking
 
 To clear the cell-selection, left-click outside the visible geometry.
 
+These curves can also be displayed in a summary plot in the main plot window using the right-click menu option *"Plot Time History for Selected Cells"*.
+
 [[Result Info]]({{% relref "resultinfo" %}}) 
 
 ### Adding the Curves to a Summary Plot
