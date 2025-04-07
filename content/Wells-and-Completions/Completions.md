@@ -243,7 +243,7 @@ Notice that only the trajectory data is exported. Properties related to well seg
 
 Hydraulic fractures are completions created by pressurizing the reservoir at a certain point in the well, and thereby creating a crack in the formation. A substance is then injected into the crack to keep it open when relaxing the pressure.
 
-Fractures in ResInsight can be added both to simulation wells and Well Trajectories, and have two main types: Elliptical fractures and StimPlan fractures. 
+Fractures in ResInsight can be Well Trajectories, and have two main types: Elliptical fractures and StimPlan fractures. 
 
 ### Visualization control
 
@@ -358,7 +358,7 @@ StimPlan fracture templates imports XML output from the StimPlan software. These
 
 ### Fracture Instances
 
-Instances of fractures can be created along well paths and simulation wells by right clicking the well pipe in the 3D view, or the corresponding items in the **Project Tree**. 
+Instances of fractures can be created along well paths by right clicking the well pipe in the 3D view, or the corresponding items in the **Project Tree**. 
 
 ![](/images/3d-main-window/FractureInstancePropertyPanel.png)
 

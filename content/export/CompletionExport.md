@@ -4,7 +4,7 @@ title = "Completions"
 weight = 40
 +++
 
-The completions defined in ResInsight can be exported to Eclipse for use in new simulation runs. The commands **Export Completion Data For Visible Wells**, **Export Completion Data For Visible Simulation Wells** and **Export Completion Data For Selected Wells** can be used to invoke the export. The commands are available by right clicking Well Paths or Simulation Wells in the **Project Tree**. The first command is available from the **File->Import** menu as well.
+The completions defined in ResInsight can be exported to Eclipse for use in new simulation runs. The commands **Export Completion Data For Visible Wells** and **Export Completion Data For Selected Wells** can be used to invoke the export. The commands are available by right clicking Well Paths in the **Project Tree**. The first command is available from the **File->Import** menu as well.
 
 ![](/images/export/Completions_ExportCompletionData.png)
 
