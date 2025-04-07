@@ -38,9 +38,8 @@ The Map Projection settings control how the 3D Data is aggregated onto the 2D pl
 
 A set of parameters governs this projection:
 
-- The first option **Sample Spacing Factor** controls how many 2D Grid Cells are used in the map. The factor is multiplied by the characteristic cell length/width of the 3D grid to get the 2D Cell Size. A smaller factor will thus create a finer Contour Map. 
-- The second option **Show Contour Lines** toggles on/off the contour lines in the view.
-- The final control in the **Projection Settings** box is the **Result Aggregation**. Here the following options are available:
+- **Sample Resolution** controls how many 2D Grid Cells are used in the map. Select finer resolution for more detailed maps. Note that finer resolution requires more processing power.
+- **Result Aggregation**: Here the following options are available:
 
 Aggregation Type     | Description                     
 ---------------------|-------------------------------------------------------------------------------------------------------
