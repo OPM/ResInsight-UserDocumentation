@@ -12,6 +12,10 @@ disableShortcutsTitle = true
 themeVariant = 'relearn'
 disableLandingPageButton = true
 
+# Note that this setting can increase build times significantly.
+# https://mcshelby.github.io/hugo-theme-relearn/configuration/sidebar/menus/index.html#expander-for-submenus
+collapsibleMenu = true
+
 [markup]
   defaultMarkdownHandler = "goldmark"
   [markup.goldmark]

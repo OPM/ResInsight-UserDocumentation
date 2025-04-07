@@ -19,6 +19,11 @@ Visibility of the docking widows can be controlled from the <b>Windows</b> menu.
 
 Clicking cells will display slightly different information text based on the case type as described in the following tables.
 
+Selection of cells can now be done by entering IJK or a UTM coordinate. This feature is available from the Windows menu, **Cell Selection Tool**.
+
+![](/images/3d-main-window/cell-selection-tool.png)
+
+
 ### Eclipse Model
 
 Geometry      | Description
@@ -45,6 +50,8 @@ The result values of the selected cells for all time steps are displayed in the 
 Additional curves can be added to the plot if CTRL-key is pressed during picking. The different cells are highlighted in different colors, and the corresponding curve is colored using the same color.
 
 To clear the cell-selection, left-click outside the visible geometry.
+
+These curves can also be displayed in a summary plot in the main plot window using the right-click menu option *"Plot Time History for Selected Cells"*.
 
 [[Result Info]]({{% relref "resultinfo" %}}) 
 

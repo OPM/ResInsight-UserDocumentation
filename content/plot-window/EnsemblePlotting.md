@@ -24,11 +24,23 @@ During import of a summary case, ResInsight tries to find an associated **parame
 
 [Best Practices Summary Data]({{% relref "summarydata" %}})
 
-## Naming
-The name of an ensemble can be changed by interactive edit of the name in the **Project Tree** (by clicking or using **F2**) or selecting the ensemble and changing the name in the **Property Editor**.
+## Selection and Highlight of Curves
+When clicking on a single curve in an ensemble several operations will happen:
+- the curve cliced on will be highlighted
+- all curves for the same realization will be highlighted in all plots
+- the realization object is selected in the **Data Sources** panel
+
+When clicking on a realization object in **Data Sources**, all curves based on this realization will be highlighted in all plots.
+
+Readout of curve values can be controlled from the **Property Editor** of a plot.
+![](/images/plot-window/summary-mouse-readout.png)
+
+- **Snap to Closest Curve Point** Displays a small circle around the closest point on a summary curve and it's values
+- **Time Tracking** Displays a vertical line in all plots at the location of the mouse pointer on the time axis
+- **Time and Value Tracking** Displays a vertical line for the location on time axis and displays a horizontal line at the intersecting highlighted curve. If no curve is highlighted, the curve is located at the mouse cursor.
 
 ## Plotting
-Ensembles are plotted in the summary plot the same way as ordinary summary curves. Create a new summary plot using the [summary plot editor]({{% relref "summaryploteditor" %}}). Imported ensembles will appear in a separate group in the list of summary cases. When an ensemble is selected, a new curve set is created and plotted as multiple summary curves. By default all curves in an ensemble curve set will have the same color. 
+Create a new summary plot using the [summary plot editor]({{% relref "summaryploteditor" %}}). Imported ensembles will appear in a separate group in the list of summary cases. When an ensemble is selected, a new curve set is created and plotted as multiple summary curves. By default all curves in an ensemble curve set will have the same color. 
 
 A color selection dialog can be opened by clicking on the color icon in the **Project Tree**.
 ![](/images/plot-window/ColorSelectionDialog.png)
