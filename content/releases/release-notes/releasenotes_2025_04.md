@@ -37,6 +37,13 @@ Improved automatic naming of ensembles. When multiple ensembles are imported, re
 
 Selection of cells can now be done by entering IJK or a UTM coordinate. This feature is available from the Windows menu, **Cell Selection Tool**.
 
+## Correlation Cross Plot Filter
+A filter on x and y axis can be defined for a correlation cross plot. The realization matching the filter can be used to create a new ensemble. This option is available on the right-click menu of a correlation plot.
+
+![](/images/plot-window/CorrelationPlotsCreateEnsemble.png)
+
+[Correlation Plots]({{% relref "correlationplots" %}})
+
 ## Store User Defined View
 
 A **User Defined View** can be stored and applied to other views, available from the View menu.

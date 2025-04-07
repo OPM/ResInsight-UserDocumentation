@@ -21,6 +21,14 @@ Alternatively, Correlation Plots can be created by right-clicking the **Correlat
 
 ![](/images/plot-window/CorrelationPlotsCreateFromPlotTree.png)
 
+## Cross Plot Filter
+The realizations are displayed in a cross plot with result parameter vs summary value. A filter on x and y axis can be set. The realization matching the filter can be used to create a new ensemble. This option is available on the right-click menu of a correlation plot.
+
+![](/images/plot-window/CorrelationPlotsFilter.png)
+
+A new ensemble can be created based on the filtered cases in the right-click menu of the cross plot.
+
+![](/images/plot-window/CorrelationPlotsCreateEnsemble.png)
 
 ## Specifying Setup and Settings
 The Correlation Plots property editor allows the user to specify an extensive number of settings dependent on the actual type of correlation plot. The complete set of settings are listed below according to the individual sections of the property editor.
