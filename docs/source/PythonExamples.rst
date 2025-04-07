@@ -114,6 +114,12 @@ Export Well Path Completions
 ===================================
 .. literalinclude:: ../rips/PythonExamples/export_well_path_completions.py
 
+.. _fishbones_completion:
+
+Fishbones Completion
+===================================
+.. literalinclude:: ../rips/PythonExamples/fishbones_completion.py
+
 .. _generate_ensemble_of_well_logs:
 
 Generate Ensemble Of Well Logs
