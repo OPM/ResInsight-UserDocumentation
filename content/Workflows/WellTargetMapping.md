@@ -5,14 +5,18 @@ weight = 90
 +++
 
 
-### Introduction ###
+![](/images/workflows/well-target-mapping.png)
 
-Automatically find suitable well targets.
+Automatically identify new well target candidates by identifying connected cluster of cells based on user defined threshold values.
 
+## Configuration
 
+Import a grid model, and from the right-click menu of a grid model select **"New Well Target Mapping"**. A **Well Target Mapping** object is displayed with the following options:
 
+![](/images/workflows/well-target-mapping-properties.png)
 
-## Configuration ##
+Click **Generate** button to compute well target candidates for the grid model. Several results will be computed and available for selection in the **Generated** section for **Cell Results**. The first available view will be used to display the well target clusters.
+
 
 **Result**
 
@@ -29,7 +33,7 @@ Automatically find suitable well targets.
 
 **Minimum Cell Values**
 
-Filter which defines which cells that can be included in a well target.
+Filter which defines the threshold values to include a candidate cell to a cell cluster.
 
 - **Saturation Oil**: Saturation of oil (fraction). Default: 0.3.
 - **Saturation Gas**: Saturation of gas (fraction). Default: 0.3.
