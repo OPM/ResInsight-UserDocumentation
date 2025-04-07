@@ -536,6 +536,108 @@ class FileSummaryCase(SummaryCase):
         if FileSummaryCase.__custom_init__ is not None:
             FileSummaryCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class FishbonesCollection(CheckableNamedObject):
+    """
+    Attributes:
+        main_bore_diameter (float): Main Bore Diameter
+        main_bore_skin_factor (float): Main Bore Skin Factor
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.main_bore_diameter: float = 0.216
+        self.main_bore_skin_factor: float = 0
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if FishbonesCollection.__custom_init__ is not None:
+            FishbonesCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: str="STANDARD") -> Fishbones:
+        """
+        Append Fishbones
+
+        Arguments:
+            sub_locations (List[float]): 
+            drilling_type (str): One of [STANDARD, EXTENDED, ACID_JETTING]
+        Returns:
+            FishbonesMultipleSubs
+        """
+        return self._call_pdm_method_return_value("AppendFishbones", Fishbones, sub_locations=sub_locations, drilling_type=drilling_type)
+
+
+    def fishbones(self) -> List[Fishbones]:
+        """fishbonesSubs
+
+        Returns:
+             List[Fishbones]
+        """
+        return self.children("fishbones", Fishbones)
+
+
+    def set_fixed_end_location(self, location: float=0) -> None:
+        """
+        
+
+        Arguments:
+            location (float): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetFixedEndLocation", location=location)
+
+
+    def set_fixed_start_location(self, location: float=0) -> None:
+        """
+        
+
+        Arguments:
+            location (float): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetFixedStartLocation", location=location)
+
+
+class Fishbones(PdmObjectBase):
+    """
+    Fishbones is a completion type used to add multiple short laterals to the main well bore.
+
+    Attributes:
+        icd_count (int): ICDs per Sub
+        icd_flow_coefficient (float): ICD Flow Coefficient
+        icd_orifice_diameter (float): ICD Orifice Diameter [mm]
+        lateral_build_angle (float): Build Angle [deg/m]
+        lateral_count_per_sub (int): Laterals Per Sub
+        lateral_diameter (float): Lateral Diameter
+        lateral_exit_angle (float): Exit Angle [deg]
+        lateral_install_success_fraction (float): Install Success Rate [0..1]
+        lateral_length (str): Length(s) [m]
+        lateral_open_hole_roghness_factor (float): Open Hole Roghness Factor [m]
+        lateral_skin_factor (float): Lateral Skin Factor
+        lateral_tubing_diameter (float): Tubing Diameter [mm]
+        lateral_tubing_roghness_factor (float): Tubing Roghness Factor [m]
+        subs_orientation_mode (str): One of [FIXED, RANDOM]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.icd_count: int = 2
+        self.icd_flow_coefficient: float = 1.5
+        self.icd_orifice_diameter: float = 7
+        self.lateral_build_angle: float = 6
+        self.lateral_count_per_sub: int = 3
+        self.lateral_diameter: float = 12.5
+        self.lateral_exit_angle: float = 35
+        self.lateral_install_success_fraction: float = 1
+        self.lateral_length: str = "11.0"
+        self.lateral_open_hole_roghness_factor: float = 0.001
+        self.lateral_skin_factor: float = 0
+        self.lateral_tubing_diameter: float = 8
+        self.lateral_tubing_roghness_factor: float = 1e-05
+        self.subs_orientation_mode: str = "RANDOM"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if Fishbones.__custom_init__ is not None:
+            Fishbones.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class FractureTemplateCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -614,6 +716,8 @@ class View(ViewWindow):
     """
     Attributes:
         background_color (str): Background
+        camera_matrix (List[float]): Camera Matrix
+        camera_point_of_interest (List[float]): Camera Point of Interest
         current_time_step (int): Current Time Step
         disable_lighting (bool): Disable Results Lighting
         grid_z_scale (float): Z Scale
@@ -626,6 +730,8 @@ class View(ViewWindow):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.background_color: str = "#b0c4de"
+        self.camera_matrix: List[float] = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+        self.camera_point_of_interest: List[float] = [0, 0, 0]
         self.current_time_step: int = 0
         self.disable_lighting: bool = False
         self.grid_z_scale: float = 5
@@ -730,6 +836,19 @@ class WellPath(PdmObjectBase):
             WellPathFracture
         """
         return self._call_pdm_method_return_value("AddThermalFracture", WellPathFracture, measured_depth=measured_depth, fracture_template=fracture_template, place_using_template_data=place_using_template_data)
+
+
+    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: str="STANDARD") -> Optional[Fishbones]:
+        """
+        Append Fishbones
+
+        Arguments:
+            sub_locations (List[float]): 
+            drilling_type (str): One of [STANDARD, EXTENDED, ACID_JETTING]
+        Returns:
+            FishbonesMultipleSubs
+        """
+        return self._call_pdm_method_return_optional_value("AppendFishbones", Fishbones, sub_locations=sub_locations, drilling_type=drilling_type)
 
 
     def append_perforation_interval(self, start_md: float=0, end_md: float=0, diameter: float=0, skin_factor: float=0) -> Perforation:
@@ -1181,6 +1300,14 @@ class RimEmCase(Reservoir):
         Reservoir.__init__(self, pb2_object, channel)
         if RimEmCase.__custom_init__ is not None:
             RimEmCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimFractureSurface(SurfaceInterface):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        SurfaceInterface.__init__(self, pb2_object, channel)
+        if RimFractureSurface.__custom_init__ is not None:
+            RimFractureSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class GeoMechContourMap(GeoMechView):
     """
@@ -1839,6 +1966,8 @@ class SummaryCaseSubCollection(PdmObjectBase):
         is_ensemble (bool): Is Ensemble
         name_count (str): Name
         summary_collection_name (str): Name
+        use_key1 (bool): Use First Path Part
+        use_key2 (bool): Use Second Path Part
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1848,6 +1977,8 @@ class SummaryCaseSubCollection(PdmObjectBase):
         self.is_ensemble: bool = False
         self.name_count: str = "Group"
         self.summary_collection_name: str = "Group"
+        self.use_key1: bool = False
+        self.use_key2: bool = False
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SummaryCaseSubCollection.__custom_init__ is not None:
             SummaryCaseSubCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -2232,6 +2363,16 @@ class WellPathCompletions(PdmObjectBase):
         if WellPathCompletions.__custom_init__ is not None:
             WellPathCompletions.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def fishbones(self) -> Optional[FishbonesCollection]:
+        """Fishbones
+
+        Returns:
+             FishbonesCollection
+        """
+        children = self.children("Fishbones", FishbonesCollection)
+        return children[0] if len(children) > 0 else None
+
+
     def perforations(self) -> Optional[PerforationCollection]:
         """Perforations
 
@@ -2407,6 +2548,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['FaciesProperties'] = FaciesProperties
     classes['FileSummaryCase'] = FileSummaryCase
     classes['FileWellPath'] = FileWellPath
+    classes['Fishbones'] = Fishbones
+    classes['FishbonesCollection'] = FishbonesCollection
     classes['Fracture'] = Fracture
     classes['FractureTemplate'] = FractureTemplate
     classes['FractureTemplateCollection'] = FractureTemplateCollection
@@ -2439,6 +2582,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['Reservoir'] = Reservoir
     classes['RimDepthSurface'] = RimDepthSurface
     classes['RimEmCase'] = RimEmCase
+    classes['RimFractureSurface'] = RimFractureSurface
     classes['RimRoffCase'] = RimRoffCase
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RimSummaryCaseSumo'] = RimSummaryCaseSumo

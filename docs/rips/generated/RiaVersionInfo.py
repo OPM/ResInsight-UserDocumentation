@@ -16,8 +16,8 @@
 #  Python version of RiaVersionInfo.h
 #  Just sets version constants
 
-RESINSIGHT_MAJOR_VERSION : str = "2024"
-RESINSIGHT_MINOR_VERSION : str = "12"
-RESINSIGHT_PATCH_VERSION : str = "2"
+RESINSIGHT_MAJOR_VERSION : str = "2025"
+RESINSIGHT_MINOR_VERSION : str = "04"
+RESINSIGHT_PATCH_VERSION : str = "0"
 
 PYTHON_GRPC_PROTOC_VERSION : str = "libprotoc 23.4"
