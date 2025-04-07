@@ -26,6 +26,12 @@ Grid appearance can be controlled from the **Property Editor** when a view is se
 
 Visibility of the grid box with labels displaying the coordinates for the reservoir can also be controlled using **Show Grid Box**. 
 
+### Store User Defined View
+
+Zoom and orientation of a model can be stored using the menu item **"Views->Store User Defined View"**. Select the menu item **"Views->User Defined View"** or use a toolbar button to apply the stored view zoom and orientation to a different view.
+
+![](/images/3d-main-window/KeyboardEast.png) 
+
 ### Cell Result 
 
 The **Cell Result** {{< image-in-text src="images/3d-main-window/CellResult.png" >}} item defines which Eclipse or Geomechanical property the 3D View uses for the main cell color. The property can be chosen in the property panel of the **Cell Result** item. The mapping between cell values and color is defined by the **Legend Definition**{{< image-in-text src="images/3d-main-window/Legend.png" >}} along with some appearance settings on the Legend itself. (Number format etc.)

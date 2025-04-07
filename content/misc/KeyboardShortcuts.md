@@ -10,7 +10,9 @@ from the project tree, **Ctrl-Alt-A** for Zoom All and **Ctrl-Alt-S/N/W/E/B/T** 
 **Ctrl-Alt-U** will apply a User Defined View.
 
 ![](/images/3d-main-window/KeyboardDel.png)
+
 ![](/images/3d-main-window/KeyboardEast.png)
+
 ![](/images/3d-main-window/KeyboardPlot.png)
 
 Other available keyboard shortcuts are
