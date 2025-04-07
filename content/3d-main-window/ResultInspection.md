@@ -19,6 +19,11 @@ Visibility of the docking widows can be controlled from the <b>Windows</b> menu.
 
 Clicking cells will display slightly different information text based on the case type as described in the following tables.
 
+Selection of cells can now be done by entering IJK or a UTM coordinate. This feature is available from the Windows menu, **Cell Selection Tool**.
+
+![](/images/3d-main-window/cell-selection-tool.png)
+
+
 ### Eclipse Model
 
 Geometry      | Description
