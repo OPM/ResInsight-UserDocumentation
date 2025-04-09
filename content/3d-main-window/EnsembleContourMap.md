@@ -7,6 +7,8 @@ weight = 40
 
 ResInsight can create contour maps from an ensemble of grid models based on different forms of aggregation of 3D Eclipse data onto a 2D plane.
 
+[Video Tutorial: Ensemble Contour Map](https://youtu.be/qE_PeNx3xP0?si=tSmzJhmmAtENsiYN)
+
 ## Creating Contour Maps
 
 Import grid models using the **Import->Eclipse Cases->Create Grid Case Ensemble**. The grid models can have individually specified geometry. For grids with equal geometry, consider using [Grid Case Group]({{% relref "casegroupsandstatistics" %}}). The formation information is imported for each grid.

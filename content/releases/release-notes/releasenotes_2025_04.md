@@ -13,6 +13,8 @@ ResInsight can create contour maps from an ensemble of grid models based on diff
 
 When a contour map is created, outline polygons of visible areas can be created.
 
+[Video Tutorial: Ensemble Contour Map](https://youtu.be/qE_PeNx3xP0?si=tSmzJhmmAtENsiYN)
+
 [Ensemble Contour Map]({{% relref "ensemblecontourmap" %}})
 
 [Contour Map]({{% relref "contourmaps" %}})
@@ -22,6 +24,10 @@ When a contour map is created, outline polygons of visible areas can be created.
 ![](/images/workflows/well-target-mapping.png)
 
 Automatically identify new well target candidates by identifying connected cluster of cells based on user defined threshold values.
+
+[Video Tutorial: Well Target Mapping](https://youtu.be/O-ms2ImgAwM?si=T_F_EdmeLDqE5_CN)
+
+[Well Target Mapping]({{% relref "welltargetmapping" %}})
 
 ## Ensemble Import Dialog
 

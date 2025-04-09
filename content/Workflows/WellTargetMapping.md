@@ -9,6 +9,8 @@ weight = 90
 
 Automatically identify new well target candidates by identifying connected cluster of cells based on user defined threshold values.
 
+[Video Tutorial: Well Target Mapping](https://youtu.be/O-ms2ImgAwM?si=T_F_EdmeLDqE5_CN)
+
 ## Configuration
 
 Import a grid model, and from the right-click menu of a grid model select **"New Well Target Mapping"**. A **Well Target Mapping** object is displayed with the following options:
