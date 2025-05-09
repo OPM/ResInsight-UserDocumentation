@@ -39,6 +39,13 @@ Readout of curve values can be controlled from the **Property Editor** of a plot
 - **Time Tracking** Displays a vertical line in all plots at the location of the mouse pointer on the time axis
 - **Time and Value Tracking** Displays a vertical line for the location on time axis and displays a horizontal line at the intersecting highlighted curve. If no curve is highlighted, the curve is located at the mouse cursor.
 
+## Realization Filters
+The realization curves can be filtered based on summary values, parameter values or objective function values. To create a new filter, activate the right-click menu of an ensemble and select *"New Ensemble Curve Filter"* The **Time Selection** defines the time window of the curve to evaluate the filter.
+
+A new ensemble based on the visible realizations can be created from the right-click menu in the plot or right-click menu of the ensemble object. Select the operation *"Create Ensemble from Filtered Cases"*
+
+![](/images/plot-window/ensemble-curve-filter.png)
+
 ## Plotting
 Create a new summary plot using the [summary plot editor]({{% relref "summaryploteditor" %}}). Imported ensembles will appear in a separate group in the list of summary cases. When an ensemble is selected, a new curve set is created and plotted as multiple summary curves. By default all curves in an ensemble curve set will have the same color. 
 
