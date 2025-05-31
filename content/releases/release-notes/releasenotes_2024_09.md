@@ -52,7 +52,7 @@ Several improvements has been done related to the opm-common grid importer, espe
 
 A flat surface at a specified depth can be created, useful to indicate oil-water contact depth.
 
-[Depth Surface]({{% relref "surfaces" %}}/#depth-surfaces)
+[Depth Surface]({{% relref "3d-main-window/surfaces" %}}/#depth-surfaces)
 
 ## Other improvements
 - Make sure summary ensemble statistics is calculated correctly if the first realization is partial
