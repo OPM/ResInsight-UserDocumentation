@@ -14,6 +14,8 @@ ResInsight is capable of mapping properties and simulation results onto 3D surfa
 3D surfaces from GOCAD and Petrel are imported into ResInsight by the menu option **File**->**Import**->**Import Surfaces** 
 in the **3D Main Window**.
 
+Surface file formats are described in [Surface Data]({{% relref "reference-manual/surfaces" %}})
+
 ![](/images/3d-main-window/SurfacesImport.png)
 
 Imported surfaces are listed under the {{< image-in-text src="images/3d-main-window/SurfacesProjectTreeNode.png" >}} entry 
@@ -85,117 +87,3 @@ ResInsight can export surfaces to the GOCAD TSurf file format. Grid case surface
 
 ![](/images/3d-main-window/surface_export.png)
 
-## Supported Surface Formats
-
-### GOCAD Surface format
-
-GOCAD is a computer application that allows you to import, create, modify, integrate, view, and export geological objects in 3D.
-The GOCAD export file format supported by ResInsight is **TSURF** (*.ts). 
-A TSURF data file is a triangle based surface format containing vertex coordinates and triangle to vertex connectivities as exemplified below. 
-ResInsight import vertex and triangle identifiers from the first TFACE section in such a file.
-
-```txt
-GOCAD TSurf 1 
-HEADER { 
-name:MF_027_SU 
-} 
-GOCAD_ORIGINAL_COORDINATE_SYSTEM 
-NAME Default 
-AXIS_NAME "X" "Y" "Z" 
-AXIS_UNIT "m" "m" "m" 
-ZPOSITIVE Depth 
-END_ORIGINAL_COORDINATE_SYSTEM 
-TFACE 
-VRTX 1 458177.767090 7322538.712891 1643.655884 CNXYZ 
-VRTX 2 458260.834961 7322392.890625 1596.685303 CNXYZ 
-VRTX 3 457985.662109 7322783.783203 1542.060059 CNXYZ 
-VRTX 4 459601.453125 7322511.427734 3639.000000 CNXYZ 
-VRTX 5 459422.015625 7322689.230469 3639.000000 CNXYZ 
-VRTX 6 459793.410156 7322338.230469 3639.000000 CNXYZ 
-...
-TRGL 2 61 98  
-TRGL 20 153 66  
-TRGL 152 19 65  
-END 
-```
-
-
-### Petrel Surface PTL files
-
-ResInsight is capable of importing a surface defined by a **PTL** (*.ptl) file format.
-A PTL data file specifies the quads of a surface by *x*, *y*, *z* nodal coordinates and the *i* and *j* indices as exemplified below. 
-As seen, *#* denotes comment lines.
-
-```txt
-#Type: scattered data
-#Version: 6
-#Description: No description
-#Format: free
-#Field: 1 x
-#Field: 2 y
-#Field: 3 z meters
-#Field: 4 column
-#Field: 5 row
-#Projection: Local Rectangular
-#Units: meters
-#End: 
-#Information from grid
-#Grid_size: Not_avaiable
-#Grid_space: Not_available
-#Z_field: z
-#Vertical_faults: Not_available
-#History: No history
-#Z_units: meters
-443479.500000 7305390.500000 -1000.000000 1 1
-443479.500000 7305488.500000 -1000.000000 1 2
-443479.500000 7305586.500000 -1000.000000 1 3
-443479.500000 7305684.500000 -1000.000000 1 4
-443479.500000 7305782.500000 -1000.000000 1 5
-443479.500000 7305880.500000 -1000.000000 1 6
-...
-```
-
-
-
-
-### OpenWorks XYZ Surface files
-
-ResInsight is capable of importing a surface defined by a **XYZ** (*.dat) file from OpenWorks.
-A XYZ data file specifies the quads of a surface by *x*, *y*, *z* nodal coordinates organized in a regular grid. 
-As seen, *#* and *@* denotes comment lines.
-```txt
-@File_Version: 4
-@Coordinate_Type_is: 1
-@Export_Type_is: 1
-@Number_of_Projects 1
-@Project_Type_Name: , 3,xxx,
-@Project_Unit_is: meters , xxx
-#File_Version____________-> 4
-#Project_Name____________-> xxx
-#Project_Type____________-> 3
-#Export_XY_Unit__________-> meters
-#OpenWorks_Project_______-> 'xxx'
-#Master_Project_______->
-#Coordinate_type_________-> 1
-#Number_of_points_in_hzd_-> 1
-#Horizon_internal_id_____-> xxx
-#Horizon_extremes_are____-> xxx,xxx
-#Horizon_onset_is_Minimum_____-> 1
-#Horizon_type_is_DEPTH_STRUCTURE______-> 2
-#Horizon_color_is________-> 255 0 0
-#Horizon_name____________-> xxx
-#Horizon_attribute_______-> DEPTH_STRUCTURE
-#Horizon_version_________-> UNKNOWN
-#Horizon_interp_status___-> defaultStat
-#Horizon_class___________-> defaultClass
-#Export_Z_Unit___________-> meters
-#Horizon_onset_type______-> Minimum
-#Horizon_data_domain_____-> DEPTH
-#Horizon_remark_size_____-> 50
-Horizon from Grid on Fri Aug 14 13:42:10 CEST 2020
-#End_of_Horizon_ASCII_Header_
-   4.5423435e+05   7.3239079e+06   1.5970070e+03
-   4.5424414e+05   7.3239157e+06   1.5970485e+03
-   4.5425392e+05   7.3239234e+06   1.5970899e+03
-   4.5426371e+05   7.3239312e+06   1.5971314e+03 
-```
