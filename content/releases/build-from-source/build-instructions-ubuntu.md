@@ -29,7 +29,7 @@ Update apt installer
 
 Install GCC and related tools
 
-    sudo apt install build-essential curl zip unzip tar flex bison
+    sudo apt install build-essential curl zip unzip tar flex bison pkg-config libgl1-mesa-dev libglu1-mesa-dev libfreetype6-dev libfontconfig1-dev
 
 [Set default compiler](https://linuxconfig.org/how-to-switch-between-multiple-gcc-and-g-compiler-versions-on-ubuntu-20-04-lts-focal-fossa)
 
@@ -75,9 +75,9 @@ Create a root folder for Qt installations. In this folder, create a virtual envi
 
 ### Build ResInsight
 
-Install Ninja build tool
+Install Ninja and CMake
     
-    sudo apt-get install ninja-build
+    sudo apt-get install ninja-build cmake
 
 The configuration flags for a basic build is given in `CMakePresets.json` in the root of the repository. Configuration flags specific for the system to build on can be specified in `CMakeUserPresets.json`. This file is ignored by git.
 
