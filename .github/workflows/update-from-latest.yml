@@ -10,6 +10,9 @@ jobs:
   download-artifact:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
       - name: Set up authentication
         env:
           GITHUB_TOKEN: ${{ secrets.PAT }}
@@ -44,12 +47,15 @@ jobs:
       - name: List downloaded files
         run: |
           echo "Downloaded files:"
+          mkdir upstream_rips
+
           cd downloaded_artifacts
           unzip artifact.zip
-          mkdir upstream_rips
           tar -xzf rips*.tar.gz -C upstream_rips
-          cd upstream_rips/rips*
-          ls -la 
+          ls upstream_rips/rips*
+          cd ..
+          cp -r upstream_rips/rips*/rips ./docs/
+          ls -R ./docs/rips
 
       - name: Upload to current repository
         uses: actions/upload-artifact@v4
