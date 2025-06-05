@@ -20,7 +20,7 @@ jobs:
         id: get_run
         run: |
           curl -H "Authorization: token ${{ secrets.PAT }}" \
-          https://api.github.com/repos/OPM/ResInsight/actions/workflows/ResInsightWithCache/runs \
+          https://api.github.com/repos/OPM/ResInsight/actions/workflows/ResInsightWithCache.yml/runs \
           | jq '.workflow_runs[] | select(.conclusion=="success") | .id' \
           | head -n 1 > run_id.txt
           echo "run_id=$(cat run_id.txt)" >> $GITHUB_ENV
