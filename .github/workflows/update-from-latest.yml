@@ -1,4 +1,4 @@
-name: Download rips and Python examples from main ResInsight repository
+name: Update rips from main ResInsight repository
 
 on:
   workflow_dispatch:
