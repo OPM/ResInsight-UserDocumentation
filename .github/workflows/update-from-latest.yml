@@ -7,6 +7,7 @@ on:
 
 jobs:
   download-artifact:
+    if: github.ref == 'refs/heads/next-major-release'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
