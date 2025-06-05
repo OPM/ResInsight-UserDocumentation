@@ -29,10 +29,12 @@ jobs:
         run: |
           curl -H "Authorization: token ${{ secrets.PAT }}" \
           -L https://api.github.com/repos/OPM/ResInsight/actions/runs/${{ env.run_id }}/artifacts \
-          -o artifact.zip
-
+          -o downloaded_artifacts/artifact.zip
 
       - name: List downloaded files
         run: |
           echo "Downloaded files:"
+          cd downloaded_artifacts
+          unzip -l artifact.zip
           ls -la .
+
