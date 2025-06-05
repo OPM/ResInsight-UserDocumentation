@@ -60,7 +60,8 @@ jobs:
 
       - name: Create Read the Docs Python examples
         run: |
-          python docs/source/create_python_examples.py
+          cd docs/source
+          python create_python_examples.py
 
       - name: Upload to current repository
         uses: actions/upload-artifact@v4
