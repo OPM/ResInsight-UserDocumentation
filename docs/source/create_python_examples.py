@@ -5,7 +5,7 @@ from os import listdir
 # The script will create a title from the file name, and add a reference to the source code using literalinclude
 
 path_examples = "../rips/PythonExamples"
-file_names = listdir(path_examples)
+file_names = sorted(listdir(path_examples))
 
 txt =""
 txt += ".. \n   This file was created using the script in docs/source/create_python_examples.py\n\n"
