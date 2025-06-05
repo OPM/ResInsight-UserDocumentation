@@ -1,0 +1,46 @@
+name: Download  rips and Python examples from main ResInsight repository
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 AM
+
+jobs:
+  download-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest successful run
+        id: get-run
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: runs } = await github.rest.actions.listWorkflowRuns({
+              owner: 'OPM',
+              repo: 'ResInsight',
+              workflow_id: 'ResInsightWithCache.yml',  # or workflow filename
+              status: 'success',
+              per_page: 1
+            });
+            
+            if (runs.total_count === 0) {
+              core.setFailed('No successful runs found');
+              return;
+            }
+            
+            core.setOutput('run-id', runs[0].id);
+            core.setOutput('run-url', runs[0].html_url);
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts  # Name of the artifact
+          repository: target-owner/target-repo
+          run-id: ${{ steps.get-run.outputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./downloaded-artifacts
+
+      - name: List downloaded files
+        run: |
+          echo "Downloaded files:"
+          ls -la ./downloaded-artifacts/
