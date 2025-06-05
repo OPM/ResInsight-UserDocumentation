@@ -46,6 +46,7 @@ jobs:
           echo "Downloaded files:"
           cd downloaded_artifacts
           unzip artifact.zip
+          tar -xzf rips*.tar.gz
           ls -la 
 
       - name: Upload to current repository
