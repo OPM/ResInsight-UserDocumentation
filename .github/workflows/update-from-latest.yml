@@ -45,7 +45,7 @@ jobs:
         run: |
           echo "Downloaded files:"
           cd downloaded_artifacts
-          unzip -l artifact.zip
+          unzip artifact.zip
           ls -la 
 
       - name: Upload to current repository
