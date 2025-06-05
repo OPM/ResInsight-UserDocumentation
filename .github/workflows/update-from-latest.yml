@@ -1,0 +1,75 @@
+name: Update rips from main ResInsight repository
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 AM
+
+jobs:
+  download-artifact:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Set up authentication
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        run: |
+          echo "Authenticated with PAT"
+
+      - name: Get latest successful workflow run
+        id: get_run
+        run: |
+          curl -H "Authorization: token ${{ secrets.PAT }}" \
+          https://api.github.com/repos/OPM/ResInsight/actions/workflows/ResInsightWithCache.yml/runs \
+          | jq '.workflow_runs[] | select(.conclusion=="success") | .id' \
+          | head -n 1 > run_id.txt
+          echo "run_id=$(cat run_id.txt)" >> $GITHUB_ENV
+
+      - name: Download artifact metadata, find url for 'python-distribution'
+        id: get_artifact
+        run: |
+          mkdir -p downloaded_artifacts
+          
+          curl -H "Authorization: token ${{ secrets.PAT }}" \
+          -L https://api.github.com/repos/OPM/ResInsight/actions/runs/${{ env.run_id }}/artifacts \
+          -o downloaded_artifacts/artifacts.json
+          
+          # Find artifact with name python-distribution
+          ARTIFACT_URL=$(jq -r '.artifacts[] | select(.name=="python-distribution") | .archive_download_url' downloaded_artifacts/artifacts.json)
+          echo "artifact_url=$ARTIFACT_URL" >> $GITHUB_ENV
+
+      - name: Download artifact file
+        run: |
+          curl -H "Authorization: token ${{ secrets.PAT }}" \
+          -L "${{ env.artifact_url }}" \
+          -o downloaded_artifacts/artifact.zip
+
+      - name: Update docs/rips folder from downloaded artifacts
+        run: |
+          echo "Downloaded files:"
+          cd downloaded_artifacts
+          unzip artifact.zip
+          cd ..
+          mkdir upstream_rips
+          tar -xzf downloaded_artifacts/rips*.tar.gz -C upstream_rips
+          # ls upstream_rips/rips*
+          rm -rf ./docs/rips
+          cp -r upstream_rips/rips*/rips ./docs/
+          # ls -R ./docs/rips
+
+      - name: Create Read the Docs Python examples
+        run: |
+          cd docs/source
+          python create_python_examples.py
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update rips module and Python examples"
+          title: "Automated fixes of rips from ResInsight artifacts"
+          branch: artifact-update-rips
+          branch-suffix: random   

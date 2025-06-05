@@ -60,17 +60,41 @@ Command Example
 ===================================
 .. literalinclude:: ../rips/PythonExamples/command_example.py
 
+.. _compute_avg_poro_for_region:
+
+Compute Avg Poro For Region
+===================================
+.. literalinclude:: ../rips/PythonExamples/compute_avg_poro_for_region.py
+
 .. _create_and_export_stim_plan_model:
 
 Create And Export Stim Plan Model
 ===================================
 .. literalinclude:: ../rips/PythonExamples/create_and_export_stim_plan_model.py
 
+.. _create_corner_point_grid:
+
+Create Corner Point Grid
+===================================
+.. literalinclude:: ../rips/PythonExamples/create_corner_point_grid.py
+
 .. _create_intersection:
 
 Create Intersection
 ===================================
 .. literalinclude:: ../rips/PythonExamples/create_intersection.py
+
+.. _create_polygon:
+
+Create Polygon
+===================================
+.. literalinclude:: ../rips/PythonExamples/create_polygon.py
+
+.. _create_regular_surface:
+
+Create Regular Surface
+===================================
+.. literalinclude:: ../rips/PythonExamples/create_regular_surface.py
 
 .. _create_surface_from_thermal_fracture:
 
