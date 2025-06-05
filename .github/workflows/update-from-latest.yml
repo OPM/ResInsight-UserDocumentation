@@ -48,11 +48,10 @@ jobs:
         run: |
           echo "Downloaded files:"
           mkdir upstream_rips
-          mkdir downloaded_artifacts
 
           cd downloaded_artifacts
           unzip artifact.zip
-          tar -xzf rips*.tar.gz -C upstream_rips
+          tar -xzf rips*.tar.gz -C ../upstream_rips
           ls upstream_rips/rips*
           cd ..
           cp -r upstream_rips/rips*/rips ./docs/
