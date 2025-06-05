@@ -1,6 +1,7 @@
 name: Download  rips and Python examples from main ResInsight repository
 
 on:
+  push:
   workflow_dispatch:
   schedule:
     - cron: '0 6 * * *'  # Daily at 6 AM
