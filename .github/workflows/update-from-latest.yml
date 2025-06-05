@@ -27,6 +27,7 @@ jobs:
 
       - name: Download artifact
         run: |
+          mkdir -p downloaded_artifacts
           curl -H "Authorization: token ${{ secrets.PAT }}" \
           -L https://api.github.com/repos/OPM/ResInsight/actions/runs/${{ env.run_id }}/artifacts \
           -o downloaded_artifacts/artifact.zip
