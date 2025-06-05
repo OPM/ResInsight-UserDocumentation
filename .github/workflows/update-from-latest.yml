@@ -46,6 +46,7 @@ jobs:
           echo "Downloaded files:"
           cd downloaded_artifacts
           unzip artifact.zip
+          mkdir upstream_rips
           tar -xzf rips*.tar.gz -C upstream_rips
           cd upstream_rips
           ls -la 
