@@ -25,11 +25,20 @@ jobs:
           | head -n 1 > run_id.txt
           echo "run_id=$(cat run_id.txt)" >> $GITHUB_ENV
 
-      - name: Download artifact
+      - name: Download artifact metadata
+        id: get_artifact
         run: |
           mkdir -p downloaded_artifacts
           curl -H "Authorization: token ${{ secrets.PAT }}" \
           -L https://api.github.com/repos/OPM/ResInsight/actions/runs/${{ env.run_id }}/artifacts \
+          -o downloaded_artifacts/artifacts.json
+          ARTIFACT_URL=$(cat downloaded_artifacts/artifacts.json | jq -r '.artifacts[0].archive_download_url')
+          echo "artifact_url=$ARTIFACT_URL" >> $GITHUB_ENV
+
+      - name: Download artifact file
+        run: |
+          curl -H "Authorization: token ${{ secrets.PAT }}" \
+          -L "${{ env.artifact_url }}" \
           -o downloaded_artifacts/artifact.zip
 
       - name: List downloaded files
