@@ -36,6 +36,6 @@ jobs:
         run: |
           echo "Downloaded files:"
           cd downloaded_artifacts
-          unzip -l artifact.zip
+          # unzip -l artifact.zip
           ls
 
