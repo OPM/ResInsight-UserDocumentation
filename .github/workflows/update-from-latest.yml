@@ -39,3 +39,8 @@ jobs:
           # unzip -l artifact.zip
           ls -la 
 
+      - name: Upload to current repository
+        uses: actions/upload-artifact@v3
+        with:
+          name: rips-and-examples
+
