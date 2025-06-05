@@ -1,0 +1,85 @@
+{
+  "total_count": 4,
+  "artifacts": [
+    {
+      "id": 3266134694,
+      "node_id": "MDg6QXJ0aWZhY3QzMjY2MTM0Njk0",
+      "name": "python-distribution",
+      "size_in_bytes": 90704,
+      "url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266134694",
+      "archive_download_url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266134694/zip",
+      "expired": false,
+      "digest": "sha256:2c7ceb84cc651231c616f99f772580fc9713d36ec226c6bd959349e4f83a77e3",
+      "created_at": "2025-06-05T09:13:06Z",
+      "updated_at": "2025-06-05T09:13:06Z",
+      "expires_at": "2025-06-10T09:13:07Z",
+      "workflow_run": {
+        "id": 15461891552,
+        "repository_id": 4335832,
+        "head_repository_id": 4335832,
+        "head_branch": "patch-2025.04.2",
+        "head_sha": "c37ff2e7d8846fb66b66f3483f730fa6cae92698"
+      }
+    },
+    {
+      "id": 3266136164,
+      "node_id": "MDg6QXJ0aWZhY3QzMjY2MTM2MTY0",
+      "name": "ResInsight-Ubuntu 24.04 gcc",
+      "size_in_bytes": 143288491,
+      "url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266136164",
+      "archive_download_url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266136164/zip",
+      "expired": false,
+      "digest": "sha256:f638433402ea5780037e7a58388bfa7730b368eb49af759f9f4952c78e4220e5",
+      "created_at": "2025-06-05T09:13:19Z",
+      "updated_at": "2025-06-05T09:13:19Z",
+      "expires_at": "2025-06-10T09:13:07Z",
+      "workflow_run": {
+        "id": 15461891552,
+        "repository_id": 4335832,
+        "head_repository_id": 4335832,
+        "head_branch": "patch-2025.04.2",
+        "head_sha": "c37ff2e7d8846fb66b66f3483f730fa6cae92698"
+      }
+    },
+    {
+      "id": 3266231191,
+      "node_id": "MDg6QXJ0aWZhY3QzMjY2MjMxMTkx",
+      "name": "ResInsight-Ubuntu 22.04 clang-16",
+      "size_in_bytes": 139317268,
+      "url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266231191",
+      "archive_download_url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266231191/zip",
+      "expired": false,
+      "digest": "sha256:f1ae4a8a8c8dadeda90f68e099940c4cf6dd5f26c2db927a534e35c8021963c8",
+      "created_at": "2025-06-05T09:26:54Z",
+      "updated_at": "2025-06-05T09:26:54Z",
+      "expires_at": "2025-06-10T09:26:43Z",
+      "workflow_run": {
+        "id": 15461891552,
+        "repository_id": 4335832,
+        "head_repository_id": 4335832,
+        "head_branch": "patch-2025.04.2",
+        "head_sha": "c37ff2e7d8846fb66b66f3483f730fa6cae92698"
+      }
+    },
+    {
+      "id": 3266761814,
+      "node_id": "MDg6QXJ0aWZhY3QzMjY2NzYxODE0",
+      "name": "ResInsight-Windows Latest MSVC",
+      "size_in_bytes": 77572526,
+      "url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266761814",
+      "archive_download_url": "https://api.github.com/repos/OPM/ResInsight/actions/artifacts/3266761814/zip",
+      "expired": false,
+      "digest": "sha256:d62b49a97636cf7a8c6037869f623624732e8b9740e1a134a391abc7768c5f85",
+      "created_at": "2025-06-05T10:46:20Z",
+      "updated_at": "2025-06-05T10:46:20Z",
+      "expires_at": "2025-06-10T10:46:15Z",
+      "workflow_run": {
+        "id": 15461891552,
+        "repository_id": 4335832,
+        "head_repository_id": 4335832,
+        "head_branch": "patch-2025.04.2",
+        "head_sha": "c37ff2e7d8846fb66b66f3483f730fa6cae92698"
+      }
+    }
+  ]
+}

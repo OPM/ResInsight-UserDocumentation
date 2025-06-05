@@ -1,0 +1,43 @@
+Metadata-Version: 2.4
+Name: rips
+Version: 2025.4.1.1
+Summary: Python Interface for ResInsight
+Home-page: http://www.resinsight.org
+Author: Ceetron Solutions
+Author-email: info@ceetronsolutions.com
+License: Copyright (C) 2019-     Equinor ASA
+        
+        ResInsight is free software: you can redistribute it andor modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+        
+        ResInsight is distributed in the hope that it will be useful, but WITHOUT ANY
+        WARRANTY; without even the implied warranty of MERCHANTABILITY or
+        FITNESS FOR A PARTICULAR PURPOSE.
+        
+        See the GNU General Public License at <http:www.gnu.orglicensesgpl.html>
+        for more details.
+        
+        
+Requires-Python: >=3.8
+License-File: LICENSE
+Requires-Dist: grpcio
+Requires-Dist: protobuf
+Requires-Dist: wheel
+Requires-Dist: typing_extensions
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# ResInsight Processing Server - rips
+
+A Python interface for the ResInsight visualization and post-processing suite for Reservoir Simulations
+
+[Learn More](https://www.resinsight.org)
