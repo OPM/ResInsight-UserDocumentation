@@ -2,7 +2,6 @@ import sys
 import os
 import math
 import pytest
-import grpc
 import tempfile
 
 sys.path.insert(1, os.path.join(sys.path[0], "../../"))
@@ -180,7 +179,7 @@ def test_replaceCase(rips_instance, initialize_test):
 
 def test_loadNonExistingCase(rips_instance, initialize_test):
     case_path = "Nonsense/Nonsense/Nonsense"
-    with pytest.raises(grpc.RpcError):
+    with pytest.raises(rips.RipsError):
         assert rips_instance.project.load_case(case_path)
 
 
@@ -215,4 +214,5 @@ def test_multiple_load_of_same_case(rips_instance, initialize_test):
     path_name = dataroot.PATH + "/flow_diagnostics_test/SIMPLE_SUMMARY2.EGRID"
     case_count = 3
     for i in range(case_count):
-        case = rips_instance.project.load_case(path_name)
+        c = rips_instance.project.load_case(path_name)
+        assert c
