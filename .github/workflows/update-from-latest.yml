@@ -51,8 +51,8 @@ jobs:
 
           cd downloaded_artifacts
           unzip artifact.zip
-          tar -xzf rips*.tar.gz -C ../upstream_rips
           cd ..
+          tar -xzf downloaded_artifacts/rips*.tar.gz -C upstream_rips
           ls upstream_rips/rips*
           cp -r upstream_rips/rips*/rips ./docs/
           ls -R ./docs/rips
