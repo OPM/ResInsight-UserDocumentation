@@ -48,6 +48,7 @@ jobs:
         run: |
           echo "Downloaded files:"
           mkdir upstream_rips
+          mkdir downloaded_artifacts
 
           cd downloaded_artifacts
           unzip artifact.zip
