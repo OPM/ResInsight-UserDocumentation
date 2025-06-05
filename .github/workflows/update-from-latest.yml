@@ -48,7 +48,7 @@ jobs:
           -L "${{ env.artifact_url }}" \
           -o downloaded_artifacts/artifact.zip
 
-      - name: Update rips folder
+      - name: Update docs/rips folder from downloaded artifacts
         run: |
           echo "Downloaded files:"
           cd downloaded_artifacts
