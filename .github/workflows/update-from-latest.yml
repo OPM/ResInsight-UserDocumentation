@@ -48,7 +48,7 @@ jobs:
           unzip artifact.zip
           mkdir upstream_rips
           tar -xzf rips*.tar.gz -C upstream_rips
-          cd upstream_rips
+          cd upstream_rips/rips*
           ls -la 
 
       - name: Upload to current repository
