@@ -6,3 +6,6 @@ npm-debug.log
 
 .vscode/
 .hugo_build.lock
+
+downloaded_artifacts
+upstream_rips
