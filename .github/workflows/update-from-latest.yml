@@ -63,3 +63,10 @@ jobs:
           name: rips-and-examples
           path: downloaded_artifacts/
 
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Fixes by clang-format"
+          title: "Fixes by clang-format"
+          branch: clang-format-patches
+          branch-suffix: random          
