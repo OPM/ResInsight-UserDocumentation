@@ -43,4 +43,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: rips-and-examples
+          path: downloaded_artifacts/
 
