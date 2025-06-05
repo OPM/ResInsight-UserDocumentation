@@ -57,6 +57,10 @@ jobs:
           cp -r upstream_rips/rips*/rips ./docs/
           ls -R ./docs/rips
 
+      - name: Create Read the Docs Python examples
+        run: |
+          python docs/source/create_python_examples.py
+
       - name: Upload to current repository
         uses: actions/upload-artifact@v4
         with:
@@ -66,7 +70,7 @@ jobs:
       - uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Fixes by clang-format"
-          title: "Fixes by clang-format"
-          branch: clang-format-patches
-          branch-suffix: random          
+          commit-message: "Update rips module and Python examples"
+          title: "Automated fixes of rips from ResInsight artifacts"
+          branch: artifact-update-rips
+          branch-suffix: random   
