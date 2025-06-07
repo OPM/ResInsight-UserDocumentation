@@ -19,7 +19,7 @@ for file_name in file_names:
     txt += ".. _" + reference + ":\n\n"
     txt += heading
     txt += "\n"
-    txt += "===================================\n"
+    txt += "=============================================\n"
     txt += ".. literalinclude:: ../rips/PythonExamples/"
     txt += file_name
     txt += "\n\n"
