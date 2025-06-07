@@ -6,30 +6,15 @@
 
 # -- Path setup --------------------------------------------------------------
 
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
-#
 import os
 import sys
+
+# Add paths for autodoc modules
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('../rips/generated'))
 # TODO: We need to get access to the generated files in /ApplicationCode/GrpcInterface/Python/rips/generated
 # It is not clear how we can organize these files for readthedocs
 # sys.path.insert(0, os.path.abspath('../../ApplicationCode/GrpcInterface/Python'))
-
-
-# -- Configuration of base URL -----------------------------------------------------
-# https://about.readthedocs.com/blog/2024/07/addons-by-default/
-
-# Define the canonical URL if you are using a custom domain on Read the Docs
-html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "")
-
-# Tell Jinja2 templates the build is running on Read the Docs
-if os.environ.get("READTHEDOCS", "") == "True":
-    if "html_context" not in globals():
-        html_context = {}
-    html_context["READTHEDOCS"] = True
 
 # -- Project information -----------------------------------------------------
 
@@ -37,7 +22,7 @@ project = 'ResInsight Python API - rips'
 copyright = 'Ceetron Solutions AS'
 author = 'Ceetron Solutions AS'
 
-# Import version information
+# Import version information from RiaVersionInfo
 try:
     import RiaVersionInfo
     release = f"{RiaVersionInfo.RESINSIGHT_MAJOR_VERSION}.{RiaVersionInfo.RESINSIGHT_MINOR_VERSION}.{RiaVersionInfo.RESINSIGHT_PATCH_VERSION}"
@@ -49,46 +34,47 @@ except ImportError:
 
 # -- General configuration ---------------------------------------------------
 
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
 extensions = [
-    'sphinx.ext.autodoc', 'sphinx.ext.coverage', 'sphinx.ext.napoleon', 'm2r2', 'sphinx_automodapi.automodapi'
+    'sphinx.ext.autodoc',
+    'sphinx.ext.coverage',
+    'sphinx.ext.napoleon',
+    'm2r2',
+    'sphinx_automodapi.automodapi'
 ]
 
 master_doc = 'index'
-
 napoleon_google_docstring = True
+smartquotes = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-# List of patterns, relative to source directory, that match files and
-# directories to ignore when looking for source files.
-# This pattern also affects html_static_path and html_extra_path.
+# List of patterns to ignore when looking for source files
 exclude_patterns = ['build/*']
 
+# -- Read the Docs configuration ---------------------------------------------
+# https://about.readthedocs.com/blog/2024/07/addons-by-default/
 
-# -- Options for HTML output -------------------------------------------------
+# Define the canonical URL if using a custom domain on Read the Docs
+html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "")
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
+# Tell Jinja2 templates the build is running on Read the Docs
+if os.environ.get("READTHEDOCS", "") == "True":
+    if "html_context" not in globals():
+        html_context = {}
+    html_context["READTHEDOCS"] = True
+    html_context["current_version"] = release
+
+# -- HTML output options -----------------------------------------------------
+
 html_theme = "sphinx_rtd_theme"
-
 html_logo = "images/ResInsightCroppedIconPicture.png"
 
 html_theme_options = {
     'style_nav_header_background': '#505050',
-     'display_version': True,  # Show version in sidebar
+    'display_version': True,  # Show version in sidebar
 }
-smartquotes = False
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
+# Add paths that contain custom static files (CSS, etc.)
 html_static_path = ['_static']
-
 html_style = 'css/custom.css'
-
-# -- Extension configuration -------------------------------------------------
