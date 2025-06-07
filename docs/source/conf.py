@@ -13,6 +13,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../rips/generated'))
 # TODO: We need to get access to the generated files in /ApplicationCode/GrpcInterface/Python/rips/generated
 # It is not clear how we can organize these files for readthedocs
 # sys.path.insert(0, os.path.abspath('../../ApplicationCode/GrpcInterface/Python'))
@@ -36,9 +37,15 @@ project = 'ResInsight Python API - rips'
 copyright = 'Ceetron Solutions AS'
 author = 'Ceetron Solutions AS'
 
-# The full version, including alpha/beta/rc tags
-release = '2020.10'
-
+# Import version information
+try:
+    import RiaVersionInfo
+    release = f"{RiaVersionInfo.RESINSIGHT_MAJOR_VERSION}.{RiaVersionInfo.RESINSIGHT_MINOR_VERSION}.{RiaVersionInfo.RESINSIGHT_PATCH_VERSION}"
+    version = f"{RiaVersionInfo.RESINSIGHT_MAJOR_VERSION}.{RiaVersionInfo.RESINSIGHT_MINOR_VERSION}"
+except ImportError:
+    # Fallback version if RiaVersionInfo is not available
+    release = '2020.10'
+    version = '2020.10'
 
 # -- General configuration ---------------------------------------------------
 
@@ -73,6 +80,7 @@ html_logo = "images/ResInsightCroppedIconPicture.png"
 
 html_theme_options = {
     'style_nav_header_background': '#505050',
+     'display_version': True,  # Show version in sidebar
 }
 smartquotes = False
 

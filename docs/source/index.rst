@@ -1,6 +1,8 @@
 ResInsight Python API - rips
 ============================
 
+Version: |release|
+
 The ResInsight Python API allows you to interact with a running ResInsight instance from `Python 3 <https://www.python.org/download/releases/3.0/>`_. 
 This enables you to:
 
