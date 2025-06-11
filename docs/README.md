@@ -1,22 +1,17 @@
 # ResInsight Scripting API - rips
 
-## Update procecure on  branch next-major-release
-REQUIRED: Compile ResInsight and make sure the content in folder `ResInsight/GrpcInterface/Python/rips` is up to date
-- Checkout branch next-major-release
-- Delete the copy in `ResInsight-UserDocumentation/docs/rips` 
-- Copy all files from `ResInsight/GrpcInterface/Python/rips` into `ResInsight-UserDocumentation/docs/rips` 
-- Update the example documentation using `ResInsight-UserDocumentation/docs/source/create_python_examples.py`
-- See below for how to create documentation locally
-- Publish to branch next-major-release
-
-## Release of master
-Create pull request from next-major-release to master branch.
+## Update procecure on branch next-major-release
+There is a workflow **update-from-latest.yml** used to update the documentation. This workflow executes the script `ResInsight-UserDocumentation/docs/source/create_python_examples.py`. This workflow will download the rips package from latest build from ResInsight main repo, build the documentation, and create a PR in this repository if required.
 
 ## How to generate documentation locally
 - Install Python 3.x
+- Create a virtual environment
 - Install dependencies for rips `pip install grpcio grpcio-tools protobuf`
 - Install the documentation system `pip install sphinx`
 - Install dependencies for sphinx `pip install m2r sphinx_rtd_theme`
 - Open command line in folder **docs**
-- Execute `make html`
-- Open the generated documentation in a browser `build/html/index.html`
+- Execute `sphinx-build -b html source build`
+- Open the generated documentation in a browser from this page `build/html/index.html`
+
+## Release of master
+Create pull request from next-major-release to master branch.
