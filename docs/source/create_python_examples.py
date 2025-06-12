@@ -44,9 +44,6 @@ def create_rst_for_folder(folder_path, relative_to_examples):
         txt += "   :linenos:\n"
         txt += "   :caption: " + py_file.name + "\n\n"
     
-        # Add individual download link
-        txt += f"📄 `Download {py_file.name} <https://raw.githubusercontent.com/OPM/ResInsight-UserDocumentation/main/docs/rips/PythonExamples/{folder_name}/{py_file.name}>`_\n\n"
-
     # Write the RST file
     with open(rst_filename, "w") as f:
         f.write(txt)
@@ -169,10 +166,5 @@ def main():
     for filename, heading in created_files:
         print(f"- {filename} ({heading})")
     
-    print("\nDownload links added:")
-    print("- Individual file downloads (raw GitHub links)")
-    print("- Folder browsing links (GitHub tree view)")
-    print("- Bulk download (ZIP archive)")
-
 if __name__ == "__main__":
     main()

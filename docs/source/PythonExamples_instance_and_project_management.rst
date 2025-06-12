@@ -16,8 +16,6 @@ Command Example
    :linenos:
    :caption: command_example.py
 
-📄 `Download command_example.py <https://raw.githubusercontent.com/OPM/ResInsight-UserDocumentation/main/docs/rips/PythonExamples/instance_and_project_management/command_example.py>`_
-
 .. _instance_and_project_management_launch_load_case_snapshot_exit:
 
 Launch Load Case Snapshot Exit
@@ -27,8 +25,6 @@ Launch Load Case Snapshot Exit
    :language: python
    :linenos:
    :caption: launch_load_case_snapshot_exit.py
-
-📄 `Download launch_load_case_snapshot_exit.py <https://raw.githubusercontent.com/OPM/ResInsight-UserDocumentation/main/docs/rips/PythonExamples/instance_and_project_management/launch_load_case_snapshot_exit.py>`_
 
 .. _instance_and_project_management_launch_with_commandline_options:
 
@@ -40,8 +36,6 @@ Launch With Commandline Options
    :linenos:
    :caption: launch_with_commandline_options.py
 
-📄 `Download launch_with_commandline_options.py <https://raw.githubusercontent.com/OPM/ResInsight-UserDocumentation/main/docs/rips/PythonExamples/instance_and_project_management/launch_with_commandline_options.py>`_
-
 .. _instance_and_project_management_open_project:
 
 Open Project
@@ -52,8 +46,6 @@ Open Project
    :linenos:
    :caption: open_project.py
 
-📄 `Download open_project.py <https://raw.githubusercontent.com/OPM/ResInsight-UserDocumentation/main/docs/rips/PythonExamples/instance_and_project_management/open_project.py>`_
-
 .. _instance_and_project_management_save_project:
 
 Save Project
@@ -63,6 +55,4 @@ Save Project
    :language: python
    :linenos:
    :caption: save_project.py
-
-📄 `Download save_project.py <https://raw.githubusercontent.com/OPM/ResInsight-UserDocumentation/main/docs/rips/PythonExamples/instance_and_project_management/save_project.py>`_
 
