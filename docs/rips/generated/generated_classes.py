@@ -177,16 +177,16 @@ class SurfaceInterface(PdmObjectBase):
         if SurfaceInterface.__custom_init__ is not None:
             SurfaceInterface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def export_to_file(self, file_name: str="") -> Optional[DataContainerString]:
+    def export_to_file(self, file_name: str="") -> None:
         """
         Export a surface to file
 
         Arguments:
             file_name (str): Filename to export surface to
         Returns:
-            DataContainerString
+            
         """
-        return self._call_pdm_method_return_optional_value("ExportToFile", DataContainerString, file_name=file_name)
+        self._call_pdm_method_void("ExportToFile", file_name=file_name)
 
 
 class DepthSurface(SurfaceInterface):
@@ -342,7 +342,7 @@ class SurfaceCollection(PdmObjectBase):
         if SurfaceCollection.__custom_init__ is not None:
             SurfaceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_folder(self, folder_name: str="Surfaces") -> Optional[SurfaceCollection]:
+    def add_folder(self, folder_name: str="Surfaces") -> SurfaceCollection:
         """
         Add a new surface folder
 
@@ -351,10 +351,10 @@ class SurfaceCollection(PdmObjectBase):
         Returns:
             SurfaceCollection
         """
-        return self._call_pdm_method_return_optional_value("AddFolder", SurfaceCollection, folder_name=folder_name)
+        return self._call_pdm_method_return_value("AddFolder", SurfaceCollection, folder_name=folder_name)
 
 
-    def import_surface(self, file_name: str="") -> Optional[Surface]:
+    def import_surface(self, file_name: str="") -> Surface:
         """
         Import a new surface from file
 
@@ -363,10 +363,10 @@ class SurfaceCollection(PdmObjectBase):
         Returns:
             Surface
         """
-        return self._call_pdm_method_return_optional_value("ImportSurface", Surface, file_name=file_name)
+        return self._call_pdm_method_return_value("ImportSurface", Surface, file_name=file_name)
 
 
-    def new_regular_surface(self, name: str="", origin_x: float=0.000000000000000e+00, origin_y: float=0.000000000000000e+00, depth: float=0.000000000000000e+00, nx: int=10, ny: int=10, increment_x: float=2.000000000000000e+01, increment_y: float=2.000000000000000e+01, rotation: float=0.000000000000000e+00) -> Optional[RegularSurface]:
+    def new_regular_surface(self, name: str="", origin_x: float=0.000000000000000e+00, origin_y: float=0.000000000000000e+00, depth: float=0.000000000000000e+00, nx: int=10, ny: int=10, increment_x: float=2.000000000000000e+01, increment_y: float=2.000000000000000e+01, rotation: float=0.000000000000000e+00) -> RegularSurface:
         """
         Create a new regular surface
 
@@ -383,10 +383,10 @@ class SurfaceCollection(PdmObjectBase):
         Returns:
             RegularSurface
         """
-        return self._call_pdm_method_return_optional_value("NewRegularSurface", RegularSurface, name=name, origin_x=origin_x, origin_y=origin_y, depth=depth, nx=nx, ny=ny, increment_x=increment_x, increment_y=increment_y, rotation=rotation)
+        return self._call_pdm_method_return_value("NewRegularSurface", RegularSurface, name=name, origin_x=origin_x, origin_y=origin_y, depth=depth, nx=nx, ny=ny, increment_x=increment_x, increment_y=increment_y, rotation=rotation)
 
 
-    def new_surface(self, case: Optional[Case]=None, k_index: int=0) -> Optional[GridCaseSurface]:
+    def new_surface(self, case: Optional[Case]=None, k_index: int=0) -> GridCaseSurface:
         """
         Create a new surface
 
@@ -396,7 +396,7 @@ class SurfaceCollection(PdmObjectBase):
         Returns:
             GridCaseSurface
         """
-        return self._call_pdm_method_return_optional_value("NewSurface", GridCaseSurface, case=case, k_index=k_index)
+        return self._call_pdm_method_return_value("NewSurface", GridCaseSurface, case=case, k_index=k_index)
 
 
     def sub_collections(self) -> List[SurfaceCollection]:
@@ -1249,7 +1249,7 @@ class Project(PdmObjectBase):
         if Project.__custom_init__ is not None:
             Project.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def create_grid_from_key_values(self, name: str="", nx: int=0, ny: int=0, nz: int=0, coord_key: str="", zcorn_key: str="", actnum_key: str="") -> Optional[CornerPointCase]:
+    def create_grid_from_key_values(self, name: str="", nx: int=0, ny: int=0, nz: int=0, coord_key: str="", zcorn_key: str="", actnum_key: str="") -> CornerPointCase:
         """
         Create Grid From Key Values
 
@@ -1264,10 +1264,10 @@ class Project(PdmObjectBase):
         Returns:
             CornerPointCase
         """
-        return self._call_pdm_method_return_optional_value("createGridFromKeyValues", CornerPointCase, name=name, nx=nx, ny=ny, nz=nz, coord_key=coord_key, zcorn_key=zcorn_key, actnum_key=actnum_key)
+        return self._call_pdm_method_return_value("createGridFromKeyValues", CornerPointCase, name=name, nx=nx, ny=ny, nz=nz, coord_key=coord_key, zcorn_key=zcorn_key, actnum_key=actnum_key)
 
 
-    def import_summary_case(self, file_name: str="") -> Optional[FileSummaryCase]:
+    def import_summary_case(self, file_name: str="") -> FileSummaryCase:
         """
         Import Summary Case
 
@@ -1276,7 +1276,7 @@ class Project(PdmObjectBase):
         Returns:
             FileSummaryCase
         """
-        return self._call_pdm_method_return_optional_value("importSummaryCase", FileSummaryCase, file_name=file_name)
+        return self._call_pdm_method_return_value("importSummaryCase", FileSummaryCase, file_name=file_name)
 
 
     def summary_case(self, case_id: int=-1) -> Optional[FileSummaryCase]:
@@ -1291,7 +1291,7 @@ class Project(PdmObjectBase):
         return self._call_pdm_method_return_optional_value("summaryCase", FileSummaryCase, case_id=case_id)
 
 
-    def surface_folder(self, folder_name: str="") -> Optional[SurfaceCollection]:
+    def surface_folder(self, folder_name: str="") -> SurfaceCollection:
         """
         Get Surface Folder
 
@@ -1300,7 +1300,7 @@ class Project(PdmObjectBase):
         Returns:
             SurfaceCollection
         """
-        return self._call_pdm_method_return_optional_value("surfaceFolder", SurfaceCollection, folder_name=folder_name)
+        return self._call_pdm_method_return_value("surfaceFolder", SurfaceCollection, folder_name=folder_name)
 
 
 class ResampleData(PdmObjectBase):
@@ -1802,16 +1802,16 @@ class StimPlanModel(CheckableNamedObject):
         if StimPlanModel.__custom_init__ is not None:
             StimPlanModel.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def export_to_file(self, directory_path: str="") -> Optional[StimPlanModel]:
+    def export_to_file(self, directory_path: str="") -> None:
         """
         Export StimPlan Model Plot to File
 
         Arguments:
             directory_path (str): Directory Path
         Returns:
-            StimPlanModel
+            
         """
-        return self._call_pdm_method_return_optional_value("ExportToFile", StimPlanModel, directory_path=directory_path)
+        self._call_pdm_method_void("ExportToFile", directory_path=directory_path)
 
 
 class StimPlanModelCollection(CheckableNamedObject):
@@ -2210,7 +2210,7 @@ class ThermalFractureTemplate(MeshFractureTemplate):
         if ThermalFractureTemplate.__custom_init__ is not None:
             ThermalFractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def export_to_file(self, file_path: str="", time_step: int=0) -> Optional[ThermalFractureTemplate]:
+    def export_to_file(self, file_path: str="", time_step: int=0) -> None:
         """
         Export Thermal Fracture Template to File
 
@@ -2218,12 +2218,12 @@ class ThermalFractureTemplate(MeshFractureTemplate):
             file_path (str): File Path
             time_step (int): 
         Returns:
-            ThermalFractureTemplate
+            
         """
-        return self._call_pdm_method_return_optional_value("ExportToFile", ThermalFractureTemplate, file_path=file_path, time_step=time_step)
+        self._call_pdm_method_void("ExportToFile", file_path=file_path, time_step=time_step)
 
 
-    def time_steps(self, ) -> Optional[DataContainerString]:
+    def time_steps(self, ) -> DataContainerString:
         """
         Get Thermal Fracture Template Time Steps
 
@@ -2232,7 +2232,7 @@ class ThermalFractureTemplate(MeshFractureTemplate):
         Returns:
             DataContainerString
         """
-        return self._call_pdm_method_return_optional_value("TimeSteps", DataContainerString)
+        return self._call_pdm_method_return_value("TimeSteps", DataContainerString)
 
 
 class TriangleGeometry(PdmObjectBase):
