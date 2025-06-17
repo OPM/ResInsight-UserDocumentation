@@ -12,6 +12,7 @@ import sys
 # Add paths for autodoc modules
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.insert(0, os.path.abspath('../rips/generated'))
+sys.path.insert(0, os.path.abspath('_ext'))
 # TODO: We need to get access to the generated files in /ApplicationCode/GrpcInterface/Python/rips/generated
 # It is not clear how we can organize these files for readthedocs
 # sys.path.insert(0, os.path.abspath('../../ApplicationCode/GrpcInterface/Python'))
@@ -39,7 +40,8 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
     'm2r2',
-    'sphinx_automodapi.automodapi'
+    'sphinx_automodapi.automodapi',
+    'hide_grpc_params'
 ]
 
 master_doc = 'index'
