@@ -838,6 +838,52 @@ class GridSummaryCase(SummaryCase):
         if GridSummaryCase.__custom_init__ is not None:
             GridSummaryCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class PlotWindow(ViewWindow):
+    """
+    The Abstract base class for all MDI Windows in the Plot Window
+
+    Attributes:
+        id (int): View ID
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.id: int = -1
+        ViewWindow.__init__(self, pb2_object, channel)
+        if PlotWindow.__custom_init__ is not None:
+            PlotWindow.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class Plot(PlotWindow):
+    """
+    The Abstract Base Class for all Plot Objects
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PlotWindow.__init__(self, pb2_object, channel)
+        if Plot.__custom_init__ is not None:
+            Plot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class HistogramPlot(Plot):
+    """
+    A Histogram Plot
+
+    Attributes:
+        is_using_auto_name (bool): Auto Title
+        normalize_curve_y_values (bool): Normalize all curves
+        plot_description (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_using_auto_name: bool = True
+        self.normalize_curve_y_values: bool = False
+        self.plot_description: str = "Histogram Plot"
+        Plot.__init__(self, pb2_object, channel)
+        if HistogramPlot.__custom_init__ is not None:
+            HistogramPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class IntersectionCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1845,21 +1891,6 @@ class StimPlanModelCollection(CheckableNamedObject):
         return self.children("StimPlanModels", StimPlanModel)
 
 
-class PlotWindow(ViewWindow):
-    """
-    The Abstract base class for all MDI Windows in the Plot Window
-
-    Attributes:
-        id (int): View ID
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.id: int = -1
-        ViewWindow.__init__(self, pb2_object, channel)
-        if PlotWindow.__custom_init__ is not None:
-            PlotWindow.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class DepthTrackPlot(PlotWindow):
     """
     Attributes:
@@ -2125,18 +2156,6 @@ class SummaryCaseSumo(SummaryCase):
         SummaryCase.__init__(self, pb2_object, channel)
         if SummaryCaseSumo.__custom_init__ is not None:
             SummaryCaseSumo.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class Plot(PlotWindow):
-    """
-    The Abstract Base Class for all Plot Objects
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PlotWindow.__init__(self, pb2_object, channel)
-        if Plot.__custom_init__ is not None:
-            Plot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class SummaryPlot(Plot):
     """
@@ -2716,6 +2735,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['GridCaseGroup'] = GridCaseGroup
     classes['GridCaseSurface'] = GridCaseSurface
     classes['GridSummaryCase'] = GridSummaryCase
+    classes['HistogramPlot'] = HistogramPlot
     classes['IntersectionCollection'] = IntersectionCollection
     classes['MeshFractureTemplate'] = MeshFractureTemplate
     classes['ModeledWellPath'] = ModeledWellPath
