@@ -2165,7 +2165,6 @@ class SummaryPlot(Plot):
         is_using_auto_name (bool): Auto Title
         normalize_curve_y_values (bool): Normalize all curves
         plot_description (str): Name
-        use_qt_charts_plot (bool): Use Qt Charts
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -2173,7 +2172,6 @@ class SummaryPlot(Plot):
         self.is_using_auto_name: bool = True
         self.normalize_curve_y_values: bool = False
         self.plot_description: str = "Summary Plot"
-        self.use_qt_charts_plot: bool = False
         Plot.__init__(self, pb2_object, channel)
         if SummaryPlot.__custom_init__ is not None:
             SummaryPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
