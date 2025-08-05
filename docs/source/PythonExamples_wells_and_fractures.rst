@@ -46,6 +46,16 @@ Create Surface From Thermal Fracture
    :linenos:
    :caption: create_surface_from_thermal_fracture.py
 
+.. _wells_and_fractures_duplicate_well:
+
+Duplicate Well
+--------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/duplicate_well.py
+   :language: python
+   :linenos:
+   :caption: duplicate_well.py
+
 .. _wells_and_fractures_export_well_path_completions:
 
 Export Well Path Completions
