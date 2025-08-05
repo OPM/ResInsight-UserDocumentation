@@ -1021,6 +1021,18 @@ class ModeledWellPath(WellPath):
         return self._call_pdm_method_return_value("AppendLateral", ModeledWellPath, tie_in_depth=tie_in_depth, lateral_name=lateral_name)
 
 
+    def duplicate(self, ) -> Optional[ModeledWellPath]:
+        """
+        Duplicate
+
+        Arguments:
+            
+        Returns:
+            ModeledWellPath
+        """
+        return self._call_pdm_method_return_optional_value("Duplicate", ModeledWellPath)
+
+
     def well_path_geometry(self) -> Optional[WellPathGeometry]:
         """Trajectory
 
