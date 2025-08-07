@@ -1043,6 +1043,35 @@ class ModeledWellPath(WellPath):
         return children[0] if len(children) > 0 else None
 
 
+class NonDarcyPerforationParameters(PdmObjectBase):
+    """
+    Attributes:
+        gas_viscosity (float): <html>Gas Viscosity (&mu;)</html> [cP]
+        grid_permeability_scaling_factor (float): <html>Grid Permeability Scaling Factor (K<sub>r</sub>) [0..1]</html>
+        inertial_coefficient (float): <html>Inertial Coefficient (&beta;<sub>0</sub>)</html> [Forch. unit]
+        non_darcy_flow_type (str): One of [None, Computed, UserDefined]
+        permeability_scaling_factor (float): Permeability Scaling Factor (B)
+        porosity_scaling_factor (float): Porosity Scaling Factor (C)
+        relative_gas_density (float): <html>Relative Gas Density (&gamma;)</html>
+        user_defined_d_factor (float): D Factor
+        well_radius (float): <html>Well Radius (r<sub>w</sub>)</html> [m]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.gas_viscosity: float = 2.000000000000000e-02
+        self.grid_permeability_scaling_factor: float = 1.000000000000000e+00
+        self.inertial_coefficient: float = 8.839000000000000e+02
+        self.non_darcy_flow_type: str = "None"
+        self.permeability_scaling_factor: float = -1.104500000000000e+00
+        self.porosity_scaling_factor: float = 0.000000000000000e+00
+        self.relative_gas_density: float = 8.000000000000000e-01
+        self.user_defined_d_factor: float = 1.000000000000000e+00
+        self.well_radius: float = 1.080000000000000e-01
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if NonDarcyPerforationParameters.__custom_init__ is not None:
+            NonDarcyPerforationParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class NonNetLayers(PdmObjectBase):
     """
     Attributes:
@@ -1106,6 +1135,16 @@ class PerforationCollection(CheckableNamedObject):
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if PerforationCollection.__custom_init__ is not None:
             PerforationCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def non_darcy_parameters(self) -> Optional[NonDarcyPerforationParameters]:
+        """Non-Darcy Parameters
+
+        Returns:
+             NonDarcyPerforationParameters
+        """
+        children = self.children("NonDarcyParameters", NonDarcyPerforationParameters)
+        return children[0] if len(children) > 0 else None
+
 
     def perforations(self) -> List[Perforation]:
         """Perforations
@@ -2752,6 +2791,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['MswSettings'] = MswSettings
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
     classes['NamedObject'] = NamedObject
+    classes['NonDarcyPerforationParameters'] = NonDarcyPerforationParameters
     classes['NonNetLayers'] = NonNetLayers
     classes['OsduWellPath'] = OsduWellPath
     classes['PdmObjectBase'] = PdmObjectBase
