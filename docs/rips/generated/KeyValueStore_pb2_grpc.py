@@ -45,12 +45,34 @@ class KeyValueStoreStub(object):
                 request_serializer=KeyValueStore__pb2.KeyValueStoreInputChunk.SerializeToString,
                 response_deserializer=Definitions__pb2.ClientToServerStreamReply.FromString,
                 _registered_method=True)
+        self.GetValue = channel.unary_stream(
+                '/rips.KeyValueStore/GetValue',
+                request_serializer=KeyValueStore__pb2.KeyValueStoreOutputRequest.SerializeToString,
+                response_deserializer=KeyValueStore__pb2.KeyValueStoreOutputChunk.FromString,
+                _registered_method=True)
+        self.RemoveValue = channel.unary_unary(
+                '/rips.KeyValueStore/RemoveValue',
+                request_serializer=KeyValueStore__pb2.KeyValueStoreRemoveRequest.SerializeToString,
+                response_deserializer=Definitions__pb2.Empty.FromString,
+                _registered_method=True)
 
 
 class KeyValueStoreServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def SetValue(self, request_iterator, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetValue(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def RemoveValue(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -63,6 +85,16 @@ def add_KeyValueStoreServicer_to_server(servicer, server):
                     servicer.SetValue,
                     request_deserializer=KeyValueStore__pb2.KeyValueStoreInputChunk.FromString,
                     response_serializer=Definitions__pb2.ClientToServerStreamReply.SerializeToString,
+            ),
+            'GetValue': grpc.unary_stream_rpc_method_handler(
+                    servicer.GetValue,
+                    request_deserializer=KeyValueStore__pb2.KeyValueStoreOutputRequest.FromString,
+                    response_serializer=KeyValueStore__pb2.KeyValueStoreOutputChunk.SerializeToString,
+            ),
+            'RemoveValue': grpc.unary_unary_rpc_method_handler(
+                    servicer.RemoveValue,
+                    request_deserializer=KeyValueStore__pb2.KeyValueStoreRemoveRequest.FromString,
+                    response_serializer=Definitions__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -91,6 +123,60 @@ class KeyValueStore(object):
             '/rips.KeyValueStore/SetValue',
             KeyValueStore__pb2.KeyValueStoreInputChunk.SerializeToString,
             Definitions__pb2.ClientToServerStreamReply.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetValue(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(
+            request,
+            target,
+            '/rips.KeyValueStore/GetValue',
+            KeyValueStore__pb2.KeyValueStoreOutputRequest.SerializeToString,
+            KeyValueStore__pb2.KeyValueStoreOutputChunk.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RemoveValue(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/rips.KeyValueStore/RemoveValue',
+            KeyValueStore__pb2.KeyValueStoreRemoveRequest.SerializeToString,
+            Definitions__pb2.Empty.FromString,
             options,
             channel_credentials,
             insecure,

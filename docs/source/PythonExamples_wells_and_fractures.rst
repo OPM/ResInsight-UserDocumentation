@@ -66,6 +66,16 @@ Export Well Path Completions
    :linenos:
    :caption: export_well_path_completions.py
 
+.. _wells_and_fractures_export_well_path_trajectory_with_properties:
+
+Export Well Path Trajectory With Properties
+-------------------------------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/export_well_path_trajectory_with_properties.py
+   :language: python
+   :linenos:
+   :caption: export_well_path_trajectory_with_properties.py
+
 .. _wells_and_fractures_fishbones_completion:
 
 Fishbones Completion
