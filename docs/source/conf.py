@@ -44,6 +44,14 @@ extensions = [
     'hide_grpc_params'
 ]
 
+# Enable search functionality
+html_search_language = 'en'
+html_search_options = {'type': 'default'}
+
+# Include source files in search
+html_copy_source = True
+html_show_sourcelink = True
+
 master_doc = 'index'
 napoleon_google_docstring = True
 smartquotes = False

@@ -1,4 +1,6 @@
 import os
+import ast
+import re
 from pathlib import Path
 
 # This script is used to create RST files for all Python examples
@@ -6,6 +8,64 @@ from pathlib import Path
 # and a main index file that references all subfolders
 
 path_examples = Path("../rips/PythonExamples")
+
+def extract_searchable_content(python_file_path):
+    """Extract searchable content from a Python file including comments, docstrings, and function names."""
+    try:
+        with open(python_file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        searchable_parts = []
+        
+        # Extract top-level comments (especially the header comments)
+        lines = content.split('\n')
+        header_comments = []
+        for line in lines[:20]:  # Check first 20 lines for header comments
+            line = line.strip()
+            if line.startswith('#'):
+                comment = line.lstrip('#').strip()
+                if comment and not comment.startswith('!'):  # Skip shebang
+                    header_comments.append(comment)
+        
+        if header_comments:
+            searchable_parts.append(' '.join(header_comments))
+        
+        # Parse the AST to extract docstrings and function/class names
+        try:
+            tree = ast.parse(content)
+            
+            # Extract module docstring
+            if (ast.get_docstring(tree)):
+                searchable_parts.append(ast.get_docstring(tree))
+            
+            # Extract function and class names and their docstrings
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+                    searchable_parts.append(node.name.replace('_', ' '))
+                    if ast.get_docstring(node):
+                        searchable_parts.append(ast.get_docstring(node))
+        except SyntaxError:
+            # If we can't parse the AST, just extract what we can with regex
+            pass
+        
+        # Extract import statements to understand what the script does
+        import_matches = re.findall(r'import\s+(\w+)', content)
+        from_matches = re.findall(r'from\s+(\w+)', content)
+        all_imports = import_matches + from_matches
+        if 'rips' in all_imports:
+            searchable_parts.append('ResInsight Python API scripting')
+        
+        # Extract string literals that might contain meaningful descriptions
+        string_matches = re.findall(r'["\']([^"\']{10,})["\']', content)
+        for match in string_matches[:5]:  # Limit to first 5 long strings
+            if not any(char in match for char in ['/', '\\', '.', '@']):  # Skip paths, emails, etc.
+                searchable_parts.append(match)
+        
+        return ' '.join(searchable_parts) if searchable_parts else ''
+        
+    except Exception as e:
+        print(f"Warning: Could not extract content from {python_file_path}: {e}")
+        return ''
 
 def create_rst_for_folder(folder_path, relative_to_examples):
     """Create an RST file for a specific folder containing Python examples."""
@@ -36,6 +96,11 @@ def create_rst_for_folder(folder_path, relative_to_examples):
         txt += f".. _{folder_name}_{reference}:\n\n"
         txt += example_heading + "\n"
         txt += "-" * len(example_heading) + "\n\n"
+        
+        # Extract and add searchable content
+        searchable_content = extract_searchable_content(folder_path / py_file)
+        if searchable_content:
+            txt += f"**Description:** {searchable_content[:500]}...\n\n" if len(searchable_content) > 500 else f"**Description:** {searchable_content}\n\n"
         
         # Build path relative to the source directory
         relative_path = path_examples / relative_to_examples / py_file.name
@@ -73,6 +138,11 @@ def create_general_examples_page():
         txt += f".. _general_{reference}:\n\n"
         txt += example_heading + "\n"
         txt += "-" * len(example_heading) + "\n\n"
+        
+        # Extract and add searchable content
+        searchable_content = extract_searchable_content(path_examples / py_file)
+        if searchable_content:
+            txt += f"**Description:** {searchable_content[:500]}...\n\n" if len(searchable_content) > 500 else f"**Description:** {searchable_content}\n\n"
        
         relative_path = path_examples / py_file.name
         txt += f".. literalinclude:: {relative_path}\n"
