@@ -58,6 +58,25 @@ class Reservoir(Case):
         if Reservoir.__custom_init__ is not None:
             Reservoir.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def export_values_internal(self, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", result_key: str="", property_type: str="", property_name: str="", time_step: int=0, porosity_model: str="") -> None:
+        """
+        Export Values Internal
+
+        Arguments:
+            coordinate_x (str): 
+            coordinate_y (str): 
+            coordinate_z (str): 
+            result_key (str): 
+            property_type (str): 
+            property_name (str): 
+            time_step (int): 
+            porosity_model (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("export_values_internal", coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, result_key=result_key, property_type=property_type, property_name=property_name, time_step=time_step, porosity_model=porosity_model)
+
+
     def import_properties(self, file_names: List[str]=[]) -> None:
         """
         Import Properties
@@ -984,6 +1003,25 @@ class WellPath(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+    def extract_well_path_properties_internal(self, resampling_interval: float=1.000000000000000e+01, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", measured_depth: str="", azimuth: str="", inclination: str="", dogleg: str="") -> None:
+        """
+        Extract Well Path Properties
+
+        Arguments:
+            resampling_interval (float): 
+            coordinate_x (str): 
+            coordinate_y (str): 
+            coordinate_z (str): 
+            measured_depth (str): 
+            azimuth (str): 
+            inclination (str): 
+            dogleg (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("ExtractWellPathPropertiesInternal", resampling_interval=resampling_interval, coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, measured_depth=measured_depth, azimuth=azimuth, inclination=inclination, dogleg=dogleg)
+
+
     def msw_settings(self, ) -> Optional[MswSettings]:
         """
         Multi Segment Well Settings
@@ -1398,6 +1436,18 @@ class Project(PdmObjectBase):
             SurfaceCollection
         """
         return self._call_pdm_method_return_value("surfaceFolder", SurfaceCollection, folder_name=folder_name)
+
+
+    def well_path_collection(self, ) -> WellPathCollection:
+        """
+        Get Well Path Collection
+
+        Arguments:
+            
+        Returns:
+            WellPaths
+        """
+        return self._call_pdm_method_return_value("wellPathCollection", WellPathCollection)
 
 
 class ResampleData(PdmObjectBase):
@@ -2729,6 +2779,18 @@ class WellPathCollection(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathCollection.__custom_init__ is not None:
             WellPathCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def import_well_path(self, file_name: str="") -> WellPath:
+        """
+        
+
+        Arguments:
+            file_name (str): 
+        Returns:
+            WellPathBase
+        """
+        return self._call_pdm_method_return_value("ImportWellPath", WellPath, file_name=file_name)
+
 
     def well_paths(self) -> List[FileWellPath]:
         """Well Paths
