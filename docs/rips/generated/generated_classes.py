@@ -25,6 +25,24 @@ class ColorLegend(PdmObjectBase):
         if ColorLegend.__custom_init__ is not None:
             ColorLegend.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class CompletionTemplateCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if CompletionTemplateCollection.__custom_init__ is not None:
+            CompletionTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def valve_templates(self) -> Optional[ValveTemplateCollection]:
+        """
+
+        Returns:
+             ValveTemplateCollection
+        """
+        children = self.children("ValveTemplates", ValveTemplateCollection)
+        return children[0] if len(children) > 0 else None
+
+
 class Case(PdmObjectBase):
     """
     The ResInsight base class for Cases
@@ -1166,6 +1184,30 @@ class Perforation(CheckableNamedObject):
         if Perforation.__custom_init__ is not None:
             Perforation.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_valve(self, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, valve_count: int=1, template: Optional[ValveTemplate]=None) -> WellPathValve:
+        """
+        Add StimPlan Fracture
+
+        Arguments:
+            start_md (float): 
+            end_md (float): 
+            valve_count (int): 
+            template (Optional[ValveTemplate]): Valve Template
+        Returns:
+            WellPathValve
+        """
+        return self._call_pdm_method_return_value("AddValve", WellPathValve, start_md=start_md, end_md=end_md, valve_count=valve_count, template=template)
+
+
+    def valves(self) -> List[WellPathValve]:
+        """Valves
+
+        Returns:
+             List[WellPathValve]
+        """
+        return self.children("Valves", WellPathValve)
+
+
 class PerforationCollection(CheckableNamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1436,6 +1478,18 @@ class Project(PdmObjectBase):
             SurfaceCollection
         """
         return self._call_pdm_method_return_value("surfaceFolder", SurfaceCollection, folder_name=folder_name)
+
+
+    def valve_templates(self, ) -> ValveTemplateCollection:
+        """
+        Get Valve Template Collection
+
+        Arguments:
+            
+        Returns:
+            ValveTemplateCollection
+        """
+        return self._call_pdm_method_return_value("valveTemplates", ValveTemplateCollection)
 
 
     def well_path_collection(self, ) -> WellPathCollection:
@@ -2386,6 +2440,53 @@ class TriangleGeometry(PdmObjectBase):
         if TriangleGeometry.__custom_init__ is not None:
             TriangleGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class ValveTemplate(NamedObject):
+    """
+    Attributes:
+        flow_coefficient (float): Flow Coefficient
+        orifice_diameter (float): Orifice Diameter [mm]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.flow_coefficient: float = 7.000000000000000e-01
+        self.orifice_diameter: float = 8.000000000000000e+00
+        NamedObject.__init__(self, pb2_object, channel)
+        if ValveTemplate.__custom_init__ is not None:
+            ValveTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def aicd_parameters(self) -> Optional[WellPathAicdParameters]:
+        """AICD Parameters
+
+        Returns:
+             WellPathAicdParameters
+        """
+        children = self.children("AicdParameters", WellPathAicdParameters)
+        return children[0] if len(children) > 0 else None
+
+
+class ValveTemplateCollection(PdmObjectBase):
+    """
+    Attributes:
+        valve_units (str): One of [UNITS_METRIC, UNITS_FIELD, UNITS_UNKNOWN]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.valve_units: str = "UNITS_METRIC"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if ValveTemplateCollection.__custom_init__ is not None:
+            ValveTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def valve_definitions(self) -> List[ValveTemplate]:
+        """
+
+        Returns:
+             List[ValveTemplate]
+        """
+        return self.children("ValveDefinitions", ValveTemplate)
+
+
 class WbsParameters(PdmObjectBase):
     """
     Attributes:
@@ -2446,6 +2547,30 @@ class SimulationWell(PdmObjectBase):
         if SimulationWell.__custom_init__ is not None:
             SimulationWell.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class PlotCurve(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if PlotCurve.__custom_init__ is not None:
+            PlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogPlotCurve(PlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PlotCurve.__init__(self, pb2_object, channel)
+        if WellLogPlotCurve.__custom_init__ is not None:
+            WellLogPlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogExtractionCurve(WellLogPlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellLogPlotCurve.__init__(self, pb2_object, channel)
+        if WellLogExtractionCurve.__custom_init__ is not None:
+            WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellLogPlot(DepthTrackPlot):
     """
     A Well Log Plot With a shared Depth Axis and Multiple Tracks
@@ -2493,30 +2618,6 @@ class WellBoreStabilityPlot(WellLogPlot):
         children = self.children("Parameters", WbsParameters)
         return children[0] if len(children) > 0 else None
 
-
-class PlotCurve(PdmObjectBase):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if PlotCurve.__custom_init__ is not None:
-            PlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellLogPlotCurve(PlotCurve):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PlotCurve.__init__(self, pb2_object, channel)
-        if WellLogPlotCurve.__custom_init__ is not None:
-            WellLogPlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellLogExtractionCurve(WellLogPlotCurve):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellLogPlotCurve.__init__(self, pb2_object, channel)
-        if WellLogExtractionCurve.__custom_init__ is not None:
-            WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -2586,6 +2687,49 @@ class FileWellPath(WellPath):
         WellPath.__init__(self, pb2_object, channel)
         if FileWellPath.__custom_init__ is not None:
             FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellPathAicdParameters(PdmObjectBase):
+    """
+    Attributes:
+        critical_water_liquid_fraction_emul (Optional[float]): Critical Water in Liquid Fraction for emulsions
+        density_calibration_fluid (Optional[float]): Calibration Fluid Density (kg/m^3)
+        device_open (bool): Device Open?
+        exponent_gas_density (Optional[float]): Density Exponent of Gas Fraction
+        exponent_gas_viscosity (Optional[float]): Viscosity Exponent of Gas Fraction
+        exponent_oil_density (Optional[float]): Density Exponent of Oil Fraction
+        exponent_oil_viscosity (Optional[float]): Viscosity Exponent of Oil Fraction
+        exponent_water_density (Optional[float]): Density Exponent of Water Fraction
+        exponent_water_viscosity (Optional[float]): Viscosity Exponent of Water Fraction
+        max_flow_rate (Optional[float]): Max Flow Rate for AICD Device (m^3 / day)
+        max_ratio_of_emulsion_visc (Optional[float]): Max Ratio of Emulsion to Continuous Viscosity
+        strength_aicd (Optional[float]): Strength of AICD
+        viscosity_calibration_fluid (Optional[float]): Calibration Fluid Viscosity (cP)
+        viscosity_function_exponent (Optional[float]): Viscosity Function Exponent
+        viscosity_transition_region_emul (Optional[float]): Emulsion Viscosity Transition Region
+        volume_flow_rate_exponent (Optional[float]): Volume Flow Rate Exponent
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.critical_water_liquid_fraction_emul: Optional[float] = None
+        self.density_calibration_fluid: Optional[float] = None
+        self.device_open: bool = True
+        self.exponent_gas_density: Optional[float] = None
+        self.exponent_gas_viscosity: Optional[float] = None
+        self.exponent_oil_density: Optional[float] = None
+        self.exponent_oil_viscosity: Optional[float] = None
+        self.exponent_water_density: Optional[float] = None
+        self.exponent_water_viscosity: Optional[float] = None
+        self.max_flow_rate: Optional[float] = None
+        self.max_ratio_of_emulsion_visc: Optional[float] = None
+        self.strength_aicd: Optional[float] = None
+        self.viscosity_calibration_fluid: Optional[float] = None
+        self.viscosity_function_exponent: Optional[float] = None
+        self.viscosity_transition_region_emul: Optional[float] = None
+        self.volume_flow_rate_exponent: Optional[float] = None
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathAicdParameters.__custom_init__ is not None:
+            WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -2768,6 +2912,19 @@ class WellPathTarget(PdmObjectBase):
         if WellPathTarget.__custom_init__ is not None:
             WellPathTarget.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class WellPathValve(CheckableNamedObject):
+    """
+    Attributes:
+        start_measured_depth (float): Start MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.start_measured_depth: float = 0.000000000000000e+00
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if WellPathValve.__custom_init__ is not None:
+            WellPathValve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathCollection(PdmObjectBase):
     """
     Collection of Well Paths
@@ -2809,6 +2966,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['CheckableNamedObject'] = CheckableNamedObject
     classes['ColorLegend'] = ColorLegend
     classes['CommandRouter'] = CommandRouter
+    classes['CompletionTemplateCollection'] = CompletionTemplateCollection
     classes['CornerPointCase'] = CornerPointCase
     classes['CurveIntersection'] = CurveIntersection
     classes['DataContainerFloat'] = DataContainerFloat
@@ -2892,6 +3050,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['TextAnnotation'] = TextAnnotation
     classes['ThermalFractureTemplate'] = ThermalFractureTemplate
     classes['TriangleGeometry'] = TriangleGeometry
+    classes['ValveTemplate'] = ValveTemplate
+    classes['ValveTemplateCollection'] = ValveTemplateCollection
     classes['View'] = View
     classes['ViewWindow'] = ViewWindow
     classes['WbsParameters'] = WbsParameters
@@ -2902,12 +3062,14 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellLogPlotCurve'] = WellLogPlotCurve
     classes['WellLogPlotTrack'] = WellLogPlotTrack
     classes['WellPath'] = WellPath
+    classes['WellPathAicdParameters'] = WellPathAicdParameters
     classes['WellPathCollection'] = WellPathCollection
     classes['WellPathCompletionSettings'] = WellPathCompletionSettings
     classes['WellPathCompletions'] = WellPathCompletions
     classes['WellPathFracture'] = WellPathFracture
     classes['WellPathGeometry'] = WellPathGeometry
     classes['WellPathTarget'] = WellPathTarget
+    classes['WellPathValve'] = WellPathValve
     return classes
 
 def class_from_keyword(class_keyword : str) -> Optional[Type[PdmObjectBase]]:
