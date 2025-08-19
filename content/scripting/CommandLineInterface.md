@@ -17,13 +17,14 @@ Examples on how command line options are used are given [below]({{% relref "comm
 
 | Parameter | Description |
 |-----------|-------------|
-| &#45;&#45;help, &#45;&#45;?           | Displays help text and version info |
-| &#45;&#45;project &lt;filename&gt;    | Open project file &lt;filename&gt;. |
-| &#45;&#45;last                        | Open last used project. |
+| &#45;&#45;help, &#45;&#45;?               | Displays help text and version info |
+| &#45;&#45;project &lt;filename&gt;        | Open project file &lt;filename&gt;. |
+| &#45;&#45;last                            | Open last used project. |
 | &#45;&#45;size &lt;width&gt; &lt;height&gt;  | Set size of the main application window. |
-| &#45;&#45;console                     | Launch as a console application without graphics |
-| &#45;&#45;server [&lt;portnumber&gt;] | Launch as a GRPC server. Default port is 50051 |
-| &#45;&#45;startdir &lt;folder&gt;     | Set startup directory. |
+| &#45;&#45;console                         | Launch as a console application without graphics |
+| &#45;&#45;server [&lt;portnumber&gt;]     | Launch as a GRPC server. Default port is 50051 |
+| &#45;&#45;startdir &lt;folder&gt;         | Set startup directory. |
+| &#45;&#45;threadcount &lt;threadcount&gt; | Set number of threads for parallel processing. |
 
 ### Command files
 
