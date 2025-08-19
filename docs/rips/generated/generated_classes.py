@@ -2478,6 +2478,21 @@ class ValveTemplateCollection(PdmObjectBase):
         if ValveTemplateCollection.__custom_init__ is not None:
             ValveTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_template(self, completion_type: str="ICD", orifice_diameter: float=8.000000000000000e+00, flow_coefficient: float=7.000000000000000e-01, user_label: str="") -> ValveTemplate:
+        """
+        Add a new valve template
+
+        Arguments:
+            completion_type (str): One of [WELL_PATH, PERFORATION_INTERVAL, FISHBONES, FRACTURE, ICD, AICD, ICV, CASING, LINER, PACKER, UNDEFINED]
+            orifice_diameter (float): Orifice diameter
+            flow_coefficient (float): Flow coefficient
+            user_label (str): User-defined label for the template
+        Returns:
+            ValveTemplate
+        """
+        return self._call_pdm_method_return_value("AddTemplate", ValveTemplate, completion_type=completion_type, orifice_diameter=orifice_diameter, flow_coefficient=flow_coefficient, user_label=user_label)
+
+
     def valve_definitions(self) -> List[ValveTemplate]:
         """
 

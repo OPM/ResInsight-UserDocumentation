@@ -146,3 +146,13 @@ Modeled Well Path Lateral
    :linenos:
    :caption: modeled_well_path_lateral.py
 
+.. _wells_and_fractures_valve_template_creation:
+
+Valve Template Creation
+-----------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/valve_template_creation.py
+   :language: python
+   :linenos:
+   :caption: valve_template_creation.py
+
