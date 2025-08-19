@@ -16,4 +16,5 @@ This page provides access to all Python examples organized by category.
    PythonExamples_instance_and_project_management
    PythonExamples_surfaces_and_visualization
    PythonExamples_wells_and_fractures
+   PythonExamples_General
 
