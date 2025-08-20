@@ -23,6 +23,10 @@ This will enable a mode where the user can click in the view to create a polygon
 
 When completed, the user can click on the button **Stop Picking Points** in the **Property Editor**.
 
+**Length and Area**
+
+The polygon length and area can be displayed as a label in the 3D view controlled by the **Show Label** checkbox.
+
 ![](/images/3d-main-window/PolygonEdit.png)
 
 
