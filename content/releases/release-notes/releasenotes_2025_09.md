@@ -20,6 +20,13 @@ The import dialog when searching the file system for ensemble data is improved, 
 ## Performance
 There has been several improvements related to summary performance in this release. These improvements are related to file operations and plot updates. The overall improved performace is significant for large cases with many summary ensembles and many plots.
 
+## Histogram Plots
+![](/images/plot-window/histogram-plot.png)
+
+Histogram Plots provide a graphical representation of the distribution of data values, making it easy to analyze the frequency and spread of results from various sources in ResInsight: Summary vectors, ensemble parameters, grid cell values and ensemble fracture surfaces.
+
+[Histogram Plots]({{% relref "histogram" %}})
+
 ## Other improvements
 - Logging of application operations and crash report to log file by default stored in `home_folder/.resinsight/logs`
 - Improved color control of RFT ensemble curves
@@ -36,6 +43,8 @@ Several improvements have been made to the Python API.
 - Added support for Non-Darcy parameters for perforation intervals
 - Create polygon from list of point
 - Create perforation interval
+- Create IDC, ICV and AICD valve template
+- Create valve instances on a perforation intervale
 
 [Python Examples](https://api.resinsight.org/en/main/PythonExamples.html)
 
