@@ -24,6 +24,16 @@ During import of a summary case, ResInsight tries to find an associated **parame
 
 [Best Practices Summary Data]({{% relref "summarydata" %}})
 
+## Realization Subset
+The imported realization numbers of an ensemble is displayed in the Ensemble Definition. Edit the value range to define a subset of realization.
+
+![](/images/plot-window/summary-file-set.png)
+
+Missing data or incomplete data for a realization is indicated with a symbol and tooltip text
+
+![](/images/plot-window/incomplete-realization.png)
+
+
 ## Selection and Highlight of Curves
 When clicking on a single curve in an ensemble several operations will happen:
 - the curve cliced on will be highlighted

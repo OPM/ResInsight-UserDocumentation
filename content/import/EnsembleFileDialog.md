@@ -29,7 +29,7 @@ The dialog consists of the following fields:
 - **Effective Filter**: The effective filter displays the resulting full path search pattern. It is updated on the fly as the user edits the pattern fields. A text string of "..." indicates a complete recursive directory search.
 
 ## Ensemble File Structure
-Multiple summary files defining an ensemble can be organized differently in folders. ResInsight support two different modes, Sub Folder and Main Folder.
+Multiple summary files defining an ensemble can be organized differently in folders. ResInsight support two different modes, **Sub Folder** and **Main Folder**.
 
 ### Sub Folder
 
