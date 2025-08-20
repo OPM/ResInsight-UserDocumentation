@@ -15,9 +15,14 @@ The import dialog when searching the file system for ensemble data is improved, 
 
 [Ensemble Summary Plotting]({{% relref "ensembleplotting" %}})
 
+## Performance
+There has been several improvements related to summary performance in this release. These improvements are related to file operations and plot updates. The overall improved performace is significant for large cases with many summary ensembles and many plots.
 
 ## Other improvements
 - Logging of application operations and crash report to log file by default stored in `home_folder/.resinsight/logs`
+- Improved color control of RFT ensemble curves
+
+
 
 
 ## Python API

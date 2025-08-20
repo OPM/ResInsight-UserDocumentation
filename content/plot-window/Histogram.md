@@ -11,11 +11,11 @@ Histogram Plots provide a graphical representation of the distribution of data v
 
 Histogram Plots can be generated from several types of data in ResInsight:
 
-### Ensemble Parameter
-Displays the distribution of parameter values across all realizations in an ensemble. This is useful for visualizing the spread and variability of input parameters used in ensemble simulations.
-
 ### Summary Vector
 Shows the distribution of summary vector values, such as production rates or pressures, at a specific timestep across all cases or realizations. This helps in understanding the variability and central tendency of key summary results.
+
+### Ensemble Parameter
+Displays the distribution of parameter values across all realizations in an ensemble. This is useful for visualizing the spread and variability of input parameters used in ensemble simulations.
 
 ### Grid Cell Values
 Visualizes the distribution of property values (e.g., porosity, saturation) for all grid cells in a selected case. This is valuable for identifying patterns, outliers, or the overall range of property values within the reservoir model.
