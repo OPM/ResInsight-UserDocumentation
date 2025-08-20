@@ -20,6 +20,12 @@ Shows the distribution of summary vector values, such as production rates or pre
 ### Grid Cell Values
 Visualizes the distribution of property values (e.g., porosity, saturation) for all grid cells in a selected case. This is valuable for identifying patterns, outliers, or the overall range of property values within the reservoir model.
 
+This histogram plot can also be created from the right-click menu in a 3D view.
+
+**Filter by 3d View Visibility**
+
+If you want to display the statistics for a subset of cells, you can select a view to use only the cells visible in that view. This option is activated by selecting a view from the drop down list at **Filter by 3d View Visibility**
+
 ### Ensemble Fracture Statistics
 Presents the distribution of statistical measures (such as mean, P10, P50, P90) calculated from ensemble fractures. 
 
