@@ -234,6 +234,27 @@ class DepthSurface(SurfaceInterface):
         if DepthSurface.__custom_init__ is not None:
             DepthSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class DiameterRoughnessInterval(PdmObjectBase):
+    """
+    DiameterRoughnessInterval
+
+    Attributes:
+        diameter (float): Diameter
+        end_md (float): End MD
+        roughness_factor (float): Roughness Factor
+        start_md (float): Start MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.diameter: float = 1.520000000000000e-01
+        self.end_md: float = 0.000000000000000e+00
+        self.roughness_factor: float = 1.000000000000000e-05
+        self.start_md: float = 0.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if DiameterRoughnessInterval.__custom_init__ is not None:
+            DiameterRoughnessInterval.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class EclipseCase(Reservoir):
     """
     The Regular Eclipse Results Case
@@ -1708,6 +1729,7 @@ class MswSettings(PdmObjectBase):
 
     Attributes:
         custom_values_for_lateral (bool): Custom Values for Lateral
+        diameter_roughness_mode (str): One of [Uniform, Intervals]
         enforce_max_segment_length (bool): Enforce Max Segment Length
         length_and_depth (str): One of [INC, ABS]
         liner_diameter (float): Liner Inner Diameter
@@ -1721,6 +1743,7 @@ class MswSettings(PdmObjectBase):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.custom_values_for_lateral: bool = False
+        self.diameter_roughness_mode: str = "Uniform"
         self.enforce_max_segment_length: bool = False
         self.length_and_depth: str = "ABS"
         self.liner_diameter: float = 1.520000000000000e-01
@@ -2783,6 +2806,21 @@ class WellPathCompletionSettings(PdmObjectBase):
         if WellPathCompletionSettings.__custom_init__ is not None:
             WellPathCompletionSettings.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_diameter_roughness_interval(self, start_md: float=0.000000000000000e+00, end_md: float=1.000000000000000e+02, diameter: float=1.520000000000000e-01, roughness_factor: float=1.000000000000000e-05) -> DiameterRoughnessInterval:
+        """
+        
+
+        Arguments:
+            start_md (float): 
+            end_md (float): 
+            diameter (float): 
+            roughness_factor (float): 
+        Returns:
+            DiameterRoughnessInterval
+        """
+        return self._call_pdm_method_return_value("AddDiameterRoughnessInterval", DiameterRoughnessInterval, start_md=start_md, end_md=end_md, diameter=diameter, roughness_factor=roughness_factor)
+
+
 class WellPathCompletions(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -2989,6 +3027,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['DataContainerTime'] = DataContainerTime
     classes['DepthSurface'] = DepthSurface
     classes['DepthTrackPlot'] = DepthTrackPlot
+    classes['DiameterRoughnessInterval'] = DiameterRoughnessInterval
     classes['EclipseCase'] = EclipseCase
     classes['EclipseCaseEnsemble'] = EclipseCaseEnsemble
     classes['EclipseContourMap'] = EclipseContourMap
