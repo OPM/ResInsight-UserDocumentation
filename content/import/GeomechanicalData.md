@@ -11,6 +11,7 @@ If you have, and would like to a use these features, please see [ Build Instruct
 ### Geo Mechanical Data Support
 Geo-mechanical data can be imported using the **Import -> Geo Mechanical Cases menu**. Here three options are present: **Import Geo Mechanical Model**, **Import Geo Mechanical Model (Time Step Filtered)**  (both for odb files) and **Import Element Property Table**.
 
+A geomechanical model can also be imported from a VTK file.
 
 ![](/images/import/GeoMechImport.png)
 

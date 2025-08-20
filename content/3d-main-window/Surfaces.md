@@ -11,7 +11,7 @@ ResInsight is capable of mapping properties and simulation results onto 3D surfa
 
 ## Import and appearance of surfaces
 
-3D surfaces from GOCAD and Petrel are imported into ResInsight by the menu option **File**->**Import**->**Import Surfaces** 
+3D surfaces from GOCAD, Petrel and RMS are imported into ResInsight by the menu option **File**->**Import**->**Import Surfaces** 
 in the **3D Main Window**.
 
 Surface file formats are described in [Surface Data]({{% relref "reference-manual/surfaces" %}})

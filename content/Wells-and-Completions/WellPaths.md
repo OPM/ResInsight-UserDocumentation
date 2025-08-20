@@ -14,7 +14,13 @@ ResInsight also supports creation of your own user-defined well paths. See [Crea
 ## Ascii Well Paths
 
 The command **File -> Import -> Well Data -> Import Well Paths From File** will read the well paths in the selected file, and create one entry for each well path under the {{< image-in-text src="images/3d-main-window/WellCollection.png" >}} **Wells** item in the **Project Tree**. 
-    
+
+|Type|Description|Example|
+|----|-----------|-------|
+|dev | Deviation file|[DEV](https://github.com/OPM/ResInsight/blob/dev/TestModels/TEST10K_FLT_LGR_NNC/wellpath_a.dev)
+|rmswell | RMS well file format|[RMS Well](https://github.com/OPM/ResInsight/blob/dev/ApplicationLibCode/UnitTests/TestData/RifRmsWellPathReader/55_33-1.rmswell)|
+|asc | Ascii file format|
+
 ## Importing well paths from OSDU
 
 Well path trajectories can be downloaded from an OSDU cloud service. When storing the project file, the reference to the OSDU trajectory is stored. This will ensure that authentication and access is checked before the trajectory is downloaded.
@@ -50,6 +56,8 @@ A well path will hold well log data and well path data imported from files. A we
 
 ### Importing Well Log Files
 Well log data is [imported from LAS-files]({{% relref "lasfile" %}}#importing-a-las-file).
+
+RMS Well Log files are also supported. See [here for and example](https://github.com/OPM/ResInsight/blob/dev/ApplicationLibCode/UnitTests/TestData/RifRmsWellPathReader/55_33-1.rmswell).
 
 ### Well Path Property Editor
 The well path property editor lets the user control the appearance of the well path and associate the well path to a simulation well. It also gives some information about the well path metadata.
