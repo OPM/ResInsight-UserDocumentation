@@ -26,7 +26,7 @@ The realizations are displayed in a cross plot with result parameter vs summary 
 
 ![](/images/plot-window/CorrelationPlotsFilter.png)
 
-A new ensemble can be created based on the filtered cases in the right-click menu of the cross plot.
+A new ensemble can be created based on the filtered cases in the right-click menu of the cross plot. A histogram of the ensemble parameter can also be created.
 
 ![](/images/plot-window/CorrelationPlotsCreateEnsemble.png)
 
