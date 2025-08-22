@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 import Definitions_pb2 as Definitions__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14SimulationWell.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"M\n\x15SimulationWellRequest\x12\x0f\n\x07\x63\x61se_id\x18\x01 \x01(\x05\x12\x11\n\twell_name\x18\x02 \x01(\t\x12\x10\n\x08timestep\x18\x03 \x01(\x05\":\n\x14SimulationWellStatus\x12\x11\n\twell_type\x18\x01 \x01(\t\x12\x0f\n\x07is_open\x18\x02 \x01(\x08\"~\n\x16SimulationWellCellInfo\x12\x18\n\x03ijk\x18\x01 \x01(\x0b\x32\x0b.rips.Vec3i\x12\x12\n\ngrid_index\x18\x02 \x01(\x05\x12\x0f\n\x07is_open\x18\x03 \x01(\x08\x12\x11\n\tbranch_id\x18\x04 \x01(\x05\x12\x12\n\nsegment_id\x18\x05 \x01(\x05\"I\n\x1bSimulationWellCellInfoArray\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.rips.SimulationWellCellInfo2\xc2\x01\n\x0eSimulationWell\x12T\n\x17GetSimulationWellStatus\x12\x1b.rips.SimulationWellRequest\x1a\x1a.rips.SimulationWellStatus\"\x00\x12Z\n\x16GetSimulationWellCells\x12\x1b.rips.SimulationWellRequest\x1a!.rips.SimulationWellCellInfoArray\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x14SimulationWell.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"M\n\x15SimulationWellRequest\x12\x0f\n\x07\x63\x61se_id\x18\x01 \x01(\x05\x12\x11\n\twell_name\x18\x02 \x01(\t\x12\x10\n\x08timestep\x18\x03 \x01(\x05\":\n\x14SimulationWellStatus\x12\x11\n\twell_type\x18\x01 \x01(\t\x12\x0f\n\x07is_open\x18\x02 \x01(\x08\"~\n\x16SimulationWellCellInfo\x12\x18\n\x03ijk\x18\x01 \x01(\x0b\x32\x0b.rips.Vec3i\x12\x12\n\ngrid_index\x18\x02 \x01(\x05\x12\x0f\n\x07is_open\x18\x03 \x01(\x08\x12\x11\n\tbranch_id\x18\x04 \x01(\x05\x12\x12\n\nsegment_id\x18\x05 \x01(\x05\"I\n\x1bSimulationWellCellInfoArray\x12*\n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x1c.rips.SimulationWellCellInfo\"6\n\x18SimulationWellPerfLength\x12\x1a\n\x12\x61\x63\x63umulated_length\x18\x01 \x01(\x01\x32\x92\x02\n\x0eSimulationWell\x12T\n\x17GetSimulationWellStatus\x12\x1b.rips.SimulationWellRequest\x1a\x1a.rips.SimulationWellStatus\"\x00\x12Z\n\x16GetSimulationWellCells\x12\x1b.rips.SimulationWellRequest\x1a!.rips.SimulationWellCellInfoArray\"\x00\x12N\n\rGetPerfLength\x12\x1b.rips.SimulationWellRequest\x1a\x1e.rips.SimulationWellPerfLength\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -30,6 +30,8 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_SIMULATIONWELLCELLINFO']._serialized_end=314
   _globals['_SIMULATIONWELLCELLINFOARRAY']._serialized_start=316
   _globals['_SIMULATIONWELLCELLINFOARRAY']._serialized_end=389
-  _globals['_SIMULATIONWELL']._serialized_start=392
-  _globals['_SIMULATIONWELL']._serialized_end=586
+  _globals['_SIMULATIONWELLPERFLENGTH']._serialized_start=391
+  _globals['_SIMULATIONWELLPERFLENGTH']._serialized_end=445
+  _globals['_SIMULATIONWELL']._serialized_start=448
+  _globals['_SIMULATIONWELL']._serialized_end=722
 # @@protoc_insertion_point(module_scope)

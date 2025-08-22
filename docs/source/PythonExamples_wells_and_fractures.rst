@@ -6,6 +6,16 @@ Wells And Fractures
 
 This page shows Python examples from the **wells_and_fractures** folder.
 
+.. _wells_and_fractures_accumulated_perforation_length:
+
+Accumulated Perforation Length
+------------------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/accumulated_perforation_length.py
+   :language: python
+   :linenos:
+   :caption: accumulated_perforation_length.py
+
 .. _wells_and_fractures_all_simulation_wells:
 
 All Simulation Wells
