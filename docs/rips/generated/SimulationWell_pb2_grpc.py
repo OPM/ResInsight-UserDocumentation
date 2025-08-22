@@ -49,6 +49,11 @@ class SimulationWellStub(object):
                 request_serializer=SimulationWell__pb2.SimulationWellRequest.SerializeToString,
                 response_deserializer=SimulationWell__pb2.SimulationWellCellInfoArray.FromString,
                 _registered_method=True)
+        self.GetPerfLength = channel.unary_unary(
+                '/rips.SimulationWell/GetPerfLength',
+                request_serializer=SimulationWell__pb2.SimulationWellRequest.SerializeToString,
+                response_deserializer=SimulationWell__pb2.SimulationWellPerfLength.FromString,
+                _registered_method=True)
 
 
 class SimulationWellServicer(object):
@@ -66,6 +71,12 @@ class SimulationWellServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetPerfLength(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SimulationWellServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -78,6 +89,11 @@ def add_SimulationWellServicer_to_server(servicer, server):
                     servicer.GetSimulationWellCells,
                     request_deserializer=SimulationWell__pb2.SimulationWellRequest.FromString,
                     response_serializer=SimulationWell__pb2.SimulationWellCellInfoArray.SerializeToString,
+            ),
+            'GetPerfLength': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPerfLength,
+                    request_deserializer=SimulationWell__pb2.SimulationWellRequest.FromString,
+                    response_serializer=SimulationWell__pb2.SimulationWellPerfLength.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -133,6 +149,33 @@ class SimulationWell(object):
             '/rips.SimulationWell/GetSimulationWellCells',
             SimulationWell__pb2.SimulationWellRequest.SerializeToString,
             SimulationWell__pb2.SimulationWellCellInfoArray.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPerfLength(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/rips.SimulationWell/GetPerfLength',
+            SimulationWell__pb2.SimulationWellRequest.SerializeToString,
+            SimulationWell__pb2.SimulationWellPerfLength.FromString,
             options,
             channel_credentials,
             insecure,
