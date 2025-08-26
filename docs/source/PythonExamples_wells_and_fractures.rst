@@ -96,6 +96,16 @@ Fishbones Completion
    :linenos:
    :caption: fishbones_completion.py
 
+.. _wells_and_fractures_fixed_trajectory_well_path:
+
+Fixed Trajectory Well Path
+--------------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/fixed_trajectory_well_path.py
+   :language: python
+   :linenos:
+   :caption: fixed_trajectory_well_path.py
+
 .. _wells_and_fractures_generate_ensemble_of_well_logs:
 
 Generate Ensemble Of Well Logs
