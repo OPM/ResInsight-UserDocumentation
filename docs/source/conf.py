@@ -41,7 +41,8 @@ extensions = [
     'sphinx.ext.napoleon',
     'm2r2',
     'sphinx_automodapi.automodapi',
-    'hide_grpc_params'
+    'hide_grpc_params',
+    'searchable_literalinclude'
 ]
 
 # Enable search functionality

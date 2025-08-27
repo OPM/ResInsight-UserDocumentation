@@ -97,13 +97,14 @@ def create_rst_for_folder(folder_path, relative_to_examples):
         txt += example_heading + "\n"
         txt += "-" * len(example_heading) + "\n\n"
         
-        # Extract and add searchable content
-        searchable_content = extract_searchable_content(folder_path / py_file)
+        # Extract and add searchable content from the actual file
+        actual_file_path = folder_path / py_file
+        searchable_content = extract_searchable_content(actual_file_path)
         if searchable_content:
             txt += f"**Description:** {searchable_content[:500]}...\n\n" if len(searchable_content) > 500 else f"**Description:** {searchable_content}\n\n"
         
         # Build path relative to the source directory
-        relative_path = path_examples / relative_to_examples / py_file.name
+        relative_path = f"../rips/PythonExamples/{relative_to_examples}/{py_file.name}"
         txt += f".. literalinclude:: {relative_path}\n"
         txt += "   :language: python\n"
         txt += "   :linenos:\n"
@@ -140,11 +141,12 @@ def create_general_examples_page():
         txt += "-" * len(example_heading) + "\n\n"
         
         # Extract and add searchable content
-        searchable_content = extract_searchable_content(path_examples / py_file)
+        actual_file_path = path_examples / py_file
+        searchable_content = extract_searchable_content(actual_file_path)
         if searchable_content:
             txt += f"**Description:** {searchable_content[:500]}...\n\n" if len(searchable_content) > 500 else f"**Description:** {searchable_content}\n\n"
        
-        relative_path = path_examples / py_file.name
+        relative_path = f"../rips/PythonExamples/{py_file.name}"
         txt += f".. literalinclude:: {relative_path}\n"
         txt += "   :language: python\n"
         txt += "   :linenos:\n"
