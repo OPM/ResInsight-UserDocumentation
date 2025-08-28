@@ -3,3 +3,4 @@ build
 _build
 .vscode
 api
+venv
