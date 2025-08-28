@@ -1,17 +1,32 @@
 # ResInsight Scripting API - rips
 
-## Update procecure on branch next-major-release
-There is a workflow **update-from-latest.yml** used to update the documentation. This workflow executes the script `ResInsight-UserDocumentation/docs/source/create_python_examples.py`. This workflow will download the rips package from latest build from ResInsight main repo, build the documentation, and create a PR in this repository if required.
+## Update Procedure for `next-major-release` Branch
+The workflow **update-from-latest.yml** is used to update the documentation. This workflow runs the script `docs/source/create_python_examples.py`, downloads the latest rips package from the ResInsight main repository, builds the documentation, and creates a pull request in this repository if needed.
 
-## How to generate documentation locally
-- Install Python 3.x
-- Create a virtual environment
-- Install dependencies for rips `pip install grpcio grpcio-tools protobuf`
-- Install the documentation system `pip install sphinx`
-- Install dependencies for sphinx `pip install m2r sphinx_rtd_theme`
-- Open command line in folder **docs**
-- Execute `sphinx-build -b html source build`
-- Open the generated documentation in a browser from this page `build/html/index.html`
+## Conventions
+We use an internal system to communicate large binary structures between Python and ResInsight. Functions related to this system are postfixed with `_internal` and are removed from the generated documentation using the script `clean_internal_methods.py`.
 
-## Release of master
-Create pull request from next-major-release to master branch.
+## How to Generate Documentation Locally
+1. Install Python 3.x
+2. Create a virtual environment
+3. Install dependencies for rips:
+	```sh
+	pip install grpcio grpcio-tools protobuf
+	```
+4. Install Sphinx:
+	```sh
+	pip install sphinx
+	```
+5. Install Sphinx dependencies:
+	```sh
+	pip install m2r sphinx_rtd_theme
+	```
+6. Open a command line in the **docs** folder
+7. Run:
+	```sh
+	sphinx-build -b html source build
+	```
+8. Open the generated documentation in your browser from `build/html/index.html`
+
+## Releasing to Master
+Create a pull request from `next-major-release` to the `master` branch.
