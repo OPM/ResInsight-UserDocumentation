@@ -42,6 +42,7 @@ extensions = [
     'm2r2',
     'sphinx_automodapi.automodapi',
     'hide_grpc_params',
+    'clean_internal_methods',
     'searchable_literalinclude'
 ]
 
