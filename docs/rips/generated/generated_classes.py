@@ -740,144 +740,6 @@ class Fishbones(PdmObjectBase):
         if Fishbones.__custom_init__ is not None:
             Fishbones.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class WellPath(PdmObjectBase):
-    """
-    A ResInsight Well Path
-
-    Attributes:
-        name (str): Name
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.name: str = ""
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if WellPath.__custom_init__ is not None:
-            WellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def add_fracture(self, measured_depth: float=0.000000000000000e+00, stim_plan_fracture_template: Optional[StimPlanFractureTemplate]=None, align_dip: bool=False, eclipse_case: Optional[Reservoir]=None) -> WellPathFracture:
-        """
-        Add StimPlan Fracture
-
-        Arguments:
-            measured_depth (float): 
-            stim_plan_fracture_template (Optional[StimPlanFractureTemplate]): StimPlan Fracture Template
-            align_dip (bool): 
-            eclipse_case (Optional[Reservoir]): Eclipse Case
-        Returns:
-            WellPathFracture
-        """
-        return self._call_pdm_method_return_value("AddFracture", WellPathFracture, measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template, align_dip=align_dip, eclipse_case=eclipse_case)
-
-
-    def add_thermal_fracture(self, measured_depth: float=0.000000000000000e+00, fracture_template: Optional[ThermalFractureTemplate]=None, place_using_template_data: bool=True) -> WellPathFracture:
-        """
-        Add Thermal Fracture
-
-        Arguments:
-            measured_depth (float): 
-            fracture_template (Optional[ThermalFractureTemplate]): Thermal Fracture Template
-            place_using_template_data (bool): 
-        Returns:
-            WellPathFracture
-        """
-        return self._call_pdm_method_return_value("AddThermalFracture", WellPathFracture, measured_depth=measured_depth, fracture_template=fracture_template, place_using_template_data=place_using_template_data)
-
-
-    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: str="STANDARD") -> Optional[Fishbones]:
-        """
-        Append Fishbones
-
-        Arguments:
-            sub_locations (List[float]): 
-            drilling_type (str): One of [STANDARD, EXTENDED, ACID_JETTING]
-        Returns:
-            FishbonesMultipleSubs
-        """
-        return self._call_pdm_method_return_optional_value("AppendFishbones", Fishbones, sub_locations=sub_locations, drilling_type=drilling_type)
-
-
-    def append_perforation_interval(self, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, diameter: float=0.000000000000000e+00, skin_factor: float=0.000000000000000e+00) -> Perforation:
-        """
-        Append Perforation Interval
-
-        Arguments:
-            start_md (float): Start Measured Depth
-            end_md (float): End Measured Depth
-            diameter (float): Diameter
-            skin_factor (float): Skin Factor
-        Returns:
-            Perforation
-        """
-        return self._call_pdm_method_return_value("AppendPerforationInterval", Perforation, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor)
-
-
-    def completion_settings(self) -> Optional[WellPathCompletionSettings]:
-        """Completion Settings
-
-        Returns:
-             WellPathCompletionSettings
-        """
-        children = self.children("CompletionSettings", WellPathCompletionSettings)
-        return children[0] if len(children) > 0 else None
-
-
-    def completions(self) -> Optional[WellPathCompletions]:
-        """Completions
-
-        Returns:
-             WellPathCompletions
-        """
-        children = self.children("Completions", WellPathCompletions)
-        return children[0] if len(children) > 0 else None
-
-
-    def extract_well_path_properties_internal(self, resampling_interval: float=1.000000000000000e+01, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", measured_depth: str="", azimuth: str="", inclination: str="", dogleg: str="") -> None:
-        """
-        Extract Well Path Properties
-
-        Arguments:
-            resampling_interval (float): 
-            coordinate_x (str): 
-            coordinate_y (str): 
-            coordinate_z (str): 
-            measured_depth (str): 
-            azimuth (str): 
-            inclination (str): 
-            dogleg (str): 
-        Returns:
-            
-        """
-        self._call_pdm_method_void("ExtractWellPathPropertiesInternal", resampling_interval=resampling_interval, coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, measured_depth=measured_depth, azimuth=azimuth, inclination=inclination, dogleg=dogleg)
-
-
-    def msw_settings(self, ) -> Optional[MswSettings]:
-        """
-        Multi Segment Well Settings
-
-        Arguments:
-            
-        Returns:
-            RimMswCompletionParameters
-        """
-        return self._call_pdm_method_return_optional_value("MswSettings", MswSettings)
-
-
-class FixedTrajectoryWellPath(WellPath):
-    """
-    FixedTrajectoryWellPath
-
-    Attributes:
-        trajectory_points (List[List[float]]): Trajectory Points
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.trajectory_points: List[List[float]] = []
-        WellPath.__init__(self, pb2_object, channel)
-        if FixedTrajectoryWellPath.__custom_init__ is not None:
-            FixedTrajectoryWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class FractureSurface(SurfaceInterface):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1088,6 +950,129 @@ class IntersectionCollection(PdmObjectBase):
         if IntersectionCollection.__custom_init__ is not None:
             IntersectionCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class WellPath(PdmObjectBase):
+    """
+    A ResInsight Well Path
+
+    Attributes:
+        name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPath.__custom_init__ is not None:
+            WellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_fracture(self, measured_depth: float=0.000000000000000e+00, stim_plan_fracture_template: Optional[StimPlanFractureTemplate]=None, align_dip: bool=False, eclipse_case: Optional[Reservoir]=None) -> WellPathFracture:
+        """
+        Add StimPlan Fracture
+
+        Arguments:
+            measured_depth (float): 
+            stim_plan_fracture_template (Optional[StimPlanFractureTemplate]): StimPlan Fracture Template
+            align_dip (bool): 
+            eclipse_case (Optional[Reservoir]): Eclipse Case
+        Returns:
+            WellPathFracture
+        """
+        return self._call_pdm_method_return_value("AddFracture", WellPathFracture, measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template, align_dip=align_dip, eclipse_case=eclipse_case)
+
+
+    def add_thermal_fracture(self, measured_depth: float=0.000000000000000e+00, fracture_template: Optional[ThermalFractureTemplate]=None, place_using_template_data: bool=True) -> WellPathFracture:
+        """
+        Add Thermal Fracture
+
+        Arguments:
+            measured_depth (float): 
+            fracture_template (Optional[ThermalFractureTemplate]): Thermal Fracture Template
+            place_using_template_data (bool): 
+        Returns:
+            WellPathFracture
+        """
+        return self._call_pdm_method_return_value("AddThermalFracture", WellPathFracture, measured_depth=measured_depth, fracture_template=fracture_template, place_using_template_data=place_using_template_data)
+
+
+    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: str="STANDARD") -> Optional[Fishbones]:
+        """
+        Append Fishbones
+
+        Arguments:
+            sub_locations (List[float]): 
+            drilling_type (str): One of [STANDARD, EXTENDED, ACID_JETTING]
+        Returns:
+            FishbonesMultipleSubs
+        """
+        return self._call_pdm_method_return_optional_value("AppendFishbones", Fishbones, sub_locations=sub_locations, drilling_type=drilling_type)
+
+
+    def append_perforation_interval(self, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, diameter: float=0.000000000000000e+00, skin_factor: float=0.000000000000000e+00) -> Perforation:
+        """
+        Append Perforation Interval
+
+        Arguments:
+            start_md (float): Start Measured Depth
+            end_md (float): End Measured Depth
+            diameter (float): Diameter
+            skin_factor (float): Skin Factor
+        Returns:
+            Perforation
+        """
+        return self._call_pdm_method_return_value("AppendPerforationInterval", Perforation, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor)
+
+
+    def completion_settings(self) -> Optional[WellPathCompletionSettings]:
+        """Completion Settings
+
+        Returns:
+             WellPathCompletionSettings
+        """
+        children = self.children("CompletionSettings", WellPathCompletionSettings)
+        return children[0] if len(children) > 0 else None
+
+
+    def completions(self) -> Optional[WellPathCompletions]:
+        """Completions
+
+        Returns:
+             WellPathCompletions
+        """
+        children = self.children("Completions", WellPathCompletions)
+        return children[0] if len(children) > 0 else None
+
+
+    def extract_well_path_properties_internal(self, resampling_interval: float=1.000000000000000e+01, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", measured_depth: str="", azimuth: str="", inclination: str="", dogleg: str="") -> None:
+        """
+        Extract Well Path Properties
+
+        Arguments:
+            resampling_interval (float): 
+            coordinate_x (str): 
+            coordinate_y (str): 
+            coordinate_z (str): 
+            measured_depth (str): 
+            azimuth (str): 
+            inclination (str): 
+            dogleg (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("ExtractWellPathPropertiesInternal", resampling_interval=resampling_interval, coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, measured_depth=measured_depth, azimuth=azimuth, inclination=inclination, dogleg=dogleg)
+
+
+    def msw_settings(self, ) -> Optional[MswSettings]:
+        """
+        Multi Segment Well Settings
+
+        Arguments:
+            
+        Returns:
+            RimMswCompletionParameters
+        """
+        return self._call_pdm_method_return_optional_value("MswSettings", MswSettings)
+
+
 class ModeledWellPath(WellPath):
     """
     A Well Path created interactively in ResInsight
@@ -1270,6 +1255,21 @@ class PerforationCollection(CheckableNamedObject):
         """
         return self.children("Perforations", Perforation)
 
+
+class PointBasedWellPath(WellPath):
+    """
+    PointBasedWellPath
+
+    Attributes:
+        trajectory_points (List[List[float]]): Trajectory Points
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.trajectory_points: List[List[float]] = []
+        WellPath.__init__(self, pb2_object, channel)
+        if PointBasedWellPath.__custom_init__ is not None:
+            PointBasedWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class Polygon(NamedObject):
     """
@@ -3005,21 +3005,6 @@ class WellPathCollection(PdmObjectBase):
         if WellPathCollection.__custom_init__ is not None:
             WellPathCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def import_fixed_trajectory_well_path_internal(self, name: str="", coordinate_x_key: str="", coordinate_y_key: str="", coordinate_z_key: str="") -> FixedTrajectoryWellPath:
-        """
-        
-
-        Arguments:
-            name (str): 
-            coordinate_x_key (str): 
-            coordinate_y_key (str): 
-            coordinate_z_key (str): 
-        Returns:
-            FixedTrajectoryWellPath
-        """
-        return self._call_pdm_method_return_value("ImportFixedTrajectoryWellPathInternal", FixedTrajectoryWellPath, name=name, coordinate_x_key=coordinate_x_key, coordinate_y_key=coordinate_y_key, coordinate_z_key=coordinate_z_key)
-
-
     def import_well_path(self, file_name: str="") -> WellPath:
         """
         
@@ -3030,6 +3015,21 @@ class WellPathCollection(PdmObjectBase):
             WellPathBase
         """
         return self._call_pdm_method_return_value("ImportWellPath", WellPath, file_name=file_name)
+
+
+    def import_well_path_from_points_internal(self, name: str="", coordinate_x_key: str="", coordinate_y_key: str="", coordinate_z_key: str="") -> PointBasedWellPath:
+        """
+        
+
+        Arguments:
+            name (str): 
+            coordinate_x_key (str): 
+            coordinate_y_key (str): 
+            coordinate_z_key (str): 
+        Returns:
+            PointBasedWellPath
+        """
+        return self._call_pdm_method_return_value("ImportWellPathFromPointsInternal", PointBasedWellPath, name=name, coordinate_x_key=coordinate_x_key, coordinate_y_key=coordinate_y_key, coordinate_z_key=coordinate_z_key)
 
 
     def well_paths(self) -> List[FileWellPath]:
@@ -3076,7 +3076,6 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['FileWellPath'] = FileWellPath
     classes['Fishbones'] = Fishbones
     classes['FishbonesCollection'] = FishbonesCollection
-    classes['FixedTrajectoryWellPath'] = FixedTrajectoryWellPath
     classes['Fracture'] = Fracture
     classes['FractureSurface'] = FractureSurface
     classes['FractureTemplate'] = FractureTemplate
@@ -3105,6 +3104,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['Plot'] = Plot
     classes['PlotCurve'] = PlotCurve
     classes['PlotWindow'] = PlotWindow
+    classes['PointBasedWellPath'] = PointBasedWellPath
     classes['Polygon'] = Polygon
     classes['PolygonCollection'] = PolygonCollection
     classes['PressureTable'] = PressureTable
