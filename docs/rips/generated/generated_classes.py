@@ -1260,13 +1260,10 @@ class PointBasedWellPath(WellPath):
     """
     PointBasedWellPath
 
-    Attributes:
-        trajectory_points (List[List[float]]): Trajectory Points
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.trajectory_points: List[List[float]] = []
         WellPath.__init__(self, pb2_object, channel)
         if PointBasedWellPath.__custom_init__ is not None:
             PointBasedWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
