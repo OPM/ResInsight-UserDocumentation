@@ -942,6 +942,29 @@ class HistogramPlot(Plot):
         if HistogramPlot.__custom_init__ is not None:
             HistogramPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class WellLog(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellLog.__custom_init__ is not None:
+            WellLog.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class ImportedWellLog(WellLog):
+    """
+    ImportedWellLog
+
+    Attributes:
+        name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = ""
+        WellLog.__init__(self, pb2_object, channel)
+        if ImportedWellLog.__custom_init__ is not None:
+            ImportedWellLog.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class IntersectionCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -992,6 +1015,22 @@ class WellPath(PdmObjectBase):
             WellPathFracture
         """
         return self._call_pdm_method_return_value("AddThermalFracture", WellPathFracture, measured_depth=measured_depth, fracture_template=fracture_template, place_using_template_data=place_using_template_data)
+
+
+    def add_well_log_internal(self, name: str="", measured_depth_key: str="", channel_keys_csv: str="", tvd_msl_key: str="", tvd_rkb_key: str="") -> ImportedWellLog:
+        """
+        Add Well Log
+
+        Arguments:
+            name (str): 
+            measured_depth_key (str): 
+            channel_keys_csv (str): 
+            tvd_msl_key (str): 
+            tvd_rkb_key (str): 
+        Returns:
+            ImportedWellLog
+        """
+        return self._call_pdm_method_return_value("AddWellLogInternal", ImportedWellLog, name=name, measured_depth_key=measured_depth_key, channel_keys_csv=channel_keys_csv, tvd_msl_key=tvd_msl_key, tvd_rkb_key=tvd_rkb_key)
 
 
     def append_fishbones(self, sub_locations: List[float]=[], drilling_type: str="STANDARD") -> Optional[Fishbones]:
@@ -3086,6 +3125,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['GridCaseSurface'] = GridCaseSurface
     classes['GridSummaryCase'] = GridSummaryCase
     classes['HistogramPlot'] = HistogramPlot
+    classes['ImportedWellLog'] = ImportedWellLog
     classes['IntersectionCollection'] = IntersectionCollection
     classes['MeshFractureTemplate'] = MeshFractureTemplate
     classes['ModeledWellPath'] = ModeledWellPath
@@ -3138,6 +3178,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['ViewWindow'] = ViewWindow
     classes['WbsParameters'] = WbsParameters
     classes['WellBoreStabilityPlot'] = WellBoreStabilityPlot
+    classes['WellLog'] = WellLog
     classes['WellLogExtractionCurve'] = WellLogExtractionCurve
     classes['WellLogPlot'] = WellLogPlot
     classes['WellLogPlotCollection'] = WellLogPlotCollection
