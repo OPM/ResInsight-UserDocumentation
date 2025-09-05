@@ -166,6 +166,16 @@ Valve Template Creation
    :linenos:
    :caption: valve_template_creation.py
 
+.. _wells_and_fractures_well_log_import_example:
+
+Well Log Import Example
+-----------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/well_log_import_example.py
+   :language: python
+   :linenos:
+   :caption: well_log_import_example.py
+
 .. _wells_and_fractures_well_path_from_points:
 
 Well Path From Points
