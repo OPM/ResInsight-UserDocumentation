@@ -77,9 +77,21 @@ Water Flooded PV, also called _Number of flooded porevolumes_ shows the amount o
 Mobile Pore Volume **MOBPORV** is computed based on the grid cell properties **PORV**, **SWCR** and **MULTPV**.
 
 If **MULTPV** is missing, **MULTPV** is set to 1.0.
-If **SWCR** is missing, **SWCR** is et to 0.0.
+If **SWCR** is missing, **SWCR** is set to 0.0.
 
 $ MOBPORV = MULTPV * PORV * (1.0 - SWCR) $
+
+### Mobile Volume Weighted Mean
+
+The **Mobile Volume Weighted Mean** is a statistical calculation that provides a more physically meaningful average of reservoir properties by weighting each cell's contribution according to its mobile pore volume.
+
+This values is displayed as text in the [Info Box in the 3D view]({{% relref "3dviews" %}}#info-box).
+
+$ Weighted Mean = Σ(MOBPORV × Value) / Σ(MOBPORV) $
+
+Where:
+- **MOBPORV** = Mobile Pore Volume (weight for each cell)
+- **Value** = The reservoir property being averaged (e.g., pressure, saturation)
 
 ### Cell Volume
 
