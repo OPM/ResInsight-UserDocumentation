@@ -1046,6 +1046,18 @@ class WellPath(PdmObjectBase):
         return self._call_pdm_method_return_optional_value("AppendFishbones", Fishbones, sub_locations=sub_locations, drilling_type=drilling_type)
 
 
+    def append_lateral(self, well_path_lateral: Optional[WellPath]=None) -> None:
+        """
+        
+
+        Arguments:
+            well_path_lateral (Optional[WellPath]): Well Path Lateral
+        Returns:
+            
+        """
+        self._call_pdm_method_void("AppendLateral", well_path_lateral=well_path_lateral)
+
+
     def append_perforation_interval(self, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, diameter: float=0.000000000000000e+00, skin_factor: float=0.000000000000000e+00) -> Perforation:
         """
         Append Perforation Interval
@@ -1124,17 +1136,16 @@ class ModeledWellPath(WellPath):
         if ModeledWellPath.__custom_init__ is not None:
             ModeledWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def append_lateral(self, tie_in_depth: float=0.000000000000000e+00, lateral_name: str="") -> ModeledWellPath:
+    def append_lateral(self, well_path_lateral: Optional[WellPath]=None) -> None:
         """
-        Append Well Path Lateral
+        
 
         Arguments:
-            tie_in_depth (float): Measured Depth on the Parent Well Path
-            lateral_name (str): Lateral Name
+            well_path_lateral (Optional[WellPath]): Well Path Lateral
         Returns:
-            ModeledWellPath
+            
         """
-        return self._call_pdm_method_return_value("AppendLateral", ModeledWellPath, tie_in_depth=tie_in_depth, lateral_name=lateral_name)
+        self._call_pdm_method_void("AppendLateral", well_path_lateral=well_path_lateral)
 
 
     def duplicate(self, ) -> Optional[ModeledWellPath]:
