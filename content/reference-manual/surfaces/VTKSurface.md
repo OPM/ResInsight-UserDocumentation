@@ -78,10 +78,7 @@ This has three parts:
 ```
 
 ## Cell Types
-- **5** = Triangle
-- **8** = Quad  
-- **10** = Tetrahedron
-- **12** = Hexahedron (cube)
+Currently the cell type **5** - triangle is supported.
 
 ## Data Types
 - **Float32** - Regular numbers (coordinates, properties)
