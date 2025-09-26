@@ -76,6 +76,20 @@ class Reservoir(Case):
         if Reservoir.__custom_init__ is not None:
             Reservoir.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def export_corner_point_grid_internal(self, zcorn_key: str="", coord_key: str="", actnum_key: str="") -> None:
+        """
+        Export Corner Point Grid Internal
+
+        Arguments:
+            zcorn_key (str): 
+            coord_key (str): 
+            actnum_key (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("export_corner_point_grid_internal", zcorn_key=zcorn_key, coord_key=coord_key, actnum_key=actnum_key)
+
+
     def export_values_internal(self, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", result_key: str="", property_type: str="", property_name: str="", time_step: int=0, porosity_model: str="") -> None:
         """
         Export Values Internal
@@ -2836,14 +2850,14 @@ class WellPathCompletionSettings(PdmObjectBase):
     Attributes:
         allow_well_cross_flow (bool): Allow Well Cross-Flow
         auto_well_shut_in (str): One of [SHUT, STOP]
-        drainage_radius_for_pi (str): Drainage Radius for PI
+        drainage_radius_for_pi (Optional[float]): Drainage Radius for PI
         fluid_in_place_region (int): Fluid In-Place Region
         gas_inflow_eq (str): One of [STD, R-G, P-P, GPP]
         group_name_for_export (str): Group Name
         hydrostatic_density (str): One of [SEG, AVG]
         msw_liner_diameter (float): MSW Liner Diameter
         msw_roughness (float): MSW Roughness
-        reference_depth_for_export (str): Reference Depth for BHP
+        reference_depth_for_export (Optional[float]): BHP Reference Depth
         well_bore_fluid_pvt_table (int): Wellbore Fluid PVT table
         well_name_for_export (str): Well Name
         well_type_for_export (str): One of [OIL, GAS, WATER, LIQUID]
@@ -2853,14 +2867,14 @@ class WellPathCompletionSettings(PdmObjectBase):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.allow_well_cross_flow: bool = True
         self.auto_well_shut_in: str = "STOP"
-        self.drainage_radius_for_pi: str = "0.0"
+        self.drainage_radius_for_pi: Optional[float] = None
         self.fluid_in_place_region: int = 0
         self.gas_inflow_eq: str = "STD"
         self.group_name_for_export: str = ""
         self.hydrostatic_density: str = "SEG"
         self.msw_liner_diameter: float = 1.520000000000000e-01
         self.msw_roughness: float = 1.000000000000000e-05
-        self.reference_depth_for_export: str = ""
+        self.reference_depth_for_export: Optional[float] = None
         self.well_bore_fluid_pvt_table: int = 0
         self.well_name_for_export: str = ""
         self.well_type_for_export: str = "OIL"
