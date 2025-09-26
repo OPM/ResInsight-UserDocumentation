@@ -56,6 +56,16 @@ Create Corner Point Grid
    :linenos:
    :caption: create_corner_point_grid.py
 
+.. _case_and_grid_operations_export_corner_point_grid:
+
+Export Corner Point Grid
+------------------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/export_corner_point_grid.py
+   :language: python
+   :linenos:
+   :caption: export_corner_point_grid.py
+
 .. _case_and_grid_operations_grid_information:
 
 Grid Information

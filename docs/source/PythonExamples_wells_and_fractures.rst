@@ -46,6 +46,16 @@ Append Lateral To Well
    :linenos:
    :caption: append_lateral_to_well.py
 
+.. _wells_and_fractures_completion_data:
+
+Completion Data
+---------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/completion_data.py
+   :language: python
+   :linenos:
+   :caption: completion_data.py
+
 .. _wells_and_fractures_create_and_export_stim_plan_model:
 
 Create And Export Stim Plan Model
