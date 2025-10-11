@@ -47,7 +47,7 @@ Create a root folder for Qt installations. In this folder, create a virtual envi
     python3 -m venv myvenv
     myvenv/Scripts/activate
     pip3 install aqtinstall
-    aqt install-qt linux desktop 6.6.3 -m qtcharts qt5compat qtnetworkauth
+    aqt install-qt windows desktop 6.6.3 win64_msvc2019_64 -m qtnetworkauth
    
 
 ### Build ResInsight
