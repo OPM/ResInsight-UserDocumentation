@@ -1660,6 +1660,19 @@ class EclipseView(View):
         self._call_set_method("CellResultData", values)
 
 
+    def visible_cells_internal(self, visibility_key: str="", time_step: int=0) -> None:
+        """
+        Visible Cells Internal
+
+        Arguments:
+            visibility_key (str): 
+            time_step (int): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("visible_cells_internal", visibility_key=visibility_key, time_step=time_step)
+
+
 class EclipseResult(PdmObjectBase):
     """
     An eclipse result definition
