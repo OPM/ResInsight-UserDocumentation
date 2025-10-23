@@ -14,8 +14,9 @@ weight = 10
 Please not that the distribution by the OPM Project will be updated some time after the release of a new version on GitHub.
 {{% /notice %}}
 
-### Ubuntu 
-On the command line do: 
+### Ubuntu (no Python support)
+
+The **apt-get** package does not contain **Python** support due to build server issues. 
 
     sudo apt-get update
     sudo apt-get install software-properties-common
@@ -26,15 +27,17 @@ On the command line do:
 
 Launch the application using the command `ResInsight`
 
+### Ubuntu (nightly build with Python support)
+
+The **apt-get** package does not contain **Python** support due to build server issues. Consider using the latest nightly build for Ubuntu from the development branch for Python support. Please note that this is a development version, and is not as stable as the public release.
+
+    curl -L -O "https://nightly.link/OPM/ResInsight/workflows/ResInsightWithCache/dev/ResInsight-Ubuntu%2024.04%20gcc.zip"
+    unzip "ResInsight-Ubuntu 24.04 gcc.zip"
+
 {{% notice info %}}
 For further installation details, see the ResInsight distribution on [Opm Project Downloading and Installing](http://opm-project.org/?page_id=36).
 {{% /notice %}}
  
-{{% notice info %}}
-The binary distributions does not support ABAQUS odb files. For building ResInsight with ABAQUS support, see 
-[Build Instructions]({{% ref "cmake-configuration.md" %}}).
-{{% /notice %}}
-
 ## Custom Qt configuration
 If you are using a version of Qt that is not available in system path, you need to do the following to make runtime Qt paths available to ResInsight
 
