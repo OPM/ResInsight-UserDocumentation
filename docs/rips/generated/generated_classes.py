@@ -556,6 +556,7 @@ class SummaryCase(PdmObjectBase):
     Attributes:
         auto_shorty_name (bool): Use Auto Display Name
         id (int): Case ID
+        include_in_auto_reload (bool): Include in Automatic Case Reloads
         name_setting (str): One of [FULL_CASE_NAME, SHORT_CASE_NAME, CUSTOM_NAME]
         short_name (str): Display Name
         show_sub_nodes_in_tree (bool): Show Summary Data Sub-Tree
@@ -566,6 +567,7 @@ class SummaryCase(PdmObjectBase):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.auto_shorty_name: bool = False
         self.id: int = -1
+        self.include_in_auto_reload: bool = False
         self.name_setting: str = "FULL_CASE_NAME"
         self.short_name: str = ""
         self.show_sub_nodes_in_tree: bool = True
@@ -2397,6 +2399,7 @@ class SummaryCaseSubCollection(PdmObjectBase):
     Attributes:
         create_auto_name (bool): Auto Name
         id (int): Ensemble ID
+        include_in_auto_reload (bool): Include in Automatic Case Reloads
         is_ensemble (bool): Is Ensemble
         name_count (str): Name
         summary_collection_name (str): Name
@@ -2408,6 +2411,7 @@ class SummaryCaseSubCollection(PdmObjectBase):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.create_auto_name: bool = True
         self.id: int = -1
+        self.include_in_auto_reload: bool = False
         self.is_ensemble: bool = False
         self.name_count: str = "Group"
         self.summary_collection_name: str = "Group"
