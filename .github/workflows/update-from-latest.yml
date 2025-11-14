@@ -89,7 +89,7 @@ jobs:
       - name: Generate Protocol Buffer documentation
         run: |
           cd docs/source
-          python generate_protobuf_docs.py
+          python generate_protobuf_docs.py --config proto_docs_config.json
 
       - name: Create Read the Docs Python examples
         run: |
