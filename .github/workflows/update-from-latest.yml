@@ -86,6 +86,11 @@ jobs:
           echo "Proto files downloaded:"
           ls -la docs/proto/
 
+      - name: Generate Protocol Buffer documentation
+        run: |
+          cd docs/source
+          python generate_protobuf_docs.py
+
       - name: Create Read the Docs Python examples
         run: |
           cd docs/source
@@ -94,7 +99,7 @@ jobs:
       - uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update rips module and Python examples"
-          title: "Automated fixes of rips from ResInsight artifacts"
+          commit-message: "Update rips module, proto files, and Python examples"
+          title: "Automated updates from ResInsight repository"
           branch: artifact-update-rips
           branch-suffix: random   
