@@ -59,11 +59,50 @@ To manually update Protocol Buffer documentation:
 	```
 3. The script will update `docs/source/ProtobufStructures.rst` with current proto definitions
 
+### Advanced Usage
+
+The generator script supports filtering and configuration:
+
+**Include specific proto files only:**
+```sh
+python generate_protobuf_docs.py --include SimulatorTables.proto Definitions.proto
+```
+
+**Exclude specific proto files:**
+```sh
+python generate_protobuf_docs.py --exclude Internal.proto Debug.proto
+```
+
+**Use a configuration file:**
+```sh
+python generate_protobuf_docs.py --config proto_docs_config.json
+```
+
+**Configuration file format (JSON or YAML):**
+```json
+{
+  "include": ["SimulatorTables.proto", "Definitions.proto"],
+  "exclude": ["Internal.proto"],
+  "important_messages": ["SimulatorTableData", "Vec3d"]
+}
+```
+
+**Custom output location:**
+```sh
+python generate_protobuf_docs.py --output custom.rst --proto-dir /path/to/protos
+```
+
+**Command-line help:**
+```sh
+python generate_protobuf_docs.py --help
+```
+
 The generator script parses `.proto` files and creates RST documentation including:
 - Message definitions with field types and descriptions
 - Enum definitions
 - Service definitions (gRPC methods)
 - Cross-references to Python API methods
+- Highlighting of important/commonly-used structures
 
 ## Releasing to Master
 Create a pull request from `next-major-release` to the `master` branch.

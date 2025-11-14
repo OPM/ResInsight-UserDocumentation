@@ -6,15 +6,40 @@ This script parses .proto files from the docs/proto directory and generates
 RST documentation for inclusion in Sphinx documentation.
 
 Usage:
-    python generate_protobuf_docs.py
+    python generate_protobuf_docs.py [options]
 
-The script will update docs/source/ProtobufStructures.rst with current proto definitions.
+    Options:
+        --config FILE       Configuration file with proto file selections (YAML or JSON)
+        --proto-dir DIR     Directory containing .proto files (default: ../proto)
+        --output FILE       Output RST file (default: ProtobufStructures.rst)
+        --include FILE...   Include only these proto files (e.g., SimulatorTables.proto)
+        --exclude FILE...   Exclude these proto files
+        --all               Include all proto files (default)
+
+Configuration file format (YAML):
+    include:
+      - SimulatorTables.proto
+      - Definitions.proto
+    exclude:
+      - Internal.proto
+    important_messages:
+      - SimulatorTableData
+      - Vec3d
+
+Configuration file format (JSON):
+    {
+      "include": ["SimulatorTables.proto", "Definitions.proto"],
+      "exclude": ["Internal.proto"],
+      "important_messages": ["SimulatorTableData", "Vec3d"]
+    }
 """
 
 import os
 import re
+import sys
+import argparse
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Set
 
 
 class ProtoMessage:
@@ -45,21 +70,50 @@ class ProtoService:
 class ProtoParser:
     """Parser for Protocol Buffer .proto files."""
 
-    def __init__(self, proto_dir: Path):
+    def __init__(self, proto_dir: Path, include_files: Optional[Set[str]] = None,
+                 exclude_files: Optional[Set[str]] = None):
         self.proto_dir = proto_dir
+        self.include_files = include_files
+        self.exclude_files = exclude_files or set()
         self.messages: Dict[str, List[ProtoMessage]] = {}
         self.enums: Dict[str, List[ProtoEnum]] = {}
         self.services: Dict[str, List[ProtoService]] = {}
 
+    def should_parse_file(self, proto_file: Path) -> bool:
+        """Determine if a proto file should be parsed based on include/exclude rules."""
+        filename = proto_file.name
+
+        # Check exclude list first
+        if filename in self.exclude_files:
+            return False
+
+        # If include list is specified, only parse files in it
+        if self.include_files is not None:
+            return filename in self.include_files
+
+        # Otherwise, parse all files
+        return True
+
     def parse_all_files(self):
-        """Parse all .proto files in the proto directory."""
+        """Parse all .proto files in the proto directory that match filters."""
         if not self.proto_dir.exists():
             print(f"Warning: Proto directory {self.proto_dir} does not exist")
             return
 
         proto_files = sorted(self.proto_dir.glob("*.proto"))
+        parsed_count = 0
+
         for proto_file in proto_files:
-            self.parse_file(proto_file)
+            if self.should_parse_file(proto_file):
+                self.parse_file(proto_file)
+                parsed_count += 1
+            else:
+                print(f"Skipping {proto_file.name} (excluded or not in include list)")
+
+        if parsed_count == 0:
+            print("Warning: No proto files were parsed!")
+        else:
+            print(f"Parsed {parsed_count} proto file(s)")
 
     def parse_file(self, proto_file: Path):
         """Parse a single .proto file."""
@@ -241,8 +295,8 @@ class RstGenerator:
         'bytes': 'bytes',
     }
 
-    # Important messages to highlight
-    IMPORTANT_MESSAGES = [
+    # Default important messages to highlight
+    DEFAULT_IMPORTANT_MESSAGES = [
         'SimulatorTableData',
         'SimulatorCompdatEntry',
         'SimulatorWelspecsEntry',
@@ -253,8 +307,9 @@ class RstGenerator:
         'CellCorners',
     ]
 
-    def __init__(self, parser: ProtoParser):
+    def __init__(self, parser: ProtoParser, important_messages: Optional[List[str]] = None):
         self.parser = parser
+        self.important_messages = important_messages or self.DEFAULT_IMPORTANT_MESSAGES
 
     def generate(self, output_file: Path):
         """Generate complete RST documentation."""
@@ -302,7 +357,7 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
         content = "\nKey Data Structures\n-------------------\n\n"
         content += "These are the most commonly used Protocol Buffer structures in the ResInsight Python API.\n\n"
 
-        for msg_name in self.IMPORTANT_MESSAGES:
+        for msg_name in self.important_messages:
             for file_key, messages in self.parser.messages.items():
                 for msg in messages:
                     if msg.name == msg_name:
@@ -325,7 +380,7 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
 
             # Messages
             for msg in self.parser.messages[file_key]:
-                if msg.name not in self.IMPORTANT_MESSAGES:
+                if msg.name not in self.important_messages:
                     content += self._format_message(msg, file_key, is_important=False)
 
             # Enums
@@ -517,27 +572,137 @@ External Resources
 """
 
 
+def load_config(config_file: Path) -> Dict:
+    """Load configuration from YAML or JSON file."""
+    import json
+
+    try:
+        # Try YAML first if available
+        import yaml
+        with open(config_file, 'r', encoding='utf-8') as f:
+            return yaml.safe_load(f)
+    except ImportError:
+        # Fall back to JSON
+        with open(config_file, 'r', encoding='utf-8') as f:
+            return json.load(f)
+
+
+def parse_arguments():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(
+        description='Generate Protocol Buffer documentation from .proto files',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Generate documentation for all proto files
+  python generate_protobuf_docs.py --all
+
+  # Include only specific files
+  python generate_protobuf_docs.py --include SimulatorTables.proto Definitions.proto
+
+  # Exclude specific files
+  python generate_protobuf_docs.py --exclude Internal.proto Debug.proto
+
+  # Use configuration file
+  python generate_protobuf_docs.py --config proto_docs_config.yaml
+
+  # Custom output location
+  python generate_protobuf_docs.py --output custom_output.rst --proto-dir /path/to/protos
+        """
+    )
+
+    parser.add_argument('--config', type=Path, metavar='FILE',
+                        help='Configuration file (YAML or JSON)')
+    parser.add_argument('--proto-dir', type=Path, metavar='DIR',
+                        help='Directory containing .proto files (default: ../proto)')
+    parser.add_argument('--output', type=Path, metavar='FILE',
+                        help='Output RST file (default: ProtobufStructures.rst)')
+    parser.add_argument('--include', nargs='+', metavar='FILE',
+                        help='Include only these proto files')
+    parser.add_argument('--exclude', nargs='+', metavar='FILE',
+                        help='Exclude these proto files')
+    parser.add_argument('--all', action='store_true',
+                        help='Include all proto files (default if no filters specified)')
+    parser.add_argument('--important', nargs='+', metavar='MESSAGE',
+                        help='List of important messages to highlight')
+
+    return parser.parse_args()
+
+
 def main():
     """Main function."""
-    # Get paths
+    args = parse_arguments()
+
+    # Get default paths
     script_dir = Path(__file__).parent
     docs_dir = script_dir.parent
-    proto_dir = docs_dir / 'proto'
-    output_file = script_dir / 'ProtobufStructures.rst'
+    default_proto_dir = docs_dir / 'proto'
+    default_output_file = script_dir / 'ProtobufStructures.rst'
+
+    # Initialize configuration
+    config = {}
+    include_files = None
+    exclude_files = set()
+    important_messages = None
+
+    # Load config file if provided
+    if args.config:
+        if not args.config.exists():
+            print(f"Error: Config file {args.config} not found")
+            sys.exit(1)
+
+        print(f"Loading configuration from {args.config}")
+        config = load_config(args.config)
+
+        if 'include' in config:
+            include_files = set(config['include'])
+        if 'exclude' in config:
+            exclude_files = set(config['exclude'])
+        if 'important_messages' in config:
+            important_messages = config['important_messages']
+
+    # Command-line arguments override config file
+    if args.include:
+        include_files = set(args.include)
+    if args.exclude:
+        exclude_files.update(args.exclude)
+    if args.important:
+        important_messages = args.important
+
+    # If --all is specified, clear include list
+    if args.all:
+        include_files = None
+
+    # Set paths
+    proto_dir = args.proto_dir or default_proto_dir
+    output_file = args.output or default_output_file
 
     print("=" * 60)
     print("Generating Protocol Buffer Documentation")
     print("=" * 60)
     print(f"Proto directory: {proto_dir}")
     print(f"Output file: {output_file}")
+
+    if include_files:
+        print(f"Including only: {', '.join(sorted(include_files))}")
+    if exclude_files:
+        print(f"Excluding: {', '.join(sorted(exclude_files))}")
+    if not include_files and not exclude_files:
+        print("Processing: All proto files")
+
     print()
 
+    # Check if proto directory exists
+    if not proto_dir.exists():
+        print(f"Warning: Proto directory {proto_dir} does not exist")
+        print("Creating empty documentation...")
+
     # Parse proto files
-    parser = ProtoParser(proto_dir)
+    parser = ProtoParser(proto_dir, include_files, exclude_files)
     parser.parse_all_files()
 
     # Generate RST documentation
-    generator = RstGenerator(parser)
+    generator = RstGenerator(parser, important_messages)
     generator.generate(output_file)
 
     print()

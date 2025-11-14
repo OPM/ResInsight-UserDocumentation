@@ -1,0 +1,18 @@
+{
+  "comment": "Configuration for Protocol Buffer documentation generation",
+  "include": [
+    "Definitions.proto",
+    "SimulatorTables.proto"
+  ],
+  "exclude": [],
+  "important_messages": [
+    "SimulatorTableData",
+    "SimulatorCompdatEntry",
+    "SimulatorWelspecsEntry",
+    "SimulatorTableRequest",
+    "Vec3d",
+    "Vec3i",
+    "CellCenters",
+    "CellCorners"
+  ]
+}
