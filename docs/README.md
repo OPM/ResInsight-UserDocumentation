@@ -19,7 +19,7 @@ We use an internal system to communicate large binary structures between Python 
 	```
 5. Install Sphinx dependencies:
 	```sh
-	pip install m2r sphinx_rtd_theme
+	pip install m2r2 sphinx_rtd_theme sphinx-automodapi
 	```
 6. Open a command line in the **docs** folder
 7. Run:
