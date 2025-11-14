@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package rips;
+
+import "Definitions.proto";
+
+service KeyValueStore {
+  rpc SetValue(stream KeyValueStoreInputChunk)
+      returns (ClientToServerStreamReply) {}
+  rpc GetValue(KeyValueStoreOutputRequest)
+      returns (stream KeyValueStoreOutputChunk) {}
+  rpc RemoveValue(KeyValueStoreRemoveRequest) returns (Empty) {}
+}
+
+message KeyValueStoreInputChunk {
+  oneof KeyValueStoreChunkType {
+    KeyValueInputParameters parameters = 1;
+    KeyValueStoreChunk values = 2;
+  }
+}
+
+message KeyValueInputParameters {
+  // Name needs to be sent in the first message
+  string name = 1;
+  int64 num_elements = 2;
+}
+
+message KeyValueStoreChunk { repeated float values = 1; }
+
+message KeyValueStoreOutputRequest { string name = 1; }
+
+message KeyValueStoreOutputChunk { repeated float values = 1; }
+
+message KeyValueStoreRemoveRequest { string name = 1; }
