@@ -451,7 +451,8 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
         # Create table header
         content = ".. list-table::\n"
         content += "   :header-rows: 1\n"
-        content += "   :widths: 30 20 50\n\n"
+        content += "   :widths: 30 20 50\n"
+        content += "   :class: plain-table\n\n"
         content += "   * - Field\n"
         content += "     - Type\n"
         content += "     - Description\n"
@@ -465,8 +466,9 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
             elif field['modifier'] == 'optional':
                 python_type = f"{python_type} | None"
 
-            field_name = f"``{field['name']}``"
-            type_name = f"``{python_type}``"
+            # Use plain text without code formatting
+            field_name = field['name']
+            type_name = python_type
             description = field['description'] if field['description'] else ""
 
             content += f"   * - {field_name}\n"

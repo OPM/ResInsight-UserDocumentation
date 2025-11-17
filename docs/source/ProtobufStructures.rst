@@ -36,15 +36,16 @@ SimulatorTableData
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``compdat``
-     - ``list[SimulatorCompdatEntry]``
+   * - compdat
+     - list[SimulatorCompdatEntry]
      - 
-   * - ``welspecs``
-     - ``list[SimulatorWelspecsEntry]``
+   * - welspecs
+     - list[SimulatorWelspecsEntry]
      - 
 
 
@@ -59,27 +60,28 @@ SimulatorCompdatEntry
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``well_name``
-     - ``str``
+   * - well_name
+     - str
      - 
-   * - ``grid_i``
-     - ``int``
+   * - grid_i
+     - int
      - 
-   * - ``grid_j``
-     - ``int``
+   * - grid_j
+     - int
      - 
-   * - ``upper_k``
-     - ``int``
+   * - upper_k
+     - int
      - 
-   * - ``lower_k``
-     - ``int``
+   * - lower_k
+     - int
      - 
-   * - ``open_shut_flag``
-     - ``str``
+   * - open_shut_flag
+     - str
      - 
 
 
@@ -88,39 +90,40 @@ SimulatorCompdatEntry
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``saturation``
-     - ``float | None``
+   * - saturation
+     - float | None
      - 
-   * - ``transmissibility``
-     - ``float | None``
+   * - transmissibility
+     - float | None
      - 
-   * - ``diameter``
-     - ``float | None``
+   * - diameter
+     - float | None
      - 
-   * - ``kh``
-     - ``float | None``
+   * - kh
+     - float | None
      - 
-   * - ``skin_factor``
-     - ``float | None``
+   * - skin_factor
+     - float | None
      - 
-   * - ``d_factor``
-     - ``float | None``
+   * - d_factor
+     - float | None
      - 
-   * - ``direction``
-     - ``str | None``
+   * - direction
+     - str | None
      - 
-   * - ``start_md``
-     - ``float | None``
+   * - start_md
+     - float | None
      - 
-   * - ``end_md``
-     - ``float | None``
+   * - end_md
+     - float | None
      - 
-   * - ``comment``
-     - ``str | None``
+   * - comment
+     - str | None
      - 
 
 
@@ -135,24 +138,25 @@ SimulatorWelspecsEntry
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``well_name``
-     - ``str``
+   * - well_name
+     - str
      - 
-   * - ``group_name``
-     - ``str``
+   * - group_name
+     - str
      - 
-   * - ``grid_i``
-     - ``int``
+   * - grid_i
+     - int
      - 
-   * - ``grid_j``
-     - ``int``
+   * - grid_j
+     - int
      - 
-   * - ``phase``
-     - ``str``
+   * - phase
+     - str
      - 
 
 
@@ -161,33 +165,34 @@ SimulatorWelspecsEntry
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``bhp_depth``
-     - ``float | None``
+   * - bhp_depth
+     - float | None
      - 
-   * - ``drainage_radius``
-     - ``float | None``
+   * - drainage_radius
+     - float | None
      - 
-   * - ``inflow_equation``
-     - ``str | None``
+   * - inflow_equation
+     - str | None
      - 
-   * - ``auto_shut_in``
-     - ``str | None``
+   * - auto_shut_in
+     - str | None
      - 
-   * - ``cross_flow``
-     - ``str | None``
+   * - cross_flow
+     - str | None
      - 
-   * - ``pvt_num``
-     - ``int | None``
+   * - pvt_num
+     - int | None
      - 
-   * - ``hydrostatic_density_calc``
-     - ``str | None``
+   * - hydrostatic_density_calc
+     - str | None
      - 
-   * - ``fip_region``
-     - ``int | None``
+   * - fip_region
+     - int | None
      - 
 
 
@@ -202,15 +207,16 @@ SimulatorTableRequest
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``wellpath_name``
-     - ``str``
+   * - wellpath_name
+     - str
      - 
-   * - ``case_id``
-     - ``int``
+   * - case_id
+     - int
      - 
 
 
@@ -225,18 +231,19 @@ Vec3d
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``x``
-     - ``float``
+   * - x
+     - float
      - 
-   * - ``y``
-     - ``float``
+   * - y
+     - float
      - 
-   * - ``z``
-     - ``float``
+   * - z
+     - float
      - 
 
 
@@ -251,18 +258,19 @@ Vec3i
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``i``
-     - ``int``
+   * - i
+     - int
      - 
-   * - ``j``
-     - ``int``
+   * - j
+     - int
      - 
-   * - ``k``
-     - ``int``
+   * - k
+     - int
      - 
 
 
@@ -284,33 +292,34 @@ CellCorners
 .. list-table::
    :header-rows: 1
    :widths: 30 20 50
+   :class: plain-table
 
    * - Field
      - Type
      - Description
-   * - ``c0``
-     - ``Vec3d``
+   * - c0
+     - Vec3d
      - 
-   * - ``c1``
-     - ``Vec3d``
+   * - c1
+     - Vec3d
      - 
-   * - ``c2``
-     - ``Vec3d``
+   * - c2
+     - Vec3d
      - 
-   * - ``c3``
-     - ``Vec3d``
+   * - c3
+     - Vec3d
      - 
-   * - ``c4``
-     - ``Vec3d``
+   * - c4
+     - Vec3d
      - 
-   * - ``c5``
-     - ``Vec3d``
+   * - c5
+     - Vec3d
      - 
-   * - ``c6``
-     - ``Vec3d``
+   * - c6
+     - Vec3d
      - 
-   * - ``c7``
-     - ``Vec3d``
+   * - c7
+     - Vec3d
      - 
 
 
