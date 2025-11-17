@@ -39,6 +39,11 @@ class WellPathStub(object):
                 request_serializer=SimulatorTables__pb2.SimulatorTableRequest.SerializeToString,
                 response_deserializer=SimulatorTables__pb2.SimulatorTableData.FromString,
                 _registered_method=True)
+        self.GetCompletionDataUnified = channel.unary_unary(
+                '/rips.WellPath/GetCompletionDataUnified',
+                request_serializer=SimulatorTables__pb2.SimulatorTableUnifiedRequest.SerializeToString,
+                response_deserializer=SimulatorTables__pb2.SimulatorTableData.FromString,
+                _registered_method=True)
 
 
 class WellPathServicer(object):
@@ -50,12 +55,23 @@ class WellPathServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetCompletionDataUnified(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_WellPathServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'GetCompletionData': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCompletionData,
                     request_deserializer=SimulatorTables__pb2.SimulatorTableRequest.FromString,
+                    response_serializer=SimulatorTables__pb2.SimulatorTableData.SerializeToString,
+            ),
+            'GetCompletionDataUnified': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetCompletionDataUnified,
+                    request_deserializer=SimulatorTables__pb2.SimulatorTableUnifiedRequest.FromString,
                     response_serializer=SimulatorTables__pb2.SimulatorTableData.SerializeToString,
             ),
     }
@@ -85,6 +101,33 @@ class WellPath(object):
             target,
             '/rips.WellPath/GetCompletionData',
             SimulatorTables__pb2.SimulatorTableRequest.SerializeToString,
+            SimulatorTables__pb2.SimulatorTableData.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetCompletionDataUnified(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/rips.WellPath/GetCompletionDataUnified',
+            SimulatorTables__pb2.SimulatorTableUnifiedRequest.SerializeToString,
             SimulatorTables__pb2.SimulatorTableData.FromString,
             options,
             channel_credentials,
