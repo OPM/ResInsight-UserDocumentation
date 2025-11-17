@@ -424,39 +424,57 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
 
             if required_fields:
                 content += "**Attributes:**\n\n"
-                for field in required_fields:
-                    content += self._format_field(field)
+                content += self._format_fields_table(required_fields)
 
             if repeated_fields:
                 # Add newline separator only if there were previous fields
                 if required_fields:
                     content += "\n"
                 content += "**Repeated Fields:**\n\n"
-                for field in repeated_fields:
-                    content += self._format_field(field)
+                content += self._format_fields_table(repeated_fields)
 
             if optional_fields:
                 # Add newline separator only if there were previous fields
                 if required_fields or repeated_fields:
                     content += "\n"
                 content += "**Optional Attributes:**\n\n"
-                for field in optional_fields:
-                    content += self._format_field(field)
+                content += self._format_fields_table(optional_fields)
 
         content += "\n"
         return content
 
-    def _format_field(self, field: Dict) -> str:
-        """Format a field as RST."""
-        python_type = self.TYPE_MAP.get(field['type'], field['type'])
+    def _format_fields_table(self, fields: List[Dict]) -> str:
+        """Format fields as an RST table."""
+        if not fields:
+            return ""
 
-        if field['modifier'] == 'repeated':
-            python_type = f"list[{python_type}]"
-        elif field['modifier'] == 'optional':
-            python_type = f"{python_type} | None"
+        # Create table header
+        content = ".. list-table::\n"
+        content += "   :header-rows: 1\n"
+        content += "   :widths: 30 20 50\n\n"
+        content += "   * - Field\n"
+        content += "     - Type\n"
+        content += "     - Description\n"
 
-        desc = f" - {field['description']}" if field['description'] else ""
-        return f"* ``{field['name']}`` ({python_type}){desc}\n"
+        # Add each field as a table row
+        for field in fields:
+            python_type = self.TYPE_MAP.get(field['type'], field['type'])
+
+            if field['modifier'] == 'repeated':
+                python_type = f"list[{python_type}]"
+            elif field['modifier'] == 'optional':
+                python_type = f"{python_type} | None"
+
+            field_name = f"``{field['name']}``"
+            type_name = f"``{python_type}``"
+            description = field['description'] if field['description'] else ""
+
+            content += f"   * - {field_name}\n"
+            content += f"     - {type_name}\n"
+            content += f"     - {description}\n"
+
+        content += "\n"
+        return content
 
     def _format_enum(self, enum: ProtoEnum) -> str:
         """Format an enum as RST."""

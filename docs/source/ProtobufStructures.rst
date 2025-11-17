@@ -33,8 +33,20 @@ SimulatorTableData
 
 **Repeated Fields:**
 
-* ``compdat`` (list[SimulatorCompdatEntry])
-* ``welspecs`` (list[SimulatorWelspecsEntry])
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``compdat``
+     - ``list[SimulatorCompdatEntry]``
+     - 
+   * - ``welspecs``
+     - ``list[SimulatorWelspecsEntry]``
+     - 
+
 
 
 SimulatorCompdatEntry
@@ -44,25 +56,73 @@ SimulatorCompdatEntry
 
 **Attributes:**
 
-* ``well_name`` (str)
-* ``grid_i`` (int)
-* ``grid_j`` (int)
-* ``upper_k`` (int)
-* ``lower_k`` (int)
-* ``open_shut_flag`` (str)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``well_name``
+     - ``str``
+     - 
+   * - ``grid_i``
+     - ``int``
+     - 
+   * - ``grid_j``
+     - ``int``
+     - 
+   * - ``upper_k``
+     - ``int``
+     - 
+   * - ``lower_k``
+     - ``int``
+     - 
+   * - ``open_shut_flag``
+     - ``str``
+     - 
+
 
 **Optional Attributes:**
 
-* ``saturation`` (float | None)
-* ``transmissibility`` (float | None)
-* ``diameter`` (float | None)
-* ``kh`` (float | None)
-* ``skin_factor`` (float | None)
-* ``d_factor`` (float | None)
-* ``direction`` (str | None)
-* ``start_md`` (float | None)
-* ``end_md`` (float | None)
-* ``comment`` (str | None)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``saturation``
+     - ``float | None``
+     - 
+   * - ``transmissibility``
+     - ``float | None``
+     - 
+   * - ``diameter``
+     - ``float | None``
+     - 
+   * - ``kh``
+     - ``float | None``
+     - 
+   * - ``skin_factor``
+     - ``float | None``
+     - 
+   * - ``d_factor``
+     - ``float | None``
+     - 
+   * - ``direction``
+     - ``str | None``
+     - 
+   * - ``start_md``
+     - ``float | None``
+     - 
+   * - ``end_md``
+     - ``float | None``
+     - 
+   * - ``comment``
+     - ``str | None``
+     - 
+
 
 
 SimulatorWelspecsEntry
@@ -72,22 +132,64 @@ SimulatorWelspecsEntry
 
 **Attributes:**
 
-* ``well_name`` (str)
-* ``group_name`` (str)
-* ``grid_i`` (int)
-* ``grid_j`` (int)
-* ``phase`` (str)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``well_name``
+     - ``str``
+     - 
+   * - ``group_name``
+     - ``str``
+     - 
+   * - ``grid_i``
+     - ``int``
+     - 
+   * - ``grid_j``
+     - ``int``
+     - 
+   * - ``phase``
+     - ``str``
+     - 
+
 
 **Optional Attributes:**
 
-* ``bhp_depth`` (float | None)
-* ``drainage_radius`` (float | None)
-* ``inflow_equation`` (str | None)
-* ``auto_shut_in`` (str | None)
-* ``cross_flow`` (str | None)
-* ``pvt_num`` (int | None)
-* ``hydrostatic_density_calc`` (str | None)
-* ``fip_region`` (int | None)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``bhp_depth``
+     - ``float | None``
+     - 
+   * - ``drainage_radius``
+     - ``float | None``
+     - 
+   * - ``inflow_equation``
+     - ``str | None``
+     - 
+   * - ``auto_shut_in``
+     - ``str | None``
+     - 
+   * - ``cross_flow``
+     - ``str | None``
+     - 
+   * - ``pvt_num``
+     - ``int | None``
+     - 
+   * - ``hydrostatic_density_calc``
+     - ``str | None``
+     - 
+   * - ``fip_region``
+     - ``int | None``
+     - 
+
 
 
 SimulatorTableRequest
@@ -97,8 +199,20 @@ SimulatorTableRequest
 
 **Attributes:**
 
-* ``wellpath_name`` (str)
-* ``case_id`` (int)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``wellpath_name``
+     - ``str``
+     - 
+   * - ``case_id``
+     - ``int``
+     - 
+
 
 
 Vec3d
@@ -108,9 +222,23 @@ Vec3d
 
 **Attributes:**
 
-* ``x`` (float)
-* ``y`` (float)
-* ``z`` (float)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``x``
+     - ``float``
+     - 
+   * - ``y``
+     - ``float``
+     - 
+   * - ``z``
+     - ``float``
+     - 
+
 
 
 Vec3i
@@ -120,9 +248,23 @@ Vec3i
 
 **Attributes:**
 
-* ``i`` (int)
-* ``j`` (int)
-* ``k`` (int)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``i``
+     - ``int``
+     - 
+   * - ``j``
+     - ``int``
+     - 
+   * - ``k``
+     - ``int``
+     - 
+
 
 
 CellCenters
@@ -139,14 +281,38 @@ CellCorners
 
 **Attributes:**
 
-* ``c0`` (Vec3d)
-* ``c1`` (Vec3d)
-* ``c2`` (Vec3d)
-* ``c3`` (Vec3d)
-* ``c4`` (Vec3d)
-* ``c5`` (Vec3d)
-* ``c6`` (Vec3d)
-* ``c7`` (Vec3d)
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+
+   * - Field
+     - Type
+     - Description
+   * - ``c0``
+     - ``Vec3d``
+     - 
+   * - ``c1``
+     - ``Vec3d``
+     - 
+   * - ``c2``
+     - ``Vec3d``
+     - 
+   * - ``c3``
+     - ``Vec3d``
+     - 
+   * - ``c4``
+     - ``Vec3d``
+     - 
+   * - ``c5``
+     - ``Vec3d``
+     - 
+   * - ``c6``
+     - ``Vec3d``
+     - 
+   * - ``c7``
+     - ``Vec3d``
+     - 
+
 
 
 Complete Structure Reference
