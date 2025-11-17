@@ -47,6 +47,18 @@ SimulatorTableData
    * - welspecs
      - list[SimulatorWelspecsEntry]
      - 
+   * - welsegs
+     - list[SimulatorWelsegsEntry]
+     - 
+   * - compsegs
+     - list[SimulatorCompsegsEntry]
+     - 
+   * - wsegvalv
+     - list[SimulatorWsegvalvEntry]
+     - 
+   * - wsegaicd
+     - list[SimulatorWsegaicdEntry]
+     - 
 
 
 
@@ -355,6 +367,393 @@ CellCornersArray
 
 SimulatorTables.proto
 ~~~~~~~~~~~~~~~~~~~~~
+
+
+SimulatorTableUnifiedRequest
+""""""""""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - case_id
+     - int
+     - 
+
+
+**Repeated Fields:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - wellpath_names
+     - list[str]
+     - 
+
+
+
+SimulatorWelsegsHeaderEntry
+"""""""""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - well_name
+     - str
+     - 
+   * - top_depth
+     - float
+     - 
+   * - top_length
+     - float
+     - 
+   * - info_type
+     - str
+     - 
+
+
+**Optional Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - wellbore_volume
+     - float | None
+     - 
+   * - pressure_omponents
+     - str | None
+     - 
+   * - flow_model
+     - str | None
+     - 
+
+
+
+SimulatorWelsegsRowEntry
+""""""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - segment_1
+     - int
+     - 
+   * - segment_2
+     - int
+     - 
+   * - branch
+     - int
+     - 
+   * - join_segment
+     - int
+     - 
+   * - length
+     - float
+     - 
+   * - depth
+     - float
+     - 
+
+
+**Optional Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - diameter
+     - float | None
+     - 
+   * - roughness
+     - float | None
+     - 
+   * - description
+     - str | None
+     - 
+
+
+
+SimulatorWelsegsEntry
+"""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - header
+     - SimulatorWelsegsHeaderEntry
+     - 
+
+
+**Repeated Fields:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - row
+     - list[SimulatorWelsegsRowEntry]
+     - 
+
+
+
+SimulatorCompsegsEntry
+""""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - i
+     - int
+     - 
+   * - j
+     - int
+     - 
+   * - k
+     - int
+     - 
+   * - branch
+     - int
+     - 
+   * - distance_start
+     - float
+     - 
+   * - distance_end
+     - float
+     - 
+
+
+**Optional Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - grid_name
+     - str | None
+     - 
+
+
+
+SimulatorWsegvalvEntry
+""""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - well_name
+     - str
+     - 
+   * - segment_number
+     - int
+     - 
+   * - cv
+     - float
+     - 
+   * - area
+     - float
+     - 
+
+
+**Optional Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - extra_length
+     - float | None
+     - 
+   * - pipe_d
+     - float | None
+     - 
+   * - roughness
+     - float | None
+     - 
+   * - pipe_a
+     - float | None
+     - 
+   * - status
+     - str | None
+     - 
+   * - max_a
+     - float | None
+     - 
+
+
+
+SimulatorWsegaicdEntry
+""""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - well_name
+     - str
+     - 
+   * - segment_1
+     - int
+     - 
+   * - segment_2
+     - int
+     - 
+   * - strength
+     - float
+     - 
+   * - max_abs_rate
+     - float
+     - 
+   * - flow_rate_exponent
+     - float
+     - 
+   * - visc_exponent
+     - float
+     - 
+
+
+**Optional Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - length
+     - float | None
+     - 
+   * - density_cali
+     - float | None
+     - 
+   * - viscosity_cali
+     - float | None
+     - 
+   * - critical_value
+     - float | None
+     - 
+   * - width_trans
+     - float | None
+     - 
+   * - max_visc_ratio
+     - float | None
+     - 
+   * - method_scaling_factor
+     - int | None
+     - 
+   * - status
+     - str | None
+     - 
+   * - oil_flow_fraction
+     - float | None
+     - 
+   * - water_flow_fraction
+     - float | None
+     - 
+   * - gas_flow_fraction
+     - float | None
+     - 
+   * - oil_visc_fraction
+     - float | None
+     - 
+   * - water_visc_fraction
+     - float | None
+     - 
+   * - gas_visc_fraction
+     - float | None
+     - 
+   * - description
+     - str | None
+     - 
+
 
 
 WellPath Service
