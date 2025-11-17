@@ -36,8 +36,8 @@ Contents
    Installation
    rips
    GeneratedClasses
-   ProtobufStructures
    PythonExamples
+   ProtobufStructures
    commands
    
 
