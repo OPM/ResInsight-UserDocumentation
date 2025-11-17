@@ -61,6 +61,36 @@ jobs:
           cp -r upstream_rips/rips*/rips ./docs/
           # ls -R ./docs/rips
 
+      - name: Download proto files from ResInsight repository
+        run: |
+          # Create proto directory
+          mkdir -p docs/proto
+
+          # Get list of proto files from the GrpcProtos directory
+          curl -H "Authorization: token ${{ secrets.PAT }}" \
+          https://api.github.com/repos/OPM/ResInsight/contents/GrpcInterface/GrpcProtos?ref=dev \
+          -o proto_files.json
+
+          # Download each proto file
+          for file in $(jq -r '.[] | select(.name | endswith(".proto")) | .download_url' proto_files.json); do
+            filename=$(basename "$file")
+            echo "Downloading $filename"
+            curl -H "Authorization: token ${{ secrets.PAT }}" \
+            -L "$file" \
+            -o "docs/proto/$filename"
+          done
+
+          # Clean up
+          rm proto_files.json
+
+          echo "Proto files downloaded:"
+          ls -la docs/proto/
+
+      - name: Generate Protocol Buffer documentation
+        run: |
+          cd docs/source
+          python generate_protobuf_docs.py --config proto_docs_config.json
+
       - name: Create Read the Docs Python examples
         run: |
           cd docs/source
@@ -69,7 +99,7 @@ jobs:
       - uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update rips module and Python examples"
-          title: "Automated fixes of rips from ResInsight artifacts"
+          commit-message: "Update rips module, proto files, and Python examples"
+          title: "Automated updates from ResInsight repository"
           branch: artifact-update-rips
           branch-suffix: random   

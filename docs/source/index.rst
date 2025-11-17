@@ -36,6 +36,7 @@ Contents
    Installation
    rips
    GeneratedClasses
+   ProtobufStructures
    PythonExamples
    commands
    
