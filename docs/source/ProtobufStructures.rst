@@ -12,8 +12,8 @@ ResInsight uses Protocol Buffers (protobuf) for efficient data serialization and
 
 The generated Python classes from these protobuf files are used as return types and parameters in many rips API methods.
 
-Source Files msj
-~~~~~~~~~~~~~~~~
+Source Files
+~~~~~~~~~~~~
 
 The Protocol Buffer definition files (.proto) are automatically downloaded from the `ResInsight repository <https://github.com/OPM/ResInsight/tree/dev/GrpcInterface/GrpcProtos>`_ and stored in the ``docs/proto`` directory.
 
