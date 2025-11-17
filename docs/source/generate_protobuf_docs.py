@@ -163,7 +163,14 @@ class ProtoParser:
                 msg_name = msg_match.group(1)
                 msg = ProtoMessage(msg_name, comment)
 
-                # Parse fields
+                # Check if message is on single line (e.g., "message Empty {}")
+                if '}' in line:
+                    # Single-line message, no fields
+                    self.messages[file_key].append(msg)
+                    i += 1
+                    continue
+
+                # Parse fields for multi-line messages
                 i += 1
                 brace_count = 1
                 while i < len(lines) and brace_count > 0:
@@ -395,8 +402,14 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
 
     def _format_message(self, msg: ProtoMessage, file_key: str, is_important: bool) -> str:
         """Format a message as RST."""
-        content = f"\n{msg.name}\n"
-        content += ("^" if is_important else "\"") * len(msg.name) + "\n\n"
+        # Use proper RST heading levels
+        # Level 3 (~~~) for important messages, Level 4 (""") for others in Complete Reference
+        if is_important:
+            content = f"\n{msg.name}\n"
+            content += "~" * len(msg.name) + "\n\n"
+        else:
+            content = f"\n{msg.name}\n"
+            content += "\"" * len(msg.name) + "\n\n"
 
         if msg.description:
             content += f"{msg.description}\n\n"
@@ -404,24 +417,29 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
         content += f"**Source:** ``{file_key}.proto``\n\n"
 
         if msg.fields:
-            # Separate required and optional fields
-            required_fields = [f for f in msg.fields if f['modifier'] != 'optional']
-            optional_fields = [f for f in msg.fields if f['modifier'] == 'optional']
+            # Separate fields by modifier
+            required_fields = [f for f in msg.fields if f['modifier'] not in ('optional', 'repeated')]
             repeated_fields = [f for f in msg.fields if f['modifier'] == 'repeated']
+            optional_fields = [f for f in msg.fields if f['modifier'] == 'optional']
 
             if required_fields:
                 content += "**Attributes:**\n\n"
                 for field in required_fields:
-                    if field['modifier'] != 'repeated':
-                        content += self._format_field(field)
+                    content += self._format_field(field)
 
             if repeated_fields:
-                content += "\n**Repeated Fields:**\n\n"
+                # Add newline separator only if there were previous fields
+                if required_fields:
+                    content += "\n"
+                content += "**Repeated Fields:**\n\n"
                 for field in repeated_fields:
                     content += self._format_field(field)
 
             if optional_fields:
-                content += "\n**Optional Attributes:**\n\n"
+                # Add newline separator only if there were previous fields
+                if required_fields or repeated_fields:
+                    content += "\n"
+                content += "**Optional Attributes:**\n\n"
                 for field in optional_fields:
                     content += self._format_field(field)
 

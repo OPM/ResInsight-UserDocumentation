@@ -12,8 +12,8 @@ ResInsight uses Protocol Buffers (protobuf) for efficient data serialization and
 
 The generated Python classes from these protobuf files are used as return types and parameters in many rips API methods.
 
-Source Files
-~~~~~~~~~~~~
+Source Files msj
+~~~~~~~~~~~~~~~~
 
 The Protocol Buffer definition files (.proto) are automatically downloaded from the `ResInsight repository <https://github.com/OPM/ResInsight/tree/dev/GrpcInterface/GrpcProtos>`_ and stored in the ``docs/proto`` directory.
 
@@ -27,12 +27,9 @@ These are the most commonly used Protocol Buffer structures in the ResInsight Py
 
 
 SimulatorTableData
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 **Source:** ``SimulatorTables.proto``
-
-**Attributes:**
-
 
 **Repeated Fields:**
 
@@ -41,7 +38,7 @@ SimulatorTableData
 
 
 SimulatorCompdatEntry
-^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~
 
 **Source:** ``SimulatorTables.proto``
 
@@ -69,7 +66,7 @@ SimulatorCompdatEntry
 
 
 SimulatorWelspecsEntry
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 **Source:** ``SimulatorTables.proto``
 
@@ -94,7 +91,7 @@ SimulatorWelspecsEntry
 
 
 SimulatorTableRequest
-^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~
 
 **Source:** ``SimulatorTables.proto``
 
@@ -102,6 +99,54 @@ SimulatorTableRequest
 
 * ``wellpath_name`` (str)
 * ``case_id`` (int)
+
+
+Vec3d
+~~~~~
+
+**Source:** ``Definitions.proto``
+
+**Attributes:**
+
+* ``x`` (float)
+* ``y`` (float)
+* ``z`` (float)
+
+
+Vec3i
+~~~~~
+
+**Source:** ``Definitions.proto``
+
+**Attributes:**
+
+* ``i`` (int)
+* ``j`` (int)
+* ``k`` (int)
+
+
+CellCenters
+~~~~~~~~~~~
+
+**Source:** ``Definitions.proto``
+
+
+
+CellCorners
+~~~~~~~~~~~
+
+**Source:** ``Definitions.proto``
+
+**Attributes:**
+
+* ``c0`` (Vec3d)
+* ``c1`` (Vec3d)
+* ``c2`` (Vec3d)
+* ``c3`` (Vec3d)
+* ``c4`` (Vec3d)
+* ``c5`` (Vec3d)
+* ``c6`` (Vec3d)
+* ``c7`` (Vec3d)
 
 
 Complete Structure Reference
@@ -117,28 +162,20 @@ Empty
 
 **Source:** ``Definitions.proto``
 
-**Attributes:**
 
-* ``accepted_value_count`` (int)
-* ``i`` (int)
-* ``j`` (int)
-* ``k`` (int)
-* ``x`` (float)
-* ``y`` (float)
-* ``z`` (float)
-* ``c0`` (Vec3d)
-* ``c1`` (Vec3d)
-* ``c2`` (Vec3d)
-* ``c3`` (Vec3d)
-* ``c4`` (Vec3d)
-* ``c5`` (Vec3d)
-* ``c6`` (Vec3d)
-* ``c7`` (Vec3d)
 
-**Repeated Fields:**
+ClientToServerStreamReply
+"""""""""""""""""""""""""
 
-* ``centers`` (list[Vec3d])
-* ``cells`` (list[CellCorners])
+**Source:** ``Definitions.proto``
+
+
+
+CellCornersArray
+""""""""""""""""
+
+**Source:** ``Definitions.proto``
+
 
 
 SimulatorTables.proto
