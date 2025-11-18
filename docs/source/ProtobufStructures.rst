@@ -26,6 +26,8 @@ Key Data Structures
 These are the most commonly used Protocol Buffer structures in the ResInsight Python API.
 
 
+.. _simulatortabledata:
+
 SimulatorTableData
 ~~~~~~~~~~~~~~~~~~
 
@@ -61,6 +63,8 @@ SimulatorTableData
      - 
 
 
+
+.. _simulatorcompdatentry:
 
 SimulatorCompdatEntry
 ~~~~~~~~~~~~~~~~~~~~~
@@ -140,6 +144,8 @@ SimulatorCompdatEntry
 
 
 
+.. _simulatorwelspecsentry:
+
 SimulatorWelspecsEntry
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -209,6 +215,8 @@ SimulatorWelspecsEntry
 
 
 
+.. _simulatortablerequest:
+
 SimulatorTableRequest
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -232,6 +240,8 @@ SimulatorTableRequest
      - 
 
 
+
+.. _vec3d:
 
 Vec3d
 ~~~~~
@@ -260,6 +270,8 @@ Vec3d
 
 
 
+.. _vec3i:
+
 Vec3i
 ~~~~~
 
@@ -287,12 +299,16 @@ Vec3i
 
 
 
+.. _cellcenters:
+
 CellCenters
 ~~~~~~~~~~~
 
 **Source:** ``Definitions.proto``
 
 
+
+.. _cellcorners:
 
 CellCorners
 ~~~~~~~~~~~

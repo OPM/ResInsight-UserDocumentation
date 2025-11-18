@@ -404,8 +404,13 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
         """Format a message as RST."""
         # Use proper RST heading levels
         # Level 3 (~~~) for important messages, Level 4 (""") for others in Complete Reference
+        content = ""
+        
+        # Add RST label for important messages to enable cross-references
         if is_important:
-            content = f"\n{msg.name}\n"
+            # Create lowercase label for referencing (e.g., SimulatorTableData -> simulatortabledata)
+            label = msg.name.lower()
+            content = f"\n.. _{label}:\n\n{msg.name}\n"
             content += "~" * len(msg.name) + "\n\n"
         else:
             content = f"\n{msg.name}\n"

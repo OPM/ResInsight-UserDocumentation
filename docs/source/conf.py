@@ -58,6 +58,17 @@ master_doc = 'index'
 napoleon_google_docstring = True
 smartquotes = False
 
+# Clean up automodapi generated files in source after build to make sure we get a full rebuild next time
+def cleanup_automodapi_files(app, exception):
+    """Remove automodapi generated files from source directory after build."""
+    import shutil
+    api_dir = os.path.join(app.srcdir, 'api')
+    if os.path.exists(api_dir):
+        shutil.rmtree(api_dir)
+
+def setup(app):
+    app.connect('build-finished', cleanup_automodapi_files)
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
