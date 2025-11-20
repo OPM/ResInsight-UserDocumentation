@@ -217,13 +217,13 @@ class SurfaceInterface(PdmObjectBase):
     """
     Attributes:
         depth_offset (float): Depth Offset
-        surface_user_decription (str): Name
+        surface_user_description (str): Name
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.depth_offset: float = 0.000000000000000e+00
-        self.surface_user_decription: str = ""
+        self.surface_user_description: str = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SurfaceInterface.__custom_init__ is not None:
             SurfaceInterface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -404,12 +404,12 @@ class EnsembleStatisticsSurface(SurfaceInterface):
 class SurfaceCollection(PdmObjectBase):
     """
     Attributes:
-        surface_user_decription (str): Name
+        surface_user_description (str): Name
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.surface_user_decription: str = "Surfaces"
+        self.surface_user_description: str = "Surfaces"
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SurfaceCollection.__custom_init__ is not None:
             SurfaceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -777,7 +777,7 @@ class FractureTemplateCollection(PdmObjectBase):
         Create a new StimPlan Fracture Template
 
         Arguments:
-            file_path (str): File Path to StimPlan Countour File
+            file_path (str): File Path to StimPlan Contour File
         Returns:
             StimPlanFractureTemplate
         """
