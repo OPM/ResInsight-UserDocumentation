@@ -463,7 +463,7 @@ SimulatorWelsegsHeaderEntry
    * - wellbore_volume
      - float | None
      - 
-   * - pressure_omponents
+   * - pressure_components
      - str | None
      - 
    * - flow_model
