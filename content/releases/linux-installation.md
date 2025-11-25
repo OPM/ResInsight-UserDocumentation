@@ -31,12 +31,22 @@ Launch the application using the command `ResInsight`
 
 The **apt-get** package does not contain **Python** support due to build server issues. Consider using the latest nightly build for Ubuntu from the development branch for Python support. Please note that this is a development version, and is not as stable as the public release.
 
-    curl -L -O "https://nightly.link/OPM/ResInsight/workflows/ResInsightWithCache/dev/ResInsight-Ubuntu%2024.04%20gcc.zip"
-    unzip "ResInsight-Ubuntu 24.04 gcc.zip"
+1. Download the binary file
+```txt
+curl -L -O "https://nightly.link/OPM/ResInsight/workflows/ResInsightWithCache/dev/ResInsight-Ubuntu%2024.04%20gcc.zip"
+```
+2. Unzip the binary
+```txt
+unzip "ResInsight-Ubuntu%2024.04%20gcc.zip”
+```
+3. Launch ResInsight from the bin folder
+```txt
+./bin/ResInsight
+```
+4. The installation of the Python package is described here https://api.resinsight.org/en/main/Installation.html
 
-{{% notice info %}}
-For further installation details, see the ResInsight distribution on [Opm Project Downloading and Installing](http://opm-project.org/?page_id=36).
-{{% /notice %}}
+5. Some examples on how to use ResInsight from Python https://api.resinsight.org/en/main/PythonExamples_instance_and_project_management.html
+
  
 ## Custom Qt configuration
 If you are using a version of Qt that is not available in system path, you need to do the following to make runtime Qt paths available to ResInsight
