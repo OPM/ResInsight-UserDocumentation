@@ -833,10 +833,8 @@ Many protobuf messages contain optional fields. Use the ``HasField()`` method to
     if entry.HasField('saturation'):
         saturation_value = entry.saturation
     else:
-        saturation_value = None
+        saturation_value = "1*"
 
-    # Or use getattr with a default value
-    saturation = getattr(entry, 'saturation', None)
 
 Working with Vec3d and Vec3i
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
