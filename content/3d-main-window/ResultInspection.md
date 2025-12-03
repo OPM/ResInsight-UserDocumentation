@@ -65,7 +65,7 @@ A dialog will appear to prompt you to select an existion plot, or to create a ne
 
 ![](/images/3d-main-window/ResultPlotToSummaryPlotDialog.png)
 
-## PVT Plot (Eclipse Cases Only)
+## PVT Plot
 
 Show the PVT Plot window by selecting **Windows -> PVT Plot**. When it is turned on, it will only be visible when the active view is a view of an Eclipse case.
 
@@ -77,7 +77,7 @@ The PVT plot window shows two plots, based on PVTNUM in the selected cell. One p
 
 Pressure for the selected cell, at the current time step, is marked on the plot as a vertical line, and a large circle marks the scalar value of the cell (formation volume factor/viscosity). RV for the selected cell is also shown.
 
-## Relative Permeability Plot (Eclipse Cases Only)
+## Relative Permeability Plot
 
 Show the Relative Permeability Plot window by selecting **Windows -> Relative Permeability Plot**.  When it is turned on, it will only be visible when the active view is a view of an Eclipse case.
 

@@ -4,7 +4,7 @@ title = " Radial Grid"
 weight = 30
 +++
 
-ResInsight now supports radial grids, enabling visualization and analysis of reservoir models that use radial coordinate systems. This is particularly useful for well-centric models and near-wellbore analysis.
+ResInsight supports radial grids, enabling visualization and analysis of reservoir models that use radial coordinate systems. This is particularly useful for well-centric models and near-wellbore analysis.
 
 ![](/images/import/radial-grid-overview.png)
 *Example of a radial grid model displayed in ResInsight showing pressure distribution around a well*

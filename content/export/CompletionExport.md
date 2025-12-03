@@ -18,11 +18,11 @@ The completions defined in ResInsight can be exported to Eclipse for use in new 
   - **File Split** -- Controls how ResInsight splits the export in different files
     - **Unified File** -- One file with all the completions. 
     - **Split on Well** -- One file for each well
-    - **Split on Well and Completion Type** -- One file for each well and completion type (Perforation Interval, Fishbone, ...)
-  - **Export Completion Types** -- Control how several completions of different type in the same cell are handled
-    - **Individually** -- Completions of each type are exported to separate sections in the file and not combined in any way.  
-    - **Combined** -- Connection factors from different completion types are added together producing one number for each cell. 
-  - **Export Folder** -- Folder for the exported COMPDAT file(s). The folder will be created when performing the export and the names of the exported file(s) will be auto generated.
+    - ~~**[Deprecated]** Split on Well and Completion Type -- One file for each well and completion type (Perforation Interval, Fishbone, ...)~~
+  - ~~**[Deprecated]** Export Completion Types -- Control how several completions of different type in the same cell are handled~~
+    - ~~**Individually** -- Completions of each type are exported to separate sections in the file and not combined in any way.~~
+    - ~~**Combined** -- Connection factors from different completion types are added together producing one number for each cell.~~
+  - **Export Folder** -- Folder for the exported COMPDAT file(s). The folder will be created when performing the export and the names of the exported file(s) will be auto generated.~~
 - **Completions Export Selection**
   - **Perforations** -- Option to include or exclude perforation intervals in the export. 
     - **Time step** -- Which timestep to export. This option is included since perforation intervals have a start time, and thus not all perforations need be present at all time steps. 
