@@ -61,6 +61,9 @@ SimulatorTableData
    * - wsegaicd
      - list[SimulatorWsegaicdEntry]
      - 
+   * - wpimult
+     - list[SimulatorWpimultEntry]
+     - 
 
 
 
@@ -141,6 +144,9 @@ SimulatorCompdatEntry
    * - comment
      - str | None
      - 
+   * - grid_name
+     - str | None
+     - 
 
 
 
@@ -211,6 +217,9 @@ SimulatorWelspecsEntry
      - 
    * - fip_region
      - int | None
+     - 
+   * - grid_name
+     - str | None
      - 
 
 
@@ -767,6 +776,54 @@ SimulatorWsegaicdEntry
      - float | None
      - 
    * - description
+     - str | None
+     - 
+
+
+
+SimulatorWpimultEntry
+"""""""""""""""""""""
+
+**Source:** ``SimulatorTables.proto``
+
+**Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - well_name
+     - str
+     - 
+   * - pimult
+     - float
+     - 
+   * - i
+     - int
+     - 
+   * - j
+     - int
+     - 
+   * - k
+     - int
+     - 
+
+
+**Optional Attributes:**
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+   :class: plain-table
+
+   * - Field
+     - Type
+     - Description
+   * - grid_name
      - str | None
      - 
 
