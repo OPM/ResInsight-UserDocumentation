@@ -34,6 +34,12 @@ ResInsight supports radial grids, enabling visualization and analysis of reservo
 
 ResInsight has now able to prepare simulation files and then run a reservoir simulator. Most of the testing is done using opm-flow, but other compatible simulators is expected to work. In this first integration, it is possible to add a new well, run the simulation, and open the result from the simulator in ResInsight.
 
+An improved export of sector model is now available, including the following features:
+- export of a subset of cells
+- definition of boundary conditions for the sector model
+- conversion of IJK indices for relevant data in model, including simulation well cells, NNCs and fault definitions
+- refinement of sector model
+
 [Integration of opm-flow]({{% relref "opm-flow-integration" %}})
 
 
@@ -50,7 +56,7 @@ https://github.com/OPM/ResInsight/issues/13264
 ## Python API
 
 Several improvements have been made to the Python API. 
-- Suppport for completion and MSW data as Python data structures. This is added as a direct way to get completion data in addition to the existing export to text files.
+- Suppport for completion and MSW data as Python data structures. This is added as a direct way to get completion data in addition to the existing export to text files. Most important keywords for tables data is WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD. In addition, LGR variants are also supported.
 - Readout of ZCORN, COORD and ACTNUM from any type of grid
 - Creation of grid based on ZCORN, COORD and ACTNUM
 
