@@ -15,7 +15,7 @@ Follow the **flow** installation instructions: https://opm-project.org/?page_id=
 
 To be able to run OPM Flow on your Windows computer, you need to first install **WSL**.
 
-A guide for installing WSL and OPM Flow can be found [here](https://github.com/themilar/OPM-flow-WSL-guide).
+A guide for installing WSL and OPM Flow can be found [here](https://github.com/CeetronSolutions/OPM-flow-WSL-guide).
 
 ## ResInsight setup
 
