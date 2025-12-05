@@ -1256,6 +1256,7 @@ class OsduWellPath(WellPath):
 class Perforation(CheckableNamedObject):
     """
     Attributes:
+        completion_number (int): Completion Number
         diameter (float): Diameter
         end_measured_depth (float): End MD
         skin_factor (float): Skin Factor
@@ -1264,6 +1265,7 @@ class Perforation(CheckableNamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.completion_number: int = 0
         self.diameter: float = 2.160000000000000e-01
         self.end_measured_depth: float = 0.000000000000000e+00
         self.skin_factor: float = 0.000000000000000e+00
