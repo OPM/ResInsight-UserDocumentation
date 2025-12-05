@@ -147,6 +147,9 @@ SimulatorCompdatEntry
    * - grid_name
      - str | None
      - 
+   * - completion_number
+     - int | None
+     - 
 
 
 
