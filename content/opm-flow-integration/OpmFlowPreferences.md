@@ -9,7 +9,7 @@ weight = 10
 
 You need at least version 2025.04 of OPM Flow installed to use it with ResInsight.
 
-Follow the **flow** installation instructions: https://opm-project.org/?page_id=245
+Follow the *OPM Flow* installation instructions [here](https://opm-project.org/?page_id=245).
 
 ## Windows support
 
