@@ -45,6 +45,20 @@ The log output from an OPM Flow job could be inspected by right clicking the job
 
 Right clicking in the log window gives you the option to select all the text and copy it to the clipboard, so that you could copy it to a text editor for closer inspection.
 
+### On successful runs
+
+If a job has completed successfully, ResInsight will automatically load and display the output from the job.
+
+If *Add to Ensemble* was checked:
+- The summary results from the job will be added to a summary ensemble, and if any existing plots were showing data from the ensemble, the plots will be updated with the new realization added.
+- The grid results from the job will be added to a grid ensemble, and if this is the first time you run the job, a 3D view showing the grid will be added.
+
+If *Add to Ensemble* was not checked:
+- A summary plot will be added for the summary data if this was the first run. 
+- If a plot already was showing data from this job, the data will be reloaded and updated.
+- A 3D grid view will be added for the grid data if none existed. 
+- If a view already was showing the data, the data in the view will be reloaded and updated.
+
 ### Running multiple jobs
 
 ResInsight allows you to run as many jobs as you want at the same time, only limited by the available computing resources.

@@ -24,13 +24,13 @@ ResInsight needs to know where to find the OPM Flow executable. To do this, open
 ![ResInsight Preferences - OPM Flow](/images/opm-flow-integration/preferences.png)
 
 **Path to OPM Flow Executable:**
-Enter the full path of the **flow** executable. Do not add any extra parameters here.
+Enter the full path of the **flow** executable. Do not add any extra parameters here. If you use WSL, it is the full path inside the WSL instance you enter here.
 
 **Use WSL to run OPM Flow:** (Windows only)
 Turn this option on if you want to run OPM Flow using WSL on Windows. In case you have multiple WSL distributions installed, select the one you have flow installed in. 
 
 **Enable MPI:**
-Turn this option on if you want to run OPM Flow in parallel using MPI. You need to enter the full path to the mpirun executable you want to use. Do not add any extra parameters here.
+Turn this option on if you want to run OPM Flow in parallel using MPI. You need to enter the full path to the mpirun executable you want to use. Do not add any extra parameters here. If you use WSL, it is the full path to mpirun inside the WSL instance you enter here.
 
 **Default command line settings:**
 This is where you define the command line parameters you want ResInsight to pass on to OPM Flow. The settings in this section will be the default settings for any new OPM Flow job you create in ResInsight. The settings can be overridden in a particular job, if needed. 
