@@ -8,7 +8,7 @@ weight = 20
 
 ResInsight refers to OPM Flow Simulations as OPM Flow Jobs. They are located in the Scripts/Jobs tree, shown in both the 3D Main Window and the Plot Main Window.
 
-You can create a new job in two ways: From an already loaded grid case or from a .DATA file located on a local or network disk drive. In both cases, ResInsight creates a copy of the provided input in the selected working folder, keeping the original files unmodified.
+You can create a new job in two ways: From an already loaded grid case or from a .DATA file located on a local or network disk drive. In both cases, ResInsight works on a copy of the provided input in the selected working folder, keeping the original files unmodified.
 
 ### Create job from grid case
 
@@ -25,3 +25,8 @@ Go to the Scripts/Jobs tree, right-click on the Jobs folder, and select "New OPM
 You will then be asked to select a working folder, where the job will store all input to and all output from the OPM Flow simulation.
 It is recommended to use an empty folder.
 
+### Duplicate an existing job
+
+If you want to create a copy of an existing job, right click on the existing job in the Scripts/Jobs tree and choose *Duplicate...*
+
+You will be asked for a working folder for the new job. All other settings will be copied over from the existing job.
