@@ -42,6 +42,6 @@ Expand the WCONPROD or WCONINJE sub-group to set the parameters you want to use 
 
 **Restart Simulation at Well Open Date** The availability of this options depends on the input file. If the input is not a restart file, you can select to restart the simulation at the same date the well is set to be opened.
 
-**Include MSW Data** When this option is turned off, only WELSPECS, COMPDAT, COMPLUMP (if set in completion data) and the selected open keyword are inserted into the DATA file. If you turn on this option, additional MSW keyword will be added. (WELSEGS, COMPSEGS, valves, etc.)
+**Include MSW Data** When this option is turned off, only WELSPECS, COMPDAT, COMPLUMP (if set in completion data) and the selected open keyword are inserted into the DATA file. If you turn on this option, additional MSW keywords will be added. (WELSEGS, COMPSEGS, valves, etc.)
 
-*NOTE*: Some of these options will not be available if your input DATA file does not have DATE keywords (i.e. used TSTEP).
+*NOTE*: Some of these options will not be available if your input DATA file does not have DATE keywords (i.e. using TSTEP).
