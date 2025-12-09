@@ -67,5 +67,10 @@ Several improvements have been made to the Python API:
 
 ResInsight writes log information to text files on the local file system. This includes log messages, warnings, errors, and crash reports. These files are important for developers to track down and fix crash situations. Based on analysis of these files, performance and stability issues have been identified and fixed.
 
+[Application Logging]({{% relref "applicationlogging" %}})
+
+## Other
+
+- Import of OSDU data was not working due to data center move. Import of OSDU well paths is now working as expected. https://github.com/OPM/ResInsight/issues/13026
 
 See [**Release Notes on GitHub**](https://github.com/OPM/ResInsight/releases/) for further details and information.
