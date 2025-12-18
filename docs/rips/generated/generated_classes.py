@@ -174,6 +174,23 @@ class CurveIntersection(PdmObjectBase):
         return self._call_pdm_method_return_value("geometryResult", DataContainerFloat, geometry_type=geometry_type)
 
 
+class CustomSegmentInterval(PdmObjectBase):
+    """
+    CustomSegmentInterval
+
+    Attributes:
+        end_md (float): End MD
+        start_md (float): Start MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.end_md: float = 1.000000000000000e+02
+        self.start_md: float = 0.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if CustomSegmentInterval.__custom_init__ is not None:
+            CustomSegmentInterval.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class DataContainerFloat(PdmObjectBase):
     """
     Attributes:
@@ -3133,6 +3150,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['CompletionTemplateCollection'] = CompletionTemplateCollection
     classes['CornerPointCase'] = CornerPointCase
     classes['CurveIntersection'] = CurveIntersection
+    classes['CustomSegmentInterval'] = CustomSegmentInterval
     classes['DataContainerFloat'] = DataContainerFloat
     classes['DataContainerString'] = DataContainerString
     classes['DataContainerTime'] = DataContainerTime
