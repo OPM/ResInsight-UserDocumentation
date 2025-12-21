@@ -66,6 +66,16 @@ Export Corner Point Grid
    :linenos:
    :caption: export_corner_point_grid.py
 
+.. _case_and_grid_operations_fault_distance:
+
+Fault Distance
+--------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/fault_distance.py
+   :language: python
+   :linenos:
+   :caption: fault_distance.py
+
 .. _case_and_grid_operations_grid_information:
 
 Grid Information
