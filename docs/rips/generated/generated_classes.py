@@ -129,6 +129,23 @@ class CornerPointCase(Reservoir):
         if CornerPointCase.__custom_init__ is not None:
             CornerPointCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def replace_corner_point_grid_internal(self, nx: int=0, ny: int=0, nz: int=0, coord_key: str="", zcorn_key: str="", actnum_key: str="") -> None:
+        """
+        Replace Corner Point Grid
+
+        Arguments:
+            nx (int): 
+            ny (int): 
+            nz (int): 
+            coord_key (str): 
+            zcorn_key (str): 
+            actnum_key (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("replace_corner_point_grid_internal", nx=nx, ny=ny, nz=nz, coord_key=coord_key, zcorn_key=zcorn_key, actnum_key=actnum_key)
+
+
 class CurveIntersection(PdmObjectBase):
     """
     Attributes:
