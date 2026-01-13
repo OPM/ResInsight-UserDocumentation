@@ -3147,6 +3147,18 @@ class WellPathCollection(PdmObjectBase):
         return self._call_pdm_method_return_value("ImportWellPathFromPointsInternal", PointBasedWellPath, name=name, coordinate_x_key=coordinate_x_key, coordinate_y_key=coordinate_y_key, coordinate_z_key=coordinate_z_key)
 
 
+    def set_msw_name_grouping(self, msw_name_grouping: str="") -> None:
+        """
+        
+
+        Arguments:
+            msw_name_grouping (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("setMswNameGrouping", msw_name_grouping=msw_name_grouping)
+
+
     def well_paths(self) -> List[FileWellPath]:
         """Well Paths
 
