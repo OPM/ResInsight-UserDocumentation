@@ -156,6 +156,16 @@ Import Well Paths And Logs
    :linenos:
    :caption: import_well_paths_and_logs.py
 
+.. _wells_and_fractures_import_wells_no_grouping:
+
+Import Wells No Grouping
+------------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/import_wells_no_grouping.py
+   :language: python
+   :linenos:
+   :caption: import_wells_no_grouping.py
+
 .. _wells_and_fractures_modeled_well_path:
 
 Modeled Well Path
