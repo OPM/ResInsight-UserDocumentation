@@ -2936,6 +2936,19 @@ class WellPathCompletionSettings(PdmObjectBase):
         if WellPathCompletionSettings.__custom_init__ is not None:
             WellPathCompletionSettings.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_custom_segment_interval(self, start_md: float=0.000000000000000e+00, end_md: float=1.000000000000000e+02) -> CustomSegmentInterval:
+        """
+        
+
+        Arguments:
+            start_md (float): 
+            end_md (float): 
+        Returns:
+            CustomSegmentInterval
+        """
+        return self._call_pdm_method_return_value("AddCustomSegmentInterval", CustomSegmentInterval, start_md=start_md, end_md=end_md)
+
+
     def add_diameter_roughness_interval(self, start_md: float=0.000000000000000e+00, end_md: float=1.000000000000000e+02, diameter: float=1.520000000000000e-01, roughness_factor: float=1.000000000000000e-05) -> DiameterRoughnessInterval:
         """
         
