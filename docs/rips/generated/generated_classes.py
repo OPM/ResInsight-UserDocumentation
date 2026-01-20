@@ -1680,20 +1680,20 @@ class EclipseView(View):
         return children[0] if len(children) > 0 else None
 
 
-    def cell_result_data(self) -> List[float]:
+    def cell_result_data(self) -> List[List[float]]:
         """Current Eclipse Cell Result
 
         Returns:
-             List[float]
+             List[List[float]]
         """
         return self._call_get_method("CellResultData")
 
 
-    def set_cell_result_data(self, values : List[float]) -> None:
+    def set_cell_result_data(self, values : List[List[float]]) -> None:
         """Set Current Eclipse Cell Result
 
         Arguments:
-            values (List[float]): data
+            values (List[List[float]]): data
         """
         self._call_set_method("CellResultData", values)
 
