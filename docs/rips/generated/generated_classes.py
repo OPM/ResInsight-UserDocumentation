@@ -76,6 +76,31 @@ class Reservoir(Case):
         if Reservoir.__custom_init__ is not None:
             Reservoir.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_result_alias(self, result_name: str="", alias_name: str="") -> None:
+        """
+        Add Result Alias
+
+        Arguments:
+            result_name (str): 
+            alias_name (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("add_result_alias", result_name=result_name, alias_name=alias_name)
+
+
+    def clear_result_aliases(self, ) -> None:
+        """
+        Clear Result Aliases
+
+        Arguments:
+            
+        Returns:
+            
+        """
+        self._call_pdm_method_void("clear_result_aliases")
+
+
     def export_corner_point_grid_internal(self, zcorn_key: str="", coord_key: str="", actnum_key: str="") -> None:
         """
         Export Corner Point Grid Internal
@@ -1678,24 +1703,6 @@ class EclipseView(View):
         """
         children = self.children("CellResult", CellColors)
         return children[0] if len(children) > 0 else None
-
-
-    def cell_result_data(self) -> List[float]:
-        """Current Eclipse Cell Result
-
-        Returns:
-             List[float]
-        """
-        return self._call_get_method("CellResultData")
-
-
-    def set_cell_result_data(self, values : List[float]) -> None:
-        """Set Current Eclipse Cell Result
-
-        Arguments:
-            values (List[float]): data
-        """
-        self._call_set_method("CellResultData", values)
 
 
     def visible_cells_internal(self, visibility_key: str="", time_step: int=0) -> None:
