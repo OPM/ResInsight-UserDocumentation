@@ -68,7 +68,7 @@ In case of discrepancy, the conversion of SEG-Y file has to be performed anew by
 
 ![](/images/import/SeismicOpenVDSdoc_snip.png)
 
-A further option is to run the [OpenVDS SEG-Y Import Tool](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html) from command line as the OpenVDS *SEGYImport* tool is part of your ResInsight intallation.
+A further option is to run the [OpenVDS SEG-Y Import Tool](https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/tools/SEGYImport/README.html) from command line as the OpenVDS *SEGYImport* tool is part of your ResInsight installation.
 
 
 

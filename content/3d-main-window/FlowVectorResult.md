@@ -54,7 +54,7 @@ The Property Editor controls the following settings:
   
 ## Cell Result View
 ResInsight may visualize intercell flows, flow rates, and transmissibilities as *Cell Results* optionally divided by face area, c.f. check-box *Divide By Area* below.
-For instance, the option enables comparison of horisontal and vertical flow velocities as alternative to flow rates as the latter is typically influenced by significant differences in cell face areas.
+For instance, the option enables comparison of horizontal and vertical flow velocities as alternative to flow rates as the latter is typically influenced by significant differences in cell face areas.
 
 ![](/images/3d-main-window/FlowRateCellResultAndLegend.png)
 

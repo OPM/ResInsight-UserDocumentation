@@ -18,7 +18,7 @@ Delete one or more 3D well log curves by selecting them in the project tree, rig
 
 ![](/images/3d-main-window/3dWellLogCurvesDelete.png)
 
-## Configurating the 3D Well Log Curves
+## Configuring the 3D Well Log Curves
 
 ### 3D Track and Draw Plane Appearance
 Each 3D well log curve belongs to a 3D Track which in turn is attached to a well path. The 3D track itself contains some settings related to the display of the curves.

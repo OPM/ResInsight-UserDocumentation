@@ -76,7 +76,7 @@ The <b>Info Box</b> settings can be activated by clicking on the Info Text in th
 
 ![](/images/3d-main-window/ViewTreeGrids.png)
 
-The **Grids** {{< image-in-text src="images/3d-main-window/draw_style_meshlines_24x24.png" >}} node contains child nodes for **Main Grid**, **LGRs** and **Temporary LGRs** where each grid's visibilty can be controlled. The **LGRs** node contains all LGRs loaded from file, while **Temporary LGRs** contains all temporary LGRs (see [Completions LGR]({{% relref "completionslgr" %}})).
+The **Grids** {{< image-in-text src="images/3d-main-window/draw_style_meshlines_24x24.png" >}} node contains child nodes for **Main Grid**, **LGRs** and **Temporary LGRs** where each grid's visibility can be controlled. The **LGRs** node contains all LGRs loaded from file, while **Temporary LGRs** contains all temporary LGRs (see [Completions LGR]({{% relref "completionslgr" %}})).
 Toggling **Grids** off will hide all grids cell geometry. This option is used to display geometry for faults and intersections. This feature is also available as a toolbutton called *Hide grid cells*.
 
 ### Intersections 

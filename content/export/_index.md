@@ -16,5 +16,5 @@ ResInsight features the following capabilities for export of data to reporting o
 - export of sub-sections of an Eclipse Grid with Parameters and Faults to Eclipse ASCII files to perform additional simulations
 - export of a contour map to text file
 
-The following subchapters details the functionality and capabilites.
+The following subchapters details the functionality and capabilities.
 

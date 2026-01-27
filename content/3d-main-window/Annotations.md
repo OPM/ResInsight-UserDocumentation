@@ -17,7 +17,7 @@ ResInsight supports displaying a few types of annotations in 3D views and Contou
 ## Global scope vs local scope annotations
 Global annotations may be displayed in all views and are located in the **Annotations** project tree node right below **Grid Models** (Global annotations sub tree). Local annotations are associated with a specific view and are located in the **Annotations** project tree node below the view node (Local annotations sub tree). All annotation types except text annotations are global only. Text annotation may be either global or local.
 
-All global annotations also have a representation in the local **Annotation** tree node in order to toggle visibilty per view. Those annotations are located in tree nodes starting with **Global**.
+All global annotations also have a representation in the local **Annotation** tree node in order to toggle visibility per view. Those annotations are located in tree nodes starting with **Global**.
 
 ![](/images/3d-main-window/LocalAnnotationsTree.png)<br/>
 Local annotations sub tree
@@ -35,7 +35,7 @@ There are two ways of creating a new text annotation.
 
 - **Anchor Point** - The interesting point in the view
 - **Label Point** - The point where the text label is placed
-- **Text** - The text to display. Multiline supprted. The first line will be the name of the annotation in the project tree
+- **Text** - The text to display. Multiline supported. The first line will be the name of the annotation in the project tree
 - **Text appearance** - Set font size, font color, background color and anchor line color
 
 When a text annotation tree node is selected, target markers in each end of the anchor line are displayed. The targets can be clicked and dragged. Clicking the blue part lets the user drag the target vertically (along Z axis). Clicking the magenta part lets the user drag the target in the XY plane.
@@ -59,7 +59,7 @@ To create a user defined polyline annotation, right click **Annotations** or **U
 - **Start Picking Points / Stop Picking Points** - Button to start / stop picking mode
 - **Line Appearance** - Set line color and thickness
 
-When a user defined polyline annotation tree node is selected, the polyline target markers become visible. Those can be dragged around as decribed above.
+When a user defined polyline annotation tree node is selected, the polyline target markers become visible. Those can be dragged around as described above.
 
 ## Polyline Imported From File
 To import a polyline annotation from file, right click **Annotations** or **Polylines From File** tree node in the global annotations sub tree. Then select the file to import and click OK. Imported polyline annotations are not editable.
@@ -91,6 +91,6 @@ Define each point as three double per line (**X Y Depth**). Comment lines are su
 
 
 ## Annotations visibility
-Local annotations visibility is controlled by the check boxes in the local annotations sub tree only. Global annotations visibility, on the other hand, is controlled by the check boxes in both the global and local annotations sub trees. So in order to display a global annotation in a specific view, both the annotation tree note itself and its representation in the local sub tree must have visibilty enabled.
+Local annotations visibility is controlled by the check boxes in the local annotations sub tree only. Global annotations visibility, on the other hand, is controlled by the check boxes in both the global and local annotations sub trees. So in order to display a global annotation in a specific view, both the annotation tree note itself and its representation in the local sub tree must have visibility enabled.
 
 

@@ -41,7 +41,7 @@ The grid can be refined by a different integer in all three directions by changi
 
 #### Faults
 
-Optionally export fault data to a separate fault file or append to the existing grid. Also, fault data can be ommitted by choosing "Do not Export" from the
+Optionally export fault data to a separate fault file or append to the existing grid. Also, fault data can be omitted by choosing "Do not Export" from the
 **Export Fault Data** drop down list.
 
 ### Exporting Parameters

@@ -42,7 +42,7 @@ In the following are the different parts of the **Simulation Wells** property pa
 
 These options controls the visibility of different aspects of the simulation wells.
 
-- **Wells Trough Visible Cells Only** -- This option will only show wells with connections to cells deemed visible by the combined result of **Range Filters** and **Property Filters**.
+- **Wells Through Visible Cells Only** -- This option will only show wells with connections to cells deemed visible by the combined result of **Range Filters** and **Property Filters**.
 - **Label** -- Controls visibility of well name labels in the 3D View
 - **Well head** -- Controls visibility of the arrow displaying the production status of the well
 - **Pipe** -- A symbolic pipe can be drawn between the well connection cells to illustrate the well. This option controls the visibility of the pipes.
@@ -127,7 +127,7 @@ The **Size Scaling** options, however, works relative to the scaling level set o
 
 ![](/images/getting-started/msw_with_valves.png)
 
-ResInsight reads the MSW information in the result files and uses that to create a topologically correct visualization of the Multi Segment Well. Valves are visulized on the pipe geometry.
+ResInsight reads the MSW information in the result files and uses that to create a topologically correct visualization of the Multi Segment Well. Valves are visualized on the pipe geometry.
 
 Reading this information is somewhat time consuming, and can be turned off in [ Preferences ]({{% relref "preferences" %}}).
 
