@@ -1,21 +1,13 @@
-name: misspell
+name: codespell
 
-on:
-  - push
+on: [push, pull_request]
 
 jobs:
-  build:
-
+  codespell:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - uses: sobolevn/misspell-fixer-action@master
-      with:
-        options: '-rsvn content/'
-    - uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: 'Fixes by misspell-fixer'
-        title: 'Typos fix by misspell-fixer'
- 
+      - uses: actions/checkout@v4
+      - uses: codespell-project/actions-codespell@v2
+        with:
+          path: content/
+          ignore_words_file: .codespell-ignore
