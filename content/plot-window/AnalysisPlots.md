@@ -29,7 +29,7 @@ The Analysis Plots property editor allows the user to specify a number of settin
 
 ### Selected Vectors
 The summary data to analyze is selected by a set of summary vectors. 
-Press the available button to activate the **Summary Adress Selection** dialog to select a set of vectors from different ensembles,
+Press the available button to activate the **Summary Address Selection** dialog to select a set of vectors from different ensembles,
 summary types and summaries.
 
 ![](/images/plot-window/AnalysisPlotsSelectedVectors.png)

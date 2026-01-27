@@ -14,7 +14,7 @@ aliases = [
 
 ## Build Overview
 The ResInsight build may be configured in different ways, with optional support for Octave plugins, 
-ABAQUS ODB API, HDF5, Pyton, and OpenMP. This is configured using options in CMake.
+ABAQUS ODB API, HDF5, Python, and OpenMP. This is configured using options in CMake.
 
 ### CMake Options for ResInsight
 
@@ -24,7 +24,7 @@ ABAQUS ODB API, HDF5, Pyton, and OpenMP. This is configured using options in CMa
 | `RESINSIGHT_ENABLE_GRPC`                          | OFF     | Enable gRPC scripting server. Required to be able to use ResInsight from Python |
 | `RESINSIGHT_ENABLE_HDF5`                          | ON      | Windows Only: Download and use HDF5 library |
 | `RESINSIGHT_ODB_API_DIR`                          | Blank   | Optional path to the ABAQUS ODB API from Simulia. Needed for support of geomechanical models |
-| `RESINSIGHT_USE_OPENMP`                           | ON      | Enable OpenMP parallellization in the code |
+| `RESINSIGHT_USE_OPENMP`                           | ON      | Enable OpenMP parallelization in the code |
 
 #### Advanced Options
 To be able to modify **Advanced Options** from the CMake User Interface, tick the checkbox **Advanced**

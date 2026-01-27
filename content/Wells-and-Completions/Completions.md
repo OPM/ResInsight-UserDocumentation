@@ -14,7 +14,7 @@ For fishbones completions, multi-segment well information can even be exported t
 c.f. [Export Well Segments]({{% relref "completionexport" %}}).
 
 {{% notice note %}}
-  The derived cell property [Completion Type]({{% relref "derivedresults#completion-type" %}}) displays wich cells are intersected by the completions.
+  The derived cell property [Completion Type]({{% relref "derivedresults#completion-type" %}}) displays which cells are intersected by the completions.
 {{% /notice %}}
 
 
@@ -71,7 +71,7 @@ For multi-segment wells there are additional parameters which should be set. The
     - **Absolute** -- the length down the tube or depth of the last nodal point
   - **Enforce Max Segment Length** -- Limit segment to max size. When this check box is checked, a max segment length input field is displayed.
   
-There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas given Dake´s (1976) radiel inflow model and correlation for calculating matrix beta factor depending on permeability and porosity.
+There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas given Take´s (1976) radiel inflow model and correlation for calculating matrix beta factor depending on permeability and porosity.
 
 ![](/images/3d-main-window/PerfIntervalNonDarcy.PNG)
 
@@ -156,7 +156,7 @@ Here is an example:
 
     -- R-2 AH sidetrack into Ile/Tilje
     WELLNAME R-2AH
-    "SOH"   perforation 6200 6350 0.212 0   -- taget Ile 2 and Ile 3
+    "SOH"   perforation 6200 6350 0.212 0   -- target Ile 2 and Ile 3
     "SOH"   perforation 7050 7133 0.212 0   -- target Tilje 3, 83 m prodint
 
     -- S-2 AH

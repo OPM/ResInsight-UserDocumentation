@@ -19,7 +19,7 @@ The following types of Seismic Sections are available:
 - **Inline Section**: A seismic line within a 3D survey *parallel* to the direction in which the data were acquired.
 - **Xline Section**: A seismic line within a 3D survey *perpendicular* to the direction in which the data were acquired.
 - **Depth Slice**: Horizontal slice through the volume data of a 3D survey at a specific depth.
-- **Polyline Section**: Seismic section following a *user defined polyline* ontop a grid model for displaying volume data of a 3D survey, c.f. [Polyline Intersection]({{% relref "intersections" %}}#polyline-intersection) for specification of polyline.
+- **Polyline Section**: Seismic section following a *user defined polyline* on top a grid model for displaying volume data of a 3D survey, c.f. [Polyline Intersection]({{% relref "intersections" %}}#polyline-intersection) for specification of polyline.
 - **Well Path Section**: Seismic section following a *specific well path* through the volume data of a 3D survey.
 
 

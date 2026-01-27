@@ -8,7 +8,7 @@ weight = 90
 
 ## Introduction
 
-To study the structural uncertainty, ResInsight enables the user to create and import an ensemble of surfaces and compute the statistical surfaces based on this ensemble. This page describes the interactive workflow, but in many cases it can be useful to create scripts related to mangement of **Ensemble Surfaces**. See  [Python Examples](https://api.resinsight.org/en/stable/PythonExamples.html) for more details.
+To study the structural uncertainty, ResInsight enables the user to create and import an ensemble of surfaces and compute the statistical surfaces based on this ensemble. This page describes the interactive workflow, but in many cases it can be useful to create scripts related to management of **Ensemble Surfaces**. See  [Python Examples](https://api.resinsight.org/en/stable/PythonExamples.html) for more details.
 
 ## Create Ensemble Surface
 

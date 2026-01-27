@@ -24,7 +24,7 @@ These settings are controlled from the **Property Editor** when a **Geomechanica
 ![](/images/3d-main-window/GeoMechCasePropertyPanel.png)
 
 {{% notice note %}}
-The state of an active Biot coefficient is indicated in the info box in upper right corner in the 3D view. This will  make sure the Biot coefficient information is availalbe when a snapshot is produced.
+The state of an active Biot coefficient is indicated in the info box in upper right corner in the 3D view. This will  make sure the Biot coefficient information is available when a snapshot is produced.
 {{% /notice %}}
 
 ## Related documents

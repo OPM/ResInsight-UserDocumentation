@@ -42,7 +42,7 @@ Properties of an individual view included in a Comparison View are controlled by
 [Cell Filters]({{% relref "filters" %}}),
 and [Intersections]({{% relref "intersections" %}}).
 
-Setting up [Linked Views]({{% relref "linkedviews" %}}) may also be relevant, e.g. to syncronize [cell results]({{% relref "cellresults" %}})
+Setting up [Linked Views]({{% relref "linkedviews" %}}) may also be relevant, e.g. to synchronize [cell results]({{% relref "cellresults" %}})
 and [cell filters]({{% relref "filters" %}}).
 
 {{% notice note %}}

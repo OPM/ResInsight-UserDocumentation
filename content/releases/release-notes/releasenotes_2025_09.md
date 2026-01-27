@@ -18,7 +18,7 @@ The import dialog when searching the file system for ensemble data is improved, 
 [Ensemble Summary Plotting]({{% relref "ensembleplotting" %}})
 
 ## Performance
-There has been several improvements related to summary performance in this release. These improvements are related to file operations and plot updates. The overall improved performace is significant for large cases with many summary ensembles and many plots.
+There has been several improvements related to summary performance in this release. These improvements are related to file operations and plot updates. The overall improved performance is significant for large cases with many summary ensembles and many plots.
 
 ## Histogram Plots
 ![](/images/plot-window/histogram-plot.png)

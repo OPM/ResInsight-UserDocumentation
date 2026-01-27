@@ -17,9 +17,9 @@ Once the input data has been written, ResInsight will launch OPM Flow as specifi
 
 - WSL will be used on Windows if selected
 - MPI will be used if selected
-- The selected command line parameters from the job properites will be added
+- The selected command line parameters from the job properties will be added
 
-The resulting command line used to lauch OPM Flow will be shown in the ResInsight *Messages* window.
+The resulting command line used to launch OPM Flow will be shown in the ResInsight *Messages* window.
 
 ### Monitor the job progress
 

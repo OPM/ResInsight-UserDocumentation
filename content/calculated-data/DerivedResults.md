@@ -43,15 +43,15 @@ The face of a cell is then colored based on the value associated with that parti
 The directional combined parameters available are:
 
 - Static Properties
-  - **TRANXYZ** (inluding NNCs)
+  - **TRANXYZ** (including NNCs)
   - **MULTXYZ**
-  - **riTRANXYZ** (inluding NNCs)
-  - **riMULTXYZ** (inluding NNCs)
-  - **riTRANXYZbyArea** (inluding NNCs)
+  - **riTRANXYZ** (including NNCs)
+  - **riMULTXYZ** (including NNCs)
+  - **riTRANXYZbyArea** (including NNCs)
 - Dynamic Properties
-  - **FLRWATIJK** (inluding NNCs)
-  - **FLROILIJK** (inluding NNCs)
-  - **FLRGASIJK** (inluding NNCs)
+  - **FLRWATIJK** (including NNCs)
+  - **FLROILIJK** (including NNCs)
+  - **FLRGASIJK** (including NNCs)
 - Generated
   - Octave generated results with same name but ending with I,J and K will also be combined into a _`<name>IJK`_ cell property.
 

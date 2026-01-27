@@ -34,7 +34,7 @@ Having completed the wizard, the imported wells are accessible as Items under th
 
 {{% notice info %}}
 <strong>Access to Cloud Data </strong>
-Make sure you have access to "OSDU - Base acces" and "Linux Exclusion Conditional Access".
+Make sure you have access to "OSDU - Base access" and "Linux Exclusion Conditional Access".
 {{% /notice %}}
 
 ## Well Path Visualization

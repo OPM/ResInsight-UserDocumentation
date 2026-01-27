@@ -189,7 +189,7 @@ replaceCase(newGridFile="/home/user/otherReservoir.EGRID", caseId=4)
 
 Replaces multiple source cases in the current project.
 
-`openProject` must be called before this command to set which project file is to be used when replacing cases. This command re-opens tje project with the cases replaced.
+`openProject` must be called before this command to set which project file is to be used when replacing cases. This command re-opens the project with the cases replaced.
 
 | Parameter    | Description                                                     | Type    | Required |
 |--------------|-----------------------------------------------------------------|---------|----------|

@@ -27,7 +27,7 @@ As shown above, the Legend configuration for cell results allows the following s
   - **Current Timestep** -- use of current (single) time step to find min and max values  
   - **User Defined Range** -- user specified range from minimum to maximum numerical value
 
-Furthermore, the legend may display semi-transparent with a sorrounding box by selecting the **Show Box around Legends** option of the 
+Furthermore, the legend may display semi-transparent with a surrounding box by selecting the **Show Box around Legends** option of the 
 [Preferences dialog]({{% relref "preferences" %}}).
 
 ![Legend Background](/images/3d-main-window/legend_background.png) ![Show Box around legends](/images/3d-main-window/legend_with_background.png)

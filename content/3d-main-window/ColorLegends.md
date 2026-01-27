@@ -47,7 +47,7 @@ Activating this particular *Custom Color Legend* is performed by specifying it a
 
 ## Integer Cell Results
 
-When displaying interger cell results, the default color mapping will be set to a category color mapping. This color legend is used when displaying **Formation Names**. If an integer result is loaded, a custom color legend with names can be used.
+When displaying integer cell results, the default color mapping will be set to a category color mapping. This color legend is used when displaying **Formation Names**. If an integer result is loaded, a custom color legend with names can be used.
 
 Example workflow
 - Select an integer cell result, i.e. FIPNUM

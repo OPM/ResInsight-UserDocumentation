@@ -10,7 +10,7 @@ weight = 91
 
 ## Separate Fault Result
 
-The **Allan Diagram** is dispayed by selecting the **Separate Fault Result** in the project tree. 
+The **Allan Diagram** is displayed by selecting the **Separate Fault Result** in the project tree. 
 ![](/images/3d-main-window/AllanDiagramPropertyEditor.png)
 
 See [Faults ]({{% relref "faults/#separate-fault-result" %}}) for more details.
