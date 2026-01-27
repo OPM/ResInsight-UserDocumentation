@@ -10,3 +10,4 @@ jobs:
       - uses: codespell-project/actions-codespell@v2
         with:
           path: content/
+          ignore_words_file: .codespell-ignore
