@@ -3,13 +3,13 @@
 
 [codespell]
 # Files and patterns to skip during spell checking
-skip = 
+# skip = 
 
 # Custom ignore words file for domain-specific terms
 ignore-words = .codespell-ignore
 
 # Check hidden files (like .github/workflows/*.yml)  
-check-hidden = 
+# check-hidden = 
 
 # Check file names in addition to file contents
-check-filenames = 
+# check-filenames = 
