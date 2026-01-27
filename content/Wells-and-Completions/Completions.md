@@ -333,7 +333,7 @@ Non-Darcy Flow is used to improve the computation of connection factors for cell
 - **Properties** -- The availability of these options depend on the **Fracture Orientation** and the **Conductivity in Fracture** setting
   - **Permeability** -- A constant permeability inside the fracture (Used to calculate conductivity in the fracture)
   - **Width** -- Crack width (Used to calculate conductivity in the fracture)
-- **Sensivity Scale Factors** -- See above
+- **Sensitivity Scale Factors** -- See above
 - **Non-Darcy Flow** -- See above
 
 #### Stimplan Fracture Template

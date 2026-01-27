@@ -6,7 +6,7 @@ weight = 15
 
 ![](/images/plot-window/SummaryPlotManagerOverview.png)
 
-The **Summary Plot Manager** is a separate **ResInsight** dialog window where the user can select which vectors to plot in a summary plot. This dialog is intented to be used from the keyboard with easy access to operations for management of summary plots. This dialog can be opened by using **CTRL-K** from anywhere in the **Plot Window**.
+The **Summary Plot Manager** is a separate **ResInsight** dialog window where the user can select which vectors to plot in a summary plot. This dialog is intended to be used from the keyboard with easy access to operations for management of summary plots. This dialog can be opened by using **CTRL-K** from anywhere in the **Plot Window**.
 
 The user writes a text string defining the summary vectors and optionally data sources for curves to be plotted. Example: *wopt:A? iter\**. This text string will filter all **WOPT** vectors for wells with two characters where the first character is **A**. Additionally, this will filter select ensemble datasources starting with the string **iter**
 
