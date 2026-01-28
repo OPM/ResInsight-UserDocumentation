@@ -71,7 +71,7 @@ For multi-segment wells there are additional parameters which should be set. The
     - **Absolute** -- the length down the tube or depth of the last nodal point
   - **Enforce Max Segment Length** -- Limit segment to max size. When this check box is checked, a max segment length input field is displayed.
   
-There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas given Take´s (1976) radiel inflow model and correlation for calculating matrix beta factor depending on permeability and porosity.
+There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas using a radial inflow model and correlation for calculating matrix beta factor depending on permeability and porosity (LP Dake 1976).
 
 ![](/images/3d-main-window/PerfIntervalNonDarcy.PNG)
 
