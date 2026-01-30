@@ -2625,6 +2625,16 @@ class ValveTemplate(NamedObject):
         return children[0] if len(children) > 0 else None
 
 
+    def sicd_parameters(self) -> Optional[WellPathSicdParameters]:
+        """SICD Parameters
+
+        Returns:
+             WellPathSicdParameters
+        """
+        children = self.children("SicdParameters", WellPathSicdParameters)
+        return children[0] if len(children) > 0 else None
+
+
 class ValveTemplateCollection(PdmObjectBase):
     """
     Attributes:
@@ -2643,7 +2653,7 @@ class ValveTemplateCollection(PdmObjectBase):
         Add a new valve template
 
         Arguments:
-            completion_type (str): One of [ICD, ICV, AICD, UNDEFINED]
+            completion_type (str): One of [ICD, ICV, AICD, SICD, UNDEFINED]
             orifice_diameter (float): Orifice diameter
             flow_coefficient (float): Flow coefficient
             user_label (str): User-defined label for the template
@@ -2722,6 +2732,30 @@ class SimulationWell(PdmObjectBase):
         if SimulationWell.__custom_init__ is not None:
             SimulationWell.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class PlotCurve(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if PlotCurve.__custom_init__ is not None:
+            PlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogPlotCurve(PlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PlotCurve.__init__(self, pb2_object, channel)
+        if WellLogPlotCurve.__custom_init__ is not None:
+            WellLogPlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogExtractionCurve(WellLogPlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellLogPlotCurve.__init__(self, pb2_object, channel)
+        if WellLogExtractionCurve.__custom_init__ is not None:
+            WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellLogPlot(DepthTrackPlot):
     """
     A Well Log Plot With a shared Depth Axis and Multiple Tracks
@@ -2769,30 +2803,6 @@ class WellBoreStabilityPlot(WellLogPlot):
         children = self.children("Parameters", WbsParameters)
         return children[0] if len(children) > 0 else None
 
-
-class PlotCurve(PdmObjectBase):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if PlotCurve.__custom_init__ is not None:
-            PlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellLogPlotCurve(PlotCurve):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PlotCurve.__init__(self, pb2_object, channel)
-        if WellLogPlotCurve.__custom_init__ is not None:
-            WellLogPlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellLogExtractionCurve(WellLogPlotCurve):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellLogPlotCurve.__init__(self, pb2_object, channel)
-        if WellLogExtractionCurve.__custom_init__ is not None:
-            WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -3078,6 +3088,33 @@ class WellPathGeometry(PdmObjectBase):
         return self.children("WellPathTargets", WellPathTarget)
 
 
+class WellPathSicdParameters(PdmObjectBase):
+    """
+    Attributes:
+        calibration_density (Optional[float]): Calibration Fluid Density
+        calibration_viscosity (Optional[float]): Calibration Fluid Viscosity
+        device_open (bool): Device Open?
+        eml_crt (Optional[float]): Local Water in Liquid Fraction (EMLCRT)
+        eml_max (Optional[float]): Max Emulsion Viscosity to Cont Phase Viscosity (EMLMAX)
+        eml_trans (Optional[float]): Width of Transition Zone (EMLTRNS)
+        max_calib_rate (Optional[float]): Max Surface Flow Rate (CALRATE)
+        strength (Optional[float]): Strength of the SICD device
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.calibration_density: Optional[float] = None
+        self.calibration_viscosity: Optional[float] = None
+        self.device_open: bool = True
+        self.eml_crt: Optional[float] = None
+        self.eml_max: Optional[float] = None
+        self.eml_trans: Optional[float] = None
+        self.max_calib_rate: Optional[float] = None
+        self.strength: Optional[float] = 1.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathSicdParameters.__custom_init__ is not None:
+            WellPathSicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathTarget(PdmObjectBase):
     """
     Class containing the Well Target definition
@@ -3127,6 +3164,18 @@ class WellPathValve(CheckableNamedObject):
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if WellPathValve.__custom_init__ is not None:
             WellPathValve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def template(self, ) -> Optional[ValveTemplate]:
+        """
+        Valve Template
+
+        Arguments:
+            
+        Returns:
+            ValveTemplate
+        """
+        return self._call_pdm_method_return_optional_value("template", ValveTemplate)
+
 
 class WellPathCollection(PdmObjectBase):
     """
@@ -3303,6 +3352,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellPathCompletions'] = WellPathCompletions
     classes['WellPathFracture'] = WellPathFracture
     classes['WellPathGeometry'] = WellPathGeometry
+    classes['WellPathSicdParameters'] = WellPathSicdParameters
     classes['WellPathTarget'] = WellPathTarget
     classes['WellPathValve'] = WellPathValve
     return classes
