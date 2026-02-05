@@ -17,8 +17,8 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "ResInsight",
-    "content": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Release Notes Sign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
-    "description": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Release Notes Sign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
+    "content": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Release Notes What’s New - Latest Release\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
+    "description": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Release Notes What’s New - Latest Release\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
     "tags": [],
     "title": "Releases",
     "uri": "/ResInsight-UserDocumentation/releases/index.html"
@@ -521,8 +521,8 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "ResInsight \u003e Releases",
-    "content": "",
-    "description": "",
+    "content": "Latest Release What’s New - Latest Release",
+    "description": "Latest Release What’s New - Latest Release",
     "tags": [],
     "title": "Release Notes",
     "uri": "/ResInsight-UserDocumentation/releases/release-notes/index.html"
