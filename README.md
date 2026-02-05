@@ -59,3 +59,15 @@ row a   row b   rov c
 2       2       5
 34      23      2
 ```
+
+## Adding Release Notes
+
+Release notes are located in `content/releases/release-notes/`. To add a new release:
+
+1. Create a new markdown file following the naming pattern `releasenotes_YYYY_MM.md`
+2. Add front matter with title, weight, and other metadata
+3. **Important**: To maintain the stable link to the latest release notes:
+   - Add `aliases = ["/releases/release-notes/latest/"]` to the **latest** release note
+   - Remove this alias from the previous release note
+
+The alias creates a permanent redirect URL at `/releases/release-notes/latest/` that always points to the most recent release notes.
