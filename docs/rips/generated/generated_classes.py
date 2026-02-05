@@ -2,7 +2,7 @@ from __future__ import annotations
 from rips.pdmobject import PdmObjectBase
 import PdmObject_pb2
 import grpc
-from typing import Optional, Dict, List, Type
+from typing import Optional, Dict, List, Tuple, Type
 
 class CellFilterCollection(PdmObjectBase):
     """
