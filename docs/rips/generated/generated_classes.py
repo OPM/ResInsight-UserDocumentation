@@ -134,16 +134,16 @@ class Reservoir(Case):
         self._call_pdm_method_void("export_values_internal", coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, result_key=result_key, property_type=property_type, property_name=property_name, time_step=time_step, porosity_model=porosity_model)
 
 
-    def import_properties(self, file_names: List[str]=[]) -> None:
+    def import_properties(self, file_names: List[str]=[]) -> DataContainerString:
         """
         Import Properties
 
         Arguments:
             file_names (List[str]): 
         Returns:
-            
+            DataContainerString
         """
-        self._call_pdm_method_void("import_properties", file_names=file_names)
+        return self._call_pdm_method_return_value("import_properties", DataContainerString, file_names=file_names)
 
 
 class CornerPointCase(Reservoir):
@@ -1197,6 +1197,18 @@ class WellPath(PdmObjectBase):
             RimMswCompletionParameters
         """
         return self._call_pdm_method_return_optional_value("MswSettings", MswSettings)
+
+
+    def parent_branch(self, ) -> Optional[WellPath]:
+        """
+        Parent Branch
+
+        Arguments:
+            
+        Returns:
+            WellPathBase
+        """
+        return self._call_pdm_method_return_optional_value("ParentBranch", WellPath)
 
 
 class ModeledWellPath(WellPath):
