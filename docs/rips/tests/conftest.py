@@ -1,9 +1,13 @@
 import pytest
 import sys
 import os
+import multiprocessing
+
+# Use spawn instead of fork to avoid deadlocks with gRPC threads
+multiprocessing.set_start_method("spawn", force=True)
 
 sys.path.insert(1, os.path.join(sys.path[0], "../../"))
-import rips
+import rips  # noqa: E402
 
 _rips_instance = None
 
