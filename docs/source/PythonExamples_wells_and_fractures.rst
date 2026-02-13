@@ -196,6 +196,16 @@ Valve Template Creation
    :linenos:
    :caption: valve_template_creation.py
 
+.. _wells_and_fractures_well_event_schedule:
+
+Well Event Schedule
+-------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/well_event_schedule.py
+   :language: python
+   :linenos:
+   :caption: well_event_schedule.py
+
 .. _wells_and_fractures_well_log_import_example:
 
 Well Log Import Example
