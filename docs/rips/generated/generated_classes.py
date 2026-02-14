@@ -1941,6 +1941,21 @@ class MudWeightWindowParameters(PdmObjectBase):
         if MudWeightWindowParameters.__custom_init__ is not None:
             MudWeightWindowParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class ReservoirGridEnsemble(NamedObject):
+    """
+    Grid Ensemble from File Set
+
+    Attributes:
+        group_id (int): Ensemble ID
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.group_id: int = -1
+        NamedObject.__init__(self, pb2_object, channel)
+        if ReservoirGridEnsemble.__custom_init__ is not None:
+            ReservoirGridEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class RimStatisticalCalculation(Reservoir):
     """
     Attributes:
@@ -1961,7 +1976,7 @@ class RimStatisticalCalculation(Reservoir):
         selected_time_steps (List[int]): Time Step Selection
         static_properties_to_calculate (List[str]): Stat Prop
         use_zero_as_inactive_cell_value (bool): Use Zero as Inactive Cell Value
-        well_data_source_case (str): Well Data Source Case
+        well_data_source_case_ptr (Optional[Reservoir]): Well Data Source Case
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1983,7 +1998,7 @@ class RimStatisticalCalculation(Reservoir):
         self.selected_time_steps: List[int] = []
         self.static_properties_to_calculate: List[str] = []
         self.use_zero_as_inactive_cell_value: bool = False
-        self.well_data_source_case: str = "None"
+        self.well_data_source_case_ptr: Optional[Reservoir] = None
         Reservoir.__init__(self, pb2_object, channel)
         if RimStatisticalCalculation.__custom_init__ is not None:
             RimStatisticalCalculation.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -2774,54 +2789,6 @@ class SimulationWell(PdmObjectBase):
         if SimulationWell.__custom_init__ is not None:
             SimulationWell.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class WellLogPlot(DepthTrackPlot):
-    """
-    A Well Log Plot With a shared Depth Axis and Multiple Tracks
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        DepthTrackPlot.__init__(self, pb2_object, channel)
-        if WellLogPlot.__custom_init__ is not None:
-            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
-        """
-        Create a new well log track
-
-        Arguments:
-            title (str): Title
-            case (Optional[Reservoir]): Case
-            well_path (Optional[WellPath]): Well Path
-        Returns:
-            WellLogPlotTrack
-        """
-        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
-
-
-class WellBoreStabilityPlot(WellLogPlot):
-    """
-    A GeoMechanical Well Bore Stability Plot
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellLogPlot.__init__(self, pb2_object, channel)
-        if WellBoreStabilityPlot.__custom_init__ is not None:
-            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def parameters(self) -> Optional[WbsParameters]:
-        """Well Bore Stability Parameters
-
-        Returns:
-             WbsParameters
-        """
-        children = self.children("Parameters", WbsParameters)
-        return children[0] if len(children) > 0 else None
-
-
 class WellEventControl(WellEvent):
     """
     WellEventControl
@@ -3172,6 +3139,54 @@ class WellLogExtractionCurve(WellLogPlotCurve):
         WellLogPlotCurve.__init__(self, pb2_object, channel)
         if WellLogExtractionCurve.__custom_init__ is not None:
             WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogPlot(DepthTrackPlot):
+    """
+    A Well Log Plot With a shared Depth Axis and Multiple Tracks
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        DepthTrackPlot.__init__(self, pb2_object, channel)
+        if WellLogPlot.__custom_init__ is not None:
+            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
+        """
+        Create a new well log track
+
+        Arguments:
+            title (str): Title
+            case (Optional[Reservoir]): Case
+            well_path (Optional[WellPath]): Well Path
+        Returns:
+            WellLogPlotTrack
+        """
+        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
+
+
+class WellBoreStabilityPlot(WellLogPlot):
+    """
+    A GeoMechanical Well Bore Stability Plot
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellLogPlot.__init__(self, pb2_object, channel)
+        if WellBoreStabilityPlot.__custom_init__ is not None:
+            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def parameters(self) -> Optional[WbsParameters]:
+        """Well Bore Stability Parameters
+
+        Returns:
+             WbsParameters
+        """
+        children = self.children("Parameters", WbsParameters)
+        return children[0] if len(children) > 0 else None
+
 
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -3692,6 +3707,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['RegularSurface'] = RegularSurface
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
+    classes['ReservoirGridEnsemble'] = ReservoirGridEnsemble
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RoffCase'] = RoffCase
     classes['SimulationWell'] = SimulationWell
