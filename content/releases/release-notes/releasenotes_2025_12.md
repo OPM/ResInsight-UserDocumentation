@@ -3,7 +3,6 @@ title = "What's New in 2025.12"
 weight = 97
 hidden = false
 search_ignore = true
-aliases = ["/releases/release-notes/latest/"]
 +++
 
 ## Radial Grid

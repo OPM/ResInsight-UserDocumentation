@@ -25,6 +25,7 @@ The dialog consists of the following fields:
 - **File Type**: The available file types will depend on the type of data to import. When importing summary data, there will be several items, and one with **SMSPEC**. 
 - **File Extensions**: List of file extensions, ie ".EGRID .GRID". The extension text is independent to the file type defined above, e.g. _CSV_ data can be imported from a file with extension "TXT"
 - Use 'realization-*' in filter : Replace the text "realization-12" with "realization-\*"
+- **Realization Filter**: Specify which realization numbers to include or exclude. Ranges are defined with `-`, multiple entries are separated by `,`, and exclusions are prefixed with `!`. For example, `1-7, !4-5` produces the list [1, 2, 3, 6, 7].
 - Ensemble grouping : Group ensemble by Main folder or Sub Folder (Used by FMU workflow)
 - **Effective Filter**: The effective filter displays the resulting full path search pattern. It is updated on the fly as the user edits the pattern fields. A text string of "..." indicates a complete recursive directory search.
 
