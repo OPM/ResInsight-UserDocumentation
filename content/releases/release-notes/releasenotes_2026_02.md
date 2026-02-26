@@ -47,4 +47,4 @@ When a surface cuts through a grid model, z-fighting and visual noise can occur 
 - Fixed issue for RMS well paths with spaces in the name
 - Fixed issue with the user interface for statistical ensemble surfaces
 - Fixed issue with formation dip for fractures
-
+- Improved display of formation colors in 2D plots (well log plots and RFT plots)
