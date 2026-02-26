@@ -98,19 +98,31 @@ Each Valve require a **Valve Template** containing properties which can be share
 
 ![](/images/3d-main-window/NewValveWithoutTemplate.png)  
 
-This will create a new **Valve Template** which can be of three different types:
+This will create a new **Valve Template** which can be of four different types:
 
 - **ICD** - In-flow Control Device, allowing the setting of **Orifice Diameter** and **Flow Coefficient**. ICDs are displayed in Orange.
 - **AICD** - Autonomous In-flow Control Device, providing several more parameters associated with the Eclipse simulation and seen in the picture below. AICDs are displayed in Dark Purple.
 - **ICV** - Interval Control Valves. Contains the same parameters as ICDs. The difference between the two in ResInsight is that many ICDs can be added at the same time, while there is only expected to be one ICV per perforation interval. ICVs are displayed in Pink.
-  
+- **SICD** - Spiral Inflow Control Device. A passive inflow control device that provides flow resistance based on fluid properties, including emulsion behavior. Exported to the Eclipse **WSEGSICD** keyword. SICDs are displayed in Cyan.
+
 An example of the ICD parameters can be seen below:
-![](/images/3d-main-window/ValveTemplate.png)  
+![](/images/3d-main-window/ValveTemplate.png)
 
 An example of the AICD parameters:
-![](/images/3d-main-window/ValveTemplate_AICD.png)  
+![](/images/3d-main-window/ValveTemplate_AICD.png)
 
 **AICD** valves can be imported from **Completor** or **Eclipse** text files from the right-click menu of **Valves**.
+
+The **SICD** parameters are set in a group called **MSW SICD Parameters**:
+
+- **Device Open** -- Whether the SICD device is open or shut.
+- **Strength** -- The strength (flow resistance) of the SICD device.
+- **Calibration Fluid Density** -- Density of the calibration fluid used to characterize the device.
+- **Calibration Fluid Viscosity** -- Viscosity of the calibration fluid.
+- **Local Water in Liquid Fraction (EMLCRT)** -- Critical water-in-liquid fraction at which the emulsion viscosity model transitions.
+- **Width of Transition Zone (EMLTRNS)** -- Width of the transition zone in the emulsion viscosity function.
+- **Max Emulsion Viscosity to Cont Phase Viscosity (EMLMAX)** -- Maximum ratio of emulsion viscosity to continuous-phase viscosity.
+- **Max Surface Flow Rate (CALRATE)** -- Maximum surface flow rate used in calibration.
 
 New templates can also be added by selecting the **New Valve Template** option from the right-click menu of the **Valve Templates** entry in the **Completion Templates** Project Tree item.
 
