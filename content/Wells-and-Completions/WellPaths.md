@@ -34,7 +34,7 @@ Having completed the wizard, the imported wells are accessible as Items under th
 
 {{% notice info %}}
 <strong>Access to Cloud Data </strong>
-Make sure you have access to "OSDU - Base acces" and "Linux Exclusion Conditional Access".
+Make sure you have access to "OSDU - Base access" and "Linux Exclusion Conditional Access".
 {{% /notice %}}
 
 ## Well Path Visualization
@@ -69,6 +69,16 @@ The well path property editor lets the user control the appearance of the well p
 - **Simulation Well group** -- Associated simulation well. ResInsight will try to associate each well path with a simulation well. This is done in the exact same way as looking up an existing well path. If the auto-association fails, the user can set the correct simulation well here.
 - **Well Info group** -- Metadata for the well path
 - **Well Picks group** -- Information about imported [well picks]({{% relref "formations" %}}#well-picks) file containing data for the current well path
+
+## Visualization of Well Segments (WELSEGS)
+
+ResInsight can visualize the well segments defined by the `WELSEGS` keyword. This makes it possible to inspect the exact start and end positions of each segment along the well path trajectory for QC purposes, without running a full simulation.
+
+This option is available in the **Property Editor** of the top level **Wells** object. In the group "MSW Segment Visualization", select the grid model to be used, and click the button "Update Segments".
+
+Clicking on an individual segment in the 3D view opens the **Result Info** window, which shows detailed information for that segment.
+
+Segment start and end positions can also be displayed as annotations in [Well Log Plots]({{% relref "welllogsandplots" %}}), in the same manner as well path casing data. This is useful for correlating segment boundaries with formation tops and simulation results.
 
 ### Casing Design
 Some Casing Design elements can be assigned to the well path by selecting **Create Casign Design** from the right-click menu of the well path.

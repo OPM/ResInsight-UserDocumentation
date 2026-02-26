@@ -1,21 +1,48 @@
-name: misspell
+name: codespell
 
 on:
-  - push
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly on Sunday at midnight
+  workflow_dispatch:  # Allow manual trigger
+  pull_request:  # Still check PRs
 
 jobs:
-  build:
-
+  codespell-check:
+    # Only check on pull requests
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - uses: sobolevn/misspell-fixer-action@master
-      with:
-        options: '-rsvn content/'
-    - uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: 'Fixes by misspell-fixer'
-        title: 'Typos fix by misspell-fixer'
- 
+      - uses: actions/checkout@v4
+      - uses: codespell-project/actions-codespell@v2
+        with:
+          path: content/
+          ignore_words_file: .codespell-ignore
+
+  codespell-fix:
+    # Auto-fix and create PR on schedule or manual trigger
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install codespell
+        run: pip install codespell
+      
+      - name: Run codespell with auto-fix
+        run: codespell content/ -I .codespell-ignore -w
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: 'Fix spelling errors found by codespell'
+          title: 'Fix spelling errors'
+          body: |
+            This PR fixes spelling errors automatically detected by codespell.
+            
+            Please review the changes carefully to ensure corrections are appropriate.
+          branch: automated/spelling-fixes
+          delete-branch: true
+          labels: documentation, automated

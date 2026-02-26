@@ -37,7 +37,7 @@ The property panel of a well path based intersection is shown below:
  ![](/images/3d-main-window/IntersectionWellPath.png)
  
 - **Name** -- Automatically created based on the item specifying the intersection. The user can edit the name, but it will be updated if you change well or well path.
-- **Intersecting Geometry** -- Options to control the curve used for the cross section dependant on the type of intersection.
+- **Intersecting Geometry** -- Options to control the curve used for the cross section dependent on the type of intersection.
 - **Depth Filter** -- Controls the depth/z-range for visible geometry. Can be controlled from the **Intersections** folder object.
 - **K Range Filter** -- Controls the visible K slices. Can be controlled from the **Intersections** folder object.
 

@@ -16,3 +16,5 @@ ResInsight handle OPM Flow simulation runs as "Jobs", allowing you to:
 - and more
 
 Both grid results and summary results from a simulation job could be automatically loaded and displayed in ResInsight after a run.
+
+A sector model can be exported from an existing grid and directly connected to a new OPM Flow simulation job. See [Sector Model Export [BETA]]({{% relref "SectorModelBeta" %}}) for details.

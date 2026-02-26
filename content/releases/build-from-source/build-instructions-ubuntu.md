@@ -35,7 +35,7 @@ Install GCC and related tools
 
 Dependencies for RHEL8
 
-    yum install curl zip unzip tar flex bison perl-IPC-Cmd gcc-toolset-10 freeglut
+    yum install curl zip unzip tar flex bison perl-IPC-Cmd gcc-toolset-10 freeglut perl-Time-Piece
 
 ### Clone and update sub modules
 

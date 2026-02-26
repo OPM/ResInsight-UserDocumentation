@@ -10,7 +10,7 @@ The completions defined in ResInsight can be exported to Eclipse for use in new 
 
 - **Export Settings**
     - **Calculated Transmissibilities** -- The transmissibilities calculated based on the case and completion data are exported directly
-    - **Default Connection Factors and WPIMULT** -- The information about the connections for Eclipse to be able to make the transmissibility calculaton is exported for the COMPDAT/COMPDATL keywords. In addition, the same transmissibility calculation is performed by ResInsight, and the factor between the actual transmissibility for the connection and the Eclipse calculation is exported in the WPIMULT keyword. 
+    - **Default Connection Factors and WPIMULT** -- The information about the connections for Eclipse to be able to make the transmissibility calculation is exported for the COMPDAT/COMPDATL keywords. In addition, the same transmissibility calculation is performed by ResInsight, and the factor between the actual transmissibility for the connection and the Eclipse calculation is exported in the WPIMULT keyword. 
   - **Case to Apply** -- Select which case to use for the export. Matrix transmissibilities will be read from this case.  
   - **Use NTG Horizontally** -- Toggles whether NTG in I and J directions is included in the calculation
   - **Include Multi Segment Well Model** -- Toggles whether to also export the completions as Multi Segment Wells.
@@ -167,7 +167,7 @@ WPIMULT
 ```
 
 ### Completions for LGR (WELSPECL and COMPDATL)
-Completion data for LGR grids are exported to a separate file having the same name as the main grid completions file postfixed by "_LGR". Instead of using the WELSPECS and COMPDAT keywords, the WELSPECL and COMPDATL keywords are used. Those tables are simlar to the WELSPECS and COMPDAT tables, except from including the columns **LGR** and **LgrName**, respectively. The extra columns contains the name of the LGR grid.
+Completion data for LGR grids are exported to a separate file having the same name as the main grid completions file postfixed by "_LGR". Instead of using the WELSPECS and COMPDAT keywords, the WELSPECL and COMPDATL keywords are used. Those tables are similar to the WELSPECS and COMPDAT tables, except from including the columns **LGR** and **LgrName**, respectively. The extra columns contains the name of the LGR grid.
 
 ```txt
 WELSPECL

@@ -48,7 +48,7 @@ The available cell filters are:
 
 - **Slice Filter**: Defining a filter to include or exclude a slice of cells in either I-, J-, or K-direction.
 
-The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as decribed in [Polygons]({{% relref "polygons" %}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
+The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as described in [Polygons]({{% relref "polygons" %}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
 
 ![](/images/3d-main-window/CellFilter_Polygon.png)
 

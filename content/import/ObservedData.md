@@ -112,7 +112,7 @@ When importing a line based CSV file, no dialog appears. Instead a more stict se
 - The comment must not contain any semicolons
 
 #### Example
-The two examples below are equvalent and result in identical data after importing to ResInsight
+The two examples below are equivalent and result in identical data after importing to ResInsight
 
 Line based CSV:
 ```txt

@@ -48,7 +48,7 @@ Continue with drag and drop of *SGAS* to define *y*.
 
 Finally, press **Calculate** to perform the actual calculation. 
 
-The calculated result is accessable via **Property Editor** as **Type** ***Generated*** **Result Property**.
+The calculated result is accessible via **Property Editor** as **Type** ***Generated*** **Result Property**.
 
 ![](/images/3d-main-window/GridPropertyCalculatorGeneratedProperty.png)
 
@@ -58,7 +58,7 @@ The calculated result is accessable via **Property Editor** as **Type** ***Gener
 1. Invoke the the **Grid Property Calculator** by right-clicking 
 {{< image-in-text src="images/3d-main-window/CellResult.png" >}} **Cell Result** in **Project Tree**.
 1. Define the expression for calculation by the involved variables and arithmetic operators
-   - Type the name of calculation, required variables and aritmetic operators into **Expression**
+   - Type the name of calculation, required variables and arithmetic operators into **Expression**
    - Press button **Parse Expression** to verify the expression and referrals to actual variables
 1. Define each actual variable referred by the expression, either manually or by drag and drop from **Data Sources**
 1. Press **Calculate** to perform the actual calculation

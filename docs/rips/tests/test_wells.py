@@ -179,7 +179,7 @@ def test_10k_intersection_add_well_perforation_interval_with_valves(
     assert perf_interval.skin_factor == skin_factor
 
     valve_templates = rips_instance.project.valve_templates()
-    assert len(valve_templates.valve_definitions()) == 3
+    assert len(valve_templates.valve_definitions()) == 4
 
     assert len(perf_interval.valves()) == 0
 
@@ -195,6 +195,74 @@ def test_10k_intersection_add_well_perforation_interval_with_valves(
 
     assert valve
     assert valve.name == "1 AICD: 2451 - 2459"
+
+    valve_template = valve.template()
+    assert valve_template.name == valve_templates.valve_definitions()[0].name
+
+    assert len(perf_interval.valves()) == 1
+
+
+def test_10k_intersection_add_well_perforation_interval_with_valves_2(
+    rips_instance, initialize_test
+):
+    case_root_path = dataroot.PATH + "/TEST10K_FLT_LGR_NNC"
+    case_path = case_root_path + "/TEST10K_FLT_LGR_NNC.EGRID"
+    case = rips_instance.project.load_case(path=case_path)
+    assert len(case.grids()) == 2
+    well_path_files = [
+        case_root_path + "/wellpath_a.dev",
+    ]
+
+    well_path_names = rips_instance.project.import_well_paths(well_path_files)
+    assert len(well_path_names) == 1
+    wells = rips_instance.project.well_paths()
+    well_path = wells[0]
+
+    result = well_path.trajectory_properties(resampling_interval=10.0)
+
+    measured_depths = result["measured_depth"]
+
+    start_md = measured_depths[len(measured_depths) - 3]
+    end_md = measured_depths[len(measured_depths) - 2]
+    diameter = 0.25
+    skin_factor = 0.1
+
+    perf_interval = well_path.append_perforation_interval(
+        start_md, end_md, diameter, skin_factor
+    )
+
+    assert perf_interval.start_measured_depth == start_md
+    assert perf_interval.end_measured_depth == end_md
+    assert perf_interval.diameter == diameter
+    assert perf_interval.skin_factor == skin_factor
+
+    valve_templates = rips_instance.project.valve_templates()
+    assert len(valve_templates.valve_definitions()) == 4
+
+    assert len(perf_interval.valves()) == 0
+
+    sicd_template = valve_templates.valve_definitions()[3]
+
+    sicd_params = sicd_template.sicd_parameters()
+    sicd_params.strength = 0.001
+    sicd_params.eml_crt = 0.8
+    sicd_params.update()
+
+    valve_start_md = start_md + 1
+    valve_end_md = end_md - 1
+    valve_count = 1
+    valve = perf_interval.add_valve(
+        template=sicd_template,
+        start_md=valve_start_md,
+        end_md=valve_end_md,
+        valve_count=valve_count,
+    )
+
+    assert valve
+    assert valve.name == "1 SICD: 2451 - 2459"
+
+    valve_template = valve.template()
+    assert valve_template.name == valve_templates.valve_definitions()[3].name
 
     assert len(perf_interval.valves()) == 1
 
@@ -255,7 +323,7 @@ def test_valve_template_creation(rips_instance, initialize_test):
 
     # Check initial state - should have 3 default templates
     initial_count = len(valve_templates.valve_definitions())
-    assert initial_count == 3
+    assert initial_count == 4
 
     # Test creating ICD template with default values
     icd_template = valve_templates.add_template(completion_type="ICD")
@@ -318,3 +386,25 @@ def test_valve_template_invalid_completion_type(rips_instance, initialize_test):
     # Test invalid completion type
     with pytest.raises(rips.RipsError):
         valve_templates.add_template(completion_type="INVALID_TYPE")
+
+
+def test_import_rmswell_with_w_extension(rips_instance, initialize_test):
+    """Test that .w extension files are correctly imported as RMSWell format."""
+    case_root_path = dataroot.PATH + "/TEST10K_FLT_LGR_NNC"
+    case_path = case_root_path + "/TEST10K_FLT_LGR_NNC.EGRID"
+    rips_instance.project.load_case(path=case_path)
+
+    well_path_file = (
+        "../../../ApplicationLibCode/UnitTests/TestData/RifRmsWellPathReader/55_33-1.w"
+    )
+    well_path_names = rips_instance.project.import_well_paths([well_path_file])
+
+    assert len(well_path_names) == 1
+    wells = rips_instance.project.well_paths()
+    assert len(wells) == 1
+    assert wells[0].name == "55_33-1"
+
+    # Verify well path geometry was read correctly (RMSWell format)
+    # File has 5 points from MD 0-20m, resampled at 1.0m interval gives 21 points
+    result = wells[0].trajectory_properties(resampling_interval=1.0)
+    assert len(result["measured_depth"]) == 21

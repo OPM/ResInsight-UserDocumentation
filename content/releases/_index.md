@@ -17,6 +17,8 @@ See the following for common install procedures and options:
 
 ## Release Notes
 
+[What's New - Latest Release](release-notes/latest/)
+
 [ Sign up to be notified of new releases ]({{% ref "releasenotification.md" %}})
 
 For the complete list of releases and updates, please visit [ResInsight on Github](https://github.com/OPM/ResInsight/releases/).

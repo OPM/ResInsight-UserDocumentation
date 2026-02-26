@@ -10,6 +10,7 @@
 
 # Access to environment variables and path tools
 import os
+import pathlib
 
 # Load ResInsight Processing Server Client Library
 import rips
@@ -21,16 +22,21 @@ resinsight = rips.Instance.find()
 resinsight_exe_path = os.environ.get("RESINSIGHT_EXECUTABLE")
 
 # Get the TestModels path from the executable path
-resinsight_install_path = os.path.dirname(resinsight_exe_path)
-test_models_path = os.path.join(resinsight_install_path, "TestModels")
+resinsight_install_path = pathlib.PurePath(
+    os.path.dirname(resinsight_exe_path)
+).as_posix()
+
+test_models_path = resinsight_install_path + "/TestModels/"
 
 # Get the .roff case
 roff_case_path = os.path.join(
     test_models_path, "reek/reek_box_grid_w_out_props.roffasc"
 )
+
 roff_case = resinsight.project.load_case(roff_case_path)
 
 # PORO and EQLNUM should not be among available properties yet
+print("Available properties:")
 for prop in roff_case.available_properties("INPUT_PROPERTY"):
     print(prop)
 
@@ -41,8 +47,16 @@ poro_property_path = os.path.join(
 eqlnum_property_path = os.path.join(
     test_models_path, "reek/reek_box_EQLNUM_property.roffasc"
 )
-roff_case.import_properties(file_names=[poro_property_path, eqlnum_property_path])
+
+imported_names = roff_case.import_properties(
+    file_names=[poro_property_path, eqlnum_property_path]
+)
+
+print("Imported properties:")
+for name in imported_names.values:
+    print(name)
 
 # PORO and EQLNUM should now be among available properties
+print("Available properties:")
 for prop in roff_case.available_properties("INPUT_PROPERTY"):
     print(prop)

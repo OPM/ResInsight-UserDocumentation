@@ -70,7 +70,7 @@ A vertical dotted line can be displayed at the mouse cursor in multiple plots in
 
 
 ## Selection of Realization
-When clicking on a curve in an ensemble, all curves connected to the selected realization will be highlighted. The summary case is also selected in the Property Editor. Selection of a realization object in the Property Editor will hightlight curves. Multiselect is supported.
+When clicking on a curve in an ensemble, all curves connected to the selected realization will be highlighted. The summary case is also selected in the Property Editor. Selection of a realization object in the Property Editor will highlight curves. Multiselect is supported.
 
 ## Curve Stepping
 The data source for curves can be manipulated using the toolbar. The values in the drop-down is simplified make the user interface easier to work with. When stepping a vector, history and difference vectors will also change.

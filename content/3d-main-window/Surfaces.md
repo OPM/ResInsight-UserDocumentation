@@ -41,17 +41,29 @@ To make it easier to organize the surfaces you import into your project, ResInsi
 
 ## Surface Results
 
-Per default, ResInsight maps current **Cell Result** on a given surface. 
+Per default, ResInsight maps current **Cell Result** on a given surface.
 If another result is to be displayed, specify the result under **Surface Results** as shown below.
 
 ![](/images/3d-main-window/SurfacesSeparateSurfaceResults.png)
 
-Clicking a surface of a **View** in the **Project Tree** activates the Property Editor for allowing view settings as shown below. 
+Clicking a surface of a **View** in the **Project Tree** activates the Property Editor for allowing view settings as shown below.
 
 To change result displayed on the surface, please specify the desired result in the **Result Reference**
 section of the **Property Editor**.
 
 ![](/images/3d-main-window/SurfacesViewPropertyEditor.png)
+
+## Surface Display Mode
+
+When a surface cuts through a grid model, result values are mapped onto the surface geometry. Areas of the surface that fall outside the grid model are colored using the surface color. To avoid z-fighting and visual noise caused by overlapping geometries, the display mode can be controlled at both the surface collection level and per individual surface.
+
+The following display modes are available:
+
+- **Surface** -- The surface is drawn using a single uniform surface color
+- **Results** -- The surface is colored using mapped result values only
+- **Both** -- Both the surface color and result colors are shown (default)
+
+The display mode can be set on the top-level **Surfaces** folder in the **Project Tree** to apply to all surfaces, or overridden per individual surface in the **Property Editor**.
 
 
 ## Reloading Surfaces

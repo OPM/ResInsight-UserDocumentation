@@ -84,10 +84,14 @@ If the number of curves in a curve set is sufficient, ResInsight will calculate 
 
 - **P10** -- 10% of the curves in the curve set are above this curve
 - **P50** -- 50% of the curves in the curve set are above this curve
-- **Mean** -- Aritmetic mean for the curves in the curve set
+- **Mean** -- Arithmetic mean for the curves in the curve set
 - **P90** -- 90% of the curves in the curve set are above this curve
 
 Statistics curves may be toggled on or off in the curve set's property editor.
+
+**User-Defined Percentiles**
+
+In addition to the default P10, P50, and P90 curves, custom percentile values can be defined in the curve set's property editor. Enter one or more percentile values (0–100) separated by commas. ResInsight will compute and display a statistics curve for each specified value.
 
 ## Delta Ensemble
 A new ensemble can be created based on calculations on two or more ensembles. 

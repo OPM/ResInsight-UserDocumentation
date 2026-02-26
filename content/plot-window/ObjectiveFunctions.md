@@ -40,7 +40,7 @@ It is also possible to create a **Custom Objective Function** to customize the c
 
 - Custom objective functions can express a weighted sum of the default objective functions (applied to any vector)
 
-- Custom objective functions allow for an arbitrary combination of weigthed default objective functions
+- Custom objective functions allow for an arbitrary combination of weighted default objective functions
 
 - Thus, $ M_{custom} = \Sigma_i^N weight_i * f_i(vectors) $ where $ f_i \in \lbrace F1, F2 \rbrace $
 

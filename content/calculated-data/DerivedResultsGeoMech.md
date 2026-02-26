@@ -273,7 +273,7 @@ $ C\_{p} = -\frac{ \alpha \Delta\epsilon\_{vol}}{ \Delta P\_p \phi_0} + \frac{1}
 Where:
 
 - $ \alpha $ is the Biot coefficient,
-- $ \Delta\epsilon\_{vol} $ is volumetric strain change (EV in ResInsight) between curret state and reference state,
+- $ \Delta\epsilon\_{vol} $ is volumetric strain change (EV in ResInsight) between current state and reference state,
 - $ \phi_0 $ is porosity on the Geostatic step,
 - $ \Delta P\_p $ is change in pore pressure between current state and reference state,
 - $ K\_s $ bulk modulus for the solid material (grain).

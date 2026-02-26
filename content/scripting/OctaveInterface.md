@@ -87,7 +87,7 @@ riSetActiveCellProperty(SOILDIFF, "SOILDIFF");
 #### Example 2
 
 ```matlab    
-# Set all values to "Undefined" exept k-layers from 17 to 20
+# Set all values to "Undefined" except k-layers from 17 to 20
 CInfo = riGetActiveCellInfo();
 SOIL = riGetActiveCellProperty("SOIL");
 

@@ -20,7 +20,7 @@ There are several ways to create new RFT Plots.
   - Right-click a simulation well select **Well Plots -> New RFT Plot**.
 
 ## Create Multiple RFT Plots
-ResInsight can automate the creation of multiple plots based on an already exising RFT plot.
+ResInsight can automate the creation of multiple plots based on an already existing RFT plot.
 
 Description of the workflow:
 - create a RFT plot for one well

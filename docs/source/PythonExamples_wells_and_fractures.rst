@@ -156,6 +156,16 @@ Import Well Paths And Logs
    :linenos:
    :caption: import_well_paths_and_logs.py
 
+.. _wells_and_fractures_import_wells_no_grouping:
+
+Import Wells No Grouping
+------------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/import_wells_no_grouping.py
+   :language: python
+   :linenos:
+   :caption: import_wells_no_grouping.py
+
 .. _wells_and_fractures_modeled_well_path:
 
 Modeled Well Path
@@ -185,6 +195,16 @@ Valve Template Creation
    :language: python
    :linenos:
    :caption: valve_template_creation.py
+
+.. _wells_and_fractures_well_event_schedule:
+
+Well Event Schedule
+-------------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/well_event_schedule.py
+   :language: python
+   :linenos:
+   :caption: well_event_schedule.py
 
 .. _wells_and_fractures_well_log_import_example:
 

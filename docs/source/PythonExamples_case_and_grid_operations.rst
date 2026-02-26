@@ -26,16 +26,6 @@ Case Grid Group Generated Results
    :linenos:
    :caption: case_grid_group_generated_results.py
 
-.. _case_and_grid_operations_cell_result_data:
-
-Cell Result Data
-----------------
-
-.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/cell_result_data.py
-   :language: python
-   :linenos:
-   :caption: cell_result_data.py
-
 .. _case_and_grid_operations_compute_avg_poro_for_region:
 
 Compute Avg Poro For Region
@@ -65,6 +55,16 @@ Export Corner Point Grid
    :language: python
    :linenos:
    :caption: export_corner_point_grid.py
+
+.. _case_and_grid_operations_fault_distance:
+
+Fault Distance
+--------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/fault_distance.py
+   :language: python
+   :linenos:
+   :caption: fault_distance.py
 
 .. _case_and_grid_operations_grid_information:
 
@@ -105,6 +105,16 @@ Input Prop Test Sync
    :language: python
    :linenos:
    :caption: input_prop_test_sync.py
+
+.. _case_and_grid_operations_result_aliases:
+
+Result Aliases
+--------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/result_aliases.py
+   :language: python
+   :linenos:
+   :caption: result_aliases.py
 
 .. _case_and_grid_operations_selected_cells:
 

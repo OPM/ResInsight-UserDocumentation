@@ -6,7 +6,7 @@ weight = 15
 
 ### Application Logging
 
-Application operations are  written to log file by default stored in `home_folder/.resinsight/logs` If an error situation or crash happens, information related to the crash situation is writen to this log file. If you experience crash, please include the log file to help the developers to fix the crash.
+Application operations are  written to log file by default stored in `home_folder/.resinsight/logs` If an error situation or crash happens, information related to the crash situation is written to this log file. If you experience crash, please include the log file to help the developers to fix the crash.
 
 ## Example of log messages
 

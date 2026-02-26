@@ -14,7 +14,7 @@ For fishbones completions, multi-segment well information can even be exported t
 c.f. [Export Well Segments]({{% relref "completionexport" %}}).
 
 {{% notice note %}}
-  The derived cell property [Completion Type]({{% relref "derivedresults#completion-type" %}}) displays wich cells are intersected by the completions.
+  The derived cell property [Completion Type]({{% relref "derivedresults#completion-type" %}}) displays which cells are intersected by the completions.
 {{% /notice %}}
 
 
@@ -71,7 +71,7 @@ For multi-segment wells there are additional parameters which should be set. The
     - **Absolute** -- the length down the tube or depth of the last nodal point
   - **Enforce Max Segment Length** -- Limit segment to max size. When this check box is checked, a max segment length input field is displayed.
   
-There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas given Dake´s (1976) radiel inflow model and correlation for calculating matrix beta factor depending on permeability and porosity.
+There are three options for Non-Darcy Flow. **None**, **User defined D-factor** and **Compute D-factor**. The second option displays an input field where the user defined D-factor can be entered. The last options calculates D-factor for gas using a radial inflow model and correlation for calculating matrix beta factor depending on permeability and porosity (LP Dake 1976).
 
 ![](/images/3d-main-window/PerfIntervalNonDarcy.PNG)
 
@@ -98,19 +98,31 @@ Each Valve require a **Valve Template** containing properties which can be share
 
 ![](/images/3d-main-window/NewValveWithoutTemplate.png)  
 
-This will create a new **Valve Template** which can be of three different types:
+This will create a new **Valve Template** which can be of four different types:
 
 - **ICD** - In-flow Control Device, allowing the setting of **Orifice Diameter** and **Flow Coefficient**. ICDs are displayed in Orange.
 - **AICD** - Autonomous In-flow Control Device, providing several more parameters associated with the Eclipse simulation and seen in the picture below. AICDs are displayed in Dark Purple.
 - **ICV** - Interval Control Valves. Contains the same parameters as ICDs. The difference between the two in ResInsight is that many ICDs can be added at the same time, while there is only expected to be one ICV per perforation interval. ICVs are displayed in Pink.
-  
+- **SICD** - Spiral Inflow Control Device. A passive inflow control device that provides flow resistance based on fluid properties, including emulsion behavior. Exported to the Eclipse **WSEGSICD** keyword. SICDs are displayed in Cyan.
+
 An example of the ICD parameters can be seen below:
-![](/images/3d-main-window/ValveTemplate.png)  
+![](/images/3d-main-window/ValveTemplate.png)
 
 An example of the AICD parameters:
-![](/images/3d-main-window/ValveTemplate_AICD.png)  
+![](/images/3d-main-window/ValveTemplate_AICD.png)
 
 **AICD** valves can be imported from **Completor** or **Eclipse** text files from the right-click menu of **Valves**.
+
+The **SICD** parameters are set in a group called **MSW SICD Parameters**:
+
+- **Device Open** -- Whether the SICD device is open or shut.
+- **Strength** -- The strength (flow resistance) of the SICD device.
+- **Calibration Fluid Density** -- Density of the calibration fluid used to characterize the device.
+- **Calibration Fluid Viscosity** -- Viscosity of the calibration fluid.
+- **Local Water in Liquid Fraction (EMLCRT)** -- Critical water-in-liquid fraction at which the emulsion viscosity model transitions.
+- **Width of Transition Zone (EMLTRNS)** -- Width of the transition zone in the emulsion viscosity function.
+- **Max Emulsion Viscosity to Cont Phase Viscosity (EMLMAX)** -- Maximum ratio of emulsion viscosity to continuous-phase viscosity.
+- **Max Surface Flow Rate (CALRATE)** -- Maximum surface flow rate used in calibration.
 
 New templates can also be added by selecting the **New Valve Template** option from the right-click menu of the **Valve Templates** entry in the **Completion Templates** Project Tree item.
 
@@ -156,7 +168,7 @@ Here is an example:
 
     -- R-2 AH sidetrack into Ile/Tilje
     WELLNAME R-2AH
-    "SOH"   perforation 6200 6350 0.212 0   -- taget Ile 2 and Ile 3
+    "SOH"   perforation 6200 6350 0.212 0   -- target Ile 2 and Ile 3
     "SOH"   perforation 7050 7133 0.212 0   -- target Tilje 3, 83 m prodint
 
     -- S-2 AH
@@ -333,7 +345,7 @@ Non-Darcy Flow is used to improve the computation of connection factors for cell
 - **Properties** -- The availability of these options depend on the **Fracture Orientation** and the **Conductivity in Fracture** setting
   - **Permeability** -- A constant permeability inside the fracture (Used to calculate conductivity in the fracture)
   - **Width** -- Crack width (Used to calculate conductivity in the fracture)
-- **Sensivity Scale Factors** -- See above
+- **Sensitivity Scale Factors** -- See above
 - **Non-Darcy Flow** -- See above
 
 #### Stimplan Fracture Template

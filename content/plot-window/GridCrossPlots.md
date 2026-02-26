@@ -70,6 +70,6 @@ Either method will bring up a dialog containing column-based text showing the X 
 ![](/images/plot-window/GridCrossPlot_ShowData.png)
 
 ## Swap Axes
-The X- and Y-axes can be swapped, both for invididual data sets, by choosing **Swap Axis Properties** from the right-click menu of the Grid Cross Plot **Data Set**, or for all data sets by right clicking on either the Cross Plot in the Project Tree or on the plot itself and selecting **Swap Axis Properties for all Data Sets in Plot**. The X- and Y-axis will swap place retaining the properties, such as Logarithmic or inverted axes.
+The X- and Y-axes can be swapped, both for individual data sets, by choosing **Swap Axis Properties** from the right-click menu of the Grid Cross Plot **Data Set**, or for all data sets by right clicking on either the Cross Plot in the Project Tree or on the plot itself and selecting **Swap Axis Properties for all Data Sets in Plot**. The X- and Y-axis will swap place retaining the properties, such as Logarithmic or inverted axes.
 
 ![](/images/plot-window/GridCrossPlot_SwapAxes.png)
