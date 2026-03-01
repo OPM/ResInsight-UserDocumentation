@@ -37,7 +37,8 @@ Use Hugo shortcodes for internal links — never hardcode paths:
 
 ## Writing conventions
 
-- **Avoid "Eclipse"** — use "simulation model", "DATA file", or "grid" instead.
+- **Prefer neutral terms over "Eclipse"** — use "simulation model", "DATA file", or "grid" where the meaning is clear without the product name.
+- **When "Eclipse" must be used** (e.g., naming the simulator product, referring to file formats by their established name, or distinguishing Eclipse from other simulators), use it as a proper adjective — never as a standalone noun. Add a note on first use per page that Eclipse is a registered trademark of Schlumberger (e.g., *Eclipse® reservoir simulator*).
 - Use bold for UI element names: **Property Name**, **Button Label**.
 - Use `--` (em dash style) to separate a term from its description in bullet lists.
 - Keep section headings short and action-oriented where possible.
@@ -51,3 +52,7 @@ Use Hugo shortcodes for internal links — never hardcode paths:
 | Eclipse grid | simulation model / grid |
 | Eclipse DATA file | DATA file |
 | Eclipse case | simulation case |
+| Eclipse file | simulation file / grid file |
+| Eclipse results | simulation results |
+
+When the Eclipse product name cannot be avoided, use *Eclipse® reservoir simulator* on first mention per page and *Eclipse simulator* on subsequent mentions.

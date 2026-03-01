@@ -46,3 +46,6 @@ The software is licensed under GPL 3+, see [Licensing details](https://github.co
 
 ### Web site programming and design
 Web site is built with [Grav](https://getgrav.org) and [Hugo](https://gohugo.io)
+
+### Trademarks
+Eclipse® is a registered trademark of Schlumberger. Use of this name in the ResInsight documentation refers to the Eclipse reservoir simulator and its associated file formats. ResInsight is not affiliated with or endorsed by Schlumberger.
