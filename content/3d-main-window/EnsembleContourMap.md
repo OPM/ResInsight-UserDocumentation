@@ -5,7 +5,7 @@ weight = 40
 
 ![](/images/3d-main-window/ensemble-grid-contour-map.png)
 
-ResInsight can create contour maps from an ensemble of grid models based on different forms of aggregation of 3D Eclipse data onto a 2D plane.
+ResInsight can create contour maps from an ensemble of grid models based on different forms of aggregation of 3D reservoir simulation data onto a 2D plane.
 
 [Video Tutorial: Ensemble Contour Map](https://youtu.be/qE_PeNx3xP0?si=tSmzJhmmAtENsiYN)
 

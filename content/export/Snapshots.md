@@ -45,7 +45,7 @@ To edit a row, the row must be activated by toggling it on in the **Active** col
 Options represented by columns:
 
 - **View** -- Selects the view to modify.
-- **Result Type**, **Properties** -- Defines a list of eclipse result properties to cycle through when creating snapshots. If properties from both the dynamic and static list is needed, you must create a new row.
+- **Result Type**, **Properties** -- Defines a list of simulation result properties to cycle through when creating snapshots. If properties from both the dynamic and static list is needed, you must create a new row.
 - **Start Time**, **End Time** -- Defines the time step range to cycle through when creating snapshots.
 - **Range Filter Slice**, **Range Start**, **Range End** -- Defines a range filter slice that will be added to the view, and then cycled from *Range Start* to *Range End* when creating snapshots. 
 - **Cases** -- Defines the cases to cycle while creating snapshots. Normally you can not change which case a view is displaying, but this option does temporarily.

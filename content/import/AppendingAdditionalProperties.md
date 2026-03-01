@@ -5,7 +5,7 @@ weight = 40
 +++
 
 
-A grid model can be imported from several sources, either **Eclipse** binary/ascii or **ROFF** binary/ascii. Grid properties in separate files can be imported into any grid type as long as the number of grid cells is matching.
+A grid model can be imported from several sources, either an *Eclipse® reservoir simulator* binary/ascii or **ROFF** binary/ascii. Grid properties in separate files can be imported into any grid type as long as the number of grid cells is matching.
 
 **Appending properties**
 1. From the right-click menu of the case or Cell Result, select **Add Input Property**

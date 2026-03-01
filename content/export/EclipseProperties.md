@@ -4,8 +4,8 @@ title = "Eclipse Properties"
 weight = 20
 +++
 
-Eclipse Properties can be exported to Eclipse ASCII files. 
-This is particularly useful when a new property is generated using Octave. 
+Simulation properties can be exported to ASCII files.
+This is particularly useful when a new property is generated using Octave.
 The generated property can be exported for further use in the simulator.
 
 ### Export Command
@@ -27,7 +27,7 @@ For import this type of property data see [Import: Eclipse Cases]({{% relref "ec
 
 ### File Format
 
-The exported file has the following format, that matches the Eclipse input format:
+The exported file has the following format, that matches the simulator input format:
 
     -- Exported from ResInsight
     <keyword>

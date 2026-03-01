@@ -6,7 +6,7 @@ weight = 40
 
 ![](/images/3d-main-window/ContourMaps.png)
 
-ResInsight can create contour maps based on different forms of aggregation of 3D Eclipse data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
+ResInsight can create contour maps based on different forms of aggregation of 3D reservoir simulation data onto a 2D Plane. Any 3D result value can be aggregated, in addition to specialised results, such as Oil, Gas and Hydrocarbon columns. A Contour Map is a specialised 2D view with many of the same features as the 3D views, including property filters, range filters and display of faults and wells. 
 ResInsight is able to [export a contour map]({{% relref "contourmapexport" %}}) to a text file. 
 
 Polygons can be created from visible areas. If you want to compute contour maps for ensembles, look at [Ensemble Contour Map]({{% relref "ensemblecontourmap" %}})
@@ -16,7 +16,7 @@ Polygons can be created from visible areas. If you want to compute contour maps 
 Contour Maps can be created in many different ways:
 
 - New Contour Map from the right-click menu of case or the **Contour Maps** project tree item underneath the case. These will create contour maps with default values.
-- New Contour Map from 3D View in the Eclipse View right-click menu. This will create a contour map based on the existing 3D View with matching filters and result.
+- New Contour Map from 3D View in the simulation View right-click menu. This will create a contour map based on the existing 3D View with matching filters and result.
 - Duplicate Contour Map from the right-click menu of an existing Contour Map. This will copy the existing map.
 
 ![](/images/3d-main-window/NewContourMapFromCase.png) ![](/images/3d-main-window/NewContourMapFromFolder.png)

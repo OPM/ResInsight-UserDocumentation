@@ -4,10 +4,10 @@ title = "Sector Model"
 weight = 60
 +++
 
-Sub-sections of the Eclipse Grid with Parameters and Faults can be exported to Eclipse ASCII files in order to create new
-Simulations on the sub-section.
+Sub-sections of the reservoir simulation grid with Parameters and Faults can be exported to ASCII files in order to create new
+simulations on the sub-section.
 
-### Exporting an Eclipse Sector Model
+### Exporting a Sector Model
 
 To launch the export dialog, right-click on either the **3D-view** in question or the **Cell Result**.
 
@@ -19,7 +19,7 @@ To launch the export dialog, right-click on either the **3D-view** in question o
 
 #### Grid Export
 
-The Export dialog will allow the user to export grid data as ascii (An Eclipse Input Grid) to a specific file name by checking the **Export Grid Data** option.
+The Export dialog will allow the user to export grid data as ASCII (a reservoir simulation input grid) to a specific file name by checking the **Export Grid Data** option.
 If the option **Export in Local Coordinates** is checked, the UTM-portion of the coordinates will be stripped and the Grid will
 be exported in a local coordinate system with no reference to actual location.
 
@@ -48,7 +48,7 @@ Optionally export fault data to a separate fault file or append to the existing 
 
 ![](/images/export/ExportSectorModel_Parameters.png) 
 
-The Static result values in the Grid may be exported as Eclipse Input Parameters. The default parameters are 
+The Static result values in the Grid may be exported as reservoir simulation input parameters. The default parameters are 
 EQLNUM, FIPNUM, NTG, PERMX, PERMY, PERMZ, PORO, PVTNUM, SATNUM and SWATINIT. ACTNUM is exported by default in the Grid Export file.
 
 Other statuc result variables may be selected.

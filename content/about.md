@@ -25,7 +25,7 @@ ResInsight can also be built with support for Geomechanical models from ABAQUS i
 ### Updating and Refining Eclipse simulation models
 ResInsight contains several pre-processing tools for updating and improving Eclipse reservoir models, including but not limited to:
 
-- Adding **Well Path Completions** such as fractures, fishbones and perforations to well paths, including transmissibility calculations to allow for simulation in Eclipse.
+- Adding **Well Path Completions** such as fractures, Fishbones® and perforations to well paths, including transmissibility calculations to allow for simulation in Eclipse.
 - Easily and visually generate setup files for **Local Grid Refinement** (LGR)
 - The generation of Eclipse **Multi Segment Well**-models for well path completions.
 
@@ -48,4 +48,16 @@ The software is licensed under GPL 3+, see [Licensing details](https://github.co
 Web site is built with [Grav](https://getgrav.org) and [Hugo](https://gohugo.io)
 
 ### Trademarks
-Eclipse® is a registered trademark of Schlumberger. Use of this name in the ResInsight documentation refers to the Eclipse reservoir simulator and its associated file formats. ResInsight is not affiliated with or endorsed by Schlumberger.
+
+Third-party product names used in this documentation are the property of their respective owners.
+
+| Product | Owner | Notes |
+|---------|-------|-------|
+| Eclipse® | Schlumberger | Registered trademark |
+| ABAQUS® | Dassault Systèmes | Registered trademark |
+| SourSimRL | ESSS | Trademark |
+| StimPlan™ | NSI Technologies, LLC | Trademark |
+| Fishbones® | Fishbones AS | Well completion technology using small-diameter lateral boreholes |
+| GNU Octave | John W. Eaton and contributors | Free software (GPL); part of the GNU Project |
+
+ResInsight is not affiliated with or endorsed by Schlumberger, Dassault Systèmes, ESSS, NSI Technologies, LLC, or Fishbones AS.

@@ -11,7 +11,7 @@ The Comparison View allows comparison of information of different grids and diff
 This improves efficiency and simplifies the workflow when working with related but different models.
 
 The figure above exemplifies a Comparison View for comparison of two different simulations models and results. 
-The left hand side is used to display grid and results of an [Eclipse simulation]({{% relref "eclipsecases" %}})
+The left hand side is used to display grid and results of a [reservoir simulation]({{% relref "eclipsecases" %}})
 while the right hand side displays an ABAQUS grid and simulation results from [geomechanical analysis]({{% relref "geomechanicaldata" %}}). 
 
 A different way to use the Comparison View is to compare the same geometrical grid with different [Cell Results]({{% relref "cellresults" %}}). 

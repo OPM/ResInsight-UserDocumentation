@@ -67,7 +67,7 @@ A dialog will appear to prompt you to select an existion plot, or to create a ne
 
 ## PVT Plot
 
-Show the PVT Plot window by selecting **Windows -> PVT Plot**. When it is turned on, it will only be visible when the active view is a view of an Eclipse case.
+Show the PVT Plot window by selecting **Windows -> PVT Plot**. When it is turned on, it will only be visible when the active view is a view of a reservoir simulation case.
 
 ![](/images/3d-main-window/pvtOil.png)
 
@@ -79,7 +79,7 @@ Pressure for the selected cell, at the current time step, is marked on the plot 
 
 ## Relative Permeability Plot
 
-Show the Relative Permeability Plot window by selecting **Windows -> Relative Permeability Plot**.  When it is turned on, it will only be visible when the active view is a view of an Eclipse case.
+Show the Relative Permeability Plot window by selecting **Windows -> Relative Permeability Plot**.  When it is turned on, it will only be visible when the active view is a view of a reservoir simulation case.
 
 ![](/images/3d-main-window/RelativePermeability.png)
 

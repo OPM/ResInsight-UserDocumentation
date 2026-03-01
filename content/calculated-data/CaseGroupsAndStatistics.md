@@ -9,9 +9,9 @@ aliases = [
 
 ![](/images/3d-main-window/GridCaseGroupTree.png)
 
-**Grid Case Group**'s are designed to make it easy to calculate statistics per cell and per time step of a large number of Eclipse simulation Cases with identical Grids (often labeled *realizations*).
+**Grid Case Group**'s are designed to make it easy to calculate statistics per cell and per time step of a large number of reservoir simulation cases with identical Grids (often labeled *realizations*).
  
-If you have several Eclipse simulations with different input parameters available, you can put all the realizations into a Grid Case Group and easily calculate each of the cells mean value, range and max/min values at each time step. Grid calculations can optionally be used as a data source for computations.
+If you have several reservoir simulations with different input parameters available, you can put all the realizations into a Grid Case Group and easily calculate each of the cells mean value, range and max/min values at each time step. Grid calculations can optionally be used as a data source for computations.
 
 ## Creating Grid Case Groups
 
@@ -49,7 +49,7 @@ After creating a grid case group, an empty **Statistics Case** is created for yo
 - **Compute** --  Starts to calculate requested statistical Properties.
 - **Edit** -- Deletes the calculated results, and makes the controls to edit the setup available.
 - **Summary of calculation setup** -- Summarizes what to calculate.
-- **Properties to consider** -- These options makes it possible to select what Eclipse properties to include in the Statistical calculations. Adding variables increase the memory usage and the computational time.
+- **Properties to consider** -- These options makes it possible to select what reservoir simulation properties to include in the Statistical calculations. Adding variables increase the memory usage and the computational time.
 - **Percentile Setup** -- Selects whether to calculate percentiles, what method and what percentile levels should be used. Turning this off speeds up the calculations.
 - **Well Data Source Case** -- This option selects which set of **Simulation Wells** to be shown along with the statistical results. You can select one of the **Source Cases**.
 

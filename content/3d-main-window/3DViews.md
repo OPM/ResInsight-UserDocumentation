@@ -14,7 +14,7 @@ Each item has a set of properties that can be edited in the **Property Editor**.
 
 Several views can be added to the same case by right-clicking the case or a view and select **New View**. You can also **Copy** and then **Paste** a view into a Case. All the settings are then copied to the new view.  
 
-Views of Eclipse models and Geomechanical models has a lot in common, but Eclipse views has some features that applies to Eclipse simulations only.
+Views of Eclipse models and Geomechanical models has a lot in common, but Eclipse views has some features that applies to reservoir simulations only.
 
 ## Common view features
 
@@ -34,7 +34,7 @@ Zoom and orientation of a model can be stored using the menu item **"Views->Stor
 
 ### Cell Result 
 
-The **Cell Result** {{< image-in-text src="images/3d-main-window/CellResult.png" >}} item defines which Eclipse or Geomechanical property the 3D View uses for the main cell color. The property can be chosen in the property panel of the **Cell Result** item. The mapping between cell values and color is defined by the **Legend Definition**{{< image-in-text src="images/3d-main-window/Legend.png" >}} along with some appearance settings on the Legend itself. (Number format etc.)
+The **Cell Result** {{< image-in-text src="images/3d-main-window/CellResult.png" >}} item defines which simulation or Geomechanical property the 3D View uses for the main cell color. The property can be chosen in the property panel of the **Cell Result** item. The mapping between cell values and color is defined by the **Legend Definition**{{< image-in-text src="images/3d-main-window/Legend.png" >}} along with some appearance settings on the Legend itself. (Number format etc.)
 
 Please refer to [Result Color Legend]({{% relref "resultcolorlegend" %}}) for details.
 
@@ -114,7 +114,7 @@ Select **Custom Edge Result** to specify one cell result to be mapped onto all c
 Default result mapping on faults is using the result specified in **Cell Result**. If a different result mapping is wanted, enable the checkbox and select the result from the result selection dialog in the **Property Editor**. A second legend for the fault result is added to the view.
 
 ### Simulation Wells
-This item controls the visualization of the Eclipse simulation wells.
+This item controls the visualization of the simulation wells.
 Please refer to [Simulation Wells]({{% relref "simulationwells" %}}) to read more.
 
 ### Well Connection Factors

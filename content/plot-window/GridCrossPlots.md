@@ -6,7 +6,7 @@ weight = 120
 
 ![](/images/plot-window/GridCrossPlot.png)
 
-ResInsight supports the creation of scatter / cross plots of two Eclipse results against each  other, with each cell in the grid
+ResInsight supports the creation of scatter / cross plots of two reservoir simulation results against each other, with each cell in the grid
 representing one data point in the plot. The data points can be grouped by a third result, by time step or by **Formations**.
 giving a separate color and label for each group. The above example shows a classic Porosity vs Permeability plot, grouped by
 formations, showing different trends for each formation.
@@ -50,7 +50,7 @@ The available parameters are:
 
 | Parameter | Description            |
 |-------|--------------------------------|
-| Case   | The Eclipse Case containing the data |
+| Case   | The reservoir simulation case containing the data |
 | Time Step  | Show data for All Time Steps or just a specific time step |
 | Filter by 3d View Visibility | Pick a view to use only the cells visible in that view. Allows the use of range and property filters |
 | Group Data by | Group and color data points by **Time Step**, **Result Property** or **Formations** |

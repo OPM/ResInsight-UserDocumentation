@@ -7,9 +7,9 @@ weight = 50
 
 ![](/images/import/GeoMechImport.png)
 
-ResInsight is able to import a wide span of Eclipse files, seismic data files, and ROFF grid models.
+ResInsight is able to import a wide span of reservoir simulation files, seismic data files, and ROFF grid models.
 
-For import of Eclipse data pertinent to summary vectors and well log data, see 
+For import of reservoir simulation data pertinent to summary vectors and well log data, see 
 [Plot Window]({{% relref "plot-window/_index.md" %}}).
 
 ResInsight can be built with support for geomechanical models from ABAQUS and is also able to import 
