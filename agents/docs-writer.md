@@ -79,3 +79,4 @@ Other third-party trademarks used in the documentation:
 | Fishbones | Fishbones AS | *Fishbones®* (registered trademark, Norwegian Patent Office no. 268831) |
 | GNU Octave | John W. Eaton and contributors | *GNU Octave* (no symbol — free software, GPL) |
 | HDF5 | The HDF Group | *HDF5®* |
+| OSDU | The Open Group | *OSDU®* |

@@ -71,6 +71,6 @@ ResInsight writes log information to text files on the local file system. This i
 
 ## Other
 
-- Import of OSDU data was not working due to data center move. Import of OSDU well paths is now working as expected. https://github.com/OPM/ResInsight/issues/13026
+- Import of OSDU® data was not working due to data center move. Import of OSDU well paths is now working as expected. https://github.com/OPM/ResInsight/issues/13026
 
 See [**Release Notes on GitHub**](https://github.com/OPM/ResInsight/releases/) for further details and information.

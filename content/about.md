@@ -60,5 +60,6 @@ Third-party product names used in this documentation are the property of their r
 | Fishbones® | Fishbones AS | Well completion technology using small-diameter lateral boreholes |
 | GNU Octave | John W. Eaton and contributors | Free software (GPL); part of the GNU Project |
 | HDF5® | The HDF Group | Registered trademark |
+| OSDU® | The Open Group | Registered trademark |
 
-ResInsight is not affiliated with or endorsed by Schlumberger, Dassault Systèmes, ESSS, NSI Technologies, LLC, Fishbones AS, or The HDF Group.
+ResInsight is not affiliated with or endorsed by Schlumberger, Dassault Systèmes, ESSS, NSI Technologies, LLC, Fishbones AS, The HDF Group, or The Open Group.

@@ -21,7 +21,7 @@ The command **File -> Import -> Well Data -> Import Well Paths From File** will 
 |rmswell | RMS well file format|[RMS Well](https://github.com/OPM/ResInsight/blob/dev/ApplicationLibCode/UnitTests/TestData/RifRmsWellPathReader/55_33-1.rmswell)|
 |asc | Ascii file format|
 
-## Importing well paths from OSDU
+## Importing well paths from OSDU®
 
 Well path trajectories can be downloaded from an OSDU cloud service. When storing the project file, the reference to the OSDU trajectory is stored. This will ensure that authentication and access is checked before the trajectory is downloaded.
 

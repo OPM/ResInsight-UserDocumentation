@@ -10,7 +10,7 @@ search_ignore = true
 
 ![](/images/cloud-services/osdu-well-path-3dview.png)
 
-ResInsight has now support for import of data from two cloud services, ensemble summary data from **SUMO** and well path geometry from **OSDU**.
+ResInsight has now support for import of data from two cloud services, ensemble summary data from **SUMO** and well path geometry from **OSDU®**.
 
 [Cloud Services]({{% relref "cloudservices" %}})
 
