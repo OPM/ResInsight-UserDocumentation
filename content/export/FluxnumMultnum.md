@@ -4,7 +4,7 @@ title = "FLUXNUM/MULTNUM"
 weight = 30
 +++
 
-The visible cells can be exported as a FLUXNUM or MULTNUM keyword that can be used in an Eclipse input data deck. 
+The visible cells can be exported as a FLUXNUM or MULTNUM keyword that can be used in a reservoir simulation input data deck. 
 
 You can do this by using the command **Export Visible Cells as FLUXNUM/MULTNUM** found by right clicking:
 
@@ -17,7 +17,7 @@ The command can also be found in **File -> Export**. If the command is used in t
 ![](/images/export/fluxnumMultnum.png)
 
 - **Export Filename** -- Name of the file to export to.
-- **Export Keyword** -- Selects the Eclipse keyword to export.
+- **Export Keyword** -- Selects the simulation keyword to export.
 - **Visible Active Cells Value** -- This value is used for all the active cells that passes the filters(Range Filter, Property Filter etc) in the 3D View, and thus is visible. 
 - **Hidden Active Cells Value** -- All the active cells that are not visible in the 3D view.
 - **Inactive Cells Value** -- This value is used for all inactive cells, regardless of whether they are visible or not.

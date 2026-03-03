@@ -37,17 +37,46 @@ Use Hugo shortcodes for internal links — never hardcode paths:
 
 ## Writing conventions
 
-- **Avoid "Eclipse"** — use "simulation model", "DATA file", or "grid" instead.
+- **Prefer neutral terms over "Eclipse"** — use "simulation model", "DATA file", or "grid" where the meaning is clear without the product name.
+- **When "Eclipse" must be used** (e.g., naming the simulator product, referring to file formats by their established name, or distinguishing Eclipse from other simulators), use it as a proper adjective — never as a standalone noun. Add a note on first use per page that Eclipse is a registered trademark of Schlumberger (e.g., *Eclipse® reservoir simulator*).
 - Use bold for UI element names: **Property Name**, **Button Label**.
 - Use `--` (em dash style) to separate a term from its description in bullet lists.
 - Keep section headings short and action-oriented where possible.
 - Use `---` horizontal rules to separate major wizard page sections.
 - Do not use emoji.
 
+## Simulation types
+
+ResInsight supports two distinct simulation types. Use precise language to distinguish them:
+
+- **Reservoir simulation** — results from simulators such as the *Eclipse® reservoir simulator* or OPM Flow. Stored in `.EGRID`/`.GRID`, `.UNRST`, `.SMSPEC` files etc.
+- **Geomechanical simulation** — results from ABAQUS, stored in `.odb` files.
+
+When the context is unambiguous (e.g. a page dedicated to reservoir simulation), "simulation" alone is acceptable. When both types could be in scope, be explicit: "reservoir simulation" or "geomechanical simulation".
+
+Never use bare "simulation" in a way that could be misread as covering both types.
+
 ## Terminology
 
 | Avoid | Use instead |
 |-------|-------------|
-| Eclipse grid | simulation model / grid |
+| Eclipse grid | reservoir model / grid |
 | Eclipse DATA file | DATA file |
-| Eclipse case | simulation case |
+| Eclipse case | reservoir simulation case |
+| Eclipse file | reservoir simulation file / grid file |
+| Eclipse results | reservoir simulation results |
+| Eclipse simulation | reservoir simulation |
+
+When the Eclipse product name cannot be avoided, use *Eclipse® reservoir simulator* on first mention per page and *Eclipse simulator* on subsequent mentions.
+
+Other third-party trademarks used in the documentation:
+
+| Product | Trademark owner | First-mention form |
+|---------|----------------|--------------------|
+| ABAQUS | Dassault Systèmes | *ABAQUS®* |
+| SourSimRL | ESSS | *SourSimRL* (no symbol — unregistered trademark) |
+| StimPlan | NSI Technologies, LLC | *StimPlan™* |
+| Fishbones | Fishbones AS | *Fishbones®* (registered trademark, Norwegian Patent Office no. 268831) |
+| GNU Octave | John W. Eaton and contributors | *GNU Octave* (no symbol — free software, GPL) |
+| HDF5 | The HDF Group | *HDF5®* |
+| OSDU | The Open Group | *OSDU®* |

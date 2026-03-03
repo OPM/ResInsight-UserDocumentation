@@ -9,7 +9,7 @@ weight = 141
 Flow Results lets the user investigate flow properties and fluxes in a reservoir, e.g. by flow vector visualizations selecting and combining different fluids and directions. 
 
 ## Flow Vectors
-Flow vectors are computed based on the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**. 
+Flow vectors are computed based on the reservoir simulation properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**. 
 Visualization of flow vector results always use velocity instead of rate. Velocity is computed as flow rate divided by cell face area.
 
 In order to show flow vectors, check the checkbox next to **Flow Vector Result** in **Project Tree**. 
@@ -58,5 +58,5 @@ For instance, the option enables comparison of horizontal and vertical flow velo
 
 ![](/images/3d-main-window/FlowRateCellResultAndLegend.png)
 
-Specifically, the check-box *Divide By Area* is applicable to Eclipse properties *FLROIL, FLRGAS, FLRWAT, FLOOIL, FLOGAS, FLOWAT*, and transmissibilities *TRAN* and *riTRAN*.
+Specifically, the check-box *Divide By Area* is applicable to reservoir simulation properties *FLROIL, FLRGAS, FLRWAT, FLOOIL, FLOGAS, FLOWAT*, and transmissibilities *TRAN* and *riTRAN*.
 These results are listed in ResInsight postfixed by *IJK+-* or *XYZ* as shown above. As seen, checking *Divide By Area* is reflected by text */A* in legend.  

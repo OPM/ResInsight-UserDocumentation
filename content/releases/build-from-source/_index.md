@@ -13,7 +13,7 @@ See the following for common install procedures and options:
 - [ Windows Installation ]({{% ref "windows-installation.md" %}})
 
 See [ Build Instructions ]({{% ref "cmake-configuration.md" %}}) for the complete list of configuration options including support for 
-Octave plugins, ABAQUS ODB API, and HDF5.
+Octave plugins, ABAQUS ODB API, and HDF5®.
 
 [ Sign up to be notified of new releases ]({{% ref "releasenotification.md" %}})
 

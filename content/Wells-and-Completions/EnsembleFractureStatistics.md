@@ -7,7 +7,7 @@ weight = 50
 
 ## Importing Ensemble Fracture Statistics
 
-Right-click on **Completion Templates > Ensemble Fracture Statistics** in the **Project Tree** and select the **Import StimPlan Fracture Recursively** option. Then select the StimPlan fracture Xml files to be part of the ensemble.
+Right-click on **Completion Templates > Ensemble Fracture Statistics** in the **Project Tree** and select the **Import StimPlan Fracture Recursively** option. Then select the StimPlan™ fracture Xml files to be part of the ensemble.
 
 After importing the **Property Panel** of the **Ensemble Fracture Statistics** item has these options:
 

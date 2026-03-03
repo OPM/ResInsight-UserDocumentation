@@ -6,7 +6,7 @@ weight = 50
 
 ![](/images/3d-main-window/CompletionsIllustration.png)
 
-Three types of completions are available for modeling and export: Perforation intervals, fishbone wells and fractures. The purpose of modeling these completions, is that it enables ResInsight to export Eclipse keywords for doing more refined simulations.
+Three types of completions are available for modeling and export: Perforation intervals, Fishbones® wells and fractures. The purpose of modeling these completions, is that it enables ResInsight to export Eclipse keywords for doing more refined simulations.
 
 Completions can be modeled by adding new perforation intervals, fishbones subs or fractures. Details about the completions must then be specified, such as the length of the perforation interval or number of fishbone subs and laterals. After modeling the completions, the transmissibility (cell connection factors) can be calculated and exported to the Eclipse COMPDAT Keyword. See [ Export Completions]({{% relref "completionexport" %}})
 
@@ -255,7 +255,7 @@ Notice that only the trajectory data is exported. Properties related to well seg
 
 Hydraulic fractures are completions created by pressurizing the reservoir at a certain point in the well, and thereby creating a crack in the formation. A substance is then injected into the crack to keep it open when relaxing the pressure.
 
-Fractures in ResInsight can be Well Trajectories, and have two main types: Elliptical fractures and StimPlan fractures. 
+Fractures in ResInsight can be Well Trajectories, and have two main types: Elliptical fractures and StimPlan™ fractures. 
 
 ### Visualization control
 

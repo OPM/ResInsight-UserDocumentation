@@ -38,7 +38,7 @@ As import of faults can be time consuming, reading of faults can be disabled fro
 {{% /notice %}}
 
 #### NNC Data
-If enabled in **Preferences**, ResInsight will read Non Neighbor Connections from the Eclipse output file (_`*.INIT`_), and create explicit visualizations of those. 
+If enabled in **Preferences**, ResInsight will read Non Neighbor Connections from the simulator output file (_`*.INIT`_), and create explicit visualizations of those. 
 The NNC's are sorted onto the Fault's and their visibility is controlled along with them.
 
 When the NNCs are imported from file, ResInsight will identify NNCs not defined in the input file (Faces with zero transmissibility is not exported from the simulator). See [Derived Results]({{% relref "derivedresults" %}}) for details on other NNC related results.
@@ -96,7 +96,7 @@ First of all, these options are only available in **Faults-only** visualization 
 
 Secondly, the option you would normally want to adjust is **Dynamic Face Selection** ( See below ).
 
-- **Show defined faces** -- Displays the fault cell faces that are defined on the Eclipse input file (_`*.DATA`_)
+- **Show defined faces** -- Displays the fault cell faces that are defined on the input file (_`*.DATA`_)
 - **Show opposite faces** -- Displays the opposite fault cell faces from what is defined on the input file, based on IJK neighbors.  
   *These two options should normally be left **On**. They are useful when investigating the exact faults information provided on the `*.DATA` file. If you need to use them, it is normally wise to set the **Dynamic Face Selection** to "Show Both".*
 - **Dynamic Face Selection** -- At one particular position on a fault there are usually two cells competing for your attention: The cell closer to you as the viewer, or the one further from you. When showing results, this becomes important because these two cell faces have different result property values, and thus color.  
@@ -114,7 +114,7 @@ The color of the NNC faces are set to be a bit lighter than their corresponding 
 
 ## Fault Export
 
-Faults can be exported to separate files in the _`*grdecl`_ file format. This is useful for example if you need a list of the geometrically detected faults that has not been covered by entries in the eclipse FAULTS keyword.  
+Faults can be exported to separate files in the _`*grdecl`_ file format. This is useful for example if you need a list of the geometrically detected faults that has not been covered by entries in the FAULTS keyword.  
 
 To export some faults, select the faults you want to export in the **Project Tree**, and select the command **Export Faults ...** from the right-click menu.
 

@@ -4,7 +4,7 @@ title = "SourSimRL Results"
 weight = 25
 +++
  
-ResInsight is able to import transient results from the simulation software SourSimRL to combine reservoir souring simulation data with an Eclipse case for analysis and visualization. 
+ResInsight is able to import transient results from the simulation software SourSimRL to combine reservoir souring simulation data with a reservoir simulation case for analysis and visualization. 
 Results from SourSimRL in its *sourres* binary format can be imported using the **SourSim File Name** field as shown below:
 
 ![](/images/import/soursim_import.PNG) 

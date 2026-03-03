@@ -189,10 +189,10 @@ To select a simulation result to display on an intersection, right-click **Inter
 
 ![](/images/3d-main-window/SeparateIntersectionResults.png)
 
-By selecting a specific **Intersection Result**, the **Property Editor** allows to specify case, type or position etc depending on whether the result stem from an Eclipse case or a Geomechanical case.
+By selecting a specific **Intersection Result**, the **Property Editor** allows to specify case, type or position etc depending on whether the result stems from a reservoir simulation case or a Geomechanical case.
 
 The next step is to select an **Intersection** in **Project Tree** and define **Result Reference**. 
-In the example below, available sources are the two **Intersections Results** of previous figure, one of which stems from a geomechanical case and the other from an Eclipse case.
+In the example below, available sources are the two **Intersections Results** of previous figure, one of which stems from a geomechanical case and the other from a reservoir simulation case.
 
 ![](/images/3d-main-window/IntersectionSeparateResultReference.png)
 

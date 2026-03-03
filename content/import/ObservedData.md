@@ -52,10 +52,10 @@ Dialog fields description:
 - **Preview** -- Preview the first 30 lines of the file contents. The view will reflect the currently selected Cell Separator and the selected time column is marked in yellow.
 
 #### Column data
-Each column must have a header text, which may be a name/description for the data in the column. By formatting the header text to a valid Eclipse address, ResInsight recognizes the column data and will be able to categorize the data in the same way as grid data. So when plotting these data later, the user will find the data in the correct category in the [Summary Plot Editor]({{% relref "summaryploteditor" %}}).
+Each column must have a header text, which may be a name/description for the data in the column. By formatting the header text to a valid simulation address, ResInsight recognizes the column data and will be able to categorize the data in the same way as grid data. So when plotting these data later, the user will find the data in the correct category in the [Summary Plot Editor]({{% relref "summaryploteditor" %}}).
 
-##### Eclipse address format
-An Eclipse address consists of a vector name and zero or more parameters. The number of parameters are defined by the category of the vector. The category is determined by looking up the category in an internal vector table. A valid standard vector name has 3 to 5 characters. Optionally it may be postfixed by a user defined name of 3 characters. A vector name having both a standard part and a user part must have 8 characters (5+3). In this case, if the standard part has less than 5 characters, it must be padded with underscores up to 5 characters. Example: 'RPR__WEL'. Vector names having only the standard part are not padded.
+##### Simulation address format
+A simulation address consists of a vector name and zero or more parameters. The number of parameters are defined by the category of the vector. The category is determined by looking up the category in an internal vector table. A valid standard vector name has 3 to 5 characters. Optionally it may be postfixed by a user defined name of 3 characters. A vector name having both a standard part and a user part must have 8 characters (5+3). In this case, if the standard part has less than 5 characters, it must be padded with underscores up to 5 characters. Example: 'RPR__WEL'. Vector names having only the standard part are not padded.
 
 Categories:
 
@@ -87,10 +87,10 @@ Categories:
   - Example: 'LBOSAT:CENTER:5,5,5'
 - **Imported** - \<SOME NAME>
 
-When ResInsight parses an eclipse address, it first tries to identify an address category by analyzing the vector name, as described above. If no category could be found, the **Imported** category is used. This category is also used if the address format is wrong (for instance missing parameters) even though the vector name identifies a different category.
+When ResInsight parses a simulation address, it first tries to identify an address category by analyzing the vector name, as described above. If no category could be found, the **Imported** category is used. This category is also used if the address format is wrong (for instance missing parameters) even though the vector name identifies a different category.
 
 **Instantaneous vs Accumulated Data**  
-A valid Eclipse vector having a standard name ending with 'T' or 'TH' are considered accumulated data. In the summary plot, these types of data are plotted slightly different. Instantaneous data are plotted using a stepped curve, while accumulated data are plotted using straight lines between the samples.
+A valid simulation vector having a standard name ending with 'T' or 'TH' are considered accumulated data. In the summary plot, these types of data are plotted slightly different. Instantaneous data are plotted using a stepped curve, while accumulated data are plotted using straight lines between the samples.
 
 **Error data**  
 Any address may have associated error data. Those type of data will have the same address as their associated data, but are prefixed by 'ER:', 'ERR:' or 'ERROR:'. Example: 'ERR:FOPT'. It is not possible to select error data explicitly in the plot editor selection fields, but when selecting a vector having associated error data, the error data is plotted as error bars in the summary plot.

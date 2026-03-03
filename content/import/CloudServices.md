@@ -26,7 +26,7 @@ Summary ensemble data can be accessed from SUMO. ResInsight will store the requi
 ### Example of summary plot with SUMO data
 ![](/images/cloud-services/sumo-summary-plot.png)
 
-## Well Paths from OSDU
+## Well Paths from OSDU®
 ![](/images/cloud-services/osdu-well-path-import.png)
 
 From the right-click menu of **Wells**, select **Import Well Paths from OSDU**. A wizard will be displayed where field and well can be selected for import.

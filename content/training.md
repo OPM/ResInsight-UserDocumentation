@@ -34,7 +34,7 @@ Please contact Ceetron Solutions for requests, phone +47 73 60 43 00, e-mail: in
 - Data analysis, grid properties cross-plotting, grid statistics across ensemble of models
 - Import and create well paths, extraction and plotting of grid data along well
 - Sector model export
-- Create well completions with perforations, Fishbones and hydraulic fractures (StimPlan import)
+- Create well completions with perforations, Fishbones® and hydraulic fractures (StimPlan™ import)
 - ResInsight project file format
 
 ### Course goals

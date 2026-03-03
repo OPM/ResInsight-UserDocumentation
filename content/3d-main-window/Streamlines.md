@@ -6,7 +6,7 @@ weight = 143
 
 ![](/images/3d-main-window/Streamlines.png)
 
-Streamlines lets the user investigate the flow of different phases through a reservoar. It allows for selecting both an individual phase or a combination of phases colored by the dominant phase or velocity. The visualization and animation of streamlines requires the Eclipse properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**.
+Streamlines lets the user investigate the flow of different phases through a reservoar. It allows for selecting both an individual phase or a combination of phases colored by the dominant phase or velocity. The visualization and animation of streamlines requires the reservoir simulation properties **FLRGASI/J/K FLRWATI/J/K FLROILI/J/K**.
 
 ## Displaying Streamlines
 

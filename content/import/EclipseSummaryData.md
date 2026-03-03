@@ -41,13 +41,13 @@ The name of a summary case can be changed by interactive edit of the name in the
 
 ## Summary Data File Formats
 
-**ResInsight** is able to import summary data in several file formats. Default exported by *Eclipse* is **\*.SMSPEC/.UNSMRY**. 
+**ResInsight** is able to import summary data in several file formats. Default exported by the *Eclipse® reservoir simulator* is **\*.SMSPEC/.UNSMRY**. 
 
 For best performance, consider using the [ESMRY File Format]({{% relref "summarydata" %}}).
 
 ### SMSPEC/UNSMRY File Format
 
-*Eclipse* will by default export summary data to **\*.SMSPEC** and **\*.UNSMRY**. Data is organized by simulation time step and extraction of data for one summary vector can be time consuming for large data sets.
+The *Eclipse simulator* will by default export summary data to **\*.SMSPEC** and **\*.UNSMRY**. Data is organized by simulation time step and extraction of data for one summary vector can be time consuming for large data sets.
 
 ### ESMRY File Format
 
@@ -57,4 +57,4 @@ For best performance, consider using the [ESMRY File Format]({{% relref "summary
 
 ### h5 File Format
 
-*Eclipse* is able to produce summary data in a file format with the extension **\*.H5** with the same content as **\*.UNSMRY**.
+The *Eclipse simulator* is able to produce summary data in a file format with the extension **\*.H5** with the same content as **\*.UNSMRY**.
