@@ -59,5 +59,6 @@ Third-party product names used in this documentation are the property of their r
 | StimPlan™ | NSI Technologies, LLC | Trademark |
 | Fishbones® | Fishbones AS | Well completion technology using small-diameter lateral boreholes |
 | GNU Octave | John W. Eaton and contributors | Free software (GPL); part of the GNU Project |
+| HDF5® | The HDF Group | Registered trademark |
 
-ResInsight is not affiliated with or endorsed by Schlumberger, Dassault Systèmes, ESSS, NSI Technologies, LLC, or Fishbones AS.
+ResInsight is not affiliated with or endorsed by Schlumberger, Dassault Systèmes, ESSS, NSI Technologies, LLC, Fishbones AS, or The HDF Group.

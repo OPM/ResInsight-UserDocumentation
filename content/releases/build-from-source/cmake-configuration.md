@@ -14,7 +14,7 @@ aliases = [
 
 ## Build Overview
 The ResInsight build may be configured in different ways, with optional support for Octave plugins, 
-ABAQUS ODB API, HDF5, Python, and OpenMP. This is configured using options in CMake.
+ABAQUS ODB API, HDF5®, Python, and OpenMP. This is configured using options in CMake.
 
 ### CMake Options for ResInsight
 

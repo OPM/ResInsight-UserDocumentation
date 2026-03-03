@@ -64,7 +64,7 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 - **Summary Data Import** including file format for summary data import, c.f. [Ensemble Summary]({{% relref "eclipsesummarydata#summary-data-file-formats" %}}):
   - **ESMRY (opm-common)** Import data from ESMRY files
   - **UNSMRY (resdata)** Import data from native UNSMRY files
-  - **h5 (HDF5)** Import data from h5 files
+  - **h5 (HDF5®)** Import data from h5 files
 
 
 ## Plotting
