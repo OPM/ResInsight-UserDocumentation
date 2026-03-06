@@ -106,6 +106,16 @@ Input Prop Test Sync
    :linenos:
    :caption: input_prop_test_sync.py
 
+.. _case_and_grid_operations_polygon_region_from_project:
+
+Polygon Region From Project
+---------------------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/polygon_region_from_project.py
+   :language: python
+   :linenos:
+   :caption: polygon_region_from_project.py
+
 .. _case_and_grid_operations_result_aliases:
 
 Result Aliases

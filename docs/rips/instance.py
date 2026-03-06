@@ -30,9 +30,12 @@ from .project import Project
 from .retry_policy import ExponentialBackoffRetryPolicy
 from .grpc_retry_interceptor import RetryOnRpcErrorClientInterceptor
 from .generated.generated_classes import CommandRouter
+from .exception import RipsError
 
 from typing import List, Optional, Tuple
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 class Instance:
@@ -78,10 +81,10 @@ class Instance:
                 return int(value)
 
         if retry_count == max_attempts:
-            print(
-                "Waiting for port number file timed out after {} seconds. File: {}".format(
-                    max_attempts, file_path
-                )
+            logger.warning(
+                "Waiting for port number file timed out after %d seconds. File: %s",
+                max_attempts,
+                file_path,
             )
 
         return -1
@@ -138,30 +141,28 @@ class Instance:
                 data = json.load(f)
                 resinsight_executable = data["resinsight_executable"]
                 if resinsight_executable:
-                    print(
-                        "In './share/rips/rips_config.json', found resinsight_executable:",
+                    logger.info(
+                        "In './share/rips/rips_config.json', found resinsight_executable: %s",
                         resinsight_executable,
                     )
 
         if not resinsight_executable:
             resinsight_executable_from_env = os.environ.get("RESINSIGHT_EXECUTABLE")
             if not resinsight_executable_from_env:
-                print(
-                    "ERROR: Could not launch ResInsight because the environment variable"
+                raise RipsError(
+                    "Could not launch ResInsight because the environment variable"
                     " RESINSIGHT_EXECUTABLE is not set"
                 )
-                return None
             else:
                 resinsight_executable = resinsight_executable_from_env
 
         # Check if executable file exists
         if not os.path.isfile(resinsight_executable):
-            print(
-                f"ERROR: ResInsight executable not found at path: {resinsight_executable}"
+            raise RipsError(
+                f"ResInsight executable not found at path: {resinsight_executable}"
             )
-            return None
 
-        print("Trying to launch", resinsight_executable)
+        logger.info("Trying to launch %s", resinsight_executable)
         with tempfile.TemporaryDirectory() as tmp_dir_path:
             port_number_file = tmp_dir_path + "/portnumber.txt"
             parameters: List[str] = [
@@ -172,7 +173,7 @@ class Instance:
                 str(port_number_file),
             ] + command_line_parameters
             if console:
-                print("Launching as console app")
+                logger.info("Launching as console app")
                 parameters.append("--console")
 
             # Stringify all parameters
@@ -186,9 +187,9 @@ class Instance:
                     port_number_file, init_timeout
                 )
                 if port == -1:
-                    print("Unable to read port number. Launch failed.")
-                    # Need to kill the process using PID since there is no  GRPC connection to use.
+                    # Need to kill the process using PID since there is no GRPC connection to use.
                     Instance.__kill_process(pid)
+                    raise RipsError("Unable to read port number. Launch failed.")
                 else:
                     instance = Instance(port=port, launched=True)
                     return instance
@@ -208,24 +209,20 @@ class Instance:
         """
         port_env = os.environ.get("RESINSIGHT_GRPC_PORT")
         if port_env:
-            print("Got port " + port_env + " from environment")
+            logger.info("Got port %s from environment", port_env)
             start_port = int(port_env)
             end_port = start_port + 20
 
         for try_port in range(start_port, end_port):
-            print("Trying port " + str(try_port))
+            logger.debug("Trying port %d", try_port)
             if Instance.__is_port_in_use(try_port) and Instance.__is_valid_port(
                 try_port
             ):
                 return Instance(port=try_port)
 
-        print(
-            "Error: Could not find any ResInsight instances responding between ports "
-            + str(start_port)
-            + " and "
-            + str(end_port)
+        raise RipsError(
+            f"Could not find any ResInsight instances responding between ports {start_port} and {end_port}"
         )
-        return None
 
     def __execute_command(self, **command_params):
         return self.commands.Execute(Commands_pb2.CommandParams(**command_params))
@@ -248,7 +245,6 @@ class Instance:
         Args:
             port(int): port number
         """
-        logging.basicConfig()
         self.location: str = "localhost:" + str(port)
 
         self.channel = grpc.insecure_channel(
@@ -432,7 +428,7 @@ class Instance:
 
     def exit(self):
         """Tell ResInsight instance to quit"""
-        print("Telling ResInsight to Exit")
+        logger.info("Telling ResInsight to Exit")
         return self.app.Exit(Empty())
 
     def is_console(self) -> bool:
