@@ -16,6 +16,16 @@ Accumulated Perforation Length
    :linenos:
    :caption: accumulated_perforation_length.py
 
+.. _wells_and_fractures_add_valve:
+
+Add Valve
+---------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/add_valve.py
+   :language: python
+   :linenos:
+   :caption: add_valve.py
+
 .. _wells_and_fractures_all_simulation_wells:
 
 All Simulation Wells
@@ -185,6 +195,16 @@ Modeled Well Path Lateral
    :language: python
    :linenos:
    :caption: modeled_well_path_lateral.py
+
+.. _wells_and_fractures_tie_in_example:
+
+Tie In Example
+--------------
+
+.. literalinclude:: ../rips/PythonExamples/wells_and_fractures/tie_in_example.py
+   :language: python
+   :linenos:
+   :caption: tie_in_example.py
 
 .. _wells_and_fractures_valve_template_creation:
 
