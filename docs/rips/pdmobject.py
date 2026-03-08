@@ -212,11 +212,14 @@ class PdmObjectBase:
                 float_val = float(value)
                 return float_val
             except ValueError:
-                # We may have a string. Strip internal start and end quotes
-                value = value.strip('"')
+                # We may have a string. Remove the outer pair of quotes
+                if len(value) >= 2 and value[0] == '"' and value[-1] == '"':
+                    value = value[1:-1]
                 if self.__islist(value):
                     return self.__makelist(value)
-                return value
+                if self.__istuple(value):
+                    return self.__maketuple(value)
+                return self.__unescape_string(value)
 
     def __convert_to_grpc_value(self, value: Any) -> str:
         if isinstance(value, bool):
@@ -230,6 +233,11 @@ class PdmObjectBase:
             for val in value:
                 list_of_values.append(self.__convert_to_grpc_value(val))
             return "[" + ", ".join(list_of_values) + "]"
+        if isinstance(value, tuple):
+            list_of_values = []
+            for val in value:
+                list_of_values.append(self.__convert_to_grpc_value(val))
+            return "(" + ", ".join(list_of_values) + ")"
         return str(value)
 
     def __get_grpc_value(self, camel_keyword: str) -> Value:
@@ -252,29 +260,98 @@ class PdmObjectBase:
         setattr(self, snake_keyword, value)
         self.update()
 
+    def __istuple(self, value) -> bool:
+        return value.startswith("(") and value.endswith(")")
+
     def __islist(self, value: str) -> bool:
         return value.startswith("[") and value.endswith("]")
+
+    def __maketuple(self, tuple_string: str) -> Value:
+        tuple_string = tuple_string.removeprefix("(")
+        tuple_string = tuple_string.removesuffix(")")
+        if not tuple_string:
+            return ()
+
+        if "), (" in tuple_string:
+            subtuples = re.split(r"\), \(", tuple_string)
+            return [self.__makelist(subtuple) for subtuple in subtuples]
+        else:
+            strings = tuple_string.split(", ")
+            if len(strings) == 2:
+                return (
+                    self.__convert_from_grpc_value(strings[0]),
+                    self.__convert_from_grpc_value(strings[1]),
+                )
+
+        return ()
+
+    def __unescape_string(self, value: str) -> str:
+        result = []
+        i = 0
+        while i < len(value):
+            if value[i] == "\\" and i + 1 < len(value):
+                next_ch = value[i + 1]
+                if next_ch == '"' or next_ch == "\\":
+                    result.append(next_ch)
+                    i += 2
+                    continue
+            result.append(value[i])
+            i += 1
+        return "".join(result)
 
     def __makelist(self, list_string: str) -> Value:
         list_string = list_string.removeprefix("[")
         list_string = list_string.removesuffix("]")
         if not list_string:
-            # Return empty list if empty string. Otherwise, the split function will return ['']
             return []
 
-        # Check if it's a nested list or single list
-        if "], [" in list_string:
-            # Nested list
-            # Split by ], [ to get each sublist
-            sublists = re.split(r"\], \[", list_string)
-            return [self.__makelist(sublist) for sublist in sublists]
-        else:
-            # Single list
-            strings = list_string.split(", ")
-            values = []
-            for string in strings:
-                values.append(self.__convert_from_grpc_value(string))
-            return values
+        # Quote-aware split: track quote state, escape state, and bracket depth
+        # so commas inside "..." or [...] are not treated as separators.
+        items = []
+        current = []
+        in_quotes = False
+        escape_next = False
+        bracket_depth = 0
+
+        for ch in list_string:
+            if escape_next:
+                current.append(ch)
+                escape_next = False
+                continue
+
+            if ch == "\\" and in_quotes:
+                current.append(ch)
+                escape_next = True
+                continue
+
+            if ch == '"':
+                in_quotes = not in_quotes
+                current.append(ch)
+                continue
+
+            if not in_quotes:
+                if ch == "[":
+                    bracket_depth += 1
+                elif ch == "]":
+                    bracket_depth -= 1
+                elif ch == "," and bracket_depth == 0:
+                    # Separator: expect ", " so skip the following space
+                    items.append("".join(current))
+                    current = []
+                    continue
+                elif ch == " " and not current:
+                    # Skip space after comma separator
+                    continue
+
+            current.append(ch)
+
+        if current:
+            items.append("".join(current))
+
+        values = []
+        for item in items:
+            values.append(self.__convert_from_grpc_value(item))
+        return values
 
     def __from_pb2_to_resinsight_classes(
         self,

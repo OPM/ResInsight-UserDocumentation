@@ -1108,6 +1108,18 @@ class WellPath(PdmObjectBase):
         return self._call_pdm_method_return_value("AddFracture", WellPathFracture, measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template, align_dip=align_dip, eclipse_case=eclipse_case)
 
 
+    def add_icv_valve(self, measured_depth: float=0.000000000000000e+00) -> WellPathValve:
+        """
+        Add ICV Valve
+
+        Arguments:
+            measured_depth (float): 
+        Returns:
+            WellPathValve
+        """
+        return self._call_pdm_method_return_value("AddIcvValve", WellPathValve, measured_depth=measured_depth)
+
+
     def add_thermal_fracture(self, measured_depth: float=0.000000000000000e+00, fracture_template: Optional[ThermalFractureTemplate]=None, place_using_template_data: bool=True) -> WellPathFracture:
         """
         Add Thermal Fracture
@@ -1198,6 +1210,21 @@ class WellPath(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+    def enable_outlet_valve(self, enable: bool=False, icv_template: Optional[ValveTemplate]=None, use_custom_valve_md: bool=False, custom_valve_md: float=0.000000000000000e+00) -> Optional[WellPathValve]:
+        """
+        Enable Outlet Valve
+
+        Arguments:
+            enable (bool): 
+            icv_template (Optional[ValveTemplate]): 
+            use_custom_valve_md (bool): 
+            custom_valve_md (float): 
+        Returns:
+            WellPathValve
+        """
+        return self._call_pdm_method_return_optional_value("EnableOutletValve", WellPathValve, enable=enable, icv_template=icv_template, use_custom_valve_md=use_custom_valve_md, custom_valve_md=custom_valve_md)
+
+
     def extract_well_path_properties_internal(self, resampling_interval: float=1.000000000000000e+01, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", measured_depth: str="", azimuth: str="", inclination: str="", dogleg: str="") -> None:
         """
         Extract Well Path Properties
@@ -1239,6 +1266,18 @@ class WellPath(PdmObjectBase):
             WellPathBase
         """
         return self._call_pdm_method_return_optional_value("ParentBranch", WellPath)
+
+
+    def tie_in(self, ) -> Optional[WellPathTimeIn]:
+        """
+        Well Path Tie-In Settings
+
+        Arguments:
+            
+        Returns:
+            RimWellPathTieIn
+        """
+        return self._call_pdm_method_return_optional_value("TieIn", WellPathTimeIn)
 
 
 class ModeledWellPath(WellPath):
@@ -2040,6 +2079,35 @@ class RimStatisticalCalculation(Reservoir):
         self._call_pdm_method_void("set_source_properties", property_type=property_type, property_names=property_names)
 
 
+class WellPathTimeIn(PdmObjectBase):
+    """
+    A ResInsight Well Tie-in
+
+    Attributes:
+        add_valve_at_connection (bool): Add Outlet Valve for Branch
+        custom_outlet_valve_md (Tuple[bool, float]): Outlet Valve Custom MD
+        tie_in_measured_depth (float): Tie In Measured Depth
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.add_valve_at_connection: bool = False
+        self.custom_outlet_valve_md: Tuple[bool, float] = (False, 0.000000000000000e+00)
+        self.tie_in_measured_depth: float = 0.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathTimeIn.__custom_init__ is not None:
+            WellPathTimeIn.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def valve(self) -> Optional[WellPathValve]:
+        """Branch Outlet Valve
+
+        Returns:
+             WellPathValve
+        """
+        children = self.children("Valve", WellPathValve)
+        return children[0] if len(children) > 0 else None
+
+
 class RoffCase(Reservoir):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -2657,6 +2725,23 @@ class TriangleGeometry(PdmObjectBase):
         if TriangleGeometry.__custom_init__ is not None:
             TriangleGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class ValveCollection(CheckableNamedObject):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if ValveCollection.__custom_init__ is not None:
+            ValveCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def valves(self) -> List[WellPathValve]:
+        """Valves
+
+        Returns:
+             List[WellPathValve]
+        """
+        return self.children("Valves", WellPathValve)
+
+
 class ValveTemplate(NamedObject):
     """
     Attributes:
@@ -2788,6 +2873,54 @@ class SimulationWell(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SimulationWell.__custom_init__ is not None:
             SimulationWell.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogPlot(DepthTrackPlot):
+    """
+    A Well Log Plot With a shared Depth Axis and Multiple Tracks
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        DepthTrackPlot.__init__(self, pb2_object, channel)
+        if WellLogPlot.__custom_init__ is not None:
+            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
+        """
+        Create a new well log track
+
+        Arguments:
+            title (str): Title
+            case (Optional[Reservoir]): Case
+            well_path (Optional[WellPath]): Well Path
+        Returns:
+            WellLogPlotTrack
+        """
+        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
+
+
+class WellBoreStabilityPlot(WellLogPlot):
+    """
+    A GeoMechanical Well Bore Stability Plot
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellLogPlot.__init__(self, pb2_object, channel)
+        if WellBoreStabilityPlot.__custom_init__ is not None:
+            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def parameters(self) -> Optional[WbsParameters]:
+        """Well Bore Stability Parameters
+
+        Returns:
+             WbsParameters
+        """
+        children = self.children("Parameters", WbsParameters)
+        return children[0] if len(children) > 0 else None
+
 
 class WellEventControl(WellEvent):
     """
@@ -3140,54 +3273,6 @@ class WellLogExtractionCurve(WellLogPlotCurve):
         if WellLogExtractionCurve.__custom_init__ is not None:
             WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class WellLogPlot(DepthTrackPlot):
-    """
-    A Well Log Plot With a shared Depth Axis and Multiple Tracks
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        DepthTrackPlot.__init__(self, pb2_object, channel)
-        if WellLogPlot.__custom_init__ is not None:
-            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
-        """
-        Create a new well log track
-
-        Arguments:
-            title (str): Title
-            case (Optional[Reservoir]): Case
-            well_path (Optional[WellPath]): Well Path
-        Returns:
-            WellLogPlotTrack
-        """
-        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
-
-
-class WellBoreStabilityPlot(WellLogPlot):
-    """
-    A GeoMechanical Well Bore Stability Plot
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellLogPlot.__init__(self, pb2_object, channel)
-        if WellBoreStabilityPlot.__custom_init__ is not None:
-            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def parameters(self) -> Optional[WbsParameters]:
-        """Well Bore Stability Parameters
-
-        Returns:
-             WbsParameters
-        """
-        children = self.children("Parameters", WbsParameters)
-        return children[0] if len(children) > 0 else None
-
-
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -3393,6 +3478,16 @@ class WellPathCompletions(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+    def valves(self) -> Optional[ValveCollection]:
+        """Valves
+
+        Returns:
+             ValveCollection
+        """
+        children = self.children("Valves", ValveCollection)
+        return children[0] if len(children) > 0 else None
+
+
 class Fracture(CheckableNamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -3539,11 +3634,13 @@ class WellPathTarget(PdmObjectBase):
 class WellPathValve(CheckableNamedObject):
     """
     Attributes:
+        is_open (bool): Valve is Open
         start_measured_depth (float): Start MD
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_open: bool = True
         self.start_measured_depth: float = 0.000000000000000e+00
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if WellPathValve.__custom_init__ is not None:
@@ -3729,6 +3826,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['TextAnnotation'] = TextAnnotation
     classes['ThermalFractureTemplate'] = ThermalFractureTemplate
     classes['TriangleGeometry'] = TriangleGeometry
+    classes['ValveCollection'] = ValveCollection
     classes['ValveTemplate'] = ValveTemplate
     classes['ValveTemplateCollection'] = ValveTemplateCollection
     classes['View'] = View
@@ -3759,6 +3857,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellPathGeometry'] = WellPathGeometry
     classes['WellPathSicdParameters'] = WellPathSicdParameters
     classes['WellPathTarget'] = WellPathTarget
+    classes['WellPathTimeIn'] = WellPathTimeIn
     classes['WellPathValve'] = WellPathValve
     return classes
 
