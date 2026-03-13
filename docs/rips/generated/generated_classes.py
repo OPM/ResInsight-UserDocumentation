@@ -1084,11 +1084,13 @@ class WellPath(PdmObjectBase):
 
     Attributes:
         name (str): Name
+        well_path_color (str): Well Path Color
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.name: str = ""
+        self.well_path_color: str = "#ff55ff"
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPath.__custom_init__ is not None:
             WellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -1489,6 +1491,16 @@ class Polygon(NamedObject):
         NamedObject.__init__(self, pb2_object, channel)
         if Polygon.__custom_init__ is not None:
             Polygon.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def appearance(self) -> Optional[RimPolygonAppearance]:
+        """Appearance
+
+        Returns:
+             RimPolygonAppearance
+        """
+        children = self.children("Appearance", RimPolygonAppearance)
+        return children[0] if len(children) > 0 else None
+
 
 class PolygonCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -1979,6 +1991,35 @@ class MudWeightWindowParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if MudWeightWindowParameters.__custom_init__ is not None:
             MudWeightWindowParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimPolygonAppearance(PdmObjectBase):
+    """
+    Attributes:
+        is_closed (bool): Closed Polygon
+        line_color (str): Line Color
+        line_thickness (int): Line Thickness
+        lock_polygon (bool): Lock Polygon to Plane
+        polygon_plane_depth (float): Polygon Plane Depth
+        show_lines (bool): Show Lines
+        show_spheres (bool): Show Spheres
+        sphere_color (str): Sphere Color
+        sphere_radius_factor (float): Sphere Radius Factor
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_closed: bool = True
+        self.line_color: str = "#ffa500"
+        self.line_thickness: int = 3
+        self.lock_polygon: bool = False
+        self.polygon_plane_depth: float = 0.000000000000000e+00
+        self.show_lines: bool = True
+        self.show_spheres: bool = False
+        self.sphere_color: str = "#ffa500"
+        self.sphere_radius_factor: float = 1.500000000000000e-01
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if RimPolygonAppearance.__custom_init__ is not None:
+            RimPolygonAppearance.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class ReservoirGridEnsemble(NamedObject):
     """
@@ -3805,6 +3846,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
     classes['ReservoirGridEnsemble'] = ReservoirGridEnsemble
+    classes['RimPolygonAppearance'] = RimPolygonAppearance
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RoffCase'] = RoffCase
     classes['SimulationWell'] = SimulationWell
