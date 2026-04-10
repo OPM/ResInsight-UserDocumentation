@@ -1614,6 +1614,19 @@ class RegularSurface(SurfaceInterface):
         if RegularSurface.__custom_init__ is not None:
             RegularSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def get_property_to_key(self, name: str="", value_key: str="") -> None:
+        """
+        Get property to key.
+
+        Arguments:
+            name (str): Name
+            value_key (str): Key Value
+        Returns:
+            
+        """
+        self._call_pdm_method_void("GetPropertyToKey", name=name, value_key=value_key)
+
+
     def set_property_as_depth(self, name: str="") -> None:
         """
         Set property as depth.
