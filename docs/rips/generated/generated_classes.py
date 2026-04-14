@@ -1627,6 +1627,18 @@ class RegularSurface(SurfaceInterface):
         self._call_pdm_method_void("GetPropertyToKey", name=name, value_key=value_key)
 
 
+    def property_names(self, ) -> DataContainerString:
+        """
+        Property Names.
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("PropertyNames", DataContainerString)
+
+
     def set_property_as_depth(self, name: str="") -> None:
         """
         Set property as depth.
