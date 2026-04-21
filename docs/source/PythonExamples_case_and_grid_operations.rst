@@ -146,6 +146,26 @@ Set Cell Result
    :linenos:
    :caption: set_cell_result.py
 
+.. _case_and_grid_operations_set_discrete_active_cell_property:
+
+Set Discrete Active Cell Property
+---------------------------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/set_discrete_active_cell_property.py
+   :language: python
+   :linenos:
+   :caption: set_discrete_active_cell_property.py
+
+.. _case_and_grid_operations_set_discrete_grid_property:
+
+Set Discrete Grid Property
+--------------------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/set_discrete_grid_property.py
+   :language: python
+   :linenos:
+   :caption: set_discrete_grid_property.py
+
 .. _case_and_grid_operations_set_flow_diagnostics_result:
 
 Set Flow Diagnostics Result
