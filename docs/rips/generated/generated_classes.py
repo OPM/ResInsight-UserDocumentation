@@ -18,12 +18,113 @@ class CellFilterCollection(PdmObjectBase):
             CellFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class ColorLegend(PdmObjectBase):
+    """
+    Attributes:
+        color_legend_name (str): Color Legend Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.color_legend_name: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if ColorLegend.__custom_init__ is not None:
+            ColorLegend.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_color_legend_item(self, category_value: int=0, category_name: str="", color: str="#ffa500") -> ColorLegendItem:
+        """
+        Append a category item with a name and RGB color
+
+        Arguments:
+            category_value (int): 
+            category_name (str): 
+            color (str): 
+        Returns:
+            ColorLegendItem
+        """
+        return self._call_pdm_method_return_value("AddColorLegendItem", ColorLegendItem, category_value=category_value, category_name=category_name, color=color)
+
+
+    def color_legend_items(self) -> List[ColorLegendItem]:
+        """
+
+        Returns:
+             List[ColorLegendItem]
+        """
+        return self.children("ColorLegendItems", ColorLegendItem)
+
+
+class ColorLegendCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         PdmObjectBase.__init__(self, pb2_object, channel)
-        if ColorLegend.__custom_init__ is not None:
-            ColorLegend.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+        if ColorLegendCollection.__custom_init__ is not None:
+            ColorLegendCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def create_color_legend(self, name: str="") -> ColorLegend:
+        """
+        Create a new custom color legend
+
+        Arguments:
+            name (str): 
+        Returns:
+            ColorLegend
+        """
+        return self._call_pdm_method_return_value("CreateColorLegend", ColorLegend, name=name)
+
+
+    def custom_color_legends(self) -> List[ColorLegend]:
+        """Custom Color Legends
+
+        Returns:
+             List[ColorLegend]
+        """
+        return self.children("CustomColorLegends", ColorLegend)
+
+
+    def delete_color_legend(self, case: Optional[Case]=None, result_name: str="") -> None:
+        """
+        Remove the color legend bound to a (case, resultName) pair
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("DeleteColorLegend", case=case, result_name=result_name)
+
+
+    def set_default_color_legend_for_result(self, case: Optional[Case]=None, result_name: str="", color_legend: Optional[ColorLegend]=None) -> None:
+        """
+        Bind a color legend to a (case, resultName) pair
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+            color_legend (Optional[ColorLegend]): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetDefaultColorLegendForResult", case=case, result_name=result_name, color_legend=color_legend)
+
+
+class ColorLegendItem(PdmObjectBase):
+    """
+    Attributes:
+        category_name (str): Category Name
+        category_value (int): Category Number
+        color (str): Color
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.category_name: str = ""
+        self.category_value: int = 0
+        self.color: str = "#000000"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if ColorLegendItem.__custom_init__ is not None:
+            ColorLegendItem.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class CompletionTemplateCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -3801,6 +3902,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['CellFilterCollection'] = CellFilterCollection
     classes['CheckableNamedObject'] = CheckableNamedObject
     classes['ColorLegend'] = ColorLegend
+    classes['ColorLegendCollection'] = ColorLegendCollection
+    classes['ColorLegendItem'] = ColorLegendItem
     classes['CommandRouter'] = CommandRouter
     classes['CompletionTemplateCollection'] = CompletionTemplateCollection
     classes['CornerPointCase'] = CornerPointCase
