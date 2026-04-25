@@ -1126,6 +1126,33 @@ class WellLog(PdmObjectBase):
         if WellLog.__custom_init__ is not None:
             WellLog.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def channel_names_internal(self, ) -> DataContainerString:
+        """
+        Channel names for this well log.
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("ChannelNamesInternal", DataContainerString)
+
+
+    def read_well_log_data_internal(self, measured_depth_key: str="", tvd_msl_key: str="", tvd_rkb_key: str="", channel_keys_csv: str="") -> None:
+        """
+        Read Well Log Data
+
+        Arguments:
+            measured_depth_key (str): 
+            tvd_msl_key (str): 
+            tvd_rkb_key (str): 
+            channel_keys_csv (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("ReadWellLogDataInternal", measured_depth_key=measured_depth_key, tvd_msl_key=tvd_msl_key, tvd_rkb_key=tvd_rkb_key, channel_keys_csv=channel_keys_csv)
+
+
 class ImportedWellLog(WellLog):
     """
     ImportedWellLog
@@ -1383,6 +1410,15 @@ class WellPath(PdmObjectBase):
         return self._call_pdm_method_return_optional_value("TieIn", WellPathTimeIn)
 
 
+    def well_logs(self) -> List[WellLog]:
+        """Well Logs
+
+        Returns:
+             List[WellLog]
+        """
+        return self.children("WellLogs", WellLog)
+
+
 class ModeledWellPath(WellPath):
     """
     A Well Path created interactively in ResInsight
@@ -1483,6 +1519,19 @@ class NonNetLayers(PdmObjectBase):
         children = self.children("FaciesDefinition", EclipseResult)
         return children[0] if len(children) > 0 else None
 
+
+class OsduWellLog(WellLog):
+    """
+    Attributes:
+        name (str): 
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = ""
+        WellLog.__init__(self, pb2_object, channel)
+        if OsduWellLog.__custom_init__ is not None:
+            OsduWellLog.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class OsduWellPath(WellPath):
     """
@@ -3440,6 +3489,34 @@ class WellLogExtractionCurve(WellLogPlotCurve):
         if WellLogExtractionCurve.__custom_init__ is not None:
             WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class WellLogFileInterface(WellLog):
+    """
+    Attributes:
+        file_name (Optional[str]): Filename
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.file_name: Optional[str] = None
+        WellLog.__init__(self, pb2_object, channel)
+        if WellLogFileInterface.__custom_init__ is not None:
+            WellLogFileInterface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogLasFile(WellLogFileInterface):
+    """
+    Attributes:
+        name (str): 
+        well_name (str): 
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = ""
+        self.well_name: str = ""
+        WellLogFileInterface.__init__(self, pb2_object, channel)
+        if WellLogLasFile.__custom_init__ is not None:
+            WellLogLasFile.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -3956,6 +4033,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['NamedObject'] = NamedObject
     classes['NonDarcyPerforationParameters'] = NonDarcyPerforationParameters
     classes['NonNetLayers'] = NonNetLayers
+    classes['OsduWellLog'] = OsduWellLog
     classes['OsduWellPath'] = OsduWellPath
     classes['PdmObjectBase'] = PdmObjectBase
     classes['Perforation'] = Perforation
@@ -4014,6 +4092,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellEventValve'] = WellEventValve
     classes['WellLog'] = WellLog
     classes['WellLogExtractionCurve'] = WellLogExtractionCurve
+    classes['WellLogFileInterface'] = WellLogFileInterface
+    classes['WellLogLasFile'] = WellLogLasFile
     classes['WellLogPlot'] = WellLogPlot
     classes['WellLogPlotCollection'] = WellLogPlotCollection
     classes['WellLogPlotCurve'] = WellLogPlotCurve
