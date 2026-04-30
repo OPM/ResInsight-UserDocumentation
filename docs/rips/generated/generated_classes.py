@@ -126,6 +126,62 @@ class ColorLegendItem(PdmObjectBase):
         if ColorLegendItem.__custom_init__ is not None:
             ColorLegendItem.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class NamedObject(PdmObjectBase):
+    """
+    Attributes:
+        name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = "Combined Filter"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if NamedObject.__custom_init__ is not None:
+            NamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CheckableNamedObject(NamedObject):
+    """
+    Attributes:
+        is_checked (bool): Active
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_checked: bool = True
+        NamedObject.__init__(self, pb2_object, channel)
+        if CheckableNamedObject.__custom_init__ is not None:
+            CheckableNamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CellFilter(CheckableNamedObject):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if CellFilter.__custom_init__ is not None:
+            CellFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CombinedFilter(CellFilter):
+    """
+    Attributes:
+        combine_mode (str): One of [AND, OR]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.combine_mode: str = "AND"
+        CellFilter.__init__(self, pb2_object, channel)
+        if CombinedFilter.__custom_init__ is not None:
+            CombinedFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def filters(self) -> List[CellFilter]:
+        """Filters
+
+        Returns:
+             List[CellFilter]
+        """
+        return self.children("Filters", CellFilter)
+
+
 class CompletionTemplateCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -482,32 +538,6 @@ class ElasticProperties(PdmObjectBase):
         children = self.children("PropertyScalingCollection", ElasticPropertyScalingCollection)
         return children[0] if len(children) > 0 else None
 
-
-class NamedObject(PdmObjectBase):
-    """
-    Attributes:
-        name (str): Name
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.name: str = ""
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if NamedObject.__custom_init__ is not None:
-            NamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class CheckableNamedObject(NamedObject):
-    """
-    Attributes:
-        is_checked (bool): Active
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.is_checked: bool = True
-        NamedObject.__init__(self, pb2_object, channel)
-        if CheckableNamedObject.__custom_init__ is not None:
-            CheckableNamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class ElasticPropertyScaling(CheckableNamedObject):
     """
@@ -3976,11 +4006,13 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes : Dict[str, Type[PdmObjectBase]] = {}
     classes['Case'] = Case
     classes['CellColors'] = CellColors
+    classes['CellFilter'] = CellFilter
     classes['CellFilterCollection'] = CellFilterCollection
     classes['CheckableNamedObject'] = CheckableNamedObject
     classes['ColorLegend'] = ColorLegend
     classes['ColorLegendCollection'] = ColorLegendCollection
     classes['ColorLegendItem'] = ColorLegendItem
+    classes['CombinedFilter'] = CombinedFilter
     classes['CommandRouter'] = CommandRouter
     classes['CompletionTemplateCollection'] = CompletionTemplateCollection
     classes['CornerPointCase'] = CornerPointCase
