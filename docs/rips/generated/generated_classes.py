@@ -1682,11 +1682,24 @@ class Polygon(NamedObject):
         return children[0] if len(children) > 0 else None
 
 
-class PolygonCollection(PdmObjectBase):
+class RimPolygonContainer(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         PdmObjectBase.__init__(self, pb2_object, channel)
+        if RimPolygonContainer.__custom_init__ is not None:
+            RimPolygonContainer.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class PolygonCollection(RimPolygonContainer):
+    """
+    Attributes:
+        polygon_collection_name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.polygon_collection_name: str = "Polygons"
+        RimPolygonContainer.__init__(self, pb2_object, channel)
         if PolygonCollection.__custom_init__ is not None:
             PolygonCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
@@ -1710,6 +1723,15 @@ class PolygonCollection(PdmObjectBase):
              List[Polygon]
         """
         return self.children("Polygons", Polygon)
+
+
+    def sub_collections(self) -> List[RimPolygonContainer]:
+        """Subcollections
+
+        Returns:
+             List[RimPolygonContainer]
+        """
+        return self.children("SubCollections", RimPolygonContainer)
 
 
 class PressureTable(PdmObjectBase):
@@ -4085,6 +4107,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['Reservoir'] = Reservoir
     classes['ReservoirGridEnsemble'] = ReservoirGridEnsemble
     classes['RimPolygonAppearance'] = RimPolygonAppearance
+    classes['RimPolygonContainer'] = RimPolygonContainer
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RoffCase'] = RoffCase
     classes['SimulationWell'] = SimulationWell
