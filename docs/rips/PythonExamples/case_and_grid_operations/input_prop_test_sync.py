@@ -2,6 +2,11 @@
 # This example generates a derived property in an synchronous manner
 # Meaning it completes reading each result before calculating the derived result
 # See InputPropTestAsync for how to do this asynchronously instead.
+#
+# Property/porosity/result types accept either a typed enum
+# (rips.PropertyType.STATIC_NATIVE) or a plain string ("STATIC_NATIVE"). This
+# example uses the string form; see input_prop_test_async.py for the typed-enum
+# form.
 ########################################################################################
 import rips
 import time

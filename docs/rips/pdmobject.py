@@ -3,6 +3,7 @@
 ResInsight caf::PdmObject connection module
 """
 
+from enum import Enum
 from functools import wraps
 import grpc
 import re
@@ -243,6 +244,8 @@ class PdmObjectBase:
             if value:
                 return "true"
             return "false"
+        if isinstance(value, Enum):
+            return str(value.value)
         if isinstance(value, PdmObjectBase):
             return value.__class__.__name__ + ":" + str(value.address())
         if isinstance(value, list):
@@ -600,8 +603,17 @@ class PdmObjectBase:
 
         try:
             pb2_object = self._pdm_object_stub.CallPdmObjectMethod(request)
-            pdm_object = class_definition(pb2_object=pb2_object, channel=self.channel())
-            return pdm_object
+
+            # Prefer the actual class the server returned over the statically declared one
+            # so that generic methods (e.g. AddFolder registered on a shared base) yield
+            # the most-derived Python proxy and inherited accessors work as expected.
+            from .generated.generated_classes import class_from_keyword
+
+            actual_class = class_from_keyword(pb2_object.class_keyword)
+            if actual_class is not None and issubclass(actual_class, class_definition):
+                return actual_class(pb2_object=pb2_object, channel=self.channel())
+
+            return class_definition(pb2_object=pb2_object, channel=self.channel())
         except grpc.RpcError as exc:
             raise RipsError(
                 "%s" % exc.details(), code=exc.code(), details=exc.details()

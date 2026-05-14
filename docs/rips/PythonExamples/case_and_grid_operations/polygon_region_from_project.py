@@ -34,9 +34,6 @@ def point_in_polygon_2d(px, py, polygon_xy):
 
 
 resinsight = rips.Instance.find()
-if resinsight is None:
-    print("No ResInsight instance found")
-    exit()
 
 cases = resinsight.project.cases()
 if not cases:
@@ -85,7 +82,9 @@ for cell_idx, cell_center in enumerate(cell_centers):
 # Step 3: Create a Generated result that stores the unique integer region value
 # for every active cell. Cells not covered by any polygon receive value 0.
 property_name = "POLYGON_REGION"
-case.set_active_cell_property(region_values, "GENERATED", property_name, 0)
+case.set_active_cell_property(
+    region_values, rips.PropertyType.GENERATED, property_name, 0
+)
 
 print(f"Generated property '{property_name}' created successfully")
 for i, polygon in enumerate(polygons):
@@ -97,5 +96,7 @@ print(f"  Unassigned (no polygon): {unassigned} cells")
 
 # Apply the generated result in the view to visualize the regions
 view = case.views()[0] if case.views() else case.create_view()
-view.apply_cell_result(result_type="GENERATED", result_variable=property_name)
+view.apply_cell_result(
+    result_type=rips.ResultType.GENERATED, result_variable=property_name
+)
 print(f"Applied '{property_name}' cell result to view")
