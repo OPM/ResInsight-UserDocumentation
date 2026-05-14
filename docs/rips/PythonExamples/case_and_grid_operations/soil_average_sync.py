@@ -1,5 +1,9 @@
 ###########################################################################################
 # This example will synchronously calculate the average value for SOIL for all time steps
+#
+# Property/porosity types accept either a typed enum (rips.PropertyType.DYNAMIC_NATIVE) or
+# a plain string ("DYNAMIC_NATIVE"). This example uses the string form; see
+# soil_average_async.py for the typed-enum form.
 ###########################################################################################
 import rips
 import time
