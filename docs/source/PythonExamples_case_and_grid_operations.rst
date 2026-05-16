@@ -6,6 +6,26 @@ Case And Grid Operations
 
 This page shows Python examples from the **case_and_grid_operations** folder.
 
+.. _case_and_grid_operations_add_combined_data_filter:
+
+Add Combined Data Filter
+------------------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/add_combined_data_filter.py
+   :language: python
+   :linenos:
+   :caption: add_combined_data_filter.py
+
+.. _case_and_grid_operations_add_perforation_filter:
+
+Add Perforation Filter
+----------------------
+
+.. literalinclude:: ../rips/PythonExamples/case_and_grid_operations/add_perforation_filter.py
+   :language: python
+   :linenos:
+   :caption: add_perforation_filter.py
+
 .. _case_and_grid_operations_case_grid_group:
 
 Case Grid Group
