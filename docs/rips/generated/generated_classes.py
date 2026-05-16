@@ -280,6 +280,86 @@ class CellFilterCollection(PdmObjectBase):
         if CellFilterCollection.__custom_init__ is not None:
             CellFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class NamedObject(PdmObjectBase):
+    """
+    Attributes:
+        name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = "New filter"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if NamedObject.__custom_init__ is not None:
+            NamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CheckableNamedObject(NamedObject):
+    """
+    Attributes:
+        is_checked (bool): Active
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_checked: bool = True
+        NamedObject.__init__(self, pb2_object, channel)
+        if CheckableNamedObject.__custom_init__ is not None:
+            CheckableNamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CellFilter(CheckableNamedObject):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if CellFilter.__custom_init__ is not None:
+            CellFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class PropertyFilter(CellFilter):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CellFilter.__init__(self, pb2_object, channel)
+        if PropertyFilter.__custom_init__ is not None:
+            PropertyFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CellPropertyFilter(PropertyFilter):
+    """
+    Attributes:
+        lower_bound (float): Min
+        upper_bound (float): Max
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.lower_bound: float = 0.000000000000000e+00
+        self.upper_bound: float = 0.000000000000000e+00
+        PropertyFilter.__init__(self, pb2_object, channel)
+        if CellPropertyFilter.__custom_init__ is not None:
+            CellPropertyFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CellRangeFilter(CellFilter):
+    """
+    Attributes:
+        cell_count_i (int):   Width
+        cell_count_j (int):   Width
+        cell_count_k (int):   Width
+        start_index_i (int): I Start
+        start_index_j (int): J Start
+        start_index_k (int): K Start
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.cell_count_i: int = 1
+        self.cell_count_j: int = 1
+        self.cell_count_k: int = 1
+        self.start_index_i: int = 1
+        self.start_index_j: int = 1
+        self.start_index_k: int = 1
+        CellFilter.__init__(self, pb2_object, channel)
+        if CellRangeFilter.__custom_init__ is not None:
+            CellRangeFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class ColorLegend(PdmObjectBase):
     """
     Attributes:
@@ -389,40 +469,6 @@ class ColorLegendItem(PdmObjectBase):
         if ColorLegendItem.__custom_init__ is not None:
             ColorLegendItem.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class NamedObject(PdmObjectBase):
-    """
-    Attributes:
-        name (str): Name
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.name: str = "Combined Filter"
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if NamedObject.__custom_init__ is not None:
-            NamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class CheckableNamedObject(NamedObject):
-    """
-    Attributes:
-        is_checked (bool): Active
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.is_checked: bool = True
-        NamedObject.__init__(self, pb2_object, channel)
-        if CheckableNamedObject.__custom_init__ is not None:
-            CheckableNamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class CellFilter(CheckableNamedObject):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        CheckableNamedObject.__init__(self, pb2_object, channel)
-        if CellFilter.__custom_init__ is not None:
-            CellFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class CombinedFilter(CellFilter):
     """
     Attributes:
@@ -435,6 +481,37 @@ class CombinedFilter(CellFilter):
         CellFilter.__init__(self, pb2_object, channel)
         if CombinedFilter.__custom_init__ is not None:
             CombinedFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_property_filter(self, result_variable: str="", result_type: str="") -> CellPropertyFilter:
+        """
+        Add a new property filter as a child of this combined filter
+
+        Arguments:
+            result_variable (str): 
+            result_type (str): 
+        Returns:
+            CellPropertyFilter
+        """
+        return self._call_pdm_method_return_value("AddPropertyFilter", CellPropertyFilter, result_variable=result_variable, result_type=result_type)
+
+
+    def add_range_filter(self, name: str="", start_i: int=-1, start_j: int=-1, start_k: int=-1, cell_count_i: int=-1, cell_count_j: int=-1, cell_count_k: int=-1) -> CellRangeFilter:
+        """
+        Add a new IJK range filter as a child of this combined filter
+
+        Arguments:
+            name (str): 
+            start_i (int): 
+            start_j (int): 
+            start_k (int): 
+            cell_count_i (int): 
+            cell_count_j (int): 
+            cell_count_k (int): 
+        Returns:
+            CellRangeFilter
+        """
+        return self._call_pdm_method_return_value("AddRangeFilter", CellRangeFilter, name=name, start_i=start_i, start_j=start_j, start_k=start_k, cell_count_i=cell_count_i, cell_count_j=cell_count_j, cell_count_k=cell_count_k)
+
 
     def filters(self) -> List[CellFilter]:
         """Filters
@@ -521,6 +598,16 @@ class Reservoir(Case):
         self._call_pdm_method_void("clear_result_aliases")
 
 
+    def data_filter_collection(self) -> Optional[DataFilterCollection]:
+        """Data Filters
+
+        Returns:
+             DataFilterCollection
+        """
+        children = self.children("DataFilterCollection", DataFilterCollection)
+        return children[0] if len(children) > 0 else None
+
+
     def export_corner_point_grid_internal(self, zcorn_key: str="", coord_key: str="", actnum_key: str="") -> None:
         """
         Export Corner Point Grid Internal
@@ -552,6 +639,21 @@ class Reservoir(Case):
             
         """
         self._call_pdm_method_void("export_values_internal", coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, result_key=result_key, property_type=property_type, property_name=property_name, time_step=time_step, porosity_model=porosity_model)
+
+
+    def filtered_cells_internal(self, filter: Optional[CellFilter]=None, mask_key: str="", time_step: int=0, grid_index: int=0) -> None:
+        """
+        Apply a cell filter to this case for a grid + time step and write a per-cell 0/1 mask to the key-value store. The vector length and ordering match grid_property(...) for the same grid index.
+
+        Arguments:
+            filter (Optional[CellFilter]): Cell Filter
+            mask_key (str): 
+            time_step (int): 
+            grid_index (int): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("filtered_cells_internal", filter=filter, mask_key=mask_key, time_step=time_step, grid_index=grid_index)
 
 
     def import_properties(self, file_names: List[str]=[]) -> DataContainerString:
@@ -691,6 +793,36 @@ class DataContainerTime(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if DataContainerTime.__custom_init__ is not None:
             DataContainerTime.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class DataFilterCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if DataFilterCollection.__custom_init__ is not None:
+            DataFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_combined_filter(self, name: str="", combine_mode: str="") -> CombinedFilter:
+        """
+        Add a new combined filter to the data filter collection
+
+        Arguments:
+            name (str): 
+            combine_mode (str): 
+        Returns:
+            CombinedFilter
+        """
+        return self._call_pdm_method_return_value("AddCombinedFilter", CombinedFilter, name=name, combine_mode=combine_mode)
+
+
+    def filters(self) -> List[CellFilter]:
+        """Filters
+
+        Returns:
+             List[CellFilter]
+        """
+        return self.children("Filters", CellFilter)
+
 
 class SurfaceInterface(PdmObjectBase):
     """
@@ -1867,6 +1999,18 @@ class Perforation(CheckableNamedObject):
         if Perforation.__custom_init__ is not None:
             Perforation.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_filter(self, filter: Optional[CellFilter]=None) -> None:
+        """
+        Set the cell filter associated with this perforation interval (replaces any existing filter)
+
+        Arguments:
+            filter (Optional[CellFilter]): Cell Filter
+        Returns:
+            
+        """
+        self._call_pdm_method_void("AddFilter", filter=filter)
+
+
     def add_valve(self, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, valve_count: int=1, template: Optional[ValveTemplate]=None) -> WellPathValve:
         """
         Add StimPlan Fracture
@@ -1880,6 +2024,18 @@ class Perforation(CheckableNamedObject):
             WellPathValve
         """
         return self._call_pdm_method_return_value("AddValve", WellPathValve, start_md=start_md, end_md=end_md, valve_count=valve_count, template=template)
+
+
+    def cell_filter(self, ) -> Optional[CellFilter]:
+        """
+        Cell filter associated with this perforation interval, or null if none
+
+        Arguments:
+            
+        Returns:
+            CellFilter
+        """
+        return self._call_pdm_method_return_optional_value("cell_filter", CellFilter)
 
 
     def valves(self) -> List[WellPathValve]:
@@ -3413,54 +3569,6 @@ class SimulationWell(PdmObjectBase):
         if SimulationWell.__custom_init__ is not None:
             SimulationWell.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class WellLogPlot(DepthTrackPlot):
-    """
-    A Well Log Plot With a shared Depth Axis and Multiple Tracks
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        DepthTrackPlot.__init__(self, pb2_object, channel)
-        if WellLogPlot.__custom_init__ is not None:
-            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
-        """
-        Create a new well log track
-
-        Arguments:
-            title (str): Title
-            case (Optional[Reservoir]): Case
-            well_path (Optional[WellPath]): Well Path
-        Returns:
-            WellLogPlotTrack
-        """
-        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
-
-
-class WellBoreStabilityPlot(WellLogPlot):
-    """
-    A GeoMechanical Well Bore Stability Plot
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellLogPlot.__init__(self, pb2_object, channel)
-        if WellBoreStabilityPlot.__custom_init__ is not None:
-            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def parameters(self) -> Optional[WbsParameters]:
-        """Well Bore Stability Parameters
-
-        Returns:
-             WbsParameters
-        """
-        children = self.children("Parameters", WbsParameters)
-        return children[0] if len(children) > 0 else None
-
-
 class WellEventControl(WellEvent):
     """
     WellEventControl
@@ -3839,6 +3947,54 @@ class WellLogLasFile(WellLogFileInterface):
         WellLogFileInterface.__init__(self, pb2_object, channel)
         if WellLogLasFile.__custom_init__ is not None:
             WellLogLasFile.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogPlot(DepthTrackPlot):
+    """
+    A Well Log Plot With a shared Depth Axis and Multiple Tracks
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        DepthTrackPlot.__init__(self, pb2_object, channel)
+        if WellLogPlot.__custom_init__ is not None:
+            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
+        """
+        Create a new well log track
+
+        Arguments:
+            title (str): Title
+            case (Optional[Reservoir]): Case
+            well_path (Optional[WellPath]): Well Path
+        Returns:
+            WellLogPlotTrack
+        """
+        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
+
+
+class WellBoreStabilityPlot(WellLogPlot):
+    """
+    A GeoMechanical Well Bore Stability Plot
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellLogPlot.__init__(self, pb2_object, channel)
+        if WellBoreStabilityPlot.__custom_init__ is not None:
+            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def parameters(self) -> Optional[WbsParameters]:
+        """Well Bore Stability Parameters
+
+        Returns:
+             WbsParameters
+        """
+        children = self.children("Parameters", WbsParameters)
+        return children[0] if len(children) > 0 else None
+
 
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -4301,6 +4457,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['CellColors'] = CellColors
     classes['CellFilter'] = CellFilter
     classes['CellFilterCollection'] = CellFilterCollection
+    classes['CellPropertyFilter'] = CellPropertyFilter
+    classes['CellRangeFilter'] = CellRangeFilter
     classes['CheckableNamedObject'] = CheckableNamedObject
     classes['ColorLegend'] = ColorLegend
     classes['ColorLegendCollection'] = ColorLegendCollection
@@ -4314,6 +4472,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['DataContainerFloat'] = DataContainerFloat
     classes['DataContainerString'] = DataContainerString
     classes['DataContainerTime'] = DataContainerTime
+    classes['DataFilterCollection'] = DataFilterCollection
     classes['DepthSurface'] = DepthSurface
     classes['DepthTrackPlot'] = DepthTrackPlot
     classes['DiameterRoughnessInterval'] = DiameterRoughnessInterval
@@ -4373,6 +4532,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['PressureTable'] = PressureTable
     classes['PressureTableItem'] = PressureTableItem
     classes['Project'] = Project
+    classes['PropertyFilter'] = PropertyFilter
     classes['RegularFileSurface'] = RegularFileSurface
     classes['RegularSurface'] = RegularSurface
     classes['ResampleData'] = ResampleData
