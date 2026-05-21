@@ -37,14 +37,18 @@ except ImportError:
 
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
     'm2r2',
-    'sphinx_automodapi.automodapi',
     'hide_grpc_params',
     'clean_internal_methods',
     'searchable_literalinclude'
 ]
+
+# Generate per-class stub pages for the autosummary tables in
+# GeneratedClasses.rst. Stubs use the template in _templates/autosummary/.
+autosummary_generate = True
 
 # Enable search functionality
 html_search_language = 'en'
@@ -58,16 +62,36 @@ master_doc = 'index'
 napoleon_google_docstring = True
 smartquotes = False
 
-# Clean up automodapi generated files in source after build to make sure we get a full rebuild next time
-def cleanup_automodapi_files(app, exception):
-    """Remove automodapi generated files from source directory after build."""
+# Keep Python objects (classes, methods) out of the page table of
+# contents. Each autosummary stub page is titled after its class, so the
+# class object would otherwise show up as a redundant leaf node beneath
+# the page in the navigation sidebar.
+toc_object_entries = False
+
+# Clean up autosummary generated stub files in source after build to make sure
+# we get a full rebuild next time.
+def cleanup_autosummary_files(app, exception):
+    """Remove autosummary generated stub files from source directory after build."""
     import shutil
     api_dir = os.path.join(app.srcdir, 'api')
     if os.path.exists(api_dir):
         shutil.rmtree(api_dir)
 
+def skip_recursive_type_aliases(app, what, name, obj, skip, options):
+    """Exclude rips.PdmObjectBase's mutually-recursive typing aliases.
+
+    PdmObjectBase defines ``Value = Union[..., "ValueArray"]`` and
+    ``ValueArray = List[Value]``. autodoc recurses through these aliases
+    without terminating, which hangs the build. They are internal
+    annotation helpers, not part of the public API.
+    """
+    if name in ('Value', 'ValueArray'):
+        return True
+    return skip
+
 def setup(app):
-    app.connect('build-finished', cleanup_automodapi_files)
+    app.connect('build-finished', cleanup_autosummary_files)
+    app.connect('autodoc-skip-member', skip_recursive_type_aliases)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
