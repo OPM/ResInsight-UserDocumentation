@@ -58,12 +58,14 @@ CATEGORIES = [
         "ColorLegendCollection", "ColorLegendItem",
     ]),
     ("Cell Filters and Intersections", [
-        "CellFilter", "CellFilterCollection", "CombinedFilter",
-        "CurveIntersection", "IntersectionCollection",
+        "CellFilter", "CellFilterCollection", "CellPropertyFilter",
+        "CellRangeFilter", "CombinedFilter", "CurveIntersection",
+        "DataFilterCollection", "IntersectionCollection",
+        "PropertyFilter",
     ]),
     ("Annotations and Polygons", [
         "TextAnnotation", "Polygon", "PolygonCollection",
-        "RimPolygonAppearance",
+        "RimPolygonAppearance", "RimPolygonContainer",
     ]),
     ("Wells and Well Paths", [
         "WellPath", "FileWellPath", "ModeledWellPath", "OsduWellPath",
@@ -103,8 +105,6 @@ CATEGORIES = [
         "Fracture", "WellPathFracture", "FractureTemplate",
         "FractureTemplateCollection", "StimPlanFractureTemplate",
         "ThermalFractureTemplate", "MeshFractureTemplate",
-    ]),
-    ("Fracture Models", [
         "StimPlanModel", "StimPlanModelCollection",
         "StimPlanModelTemplate", "StimPlanModelTemplateCollection",
         "StimPlanModelPlot", "StimPlanModelPlotCollection",
@@ -133,7 +133,7 @@ CATEGORIES = [
     ]),
     ("Base Classes", [
         "PdmObjectBase", "NamedObject", "CheckableNamedObject",
-        "ViewWindow",
+        "PdmNestedCollectionBase", "ViewWindow",
     ]),
 ]
 
@@ -203,43 +203,50 @@ def slugify(title):
 
 
 def discover_classes():
-    """Return the sorted list of public class names exported by rips."""
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    docs_dir = os.path.dirname(script_dir)
-    if docs_dir not in sys.path:
-        sys.path.insert(0, docs_dir)
+    """Return the sorted list of public class names exported by rips.
 
-    import rips  # noqa: E402
-
-    return sorted(
-        name
-        for name in rips.__all__
-        if inspect.isclass(getattr(rips, name))
-    )
-
-
-def discover_enums():
-    """Return the sorted list of StrEnum class names exported by rips.
-
-    The StrEnum parameter types live in ``rips.generated.generated_classes``
-    but are not registered in ``rips.__all__``, so they are discovered
-    directly from that module.
+    StrEnum subclasses are excluded; they are documented separately on
+    the enum reference page (see :func:`discover_enums`).
     """
     script_dir = os.path.dirname(os.path.abspath(__file__))
     docs_dir = os.path.dirname(script_dir)
     if docs_dir not in sys.path:
         sys.path.insert(0, docs_dir)
 
-    import rips  # noqa: E402  (sets up the generated/ import path)
+    import rips  # noqa: E402
     from enum import StrEnum  # noqa: E402
-    from rips.generated import generated_classes  # noqa: E402
 
     return sorted(
         name
-        for name, obj in inspect.getmembers(generated_classes, inspect.isclass)
-        if issubclass(obj, StrEnum)
-        and obj is not StrEnum
-        and obj.__module__ == generated_classes.__name__
+        for name in rips.__all__
+        if inspect.isclass(getattr(rips, name))
+        and not issubclass(getattr(rips, name), StrEnum)
+    )
+
+
+def discover_enums():
+    """Return the sorted list of StrEnum class names reachable from rips.
+
+    Covers both the auto-generated StrEnum parameter types in
+    ``rips.generated.generated_classes`` and the hand-written gRPC proto
+    enums in ``rips.enums``. None of these are registered in
+    ``rips.__all__``, so they are discovered by scanning the ``rips``
+    namespace for ``StrEnum`` subclasses.
+    """
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    docs_dir = os.path.dirname(script_dir)
+    if docs_dir not in sys.path:
+        sys.path.insert(0, docs_dir)
+
+    import rips  # noqa: E402
+    from enum import StrEnum  # noqa: E402
+
+    return sorted(
+        name
+        for name in dir(rips)
+        if inspect.isclass(getattr(rips, name))
+        and issubclass(getattr(rips, name), StrEnum)
+        and getattr(rips, name) is not StrEnum
     )
 
 
