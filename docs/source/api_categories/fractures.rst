@@ -7,10 +7,24 @@ Fractures
    :toctree: ../api
    :nosignatures:
 
+   rips.ElasticProperties
+   rips.ElasticPropertyScaling
+   rips.ElasticPropertyScalingCollection
+   rips.FaciesInitialPressureConfig
+   rips.FaciesProperties
    rips.Fracture
    rips.FractureTemplate
    rips.FractureTemplateCollection
    rips.MeshFractureTemplate
+   rips.NonNetLayers
+   rips.PressureTable
+   rips.PressureTableItem
    rips.StimPlanFractureTemplate
+   rips.StimPlanModel
+   rips.StimPlanModelCollection
+   rips.StimPlanModelPlot
+   rips.StimPlanModelPlotCollection
+   rips.StimPlanModelTemplate
+   rips.StimPlanModelTemplateCollection
    rips.ThermalFractureTemplate
    rips.WellPathFracture

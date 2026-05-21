@@ -9,6 +9,10 @@ Cell Filters and Intersections
 
    rips.CellFilter
    rips.CellFilterCollection
+   rips.CellPropertyFilter
+   rips.CellRangeFilter
    rips.CombinedFilter
    rips.CurveIntersection
+   rips.DataFilterCollection
    rips.IntersectionCollection
+   rips.PropertyFilter

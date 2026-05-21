@@ -9,5 +9,6 @@ Base Classes
 
    rips.CheckableNamedObject
    rips.NamedObject
+   rips.PdmNestedCollectionBase
    rips.PdmObjectBase
    rips.ViewWindow

@@ -10,4 +10,5 @@ Annotations and Polygons
    rips.Polygon
    rips.PolygonCollection
    rips.RimPolygonAppearance
+   rips.RimPolygonContainer
    rips.TextAnnotation

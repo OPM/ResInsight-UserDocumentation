@@ -105,6 +105,11 @@ plain string value (``"FractureBetaFactor"``).
    :undoc-members:
    :show-inheritance:
 
+.. autoclass:: rips.NNCPropertyType
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 .. autoclass:: rips.NameSetting
    :members:
    :undoc-members:
@@ -156,6 +161,16 @@ plain string value (``"FractureBetaFactor"``).
    :show-inheritance:
 
 .. autoclass:: rips.Property
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: rips.PropertyDataType
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: rips.PropertyType
    :members:
    :undoc-members:
    :show-inheritance:

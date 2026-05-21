@@ -40,7 +40,6 @@ every class are documented once on :ref:`PdmObjectBaseLabel`.
    api_categories/perforations_and_fishbones
    api_categories/valves
    api_categories/fractures
-   api_categories/fracture_models
    api_categories/well_bore_stability
    api_categories/surfaces
    api_categories/plots_and_curves
