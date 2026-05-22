@@ -70,18 +70,25 @@ smartquotes = False
 toc_object_entries = False
 
 # -- Documentation generators ------------------------------------------------
-# These scripts turn the rips package and the .proto files into RST. Running
-# them from 'builder-inited' (before Sphinx reads sources) keeps the docs in
-# sync with docs/rips and docs/proto on every build - local and Read the Docs.
-# They previously ran as separate steps in the update-from-latest workflow.
+# These scripts turn the rips package and the .proto files into RST, keeping
+# the docs in sync with docs/rips and docs/proto on every build - local and
+# Read the Docs. They previously ran as separate steps in the
+# update-from-latest workflow.
 GENERATORS = [
     ['generate_class_index.py'],
     ['generate_protobuf_docs.py', '--config', 'proto_docs_config.json'],
     ['create_python_examples.py'],
 ]
 
-def run_doc_generators(app):
-    """Run the RST generator scripts before the source files are read."""
+def run_doc_generators(app, config):
+    """Run the RST generator scripts before Sphinx discovers source files.
+
+    Hooked on 'config-inited' (not 'builder-inited') so the generated
+    api_categories/*.rst exist before Sphinx scans the source tree. That
+    scan feeds autosummary's stub generation; if the files appeared later
+    the per-class stub pages would not be generated on a fresh checkout
+    and the class leaf nodes would be missing from the navigation.
+    """
     from sphinx.util import logging
     logger = logging.getLogger(__name__)
     for cmd in GENERATORS:
@@ -110,9 +117,7 @@ def skip_recursive_type_aliases(app, what, name, obj, skip, options):
     return skip
 
 def setup(app):
-    # priority 100 < autosummary's default 500: generate_class_index.py must
-    # write api_categories/*.rst before autosummary scans for directives.
-    app.connect('builder-inited', run_doc_generators, priority=100)
+    app.connect('config-inited', run_doc_generators)
     app.connect('build-finished', cleanup_autosummary_files)
     app.connect('autodoc-skip-member', skip_recursive_type_aliases)
 
