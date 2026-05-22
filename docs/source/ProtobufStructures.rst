@@ -1839,6 +1839,8 @@ SaveProjectRequest
 CommandParams
 """""""""""""
 
+CommandParams handles both command name and parameters in one. The message type and content is used as parameters and the name of the variable is used to find the command name.
+
 **Source:** ``Commands.proto``
 
 **Attributes:**
@@ -2040,6 +2042,8 @@ ExportWellLogPlotDataResult
 CommandReply
 """"""""""""
 
+Command reply handles the return values for the generic command The name of the variable is used to map to the cafPdmObject classKeyword
+
 **Source:** ``Commands.proto``
 
 **Attributes:**
@@ -2184,6 +2188,8 @@ ExportFormat
 
 Commands Service
 """"""""""""""""
+
+The Commands service handles generic ResInsight RicfCommandObject-commands The CommandParams is used to deduce command name from the chosen oneof-message .. and the parameters are in the oneof-message itself. Note that we several times duplicate nearly the same message. This is because it is not recommended to reuse existing messages for different purposes.
 
 
 
@@ -2638,6 +2644,9 @@ PdmObject
      - 
    * - address
      - int
+     - 
+   * - parameters
+     - dict[str, str]
      - 
    * - visible
      - bool

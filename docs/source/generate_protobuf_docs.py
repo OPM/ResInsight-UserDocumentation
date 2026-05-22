@@ -127,17 +127,42 @@ class ProtoParser:
         self.enums[file_key] = []
         self.services[file_key] = []
 
-        # Remove comments and get leading comments
+        # Remove comments and get leading comments. Both // line comments
+        # and /* ... */ block comments (single- or multi-line) are
+        # buffered and attached to the next declaration.
         lines = content.split('\n')
         cleaned_lines = []
         comment_buffer = []
+        in_block_comment = False
 
         for line in lines:
             stripped = line.strip()
+
+            if in_block_comment:
+                # Inside a /* ... */ block: accumulate until the closing */
+                text = stripped
+                if '*/' in text:
+                    text = text.split('*/', 1)[0]
+                    in_block_comment = False
+                comment_text = text.lstrip('*').strip()
+                if comment_text:
+                    comment_buffer.append(comment_text)
+                continue
+
             if stripped.startswith('//'):
                 # Store comment for next declaration
                 comment_text = stripped[2:].strip()
                 comment_buffer.append(comment_text)
+            elif stripped.startswith('/*'):
+                # Block comment; may close on the same line or span lines
+                text = stripped[2:]
+                if '*/' in text:
+                    text = text.split('*/', 1)[0]
+                else:
+                    in_block_comment = True
+                comment_text = text.lstrip('*').strip()
+                if comment_text:
+                    comment_buffer.append(comment_text)
             else:
                 cleaned_lines.append((line, ' '.join(comment_buffer)))
                 comment_buffer = []
@@ -184,12 +209,25 @@ class ProtoParser:
                     if brace_count == 0:
                         break
 
-                    # Parse field: type name = number;
+                    # Parse map field: map<keytype, valuetype> name = number;
+                    map_match = re.search(
+                        r'map\s*<\s*(\w+)\s*,\s*(\w+)\s*>\s+(\w+)\s*=\s*(\d+)',
+                        field_line
+                    )
+                    # Parse plain field: type name = number;
                     field_match = re.search(
                         r'(optional|repeated|required)?\s*(\w+)\s+(\w+)\s*=\s*(\d+)',
                         field_line
                     )
-                    if field_match:
+                    if map_match:
+                        key_type, value_type, field_name = map_match.group(1, 2, 3)
+                        msg.fields.append({
+                            'name': field_name,
+                            'type': f'map<{key_type}, {value_type}>',
+                            'modifier': '',
+                            'description': field_comment
+                        })
+                    elif field_match:
                         modifier = field_match.group(1) or ''
                         field_type = field_match.group(2)
                         field_name = field_match.group(3)
@@ -448,6 +486,15 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
         content += "\n"
         return content
 
+    def _python_type(self, proto_type: str) -> str:
+        """Translate a proto field type to its Python equivalent."""
+        map_match = re.match(r'map<\s*(\w+)\s*,\s*(\w+)\s*>', proto_type)
+        if map_match:
+            key = self.TYPE_MAP.get(map_match.group(1), map_match.group(1))
+            value = self.TYPE_MAP.get(map_match.group(2), map_match.group(2))
+            return f"dict[{key}, {value}]"
+        return self.TYPE_MAP.get(proto_type, proto_type)
+
     def _format_fields_table(self, fields: List[Dict]) -> str:
         """Format fields as an RST table."""
         if not fields:
@@ -464,7 +511,7 @@ The generated Python files are located in ``docs/rips/generated/`` and include:
 
         # Add each field as a table row
         for field in fields:
-            python_type = self.TYPE_MAP.get(field['type'], field['type'])
+            python_type = self._python_type(field['type'])
 
             if field['modifier'] == 'repeated':
                 python_type = f"list[{python_type}]"
