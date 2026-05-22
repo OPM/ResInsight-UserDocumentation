@@ -7,6 +7,7 @@
 # -- Path setup --------------------------------------------------------------
 
 import os
+import subprocess
 import sys
 
 # Add paths for autodoc modules
@@ -68,6 +69,25 @@ smartquotes = False
 # the page in the navigation sidebar.
 toc_object_entries = False
 
+# -- Documentation generators ------------------------------------------------
+# These scripts turn the rips package and the .proto files into RST. Running
+# them from 'builder-inited' (before Sphinx reads sources) keeps the docs in
+# sync with docs/rips and docs/proto on every build - local and Read the Docs.
+# They previously ran as separate steps in the update-from-latest workflow.
+GENERATORS = [
+    ['generate_class_index.py'],
+    ['generate_protobuf_docs.py', '--config', 'proto_docs_config.json'],
+    ['create_python_examples.py'],
+]
+
+def run_doc_generators(app):
+    """Run the RST generator scripts before the source files are read."""
+    from sphinx.util import logging
+    logger = logging.getLogger(__name__)
+    for cmd in GENERATORS:
+        logger.info('running doc generator: %s', ' '.join(cmd))
+        subprocess.run([sys.executable, *cmd], cwd=app.srcdir, check=True)
+
 # Clean up autosummary generated stub files in source after build to make sure
 # we get a full rebuild next time.
 def cleanup_autosummary_files(app, exception):
@@ -90,6 +110,9 @@ def skip_recursive_type_aliases(app, what, name, obj, skip, options):
     return skip
 
 def setup(app):
+    # priority 100 < autosummary's default 500: generate_class_index.py must
+    # write api_categories/*.rst before autosummary scans for directives.
+    app.connect('builder-inited', run_doc_generators, priority=100)
     app.connect('build-finished', cleanup_autosummary_files)
     app.connect('autodoc-skip-member', skip_recursive_type_aliases)
 
