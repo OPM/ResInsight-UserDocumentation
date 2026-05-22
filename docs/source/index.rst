@@ -34,10 +34,10 @@ Contents
    :maxdepth: 1
 
    Installation
+   PythonExamples
    rips
    GeneratedClasses
    EnumClasses
-   PythonExamples
    ProtobufStructures
    commands
    
