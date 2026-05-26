@@ -186,11 +186,13 @@ class Property(StrEnum):
     PRESSURE_GRADIENT = "PRESSURE_GRADIENT"
     FORMATIONS = "FORMATIONS"
 
-class ReferenceMdType(StrEnum):
-    GridEntryPoint = "GridEntryPoint"
-    UserDefined = "UserDefined"
+class PropertyDataType(StrEnum):
+    UNKNOWN = "UNKNOWN"
+    FLOAT = "FLOAT"
+    DOUBLE = "DOUBLE"
+    INTEGER = "INTEGER"
 
-class ResultType(StrEnum):
+class PropertyType(StrEnum):
     DYNAMIC_NATIVE = "DYNAMIC_NATIVE"
     STATIC_NATIVE = "STATIC_NATIVE"
     SOURSIMRL = "SOURSIMRL"
@@ -200,6 +202,10 @@ class ResultType(StrEnum):
     ALLAN_DIAGRAMS = "ALLAN_DIAGRAMS"
     FLOW_DIAGNOSTICS = "FLOW_DIAGNOSTICS"
     INJECTION_FLOODING = "INJECTION_FLOODING"
+
+class ReferenceMdType(StrEnum):
+    GridEntryPoint = "GridEntryPoint"
+    UserDefined = "UserDefined"
 
 class ShowDepthGridLines(StrEnum):
     GRID_X_NONE = "GRID_X_NONE"
@@ -438,6 +444,19 @@ class ColorLegendCollection(PdmObjectBase):
         self._call_pdm_method_void("DeleteColorLegend", case=case, result_name=result_name)
 
 
+    def find_default_legend_for_result(self, case: Optional[Case]=None, result_name: str="") -> Optional[ColorLegend]:
+        """
+        Look up the color legend bound to a (case, resultName) pair
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+        Returns:
+            ColorLegend
+        """
+        return self._call_pdm_method_return_optional_value("FindDefaultLegendForResult", ColorLegend, case=case, result_name=result_name)
+
+
     def set_default_color_legend_for_result(self, case: Optional[Case]=None, result_name: str="", color_legend: Optional[ColorLegend]=None) -> None:
         """
         Bind a color legend to a (case, resultName) pair
@@ -668,6 +687,21 @@ class Reservoir(Case):
         return self._call_pdm_method_return_value("import_properties", DataContainerString, file_names=file_names)
 
 
+    def property_data_type(self, property_type: PropertyType=PropertyType.DYNAMIC_NATIVE, property_name: str="", porosity_model: PorosityModelType=PorosityModelType.MATRIX_MODEL) -> PropertyDataType:
+        """
+        Get the data type (FLOAT or INTEGER) of a grid property
+
+        Arguments:
+            property_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+            property_name (str): 
+            porosity_model (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
+        Returns:
+            PropertyDataType
+        """
+        _container = self._call_pdm_method_return_value("property_data_type", DataContainerEnum, property_type=property_type, property_name=property_name, porosity_model=porosity_model)
+        return PropertyDataType(_container.value)
+
+
 class CornerPointCase(Reservoir):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -754,6 +788,19 @@ class CustomSegmentInterval(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if CustomSegmentInterval.__custom_init__ is not None:
             CustomSegmentInterval.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class DataContainerEnum(PdmObjectBase):
+    """
+    Attributes:
+        value (str): Value
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.value: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if DataContainerEnum.__custom_init__ is not None:
+            DataContainerEnum.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class DataContainerFloat(PdmObjectBase):
     """
@@ -2473,7 +2520,7 @@ class EclipseResult(PdmObjectBase):
         flow_tracer_selection_mode (FlowTracerSelectionMode): One of [FLOW_TR_INJ_AND_PROD, FLOW_TR_PRODUCERS, FLOW_TR_INJECTORS, FLOW_TR_BY_SELECTION]
         phase_selection (PhaseSelection): One of [PHASE_ALL, PHASE_OIL, PHASE_GAS, PHASE_WAT]
         porosity_model_type (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
-        result_type (ResultType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
         result_variable (str): Variable
         selected_injector_tracers (List[str]): Injector Tracers
         selected_producer_tracers (List[str]): Producer Tracers
@@ -2486,7 +2533,7 @@ class EclipseResult(PdmObjectBase):
         self.flow_tracer_selection_mode: FlowTracerSelectionMode = FlowTracerSelectionMode.FLOW_TR_INJ_AND_PROD
         self.phase_selection: PhaseSelection = PhaseSelection.PHASE_ALL
         self.porosity_model_type: PorosityModelType = PorosityModelType.MATRIX_MODEL
-        self.result_type: ResultType = ResultType.DYNAMIC_NATIVE
+        self.result_type: PropertyType = PropertyType.DYNAMIC_NATIVE
         self.result_variable: str = "None"
         self.selected_injector_tracers: List[str] = []
         self.selected_producer_tracers: List[str] = []
@@ -2706,7 +2753,7 @@ class RimStatisticalCalculation(Reservoir):
         mid_percentile (float): Mid
         percentile_calculation_type (PercentileCalculationType): One of [NearestObservationPercentile, HistogramEstimatedPercentile, InterpolatedObservationPercentile]
         porosity_model (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
-        result_type (ResultType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
         selected_time_steps (List[int]): Time Step Selection
         static_properties_to_calculate (List[str]): Stat Prop
         use_zero_as_inactive_cell_value (bool): Use Zero as Inactive Cell Value
@@ -2728,7 +2775,7 @@ class RimStatisticalCalculation(Reservoir):
         self.mid_percentile: float = 5.000000000000000e+01
         self.percentile_calculation_type: PercentileCalculationType = PercentileCalculationType.InterpolatedObservationPercentile
         self.porosity_model: PorosityModelType = PorosityModelType.MATRIX_MODEL
-        self.result_type: ResultType = ResultType.DYNAMIC_NATIVE
+        self.result_type: PropertyType = PropertyType.DYNAMIC_NATIVE
         self.selected_time_steps: List[int] = []
         self.static_properties_to_calculate: List[str] = []
         self.use_zero_as_inactive_cell_value: bool = False
@@ -3569,6 +3616,54 @@ class SimulationWell(PdmObjectBase):
         if SimulationWell.__custom_init__ is not None:
             SimulationWell.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class WellLogPlot(DepthTrackPlot):
+    """
+    A Well Log Plot With a shared Depth Axis and Multiple Tracks
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        DepthTrackPlot.__init__(self, pb2_object, channel)
+        if WellLogPlot.__custom_init__ is not None:
+            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
+        """
+        Create a new well log track
+
+        Arguments:
+            title (str): Title
+            case (Optional[Reservoir]): Case
+            well_path (Optional[WellPath]): Well Path
+        Returns:
+            WellLogPlotTrack
+        """
+        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
+
+
+class WellBoreStabilityPlot(WellLogPlot):
+    """
+    A GeoMechanical Well Bore Stability Plot
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellLogPlot.__init__(self, pb2_object, channel)
+        if WellBoreStabilityPlot.__custom_init__ is not None:
+            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def parameters(self) -> Optional[WbsParameters]:
+        """Well Bore Stability Parameters
+
+        Returns:
+             WbsParameters
+        """
+        children = self.children("Parameters", WbsParameters)
+        return children[0] if len(children) > 0 else None
+
+
 class WellEventControl(WellEvent):
     """
     WellEventControl
@@ -3947,54 +4042,6 @@ class WellLogLasFile(WellLogFileInterface):
         WellLogFileInterface.__init__(self, pb2_object, channel)
         if WellLogLasFile.__custom_init__ is not None:
             WellLogLasFile.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellLogPlot(DepthTrackPlot):
-    """
-    A Well Log Plot With a shared Depth Axis and Multiple Tracks
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        DepthTrackPlot.__init__(self, pb2_object, channel)
-        if WellLogPlot.__custom_init__ is not None:
-            WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
-        """
-        Create a new well log track
-
-        Arguments:
-            title (str): Title
-            case (Optional[Reservoir]): Case
-            well_path (Optional[WellPath]): Well Path
-        Returns:
-            WellLogPlotTrack
-        """
-        return self._call_pdm_method_return_value("NewWellLogTrack", WellLogPlotTrack, title=title, case=case, well_path=well_path)
-
-
-class WellBoreStabilityPlot(WellLogPlot):
-    """
-    A GeoMechanical Well Bore Stability Plot
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellLogPlot.__init__(self, pb2_object, channel)
-        if WellBoreStabilityPlot.__custom_init__ is not None:
-            WellBoreStabilityPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def parameters(self) -> Optional[WbsParameters]:
-        """Well Bore Stability Parameters
-
-        Returns:
-             WbsParameters
-        """
-        children = self.children("Parameters", WbsParameters)
-        return children[0] if len(children) > 0 else None
-
 
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -4469,6 +4516,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['CornerPointCase'] = CornerPointCase
     classes['CurveIntersection'] = CurveIntersection
     classes['CustomSegmentInterval'] = CustomSegmentInterval
+    classes['DataContainerEnum'] = DataContainerEnum
     classes['DataContainerFloat'] = DataContainerFloat
     classes['DataContainerString'] = DataContainerString
     classes['DataContainerTime'] = DataContainerTime
