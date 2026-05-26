@@ -135,6 +135,21 @@ def test_10k_set_integer_active_cell_property(rips_instance, initialize_test):
     for expected, actual in zip(integer_values, round_trip):
         assert expected == int(actual)
 
+    assert (
+        case.property_data_type(
+            property_type=rips.PropertyType.GENERATED,
+            property_name="MY_DISCRETE_ACTIVE",
+        )
+        == rips.PropertyDataType.INTEGER
+    )
+    assert (
+        case.property_data_type(
+            property_type=rips.PropertyType.STATIC_NATIVE,
+            property_name="PORO",
+        )
+        == rips.PropertyDataType.FLOAT
+    )
+
 
 def test_10k_set_integer_grid_property(rips_instance, initialize_test):
     casePath = dataroot.PATH + "/TEST10K_FLT_LGR_NNC/TEST10K_FLT_LGR_NNC.EGRID"
@@ -156,6 +171,14 @@ def test_10k_set_integer_grid_property(rips_instance, initialize_test):
     assert len(round_trip) == len(integer_values)
     for expected, actual in zip(integer_values, round_trip):
         assert expected == int(actual)
+
+    assert (
+        case.property_data_type(
+            property_type=rips.PropertyType.GENERATED,
+            property_name="MY_DISCRETE_GRID",
+        )
+        == rips.PropertyDataType.INTEGER
+    )
 
 
 def test_10k_property_strings(rips_instance, initialize_test):
