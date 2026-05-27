@@ -116,6 +116,12 @@ class NonDarcyFlowType2(StrEnum):
     Computed = "Computed"
     UserDefined = "UserDefined"
 
+class NumberOfColumns(StrEnum):
+    _1 = "1"
+    _2 = "2"
+    _3 = "3"
+    _4 = "4"
+
 class Orientation(StrEnum):
     Azimuth = "Azimuth"
     Longitudinal = "Longitudinal"
@@ -206,6 +212,12 @@ class PropertyType(StrEnum):
 class ReferenceMdType(StrEnum):
     GridEntryPoint = "GridEntryPoint"
     UserDefined = "UserDefined"
+
+class RowsPerPage(StrEnum):
+    _1 = "1"
+    _2 = "2"
+    _3 = "3"
+    _4 = "4"
 
 class ShowDepthGridLines(StrEnum):
     GRID_X_NONE = "GRID_X_NONE"
@@ -1945,6 +1957,29 @@ class ModeledWellPath(WellPath):
         children = self.children("WellPathGeometry", WellPathGeometry)
         return children[0] if len(children) > 0 else None
 
+
+class MultiPlot(PlotWindow):
+    """
+    Attributes:
+        number_of_columns (NumberOfColumns): One of [1, 2, 3, 4]
+        rows_per_page (RowsPerPage): One of [1, 2, 3, 4]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.number_of_columns: NumberOfColumns = NumberOfColumns._2
+        self.rows_per_page: RowsPerPage = RowsPerPage._2
+        PlotWindow.__init__(self, pb2_object, channel)
+        if MultiPlot.__custom_init__ is not None:
+            MultiPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class MultiSummaryPlot(MultiPlot):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        MultiPlot.__init__(self, pb2_object, channel)
+        if MultiSummaryPlot.__custom_init__ is not None:
+            MultiSummaryPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class NonDarcyPerforationParameters(PdmObjectBase):
     """
@@ -4562,6 +4597,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['ModeledWellPath'] = ModeledWellPath
     classes['MswSettings'] = MswSettings
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
+    classes['MultiPlot'] = MultiPlot
+    classes['MultiSummaryPlot'] = MultiSummaryPlot
     classes['NamedObject'] = NamedObject
     classes['NonDarcyPerforationParameters'] = NonDarcyPerforationParameters
     classes['NonNetLayers'] = NonNetLayers
