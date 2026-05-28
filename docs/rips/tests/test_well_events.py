@@ -1231,6 +1231,102 @@ class TestScheduleGeneration:
         assert jan_pos < feb_pos, "January should come before February"
         assert feb_pos < jun_pos, "February should come before June"
 
+    def test_welsegs_compsegs_optional(self, project_with_case_and_well):
+        """Regression for #14064: callers can suppress WELSEGS and/or COMPSEGS
+        without affecting other keywords (WSEGVALV/WSEGAICD/COMPDAT/WELSPECS).
+        """
+        project, case, timeline = project_with_case_and_well
+        well_paths = project.well_paths()
+        assert len(well_paths) >= 1
+
+        wp = well_paths[0]
+        timeline.add_tubing_event(
+            event_date="2024-01-01",
+            well_path=wp,
+            start_md=0.0,
+            end_md=2500.0,
+            inner_diameter=0.15,
+            roughness=1.0e-5,
+        )
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=wp,
+            start_md=2000.0,
+            end_md=2200.0,
+            diameter=0.1,
+            state="OPEN",
+        )
+        timeline.set_timestamp(timestamp="2024-12-31")
+
+        # Baseline (defaults) must still emit WELSEGS and COMPSEGS.
+        baseline = timeline.generate_schedule_text(eclipse_case=case)
+        assert "WELSEGS" in baseline
+        assert "COMPSEGS" in baseline
+
+        # Suppress both.
+        suppressed = timeline.generate_schedule_text(
+            eclipse_case=case, include_welsegs=False, include_compsegs=False
+        )
+        print(f"\nSchedule with WELSEGS/COMPSEGS suppressed:\n{suppressed}")
+        assert "WELSEGS" not in suppressed, (
+            f"WELSEGS should be suppressed:\n{suppressed}"
+        )
+        assert "COMPSEGS" not in suppressed, (
+            f"COMPSEGS should be suppressed:\n{suppressed}"
+        )
+        # COMPDAT (perforation completions) is unrelated to the MSW flags.
+        assert "COMPDAT" in suppressed
+
+        # Independent toggling.
+        only_compsegs_off = timeline.generate_schedule_text(
+            eclipse_case=case, include_compsegs=False
+        )
+        assert "WELSEGS" in only_compsegs_off
+        assert "COMPSEGS" not in only_compsegs_off
+
+        only_welsegs_off = timeline.generate_schedule_text(
+            eclipse_case=case, include_welsegs=False
+        )
+        assert "WELSEGS" not in only_welsegs_off
+        assert "COMPSEGS" in only_welsegs_off
+
+    def test_keywords_grouped_across_wells(self, project_with_case_and_well):
+        """Regression for #14063: WELSPECS / COMPDAT records for multiple wells on
+        the same date must appear under a single keyword header (not one block per well).
+        """
+        project, case, timeline = project_with_case_and_well
+        well_paths = project.well_paths()
+        assert len(well_paths) >= 2, (
+            "Test requires at least two well paths in the fixture"
+        )
+
+        for wp in well_paths[:2]:
+            timeline.add_perf_event(
+                event_date="2024-01-01",
+                well_path=wp,
+                start_md=2000.0,
+                end_md=2200.0,
+                diameter=0.1,
+                state="OPEN",
+            )
+
+        timeline.set_timestamp(timestamp="2024-12-31")
+        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        print(f"\nSchedule text for multi-well grouping:\n{schedule_text}")
+
+        # Exactly one "WELSPECS\n" header for all wells.
+        welspecs_count = schedule_text.count("WELSPECS\n")
+        assert welspecs_count == 1, (
+            f"WELSPECS should appear once for grouped output; got {welspecs_count}:\n{schedule_text}"
+        )
+
+        # Both well names must appear inside the WELSPECS block (between header and trailing '/' line).
+        welspecs_block = schedule_text.split("WELSPECS\n", 1)[1].split("\n/\n", 1)[0]
+        for wp in well_paths[:2]:
+            assert wp.name.replace(" ", "") in welspecs_block.replace(" ", ""), (
+                f"Well {wp.name!r} missing from grouped WELSPECS block: {welspecs_block!r}"
+            )
+
 
 class TestKeywordEvents:
     """Tests for well keyword event functionality."""
@@ -1427,6 +1523,53 @@ class TestKeywordEvents:
         assert "WELTARG" in schedule_text, "Schedule should contain WELTARG keyword"
         assert "WRFTPLT" in schedule_text, "Schedule should contain WRFTPLT keyword"
         assert "DATES" in schedule_text, "Schedule should contain DATES keyword"
+
+    def test_wconhist_item_order_canonical(self, project_with_case_and_well):
+        """Regression for #14065: WCONHIST items must appear in the Eclipse-defined
+        canonical order regardless of how keyword_data was constructed in Python.
+
+        Canonical WCONHIST order: WELL, STATUS, CMODE, ORAT, WRAT, GRAT, VFP_TABLE,
+        ALQ, THP, BHP, WGASRAT_HIS, NGLRAT_HIS.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        # Intentionally non-canonical insertion order: BHP placed before ORAT/WRAT/GRAT.
+        timeline.add_well_keyword_event(
+            event_date="2024-01-15",
+            well_path=well_path,
+            keyword_name="WCONHIST",
+            keyword_data={
+                "WELL": well_path.name,
+                "STATUS": "OPEN",
+                "CMODE": "RESV",
+                "BHP": 250.0,
+                "ORAT": 3999.99,
+                "WRAT": 0.01,
+                "GRAT": 550678.44,
+                "VFP_TABLE": 1,
+            },
+        )
+
+        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        print(f"\nSchedule text for canonical-order check:\n{schedule_text}")
+
+        assert "WCONHIST" in schedule_text
+        # Extract the WCONHIST record body (between the keyword and its terminating '/').
+        wconhist_block = schedule_text.split("WCONHIST", 1)[1].split("/", 1)[0]
+
+        orat_pos = wconhist_block.find("3999.99")
+        grat_pos = wconhist_block.find("550678")
+        bhp_pos = wconhist_block.find("250")
+        assert orat_pos >= 0, "ORAT value missing from WCONHIST output"
+        assert grat_pos >= 0, "GRAT value missing from WCONHIST output"
+        assert bhp_pos >= 0, "BHP value missing from WCONHIST output"
+        assert orat_pos < bhp_pos, (
+            f"ORAT must precede BHP in canonical WCONHIST order; got block: {wconhist_block!r}"
+        )
+        assert grat_pos < bhp_pos, (
+            f"GRAT must precede BHP in canonical WCONHIST order; got block: {wconhist_block!r}"
+        )
 
     def test_invalid_keyword_data_unsupported_type(self, project_with_case_and_well):
         """Test error handling for unsupported data types in keyword events."""
@@ -1848,3 +1991,55 @@ class TestScheduleKeywordEvents:
         )
 
         assert event is not None, "Event with mixed types should be created"
+
+    def test_rptrst_mnemonic_output(self, project_with_case_and_well):
+        """RPTRST/RPTSCHED are mnemonic-list keywords. bool True must emit a
+        bare KEY, int/float/str must emit KEY=VALUE, bool False must be omitted.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        # Schedule generation requires at least one well event so a well path is
+        # selected for output; the assertions below target only the RPTRST block.
+        timeline.add_control_event(
+            event_date="2024-01-01",
+            well_path=well_path,
+            control_mode="ORAT",
+            control_value=1000.0,
+            oil_rate=1000.0,
+            is_producer=True,
+        )
+
+        timeline.add_keyword_event(
+            event_date="2024-01-01",
+            keyword_name="RPTRST",
+            keyword_data={
+                "BASIC": 2,
+                "DEN": True,
+                "ROCKC": True,
+                "RPORV": True,
+                "RFIP": True,
+                "FLOWS": True,
+                "NORST": 1,
+                "FLORES": True,
+                "OBSOLETE": False,
+            },
+        )
+
+        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        print(f"\nRPTRST mnemonic output:\n{schedule_text}")
+
+        assert "RPTRST" in schedule_text
+        rptrst_block = schedule_text.split("RPTRST", 1)[1].split("/", 1)[0]
+
+        # Keyed mnemonics rendered as KEY=VALUE.
+        assert "BASIC=2" in rptrst_block
+        assert "NORST=1" in rptrst_block
+        # Flag mnemonics rendered as bare tokens. Whitespace-bounded so we don't accept
+        # accidental substring matches like 'DEN' inside another token.
+        for flag in ("DEN", "ROCKC", "RPORV", "RFIP", "FLOWS", "FLORES"):
+            assert f" {flag} " in rptrst_block or rptrst_block.rstrip().endswith(
+                f" {flag}"
+            ), f"flag {flag!r} missing from RPTRST output: {rptrst_block!r}"
+        # False-valued flag must be omitted entirely.
+        assert "OBSOLETE" not in rptrst_block

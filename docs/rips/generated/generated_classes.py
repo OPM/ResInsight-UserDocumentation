@@ -3931,16 +3931,18 @@ class WellEventTimeline(PdmObjectBase):
         return self.children("Events", WellEvent)
 
 
-    def generate_schedule(self, eclipse_case_id: int=-1) -> DataContainerString:
+    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, include_welsegs: bool=True, include_compsegs: bool=True) -> DataContainerString:
         """
         Generate Eclipse schedule text for all wells in the collection
 
         Arguments:
-            eclipse_case_id (int): Eclipse Case ID
+            eclipse_case (Optional[Reservoir]): Eclipse Case
+            include_welsegs (bool): Include WELSEGS keyword in the exported schedule
+            include_compsegs (bool): Include COMPSEGS keyword in the exported schedule
         Returns:
             DataContainerString
         """
-        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case_id=eclipse_case_id)
+        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, include_welsegs=include_welsegs, include_compsegs=include_compsegs)
 
 
     def set_timestamp(self, timestamp: str="2024-01-01") -> None:
