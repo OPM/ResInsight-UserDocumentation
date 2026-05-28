@@ -10,7 +10,7 @@ from typing import Any, Dict
 from datetime import date, datetime
 
 from .pdmobject import add_method
-from .resinsight_classes import Case
+from .resinsight_classes import EclipseCase
 from .generated.generated_classes import (
     KeywordEvent,
     WellEventKeyword,
@@ -121,15 +121,24 @@ def add_well_keyword_event(
     item_values = []
 
     for name, value in keyword_data.items():
+        # Handle bool before int (bool is subclass of int in Python).
+        # bool semantics: True -> flag (emitted as bare KEY in mnemonic-list keywords,
+        # ignored elsewhere); False -> the entry is dropped entirely.
+        if isinstance(value, bool):
+            if not value:
+                continue
+            item_names.append(name)
+            item_types.append("FLAG")
+            # The value is ignored for FLAG items but must be a non-empty string;
+            # empty strings get dropped by the GRPC vector<string> serialization.
+            item_values.append("1")
+            continue
+
         item_names.append(name)
 
         if isinstance(value, str):
             item_types.append("STRING")
             item_values.append(value)
-        elif isinstance(value, bool):
-            # Handle bool before int (bool is subclass of int in Python)
-            item_types.append("INT")
-            item_values.append("1" if value else "0")
         elif isinstance(value, int):
             item_types.append("INT")
             item_values.append(str(value))
@@ -228,15 +237,24 @@ def add_keyword_event(
     item_values = []
 
     for name, value in keyword_data.items():
+        # Handle bool before int (bool is subclass of int in Python).
+        # bool semantics: True -> flag (emitted as bare KEY in mnemonic-list keywords,
+        # ignored elsewhere); False -> the entry is dropped entirely.
+        if isinstance(value, bool):
+            if not value:
+                continue
+            item_names.append(name)
+            item_types.append("FLAG")
+            # The value is ignored for FLAG items but must be a non-empty string;
+            # empty strings get dropped by the GRPC vector<string> serialization.
+            item_values.append("1")
+            continue
+
         item_names.append(name)
 
         if isinstance(value, str):
             item_types.append("STRING")
             item_values.append(value)
-        elif isinstance(value, bool):
-            # Handle bool before int (bool is subclass of int in Python)
-            item_types.append("INT")
-            item_values.append("1" if value else "0")
         elif isinstance(value, int):
             item_types.append("INT")
             item_values.append(str(value))
@@ -263,7 +281,12 @@ def add_keyword_event(
 
 
 @add_method(WellEventTimeline)
-def generate_schedule_text(self: WellEventTimeline, eclipse_case: Case) -> str:
+def generate_schedule_text(
+    self: WellEventTimeline,
+    eclipse_case: EclipseCase,
+    include_welsegs: bool = True,
+    include_compsegs: bool = True,
+) -> str:
     """Generate Eclipse schedule text for all wells in the collection.
 
     The timeline is shared across all wells in the well path collection.
@@ -274,7 +297,13 @@ def generate_schedule_text(self: WellEventTimeline, eclipse_case: Case) -> str:
     text directly instead of a DataContainerString.
 
     Arguments:
-        eclipse_case (Case): Eclipse case to use for schedule generation.
+        eclipse_case (EclipseCase): Eclipse case to use for schedule generation.
+        include_welsegs (bool): When False, omit the WELSEGS keyword from the
+            output. Other multi-segment-well keywords (COMPSEGS, WSEGVALV,
+            WSEGAICD) are not affected. Defaults to True.
+        include_compsegs (bool): When False, omit the COMPSEGS keyword from
+            the output. WELSEGS, WSEGVALV, WSEGAICD are not affected.
+            Defaults to True.
 
     Returns:
         str: Eclipse schedule text containing DATES, COMPDAT, WELSEGS, WCONPROD, etc.
@@ -312,7 +341,11 @@ def generate_schedule_text(self: WellEventTimeline, eclipse_case: Case) -> str:
         print(schedule_text)
         ```
     """
-    container = self.generate_schedule(eclipse_case_id=eclipse_case.id)
+    container = self.generate_schedule(
+        eclipse_case=eclipse_case,
+        include_welsegs=include_welsegs,
+        include_compsegs=include_compsegs,
+    )
     if container and container.values:
         return "".join(container.values)
     return ""
