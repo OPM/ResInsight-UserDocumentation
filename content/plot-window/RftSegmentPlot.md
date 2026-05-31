@@ -73,7 +73,7 @@ Connection data -- maps segments to grid cells and exposes connection-level resu
 
 Standard well log channels:
 
-- `DEPTH` (true vertical depth), `PRESSURE`, `WRAT`, `ORAT`, `GRAT`
+- `DEPTH` (true vertical depth), `PRESSURE`, `WRAT`, `ORAT`, `GREAT`
 - `SWAT`, `SOIL`, `SGAS`. When `SOIL` is not present in the file it is computed as `1 - SWAT - SGAS`.
 
 In addition, **WSEGLINK** is parsed from the DATA file (not from the RFT file itself) to identify which segments belong to annulus branches.
