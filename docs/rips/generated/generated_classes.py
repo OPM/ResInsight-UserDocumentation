@@ -3752,6 +3752,7 @@ class WellEventPerf(WellEvent):
     WellEventPerf
 
     Attributes:
+        completion_number (int): Completion Number
         diameter (float): Diameter
         end_md (float): End MD
         skin_factor (float): Skin Factor
@@ -3761,6 +3762,7 @@ class WellEventPerf(WellEvent):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.completion_number: int = 0
         self.diameter: float = 2.160000000000000e-01
         self.end_md: float = 0.000000000000000e+00
         self.skin_factor: float = 0.000000000000000e+00
@@ -3833,7 +3835,7 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("AddKeywordEventInternal", KeywordEvent, event_date=event_date, keyword_name=keyword_name, item_names=item_names, item_types=item_types, item_values=item_values)
 
 
-    def add_perf_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, diameter: float=2.160000000000000e-01, skin_factor: float=0.000000000000000e+00, state: State=State.OPEN) -> WellEventPerf:
+    def add_perf_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, diameter: float=2.160000000000000e-01, skin_factor: float=0.000000000000000e+00, state: State=State.OPEN, completion_number: int=0) -> WellEventPerf:
         """
         Add a perforation event to the timeline
 
@@ -3845,10 +3847,11 @@ class WellEventTimeline(PdmObjectBase):
             diameter (float): Diameter [m]
             skin_factor (float): Skin Factor
             state (State): One of [OPEN, SHUT]
+            completion_number (int): Completion Number (for COMPLUMP, 0 = none)
         Returns:
             WellEventPerf
         """
-        return self._call_pdm_method_return_value("AddPerfEvent", WellEventPerf, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor, state=state)
+        return self._call_pdm_method_return_value("AddPerfEvent", WellEventPerf, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor, state=state, completion_number=completion_number)
 
 
     def add_state_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, well_state: WellState=WellState.OPEN) -> WellEventState:
@@ -3931,18 +3934,17 @@ class WellEventTimeline(PdmObjectBase):
         return self.children("Events", WellEvent)
 
 
-    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, include_welsegs: bool=True, include_compsegs: bool=True) -> DataContainerString:
+    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[]) -> DataContainerString:
         """
         Generate Eclipse schedule text for all wells in the collection
 
         Arguments:
             eclipse_case (Optional[Reservoir]): Eclipse Case
-            include_welsegs (bool): Include WELSEGS keyword in the exported schedule
-            include_compsegs (bool): Include COMPSEGS keyword in the exported schedule
+            export_msw_for_wells (List[WellPath]): Wells for which multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD) are exported
         Returns:
             DataContainerString
         """
-        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, include_welsegs=include_welsegs, include_compsegs=include_compsegs)
+        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells)
 
 
     def set_timestamp(self, timestamp: str="2024-01-01") -> None:
