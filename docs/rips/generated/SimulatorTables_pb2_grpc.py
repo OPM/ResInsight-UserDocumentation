@@ -5,7 +5,7 @@ import warnings
 
 import SimulatorTables_pb2 as SimulatorTables__pb2
 
-GRPC_GENERATED_VERSION = '1.80.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -25,7 +25,7 @@ if _version_not_supported:
     )
 
 
-class WellPathStub(object):
+class WellPathStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -46,7 +46,7 @@ class WellPathStub(object):
                 _registered_method=True)
 
 
-class WellPathServicer(object):
+class WellPathServicer:
     """Missing associated documentation comment in .proto file."""
 
     def GetCompletionData(self, request, context):
@@ -82,7 +82,7 @@ def add_WellPathServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class WellPath(object):
+class WellPath:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

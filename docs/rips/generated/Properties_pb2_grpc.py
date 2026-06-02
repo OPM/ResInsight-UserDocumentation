@@ -6,7 +6,7 @@ import warnings
 import Definitions_pb2 as Definitions__pb2
 import Properties_pb2 as Properties__pb2
 
-GRPC_GENERATED_VERSION = '1.80.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -26,7 +26,7 @@ if _version_not_supported:
     )
 
 
-class PropertiesStub(object):
+class PropertiesStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -67,7 +67,7 @@ class PropertiesStub(object):
                 _registered_method=True)
 
 
-class PropertiesServicer(object):
+class PropertiesServicer:
     """Missing associated documentation comment in .proto file."""
 
     def GetAvailableProperties(self, request, context):
@@ -147,7 +147,7 @@ def add_PropertiesServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Properties(object):
+class Properties:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
