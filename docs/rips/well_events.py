@@ -288,6 +288,8 @@ def generate_schedule_text(
     self: WellEventTimeline,
     eclipse_case: EclipseCase,
     export_msw_for_wells: List[WellPath] = [],
+    first_date_as_comment: bool = True,
+    align_columns: bool = False,
 ) -> str:
     """Generate Eclipse schedule text for all wells in the collection.
 
@@ -304,6 +306,14 @@ def generate_schedule_text(
             multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD)
             are exported. Wells not in the list get no MSW keywords. An empty
             list (the default) suppresses MSW export for all wells.
+        first_date_as_comment (bool): When True (the default), the first
+            (earliest) date is written as a comment line (e.g. "-- Date: 1 JAN
+            2024") instead of a DATES keyword. This avoids a DATES entry equal
+            to the simulation start date, which some commercial simulators
+            reject. Later dates are always emitted as DATES keywords.
+        align_columns (bool): When True, emit each keyword with a "--"-prefixed
+            column-header comment and right-aligned, fixed-width columns instead
+            of the compact default form. Defaults to False.
 
     Returns:
         str: Eclipse schedule text containing DATES, COMPDAT, WELSEGS, WCONPROD, etc.
@@ -346,6 +356,8 @@ def generate_schedule_text(
     container = self.generate_schedule(
         eclipse_case=eclipse_case,
         export_msw_for_wells=export_msw_for_wells,
+        first_date_as_comment=first_date_as_comment,
+        align_columns=align_columns,
     )
     if container and container.values:
         return "".join(container.values)
