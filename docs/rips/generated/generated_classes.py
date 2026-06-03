@@ -1201,6 +1201,42 @@ class FaciesProperties(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+class FaultInView(PdmObjectBase):
+    """
+    A fault belonging to a view's fault collection
+
+    Attributes:
+        fault_name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.fault_name: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultInView.__custom_init__ is not None:
+            FaultInView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FaultInViewCollection(PdmObjectBase):
+    """
+    Per-view fault collection
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultInViewCollection.__custom_init__ is not None:
+            FaultInViewCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def faults(self) -> List[FaultInView]:
+        """Faults
+
+        Returns:
+             List[FaultInView]
+        """
+        return self.children("Faults", FaultInView)
+
+
 class SummaryCase(PdmObjectBase):
     """
     The Base Class for all Summary Cases
@@ -2524,6 +2560,19 @@ class EclipseView(View):
         if EclipseView.__custom_init__ is not None:
             EclipseView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_fault_distance_result(self, name: str="", faults: List[FaultInView]=[]) -> FaultDistanceResult:
+        """
+        Create a FAULTDIST cell result for a chosen subset of faults
+
+        Arguments:
+            name (str): 
+            faults (List[FaultInView]): 
+        Returns:
+            RimFaultDistanceResult
+        """
+        return self._call_pdm_method_return_value("add_fault_distance_result", FaultDistanceResult, name=name, faults=faults)
+
+
     def cell_result(self) -> Optional[CellColors]:
         """Cell Result
 
@@ -2531,6 +2580,16 @@ class EclipseView(View):
              CellColors
         """
         children = self.children("CellResult", CellColors)
+        return children[0] if len(children) > 0 else None
+
+
+    def fault_collection(self) -> Optional[FaultInViewCollection]:
+        """Faults
+
+        Returns:
+             FaultInViewCollection
+        """
+        children = self.children("FaultCollection", FaultInViewCollection)
         return children[0] if len(children) > 0 else None
 
 
@@ -2645,6 +2704,42 @@ class EclipseCaseEnsemble(NamedObject):
         NamedObject.__init__(self, pb2_object, channel)
         if EclipseCaseEnsemble.__custom_init__ is not None:
             EclipseCaseEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FaultDistanceResult(PdmObjectBase):
+    """
+    Per-cell distance to a selected subset of faults
+
+    Attributes:
+        result_name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.result_name: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultDistanceResult.__custom_init__ is not None:
+            FaultDistanceResult.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FaultDistanceResultCollection(PdmObjectBase):
+    """
+    Collection of named, subset-based FAULTDIST results
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultDistanceResultCollection.__custom_init__ is not None:
+            FaultDistanceResultCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def fault_distance_results(self) -> List[FaultDistanceResult]:
+        """
+
+        Returns:
+             List[FaultDistanceResult]
+        """
+        return self.children("FaultDistanceResults", FaultDistanceResult)
+
 
 class GeoMechContourMap(GeoMechView):
     """
@@ -3934,17 +4029,19 @@ class WellEventTimeline(PdmObjectBase):
         return self.children("Events", WellEvent)
 
 
-    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[]) -> DataContainerString:
+    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[], first_date_as_comment: bool=True, align_columns: bool=False) -> DataContainerString:
         """
         Generate Eclipse schedule text for all wells in the collection
 
         Arguments:
             eclipse_case (Optional[Reservoir]): Eclipse Case
             export_msw_for_wells (List[WellPath]): Wells for which multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD) are exported
+            first_date_as_comment (bool): Emit the first (simulation-start) date as a comment instead of a DATES keyword
+            align_columns (bool): Emit a column-header comment and right-aligned, fixed-width columns instead of the compact form
         Returns:
             DataContainerString
         """
-        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells)
+        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells, first_date_as_comment=first_date_as_comment, align_columns=align_columns)
 
 
     def set_timestamp(self, timestamp: str="2024-01-01") -> None:
@@ -4577,6 +4674,10 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['EnsembleWellLogs'] = EnsembleWellLogs
     classes['FaciesInitialPressureConfig'] = FaciesInitialPressureConfig
     classes['FaciesProperties'] = FaciesProperties
+    classes['FaultDistanceResult'] = FaultDistanceResult
+    classes['FaultDistanceResultCollection'] = FaultDistanceResultCollection
+    classes['FaultInView'] = FaultInView
+    classes['FaultInViewCollection'] = FaultInViewCollection
     classes['FileSummaryCase'] = FileSummaryCase
     classes['FileWellPath'] = FileWellPath
     classes['Fishbones'] = Fishbones
