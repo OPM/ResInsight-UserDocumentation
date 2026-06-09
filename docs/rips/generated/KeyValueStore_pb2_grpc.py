@@ -6,7 +6,7 @@ import warnings
 import Definitions_pb2 as Definitions__pb2
 import KeyValueStore_pb2 as KeyValueStore__pb2
 
-GRPC_GENERATED_VERSION = '1.80.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -26,7 +26,7 @@ if _version_not_supported:
     )
 
 
-class KeyValueStoreStub(object):
+class KeyValueStoreStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -52,7 +52,7 @@ class KeyValueStoreStub(object):
                 _registered_method=True)
 
 
-class KeyValueStoreServicer(object):
+class KeyValueStoreServicer:
     """Missing associated documentation comment in .proto file."""
 
     def SetValue(self, request_iterator, context):
@@ -99,7 +99,7 @@ def add_KeyValueStoreServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class KeyValueStore(object):
+class KeyValueStore:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

@@ -6,7 +6,7 @@ import warnings
 import Definitions_pb2 as Definitions__pb2
 import PdmObject_pb2 as PdmObject__pb2
 
-GRPC_GENERATED_VERSION = '1.80.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -26,7 +26,7 @@ if _version_not_supported:
     )
 
 
-class PdmObjectServiceStub(object):
+class PdmObjectServiceStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -82,7 +82,7 @@ class PdmObjectServiceStub(object):
                 _registered_method=True)
 
 
-class PdmObjectServiceServicer(object):
+class PdmObjectServiceServicer:
     """Missing associated documentation comment in .proto file."""
 
     def GetDescendantPdmObjects(self, request, context):
@@ -195,7 +195,7 @@ def add_PdmObjectServiceServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class PdmObjectService(object):
+class PdmObjectService:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

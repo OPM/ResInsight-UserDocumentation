@@ -2560,7 +2560,7 @@ class EclipseView(View):
         if EclipseView.__custom_init__ is not None:
             EclipseView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_fault_distance_result(self, name: str="", faults: List[FaultInView]=[]) -> FaultDistanceResult:
+    def add_fault_distance(self, name: str="", faults: List[FaultInView]=[]) -> FaultDistance:
         """
         Create a FAULTDIST cell result for a chosen subset of faults
 
@@ -2568,9 +2568,9 @@ class EclipseView(View):
             name (str): 
             faults (List[FaultInView]): 
         Returns:
-            RimFaultDistanceResult
+            RimFaultDistance
         """
-        return self._call_pdm_method_return_value("add_fault_distance_result", FaultDistanceResult, name=name, faults=faults)
+        return self._call_pdm_method_return_value("add_fault_distance", FaultDistance, name=name, faults=faults)
 
 
     def cell_result(self) -> Optional[CellColors]:
@@ -2705,7 +2705,7 @@ class EclipseCaseEnsemble(NamedObject):
         if EclipseCaseEnsemble.__custom_init__ is not None:
             EclipseCaseEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class FaultDistanceResult(PdmObjectBase):
+class FaultDistance(PdmObjectBase):
     """
     Per-cell distance to a selected subset of faults
 
@@ -2717,10 +2717,10 @@ class FaultDistanceResult(PdmObjectBase):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.result_name: str = ""
         PdmObjectBase.__init__(self, pb2_object, channel)
-        if FaultDistanceResult.__custom_init__ is not None:
-            FaultDistanceResult.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+        if FaultDistance.__custom_init__ is not None:
+            FaultDistance.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class FaultDistanceResultCollection(PdmObjectBase):
+class FaultDistanceCollection(PdmObjectBase):
     """
     Collection of named, subset-based FAULTDIST results
 
@@ -2729,16 +2729,16 @@ class FaultDistanceResultCollection(PdmObjectBase):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         PdmObjectBase.__init__(self, pb2_object, channel)
-        if FaultDistanceResultCollection.__custom_init__ is not None:
-            FaultDistanceResultCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+        if FaultDistanceCollection.__custom_init__ is not None:
+            FaultDistanceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def fault_distance_results(self) -> List[FaultDistanceResult]:
+    def fault_distances(self) -> List[FaultDistance]:
         """
 
         Returns:
-             List[FaultDistanceResult]
+             List[FaultDistance]
         """
-        return self.children("FaultDistanceResults", FaultDistanceResult)
+        return self.children("FaultDistances", FaultDistance)
 
 
 class GeoMechContourMap(GeoMechView):
@@ -4674,8 +4674,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['EnsembleWellLogs'] = EnsembleWellLogs
     classes['FaciesInitialPressureConfig'] = FaciesInitialPressureConfig
     classes['FaciesProperties'] = FaciesProperties
-    classes['FaultDistanceResult'] = FaultDistanceResult
-    classes['FaultDistanceResultCollection'] = FaultDistanceResultCollection
+    classes['FaultDistance'] = FaultDistance
+    classes['FaultDistanceCollection'] = FaultDistanceCollection
     classes['FaultInView'] = FaultInView
     classes['FaultInViewCollection'] = FaultInViewCollection
     classes['FileSummaryCase'] = FileSummaryCase
