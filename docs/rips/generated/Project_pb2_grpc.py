@@ -7,7 +7,7 @@ import Case_pb2 as Case__pb2
 import Definitions_pb2 as Definitions__pb2
 import PdmObject_pb2 as PdmObject__pb2
 
-GRPC_GENERATED_VERSION = '1.80.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -27,7 +27,7 @@ if _version_not_supported:
     )
 
 
-class ProjectStub(object):
+class ProjectStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -68,7 +68,7 @@ class ProjectStub(object):
                 _registered_method=True)
 
 
-class ProjectServicer(object):
+class ProjectServicer:
     """Missing associated documentation comment in .proto file."""
 
     def GetCurrentCase(self, request, context):
@@ -148,7 +148,7 @@ def add_ProjectServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Project(object):
+class Project:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

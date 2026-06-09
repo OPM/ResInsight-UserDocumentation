@@ -5,7 +5,7 @@ import warnings
 
 import Commands_pb2 as Commands__pb2
 
-GRPC_GENERATED_VERSION = '1.80.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -25,7 +25,7 @@ if _version_not_supported:
     )
 
 
-class CommandsStub(object):
+class CommandsStub:
     """
     The Commands service handles generic ResInsight RicfCommandObject-commands
     The CommandParams is used to deduce command name from the chosen
@@ -48,7 +48,7 @@ class CommandsStub(object):
                 _registered_method=True)
 
 
-class CommandsServicer(object):
+class CommandsServicer:
     """
     The Commands service handles generic ResInsight RicfCommandObject-commands
     The CommandParams is used to deduce command name from the chosen
@@ -80,7 +80,7 @@ def add_CommandsServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Commands(object):
+class Commands:
     """
     The Commands service handles generic ResInsight RicfCommandObject-commands
     The CommandParams is used to deduce command name from the chosen
