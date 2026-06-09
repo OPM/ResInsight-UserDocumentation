@@ -35,6 +35,13 @@ Use Hugo shortcodes for internal links — never hardcode paths:
 [Link text]({{% ref "section" %}})
 ```
 
+## Release notes
+
+Release note pages live in `content/releases/release-notes/` as `releasenotes_<year>_<month>.md`.
+
+- The `aliases = ["/releases/release-notes/latest/"]` frontmatter field marks the current release and powers the `/releases/release-notes/latest/` redirect. Only one release note should carry it at a time.
+- When adding a new release note, remove `aliases = ["/releases/release-notes/latest/"]` from the previous release note so the redirect points only at the newest page.
+
 ## Writing conventions
 
 - **Prefer neutral terms over "Eclipse"** — use "simulation model", "DATA file", or "grid" where the meaning is clear without the product name.
