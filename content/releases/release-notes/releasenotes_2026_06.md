@@ -40,6 +40,10 @@ Geomechanical simulation results can now be imported from VTK files. The import 
 - Case-level cell filters can be shared across views, with support for configuring them from Python.
 - A cell filter can be attached to limit a perforation interval.
 
+![](/images/3d-main-window/FiltersFolderMenu.png)
+
+[Filters]({{% relref "Filters" %}})
+
 ## Fault Distance
 - Fault distance can now be calculated to a selected set of faults.
 - The user interface has been reorganized and the calculation performance improved.
