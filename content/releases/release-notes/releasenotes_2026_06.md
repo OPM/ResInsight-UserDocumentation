@@ -15,6 +15,15 @@ aliases = ["/releases/release-notes/latest/"]
 
 [RFT Correlation Plot]({{% relref "RftCorrelationPlot" %}})
 
+## Single Filter Folder
+- Geometry and property filters are now available in a single combined folder.
+- Case-level cell filters can be shared across views, with support for configuring them from Python.
+- A cell filter can be attached to limit a perforation interval.
+
+![](/images/3d-main-window/FiltersFolderMenu.png?width=500px)
+
+[Filters]({{% relref "Filters" %}})
+
 ## Grid Ensemble
 - Import of grid ensembles now uses the shared **file set** concept, and grid and summary ensembles can be imported together in a single unified import dialog.
 - Several separate grid-import features have been merged into one, simplifying the import menus and user interface.
@@ -25,24 +34,6 @@ aliases = ["/releases/release-notes/latest/"]
 [Grid and Summary Ensemble]({{% relref "ImportGridAndSummaryEnsemble" %}})
 
 [Grid Ensemble]({{% relref "GridEnsemble" %}})
-
-## Import of VTK for Geomechanical Models
-Geomechanical simulation results can now be imported from VTK files. The import handles tensor data such as stress and strain, and supports displacement visualization.
-
-![](/images/import/GeoMechVtkImport.png?width=500px)
-
-[Geomechanical Data]({{% relref "GeomechanicalData" %}}#import-from-vtk-files)
-
-[VTK Geomechanical Model]({{% relref "VTKGeoMechModel" %}})
-
-## Single Filter Folder
-- Geometry and property filters are now available in a single combined folder.
-- Case-level cell filters can be shared across views, with support for configuring them from Python.
-- A cell filter can be attached to limit a perforation interval.
-
-![](/images/3d-main-window/FiltersFolderMenu.png?width=500px)
-
-[Filters]({{% relref "Filters" %}})
 
 ## Fault Distance
 - Fault distance can now be calculated to a selected set of faults.
@@ -59,6 +50,15 @@ Sector model export has been substantially improved, including support for a cus
 - Correlation report plots support click-to-select realization and improved control over subplot visibility.
 - Correlation and tornado bar-chart behavior has been harmonized, and sorting of realizations in tornado plots improved.
 - Ensemble correlation plots can be created using a delta ensemble.
+
+## Import of VTK for Geomechanical Models
+Geomechanical simulation results can now be imported from VTK files. The import handles tensor data such as stress and strain, and supports displacement visualization.
+
+![](/images/import/GeoMechVtkImport.png?width=500px)
+
+[Geomechanical Data]({{% relref "GeomechanicalData" %}}#import-from-vtk-files)
+
+[VTK Geomechanical Model]({{% relref "VTKGeoMechModel" %}})
 
 ## Python Improvements
 - Access to the tie-in depth of a well path, control of well path and polygon colors, and the port number exposed on the **Instance** class.
