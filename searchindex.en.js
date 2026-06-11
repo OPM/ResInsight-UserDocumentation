@@ -929,8 +929,8 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "ResInsight \u003e Releases",
-    "content": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation See Build Instructions for the complete list of configuration options including support for Octave plugins, ABAQUS ODB API, and HDF5®.\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
-    "description": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation See Build Instructions for the complete list of configuration options including support for Octave plugins, ABAQUS ODB API, and HDF5®.\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
+    "content": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Mac Build See Build Instructions for the complete list of configuration options including support for Octave plugins, ABAQUS ODB API, and HDF5®.\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
+    "description": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Mac Build See Build Instructions for the complete list of configuration options including support for Octave plugins, ABAQUS ODB API, and HDF5®.\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
     "tags": [],
     "title": "Build From Source",
     "uri": "/ResInsight-UserDocumentation/releases/build-from-source/index.html"
