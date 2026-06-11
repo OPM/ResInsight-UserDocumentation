@@ -20,6 +20,10 @@ aliases = ["/releases/release-notes/latest/"]
 - Several separate grid-import features have been merged into one, simplifying the import menus and user interface.
 - A visual indicator is shown when a grid ensemble has a varying number of K layers.
 
+![](/images/import/ImportGridAndSummaryEnsemble.png)
+
+[Grid and Summary Ensemble]({{% relref "ImportGridAndSummaryEnsemble" %}})
+
 ## Import of VTK for Geomechanical Models
 Geomechanical simulation results can now be imported from VTK files. The import handles tensor data such as stress and strain, and supports displacement visualization.
 
