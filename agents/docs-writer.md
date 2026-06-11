@@ -35,6 +35,13 @@ Use Hugo shortcodes for internal links — never hardcode paths:
 [Link text]({{% ref "section" %}})
 ```
 
+## Images
+
+- Images use standard markdown: `![](/images/<section>/Name.png)`.
+- Control the rendered size with a `?width=` query string on the URL — any CSS unit works (`?width=500px`, `?width=50%`). The theme reads `width`/`height` from the query string; no shortcode is needed.
+- The theme enables a lightbox by default, so a sized-down image still expands to full size on click.
+- In release notes, render images at `?width=500px` for a consistent, compact layout.
+
 ## Release notes
 
 Release note pages live in `content/releases/release-notes/` as `releasenotes_<year>_<month>.md`.
