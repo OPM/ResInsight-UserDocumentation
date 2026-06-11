@@ -10,6 +10,8 @@ ResInsight allows the user to create a ensemble RFT plot similar to summary ense
 The functionality also computes statistics, e.g. P10, P90, and mean.
 When possible, ResInsight avoids loading the grid when reading ensemble RFT data.
 
+An ensemble RFT plot can also be used as the basis for an [RFT Correlation Plot]({{% relref "RftCorrelationPlot" %}}), which relates the RFT pressure response to the ensemble parameters.
+
 ## Create New Ensemble RFT Plot
 
 When a [summary ensemble has been imported]({{% relref "ensembleplotting" %}}#import),

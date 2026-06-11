@@ -11,6 +11,10 @@ aliases = ["/releases/release-notes/latest/"]
 - Ensemble curve sets can be selected directly in the plot, and clicking a curve highlights it.
 - Rft Segment Plots: Device-layer segment assignment is now driven by segment topology instead of measured depth, giving more reliable results for multi-branched wells.
 
+![](/images/plot-window/RftCorrelationPlot.png)
+
+[RFT Correlation Plot]({{% relref "RftCorrelationPlot" %}})
+
 ## Grid Ensemble
 - Import of grid ensembles now uses the shared **file set** concept, and grid and summary ensembles can be imported together in a single unified import dialog.
 - Several separate grid-import features have been merged into one, simplifying the import menus and user interface.
