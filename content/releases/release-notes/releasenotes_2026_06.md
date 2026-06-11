@@ -11,7 +11,7 @@ aliases = ["/releases/release-notes/latest/"]
 - Ensemble curve sets can be selected directly in the plot, and clicking a curve highlights it.
 - Rft Segment Plots: Device-layer segment assignment is now driven by segment topology instead of measured depth, giving more reliable results for multi-branched wells.
 
-![](/images/plot-window/RftCorrelationPlot.png)
+![](/images/plot-window/RftCorrelationPlot.png?width=500px)
 
 [RFT Correlation Plot]({{% relref "RftCorrelationPlot" %}})
 
@@ -20,7 +20,7 @@ aliases = ["/releases/release-notes/latest/"]
 - Several separate grid-import features have been merged into one, simplifying the import menus and user interface.
 - A visual indicator is shown when a grid ensemble has a varying number of K layers.
 
-![](/images/import/ImportGridAndSummaryEnsemble.png)
+![](/images/import/ImportGridAndSummaryEnsemble.png?width=500px)
 
 [Grid and Summary Ensemble]({{% relref "ImportGridAndSummaryEnsemble" %}})
 
@@ -29,7 +29,7 @@ aliases = ["/releases/release-notes/latest/"]
 ## Import of VTK for Geomechanical Models
 Geomechanical simulation results can now be imported from VTK files. The import handles tensor data such as stress and strain, and supports displacement visualization.
 
-![](/images/import/GeoMechVtkImport.png)
+![](/images/import/GeoMechVtkImport.png?width=500px)
 
 [Geomechanical Data]({{% relref "GeomechanicalData" %}}#import-from-vtk-files)
 
@@ -40,7 +40,7 @@ Geomechanical simulation results can now be imported from VTK files. The import 
 - Case-level cell filters can be shared across views, with support for configuring them from Python.
 - A cell filter can be attached to limit a perforation interval.
 
-![](/images/3d-main-window/FiltersFolderMenu.png)
+![](/images/3d-main-window/FiltersFolderMenu.png?width=500px)
 
 [Filters]({{% relref "Filters" %}})
 
