@@ -29,6 +29,12 @@ aliases = ["/releases/release-notes/latest/"]
 ## Import of VTK for Geomechanical Models
 Geomechanical simulation results can now be imported from VTK files. The import handles tensor data such as stress and strain, and supports displacement visualization.
 
+![](/images/import/GeoMechVtkImport.png)
+
+[Geomechanical Data]({{% relref "GeomechanicalData" %}}#import-from-vtk-files)
+
+[VTK Geomechanical Model]({{% relref "VTKGeoMechModel" %}})
+
 ## Single Filter Folder
 - Geometry and property filters are now available in a single combined folder.
 - Case-level cell filters can be shared across views, with support for configuring them from Python.

@@ -11,7 +11,7 @@ If you have, and would like to a use these features, please see [ Build Instruct
 ### Geo Mechanical Data Support
 Geo-mechanical data can be imported using the **Import -> Geo Mechanical Cases menu**. Here three options are present: **Import Geo Mechanical Model**, **Import Geo Mechanical Model (Time Step Filtered)**  (both for odb files) and **Import Element Property Table**.
 
-A geomechanical model can also be imported from a VTK file.
+A geomechanical model can also be imported from a VTK file, see [Import from VTK Files](#import-from-vtk-files) below.
 
 ![](/images/import/GeoMechImport.png)
 
@@ -24,6 +24,17 @@ All the result fields in the odb-file is then available for post processing in R
 Pressure and stress are always displayed using the *Bar* unit.
 
 Other derived results are also calculated, and are described in [ Derived Results ]({{% relref "derivedresultsgeomech" %}}) 
+
+### Import from VTK Files
+Geomechanical simulation results can also be imported from VTK files. Unlike the `*.odb` import, this does not require the ODB-Api or a Simulia license, so it is available in a standard build of ResInsight.
+
+To import a VTK model, select **Import -> Geo Mechanical Cases -> Import Geo Mechanical Model**. In the file dialog, set the file type to **VTK file (\*.pvd)** and select the `*.pvd` file.
+
+The `*.pvd` file is a VTK collection file that references one or more `*.vtu` unstructured-grid files, one per time step. ResInsight reads these as the time series for the model.
+
+The import handles the node and element result fields stored in the files, including tensor data such as stress and strain, and reads nodal displacements for deformation visualization.
+
+The VTK file format is described in detail in [VTK Geomechanical Model]({{% relref "VTKGeoMechModel" %}}).
 
 ### ResInsight Features
 Most of the central features of ResInsight visualization setup also applies to ABAQUS Odb models, like range filters and property filters. Well Paths will also show up along with the odb models.
