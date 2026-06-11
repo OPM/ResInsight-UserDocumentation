@@ -483,6 +483,23 @@ class ColorLegendCollection(PdmObjectBase):
         self._call_pdm_method_void("SetDefaultColorLegendForResult", case=case, result_name=result_name, color_legend=color_legend)
 
 
+    def update_color_legend(self, case: Optional[Case]=None, result_name: str="", legend_name: str="", category_values: List[int]=[], category_names: List[str]=[], colors: List[str]=[]) -> ColorLegend:
+        """
+        Update the color legend bound to a (case, resultName) pair in place, creating it if needed
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+            legend_name (str): 
+            category_values (List[int]): 
+            category_names (List[str]): 
+            colors (List[str]): 
+        Returns:
+            ColorLegend
+        """
+        return self._call_pdm_method_return_value("UpdateColorLegend", ColorLegend, case=case, result_name=result_name, legend_name=legend_name, category_values=category_values, category_names=category_names, colors=colors)
+
+
 class ColorLegendItem(PdmObjectBase):
     """
     Attributes:
