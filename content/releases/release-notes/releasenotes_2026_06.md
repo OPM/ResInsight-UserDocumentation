@@ -24,6 +24,8 @@ aliases = ["/releases/release-notes/latest/"]
 
 [Grid and Summary Ensemble]({{% relref "ImportGridAndSummaryEnsemble" %}})
 
+[Grid Ensemble]({{% relref "GridEnsemble" %}})
+
 ## Import of VTK for Geomechanical Models
 Geomechanical simulation results can now be imported from VTK files. The import handles tensor data such as stress and strain, and supports displacement visualization.
 

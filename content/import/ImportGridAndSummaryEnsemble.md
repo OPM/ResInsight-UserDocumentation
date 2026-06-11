@@ -35,4 +35,4 @@ The **Files Found** group lists the realizations found by the search, grouped by
 
 To select realizations by number rather than individually, enter a list in the **Select Realizations** field and press **Apply**. Ranges are defined with `-`, multiple entries are separated by `,`, exclusions are prefixed with `!`, and a step can be added with `:`. For example, `1, 5-7, !4, 9-18:3` selects realization 1, the range 5 to 7 excluding 4, and every third realization from 9 to 18.
 
-Press **OK** to import the checked realizations into the selected ensembles.
+Press **OK** to import the checked realizations into the selected ensembles. The imported [Grid Ensemble]({{% relref "GridEnsemble" %}}) appears under **Grid Models** in the **Project Tree**.
