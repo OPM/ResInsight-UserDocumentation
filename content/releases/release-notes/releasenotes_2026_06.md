@@ -42,6 +42,8 @@ aliases = ["/releases/release-notes/latest/"]
 ## Sector Model Export
 Sector model export has been substantially improved, including support for a custom input DATA file, refinement of individual cells or groups of cells, and handling of aquifer, FIP, valve, **BCCON** and **BCPROP** keywords.
 
+[Sector Model Export]({{% relref "SectorModelExport" %}})
+
 ## Well Events and Schedule Export
 - Generation of time-dependent well events and schedule data.
 - Improved keyword grouping and ordering in exported schedule files, optional export of **WELSEGS** and **COMPSEGS**, and added time precision in exported timelines.
