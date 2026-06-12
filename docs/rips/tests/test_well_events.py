@@ -296,14 +296,50 @@ class TestScheduleGeneration:
         # Apply events to create actual completions
         timeline.set_timestamp(timestamp="2024-12-31")
 
-        # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        # Generate schedule text (keep the first date as a DATES keyword for this assertion)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+        )
 
         # Verify schedule text contains expected keywords
         assert schedule_text, "Schedule text should not be empty"
         assert "DATES" in schedule_text, "Schedule should contain DATES keyword"
         assert "2024" in schedule_text, "Schedule should contain the event date"
         assert "WELSEGS" in schedule_text, "Schedule should contain MSW WELSEGS keyword"
+
+    def test_generate_schedule_preserves_time_of_day(self, project_with_case_and_well):
+        """Event timestamps with a time-of-day must be preserved in the exported DATES keyword (issue #14111)."""
+        project, case, timeline = project_with_case_and_well
+
+        # Get well path
+        well_paths = project.well_paths()
+        well_path_a = [wp for wp in well_paths if "A" in wp.name][0]
+
+        # Event date carrying an explicit, non-midnight time-of-day (ISO 8601).
+        timeline.add_perf_event(
+            event_date="2024-01-01T12:34:56.789",
+            well_path=well_path_a,
+            start_md=2000.0,
+            end_md=2200.0,
+            diameter=0.1,
+            skin_factor=0.5,
+            state="OPEN",
+        )
+
+        timeline.set_timestamp(timestamp="2024-12-31")
+
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+        )
+
+        assert "DATES" in schedule_text, "Schedule should contain DATES keyword"
+        assert "12:34:56.789" in schedule_text, (
+            "DATES keyword should preserve the event time-of-day with millisecond precision (TIME field)"
+        )
 
     def test_generate_schedule_with_control_events(self, project_with_case_and_well):
         """Test schedule generation with well control events and MSW."""
@@ -346,8 +382,12 @@ class TestScheduleGeneration:
         # Apply events to create actual completions
         timeline.set_timestamp(timestamp="2024-12-31")
 
-        # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        # Generate schedule text (keep the first date as a DATES keyword for this assertion)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+        )
 
         # Verify we have schedule text with completions and controls
         assert schedule_text, "Schedule text should not be empty"
@@ -388,12 +428,70 @@ class TestScheduleGeneration:
         timeline.set_timestamp(timestamp="2024-12-31")
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         # Verify schedule was generated
         assert schedule_text, "Schedule text should not be empty"
         assert "DATES" in schedule_text, "Schedule should contain DATES keyword"
         assert "2024" in schedule_text, "Schedule should contain event dates"
+
+    def test_first_date_as_comment(self, project_with_case_and_well):
+        """Test that the first (earliest) date can be emitted as a comment.
+
+        The first date equals the simulation start date, which some commercial
+        simulators reject as a DATES entry. With first_date_as_comment (the
+        default), the earliest date becomes a comment line while later dates
+        remain real DATES keywords.
+        """
+        project, case, timeline = project_with_case_and_well
+
+        well_paths = project.well_paths()
+        well_path_a = [wp for wp in well_paths if "A" in wp.name][0]
+
+        # Two distinct dates: earliest 2024-01-01, later 2024-06-01
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=well_path_a,
+            start_md=1800.0,
+            end_md=2000.0,
+            diameter=0.1,
+            state="OPEN",
+        )
+        timeline.add_perf_event(
+            event_date="2024-06-01",
+            well_path=well_path_a,
+            start_md=2000.0,
+            end_md=2200.0,
+            diameter=0.1,
+            state="OPEN",
+        )
+
+        timeline.set_timestamp(timestamp="2024-12-31")
+
+        # Default (first_date_as_comment=True): first date is a comment, later date a DATES keyword
+        default_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+        assert default_text, "Schedule text should not be empty"
+        assert "-- Date: 1 JAN 2024" in default_text, (
+            "First date should be emitted as a comment"
+        )
+        assert default_text.count("DATES") == 1, (
+            "Only the later date should be a DATES keyword"
+        )
+
+        # Explicit False: both dates emitted as DATES keywords (legacy behavior)
+        legacy_text = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+        )
+        assert "-- Date:" not in legacy_text, (
+            "No date comment should be present when first_date_as_comment is False"
+        )
+        assert legacy_text.count("DATES") == 2, "Both dates should be DATES keywords"
 
     def test_timestamp_filters_wells_in_schedule_output(
         self, project_with_case_and_well
@@ -470,7 +568,9 @@ class TestScheduleGeneration:
         timeline.set_timestamp(timestamp="2024-02-01")
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
         print("SCHEDULE:", schedule_text)
 
         # Verify schedule is generated
@@ -644,7 +744,9 @@ class TestScheduleGeneration:
         timeline.set_timestamp(timestamp="2024-12-31")
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
         print(schedule_text)
 
         # Verify schedule is generated with all dates
@@ -975,7 +1077,9 @@ class TestScheduleGeneration:
         timeline.set_timestamp(timestamp="2024-12-31")
 
         # Generate Eclipse schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         # Debug output
         print(f"\nSchedule text ({len(schedule_text)} characters):")
@@ -1073,7 +1177,9 @@ class TestScheduleGeneration:
         )
 
         timeline.set_timestamp(timestamp="2024-12-31")
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule text for WELSEGS test:\n{schedule_text}")
 
@@ -1125,7 +1231,9 @@ class TestScheduleGeneration:
         )
 
         timeline.set_timestamp(timestamp="2024-12-31")
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule text for WSEGVALV test:\n{schedule_text}")
 
@@ -1151,7 +1259,9 @@ class TestScheduleGeneration:
             is_producer=True,
         )
 
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule text for WCONPROD test:\n{schedule_text}")
 
@@ -1176,11 +1286,162 @@ class TestScheduleGeneration:
 
         timeline.set_timestamp(timestamp="2024-01-01")
 
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule text for COMPDAT test:\n{schedule_text}")
 
         assert "COMPDAT" in schedule_text
+
+    def test_align_columns_adds_headers_and_alignment(self, project_with_case_and_well):
+        """align_columns=True must add a '--'-prefixed column-header comment per keyword and
+        indent right-aligned data rows, while the default (align_columns=False) keeps the
+        compact form. Only the formatting should differ between the two."""
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        # A perforation (COMPDAT) plus a WCONHIST keyword event gives several tabular keywords
+        # plus the always-present DATES keyword to exercise the aligned formatter.
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=well_path,
+            start_md=2000.0,
+            end_md=2200.0,
+            diameter=0.1,
+            state="OPEN",
+        )
+        timeline.add_well_keyword_event(
+            event_date="2024-01-01",
+            well_path=well_path,
+            keyword_name="WCONHIST",
+            keyword_data={
+                "WELL": well_path.name,
+                "STATUS": "OPEN",
+                "CMODE": "RESV",
+                "ORAT": 3999.99,
+                "VFP_TABLE": 1,
+            },
+        )
+
+        timeline.set_timestamp(timestamp="2024-01-01")
+
+        # Force the first date to a DATES keyword (instead of the default leading comment) so the
+        # aligned DATES column header is exercised.
+        aligned = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+            align_columns=True,
+        )
+        default = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+            align_columns=False,
+        )
+
+        print(f"\nAligned schedule text:\n{aligned}")
+        print(f"\nDefault schedule text:\n{default}")
+
+        # The DATES keyword is always present; aligned output prefixes its item names as a comment.
+        assert "--DAY" in aligned, "Aligned output should carry a DATES column header"
+        assert "--DAY" not in default, "Default output should not carry column headers"
+
+        # WCONHIST item names appear only as a header comment in the aligned form (their values,
+        # e.g. 'OPEN'/'RESV', are what show up in both forms).
+        assert "CMODE" in aligned and "STATUS" in aligned, (
+            "Aligned output should list WCONHIST item names in a header comment"
+        )
+        assert "CMODE" not in default and "STATUS" not in default, (
+            "Default output should not list item names"
+        )
+
+        # Each aligned column-header line starts with '--' and its data rows are indented two
+        # spaces and terminate with ' /'.
+        wconhist_block = aligned.split("WCONHIST\n", 1)[1]
+        header_line = wconhist_block.splitlines()[0]
+        data_line = wconhist_block.splitlines()[1]
+        # Header is a comment whose names are right-aligned into their columns, so it starts with
+        # '--' and lists WELL/STATUS/CMODE (the first column may be padded ahead of 'WELL').
+        assert header_line.startswith("--") and "WELL" in header_line, (
+            f"WCONHIST header should be a '--' comment listing item names: {header_line!r}"
+        )
+        assert data_line.startswith("  "), (
+            f"WCONHIST data row should be indented two spaces: {data_line!r}"
+        )
+        assert data_line.rstrip().endswith("/"), (
+            f"WCONHIST data row should end with '/': {data_line!r}"
+        )
+        # Per-column defaults stay as individual '1*' markers (never accumulated into 'N*').
+        assert "1*" in data_line and " 2*" not in data_line, (
+            f"WCONHIST data row should keep per-column '1*' markers: {data_line!r}"
+        )
+
+        # Same keywords are produced either way.
+        for keyword in ("DATES", "COMPDAT", "WCONHIST"):
+            assert keyword in aligned and keyword in default
+
+    def test_perf_completion_number_triggers_complump(self, project_with_case_and_well):
+        """#13273 follow-up: a completion_number on add_perf_event must surface as a
+        COMPLUMP keyword (with that number) in the generated schedule.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=well_path,
+            start_md=2000.0,
+            end_md=2200.0,
+            diameter=0.1,
+            state="OPEN",
+            completion_number=3,
+        )
+
+        timeline.set_timestamp(timestamp="2024-01-01")
+
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+
+        print(f"\nSchedule text for COMPLUMP test:\n{schedule_text}")
+
+        assert "COMPLUMP" in schedule_text, (
+            "Schedule should contain COMPLUMP when a perforation has a completion number"
+        )
+        # The completion number must appear inside the COMPLUMP block (header to trailing '/').
+        complump_block = schedule_text.split("COMPLUMP\n", 1)[1].split("\n/\n", 1)[0]
+        assert " 3 " in complump_block or complump_block.rstrip().endswith("3 /"), (
+            f"Completion number 3 missing from COMPLUMP block: {complump_block!r}"
+        )
+
+    def test_perf_without_completion_number_has_no_complump(
+        self, project_with_case_and_well
+    ):
+        """Without a completion_number, no COMPLUMP keyword should be emitted."""
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=well_path,
+            start_md=2000.0,
+            end_md=2200.0,
+            diameter=0.1,
+            state="OPEN",
+        )
+
+        timeline.set_timestamp(timestamp="2024-01-01")
+
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+
+        assert "COMPDAT" in schedule_text
+        assert "COMPLUMP" not in schedule_text, (
+            "COMPLUMP should not appear when no completion number is set"
+        )
 
     def test_schedule_multiple_dates_in_order(self, project_with_case_and_well):
         """Verify schedule dates are in chronological order."""
@@ -1215,8 +1476,13 @@ class TestScheduleGeneration:
             is_producer=True,
         )
 
-        # Control events don't require set_timestamp
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        # Control events don't require set_timestamp. Keep all dates as DATES keywords
+        # so the chronological ordering of the keyword can be verified.
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+        )
 
         print(f"\nSchedule text for date ordering test:\n{schedule_text}")
 
@@ -1230,6 +1496,307 @@ class TestScheduleGeneration:
         assert jun_pos > 0, "Schedule should contain 1 'JUN' 2024"
         assert jan_pos < feb_pos, "January should come before February"
         assert feb_pos < jun_pos, "February should come before June"
+
+    def test_msw_export_gated_by_well_list(self, project_with_case_and_well):
+        """#14079: the multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV,
+        WSEGAICD) are emitted only for wells listed in export_msw_for_wells.
+
+        With the default (empty list) none of them appear, while unrelated
+        keywords (COMPDAT) are unaffected. Listing the well enables them.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_paths = project.well_paths()
+        well_path_a = [wp for wp in well_paths if "A" in wp.name][0]
+
+        timeline.add_tubing_event(
+            event_date="2024-01-01",
+            well_path=well_path_a,
+            start_md=0.0,
+            end_md=2500.0,
+            inner_diameter=0.15,
+            roughness=1.0e-5,
+        )
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=well_path_a,
+            start_md=2000.0,
+            end_md=2200.0,
+            diameter=0.1,
+            state="OPEN",
+        )
+        timeline.set_timestamp(timestamp="2024-12-31")
+
+        # Default (no list) suppresses all MSW keywords, COMPDAT is unaffected.
+        default_text = timeline.generate_schedule_text(eclipse_case=case)
+        print(f"\nSchedule with no MSW wells:\n{default_text}")
+        assert "WELSEGS" not in default_text, (
+            f"WELSEGS should be absent:\n{default_text}"
+        )
+        assert "COMPSEGS" not in default_text, (
+            f"COMPSEGS should be absent:\n{default_text}"
+        )
+        assert "WSEGVALV" not in default_text
+        assert "WSEGAICD" not in default_text
+        assert "COMPDAT" in default_text
+
+        # An explicit empty list behaves identically to the default.
+        empty_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[]
+        )
+        assert "WELSEGS" not in empty_text
+        assert "COMPSEGS" not in empty_text
+
+        # Listing the well enables WELSEGS and COMPSEGS for it.
+        enabled_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[well_path_a]
+        )
+        assert "WELSEGS" in enabled_text, f"WELSEGS should be present:\n{enabled_text}"
+        assert "COMPSEGS" in enabled_text, (
+            f"COMPSEGS should be present:\n{enabled_text}"
+        )
+        assert "COMPDAT" in enabled_text
+
+    def test_msw_export_selected_per_well(self, project_with_case_and_well):
+        """#14079: the well list selects MSW output per well and gates WSEGVALV
+        and WSEGAICD the same way as WELSEGS / COMPSEGS.
+
+        Well A carries an AICD valve (emits WSEGAICD, not WSEGVALV); well B
+        carries an ICD valve (emits WSEGVALV, not WSEGAICD). The presence of
+        each keyword therefore pinpoints exactly which well's MSW data was
+        exported.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_paths = project.well_paths()
+        well_path_a = [wp for wp in well_paths if "A" in wp.name][0]
+        well_path_b = [wp for wp in well_paths if "B" in wp.name][0]
+
+        # Well A: tubing + perforation + AICD valve -> WSEGAICD.
+        timeline.add_tubing_event(
+            event_date="2024-01-01",
+            well_path=well_path_a,
+            start_md=0.0,
+            end_md=2500.0,
+            inner_diameter=0.20,
+            roughness=3.0e-5,
+        )
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=well_path_a,
+            start_md=2250.0,
+            end_md=2400.0,
+            diameter=0.12,
+            state="OPEN",
+        )
+        timeline.add_valve_event(
+            event_date="2024-01-01",
+            well_path=well_path_a,
+            measured_depth=2300.0,
+            valve_type="AICD",
+            state="OPEN",
+            flow_coefficient=0.6,
+            area=0.00015,
+            aicd_strength=0.00021,
+            aicd_density_calib_fluid=1000.0,
+            aicd_viscosity_calib_fluid=1.0,
+            aicd_vol_flow_exp=2.1,
+            aicd_visc_func_exp=0.5,
+        )
+
+        # Well B: tubing + perforation + ICD valve -> WSEGVALV.
+        timeline.add_tubing_event(
+            event_date="2024-01-01",
+            well_path=well_path_b,
+            start_md=0.0,
+            end_md=2000.0,
+            inner_diameter=0.15,
+            roughness=2.0e-5,
+        )
+        timeline.add_perf_event(
+            event_date="2024-01-01",
+            well_path=well_path_b,
+            start_md=1500.0,
+            end_md=1700.0,
+            diameter=0.2,
+            state="OPEN",
+        )
+        timeline.add_valve_event(
+            event_date="2024-01-01",
+            well_path=well_path_b,
+            measured_depth=1600.0,
+            valve_type="ICD",
+            state="OPEN",
+            flow_coefficient=0.6,
+            area=0.00012,
+        )
+
+        timeline.set_timestamp(timestamp="2024-12-31")
+
+        # Both wells listed: all four MSW keywords present.
+        both = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[well_path_a, well_path_b]
+        )
+        assert "WELSEGS" in both
+        assert "COMPSEGS" in both
+        assert "WSEGVALV" in both  # from well B's ICD valve
+        assert "WSEGAICD" in both  # from well A's AICD valve
+
+        # Only well A: WSEGAICD present, WSEGVALV absent (B's ICD excluded).
+        only_a = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[well_path_a]
+        )
+        assert "WELSEGS" in only_a
+        assert "WSEGAICD" in only_a, f"WSEGAICD should be present:\n{only_a}"
+        assert "WSEGVALV" not in only_a, (
+            f"WSEGVALV (well B's ICD) should be excluded:\n{only_a}"
+        )
+
+        # Only well B: WSEGVALV present, WSEGAICD absent (A's AICD excluded).
+        only_b = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[well_path_b]
+        )
+        assert "WELSEGS" in only_b
+        assert "WSEGVALV" in only_b, f"WSEGVALV should be present:\n{only_b}"
+        assert "WSEGAICD" not in only_b, (
+            f"WSEGAICD (well A's AICD) should be excluded:\n{only_b}"
+        )
+
+    def test_keywords_grouped_across_wells(self, project_with_case_and_well):
+        """Regression for #14063: WELSPECS / COMPDAT records for multiple wells on
+        the same date must appear under a single keyword header (not one block per well).
+        """
+        project, case, timeline = project_with_case_and_well
+        well_paths = project.well_paths()
+        assert len(well_paths) >= 2, (
+            "Test requires at least two well paths in the fixture"
+        )
+
+        for wp in well_paths[:2]:
+            timeline.add_perf_event(
+                event_date="2024-01-01",
+                well_path=wp,
+                start_md=2000.0,
+                end_md=2200.0,
+                diameter=0.1,
+                state="OPEN",
+            )
+
+        timeline.set_timestamp(timestamp="2024-12-31")
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+        print(f"\nSchedule text for multi-well grouping:\n{schedule_text}")
+
+        # Exactly one "WELSPECS\n" header for all wells.
+        welspecs_count = schedule_text.count("WELSPECS\n")
+        assert welspecs_count == 1, (
+            f"WELSPECS should appear once for grouped output; got {welspecs_count}:\n{schedule_text}"
+        )
+
+        # Both well names must appear inside the WELSPECS block (between header and trailing '/' line).
+        welspecs_block = schedule_text.split("WELSPECS\n", 1)[1].split("\n/\n", 1)[0]
+        for wp in well_paths[:2]:
+            assert wp.name.replace(" ", "") in welspecs_block.replace(" ", ""), (
+                f"Well {wp.name!r} missing from grouped WELSPECS block: {welspecs_block!r}"
+            )
+
+    def test_per_well_keywords_sorted_by_well_name(self, project_with_case_and_well):
+        """Per-well keyword records are emitted in deck-name-sorted well order, so WELSPECS
+        and COMPDAT share the same ascending well order rather than an arbitrary one.
+
+        Note: the fixture imports wells A then B, so insertion order already matches name
+        order; this test locks in the deterministic ascending ordering and cross-keyword
+        consistency that the sort guarantees.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_paths = project.well_paths()
+        assert len(well_paths) >= 2, (
+            "Test requires at least two well paths in the fixture"
+        )
+
+        for wp in well_paths[:2]:
+            timeline.add_perf_event(
+                event_date="2024-01-01",
+                well_path=wp,
+                start_md=2000.0,
+                end_md=2200.0,
+                diameter=0.1,
+                state="OPEN",
+            )
+
+        timeline.set_timestamp(timestamp="2024-12-31")
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+        print(f"\nSchedule text for sorted well order:\n{schedule_text}")
+
+        export_names = sorted(wp.name.replace(" ", "") for wp in well_paths[:2])
+
+        def first_positions(block):
+            squashed = block.replace(" ", "")
+            return [squashed.find(name) for name in export_names]
+
+        welspecs_block = schedule_text.split("WELSPECS\n", 1)[1].split("\n/\n", 1)[0]
+        compdat_block = schedule_text.split("COMPDAT\n", 1)[1].split("\n/\n", 1)[0]
+
+        for block_name, block in (
+            ("WELSPECS", welspecs_block),
+            ("COMPDAT", compdat_block),
+        ):
+            positions = first_positions(block)
+            assert all(p >= 0 for p in positions), (
+                f"Both wells must appear in the {block_name} block: {block!r}"
+            )
+            assert positions == sorted(positions), (
+                f"{block_name} wells not in ascending name order {export_names}: {block!r}"
+            )
+
+    def test_welsegs_compsegs_not_merged_across_wells(self, project_with_case_and_well):
+        """WELSEGS and COMPSEGS carry a per-well header record and therefore cannot
+        be merged across wells: each MSW well must get its own keyword block on the
+        same date, while the other keywords stay grouped.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_paths = project.well_paths()
+        assert len(well_paths) >= 2, (
+            "Test requires at least two well paths in the fixture"
+        )
+
+        for wp in well_paths[:2]:
+            timeline.add_tubing_event(
+                event_date="2024-01-01",
+                well_path=wp,
+                start_md=0.0,
+                end_md=2500.0,
+                inner_diameter=0.15,
+                roughness=1.0e-5,
+            )
+            timeline.add_perf_event(
+                event_date="2024-01-01",
+                well_path=wp,
+                start_md=2000.0,
+                end_md=2200.0,
+                diameter=0.1,
+                state="OPEN",
+            )
+
+        timeline.set_timestamp(timestamp="2024-12-31")
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=well_paths[:2]
+        )
+        print(f"\nSchedule text for unmerged MSW keywords:\n{schedule_text}")
+
+        # One WELSEGS and one COMPSEGS header per MSW well (not merged into one block).
+        assert schedule_text.count("WELSEGS\n") == 2, (
+            f"WELSEGS should appear once per well; got {schedule_text.count('WELSEGS')}:\n{schedule_text}"
+        )
+        assert schedule_text.count("COMPSEGS\n") == 2, (
+            f"COMPSEGS should appear once per well; got {schedule_text.count('COMPSEGS')}:\n{schedule_text}"
+        )
+
+        # COMPDAT, by contrast, stays grouped under a single header.
+        assert schedule_text.count("COMPDAT\n") == 1, (
+            f"COMPDAT should stay grouped under one header; got {schedule_text.count('COMPDAT')}:\n{schedule_text}"
+        )
 
 
 class TestKeywordEvents:
@@ -1355,7 +1922,9 @@ class TestKeywordEvents:
         )
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule text for keyword event:\n{schedule_text}")
 
@@ -1417,7 +1986,9 @@ class TestKeywordEvents:
         )
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule text for multiple keywords:\n{schedule_text}")
 
@@ -1427,6 +1998,55 @@ class TestKeywordEvents:
         assert "WELTARG" in schedule_text, "Schedule should contain WELTARG keyword"
         assert "WRFTPLT" in schedule_text, "Schedule should contain WRFTPLT keyword"
         assert "DATES" in schedule_text, "Schedule should contain DATES keyword"
+
+    def test_wconhist_item_order_canonical(self, project_with_case_and_well):
+        """Regression for #14065: WCONHIST items must appear in the Eclipse-defined
+        canonical order regardless of how keyword_data was constructed in Python.
+
+        Canonical WCONHIST order: WELL, STATUS, CMODE, ORAT, WRAT, GRAT, VFP_TABLE,
+        ALQ, THP, BHP, WGASRAT_HIS, NGLRAT_HIS.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        # Intentionally non-canonical insertion order: BHP placed before ORAT/WRAT/GRAT.
+        timeline.add_well_keyword_event(
+            event_date="2024-01-15",
+            well_path=well_path,
+            keyword_name="WCONHIST",
+            keyword_data={
+                "WELL": well_path.name,
+                "STATUS": "OPEN",
+                "CMODE": "RESV",
+                "BHP": 250.0,
+                "ORAT": 3999.99,
+                "WRAT": 0.01,
+                "GRAT": 550678.44,
+                "VFP_TABLE": 1,
+            },
+        )
+
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+        print(f"\nSchedule text for canonical-order check:\n{schedule_text}")
+
+        assert "WCONHIST" in schedule_text
+        # Extract the WCONHIST record body (between the keyword and its terminating '/').
+        wconhist_block = schedule_text.split("WCONHIST", 1)[1].split("/", 1)[0]
+
+        orat_pos = wconhist_block.find("3999.99")
+        grat_pos = wconhist_block.find("550678")
+        bhp_pos = wconhist_block.find("250")
+        assert orat_pos >= 0, "ORAT value missing from WCONHIST output"
+        assert grat_pos >= 0, "GRAT value missing from WCONHIST output"
+        assert bhp_pos >= 0, "BHP value missing from WCONHIST output"
+        assert orat_pos < bhp_pos, (
+            f"ORAT must precede BHP in canonical WCONHIST order; got block: {wconhist_block!r}"
+        )
+        assert grat_pos < bhp_pos, (
+            f"GRAT must precede BHP in canonical WCONHIST order; got block: {wconhist_block!r}"
+        )
 
     def test_invalid_keyword_data_unsupported_type(self, project_with_case_and_well):
         """Test error handling for unsupported data types in keyword events."""
@@ -1489,7 +2109,9 @@ class TestKeywordEvents:
         timeline.set_timestamp(timestamp="2024-12-31")
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule with perf and keyword events:\n{schedule_text}")
 
@@ -1528,7 +2150,9 @@ class TestKeywordEvents:
         )
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule with control and keyword events:\n{schedule_text}")
 
@@ -1582,7 +2206,9 @@ class TestKeywordEvents:
         )
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule with keyword events at multiple dates:\n{schedule_text}")
 
@@ -1623,7 +2249,9 @@ class TestKeywordEvents:
         assert event is not None, "Event with boolean values should be created"
 
         # Generate schedule to verify bool conversion
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule with boolean keyword values:\n{schedule_text}")
         assert schedule_text, "Schedule text should not be empty"
@@ -1698,6 +2326,62 @@ class TestScheduleKeywordEvents:
 
         assert event is not None, "RPTSCHED event should be created"
 
+    def test_tuning_keyword_multi_record_output(self, project_with_case_and_well):
+        """TUNING is a multi-record keyword (3 records, each terminated by '/'). Items
+        spanning different records must be distributed into their own records, producing
+        three slashes rather than one.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        # A well event so the date section is emitted.
+        timeline.add_control_event(
+            event_date="2018-01-01",
+            well_path=well_path,
+            control_mode="ORAT",
+            control_value=1000.0,
+            oil_rate=1000.0,
+            is_producer=True,
+        )
+
+        # Items from record 1 (TSINIT, TSMAXZ, TMAXWC) and record 3 (NEWTMX..MXWPIT).
+        timeline.add_keyword_event(
+            event_date="2018-01-01",
+            keyword_name="TUNING",
+            keyword_data={
+                "TSINIT": 1,
+                "TSMAXZ": 30,
+                "TMAXWC": 1,
+                "NEWTMX": 12,
+                "NEWTMN": 1,
+                "LITMAX": 50,
+                "LITMIN": 1,
+                "MXWSIT": 50,
+                "MXWPIT": 50,
+            },
+        )
+
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+
+        print(f"\nSchedule text with TUNING keyword:\n{schedule_text}")
+
+        assert "TUNING" in schedule_text, "Schedule should contain TUNING keyword"
+
+        # Isolate the TUNING block (header line up to the following blank line).
+        tuning_block = schedule_text.split("TUNING\n", 1)[1].split("\n\n", 1)[0]
+        record_terminators = [
+            line for line in tuning_block.splitlines() if line.strip().endswith("/")
+        ]
+        assert len(record_terminators) == 3, (
+            f"TUNING must emit three records (three '/'), got {len(record_terminators)}:\n{tuning_block}"
+        )
+
+        # Record 1 keeps TSMAXZ; record 3 keeps NEWTMX. Both values must survive.
+        assert "30" in tuning_block, "TSMAXZ value missing from TUNING record 1"
+        assert "12" in tuning_block, "NEWTMX value missing from TUNING record 3"
+
     def test_keyword_event_schedule_output(self, project_with_case_and_well):
         """Test that schedule keyword events appear in schedule text generation."""
         project, case, timeline = project_with_case_and_well
@@ -1723,8 +2407,12 @@ class TestScheduleKeywordEvents:
             },
         )
 
-        # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        # Generate schedule text (keep the first date as a DATES keyword for this assertion)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case,
+            export_msw_for_wells=project.well_paths(),
+            first_date_as_comment=False,
+        )
 
         print(f"\nSchedule text with RPTRST keyword:\n{schedule_text}")
 
@@ -1770,7 +2458,9 @@ class TestScheduleKeywordEvents:
         timeline.set_timestamp(timestamp="2024-12-31")
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(
             f"\nSchedule with mixed well and schedule-level keywords:\n{schedule_text}"
@@ -1823,7 +2513,9 @@ class TestScheduleKeywordEvents:
         )
 
         # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
 
         print(f"\nSchedule with keyword events at multiple dates:\n{schedule_text}")
 
@@ -1848,3 +2540,57 @@ class TestScheduleKeywordEvents:
         )
 
         assert event is not None, "Event with mixed types should be created"
+
+    def test_rptrst_mnemonic_output(self, project_with_case_and_well):
+        """RPTRST/RPTSCHED are mnemonic-list keywords. bool True must emit a
+        bare KEY, int/float/str must emit KEY=VALUE, bool False must be omitted.
+        """
+        project, case, timeline = project_with_case_and_well
+        well_path = project.well_paths()[0]
+
+        # Schedule generation requires at least one well event so a well path is
+        # selected for output; the assertions below target only the RPTRST block.
+        timeline.add_control_event(
+            event_date="2024-01-01",
+            well_path=well_path,
+            control_mode="ORAT",
+            control_value=1000.0,
+            oil_rate=1000.0,
+            is_producer=True,
+        )
+
+        timeline.add_keyword_event(
+            event_date="2024-01-01",
+            keyword_name="RPTRST",
+            keyword_data={
+                "BASIC": 2,
+                "DEN": True,
+                "ROCKC": True,
+                "RPORV": True,
+                "RFIP": True,
+                "FLOWS": True,
+                "NORST": 1,
+                "FLORES": True,
+                "OBSOLETE": False,
+            },
+        )
+
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
+        print(f"\nRPTRST mnemonic output:\n{schedule_text}")
+
+        assert "RPTRST" in schedule_text
+        rptrst_block = schedule_text.split("RPTRST", 1)[1].split("/", 1)[0]
+
+        # Keyed mnemonics rendered as KEY=VALUE.
+        assert "BASIC=2" in rptrst_block
+        assert "NORST=1" in rptrst_block
+        # Flag mnemonics rendered as bare tokens. Whitespace-bounded so we don't accept
+        # accidental substring matches like 'DEN' inside another token.
+        for flag in ("DEN", "ROCKC", "RPORV", "RFIP", "FLOWS", "FLORES"):
+            assert f" {flag} " in rptrst_block or rptrst_block.rstrip().endswith(
+                f" {flag}"
+            ), f"flag {flag!r} missing from RPTRST output: {rptrst_block!r}"
+        # False-valued flag must be omitted entirely.
+        assert "OBSOLETE" not in rptrst_block

@@ -7,7 +7,7 @@ import Case_pb2 as Case__pb2
 import Definitions_pb2 as Definitions__pb2
 import PdmObject_pb2 as PdmObject__pb2
 
-GRPC_GENERATED_VERSION = '1.78.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -27,7 +27,7 @@ if _version_not_supported:
     )
 
 
-class CaseStub(object):
+class CaseStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -103,7 +103,7 @@ class CaseStub(object):
                 _registered_method=True)
 
 
-class CaseServicer(object):
+class CaseServicer:
     """Missing associated documentation comment in .proto file."""
 
     def GetGridCount(self, request, context):
@@ -260,7 +260,7 @@ def add_CaseServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class Case(object):
+class Case:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

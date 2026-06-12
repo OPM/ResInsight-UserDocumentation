@@ -37,7 +37,7 @@ curl -L -O "https://nightly.link/OPM/ResInsight/workflows/ResInsightWithCache/de
 ```
 2. Unzip the binary
 ```txt
-unzip "ResInsight-Ubuntu%2024.04%20gcc.zip”
+unzip "ResInsight-Ubuntu%2024.04%20gcc.zip"
 ```
 3. Launch ResInsight from the bin folder
 ```txt

@@ -67,6 +67,55 @@ def test_10k(rips_instance, initialize_test):
     check_corner(cell_corners[cell_index].c7, expected_corners[7])
 
 
+def test_10k_cell_centers_async(rips_instance, initialize_test):
+    casePath = dataroot.PATH + "/TEST10K_FLT_LGR_NNC/TEST10K_FLT_LGR_NNC.EGRID"
+    case = rips_instance.project.load_case(path=casePath)
+    grid = case.grid(index=0)
+
+    accumulated = []
+    for chunk in grid.cell_centers_async():
+        accumulated.extend(chunk.centers)
+
+    sync_centers = grid.cell_centers()
+    assert len(accumulated) == len(sync_centers)
+
+    cell_index = 168143
+    assert math.isclose(accumulated[cell_index].x, sync_centers[cell_index].x)
+    assert math.isclose(accumulated[cell_index].y, sync_centers[cell_index].y)
+    assert math.isclose(accumulated[cell_index].z, sync_centers[cell_index].z)
+
+
+def test_10k_cell_corners_async(rips_instance, initialize_test):
+    casePath = dataroot.PATH + "/TEST10K_FLT_LGR_NNC/TEST10K_FLT_LGR_NNC.EGRID"
+    case = rips_instance.project.load_case(path=casePath)
+    grid = case.grid(index=0)
+
+    accumulated = []
+    for chunk in grid.cell_corners_async():
+        accumulated.extend(chunk.cells)
+
+    sync_corners = grid.cell_corners()
+    assert len(accumulated) == len(sync_corners)
+
+    cell_index = 168143
+    check_corner(
+        accumulated[cell_index].c0,
+        [
+            sync_corners[cell_index].c0.x,
+            sync_corners[cell_index].c0.y,
+            sync_corners[cell_index].c0.z,
+        ],
+    )
+    check_corner(
+        accumulated[cell_index].c7,
+        [
+            sync_corners[cell_index].c7.x,
+            sync_corners[cell_index].c7.y,
+            sync_corners[cell_index].c7.z,
+        ],
+    )
+
+
 def check_reek_grid_box(case: rips.Case):
     assert len(case.grids()) == 1
     grid = case.grid(index=0)
@@ -80,7 +129,7 @@ def check_reek_grid_box(case: rips.Case):
     total_size = dimensions.i * dimensions.j * dimensions.k
     assert len(cell_centers) == total_size
 
-    poro = case.active_cell_property("INPUT_PROPERTY", "PORO", 0)
+    poro = case.active_cell_property(rips.PropertyType.INPUT_PROPERTY, "PORO", 0)
     assert len(poro) == total_size
     assert math.isclose(min(poro), 0.000928084715269506)
     assert math.isclose(max(poro), 0.351595014333725)
@@ -108,7 +157,7 @@ def verify_load_grid_and_separate_properties(
     case: rips.Reservoir, property_name_and_paths: NameAndPath
 ):
     # Load case without properties
-    available_properties = case.available_properties("INPUT_PROPERTY")
+    available_properties = case.available_properties(rips.PropertyType.INPUT_PROPERTY)
     for [name, _path] in property_name_and_paths.items():
         assert name not in available_properties
 
@@ -120,11 +169,13 @@ def verify_load_grid_and_separate_properties(
     imported = case.import_properties(file_names=list(property_name_and_paths.values()))
     imported_names = imported.values
 
-    available_properties = case.available_properties("INPUT_PROPERTY")
+    available_properties = case.available_properties(rips.PropertyType.INPUT_PROPERTY)
     for [name, _path] in property_name_and_paths.items():
         assert name in available_properties
         assert name in imported_names
-        property_values = case.active_cell_property("INPUT_PROPERTY", name, 0)
+        property_values = case.active_cell_property(
+            rips.PropertyType.INPUT_PROPERTY, name, 0
+        )
         assert len(property_values) == total_size
 
 

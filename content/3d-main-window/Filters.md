@@ -11,6 +11,10 @@ Filters are used to control the visibility of cells in the 3D view. Two types of
 - **Cell Filter** -- Extracts subset(s) of grid cells
 - **Property Filter** -- Extracts cells with a property value matching a value range
 
+Both types are now collected in a single **Filters** folder in the **Project Tree**, located under each 3D view. All filters are created from the right-click menu of this folder.
+
+![](/images/3d-main-window/FiltersFolderMenu.png)
+
 {{% notice note %}}
 The visibility of cells connected to wells, and fences can be controlled from <b> <a href="{{% relref "simulationwells" %}}">Simulation Wells</a></b>.<br> 
 <small><i>(Not applicable for Geomechanical cases)</i></small>
@@ -34,19 +38,17 @@ The logical operation combining multiple **Cell Filters** is defined by *"Combin
 
 ![](/images/3d-main-window/cellfilters_combine.png)
 
-A new cell filter can be added by invoking the right-click menu for the **Cell Filters** collection in **Project Tree**. 
-
-![](/images/3d-main-window/CellFilterTypes.png)
+A new cell filter can be added by invoking the right-click menu for the **Filters** folder in **Project Tree** (see the menu above).
 
 The available cell filters are:
 
-- **Polygon Filter**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. The polygon can be defined as part of the filter or referencing a polygon defined in the [Polygons]({{% relref "polygons" %}}) collection.
+- **User Defined Polygon Filter**: Defining a filter by marking target points of a polygon in 3D view to include or exclude matching cells. The polygon can be defined as part of the filter or referencing a polygon defined in the [Polygons]({{% relref "polygons" %}}) collection.
 
-- **User Defined Filter**: Defining a filter by specifying explicit cells to include or exclude by their IJK-index.
+- **Range Filter**: Defining a filter to include or exclude cells by specifying IJK-ranges. For radial models, IJ represents angle and radius. The submenu also offers slice filters that include or exclude a slice of cells in the I-, J-, or K-direction.
 
-- **Range Filter**: Defining a filter to include or exclude cells by specifying IJK-ranges. For radial models, IJ represents angle and radius.
+- **User Defined IJK Filter**: Defining a filter by specifying explicit cells to include or exclude by their IJK-index.
 
-- **Slice Filter**: Defining a filter to include or exclude a slice of cells in either I-, J-, or K-direction.
+- **User Defined Index Filter**: Defining a filter by specifying explicit cells to include or exclude by their cell index.
 
 The following exemplifies the use of a **Polygon Filter** and target points. Target points are defined and manipulated in 3D view as described in [Polygons]({{% relref "polygons" %}}). Vertically, the filter can be set to use the XY target positions or IJK-index of targeted cells. The actual filtering can be specified to whole cells inside polygon, cell center inside polygon, or any cell corner inside polygon.
 
@@ -72,7 +74,11 @@ The **Width** labels show the number of active cells from the start of the activ
 
 **Property Filters** applies to the results of the **Cell Filters** and limits the visible cells to the ones approved by the filter. For a cell to be visible it must be accepted by all property filters. 
 
-A new property filter is created by activating the right-click menu on **Property Filters** or by right-clicking inside a 3D view. The new property filter is based on the currently viewed cell result by default. 
+A new property filter is created from the right-click menu of the **Filters** folder or by right-clicking inside a 3D view. The menu offers:
+
+- **New Property Filter**: a property filter based on the currently viewed cell result by default.
+- **Add Property Filter Linked to Cell Result**: a property filter that follows the current cell result.
+- **New Combined Property Filter**: a property filter combining several property conditions.
 
 The name of the property filter is automatically set to *"propertyname (min .. max)"* as you edit the property filter.
 

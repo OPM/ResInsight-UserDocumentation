@@ -15,6 +15,7 @@ import signal
 import sys
 import json
 import subprocess
+import threading
 
 import grpc
 
@@ -30,9 +31,12 @@ from .project import Project
 from .retry_policy import ExponentialBackoffRetryPolicy
 from .grpc_retry_interceptor import RetryOnRpcErrorClientInterceptor
 from .generated.generated_classes import CommandRouter
+from .exception import RipsError
 
-from typing import List, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 class Instance:
@@ -41,10 +45,16 @@ class Instance:
     Attributes:
         launched (bool): Tells us whether the application was launched as a new process.
             If the application was launched we may need to close it when exiting the script.
+        port (int): The port number used to connect to this instance.
         commands (Commands): Command executor. Set when creating an instance.
         project (Project): Current project in ResInsight.
             Set when creating an instance and updated when opening/closing projects.
     """
+
+    _last_version_check_error: Optional[grpc.RpcError]
+    _connection_lost: bool
+    _heartbeat_thread: Optional[threading.Thread]
+    _heartbeat_stop: Optional[threading.Event]
 
     @staticmethod
     def __is_port_in_use(port: int) -> bool:
@@ -78,10 +88,10 @@ class Instance:
                 return int(value)
 
         if retry_count == max_attempts:
-            print(
-                "Waiting for port number file timed out after {} seconds. File: {}".format(
-                    max_attempts, file_path
-                )
+            logger.warning(
+                "Waiting for port number file timed out after %d seconds. File: %s",
+                max_attempts,
+                file_path,
             )
 
         return -1
@@ -105,7 +115,8 @@ class Instance:
         launch_port: int = 0,
         init_timeout: int = 300,
         command_line_parameters: List[str] = [],
-    ) -> Optional[Instance]:
+        enable_heartbeat: bool = True,
+    ) -> Instance:
         """Launch a new Instance of ResInsight. This requires the environment variable
         RESINSIGHT_EXECUTABLE to be set or the parameter resinsight_executable to be provided.
         The RESINSIGHT_GRPC_PORT environment variable can be set to an alternative port number.
@@ -120,8 +131,11 @@ class Instance:
                              If anything else, ResInsight will try to launch with the specified portnumber.
             init_timeout: Number of seconds to wait for initialization before timing out.
             command_line_parameters(list): Additional parameters as string entries in the list.
+            enable_heartbeat(bool): If True (default), a background thread pings the
+                server periodically and aborts pending RPCs if it dies. Disable on
+                slow boxes where false positives matter (long GC pauses, debugger).
         Returns:
-            Instance: an instance object if it worked. None if not.
+            Instance: a connected instance object. Raises :class:`RipsError` on failure.
         """
 
         requested_port: int = 50051
@@ -138,30 +152,28 @@ class Instance:
                 data = json.load(f)
                 resinsight_executable = data["resinsight_executable"]
                 if resinsight_executable:
-                    print(
-                        "In './share/rips/rips_config.json', found resinsight_executable:",
+                    logger.info(
+                        "In './share/rips/rips_config.json', found resinsight_executable: %s",
                         resinsight_executable,
                     )
 
         if not resinsight_executable:
             resinsight_executable_from_env = os.environ.get("RESINSIGHT_EXECUTABLE")
             if not resinsight_executable_from_env:
-                print(
-                    "ERROR: Could not launch ResInsight because the environment variable"
+                raise RipsError(
+                    "Could not launch ResInsight because the environment variable"
                     " RESINSIGHT_EXECUTABLE is not set"
                 )
-                return None
             else:
                 resinsight_executable = resinsight_executable_from_env
 
         # Check if executable file exists
         if not os.path.isfile(resinsight_executable):
-            print(
-                f"ERROR: ResInsight executable not found at path: {resinsight_executable}"
+            raise RipsError(
+                f"ResInsight executable not found at path: {resinsight_executable}"
             )
-            return None
 
-        print("Trying to launch", resinsight_executable)
+        logger.info("Trying to launch %s", resinsight_executable)
         with tempfile.TemporaryDirectory() as tmp_dir_path:
             port_number_file = tmp_dir_path + "/portnumber.txt"
             parameters: List[str] = [
@@ -172,7 +184,7 @@ class Instance:
                 str(port_number_file),
             ] + command_line_parameters
             if console:
-                print("Launching as console app")
+                logger.info("Launching as console app")
                 parameters.append("--console")
 
             # Stringify all parameters
@@ -181,21 +193,23 @@ class Instance:
 
             process = subprocess.Popen(parameters)
             pid = process.pid
-            if pid:
-                port = Instance.__read_port_number_from_file(
-                    port_number_file, init_timeout
-                )
-                if port == -1:
-                    print("Unable to read port number. Launch failed.")
-                    # Need to kill the process using PID since there is no  GRPC connection to use.
-                    Instance.__kill_process(pid)
-                else:
-                    instance = Instance(port=port, launched=True)
-                    return instance
-        return None
+            port = Instance.__read_port_number_from_file(port_number_file, init_timeout)
+            if port == -1:
+                # Need to kill the process using PID since there is no GRPC connection to use.
+                Instance.__kill_process(pid)
+                raise RipsError("Unable to read port number. Launch failed.")
+            return Instance(
+                port=port,
+                launched=True,
+                enable_heartbeat=enable_heartbeat,
+            )
 
     @staticmethod
-    def find(start_port: int = 50051, end_port: int = 50071) -> Optional[Instance]:
+    def find(
+        start_port: int = 50051,
+        end_port: int = 50071,
+        enable_heartbeat: bool = True,
+    ) -> Instance:
         """Search for an existing Instance of ResInsight by testing ports.
 
         By default we search from port 50051 to 50071 or if the environment
@@ -205,27 +219,26 @@ class Instance:
         Args:
             start_port (int): start searching from this port
             end_port (int): search up to but not including this port
+            enable_heartbeat(bool): If True (default), a background thread pings the
+                server periodically and aborts pending RPCs if it dies. Disable on
+                slow boxes where false positives matter (long GC pauses, debugger).
         """
         port_env = os.environ.get("RESINSIGHT_GRPC_PORT")
         if port_env:
-            print("Got port " + port_env + " from environment")
+            logger.info("Got port %s from environment", port_env)
             start_port = int(port_env)
             end_port = start_port + 20
 
         for try_port in range(start_port, end_port):
-            print("Trying port " + str(try_port))
+            logger.debug("Trying port %d", try_port)
             if Instance.__is_port_in_use(try_port) and Instance.__is_valid_port(
                 try_port
             ):
-                return Instance(port=try_port)
+                return Instance(port=try_port, enable_heartbeat=enable_heartbeat)
 
-        print(
-            "Error: Could not find any ResInsight instances responding between ports "
-            + str(start_port)
-            + " and "
-            + str(end_port)
+        raise RipsError(
+            f"Could not find any ResInsight instances responding between ports {start_port} and {end_port}"
         )
-        return None
 
     def __execute_command(self, **command_params):
         return self.commands.Execute(Commands_pb2.CommandParams(**command_params))
@@ -238,18 +251,34 @@ class Instance:
             minor_version_ok = self.minor_version() == int(
                 RiaVersionInfo.RESINSIGHT_MINOR_VERSION
             )
+            self._last_version_check_error = None
             return True, major_version_ok and minor_version_ok
-        except grpc.RpcError:
+        except grpc.RpcError as exception:
+            self._last_version_check_error = exception
             return False, False
 
-    def __init__(self, port: int = 50051, launched: bool = False) -> None:
+    def __init__(
+        self,
+        port: int = 50051,
+        launched: bool = False,
+        enable_heartbeat: bool = True,
+    ) -> None:
         """Attempts to connect to ResInsight at a specific port on localhost
 
         Args:
             port(int): port number
+            launched(bool): True if this Python process launched ResInsight.
+            enable_heartbeat(bool): If True (default), a background thread
+                pings the server periodically. On detection of a dead server
+                the channel is closed so any in-flight RPC unblocks
+                immediately with a :class:`RipsError`.
         """
-        logging.basicConfig()
         self.location: str = "localhost:" + str(port)
+        self.port: int = port
+        self._last_version_check_error = None
+        self._connection_lost = False
+        self._heartbeat_thread = None
+        self._heartbeat_stop = None
 
         self.channel = grpc.insecure_channel(
             self.location, options=[("grpc.enable_http_proxy", False)]
@@ -269,6 +298,7 @@ class Instance:
                     min_backoff=100, max_backoff=5000, max_num_retries=20
                 ),
                 status_for_retry=(grpc.StatusCode.UNAVAILABLE,),
+                should_abort=lambda: self._connection_lost,
             ),
         )
 
@@ -288,6 +318,9 @@ class Instance:
         path = os.getcwd()
         self.set_start_dir(path=path)
 
+        if enable_heartbeat:
+            self.start_heartbeat()
+
     def _check_connection_and_version(
         self, channel: grpc.Channel, launched: bool, location: str
     ) -> None:
@@ -305,25 +338,152 @@ class Instance:
             connection_ok, version_ok = self.__check_version()
 
         if not connection_ok:
+            last_error = self._last_version_check_error
+            cause_text = ""
+            code = None
+            details = None
+            if last_error is not None:
+                code_fn = getattr(last_error, "code", None)
+                details_fn = getattr(last_error, "details", None)
+                if callable(code_fn):
+                    code = code_fn()
+                if callable(details_fn):
+                    details = details_fn()
+                if code is not None or details:
+                    cause_text = f" (gRPC {code}: {details or ''})"
+
             if self.launched:
-                raise Exception(
-                    "Error: Could not connect to resinsight at ",
-                    location,
-                    ".",
-                    retry_policy.time_out_message(),
-                )
-            raise Exception("Error: Could not connect to resinsight at ", location)
+                raise RipsError(
+                    f"Could not connect to ResInsight at {location}.{cause_text} "
+                    f"{retry_policy.time_out_message()}",
+                    code=code,
+                    details=details,
+                    location=location,
+                ) from last_error
+            raise RipsError(
+                f"Could not connect to ResInsight at {location}.{cause_text}",
+                code=code,
+                details=details,
+                location=location,
+            ) from last_error
         if not version_ok:
-            raise Exception(
-                "Error: Wrong Version of ResInsight at ",
-                location,
-                "Executable : " + self.version_string(),
-                " ",
-                "rips : " + self.client_version_string(),
+            raise RipsError(
+                f"Wrong Version of ResInsight at {location}. "
+                f"Executable: {self.version_string()}, "
+                f"rips: {self.client_version_string()}",
+                location=location,
             )
 
     def __version_message(self) -> App_pb2.Version:
         return self.app.GetVersion(Empty())
+
+    def start_heartbeat(
+        self,
+        interval_sec: float = 5.0,
+        deadline_sec: float = 5.0,
+        failure_threshold: int = 3,
+        on_failure: Optional[Callable[["RipsError"], None]] = None,
+    ) -> None:
+        """Start a background thread that periodically pings ResInsight.
+
+        A single missed ping is not fatal: the heartbeat tolerates up
+        to ``failure_threshold - 1`` consecutive failures (e.g.
+        transient slowness on a loaded CI box) before declaring the
+        connection lost. A successful ping resets the counter.
+
+        Once the threshold is reached, the instance is marked as
+        ``connection_lost``, the underlying gRPC channel is closed so
+        any in-flight calls fail fast with ``UNAVAILABLE``, and the
+        retry interceptor is told to stop retrying. Subsequent API
+        calls that go through :meth:`check_alive` raise
+        :class:`RipsError` with the captured cause.
+
+        Heartbeat is opt-in. Existing scripts are unaffected unless
+        they call this method.
+
+        Args:
+            interval_sec: Seconds between pings.
+            deadline_sec: Per-ping deadline. Pings exceeding this are
+                treated as failures.
+            failure_threshold: Number of consecutive failed pings
+                required before the connection is declared lost.
+                Must be >= 1.
+            on_failure: Optional callback invoked once when the
+                heartbeat detects a lost connection. Receives a
+                :class:`RipsError`.
+        """
+        if failure_threshold < 1:
+            raise RipsError("failure_threshold must be >= 1")
+
+        if self._heartbeat_thread is not None and self._heartbeat_thread.is_alive():
+            return
+
+        stop_event = threading.Event()
+        self._heartbeat_stop = stop_event
+
+        def _run() -> None:
+            consecutive_failures = 0
+            while not stop_event.is_set():
+                try:
+                    self.app.GetVersion(Empty(), timeout=deadline_sec)
+                    consecutive_failures = 0
+                except grpc.RpcError as exc:
+                    consecutive_failures += 1
+                    if consecutive_failures < failure_threshold:
+                        logger.warning(
+                            "Heartbeat ping failed (%d/%d): %s",
+                            consecutive_failures,
+                            failure_threshold,
+                            exc,
+                        )
+                        stop_event.wait(interval_sec)
+                        continue
+
+                    self._connection_lost = True
+                    # Close the channel so any pending RPC unblocks
+                    # immediately with UNAVAILABLE instead of waiting
+                    # for TCP keepalive (which can take many minutes).
+                    try:
+                        self.channel.close()
+                    except Exception:
+                        logger.exception("Failed to close gRPC channel from heartbeat")
+                    err = RipsError.from_rpc_error(exc, location=self.location)
+                    if on_failure is not None:
+                        try:
+                            on_failure(err)
+                        except Exception:
+                            logger.exception("Heartbeat on_failure callback raised")
+                    return
+                stop_event.wait(interval_sec)
+
+        thread = threading.Thread(target=_run, name="rips-heartbeat", daemon=True)
+        self._heartbeat_thread = thread
+        thread.start()
+
+    def stop_heartbeat(self) -> None:
+        """Stop the background heartbeat thread, if running."""
+        if self._heartbeat_stop is not None:
+            self._heartbeat_stop.set()
+        if self._heartbeat_thread is not None:
+            self._heartbeat_thread.join(timeout=2.0)
+        self._heartbeat_thread = None
+        self._heartbeat_stop = None
+
+    def check_alive(self) -> None:
+        """Raise :class:`RipsError` if the heartbeat has flagged a
+        lost connection. Cheap to call before issuing API requests."""
+        if self._connection_lost:
+            raise RipsError(
+                f"ResInsight at {self.location} is no longer responding "
+                "(detected by heartbeat)",
+                location=self.location,
+            )
+
+    def __del__(self):
+        try:
+            self.stop_heartbeat()
+        except Exception:
+            pass
 
     def set_start_dir(self, path: str):
         """Set current start directory
@@ -432,7 +592,7 @@ class Instance:
 
     def exit(self):
         """Tell ResInsight instance to quit"""
-        print("Telling ResInsight to Exit")
+        logger.info("Telling ResInsight to Exit")
         return self.app.Exit(Empty())
 
     def is_console(self) -> bool:

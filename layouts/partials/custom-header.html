@@ -1,6 +1,10 @@
-<!-- Partial intended to be overwritten to add custom headers, like CSS or any other info
+<!-- Partial intended to be overwritten to add custom headers, like CSS or any other info -->
 <style type="text/css">
-    /* Custom css */
+    /* Search match highlight: use a rectangle with a single solid color */
+    mark {
+        border-radius: 0;
+        background-image: none;
+        background-color: color-mix(in srgb, var(--ACCENT-color) 35%, transparent);
+    }
 </style>
--->
 {{ partial "mathjax_support.html" . }}

@@ -5,7 +5,7 @@ import warnings
 
 import SimulationWell_pb2 as SimulationWell__pb2
 
-GRPC_GENERATED_VERSION = '1.78.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -25,7 +25,7 @@ if _version_not_supported:
     )
 
 
-class SimulationWellStub(object):
+class SimulationWellStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -51,7 +51,7 @@ class SimulationWellStub(object):
                 _registered_method=True)
 
 
-class SimulationWellServicer(object):
+class SimulationWellServicer:
     """Missing associated documentation comment in .proto file."""
 
     def GetSimulationWellStatus(self, request, context):
@@ -98,7 +98,7 @@ def add_SimulationWellServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class SimulationWell(object):
+class SimulationWell:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

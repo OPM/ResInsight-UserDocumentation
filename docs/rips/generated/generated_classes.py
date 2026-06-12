@@ -2,7 +2,288 @@ from __future__ import annotations
 from rips.pdmobject import PdmObjectBase
 import PdmObject_pb2
 import grpc
+from enum import StrEnum
 from typing import Optional, Dict, List, Tuple, Type
+
+class AutoWellShutIn(StrEnum):
+    SHUT = "SHUT"
+    STOP = "STOP"
+
+class BetaFactorType(StrEnum):
+    UserDefinedBetaFactor = "UserDefinedBetaFactor"
+    FractureBetaFactor = "FractureBetaFactor"
+
+class CombineMode(StrEnum):
+    AND = "AND"
+    OR = "OR"
+
+class CompletionType(StrEnum):
+    ICD = "ICD"
+    ICV = "ICV"
+    AICD = "AICD"
+    SICD = "SICD"
+    UNDEFINED = "UNDEFINED"
+
+class ConductivityType(StrEnum):
+    InfiniteConductivity = "InfiniteConductivity"
+    FiniteConductivity = "FiniteConductivity"
+    FiniteConductivityInfiniteWellPI = "FiniteConductivityInfiniteWellPI"
+
+class ControlMode(StrEnum):
+    ORAT = "ORAT"
+    WRAT = "WRAT"
+    GRAT = "GRAT"
+    LRAT = "LRAT"
+    RESV = "RESV"
+    BHP = "BHP"
+    THP = "THP"
+
+class DepthType(StrEnum):
+    MEASURED_DEPTH = "MEASURED_DEPTH"
+    TRUE_VERTICAL_DEPTH = "TRUE_VERTICAL_DEPTH"
+    PSEUDO_LENGTH = "PSEUDO_LENGTH"
+    CONNECTION_NUMBER = "CONNECTION_NUMBER"
+    TRUE_VERTICAL_DEPTH_RKB = "TRUE_VERTICAL_DEPTH_RKB"
+
+class DepthUnit(StrEnum):
+    UNIT_METER = "UNIT_METER"
+    UNIT_FEET = "UNIT_FEET"
+    UNIT_NONE = "UNIT_NONE"
+
+class DiameterRoughnessMode(StrEnum):
+    Uniform = "Uniform"
+    Intervals = "Intervals"
+
+class DrillingType(StrEnum):
+    STANDARD = "STANDARD"
+    EXTENDED = "EXTENDED"
+    ACID_JETTING = "ACID_JETTING"
+
+class ExtractionType(StrEnum):
+    TVT = "TVT"
+    TST = "TST"
+
+class FilterCakePressureDrop(StrEnum):
+    None_ = "None"
+    Relative = "Relative"
+    Absolute = "Absolute"
+
+class FlowTracerSelectionMode(StrEnum):
+    FLOW_TR_INJ_AND_PROD = "FLOW_TR_INJ_AND_PROD"
+    FLOW_TR_PRODUCERS = "FLOW_TR_PRODUCERS"
+    FLOW_TR_INJECTORS = "FLOW_TR_INJECTORS"
+    FLOW_TR_BY_SELECTION = "FLOW_TR_BY_SELECTION"
+
+class FractureOrientation(StrEnum):
+    Longitudinal = "Longitudinal"
+    Transverse = "Transverse"
+    Azimuth = "Azimuth"
+
+class FractureWidthType(StrEnum):
+    UserDefinedWidth = "UserDefinedWidth"
+    FractureWidth = "FractureWidth"
+
+class GasInflowEq(StrEnum):
+    STD = "STD"
+    R_G = "R-G"
+    P_P = "P-P"
+    GPP = "GPP"
+
+class GeometryType(StrEnum):
+    FULL_3D = "FULL_3D"
+    PROJECTED_TO_PLANE = "PROJECTED_TO_PLANE"
+
+class HydrostaticDensity(StrEnum):
+    SEG = "SEG"
+    AVG = "AVG"
+
+class LengthAndDepth(StrEnum):
+    INC = "INC"
+    ABS = "ABS"
+
+class NameSetting(StrEnum):
+    FULL_CASE_NAME = "FULL_CASE_NAME"
+    SHORT_CASE_NAME = "SHORT_CASE_NAME"
+    CUSTOM_NAME = "CUSTOM_NAME"
+
+class NonDarcyFlowType(StrEnum):
+    None_ = "None"
+    Computed = "Computed"
+    UserDefined = "UserDefined"
+
+class NonDarcyFlowType2(StrEnum):
+    None_ = "None"
+    Computed = "Computed"
+    UserDefined = "UserDefined"
+
+class NumberOfColumns(StrEnum):
+    _1 = "1"
+    _2 = "2"
+    _3 = "3"
+    _4 = "4"
+
+class Orientation(StrEnum):
+    Azimuth = "Azimuth"
+    Longitudinal = "Longitudinal"
+    Transverse = "Transverse"
+
+class PercentileCalculationType(StrEnum):
+    NearestObservationPercentile = "NearestObservationPercentile"
+    HistogramEstimatedPercentile = "HistogramEstimatedPercentile"
+    InterpolatedObservationPercentile = "InterpolatedObservationPercentile"
+
+class PermeabilityType(StrEnum):
+    UserDefinedPermeability = "UserDefinedPermeability"
+    FractureConductivity = "FractureConductivity"
+
+class PhaseSelection(StrEnum):
+    PHASE_ALL = "PHASE_ALL"
+    PHASE_OIL = "PHASE_OIL"
+    PHASE_GAS = "PHASE_GAS"
+    PHASE_WAT = "PHASE_WAT"
+
+class PorePressureReservoirSource(StrEnum):
+    GRID = "GRID"
+    LAS_FILE = "LAS_FILE"
+    ELEMENT_PROPERTY_TABLE = "ELEMENT_PROPERTY_TABLE"
+    USER_DEFINED = "USER_DEFINED"
+    HYDROSTATIC = "HYDROSTATIC"
+    DERIVED_FROM_K0FG = "DERIVED_FROM_K0FG"
+    PROPORTIONAL_TO_SH = "PROPORTIONAL_TO_SH"
+    UNDEFINED = "UNDEFINED"
+
+class PorosityModelType(StrEnum):
+    MATRIX_MODEL = "MATRIX_MODEL"
+    FRACTURE_MODEL = "FRACTURE_MODEL"
+
+class PressureDrop(StrEnum):
+    H__ = "H--"
+    HF_ = "HF-"
+    HFA = "HFA"
+
+class Property(StrEnum):
+    UNDEFINED = "UNDEFINED"
+    FACIES = "FACIES"
+    LAYERS = "LAYERS"
+    POROSITY = "POROSITY"
+    PERMEABILITY_X = "PERMEABILITY_X"
+    PERMEABILITY_Z = "PERMEABILITY_Z"
+    INITIAL_PRESSURE = "INITIAL_PRESSURE"
+    PRESSURE = "PRESSURE"
+    STRESS = "STRESS"
+    INITIAL_STRESS = "INITIAL_STRESS"
+    STRESS_GRADIENT = "STRESS_GRADIENT"
+    YOUNGS_MODULUS = "YOUNGS_MODULUS"
+    POISSONS_RATIO = "POISSONS_RATIO"
+    K_IC = "K_IC"
+    PROPPANT_EMBEDMENT = "PROPPANT_EMBEDMENT"
+    BIOT_COEFFICIENT = "BIOT_COEFFICIENT"
+    K0 = "K0"
+    FLUID_LOSS_COEFFICIENT = "FLUID_LOSS_COEFFICIENT"
+    SPURT_LOSS = "SPURT_LOSS"
+    TEMPERATURE = "TEMPERATURE"
+    RELATIVE_PERMEABILITY_FACTOR = "RELATIVE_PERMEABILITY_FACTOR"
+    PORO_ELASTIC_CONSTANT = "PORO_ELASTIC_CONSTANT"
+    THERMAL_EXPANSION_COEFFICIENT = "THERMAL_EXPANSION_COEFFICIENT"
+    IMMOBILE_FLUID_SATURATION = "IMMOBILE_FLUID_SATURATION"
+    NET_TO_GROSS = "NET_TO_GROSS"
+    POROSITY_UNSCALED = "POROSITY_UNSCALED"
+    EQLNUM = "EQLNUM"
+    PRESSURE_GRADIENT = "PRESSURE_GRADIENT"
+    FORMATIONS = "FORMATIONS"
+
+class PropertyDataType(StrEnum):
+    UNKNOWN = "UNKNOWN"
+    FLOAT = "FLOAT"
+    DOUBLE = "DOUBLE"
+    INTEGER = "INTEGER"
+
+class PropertyType(StrEnum):
+    DYNAMIC_NATIVE = "DYNAMIC_NATIVE"
+    STATIC_NATIVE = "STATIC_NATIVE"
+    SOURSIMRL = "SOURSIMRL"
+    GENERATED = "GENERATED"
+    INPUT_PROPERTY = "INPUT_PROPERTY"
+    FORMATION_NAMES = "FORMATION_NAMES"
+    ALLAN_DIAGRAMS = "ALLAN_DIAGRAMS"
+    FLOW_DIAGNOSTICS = "FLOW_DIAGNOSTICS"
+    INJECTION_FLOODING = "INJECTION_FLOODING"
+
+class ReferenceMdType(StrEnum):
+    GridEntryPoint = "GridEntryPoint"
+    UserDefined = "UserDefined"
+
+class RowsPerPage(StrEnum):
+    _1 = "1"
+    _2 = "2"
+    _3 = "3"
+    _4 = "4"
+
+class ShowDepthGridLines(StrEnum):
+    GRID_X_NONE = "GRID_X_NONE"
+    GRID_X_MAJOR = "GRID_X_MAJOR"
+    GRID_X_MAJOR_AND_MINOR = "GRID_X_MAJOR_AND_MINOR"
+
+class State(StrEnum):
+    OPEN = "OPEN"
+    SHUT = "SHUT"
+
+class State2(StrEnum):
+    OPEN = "OPEN"
+    SHUT = "SHUT"
+
+class SubTitleFontSize(StrEnum):
+    XX_Small = "XX_Small"
+    X_Small = "X_Small"
+    Small = "Small"
+    Medium = "Medium"
+    Large = "Large"
+    X_Large = "X_Large"
+    XX_Large = "XX_Large"
+
+class SubsOrientationMode(StrEnum):
+    FIXED = "FIXED"
+    RANDOM = "RANDOM"
+
+class Type2(StrEnum):
+    CS_WELL_PATH = "CS_WELL_PATH"
+    CS_SIMULATION_WELL = "CS_SIMULATION_WELL"
+    CS_POLYLINE = "CS_POLYLINE"
+    CS_AZIMUTHLINE = "CS_AZIMUTHLINE"
+    CS_POLYGON = "CS_POLYGON"
+
+class ValveType(StrEnum):
+    ICV = "ICV"
+    ICD = "ICD"
+    AICD = "AICD"
+
+class ValveUnits(StrEnum):
+    UNITS_METRIC = "UNITS_METRIC"
+    UNITS_FIELD = "UNITS_FIELD"
+    UNITS_UNKNOWN = "UNITS_UNKNOWN"
+
+class WellState(StrEnum):
+    OPEN = "OPEN"
+    SHUT = "SHUT"
+    STOP = "STOP"
+
+class WellStatus(StrEnum):
+    OPEN = "OPEN"
+    SHUT = "SHUT"
+    STOP = "STOP"
+
+class WellType(StrEnum):
+    OIL_PRODUCER = "OIL_PRODUCER"
+    GAS_PRODUCER = "GAS_PRODUCER"
+    WATER_PRODUCER = "WATER_PRODUCER"
+    WATER_INJECTOR = "WATER_INJECTOR"
+    GAS_INJECTOR = "GAS_INJECTOR"
+
+class WellTypeForExport(StrEnum):
+    OIL = "OIL"
+    GAS = "GAS"
+    WATER = "WATER"
+    LIQUID = "LIQUID"
 
 class CellFilterCollection(PdmObjectBase):
     """
@@ -17,13 +298,277 @@ class CellFilterCollection(PdmObjectBase):
         if CellFilterCollection.__custom_init__ is not None:
             CellFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class NamedObject(PdmObjectBase):
+    """
+    Attributes:
+        name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = "New filter"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if NamedObject.__custom_init__ is not None:
+            NamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CheckableNamedObject(NamedObject):
+    """
+    Attributes:
+        is_checked (bool): Active
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_checked: bool = True
+        NamedObject.__init__(self, pb2_object, channel)
+        if CheckableNamedObject.__custom_init__ is not None:
+            CheckableNamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CellFilter(CheckableNamedObject):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if CellFilter.__custom_init__ is not None:
+            CellFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class PropertyFilter(CellFilter):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CellFilter.__init__(self, pb2_object, channel)
+        if PropertyFilter.__custom_init__ is not None:
+            PropertyFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CellPropertyFilter(PropertyFilter):
+    """
+    Attributes:
+        lower_bound (float): Min
+        upper_bound (float): Max
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.lower_bound: float = 0.000000000000000e+00
+        self.upper_bound: float = 0.000000000000000e+00
+        PropertyFilter.__init__(self, pb2_object, channel)
+        if CellPropertyFilter.__custom_init__ is not None:
+            CellPropertyFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CellRangeFilter(CellFilter):
+    """
+    Attributes:
+        cell_count_i (int):   Width
+        cell_count_j (int):   Width
+        cell_count_k (int):   Width
+        start_index_i (int): I Start
+        start_index_j (int): J Start
+        start_index_k (int): K Start
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.cell_count_i: int = 1
+        self.cell_count_j: int = 1
+        self.cell_count_k: int = 1
+        self.start_index_i: int = 1
+        self.start_index_j: int = 1
+        self.start_index_k: int = 1
+        CellFilter.__init__(self, pb2_object, channel)
+        if CellRangeFilter.__custom_init__ is not None:
+            CellRangeFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class ColorLegend(PdmObjectBase):
+    """
+    Attributes:
+        color_legend_name (str): Color Legend Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.color_legend_name: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if ColorLegend.__custom_init__ is not None:
+            ColorLegend.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_color_legend_item(self, category_value: int=0, category_name: str="", color: str="#ffa500") -> ColorLegendItem:
+        """
+        Append a category item with a name and RGB color
+
+        Arguments:
+            category_value (int): 
+            category_name (str): 
+            color (str): 
+        Returns:
+            ColorLegendItem
+        """
+        return self._call_pdm_method_return_value("AddColorLegendItem", ColorLegendItem, category_value=category_value, category_name=category_name, color=color)
+
+
+    def color_legend_items(self) -> List[ColorLegendItem]:
+        """
+
+        Returns:
+             List[ColorLegendItem]
+        """
+        return self.children("ColorLegendItems", ColorLegendItem)
+
+
+class ColorLegendCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         PdmObjectBase.__init__(self, pb2_object, channel)
-        if ColorLegend.__custom_init__ is not None:
-            ColorLegend.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+        if ColorLegendCollection.__custom_init__ is not None:
+            ColorLegendCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def create_color_legend(self, name: str="") -> ColorLegend:
+        """
+        Create a new custom color legend
+
+        Arguments:
+            name (str): 
+        Returns:
+            ColorLegend
+        """
+        return self._call_pdm_method_return_value("CreateColorLegend", ColorLegend, name=name)
+
+
+    def custom_color_legends(self) -> List[ColorLegend]:
+        """Custom Color Legends
+
+        Returns:
+             List[ColorLegend]
+        """
+        return self.children("CustomColorLegends", ColorLegend)
+
+
+    def delete_color_legend(self, case: Optional[Case]=None, result_name: str="") -> None:
+        """
+        Remove the color legend bound to a (case, resultName) pair
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("DeleteColorLegend", case=case, result_name=result_name)
+
+
+    def find_default_legend_for_result(self, case: Optional[Case]=None, result_name: str="") -> Optional[ColorLegend]:
+        """
+        Look up the color legend bound to a (case, resultName) pair
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+        Returns:
+            ColorLegend
+        """
+        return self._call_pdm_method_return_optional_value("FindDefaultLegendForResult", ColorLegend, case=case, result_name=result_name)
+
+
+    def set_default_color_legend_for_result(self, case: Optional[Case]=None, result_name: str="", color_legend: Optional[ColorLegend]=None) -> None:
+        """
+        Bind a color legend to a (case, resultName) pair
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+            color_legend (Optional[ColorLegend]): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetDefaultColorLegendForResult", case=case, result_name=result_name, color_legend=color_legend)
+
+
+    def update_color_legend(self, case: Optional[Case]=None, result_name: str="", legend_name: str="", category_values: List[int]=[], category_names: List[str]=[], colors: List[str]=[]) -> ColorLegend:
+        """
+        Update the color legend bound to a (case, resultName) pair in place, creating it if needed
+
+        Arguments:
+            case (Optional[Case]): 
+            result_name (str): 
+            legend_name (str): 
+            category_values (List[int]): 
+            category_names (List[str]): 
+            colors (List[str]): 
+        Returns:
+            ColorLegend
+        """
+        return self._call_pdm_method_return_value("UpdateColorLegend", ColorLegend, case=case, result_name=result_name, legend_name=legend_name, category_values=category_values, category_names=category_names, colors=colors)
+
+
+class ColorLegendItem(PdmObjectBase):
+    """
+    Attributes:
+        category_name (str): Category Name
+        category_value (int): Category Number
+        color (str): Color
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.category_name: str = ""
+        self.category_value: int = 0
+        self.color: str = "#000000"
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if ColorLegendItem.__custom_init__ is not None:
+            ColorLegendItem.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class CombinedFilter(CellFilter):
+    """
+    Attributes:
+        combine_mode (CombineMode): One of [AND, OR]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.combine_mode: CombineMode = CombineMode.AND
+        CellFilter.__init__(self, pb2_object, channel)
+        if CombinedFilter.__custom_init__ is not None:
+            CombinedFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_property_filter(self, result_variable: str="", result_type: str="") -> CellPropertyFilter:
+        """
+        Add a new property filter as a child of this combined filter
+
+        Arguments:
+            result_variable (str): 
+            result_type (str): 
+        Returns:
+            CellPropertyFilter
+        """
+        return self._call_pdm_method_return_value("AddPropertyFilter", CellPropertyFilter, result_variable=result_variable, result_type=result_type)
+
+
+    def add_range_filter(self, name: str="", start_i: int=-1, start_j: int=-1, start_k: int=-1, cell_count_i: int=-1, cell_count_j: int=-1, cell_count_k: int=-1) -> CellRangeFilter:
+        """
+        Add a new IJK range filter as a child of this combined filter
+
+        Arguments:
+            name (str): 
+            start_i (int): 
+            start_j (int): 
+            start_k (int): 
+            cell_count_i (int): 
+            cell_count_j (int): 
+            cell_count_k (int): 
+        Returns:
+            CellRangeFilter
+        """
+        return self._call_pdm_method_return_value("AddRangeFilter", CellRangeFilter, name=name, start_i=start_i, start_j=start_j, start_k=start_k, cell_count_i=cell_count_i, cell_count_j=cell_count_j, cell_count_k=cell_count_k)
+
+
+    def filters(self) -> List[CellFilter]:
+        """Filters
+
+        Returns:
+             List[CellFilter]
+        """
+        return self.children("Filters", CellFilter)
+
 
 class CompletionTemplateCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -51,7 +596,7 @@ class Case(PdmObjectBase):
         file_path (Optional[str]): Case File Name
         id (int): Case ID
         name (str): Case Name
-        name_setting (str): One of [FULL_CASE_NAME, SHORT_CASE_NAME, CUSTOM_NAME]
+        name_setting (NameSetting): One of [FULL_CASE_NAME, SHORT_CASE_NAME, CUSTOM_NAME]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -59,7 +604,7 @@ class Case(PdmObjectBase):
         self.file_path: Optional[str] = None
         self.id: int = -1
         self.name: str = ""
-        self.name_setting: str = "FULL_CASE_NAME"
+        self.name_setting: NameSetting = NameSetting.FULL_CASE_NAME
         PdmObjectBase.__init__(self, pb2_object, channel)
         if Case.__custom_init__ is not None:
             Case.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -101,6 +646,16 @@ class Reservoir(Case):
         self._call_pdm_method_void("clear_result_aliases")
 
 
+    def data_filter_collection(self) -> Optional[DataFilterCollection]:
+        """Data Filters
+
+        Returns:
+             DataFilterCollection
+        """
+        children = self.children("DataFilterCollection", DataFilterCollection)
+        return children[0] if len(children) > 0 else None
+
+
     def export_corner_point_grid_internal(self, zcorn_key: str="", coord_key: str="", actnum_key: str="") -> None:
         """
         Export Corner Point Grid Internal
@@ -134,6 +689,21 @@ class Reservoir(Case):
         self._call_pdm_method_void("export_values_internal", coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, result_key=result_key, property_type=property_type, property_name=property_name, time_step=time_step, porosity_model=porosity_model)
 
 
+    def filtered_cells_internal(self, filter: Optional[CellFilter]=None, mask_key: str="", time_step: int=0, grid_index: int=0) -> None:
+        """
+        Apply a cell filter to this case for a grid + time step and write a per-cell 0/1 mask to the key-value store. The vector length and ordering match grid_property(...) for the same grid index.
+
+        Arguments:
+            filter (Optional[CellFilter]): Cell Filter
+            mask_key (str): 
+            time_step (int): 
+            grid_index (int): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("filtered_cells_internal", filter=filter, mask_key=mask_key, time_step=time_step, grid_index=grid_index)
+
+
     def import_properties(self, file_names: List[str]=[]) -> DataContainerString:
         """
         Import Properties
@@ -144,6 +714,21 @@ class Reservoir(Case):
             DataContainerString
         """
         return self._call_pdm_method_return_value("import_properties", DataContainerString, file_names=file_names)
+
+
+    def property_data_type(self, property_type: PropertyType=PropertyType.DYNAMIC_NATIVE, property_name: str="", porosity_model: PorosityModelType=PorosityModelType.MATRIX_MODEL) -> PropertyDataType:
+        """
+        Get the data type (FLOAT or INTEGER) of a grid property
+
+        Arguments:
+            property_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+            property_name (str): 
+            porosity_model (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
+        Returns:
+            PropertyDataType
+        """
+        _container = self._call_pdm_method_return_value("property_data_type", DataContainerEnum, property_type=property_type, property_name=property_name, porosity_model=porosity_model)
+        return PropertyDataType(_container.value)
 
 
 class CornerPointCase(Reservoir):
@@ -177,7 +762,7 @@ class CurveIntersection(PdmObjectBase):
         name (str): Name
         points (List[List[float]]): Points
         simulation_well (Optional[SimulationWell]): Simulation Well
-        type (str): One of [CS_WELL_PATH, CS_SIMULATION_WELL, CS_POLYLINE, CS_AZIMUTHLINE, CS_POLYGON]
+        type (Type2): One of [CS_WELL_PATH, CS_SIMULATION_WELL, CS_POLYLINE, CS_AZIMUTHLINE, CS_POLYGON]
         well_path (Optional[WellPath]): Well Path        
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -186,30 +771,30 @@ class CurveIntersection(PdmObjectBase):
         self.name: str = "Intersection Name"
         self.points: List[List[float]] = []
         self.simulation_well: Optional[SimulationWell] = None
-        self.type: str = "CS_POLYLINE"
+        self.type: Type2 = Type2.CS_POLYLINE
         self.well_path: Optional[WellPath] = None
         PdmObjectBase.__init__(self, pb2_object, channel)
         if CurveIntersection.__custom_init__ is not None:
             CurveIntersection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def geometry(self, geometry_type: str="FULL_3D") -> TriangleGeometry:
+    def geometry(self, geometry_type: GeometryType=GeometryType.FULL_3D) -> TriangleGeometry:
         """
         
 
         Arguments:
-            geometry_type (str): One of [FULL_3D, PROJECTED_TO_PLANE]
+            geometry_type (GeometryType): One of [FULL_3D, PROJECTED_TO_PLANE]
         Returns:
             TriangleGeometry
         """
         return self._call_pdm_method_return_value("geometry", TriangleGeometry, geometry_type=geometry_type)
 
 
-    def geometry_result(self, geometry_type: str="FULL_3D") -> DataContainerFloat:
+    def geometry_result(self, geometry_type: GeometryType=GeometryType.FULL_3D) -> DataContainerFloat:
         """
         
 
         Arguments:
-            geometry_type (str): One of [FULL_3D, PROJECTED_TO_PLANE]
+            geometry_type (GeometryType): One of [FULL_3D, PROJECTED_TO_PLANE]
         Returns:
             DataContainerFloat
         """
@@ -232,6 +817,19 @@ class CustomSegmentInterval(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if CustomSegmentInterval.__custom_init__ is not None:
             CustomSegmentInterval.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class DataContainerEnum(PdmObjectBase):
+    """
+    Attributes:
+        value (str): Value
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.value: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if DataContainerEnum.__custom_init__ is not None:
+            DataContainerEnum.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class DataContainerFloat(PdmObjectBase):
     """
@@ -271,6 +869,36 @@ class DataContainerTime(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if DataContainerTime.__custom_init__ is not None:
             DataContainerTime.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class DataFilterCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if DataFilterCollection.__custom_init__ is not None:
+            DataFilterCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_combined_filter(self, name: str="", combine_mode: str="") -> CombinedFilter:
+        """
+        Add a new combined filter to the data filter collection
+
+        Arguments:
+            name (str): 
+            combine_mode (str): 
+        Returns:
+            CombinedFilter
+        """
+        return self._call_pdm_method_return_value("AddCombinedFilter", CombinedFilter, name=name, combine_mode=combine_mode)
+
+
+    def filters(self) -> List[CellFilter]:
+        """Filters
+
+        Returns:
+             List[CellFilter]
+        """
+        return self.children("Filters", CellFilter)
+
 
 class SurfaceInterface(PdmObjectBase):
     """
@@ -382,38 +1010,12 @@ class ElasticProperties(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
-class NamedObject(PdmObjectBase):
-    """
-    Attributes:
-        name (str): Name
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.name: str = ""
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if NamedObject.__custom_init__ is not None:
-            NamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class CheckableNamedObject(NamedObject):
-    """
-    Attributes:
-        is_checked (bool): Active
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.is_checked: bool = True
-        NamedObject.__init__(self, pb2_object, channel)
-        if CheckableNamedObject.__custom_init__ is not None:
-            CheckableNamedObject.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class ElasticPropertyScaling(CheckableNamedObject):
     """
     Attributes:
         facies (str): Facies
         formation (str): Formation
-        property (str): One of [UNDEFINED, FACIES, LAYERS, POROSITY, PERMEABILITY_X, PERMEABILITY_Z, INITIAL_PRESSURE, PRESSURE, STRESS, INITIAL_STRESS, STRESS_GRADIENT, YOUNGS_MODULUS, POISSONS_RATIO, K_IC, PROPPANT_EMBEDMENT, BIOT_COEFFICIENT, K0, FLUID_LOSS_COEFFICIENT, SPURT_LOSS, TEMPERATURE, RELATIVE_PERMEABILITY_FACTOR, PORO_ELASTIC_CONSTANT, THERMAL_EXPANSION_COEFFICIENT, IMMOBILE_FLUID_SATURATION, NET_TO_GROSS, POROSITY_UNSCALED, EQLNUM, PRESSURE_GRADIENT, FORMATIONS]
+        property (Property): One of [UNDEFINED, FACIES, LAYERS, POROSITY, PERMEABILITY_X, PERMEABILITY_Z, INITIAL_PRESSURE, PRESSURE, STRESS, INITIAL_STRESS, STRESS_GRADIENT, YOUNGS_MODULUS, POISSONS_RATIO, K_IC, PROPPANT_EMBEDMENT, BIOT_COEFFICIENT, K0, FLUID_LOSS_COEFFICIENT, SPURT_LOSS, TEMPERATURE, RELATIVE_PERMEABILITY_FACTOR, PORO_ELASTIC_CONSTANT, THERMAL_EXPANSION_COEFFICIENT, IMMOBILE_FLUID_SATURATION, NET_TO_GROSS, POROSITY_UNSCALED, EQLNUM, PRESSURE_GRADIENT, FORMATIONS]
         scale (float): Scale
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -421,7 +1023,7 @@ class ElasticPropertyScaling(CheckableNamedObject):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.facies: str = ""
         self.formation: str = ""
-        self.property: str = "YOUNGS_MODULUS"
+        self.property: Property = Property.YOUNGS_MODULUS
         self.scale: float = 1.000000000000000e+00
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if ElasticPropertyScaling.__custom_init__ is not None:
@@ -460,7 +1062,27 @@ class EnsembleStatisticsSurface(SurfaceInterface):
         if EnsembleStatisticsSurface.__custom_init__ is not None:
             EnsembleStatisticsSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class SurfaceCollection(PdmObjectBase):
+class PdmNestedCollectionBase(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if PdmNestedCollectionBase.__custom_init__ is not None:
+            PdmNestedCollectionBase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_folder(self, folder_name: str="Folder") -> PdmNestedCollectionBase:
+        """
+        Add a new folder
+
+        Arguments:
+            folder_name (str): New folder name
+        Returns:
+            PdmNestedCollectionBase
+        """
+        return self._call_pdm_method_return_value("AddFolder", PdmNestedCollectionBase, folder_name=folder_name)
+
+
+class SurfaceCollection(PdmNestedCollectionBase):
     """
     Attributes:
         surface_user_description (str): Name
@@ -469,21 +1091,9 @@ class SurfaceCollection(PdmObjectBase):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.surface_user_description: str = "Surfaces"
-        PdmObjectBase.__init__(self, pb2_object, channel)
+        PdmNestedCollectionBase.__init__(self, pb2_object, channel)
         if SurfaceCollection.__custom_init__ is not None:
             SurfaceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def add_folder(self, folder_name: str="Surfaces") -> SurfaceCollection:
-        """
-        Add a new surface folder
-
-        Arguments:
-            folder_name (str): New surface folder name
-        Returns:
-            SurfaceCollection
-        """
-        return self._call_pdm_method_return_value("AddFolder", SurfaceCollection, folder_name=folder_name)
-
 
     def import_surface(self, file_name: str="") -> Surface:
         """
@@ -608,6 +1218,42 @@ class FaciesProperties(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+class FaultInView(PdmObjectBase):
+    """
+    A fault belonging to a view's fault collection
+
+    Attributes:
+        fault_name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.fault_name: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultInView.__custom_init__ is not None:
+            FaultInView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FaultInViewCollection(PdmObjectBase):
+    """
+    Per-view fault collection
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultInViewCollection.__custom_init__ is not None:
+            FaultInViewCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def faults(self) -> List[FaultInView]:
+        """Faults
+
+        Returns:
+             List[FaultInView]
+        """
+        return self.children("Faults", FaultInView)
+
+
 class SummaryCase(PdmObjectBase):
     """
     The Base Class for all Summary Cases
@@ -616,7 +1262,7 @@ class SummaryCase(PdmObjectBase):
         auto_shorty_name (bool): Use Auto Display Name
         id (int): Case ID
         include_in_auto_reload (bool): Include in Automatic Case Reloads
-        name_setting (str): One of [FULL_CASE_NAME, SHORT_CASE_NAME, CUSTOM_NAME]
+        name_setting (NameSetting): One of [FULL_CASE_NAME, SHORT_CASE_NAME, CUSTOM_NAME]
         short_name (str): Display Name
         show_sub_nodes_in_tree (bool): Show Summary Data Sub-Tree
         summary_header_filename (Optional[str]): Summary Header File
@@ -627,7 +1273,7 @@ class SummaryCase(PdmObjectBase):
         self.auto_shorty_name: bool = False
         self.id: int = -1
         self.include_in_auto_reload: bool = False
-        self.name_setting: str = "FULL_CASE_NAME"
+        self.name_setting: NameSetting = NameSetting.FULL_CASE_NAME
         self.short_name: str = ""
         self.show_sub_nodes_in_tree: bool = True
         self.summary_header_filename: Optional[str] = None
@@ -728,13 +1374,13 @@ class FishbonesCollection(CheckableNamedObject):
         if FishbonesCollection.__custom_init__ is not None:
             FishbonesCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: str="STANDARD") -> Fishbones:
+    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: DrillingType=DrillingType.STANDARD) -> Fishbones:
         """
         Append Fishbones
 
         Arguments:
             sub_locations (List[float]): 
-            drilling_type (str): One of [STANDARD, EXTENDED, ACID_JETTING]
+            drilling_type (DrillingType): One of [STANDARD, EXTENDED, ACID_JETTING]
         Returns:
             FishbonesMultipleSubs
         """
@@ -792,7 +1438,7 @@ class Fishbones(PdmObjectBase):
         lateral_skin_factor (float): Lateral Skin Factor
         lateral_tubing_diameter (float): Tubing Diameter [mm]
         lateral_tubing_roghness_factor (float): Tubing Roghness Factor [m]
-        subs_orientation_mode (str): One of [FIXED, RANDOM]
+        subs_orientation_mode (SubsOrientationMode): One of [FIXED, RANDOM]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -810,7 +1456,7 @@ class Fishbones(PdmObjectBase):
         self.lateral_skin_factor: float = 0.000000000000000e+00
         self.lateral_tubing_diameter: float = 8.000000000000000e+00
         self.lateral_tubing_roghness_factor: float = 1.000000000000000e-05
-        self.subs_orientation_mode: str = "RANDOM"
+        self.subs_orientation_mode: SubsOrientationMode = SubsOrientationMode.RANDOM
         PdmObjectBase.__init__(self, pb2_object, channel)
         if Fishbones.__custom_init__ is not None:
             Fishbones.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -1025,6 +1671,33 @@ class WellLog(PdmObjectBase):
         if WellLog.__custom_init__ is not None:
             WellLog.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def channel_names_internal(self, ) -> DataContainerString:
+        """
+        Channel names for this well log.
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("ChannelNamesInternal", DataContainerString)
+
+
+    def read_well_log_data_internal(self, measured_depth_key: str="", tvd_msl_key: str="", tvd_rkb_key: str="", channel_keys_csv: str="") -> None:
+        """
+        Read Well Log Data
+
+        Arguments:
+            measured_depth_key (str): 
+            tvd_msl_key (str): 
+            tvd_rkb_key (str): 
+            channel_keys_csv (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("ReadWellLogDataInternal", measured_depth_key=measured_depth_key, tvd_msl_key=tvd_msl_key, tvd_rkb_key=tvd_rkb_key, channel_keys_csv=channel_keys_csv)
+
+
 class ImportedWellLog(WellLog):
     """
     ImportedWellLog
@@ -1084,11 +1757,13 @@ class WellPath(PdmObjectBase):
 
     Attributes:
         name (str): Name
+        well_path_color (str): Well Path Color
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.name: str = ""
+        self.well_path_color: str = "#ff55ff"
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPath.__custom_init__ is not None:
             WellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -1106,6 +1781,18 @@ class WellPath(PdmObjectBase):
             WellPathFracture
         """
         return self._call_pdm_method_return_value("AddFracture", WellPathFracture, measured_depth=measured_depth, stim_plan_fracture_template=stim_plan_fracture_template, align_dip=align_dip, eclipse_case=eclipse_case)
+
+
+    def add_icv_valve(self, measured_depth: float=0.000000000000000e+00) -> WellPathValve:
+        """
+        Add ICV Valve
+
+        Arguments:
+            measured_depth (float): 
+        Returns:
+            WellPathValve
+        """
+        return self._call_pdm_method_return_value("AddIcvValve", WellPathValve, measured_depth=measured_depth)
 
 
     def add_thermal_fracture(self, measured_depth: float=0.000000000000000e+00, fracture_template: Optional[ThermalFractureTemplate]=None, place_using_template_data: bool=True) -> WellPathFracture:
@@ -1138,13 +1825,13 @@ class WellPath(PdmObjectBase):
         return self._call_pdm_method_return_value("AddWellLogInternal", ImportedWellLog, name=name, measured_depth_key=measured_depth_key, channel_keys_csv=channel_keys_csv, tvd_msl_key=tvd_msl_key, tvd_rkb_key=tvd_rkb_key)
 
 
-    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: str="STANDARD") -> Optional[Fishbones]:
+    def append_fishbones(self, sub_locations: List[float]=[], drilling_type: DrillingType=DrillingType.STANDARD) -> Optional[Fishbones]:
         """
         Append Fishbones
 
         Arguments:
             sub_locations (List[float]): 
-            drilling_type (str): One of [STANDARD, EXTENDED, ACID_JETTING]
+            drilling_type (DrillingType): One of [STANDARD, EXTENDED, ACID_JETTING]
         Returns:
             FishbonesMultipleSubs
         """
@@ -1198,6 +1885,21 @@ class WellPath(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+    def enable_outlet_valve(self, enable: bool=False, icv_template: Optional[ValveTemplate]=None, use_custom_valve_md: bool=False, custom_valve_md: float=0.000000000000000e+00) -> Optional[WellPathValve]:
+        """
+        Enable Outlet Valve
+
+        Arguments:
+            enable (bool): 
+            icv_template (Optional[ValveTemplate]): 
+            use_custom_valve_md (bool): 
+            custom_valve_md (float): 
+        Returns:
+            WellPathValve
+        """
+        return self._call_pdm_method_return_optional_value("EnableOutletValve", WellPathValve, enable=enable, icv_template=icv_template, use_custom_valve_md=use_custom_valve_md, custom_valve_md=custom_valve_md)
+
+
     def extract_well_path_properties_internal(self, resampling_interval: float=1.000000000000000e+01, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", measured_depth: str="", azimuth: str="", inclination: str="", dogleg: str="") -> None:
         """
         Extract Well Path Properties
@@ -1239,6 +1941,27 @@ class WellPath(PdmObjectBase):
             WellPathBase
         """
         return self._call_pdm_method_return_optional_value("ParentBranch", WellPath)
+
+
+    def tie_in(self, ) -> Optional[WellPathTimeIn]:
+        """
+        Well Path Tie-In Settings
+
+        Arguments:
+            
+        Returns:
+            RimWellPathTieIn
+        """
+        return self._call_pdm_method_return_optional_value("TieIn", WellPathTimeIn)
+
+
+    def well_logs(self) -> List[WellLog]:
+        """Well Logs
+
+        Returns:
+             List[WellLog]
+        """
+        return self.children("WellLogs", WellLog)
 
 
 class ModeledWellPath(WellPath):
@@ -1288,13 +2011,36 @@ class ModeledWellPath(WellPath):
         return children[0] if len(children) > 0 else None
 
 
+class MultiPlot(PlotWindow):
+    """
+    Attributes:
+        number_of_columns (NumberOfColumns): One of [1, 2, 3, 4]
+        rows_per_page (RowsPerPage): One of [1, 2, 3, 4]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.number_of_columns: NumberOfColumns = NumberOfColumns._2
+        self.rows_per_page: RowsPerPage = RowsPerPage._2
+        PlotWindow.__init__(self, pb2_object, channel)
+        if MultiPlot.__custom_init__ is not None:
+            MultiPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class MultiSummaryPlot(MultiPlot):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        MultiPlot.__init__(self, pb2_object, channel)
+        if MultiSummaryPlot.__custom_init__ is not None:
+            MultiSummaryPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class NonDarcyPerforationParameters(PdmObjectBase):
     """
     Attributes:
         gas_viscosity (float): <html>Gas Viscosity (&mu;)</html> [cP]
         grid_permeability_scaling_factor (float): <html>Grid Permeability Scaling Factor (K<sub>r</sub>) [0..1]</html>
         inertial_coefficient (float): <html>Inertial Coefficient (&beta;<sub>0</sub>)</html> [Forch. unit]
-        non_darcy_flow_type (str): One of [None, Computed, UserDefined]
+        non_darcy_flow_type (NonDarcyFlowType): One of [None, Computed, UserDefined]
         permeability_scaling_factor (float): Permeability Scaling Factor (B)
         porosity_scaling_factor (float): Porosity Scaling Factor (C)
         relative_gas_density (float): <html>Relative Gas Density (&gamma;)</html>
@@ -1307,7 +2053,7 @@ class NonDarcyPerforationParameters(PdmObjectBase):
         self.gas_viscosity: float = 2.000000000000000e-02
         self.grid_permeability_scaling_factor: float = 1.000000000000000e+00
         self.inertial_coefficient: float = 8.839000000000000e+02
-        self.non_darcy_flow_type: str = "None"
+        self.non_darcy_flow_type: NonDarcyFlowType = NonDarcyFlowType.None_
         self.permeability_scaling_factor: float = -1.104500000000000e+00
         self.porosity_scaling_factor: float = 0.000000000000000e+00
         self.relative_gas_density: float = 8.000000000000000e-01
@@ -1342,6 +2088,19 @@ class NonNetLayers(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+class OsduWellLog(WellLog):
+    """
+    Attributes:
+        name (str): 
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = ""
+        WellLog.__init__(self, pb2_object, channel)
+        if OsduWellLog.__custom_init__ is not None:
+            OsduWellLog.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class OsduWellPath(WellPath):
     """
     Well Path Loaded From Osdu
@@ -1375,6 +2134,18 @@ class Perforation(CheckableNamedObject):
         if Perforation.__custom_init__ is not None:
             Perforation.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_filter(self, filter: Optional[CellFilter]=None) -> None:
+        """
+        Set the cell filter associated with this perforation interval (replaces any existing filter)
+
+        Arguments:
+            filter (Optional[CellFilter]): Cell Filter
+        Returns:
+            
+        """
+        self._call_pdm_method_void("AddFilter", filter=filter)
+
+
     def add_valve(self, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, valve_count: int=1, template: Optional[ValveTemplate]=None) -> WellPathValve:
         """
         Add StimPlan Fracture
@@ -1388,6 +2159,18 @@ class Perforation(CheckableNamedObject):
             WellPathValve
         """
         return self._call_pdm_method_return_value("AddValve", WellPathValve, start_md=start_md, end_md=end_md, valve_count=valve_count, template=template)
+
+
+    def cell_filter(self, ) -> Optional[CellFilter]:
+        """
+        Cell filter associated with this perforation interval, or null if none
+
+        Arguments:
+            
+        Returns:
+            CellFilter
+        """
+        return self._call_pdm_method_return_optional_value("cell_filter", CellFilter)
 
 
     def valves(self) -> List[WellPathValve]:
@@ -1451,11 +2234,34 @@ class Polygon(NamedObject):
         if Polygon.__custom_init__ is not None:
             Polygon.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class PolygonCollection(PdmObjectBase):
+    def appearance(self) -> Optional[RimPolygonAppearance]:
+        """Appearance
+
+        Returns:
+             RimPolygonAppearance
+        """
+        children = self.children("Appearance", RimPolygonAppearance)
+        return children[0] if len(children) > 0 else None
+
+
+class RimPolygonContainer(PdmNestedCollectionBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PdmObjectBase.__init__(self, pb2_object, channel)
+        PdmNestedCollectionBase.__init__(self, pb2_object, channel)
+        if RimPolygonContainer.__custom_init__ is not None:
+            RimPolygonContainer.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class PolygonCollection(RimPolygonContainer):
+    """
+    Attributes:
+        polygon_collection_name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.polygon_collection_name: str = "Polygons"
+        RimPolygonContainer.__init__(self, pb2_object, channel)
         if PolygonCollection.__custom_init__ is not None:
             PolygonCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
@@ -1479,6 +2285,15 @@ class PolygonCollection(PdmObjectBase):
              List[Polygon]
         """
         return self.children("Polygons", Polygon)
+
+
+    def sub_collections(self) -> List[RimPolygonContainer]:
+        """Subcollections
+
+        Returns:
+             List[RimPolygonContainer]
+        """
+        return self.children("SubCollections", RimPolygonContainer)
 
 
 class PressureTable(PdmObjectBase):
@@ -1562,6 +2377,31 @@ class RegularSurface(SurfaceInterface):
         SurfaceInterface.__init__(self, pb2_object, channel)
         if RegularSurface.__custom_init__ is not None:
             RegularSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def get_property_to_key(self, name: str="", value_key: str="") -> None:
+        """
+        Get property to key.
+
+        Arguments:
+            name (str): Name
+            value_key (str): Key Value
+        Returns:
+            
+        """
+        self._call_pdm_method_void("GetPropertyToKey", name=name, value_key=value_key)
+
+
+    def property_names(self, ) -> DataContainerString:
+        """
+        Property Names.
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("PropertyNames", DataContainerString)
+
 
     def set_property_as_depth(self, name: str="") -> None:
         """
@@ -1737,6 +2577,19 @@ class EclipseView(View):
         if EclipseView.__custom_init__ is not None:
             EclipseView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_fault_distance(self, name: str="", faults: List[FaultInView]=[]) -> FaultDistance:
+        """
+        Create a FAULTDIST cell result for a chosen subset of faults
+
+        Arguments:
+            name (str): 
+            faults (List[FaultInView]): 
+        Returns:
+            RimFaultDistance
+        """
+        return self._call_pdm_method_return_value("add_fault_distance", FaultDistance, name=name, faults=faults)
+
+
     def cell_result(self) -> Optional[CellColors]:
         """Cell Result
 
@@ -1744,6 +2597,16 @@ class EclipseView(View):
              CellColors
         """
         children = self.children("CellResult", CellColors)
+        return children[0] if len(children) > 0 else None
+
+
+    def fault_collection(self) -> Optional[FaultInViewCollection]:
+        """Faults
+
+        Returns:
+             FaultInViewCollection
+        """
+        children = self.children("FaultCollection", FaultInViewCollection)
         return children[0] if len(children) > 0 else None
 
 
@@ -1765,10 +2628,10 @@ class EclipseResult(PdmObjectBase):
     An eclipse result definition
 
     Attributes:
-        flow_tracer_selection_mode (str): One of [FLOW_TR_INJ_AND_PROD, FLOW_TR_PRODUCERS, FLOW_TR_INJECTORS, FLOW_TR_BY_SELECTION]
-        phase_selection (str): One of [PHASE_ALL, PHASE_OIL, PHASE_GAS, PHASE_WAT]
-        porosity_model_type (str): One of [MATRIX_MODEL, FRACTURE_MODEL]
-        result_type (str): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+        flow_tracer_selection_mode (FlowTracerSelectionMode): One of [FLOW_TR_INJ_AND_PROD, FLOW_TR_PRODUCERS, FLOW_TR_INJECTORS, FLOW_TR_BY_SELECTION]
+        phase_selection (PhaseSelection): One of [PHASE_ALL, PHASE_OIL, PHASE_GAS, PHASE_WAT]
+        porosity_model_type (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
+        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
         result_variable (str): Variable
         selected_injector_tracers (List[str]): Injector Tracers
         selected_producer_tracers (List[str]): Producer Tracers
@@ -1778,10 +2641,10 @@ class EclipseResult(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.flow_tracer_selection_mode: str = "FLOW_TR_INJ_AND_PROD"
-        self.phase_selection: str = "PHASE_ALL"
-        self.porosity_model_type: str = "MATRIX_MODEL"
-        self.result_type: str = "DYNAMIC_NATIVE"
+        self.flow_tracer_selection_mode: FlowTracerSelectionMode = FlowTracerSelectionMode.FLOW_TR_INJ_AND_PROD
+        self.phase_selection: PhaseSelection = PhaseSelection.PHASE_ALL
+        self.porosity_model_type: PorosityModelType = PorosityModelType.MATRIX_MODEL
+        self.result_type: PropertyType = PropertyType.DYNAMIC_NATIVE
         self.result_variable: str = "None"
         self.selected_injector_tracers: List[str] = []
         self.selected_producer_tracers: List[str] = []
@@ -1859,6 +2722,42 @@ class EclipseCaseEnsemble(NamedObject):
         if EclipseCaseEnsemble.__custom_init__ is not None:
             EclipseCaseEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class FaultDistance(PdmObjectBase):
+    """
+    Per-cell distance to a selected subset of faults
+
+    Attributes:
+        result_name (str): Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.result_name: str = ""
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultDistance.__custom_init__ is not None:
+            FaultDistance.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FaultDistanceCollection(PdmObjectBase):
+    """
+    Collection of named, subset-based FAULTDIST results
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FaultDistanceCollection.__custom_init__ is not None:
+            FaultDistanceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def fault_distances(self) -> List[FaultDistance]:
+        """
+
+        Returns:
+             List[FaultDistance]
+        """
+        return self.children("FaultDistances", FaultDistance)
+
+
 class GeoMechContourMap(GeoMechView):
     """
     A contour map for GeoMech cases
@@ -1906,13 +2805,13 @@ class MswSettings(PdmObjectBase):
 
     Attributes:
         custom_values_for_lateral (bool): Custom Values for Lateral
-        diameter_roughness_mode (str): One of [Uniform, Intervals]
+        diameter_roughness_mode (DiameterRoughnessMode): One of [Uniform, Intervals]
         enforce_max_segment_length (bool): Enforce Max Segment Length
-        length_and_depth (str): One of [INC, ABS]
+        length_and_depth (LengthAndDepth): One of [INC, ABS]
         liner_diameter (float): Liner Inner Diameter
         max_segment_length (float): Max Segment Length
-        pressure_drop (str): One of [H--, HF-, HFA]
-        reference_md_type (str): One of [GridEntryPoint, UserDefined]
+        pressure_drop (PressureDrop): One of [H--, HF-, HFA]
+        reference_md_type (ReferenceMdType): One of [GridEntryPoint, UserDefined]
         roughness_factor (float): Roughness Factor
         user_defined_reference_md (float): User Defined Reference MD
     """
@@ -1920,13 +2819,13 @@ class MswSettings(PdmObjectBase):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.custom_values_for_lateral: bool = False
-        self.diameter_roughness_mode: str = "Uniform"
+        self.diameter_roughness_mode: DiameterRoughnessMode = DiameterRoughnessMode.Uniform
         self.enforce_max_segment_length: bool = False
-        self.length_and_depth: str = "ABS"
+        self.length_and_depth: LengthAndDepth = LengthAndDepth.ABS
         self.liner_diameter: float = 1.520000000000000e-01
         self.max_segment_length: float = 2.000000000000000e+02
-        self.pressure_drop: str = "HF-"
-        self.reference_md_type: str = "GridEntryPoint"
+        self.pressure_drop: PressureDrop = PressureDrop.HF_
+        self.reference_md_type: ReferenceMdType = ReferenceMdType.GridEntryPoint
         self.roughness_factor: float = 1.000000000000000e-05
         self.user_defined_reference_md: float = 0.000000000000000e+00
         PdmObjectBase.__init__(self, pb2_object, channel)
@@ -1940,6 +2839,35 @@ class MudWeightWindowParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if MudWeightWindowParameters.__custom_init__ is not None:
             MudWeightWindowParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class RimPolygonAppearance(PdmObjectBase):
+    """
+    Attributes:
+        is_closed (bool): Closed Polygon
+        line_color (str): Line Color
+        line_thickness (int): Line Thickness
+        lock_polygon (bool): Lock Polygon to Plane
+        polygon_plane_depth (float): Polygon Plane Depth
+        show_lines (bool): Show Lines
+        show_spheres (bool): Show Spheres
+        sphere_color (str): Sphere Color
+        sphere_radius_factor (float): Sphere Radius Factor
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_closed: bool = True
+        self.line_color: str = "#ffa500"
+        self.line_thickness: int = 3
+        self.lock_polygon: bool = False
+        self.polygon_plane_depth: float = 0.000000000000000e+00
+        self.show_lines: bool = True
+        self.show_spheres: bool = False
+        self.sphere_color: str = "#ffa500"
+        self.sphere_radius_factor: float = 1.500000000000000e-01
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if RimPolygonAppearance.__custom_init__ is not None:
+            RimPolygonAppearance.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class ReservoirGridEnsemble(NamedObject):
     """
@@ -1970,9 +2898,9 @@ class RimStatisticalCalculation(Reservoir):
         input_properties_to_calculate (List[str]): 
         low_percentile (float): Low
         mid_percentile (float): Mid
-        percentile_calculation_type (str): One of [NearestObservationPercentile, HistogramEstimatedPercentile, InterpolatedObservationPercentile]
-        porosity_model (str): One of [MATRIX_MODEL, FRACTURE_MODEL]
-        result_type (str): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+        percentile_calculation_type (PercentileCalculationType): One of [NearestObservationPercentile, HistogramEstimatedPercentile, InterpolatedObservationPercentile]
+        porosity_model (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
+        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
         selected_time_steps (List[int]): Time Step Selection
         static_properties_to_calculate (List[str]): Stat Prop
         use_zero_as_inactive_cell_value (bool): Use Zero as Inactive Cell Value
@@ -1992,9 +2920,9 @@ class RimStatisticalCalculation(Reservoir):
         self.input_properties_to_calculate: List[str] = []
         self.low_percentile: float = 1.000000000000000e+01
         self.mid_percentile: float = 5.000000000000000e+01
-        self.percentile_calculation_type: str = "InterpolatedObservationPercentile"
-        self.porosity_model: str = "MATRIX_MODEL"
-        self.result_type: str = "DYNAMIC_NATIVE"
+        self.percentile_calculation_type: PercentileCalculationType = PercentileCalculationType.InterpolatedObservationPercentile
+        self.porosity_model: PorosityModelType = PorosityModelType.MATRIX_MODEL
+        self.result_type: PropertyType = PropertyType.DYNAMIC_NATIVE
         self.selected_time_steps: List[int] = []
         self.static_properties_to_calculate: List[str] = []
         self.use_zero_as_inactive_cell_value: bool = False
@@ -2040,6 +2968,35 @@ class RimStatisticalCalculation(Reservoir):
         self._call_pdm_method_void("set_source_properties", property_type=property_type, property_names=property_names)
 
 
+class WellPathTimeIn(PdmObjectBase):
+    """
+    A ResInsight Well Tie-in
+
+    Attributes:
+        add_valve_at_connection (bool): Add Outlet Valve for Branch
+        custom_outlet_valve_md (Tuple[bool, float]): Outlet Valve Custom MD
+        tie_in_measured_depth (float): Tie In Measured Depth
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.add_valve_at_connection: bool = False
+        self.custom_outlet_valve_md: Tuple[bool, float] = (False, 0.000000000000000e+00)
+        self.tie_in_measured_depth: float = 0.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellPathTimeIn.__custom_init__ is not None:
+            WellPathTimeIn.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def valve(self) -> Optional[WellPathValve]:
+        """Branch Outlet Valve
+
+        Returns:
+             WellPathValve
+        """
+        children = self.children("Valve", WellPathValve)
+        return children[0] if len(children) > 0 else None
+
+
 class RoffCase(Reservoir):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -2052,20 +3009,20 @@ class FractureTemplate(PdmObjectBase):
     """
     Attributes:
         azimuth_angle (float): Azimuth Angle
-        beta_factor_type (str): One of [UserDefinedBetaFactor, FractureBetaFactor]
+        beta_factor_type (BetaFactorType): One of [UserDefinedBetaFactor, FractureBetaFactor]
         conductivity_factor (float): Conductivity
-        conductivity_type (str): One of [InfiniteConductivity, FiniteConductivity, FiniteConductivityInfiniteWellPI]
+        conductivity_type (ConductivityType): One of [InfiniteConductivity, FiniteConductivity, FiniteConductivityInfiniteWellPI]
         d_factor_scale_factor (float): D-factor
         effective_permeability (float): Effective Permeability (Ke) [mD]
         fracture_width (float): Fracture Width (h)
-        fracture_width_type (str): One of [UserDefinedWidth, FractureWidth]
+        fracture_width_type (FractureWidthType): One of [UserDefinedWidth, FractureWidth]
         gas_viscosity (float): <html>Gas Viscosity (&mu;)</html> [cP]
         height_scale_factor (float): Height
         inertial_coefficient (float): <html>Inertial Coefficient (&beta;)</html> [Forch. unit]
-        non_darcy_flow_type (str): One of [None, Computed, UserDefined]
-        orientation (str): One of [Azimuth, Longitudinal, Transverse]
+        non_darcy_flow_type (NonDarcyFlowType2): One of [None, Computed, UserDefined]
+        orientation (Orientation): One of [Azimuth, Longitudinal, Transverse]
         perforation_length (float): Perforation Length
-        permeability_type (str): One of [UserDefinedPermeability, FractureConductivity]
+        permeability_type (PermeabilityType): One of [UserDefinedPermeability, FractureConductivity]
         relative_gas_density (float): <html>Relative Gas Density (&gamma;)</html>
         relative_permeability (float): Relative Permeability
         user_defined_d_factor (float): D Factor
@@ -2077,20 +3034,20 @@ class FractureTemplate(PdmObjectBase):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.azimuth_angle: float = 0
-        self.beta_factor_type: str = "UserDefinedBetaFactor"
+        self.beta_factor_type: BetaFactorType = BetaFactorType.UserDefinedBetaFactor
         self.conductivity_factor: float = 1.000000000000000e+00
-        self.conductivity_type: str = "FiniteConductivity"
+        self.conductivity_type: ConductivityType = ConductivityType.FiniteConductivity
         self.d_factor_scale_factor: float = 1.000000000000000e+00
         self.effective_permeability: float = 0.000000000000000e+00
         self.fracture_width: float = 1.000000000000000e-02
-        self.fracture_width_type: str = "FractureWidth"
+        self.fracture_width_type: FractureWidthType = FractureWidthType.FractureWidth
         self.gas_viscosity: float = 2.000000000000000e-02
         self.height_scale_factor: float = 1.000000000000000e+00
         self.inertial_coefficient: float = 6.083236000000000e-03
-        self.non_darcy_flow_type: str = "None"
-        self.orientation: str = "Transverse"
+        self.non_darcy_flow_type: NonDarcyFlowType2 = NonDarcyFlowType2.None_
+        self.orientation: Orientation = Orientation.Transverse
         self.perforation_length: float = 1.000000000000000e+00
-        self.permeability_type: str = "FractureConductivity"
+        self.permeability_type: PermeabilityType = PermeabilityType.FractureConductivity
         self.relative_gas_density: float = 8.000000000000000e-01
         self.relative_permeability: float = 1.000000000000000e+00
         self.user_defined_d_factor: float = 1.000000000000000e+00
@@ -2157,9 +3114,9 @@ class StimPlanModel(CheckableNamedObject):
         extraction_depth_top (float): Depth
         extraction_offset_bottom (float): Bottom Offset
         extraction_offset_top (float): Top Offset
-        extraction_type (str): One of [TVT, TST]
+        extraction_type (ExtractionType): One of [TVT, TST]
         formation_dip (float): Formation Dip
-        fracture_orientation (str): One of [Longitudinal, Transverse, Azimuth]
+        fracture_orientation (FractureOrientation): One of [Longitudinal, Transverse, Azimuth]
         initial_pressure_eclipse_case (Optional[Reservoir]): Initial Pressure Case
         measured_depth (float): Measured Depth
         original_thickness_direction (List[float]): Original Thickness Direction
@@ -2195,9 +3152,9 @@ class StimPlanModel(CheckableNamedObject):
         self.extraction_depth_top: float = -1.000000000000000e+00
         self.extraction_offset_bottom: float = -1.000000000000000e+00
         self.extraction_offset_top: float = -1.000000000000000e+00
-        self.extraction_type: str = "TST"
+        self.extraction_type: ExtractionType = ExtractionType.TST
         self.formation_dip: float = 0.000000000000000e+00
-        self.fracture_orientation: str = "Longitudinal"
+        self.fracture_orientation: FractureOrientation = FractureOrientation.Longitudinal
         self.initial_pressure_eclipse_case: Optional[Reservoir] = None
         self.measured_depth: float = 0.000000000000000e+00
         self.original_thickness_direction: List[float] = [0.000000000000000e+00, 0.000000000000000e+00, 0.000000000000000e+00]
@@ -2267,15 +3224,15 @@ class DepthTrackPlot(PlotWindow):
         auto_scale_depth_enabled (bool): Auto Scale
         auto_zoom_max_depth_factor (float): Auto Zoom Maximum Factor
         auto_zoom_min_depth_factor (float): Auto Zoom Minimum Factor
-        axis_title_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
-        axis_value_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
-        depth_type (str): One of [MEASURED_DEPTH, TRUE_VERTICAL_DEPTH, PSEUDO_LENGTH, CONNECTION_NUMBER, TRUE_VERTICAL_DEPTH_RKB]
-        depth_unit (str): One of [UNIT_METER, UNIT_FEET, UNIT_NONE]
+        axis_title_font_size (SubTitleFontSize): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
+        axis_value_font_size (SubTitleFontSize): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
+        depth_type (DepthType): One of [MEASURED_DEPTH, TRUE_VERTICAL_DEPTH, PSEUDO_LENGTH, CONNECTION_NUMBER, TRUE_VERTICAL_DEPTH_RKB]
+        depth_unit (DepthUnit): One of [UNIT_METER, UNIT_FEET, UNIT_NONE]
         maximum_depth (float): Max
         minimum_depth (float): Min
-        show_depth_grid_lines (str): One of [GRID_X_NONE, GRID_X_MAJOR, GRID_X_MAJOR_AND_MINOR]
+        show_depth_grid_lines (ShowDepthGridLines): One of [GRID_X_NONE, GRID_X_MAJOR, GRID_X_MAJOR_AND_MINOR]
         show_depth_marker_line (bool): Show Depth Marker Line
-        sub_title_font_size (str): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
+        sub_title_font_size (SubTitleFontSize): One of [XX_Small, X_Small, Small, Medium, Large, X_Large, XX_Large]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -2283,15 +3240,15 @@ class DepthTrackPlot(PlotWindow):
         self.auto_scale_depth_enabled: bool = True
         self.auto_zoom_max_depth_factor: float = 0.000000000000000e+00
         self.auto_zoom_min_depth_factor: float = 0.000000000000000e+00
-        self.axis_title_font_size: str = "Medium"
-        self.axis_value_font_size: str = "Medium"
-        self.depth_type: str = "MEASURED_DEPTH"
-        self.depth_unit: str = "UNIT_METER"
+        self.axis_title_font_size: SubTitleFontSize = SubTitleFontSize.Medium
+        self.axis_value_font_size: SubTitleFontSize = SubTitleFontSize.Medium
+        self.depth_type: DepthType = DepthType.MEASURED_DEPTH
+        self.depth_unit: DepthUnit = DepthUnit.UNIT_METER
         self.maximum_depth: float = 1.000000000000000e+03
         self.minimum_depth: float = 0.000000000000000e+00
-        self.show_depth_grid_lines: str = "GRID_X_MAJOR"
+        self.show_depth_grid_lines: ShowDepthGridLines = ShowDepthGridLines.GRID_X_MAJOR
         self.show_depth_marker_line: bool = False
-        self.sub_title_font_size: str = "Medium"
+        self.sub_title_font_size: SubTitleFontSize = SubTitleFontSize.Medium
         PlotWindow.__init__(self, pb2_object, channel)
         if DepthTrackPlot.__custom_init__ is not None:
             DepthTrackPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -2589,12 +3546,12 @@ class TextAnnotation(PdmObjectBase):
 class ThermalFractureTemplate(MeshFractureTemplate):
     """
     Attributes:
-        filter_cake_pressure_drop (str): One of [None, Relative, Absolute]
+        filter_cake_pressure_drop (FilterCakePressureDrop): One of [None, Relative, Absolute]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.filter_cake_pressure_drop: str = "Relative"
+        self.filter_cake_pressure_drop: FilterCakePressureDrop = FilterCakePressureDrop.Relative
         MeshFractureTemplate.__init__(self, pb2_object, channel)
         if ThermalFractureTemplate.__custom_init__ is not None:
             ThermalFractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -2657,6 +3614,23 @@ class TriangleGeometry(PdmObjectBase):
         if TriangleGeometry.__custom_init__ is not None:
             TriangleGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class ValveCollection(CheckableNamedObject):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CheckableNamedObject.__init__(self, pb2_object, channel)
+        if ValveCollection.__custom_init__ is not None:
+            ValveCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def valves(self) -> List[WellPathValve]:
+        """Valves
+
+        Returns:
+             List[WellPathValve]
+        """
+        return self.children("Valves", WellPathValve)
+
+
 class ValveTemplate(NamedObject):
     """
     Attributes:
@@ -2695,22 +3669,22 @@ class ValveTemplate(NamedObject):
 class ValveTemplateCollection(PdmObjectBase):
     """
     Attributes:
-        valve_units (str): One of [UNITS_METRIC, UNITS_FIELD, UNITS_UNKNOWN]
+        valve_units (ValveUnits): One of [UNITS_METRIC, UNITS_FIELD, UNITS_UNKNOWN]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.valve_units: str = "UNITS_METRIC"
+        self.valve_units: ValveUnits = ValveUnits.UNITS_METRIC
         PdmObjectBase.__init__(self, pb2_object, channel)
         if ValveTemplateCollection.__custom_init__ is not None:
             ValveTemplateCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_template(self, completion_type: str="UNDEFINED", orifice_diameter: float=8.000000000000000e+00, flow_coefficient: float=7.000000000000000e-01, user_label: str="") -> ValveTemplate:
+    def add_template(self, completion_type: CompletionType=CompletionType.UNDEFINED, orifice_diameter: float=8.000000000000000e+00, flow_coefficient: float=7.000000000000000e-01, user_label: str="") -> ValveTemplate:
         """
         Add a new valve template
 
         Arguments:
-            completion_type (str): One of [ICD, ICV, AICD, SICD, UNDEFINED]
+            completion_type (CompletionType): One of [ICD, ICV, AICD, SICD, UNDEFINED]
             orifice_diameter (float): Orifice diameter
             flow_coefficient (float): Flow coefficient
             user_label (str): User-defined label for the template
@@ -2732,16 +3706,16 @@ class ValveTemplateCollection(PdmObjectBase):
 class WbsParameters(PdmObjectBase):
     """
     Attributes:
-        df_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        df_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         fg_multiplier (float): SH Multiplier for FG in Shale
-        fg_shale_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        kfg_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        ksh_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        obg_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        poission_ratio_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        pore_pressure_non_reservoir_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        pore_pressure_reservoir_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
-        ucs_source (str): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        fg_shale_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        kfg_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        ksh_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        obg_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        poission_ratio_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        pore_pressure_non_reservoir_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        pore_pressure_reservoir_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
+        ucs_source (PorePressureReservoirSource): One of [GRID, LAS_FILE, ELEMENT_PROPERTY_TABLE, USER_DEFINED, HYDROSTATIC, DERIVED_FROM_K0FG, PROPORTIONAL_TO_SH, UNDEFINED]
         user_df (float): User Defined DF
         user_kfg (float): User Defined K0_FG
         user_ksh (float): User Defined K0_SH
@@ -2753,16 +3727,16 @@ class WbsParameters(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.df_source: str = "LAS_FILE"
+        self.df_source: PorePressureReservoirSource = PorePressureReservoirSource.LAS_FILE
         self.fg_multiplier: float = 1.050000000000000e+00
-        self.fg_shale_source: str = "DERIVED_FROM_K0FG"
-        self.kfg_source: str = "LAS_FILE"
-        self.ksh_source: str = "LAS_FILE"
-        self.obg_source: str = "GRID"
-        self.poission_ratio_source: str = "LAS_FILE"
-        self.pore_pressure_non_reservoir_source: str = "LAS_FILE"
-        self.pore_pressure_reservoir_source: str = "GRID"
-        self.ucs_source: str = "LAS_FILE"
+        self.fg_shale_source: PorePressureReservoirSource = PorePressureReservoirSource.DERIVED_FROM_K0FG
+        self.kfg_source: PorePressureReservoirSource = PorePressureReservoirSource.LAS_FILE
+        self.ksh_source: PorePressureReservoirSource = PorePressureReservoirSource.LAS_FILE
+        self.obg_source: PorePressureReservoirSource = PorePressureReservoirSource.GRID
+        self.poission_ratio_source: PorePressureReservoirSource = PorePressureReservoirSource.LAS_FILE
+        self.pore_pressure_non_reservoir_source: PorePressureReservoirSource = PorePressureReservoirSource.LAS_FILE
+        self.pore_pressure_reservoir_source: PorePressureReservoirSource = PorePressureReservoirSource.GRID
+        self.ucs_source: PorePressureReservoirSource = PorePressureReservoirSource.LAS_FILE
         self.user_df: float = 7.000000000000000e-01
         self.user_kfg: float = 7.500000000000000e-01
         self.user_ksh: float = 6.500000000000000e-01
@@ -2788,357 +3762,6 @@ class SimulationWell(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SimulationWell.__custom_init__ is not None:
             SimulationWell.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellEventControl(WellEvent):
-    """
-    WellEventControl
-
-    Attributes:
-        bhp_limit (float): BHP Limit [bar]
-        control_mode (str): One of [ORAT, WRAT, GRAT, LRAT, RESV, BHP, THP]
-        control_value (float): Control Value
-        gas_rate (float): Gas Rate [Sm3/day]
-        is_producer (bool): Is Producer
-        liquid_rate (float): Liquid Rate [Sm3/day]
-        oil_rate (float): Oil Rate [Sm3/day]
-        thp_limit (float): THP Limit [bar]
-        water_rate (float): Water Rate [Sm3/day]
-        well_status (str): One of [OPEN, SHUT, STOP]
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.bhp_limit: float = 0.000000000000000e+00
-        self.control_mode: str = "ORAT"
-        self.control_value: float = 0.000000000000000e+00
-        self.gas_rate: float = 0.000000000000000e+00
-        self.is_producer: bool = True
-        self.liquid_rate: float = 0.000000000000000e+00
-        self.oil_rate: float = 0.000000000000000e+00
-        self.thp_limit: float = 0.000000000000000e+00
-        self.water_rate: float = 0.000000000000000e+00
-        self.well_status: str = "OPEN"
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventControl.__custom_init__ is not None:
-            WellEventControl.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellEventKeyword(WellEvent):
-    """
-    WellEventKeyword
-
-    Attributes:
-        keyword_name (str): Keyword Name
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.keyword_name: str = ""
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventKeyword.__custom_init__ is not None:
-            WellEventKeyword.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellEventPerf(WellEvent):
-    """
-    WellEventPerf
-
-    Attributes:
-        diameter (float): Diameter
-        end_md (float): End MD
-        skin_factor (float): Skin Factor
-        start_md (float): Start MD
-        state (str): One of [OPEN, SHUT]
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.diameter: float = 2.160000000000000e-01
-        self.end_md: float = 0.000000000000000e+00
-        self.skin_factor: float = 0.000000000000000e+00
-        self.start_md: float = 0.000000000000000e+00
-        self.state: str = "OPEN"
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventPerf.__custom_init__ is not None:
-            WellEventPerf.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellEventState(WellEvent):
-    """
-    WellEventState
-
-    Attributes:
-        well_state (str): One of [OPEN, SHUT, STOP]
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.well_state: str = "OPEN"
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventState.__custom_init__ is not None:
-            WellEventState.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellEventTimeline(PdmObjectBase):
-    """
-    WellEventTimeline
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if WellEventTimeline.__custom_init__ is not None:
-            WellEventTimeline.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def add_control_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, control_mode: str="ORAT", control_value: float=0.000000000000000e+00, bhp_limit: float=0.000000000000000e+00, oil_rate: float=0.000000000000000e+00, water_rate: float=0.000000000000000e+00, gas_rate: float=0.000000000000000e+00, is_producer: bool=True) -> WellEventControl:
-        """
-        Add a well control event to the timeline
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            well_path (Optional[WellPath]): Well Path
-            control_mode (str): One of [ORAT, WRAT, GRAT, LRAT, RESV, BHP, THP]
-            control_value (float): Control Value
-            bhp_limit (float): BHP Limit [bar]
-            oil_rate (float): Oil Rate [Sm3/day]
-            water_rate (float): Water Rate [Sm3/day]
-            gas_rate (float): Gas Rate [Sm3/day]
-            is_producer (bool): Is Producer
-        Returns:
-            WellEventControl
-        """
-        return self._call_pdm_method_return_value("AddControlEvent", WellEventControl, event_date=event_date, well_path=well_path, control_mode=control_mode, control_value=control_value, bhp_limit=bhp_limit, oil_rate=oil_rate, water_rate=water_rate, gas_rate=gas_rate, is_producer=is_producer)
-
-
-    def add_keyword_event_internal(self, event_date: str="2024-01-01", keyword_name: str="", item_names: List[str]=[], item_types: List[str]=[], item_values: List[str]=[]) -> KeywordEvent:
-        """
-        Add a schedule-level keyword event to the timeline (not tied to a well)
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            keyword_name (str): Keyword Name
-            item_names (List[str]): Item Names
-            item_types (List[str]): Item Types
-            item_values (List[str]): Item Values
-        Returns:
-            KeywordEvent
-        """
-        return self._call_pdm_method_return_value("AddKeywordEventInternal", KeywordEvent, event_date=event_date, keyword_name=keyword_name, item_names=item_names, item_types=item_types, item_values=item_values)
-
-
-    def add_perf_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, diameter: float=2.160000000000000e-01, skin_factor: float=0.000000000000000e+00, state: str="OPEN") -> WellEventPerf:
-        """
-        Add a perforation event to the timeline
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            well_path (Optional[WellPath]): Well Path
-            start_md (float): Start Measured Depth
-            end_md (float): End Measured Depth
-            diameter (float): Diameter [m]
-            skin_factor (float): Skin Factor
-            state (str): One of [OPEN, SHUT]
-        Returns:
-            WellEventPerf
-        """
-        return self._call_pdm_method_return_value("AddPerfEvent", WellEventPerf, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor, state=state)
-
-
-    def add_state_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, well_state: str="OPEN") -> WellEventState:
-        """
-        Add a well state event to the timeline
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            well_path (Optional[WellPath]): Well Path
-            well_state (str): One of [OPEN, SHUT, STOP]
-        Returns:
-            WellEventState
-        """
-        return self._call_pdm_method_return_value("AddStateEvent", WellEventState, event_date=event_date, well_path=well_path, well_state=well_state)
-
-
-    def add_tubing_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, inner_diameter: float=1.500000000000000e-01, roughness: float=1.000000000000000e-05) -> WellEventTubing:
-        """
-        Add a tubing event to the timeline
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            well_path (Optional[WellPath]): Well Path
-            start_md (float): Start Measured Depth
-            end_md (float): End Measured Depth
-            inner_diameter (float): Inner Diameter [m]
-            roughness (float): Roughness [m]
-        Returns:
-            WellEventTubing
-        """
-        return self._call_pdm_method_return_value("AddTubingEvent", WellEventTubing, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, inner_diameter=inner_diameter, roughness=roughness)
-
-
-    def add_valve_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, measured_depth: float=0.000000000000000e+00, valve_type: str="ICV", state: str="OPEN", flow_coefficient: float=7.000000000000000e-01, area: float=1.000000000000000e-04, aicd_strength: float=2.100000000000000e-04, aicd_density_calib_fluid: float=1.000000000000000e+03, aicd_viscosity_calib_fluid: float=1.000000000000000e+00, aicd_vol_flow_exp: float=2.100000000000000e+00, aicd_visc_func_exp: float=5.000000000000000e-01) -> WellEventValve:
-        """
-        Add a valve event to the timeline
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            well_path (Optional[WellPath]): Well Path
-            measured_depth (float): Measured Depth
-            valve_type (str): One of [ICV, ICD, AICD]
-            state (str): One of [OPEN, SHUT]
-            flow_coefficient (float): Flow Coefficient
-            area (float): Area [m2]
-            aicd_strength (float): AICD Strength
-            aicd_density_calib_fluid (float): AICD Density of Calibration Fluid [kg/m3]
-            aicd_viscosity_calib_fluid (float): AICD Viscosity of Calibration Fluid [cP]
-            aicd_vol_flow_exp (float): AICD Volume Flow Rate Exponent
-            aicd_visc_func_exp (float): AICD Viscosity Function Exponent
-        Returns:
-            WellEventValve
-        """
-        return self._call_pdm_method_return_value("AddValveEvent", WellEventValve, event_date=event_date, well_path=well_path, measured_depth=measured_depth, valve_type=valve_type, state=state, flow_coefficient=flow_coefficient, area=area, aicd_strength=aicd_strength, aicd_density_calib_fluid=aicd_density_calib_fluid, aicd_viscosity_calib_fluid=aicd_viscosity_calib_fluid, aicd_vol_flow_exp=aicd_vol_flow_exp, aicd_visc_func_exp=aicd_visc_func_exp)
-
-
-    def add_well_keyword_event_internal(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, keyword_name: str="", item_names: List[str]=[], item_types: List[str]=[], item_values: List[str]=[]) -> WellEventKeyword:
-        """
-        Add a well keyword event to the timeline
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            well_path (Optional[WellPath]): Well Path
-            keyword_name (str): Keyword Name
-            item_names (List[str]): Item Names
-            item_types (List[str]): Item Types
-            item_values (List[str]): Item Values
-        Returns:
-            WellEventKeyword
-        """
-        return self._call_pdm_method_return_value("AddWellKeywordEventInternal", WellEventKeyword, event_date=event_date, well_path=well_path, keyword_name=keyword_name, item_names=item_names, item_types=item_types, item_values=item_values)
-
-
-    def events(self) -> List[WellEvent]:
-        """Events
-
-        Returns:
-             List[WellEvent]
-        """
-        return self.children("Events", WellEvent)
-
-
-    def generate_schedule(self, eclipse_case_id: int=-1) -> DataContainerString:
-        """
-        Generate Eclipse schedule text for all wells in the collection
-
-        Arguments:
-            eclipse_case_id (int): Eclipse Case ID
-        Returns:
-            DataContainerString
-        """
-        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case_id=eclipse_case_id)
-
-
-    def set_timestamp(self, timestamp: str="2024-01-01") -> None:
-        """
-        Apply well events up to a given timestamp
-
-        Arguments:
-            timestamp (str): Timestamp (YYYY-MM-DD)
-        Returns:
-            
-        """
-        self._call_pdm_method_void("SetTimestamp", timestamp=timestamp)
-
-
-class WellEventTubing(WellEvent):
-    """
-    WellEventTubing
-
-    Attributes:
-        end_md (float): End MD
-        inner_diameter (float): Inner Diameter [m]
-        roughness (float): Roughness [m]
-        start_md (float): Start MD
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.end_md: float = 0.000000000000000e+00
-        self.inner_diameter: float = 1.500000000000000e-01
-        self.roughness: float = 1.000000000000000e-05
-        self.start_md: float = 0.000000000000000e+00
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventTubing.__custom_init__ is not None:
-            WellEventTubing.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellEventType(WellEvent):
-    """
-    WellEventType
-
-    Attributes:
-        well_type (str): One of [OIL_PRODUCER, GAS_PRODUCER, WATER_PRODUCER, WATER_INJECTOR, GAS_INJECTOR]
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.well_type: str = "OIL_PRODUCER"
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventType.__custom_init__ is not None:
-            WellEventType.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellEventValve(WellEvent):
-    """
-    WellEventValve
-
-    Attributes:
-        aicd_density_calib_fluid (float): AICD Density of Calibration Fluid [kg/m3]
-        aicd_strength (float): AICD Strength
-        aicd_visc_func_exp (float): AICD Viscosity Function Exponent
-        aicd_viscosity_calib_fluid (float): AICD Viscosity of Calibration Fluid [cP]
-        aicd_vol_flow_exp (float): AICD Volume Flow Rate Exponent
-        area (float): Area [m2]
-        flow_coefficient (float): Flow Coefficient
-        measured_depth (float): Measured Depth
-        state (str): One of [OPEN, SHUT]
-        valve_template (Optional[ValveTemplate]): Valve Template
-        valve_type (str): One of [ICV, ICD, AICD]
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.aicd_density_calib_fluid: float = 1.000000000000000e+03
-        self.aicd_strength: float = 2.100000000000000e-04
-        self.aicd_visc_func_exp: float = 5.000000000000000e-01
-        self.aicd_viscosity_calib_fluid: float = 1.000000000000000e+00
-        self.aicd_vol_flow_exp: float = 2.100000000000000e+00
-        self.area: float = 1.000000000000000e-04
-        self.flow_coefficient: float = 7.000000000000000e-01
-        self.measured_depth: float = 0.000000000000000e+00
-        self.state: str = "OPEN"
-        self.valve_template: Optional[ValveTemplate] = None
-        self.valve_type: str = "ICV"
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventValve.__custom_init__ is not None:
-            WellEventValve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class PlotCurve(PdmObjectBase):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if PlotCurve.__custom_init__ is not None:
-            PlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellLogPlotCurve(PlotCurve):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PlotCurve.__init__(self, pb2_object, channel)
-        if WellLogPlotCurve.__custom_init__ is not None:
-            WellLogPlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class WellLogExtractionCurve(WellLogPlotCurve):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellLogPlotCurve.__init__(self, pb2_object, channel)
-        if WellLogExtractionCurve.__custom_init__ is not None:
-            WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellLogPlot(DepthTrackPlot):
     """
@@ -3187,6 +3810,391 @@ class WellBoreStabilityPlot(WellLogPlot):
         children = self.children("Parameters", WbsParameters)
         return children[0] if len(children) > 0 else None
 
+
+class WellEventControl(WellEvent):
+    """
+    WellEventControl
+
+    Attributes:
+        bhp_limit (float): BHP Limit [bar]
+        control_mode (ControlMode): One of [ORAT, WRAT, GRAT, LRAT, RESV, BHP, THP]
+        control_value (float): Control Value
+        gas_rate (float): Gas Rate [Sm3/day]
+        is_producer (bool): Is Producer
+        liquid_rate (float): Liquid Rate [Sm3/day]
+        oil_rate (float): Oil Rate [Sm3/day]
+        thp_limit (float): THP Limit [bar]
+        water_rate (float): Water Rate [Sm3/day]
+        well_status (WellStatus): One of [OPEN, SHUT, STOP]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.bhp_limit: float = 0.000000000000000e+00
+        self.control_mode: ControlMode = ControlMode.ORAT
+        self.control_value: float = 0.000000000000000e+00
+        self.gas_rate: float = 0.000000000000000e+00
+        self.is_producer: bool = True
+        self.liquid_rate: float = 0.000000000000000e+00
+        self.oil_rate: float = 0.000000000000000e+00
+        self.thp_limit: float = 0.000000000000000e+00
+        self.water_rate: float = 0.000000000000000e+00
+        self.well_status: WellStatus = WellStatus.OPEN
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventControl.__custom_init__ is not None:
+            WellEventControl.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellEventKeyword(WellEvent):
+    """
+    WellEventKeyword
+
+    Attributes:
+        keyword_name (str): Keyword Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.keyword_name: str = ""
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventKeyword.__custom_init__ is not None:
+            WellEventKeyword.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellEventPerf(WellEvent):
+    """
+    WellEventPerf
+
+    Attributes:
+        completion_number (int): Completion Number
+        diameter (float): Diameter
+        end_md (float): End MD
+        skin_factor (float): Skin Factor
+        start_md (float): Start MD
+        state (State): One of [OPEN, SHUT]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.completion_number: int = 0
+        self.diameter: float = 2.160000000000000e-01
+        self.end_md: float = 0.000000000000000e+00
+        self.skin_factor: float = 0.000000000000000e+00
+        self.start_md: float = 0.000000000000000e+00
+        self.state: State = State.OPEN
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventPerf.__custom_init__ is not None:
+            WellEventPerf.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellEventState(WellEvent):
+    """
+    WellEventState
+
+    Attributes:
+        well_state (WellState): One of [OPEN, SHUT, STOP]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.well_state: WellState = WellState.OPEN
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventState.__custom_init__ is not None:
+            WellEventState.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellEventTimeline(PdmObjectBase):
+    """
+    WellEventTimeline
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellEventTimeline.__custom_init__ is not None:
+            WellEventTimeline.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_control_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, control_mode: ControlMode=ControlMode.ORAT, control_value: float=0.000000000000000e+00, bhp_limit: float=0.000000000000000e+00, oil_rate: float=0.000000000000000e+00, water_rate: float=0.000000000000000e+00, gas_rate: float=0.000000000000000e+00, is_producer: bool=True) -> WellEventControl:
+        """
+        Add a well control event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            control_mode (ControlMode): One of [ORAT, WRAT, GRAT, LRAT, RESV, BHP, THP]
+            control_value (float): Control Value
+            bhp_limit (float): BHP Limit [bar]
+            oil_rate (float): Oil Rate [Sm3/day]
+            water_rate (float): Water Rate [Sm3/day]
+            gas_rate (float): Gas Rate [Sm3/day]
+            is_producer (bool): Is Producer
+        Returns:
+            WellEventControl
+        """
+        return self._call_pdm_method_return_value("AddControlEvent", WellEventControl, event_date=event_date, well_path=well_path, control_mode=control_mode, control_value=control_value, bhp_limit=bhp_limit, oil_rate=oil_rate, water_rate=water_rate, gas_rate=gas_rate, is_producer=is_producer)
+
+
+    def add_keyword_event_internal(self, event_date: str="2024-01-01", keyword_name: str="", item_names: List[str]=[], item_types: List[str]=[], item_values: List[str]=[]) -> KeywordEvent:
+        """
+        Add a schedule-level keyword event to the timeline (not tied to a well)
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            keyword_name (str): Keyword Name
+            item_names (List[str]): Item Names
+            item_types (List[str]): Item Types
+            item_values (List[str]): Item Values
+        Returns:
+            KeywordEvent
+        """
+        return self._call_pdm_method_return_value("AddKeywordEventInternal", KeywordEvent, event_date=event_date, keyword_name=keyword_name, item_names=item_names, item_types=item_types, item_values=item_values)
+
+
+    def add_perf_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, diameter: float=2.160000000000000e-01, skin_factor: float=0.000000000000000e+00, state: State=State.OPEN, completion_number: int=0) -> WellEventPerf:
+        """
+        Add a perforation event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            start_md (float): Start Measured Depth
+            end_md (float): End Measured Depth
+            diameter (float): Diameter [m]
+            skin_factor (float): Skin Factor
+            state (State): One of [OPEN, SHUT]
+            completion_number (int): Completion Number (for COMPLUMP, 0 = none)
+        Returns:
+            WellEventPerf
+        """
+        return self._call_pdm_method_return_value("AddPerfEvent", WellEventPerf, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor, state=state, completion_number=completion_number)
+
+
+    def add_state_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, well_state: WellState=WellState.OPEN) -> WellEventState:
+        """
+        Add a well state event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            well_state (WellState): One of [OPEN, SHUT, STOP]
+        Returns:
+            WellEventState
+        """
+        return self._call_pdm_method_return_value("AddStateEvent", WellEventState, event_date=event_date, well_path=well_path, well_state=well_state)
+
+
+    def add_tubing_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, inner_diameter: float=1.500000000000000e-01, roughness: float=1.000000000000000e-05) -> WellEventTubing:
+        """
+        Add a tubing event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            start_md (float): Start Measured Depth
+            end_md (float): End Measured Depth
+            inner_diameter (float): Inner Diameter [m]
+            roughness (float): Roughness [m]
+        Returns:
+            WellEventTubing
+        """
+        return self._call_pdm_method_return_value("AddTubingEvent", WellEventTubing, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, inner_diameter=inner_diameter, roughness=roughness)
+
+
+    def add_valve_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, measured_depth: float=0.000000000000000e+00, valve_type: ValveType=ValveType.ICV, state: State2=State2.OPEN, flow_coefficient: float=7.000000000000000e-01, area: float=1.000000000000000e-04, aicd_strength: float=2.100000000000000e-04, aicd_density_calib_fluid: float=1.000000000000000e+03, aicd_viscosity_calib_fluid: float=1.000000000000000e+00, aicd_vol_flow_exp: float=2.100000000000000e+00, aicd_visc_func_exp: float=5.000000000000000e-01) -> WellEventValve:
+        """
+        Add a valve event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            measured_depth (float): Measured Depth
+            valve_type (ValveType): One of [ICV, ICD, AICD]
+            state (State2): One of [OPEN, SHUT]
+            flow_coefficient (float): Flow Coefficient
+            area (float): Area [m2]
+            aicd_strength (float): AICD Strength
+            aicd_density_calib_fluid (float): AICD Density of Calibration Fluid [kg/m3]
+            aicd_viscosity_calib_fluid (float): AICD Viscosity of Calibration Fluid [cP]
+            aicd_vol_flow_exp (float): AICD Volume Flow Rate Exponent
+            aicd_visc_func_exp (float): AICD Viscosity Function Exponent
+        Returns:
+            WellEventValve
+        """
+        return self._call_pdm_method_return_value("AddValveEvent", WellEventValve, event_date=event_date, well_path=well_path, measured_depth=measured_depth, valve_type=valve_type, state=state, flow_coefficient=flow_coefficient, area=area, aicd_strength=aicd_strength, aicd_density_calib_fluid=aicd_density_calib_fluid, aicd_viscosity_calib_fluid=aicd_viscosity_calib_fluid, aicd_vol_flow_exp=aicd_vol_flow_exp, aicd_visc_func_exp=aicd_visc_func_exp)
+
+
+    def add_well_keyword_event_internal(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, keyword_name: str="", item_names: List[str]=[], item_types: List[str]=[], item_values: List[str]=[]) -> WellEventKeyword:
+        """
+        Add a well keyword event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            keyword_name (str): Keyword Name
+            item_names (List[str]): Item Names
+            item_types (List[str]): Item Types
+            item_values (List[str]): Item Values
+        Returns:
+            WellEventKeyword
+        """
+        return self._call_pdm_method_return_value("AddWellKeywordEventInternal", WellEventKeyword, event_date=event_date, well_path=well_path, keyword_name=keyword_name, item_names=item_names, item_types=item_types, item_values=item_values)
+
+
+    def events(self) -> List[WellEvent]:
+        """Events
+
+        Returns:
+             List[WellEvent]
+        """
+        return self.children("Events", WellEvent)
+
+
+    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[], first_date_as_comment: bool=True, align_columns: bool=False) -> DataContainerString:
+        """
+        Generate Eclipse schedule text for all wells in the collection
+
+        Arguments:
+            eclipse_case (Optional[Reservoir]): Eclipse Case
+            export_msw_for_wells (List[WellPath]): Wells for which multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD) are exported
+            first_date_as_comment (bool): Emit the first (simulation-start) date as a comment instead of a DATES keyword
+            align_columns (bool): Emit a column-header comment and right-aligned, fixed-width columns instead of the compact form
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells, first_date_as_comment=first_date_as_comment, align_columns=align_columns)
+
+
+    def set_timestamp(self, timestamp: str="2024-01-01") -> None:
+        """
+        Apply well events up to a given timestamp
+
+        Arguments:
+            timestamp (str): Timestamp (YYYY-MM-DD)
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetTimestamp", timestamp=timestamp)
+
+
+class WellEventTubing(WellEvent):
+    """
+    WellEventTubing
+
+    Attributes:
+        end_md (float): End MD
+        inner_diameter (float): Inner Diameter [m]
+        roughness (float): Roughness [m]
+        start_md (float): Start MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.end_md: float = 0.000000000000000e+00
+        self.inner_diameter: float = 1.500000000000000e-01
+        self.roughness: float = 1.000000000000000e-05
+        self.start_md: float = 0.000000000000000e+00
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventTubing.__custom_init__ is not None:
+            WellEventTubing.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellEventType(WellEvent):
+    """
+    WellEventType
+
+    Attributes:
+        well_type (WellType): One of [OIL_PRODUCER, GAS_PRODUCER, WATER_PRODUCER, WATER_INJECTOR, GAS_INJECTOR]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.well_type: WellType = WellType.OIL_PRODUCER
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventType.__custom_init__ is not None:
+            WellEventType.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellEventValve(WellEvent):
+    """
+    WellEventValve
+
+    Attributes:
+        aicd_density_calib_fluid (float): AICD Density of Calibration Fluid [kg/m3]
+        aicd_strength (float): AICD Strength
+        aicd_visc_func_exp (float): AICD Viscosity Function Exponent
+        aicd_viscosity_calib_fluid (float): AICD Viscosity of Calibration Fluid [cP]
+        aicd_vol_flow_exp (float): AICD Volume Flow Rate Exponent
+        area (float): Area [m2]
+        flow_coefficient (float): Flow Coefficient
+        measured_depth (float): Measured Depth
+        state (State2): One of [OPEN, SHUT]
+        valve_template (Optional[ValveTemplate]): Valve Template
+        valve_type (ValveType): One of [ICV, ICD, AICD]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.aicd_density_calib_fluid: float = 1.000000000000000e+03
+        self.aicd_strength: float = 2.100000000000000e-04
+        self.aicd_visc_func_exp: float = 5.000000000000000e-01
+        self.aicd_viscosity_calib_fluid: float = 1.000000000000000e+00
+        self.aicd_vol_flow_exp: float = 2.100000000000000e+00
+        self.area: float = 1.000000000000000e-04
+        self.flow_coefficient: float = 7.000000000000000e-01
+        self.measured_depth: float = 0.000000000000000e+00
+        self.state: State2 = State2.OPEN
+        self.valve_template: Optional[ValveTemplate] = None
+        self.valve_type: ValveType = ValveType.ICV
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventValve.__custom_init__ is not None:
+            WellEventValve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class PlotCurve(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if PlotCurve.__custom_init__ is not None:
+            PlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogPlotCurve(PlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PlotCurve.__init__(self, pb2_object, channel)
+        if WellLogPlotCurve.__custom_init__ is not None:
+            WellLogPlotCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogExtractionCurve(WellLogPlotCurve):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellLogPlotCurve.__init__(self, pb2_object, channel)
+        if WellLogExtractionCurve.__custom_init__ is not None:
+            WellLogExtractionCurve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogFileInterface(WellLog):
+    """
+    Attributes:
+        file_name (Optional[str]): Filename
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.file_name: Optional[str] = None
+        WellLog.__init__(self, pb2_object, channel)
+        if WellLogFileInterface.__custom_init__ is not None:
+            WellLogFileInterface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellLogLasFile(WellLogFileInterface):
+    """
+    Attributes:
+        name (str): 
+        well_name (str): 
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.name: str = ""
+        self.well_name: str = ""
+        WellLogFileInterface.__init__(self, pb2_object, channel)
+        if WellLogLasFile.__custom_init__ is not None:
+            WellLogLasFile.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellLogPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -3304,35 +4312,35 @@ class WellPathCompletionSettings(PdmObjectBase):
     """
     Attributes:
         allow_well_cross_flow (bool): Allow Well Cross-Flow
-        auto_well_shut_in (str): One of [SHUT, STOP]
+        auto_well_shut_in (AutoWellShutIn): One of [SHUT, STOP]
         drainage_radius_for_pi (Optional[float]): Drainage Radius for PI
         fluid_in_place_region (int): Fluid In-Place Region
-        gas_inflow_eq (str): One of [STD, R-G, P-P, GPP]
+        gas_inflow_eq (GasInflowEq): One of [STD, R-G, P-P, GPP]
         group_name_for_export (str): Group Name
-        hydrostatic_density (str): One of [SEG, AVG]
+        hydrostatic_density (HydrostaticDensity): One of [SEG, AVG]
         msw_liner_diameter (float): MSW Liner Diameter
         msw_roughness (float): MSW Roughness
         reference_depth_for_export (Optional[float]): BHP Reference Depth
         well_bore_fluid_pvt_table (int): Wellbore Fluid PVT table
         well_name_for_export (str): Well Name
-        well_type_for_export (str): One of [OIL, GAS, WATER, LIQUID]
+        well_type_for_export (WellTypeForExport): One of [OIL, GAS, WATER, LIQUID]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.allow_well_cross_flow: bool = True
-        self.auto_well_shut_in: str = "STOP"
+        self.auto_well_shut_in: AutoWellShutIn = AutoWellShutIn.STOP
         self.drainage_radius_for_pi: Optional[float] = None
         self.fluid_in_place_region: int = 0
-        self.gas_inflow_eq: str = "STD"
+        self.gas_inflow_eq: GasInflowEq = GasInflowEq.STD
         self.group_name_for_export: str = ""
-        self.hydrostatic_density: str = "SEG"
+        self.hydrostatic_density: HydrostaticDensity = HydrostaticDensity.SEG
         self.msw_liner_diameter: float = 1.520000000000000e-01
         self.msw_roughness: float = 1.000000000000000e-05
         self.reference_depth_for_export: Optional[float] = None
         self.well_bore_fluid_pvt_table: int = 0
         self.well_name_for_export: str = ""
-        self.well_type_for_export: str = "OIL"
+        self.well_type_for_export: WellTypeForExport = WellTypeForExport.OIL
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathCompletionSettings.__custom_init__ is not None:
             WellPathCompletionSettings.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -3390,6 +4398,16 @@ class WellPathCompletions(PdmObjectBase):
              PerforationCollection
         """
         children = self.children("Perforations", PerforationCollection)
+        return children[0] if len(children) > 0 else None
+
+
+    def valves(self) -> Optional[ValveCollection]:
+        """Valves
+
+        Returns:
+             ValveCollection
+        """
+        children = self.children("Valves", ValveCollection)
         return children[0] if len(children) > 0 else None
 
 
@@ -3539,11 +4557,13 @@ class WellPathTarget(PdmObjectBase):
 class WellPathValve(CheckableNamedObject):
     """
     Attributes:
+        is_open (bool): Valve is Open
         start_measured_depth (float): Start MD
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.is_open: bool = True
         self.start_measured_depth: float = 0.000000000000000e+00
         CheckableNamedObject.__init__(self, pb2_object, channel)
         if WellPathValve.__custom_init__ is not None:
@@ -3635,17 +4655,25 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes : Dict[str, Type[PdmObjectBase]] = {}
     classes['Case'] = Case
     classes['CellColors'] = CellColors
+    classes['CellFilter'] = CellFilter
     classes['CellFilterCollection'] = CellFilterCollection
+    classes['CellPropertyFilter'] = CellPropertyFilter
+    classes['CellRangeFilter'] = CellRangeFilter
     classes['CheckableNamedObject'] = CheckableNamedObject
     classes['ColorLegend'] = ColorLegend
+    classes['ColorLegendCollection'] = ColorLegendCollection
+    classes['ColorLegendItem'] = ColorLegendItem
+    classes['CombinedFilter'] = CombinedFilter
     classes['CommandRouter'] = CommandRouter
     classes['CompletionTemplateCollection'] = CompletionTemplateCollection
     classes['CornerPointCase'] = CornerPointCase
     classes['CurveIntersection'] = CurveIntersection
     classes['CustomSegmentInterval'] = CustomSegmentInterval
+    classes['DataContainerEnum'] = DataContainerEnum
     classes['DataContainerFloat'] = DataContainerFloat
     classes['DataContainerString'] = DataContainerString
     classes['DataContainerTime'] = DataContainerTime
+    classes['DataFilterCollection'] = DataFilterCollection
     classes['DepthSurface'] = DepthSurface
     classes['DepthTrackPlot'] = DepthTrackPlot
     classes['DiameterRoughnessInterval'] = DiameterRoughnessInterval
@@ -3663,6 +4691,10 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['EnsembleWellLogs'] = EnsembleWellLogs
     classes['FaciesInitialPressureConfig'] = FaciesInitialPressureConfig
     classes['FaciesProperties'] = FaciesProperties
+    classes['FaultDistance'] = FaultDistance
+    classes['FaultDistanceCollection'] = FaultDistanceCollection
+    classes['FaultInView'] = FaultInView
+    classes['FaultInViewCollection'] = FaultInViewCollection
     classes['FileSummaryCase'] = FileSummaryCase
     classes['FileWellPath'] = FileWellPath
     classes['Fishbones'] = Fishbones
@@ -3687,10 +4719,14 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['ModeledWellPath'] = ModeledWellPath
     classes['MswSettings'] = MswSettings
     classes['MudWeightWindowParameters'] = MudWeightWindowParameters
+    classes['MultiPlot'] = MultiPlot
+    classes['MultiSummaryPlot'] = MultiSummaryPlot
     classes['NamedObject'] = NamedObject
     classes['NonDarcyPerforationParameters'] = NonDarcyPerforationParameters
     classes['NonNetLayers'] = NonNetLayers
+    classes['OsduWellLog'] = OsduWellLog
     classes['OsduWellPath'] = OsduWellPath
+    classes['PdmNestedCollectionBase'] = PdmNestedCollectionBase
     classes['PdmObjectBase'] = PdmObjectBase
     classes['Perforation'] = Perforation
     classes['PerforationCollection'] = PerforationCollection
@@ -3703,11 +4739,14 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['PressureTable'] = PressureTable
     classes['PressureTableItem'] = PressureTableItem
     classes['Project'] = Project
+    classes['PropertyFilter'] = PropertyFilter
     classes['RegularFileSurface'] = RegularFileSurface
     classes['RegularSurface'] = RegularSurface
     classes['ResampleData'] = ResampleData
     classes['Reservoir'] = Reservoir
     classes['ReservoirGridEnsemble'] = ReservoirGridEnsemble
+    classes['RimPolygonAppearance'] = RimPolygonAppearance
+    classes['RimPolygonContainer'] = RimPolygonContainer
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RoffCase'] = RoffCase
     classes['SimulationWell'] = SimulationWell
@@ -3729,6 +4768,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['TextAnnotation'] = TextAnnotation
     classes['ThermalFractureTemplate'] = ThermalFractureTemplate
     classes['TriangleGeometry'] = TriangleGeometry
+    classes['ValveCollection'] = ValveCollection
     classes['ValveTemplate'] = ValveTemplate
     classes['ValveTemplateCollection'] = ValveTemplateCollection
     classes['View'] = View
@@ -3746,6 +4786,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellEventValve'] = WellEventValve
     classes['WellLog'] = WellLog
     classes['WellLogExtractionCurve'] = WellLogExtractionCurve
+    classes['WellLogFileInterface'] = WellLogFileInterface
+    classes['WellLogLasFile'] = WellLogLasFile
     classes['WellLogPlot'] = WellLogPlot
     classes['WellLogPlotCollection'] = WellLogPlotCollection
     classes['WellLogPlotCurve'] = WellLogPlotCurve
@@ -3759,6 +4801,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellPathGeometry'] = WellPathGeometry
     classes['WellPathSicdParameters'] = WellPathSicdParameters
     classes['WellPathTarget'] = WellPathTarget
+    classes['WellPathTimeIn'] = WellPathTimeIn
     classes['WellPathValve'] = WellPathValve
     return classes
 

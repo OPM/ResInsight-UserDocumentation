@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         
       - name: Set up authentication
         env:
@@ -24,7 +24,7 @@ jobs:
         id: get_run
         run: |
           curl -H "Authorization: token ${{ secrets.PAT }}" \
-          https://api.github.com/repos/OPM/ResInsight/actions/workflows/ResInsightWithCache.yml/runs \
+          "https://api.github.com/repos/OPM/ResInsight/actions/workflows/ResInsightWithCache.yml/runs?branch=dev&status=completed&per_page=100" \
           | jq '.workflow_runs[] | select(.conclusion=="success") | .id' \
           | head -n 1 > run_id.txt
           echo "run_id=$(cat run_id.txt)" >> $GITHUB_ENV
@@ -86,20 +86,13 @@ jobs:
           echo "Proto files downloaded:"
           ls -la docs/proto/
 
-      - name: Generate Protocol Buffer documentation
-        run: |
-          cd docs/source
-          python generate_protobuf_docs.py --config proto_docs_config.json
-
-      - name: Create Read the Docs Python examples
-        run: |
-          cd docs/source
-          python create_python_examples.py
-
-      - uses: peter-evans/create-pull-request@v7
+      # ProtobufStructures.rst, the class/enum index and the Python example
+      # pages are generated at Sphinx build time (docs/source/conf.py), so this
+      # workflow only ships the updated rips package and .proto files.
+      - uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update rips module, proto files, and Python examples"
+          commit-message: "Update rips module and proto files"
           title: "Automated updates from ResInsight repository"
           branch: artifact-update-rips
           branch-suffix: random   

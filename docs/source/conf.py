@@ -7,6 +7,7 @@
 # -- Path setup --------------------------------------------------------------
 
 import os
+import subprocess
 import sys
 
 # Add paths for autodoc modules
@@ -37,14 +38,18 @@ except ImportError:
 
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
     'm2r2',
-    'sphinx_automodapi.automodapi',
     'hide_grpc_params',
     'clean_internal_methods',
     'searchable_literalinclude'
 ]
+
+# Generate per-class stub pages for the autosummary tables in
+# GeneratedClasses.rst. Stubs use the template in _templates/autosummary/.
+autosummary_generate = True
 
 # Enable search functionality
 html_search_language = 'en'
@@ -58,16 +63,63 @@ master_doc = 'index'
 napoleon_google_docstring = True
 smartquotes = False
 
-# Clean up automodapi generated files in source after build to make sure we get a full rebuild next time
-def cleanup_automodapi_files(app, exception):
-    """Remove automodapi generated files from source directory after build."""
+# Keep Python objects (classes, methods) out of the page table of
+# contents. Each autosummary stub page is titled after its class, so the
+# class object would otherwise show up as a redundant leaf node beneath
+# the page in the navigation sidebar.
+toc_object_entries = False
+
+# -- Documentation generators ------------------------------------------------
+# These scripts turn the rips package and the .proto files into RST, keeping
+# the docs in sync with docs/rips and docs/proto on every build - local and
+# Read the Docs. They previously ran as separate steps in the
+# update-from-latest workflow.
+GENERATORS = [
+    ['generate_class_index.py'],
+    ['generate_protobuf_docs.py', '--config', 'proto_docs_config.json'],
+    ['create_python_examples.py'],
+]
+
+def run_doc_generators(app, config):
+    """Run the RST generator scripts before Sphinx discovers source files.
+
+    Hooked on 'config-inited' (not 'builder-inited') so the generated
+    api_categories/*.rst exist before Sphinx scans the source tree. That
+    scan feeds autosummary's stub generation; if the files appeared later
+    the per-class stub pages would not be generated on a fresh checkout
+    and the class leaf nodes would be missing from the navigation.
+    """
+    from sphinx.util import logging
+    logger = logging.getLogger(__name__)
+    for cmd in GENERATORS:
+        logger.info('running doc generator: %s', ' '.join(cmd))
+        subprocess.run([sys.executable, *cmd], cwd=app.srcdir, check=True)
+
+# Clean up autosummary generated stub files in source after build to make sure
+# we get a full rebuild next time.
+def cleanup_autosummary_files(app, exception):
+    """Remove autosummary generated stub files from source directory after build."""
     import shutil
     api_dir = os.path.join(app.srcdir, 'api')
     if os.path.exists(api_dir):
         shutil.rmtree(api_dir)
 
+def skip_recursive_type_aliases(app, what, name, obj, skip, options):
+    """Exclude rips.PdmObjectBase's mutually-recursive typing aliases.
+
+    PdmObjectBase defines ``Value = Union[..., "ValueArray"]`` and
+    ``ValueArray = List[Value]``. autodoc recurses through these aliases
+    without terminating, which hangs the build. They are internal
+    annotation helpers, not part of the public API.
+    """
+    if name in ('Value', 'ValueArray'):
+        return True
+    return skip
+
 def setup(app):
-    app.connect('build-finished', cleanup_automodapi_files)
+    app.connect('config-inited', run_doc_generators)
+    app.connect('build-finished', cleanup_autosummary_files)
+    app.connect('autodoc-skip-member', skip_recursive_type_aliases)
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

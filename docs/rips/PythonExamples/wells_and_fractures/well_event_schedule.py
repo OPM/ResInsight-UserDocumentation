@@ -52,7 +52,9 @@ def main():
     )
     print("   Added tubing event on 2024-01-01 (MD 0-2500m)")
 
-    # Add first perforation event
+    # Add first perforation event.
+    # completion_number assigns the perforation to a completion group, which makes
+    # the schedule emit a COMPLUMP keyword lumping these connections into group 1.
     _perf_event1 = timeline.add_perf_event(
         event_date="2024-02-01",
         well_path=well_path,
@@ -61,10 +63,11 @@ def main():
         diameter=0.1,
         skin_factor=0.5,
         state="OPEN",
+        completion_number=1,
     )
-    print("   Added perforation event on 2024-02-01 (MD 2000-2200m)")
+    print("   Added perforation event on 2024-02-01 (MD 2000-2200m, completion 1)")
 
-    # Add second perforation event (later)
+    # Add second perforation event (later), assigned to a different completion group.
     _perf_event2 = timeline.add_perf_event(
         event_date="2024-04-01",
         well_path=well_path,
@@ -73,8 +76,27 @@ def main():
         diameter=0.1,
         skin_factor=0.3,
         state="OPEN",
+        completion_number=2,
     )
-    print("   Added perforation event on 2024-04-01 (MD 2400-2600m)")
+    print("   Added perforation event on 2024-04-01 (MD 2400-2600m, completion 2)")
+
+    # Add a perforation event with an explicit time-of-day. event_date accepts an ISO 8601
+    # timestamp, so a non-midnight time (here with millisecond precision) is preserved and
+    # emitted as the optional TIME field of the DATES keyword (e.g. "DATES\n 15 'MAY' 2024
+    # '14:45:30.500' /"). Date-only events keep their plain DAY/MONTH/YEAR output.
+    _perf_event3 = timeline.add_perf_event(
+        event_date="2024-05-15T14:45:30.500",
+        well_path=well_path,
+        start_md=2300.0,
+        end_md=2350.0,
+        diameter=0.1,
+        skin_factor=0.4,
+        state="OPEN",
+        completion_number=3,
+    )
+    print(
+        "   Added perforation event on 2024-05-15T14:45:30.500 (MD 2300-2350m, completion 3, time-of-day preserved)"
+    )
 
     # Add valve event (requires existing perforation)
     _valve_event = timeline.add_valve_event(
@@ -168,6 +190,27 @@ def main():
     )
     print("   Added GRUPTREE event on 2024-01-01 (group tree definition)")
 
+    # Example 6: TUNING - Time stepping / convergence control.
+    # TUNING is a multi-record keyword: items are distributed into the record that
+    # defines them (record 1: TSINIT/TSMAXZ/TMAXWC, record 3: NEWTMX..MXWPIT), so the
+    # generated keyword has three records, each terminated by its own '/'.
+    _tuning_event = timeline.add_keyword_event(
+        event_date="2024-01-01",
+        keyword_name="TUNING",
+        keyword_data={
+            "TSINIT": 1,
+            "TSMAXZ": 30,
+            "TMAXWC": 1,
+            "NEWTMX": 12,
+            "NEWTMN": 1,
+            "LITMAX": 50,
+            "LITMIN": 1,
+            "MXWSIT": 50,
+            "MXWPIT": 50,
+        },
+    )
+    print("   Added TUNING event on 2024-01-01 (time stepping / convergence control)")
+
     # Apply events up to March 15, 2024
     # This should create:
     # - Tubing interval (Jan 1)
@@ -206,8 +249,18 @@ def main():
         case = cases[0]
         print(f"   Using Eclipse case: {case.name}")
 
-        # Generate schedule text
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        # Generate schedule text. Pass the wells that should get multi-segment-well
+        # keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD); an empty list omits them.
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[well_path]
+        )
+
+        # Generate the same schedule with align_columns=True, which adds a "--"-prefixed
+        # column-header comment per keyword and right-aligns the data into fixed-width
+        # columns. Only the formatting differs from the unaligned text above.
+        schedule_text_aligned = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[well_path], align_columns=True
+        )
 
         if schedule_text:
             print(f"\n   Generated schedule text ({len(schedule_text)} characters)")
@@ -224,15 +277,25 @@ def main():
                 "DATES",
                 "WELSEGS",
                 "COMPSEGS",
+                "COMPDAT",
+                "COMPLUMP",
                 "WCONHIST",
                 "WELTARG",
                 "WRFTPLT",
                 "RPTRST",
                 "GRUPTREE",
+                "TUNING",
             ]
             found_keywords = [kw for kw in expected_keywords if kw in schedule_text]
 
             print(f"   Keywords found: {', '.join(found_keywords)}")
+
+            # The 2024-05-15T14:45:30.500 perforation event should surface as a DATES
+            # keyword carrying the optional TIME field with millisecond precision.
+            if "14:45:30.500" in schedule_text:
+                print(
+                    "   ✓ DATES keyword preserves event time-of-day (TIME field: 14:45:30.500)"
+                )
 
             if "WELSEGS" in schedule_text:
                 print("   ✓ WELSEGS keyword generated (MSW well segments)")
@@ -246,6 +309,9 @@ def main():
 
             if "COMPSEGS" in schedule_text:
                 print("   ✓ COMPSEGS keyword generated (completion segments)")
+
+            if "COMPLUMP" in schedule_text:
+                print("   ✓ COMPLUMP keyword generated (perforation completion groups)")
 
             if "WSEGVALV" in schedule_text:
                 print("   ✓ WSEGVALV keyword generated (segment valves)")
@@ -265,22 +331,29 @@ def main():
             print(f"   - DATES entries: {schedule_text.count('DATES')}")
             print(f"   - WELSEGS entries: {schedule_text.count('WELSEGS')}")
             print(f"   - COMPSEGS entries: {schedule_text.count('COMPSEGS')}")
+            print(f"   - COMPLUMP entries: {schedule_text.count('COMPLUMP')}")
             print(f"   - WSEGVALV entries: {schedule_text.count('WSEGVALV')}")
             print(f"   - WCONHIST entries: {schedule_text.count('WCONHIST')}")
             print(f"   - WELTARG entries: {schedule_text.count('WELTARG')}")
             print(f"   - WRFTPLT entries: {schedule_text.count('WRFTPLT')}")
             print(f"   - RPTRST entries: {schedule_text.count('RPTRST')}")
             print(f"   - GRUPTREE entries: {schedule_text.count('GRUPTREE')}")
+            print(f"   - TUNING entries: {schedule_text.count('TUNING')}")
 
-            # Save to file
-            output_file = "generated_schedule.sch"
-            with open(output_file, "w") as f:
+            # Save both formats to file
+            unaligned_file = "generate_schedule_unaligned.sch"
+            with open(unaligned_file, "w") as f:
                 f.write(schedule_text)
-            print(f"\n   Schedule text saved to: {output_file}")
+            print(f"\n   Unaligned schedule text saved to: {unaligned_file}")
+
+            aligned_file = "generate_schedule_aligned.sch"
+            with open(aligned_file, "w") as f:
+                f.write(schedule_text_aligned)
+            print(f"   Aligned schedule text saved to:   {aligned_file}")
 
             # Show example of generated keywords
             print("\n8. Example of generated Eclipse keywords:")
-            print("   (See generated_schedule.sch for complete output)")
+            print(f"   (See {unaligned_file} / {aligned_file} for complete output)")
             if "WELSEGS" in schedule_text:
                 print("\n   Sample WELSEGS segment:")
                 for line in lines:
@@ -320,8 +393,12 @@ def main():
     print("      keyword_data={'BASIC': 2, 'FREQ': 1}")
     print("  )")
     print("- timeline.set_timestamp(timestamp='2024-06-01')  # Apply events up to date")
-    print("- schedule_text = timeline.generate_schedule_text(eclipse_case=case)")
-    print("  # Generate Eclipse schedule text")
+    print(
+        "- schedule_text = timeline.generate_schedule_text(eclipse_case=case, export_msw_for_wells=[well_path])"
+    )
+    print(
+        "  # Generate Eclipse schedule text (export_msw_for_wells enables MSW keywords)"
+    )
 
 
 if __name__ == "__main__":

@@ -3,7 +3,6 @@ title = "What's New in 2026.02"
 weight = 96
 hidden = false
 search_ignore = true
-aliases = ["/releases/release-notes/latest/"]
 +++
 
 ## Ensemble Import

@@ -6,15 +6,16 @@ in a timeline-based event system. Events can be perforation events, valve events
 tubing changes, well state changes, and production/injection control changes.
 """
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 from datetime import date, datetime
 
 from .pdmobject import add_method
-from .resinsight_classes import Case
+from .resinsight_classes import EclipseCase
 from .generated.generated_classes import (
     KeywordEvent,
     WellEventKeyword,
     WellEventTimeline,
+    WellPath,
 )
 
 
@@ -111,7 +112,9 @@ def add_well_keyword_event(
 
         # Generate schedule
         case = project.cases()[0]
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[well_path]
+        )
         print(schedule_text)
         ```
     """
@@ -121,15 +124,24 @@ def add_well_keyword_event(
     item_values = []
 
     for name, value in keyword_data.items():
+        # Handle bool before int (bool is subclass of int in Python).
+        # bool semantics: True -> flag (emitted as bare KEY in mnemonic-list keywords,
+        # ignored elsewhere); False -> the entry is dropped entirely.
+        if isinstance(value, bool):
+            if not value:
+                continue
+            item_names.append(name)
+            item_types.append("FLAG")
+            # The value is ignored for FLAG items but must be a non-empty string;
+            # empty strings get dropped by the GRPC vector<string> serialization.
+            item_values.append("1")
+            continue
+
         item_names.append(name)
 
         if isinstance(value, str):
             item_types.append("STRING")
             item_values.append(value)
-        elif isinstance(value, bool):
-            # Handle bool before int (bool is subclass of int in Python)
-            item_types.append("INT")
-            item_values.append("1" if value else "0")
         elif isinstance(value, int):
             item_types.append("INT")
             item_values.append(str(value))
@@ -228,15 +240,24 @@ def add_keyword_event(
     item_values = []
 
     for name, value in keyword_data.items():
+        # Handle bool before int (bool is subclass of int in Python).
+        # bool semantics: True -> flag (emitted as bare KEY in mnemonic-list keywords,
+        # ignored elsewhere); False -> the entry is dropped entirely.
+        if isinstance(value, bool):
+            if not value:
+                continue
+            item_names.append(name)
+            item_types.append("FLAG")
+            # The value is ignored for FLAG items but must be a non-empty string;
+            # empty strings get dropped by the GRPC vector<string> serialization.
+            item_values.append("1")
+            continue
+
         item_names.append(name)
 
         if isinstance(value, str):
             item_types.append("STRING")
             item_values.append(value)
-        elif isinstance(value, bool):
-            # Handle bool before int (bool is subclass of int in Python)
-            item_types.append("INT")
-            item_values.append("1" if value else "0")
         elif isinstance(value, int):
             item_types.append("INT")
             item_values.append(str(value))
@@ -263,7 +284,13 @@ def add_keyword_event(
 
 
 @add_method(WellEventTimeline)
-def generate_schedule_text(self: WellEventTimeline, eclipse_case: Case) -> str:
+def generate_schedule_text(
+    self: WellEventTimeline,
+    eclipse_case: EclipseCase,
+    export_msw_for_wells: List[WellPath] = [],
+    first_date_as_comment: bool = True,
+    align_columns: bool = False,
+) -> str:
     """Generate Eclipse schedule text for all wells in the collection.
 
     The timeline is shared across all wells in the well path collection.
@@ -274,7 +301,19 @@ def generate_schedule_text(self: WellEventTimeline, eclipse_case: Case) -> str:
     text directly instead of a DataContainerString.
 
     Arguments:
-        eclipse_case (Case): Eclipse case to use for schedule generation.
+        eclipse_case (EclipseCase): Eclipse case to use for schedule generation.
+        export_msw_for_wells (List[WellPath]): Wells for which the
+            multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD)
+            are exported. Wells not in the list get no MSW keywords. An empty
+            list (the default) suppresses MSW export for all wells.
+        first_date_as_comment (bool): When True (the default), the first
+            (earliest) date is written as a comment line (e.g. "-- Date: 1 JAN
+            2024") instead of a DATES keyword. This avoids a DATES entry equal
+            to the simulation start date, which some commercial simulators
+            reject. Later dates are always emitted as DATES keywords.
+        align_columns (bool): When True, emit each keyword with a "--"-prefixed
+            column-header comment and right-aligned, fixed-width columns instead
+            of the compact default form. Defaults to False.
 
     Returns:
         str: Eclipse schedule text containing DATES, COMPDAT, WELSEGS, WCONPROD, etc.
@@ -306,15 +345,20 @@ def generate_schedule_text(self: WellEventTimeline, eclipse_case: Case) -> str:
             state="OPEN"
         )
 
-        # Generate schedule text for all wells
+        # Generate schedule text, exporting MSW keywords for all wells
         case = project.cases()[0]
-        schedule_text = timeline.generate_schedule_text(eclipse_case=case)
+        schedule_text = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=project.well_paths()
+        )
         print(schedule_text)
         ```
     """
-    container = self.generate_schedule(eclipse_case_id=eclipse_case.id)
+    container = self.generate_schedule(
+        eclipse_case=eclipse_case,
+        export_msw_for_wells=export_msw_for_wells,
+        first_date_as_comment=first_date_as_comment,
+        align_columns=align_columns,
+    )
     if container and container.values:
-        # Workaround: Concatenate all values in case the schedule text
-        # was split by comma parsing in the gRPC layer
         return "".join(container.values)
     return ""

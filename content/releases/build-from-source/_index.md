@@ -12,6 +12,8 @@ See the following for common install procedures and options:
 
 - [ Windows Installation ]({{% ref "windows-installation.md" %}})
 
+- [ Mac Build ]({{% ref "build-instructions-mac.md" %}})
+
 See [ Build Instructions ]({{% ref "cmake-configuration.md" %}}) for the complete list of configuration options including support for 
 Octave plugins, ABAQUS ODB API, and HDF5®.
 

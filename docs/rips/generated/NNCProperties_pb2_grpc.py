@@ -7,7 +7,7 @@ import Case_pb2 as Case__pb2
 import Definitions_pb2 as Definitions__pb2
 import NNCProperties_pb2 as NNCProperties__pb2
 
-GRPC_GENERATED_VERSION = '1.78.0'
+GRPC_GENERATED_VERSION = '1.81.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -27,7 +27,7 @@ if _version_not_supported:
     )
 
 
-class NNCPropertiesStub(object):
+class NNCPropertiesStub:
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -58,7 +58,7 @@ class NNCPropertiesStub(object):
                 _registered_method=True)
 
 
-class NNCPropertiesServicer(object):
+class NNCPropertiesServicer:
     """Missing associated documentation comment in .proto file."""
 
     def GetAvailableNNCProperties(self, request, context):
@@ -116,7 +116,7 @@ def add_NNCPropertiesServicer_to_server(servicer, server):
 
 
  # This class is part of an EXPERIMENTAL API.
-class NNCProperties(object):
+class NNCProperties:
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod

@@ -1,6 +1,15 @@
 __pycache__
+*.pyi
 build
 _build
 .vscode
 api
 venv
+
+# Generated at Sphinx build time by conf.py (see run_doc_generators).
+# Inputs (docs/rips, docs/proto) are tracked; these RST outputs are not.
+source/GeneratedClasses.rst
+source/EnumClasses.rst
+source/ProtobufStructures.rst
+source/PythonExamples*.rst
+source/api_categories/
