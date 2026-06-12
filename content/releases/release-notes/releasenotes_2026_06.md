@@ -39,6 +39,8 @@ aliases = ["/releases/release-notes/latest/"]
 - Fault distance can now be calculated to a selected set of faults.
 - The user interface has been reorganized and the calculation performance improved.
 
+[Fault Distance]({{% relref "FaultDistance" %}})
+
 ## Sector Model Export
 Sector model export has been substantially improved, including support for a custom input DATA file, refinement of individual cells or groups of cells, and handling of aquifer, FIP, valve, **BCCON** and **BCPROP** keywords.
 
