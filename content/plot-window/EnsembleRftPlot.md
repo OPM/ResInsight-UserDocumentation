@@ -63,7 +63,7 @@ Each time step is postfixed by letter(s) to indicate source type(s) of each time
 More than one letter for one single time step, means that the time step comes from multiple case types.
 
 ### Zonation/Formation Names
-The display of formations lines is controlled in the same manner as for [RFT plots]({{% relref "RftPlot" %}}#zonation-formation-names).
+The display of formations lines is controlled in the same manner as for [RFT plots]({{% relref "RftPlot" %}}#zonationformation-names).
 Please see the [full documentation]({{% relref "formations" %}}) of the formations property editor for details about formations.
 
 ### Legend and Axis

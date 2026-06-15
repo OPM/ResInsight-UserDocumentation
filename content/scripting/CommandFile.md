@@ -32,7 +32,6 @@ the [ResInsight Python API](https://api.resinsight.org).
 * [exportProperty](#exportproperty)
 * [exportPropertyInViews](#exportpropertyinviews)
 * [exportWellPathCompletions](#exportwellpathcompletions)
-* [exportSimWellFractureCompletions](#exportsimwellfracturecompletions)
 * [exportMsw](#exportmsw)
 * [exportWellPaths](#exportwellpaths)
 * [exportVisibleCells](#exportvisiblecells)
@@ -48,7 +47,7 @@ the [ResInsight Python API](https://api.resinsight.org).
 * [setFractureContainment](#setfracturecontainment)
 * [createMultipleFractures](#createmultiplefractures)
 * [createLgrForCompletions](#createlgrforcompletions)
-* [createSaturationPressurePlots](#createSaturationPressurePlots)
+* [createSaturationPressurePlots](#createsaturationpressureplots)
 
 ## Syntax
 

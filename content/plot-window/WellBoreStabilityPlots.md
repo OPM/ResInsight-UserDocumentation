@@ -6,7 +6,7 @@ weight = 80
 
 ![](/images/plot-window/WellBoreStability.png)
 
-ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{% relref "welllogsandplots" %}}) to visualize [Formations]({{% relref "formations" %}}), [Well Measurements]({{% relref "wellmeasurements" %}}), [Well Path Attributes]({{% relref "wellpaths" %}}#well-path-attributes) as well as a set of well path derived curves in different tracks. 
+ResInsight can create **Well Bore Stability** plots for Geomechanical cases. These plots are specialized [Well Log Plots]({{% relref "welllogsandplots" %}}) to visualize [Formations]({{% relref "formations" %}}), [Well Measurements]({{% relref "wellmeasurements" %}}), [Well Path Attributes]({{% relref "wellpaths" %}}#casing-design) as well as a set of well path derived curves in different tracks. 
 
 In the figure above, the first track contains [Formations]({{% relref "formations" %}}) and an indication of sea level.
 

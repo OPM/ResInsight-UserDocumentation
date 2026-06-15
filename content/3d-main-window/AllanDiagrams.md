@@ -13,7 +13,7 @@ weight = 91
 The **Allan Diagram** is displayed by selecting the **Separate Fault Result** in the project tree. 
 ![](/images/3d-main-window/AllanDiagramPropertyEditor.png)
 
-See [Faults ]({{% relref "faults/#separate-fault-result" %}}) for more details.
+See [Faults ]({{% relref "faults/#fault-result" %}}) for more details.
 
 ## Property Editor Settings
 
