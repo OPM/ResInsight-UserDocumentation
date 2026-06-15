@@ -104,7 +104,7 @@ A new delta ensemble is created with the two selected ensembles as input and a d
 In the property for the delta ensemble, both input ensembles and operator can be modified.
 Checking *Match On Parameters* ensures strict match on ensemble parameters. 
 In addition, it is possible to specify a fixed time step to be used in delta computation, see 
-[Delta Summary Case]({{% relref "summaryplots" %}}#delta-summary-case) for an example.
+[Delta Summary Case]({{% relref "SummaryPlotDataSources" %}}#delta-summary-case-and-delta-ensemble) for an example.
 
 ![](/images/plot-window/DeltaEnsemblePropertyEditor.png)
 

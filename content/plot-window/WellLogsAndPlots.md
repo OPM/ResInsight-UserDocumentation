@@ -61,7 +61,7 @@ The settings of each Track is controlled by the Property Editor. The figure belo
 
 A track controls the x-axis range of the display which is set in the property panel. In addition to the range, logarithmic display is controlled by checking **Logarithmic Scale**, grid lines are controlled by the **Show Grid Lines** option.
 
-It is also possible to visualize [Well Attributes]({{% relref "wellpaths" %}}#well-path-attributes) such as casing and liners. The following images show some of the possibilities in which the first track shows cross sections of a well and the second track shows a radial view labeled with formations.
+It is also possible to visualize [Well Attributes]({{% relref "wellpaths" %}}#casing-design) such as casing and liners. The following images show some of the possibilities in which the first track shows cross sections of a well and the second track shows a radial view labeled with formations.
 
 ![](/images/plot-window/WellAttributeBothSides.png)
 

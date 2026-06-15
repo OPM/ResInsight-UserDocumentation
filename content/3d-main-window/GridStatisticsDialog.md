@@ -42,6 +42,6 @@ The options in the Visibility group apply to the info box only and do not affect
 The Grid Statistics dialog has a toolbar containing two buttons for snapshot functionality. The leftmost button copies a snapshot of the dialog contents to the operating system's clipboard, while the rightmost button creates a file containing the snapshot.
 
 {{% notice note %}}
-The main window also has a snapshot toolbar containing the button <a href="{{% relref "snapshots" %}}#snapshot-all-viewsplots-to-file-">Snapshot All Views</a>. This button will include a snapshot of the Grid Statistics dialog if opened.
+The main window also has a snapshot toolbar containing the button <a href="{{% relref "snapshots" %}}#snapshot-all-viewsplots-to-file">Snapshot All Views</a>. This button will include a snapshot of the Grid Statistics dialog if opened.
 {{% /notice %}}
 

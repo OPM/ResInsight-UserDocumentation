@@ -24,7 +24,7 @@ Several commands are available as right-click commands on a simulation well. The
    - Add a property filter of **Time Of Flight** to/from the selected well to show only the cells that contribute to/are influenced by the well.
    - Sets the **Cell Result** to show **Tracer With Max Fraction** based on **All Injectors** or **All Producers** (the opposite of the selected well)
    - Toggles the visibility of the other Simulation wells to show only wells contributing to/influenced by the selected well.
-- **New Fracture** -- Creates a new fracture along the simulation well. (See [Fracture instances]({{% relref "welllogsandplots" %}}#fracture-instances))
+- **New Fracture** -- Creates a new fracture along the simulation well. (See [Fracture instances]({{% relref "completions" %}}#fracture-instances))
 - **New Intersection** -- creates a new intersection based on the selected simulation well.  
   ( See [Well Log Plots]({{% relref "intersections" %}}) )
   

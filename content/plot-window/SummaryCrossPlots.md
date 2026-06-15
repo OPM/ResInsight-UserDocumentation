@@ -20,7 +20,7 @@ The combination of cross plot curves are defined in [Plotting Preferences]({{% r
 
 In this property editor, there is an additional group called **Summary Vector X Axis**. Like the other property editor groups, the vector selection groups works the same way as in the ordinary summary plot. 
 
-See the [detailed description]({{% relref "summaryplots" %}}#summary-curves).
+See the [detailed description]({{% relref "summaryplots" %}}#editing-a-summary-curve).
 
 ## Summary Cross Plot Ensemble
 

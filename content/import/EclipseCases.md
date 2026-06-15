@@ -17,10 +17,10 @@ Release 2018.11 supports import of simulations from Intersect. To be able to imp
 ResInsight offers several ways to import reservoir simulation grid files. Use one of the following commands in the **File->Import->Eclipse Cases** menu:
 
 - **Import Eclipse Case**: Brings up the standard file selection dialog. Select _`*.EGRID`_ or _`*.GRID`_ reservoir simulation files for import. Multiple selections are allowed.
-- **Import Eclipse Cases Recursively**: Brings up the recursive file selection dialog. This dialog is described in detail on the [Summary Plots page]({{% relref "eclipsesummarydata" %}}#ensemble-file-import).
+- **Import Eclipse Cases Recursively**: Brings up the recursive file selection dialog. This dialog is described in detail on the [Summary Plots page]({{% relref "ensemblefiledialog" %}}#ensemble-file-import).
 - **Import Eclipse Case (Time Step Filtered)**: See [description](#time-step-filtered-eclipse-result)
 - **Import Input Eclipse Case**: See [description](#eclipse-ascii-input-data)
-- **Create Grid Case Group** : Import a set of reservoir simulation files and places the cases in a [grid case group]({{% relref "casegroupsandstatistics" %}}#creating-grid-case-groups) See [File Selection Dialog]({{% relref "eclipsesummarydata" %}}#ensemble-file-import) for how to import multiple files. All cases must have identical IJK to be part of a grid case group.
+- **Create Grid Case Group** : Import a set of reservoir simulation files and places the cases in a [grid case group]({{% relref "casegroupsandstatistics" %}}#creating-grid-case-groups) See [File Selection Dialog]({{% relref "ensemblefiledialog" %}}#ensemble-file-import) for how to import multiple files. All cases must have identical IJK to be part of a grid case group.
 - **Create Grid Case Ensemble** : Import a set of reservoir simulation files and places the cases in a grid case ensemble. The grid models can have varying IJK resolution. If you have identical IJK for all cases, consider uting a **Grid Case Group** for reduced memory usage and improved performance.
 
 Changing the grid case a view is connected to is described in [3D Views]({{% relref "3d-main-window/3dviews" %}}#change-data-source-for-view)
@@ -34,7 +34,7 @@ You can select several grid files in one go by multiple selection of files (Ctrl
 ### Result Index File
 
 If enabled, ResInsight will generate an index file when reading the simulation result files for the first time. This file will significantly reduce the time used to open the case next time. The file is named _`<casename>.RESINSIGHT_IDX`_
-See [Preferences: Behavior When Loading Data]({{% relref "preferences" %}}#behavior-when-loading-data)
+See [Preferences: Behavior When Loading Data]({{% relref "preferences" %}}#grid)
 
 ## Time Step Filtered Eclipse Result
 Some reservoir simulation files have an enormous amount of time steps. If only a selection of the time steps really are needed for the session, the time steps can be filtered before loading. This can possibly speed up the import a great deal. Filtering can be done in the following way.

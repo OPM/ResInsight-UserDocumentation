@@ -25,7 +25,7 @@ In addition a **Cumulative Saturation by Time of Flight** plot may be shown. Thi
 ### Branches
 
 Each branch of the well will be assigned a separate **Track**. For normal wells this is based on the branch detection algorithm used for Well Pipe visualization, and will correspond to the pipe visualization with **Branch Detection** *On* ( See [Well Pipe Geometry]({{% relref "simulationwells" %}}#well-pipe-geometry) ).
-Multi Segment Wells will be displayed according to their branch information, but tiny branches consisting of only one connection are lumped into the main branch to make the visualization more understandable ( See  [Dummy branches]({{% relref "simulationwells" %}}#dummy-branches) ).
+Multi Segment Wells will be displayed according to their branch information, but tiny branches consisting of only one connection are lumped into the main branch to make the visualization more understandable ( See  [Dummy branches]({{% relref "simulationwells" %}}#well-pipe-geometry) ).
 
 ### Creating Well Allocation Plots
 
@@ -133,7 +133,7 @@ This window displays three different graphs describing the overall behavior of t
     - **All Active Cells** -- Use all the active cells in the model (default)
     - **Visible Cells** -- Use the visible cells in a particular predefined view as cell region. This option will respect all the filter settings in the view, and use the correct cell set for each time step. 
       - **View** -- The view to use as cell filter
-    - **Injector Producer Communication** -- The region of communication between selected producers and injectors. See  [Flow Diagnostic Results]({{% relref "cellresults" %}}#Flow-Diagnostic-Results)
+    - **Injector Producer Communication** -- The region of communication between selected producers and injectors. See  [Flow Diagnostic Results]({{% relref "cellresults" %}}#flow-diagnostic-results)
       - **Tracer Filter** -- Wild card based filter-text to filter the list of tracers
       - **list** -- Producer and injector tracers to select
       - **Show Region** -- Button to create (or edit) a 3D View showing the selected region of cells.
