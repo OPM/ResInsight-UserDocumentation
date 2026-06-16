@@ -25,8 +25,8 @@ var relearn_searchindex = [
   },
   {
     "breadcrumb": "ResInsight",
-    "content": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Release Notes What’s New - Latest Release\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
-    "description": "Installation See the following for common install procedures and options:\nLinux Installation Windows Installation Release Notes What’s New - Latest Release\nSign up to be notified of new releases",
+    "content": "Installation See the following for common install procedures and options:\nLinux Installation Mac Installation Windows Installation Release Notes What’s New - Latest Release\nSign up to be notified of new releases For the complete list of releases and updates, please visit ResInsight on Github.",
+    "description": "Installation See the following for common install procedures and options:\nLinux Installation Mac Installation Windows Installation Release Notes What’s New - Latest Release\nSign up to be notified of new releases",
     "tags": [],
     "title": "Releases",
     "uri": "/ResInsight-UserDocumentation/releases/index.html"
@@ -230,6 +230,14 @@ var relearn_searchindex = [
     "tags": [],
     "title": "Log ASCII Standard File",
     "uri": "/ResInsight-UserDocumentation/import/lasfile/index.html"
+  },
+  {
+    "breadcrumb": "ResInsight \u003e Releases",
+    "content": "ResInsight Installation Download the ZIP binary distribution from https://github.com/OPM/ResInsight/releases\nUnzip the file to extract the ResInsight.app application bundle\nRemove the Gatekeeper quarantine attribute before the first launch:\nsudo xattr -r -d com.apple.quarantine ResInsight.app Launch the application by double-clicking ResInsight.app in Finder, or from a terminal:\nopen ResInsight.app Info The application bundle is not code-signed and not notarized, so macOS Gatekeeper quarantines it on download. Removing the quarantine attribute as shown above is required before the first launch. The distribution requires macOS 15 (Sequoia) or newer and is built with Qt 6.7.0.",
+    "description": "ResInsight Installation Download the ZIP binary distribution from https://github.com/OPM/ResInsight/releases\nUnzip the file to extract the ResInsight.app application bundle\nRemove the Gatekeeper quarantine attribute before the first launch:\nsudo xattr -r -d com.apple.quarantine ResInsight.app Launch the application by double-clicking ResInsight.app in Finder, or from a terminal:\nopen ResInsight.app Info The application bundle is not code-signed and not notarized, so macOS Gatekeeper quarantines it on download. Removing the quarantine attribute as shown above is required before the first launch. The distribution requires macOS 15 (Sequoia) or newer and is built with Qt 6.7.0.",
+    "tags": [],
+    "title": "Mac Installation",
+    "uri": "/ResInsight-UserDocumentation/releases/mac-installation/index.html"
   },
   {
     "breadcrumb": "ResInsight \u003e Best Practices",
