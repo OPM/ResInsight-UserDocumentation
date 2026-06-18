@@ -9,9 +9,6 @@ import rips
 resinsight = rips.Instance.find()
 cases = resinsight.project.cases()
 
-# Set main window size
-resinsight.set_main_window_size(width=800, height=500)
-
 n = 5  # every n-th time_step for snapshot
 property_list = ["SOIL", "PRESSURE"]  # list of parameter for snapshot
 
@@ -42,4 +39,4 @@ for case in cases:
             )
         for time_step in range(0, len(time_steps), 10):
             view.set_time_step(time_step=time_step)
-            view.export_snapshot()
+            view.export_snapshot(width=1024, height=768)
