@@ -63,6 +63,10 @@ CATEGORIES = [
         "DataFilterCollection", "IntersectionCollection",
         "PropertyFilter",
     ]),
+    ("Faults", [
+        "FaultInView", "FaultInViewCollection", "FaultDistance",
+        "FaultDistanceCollection",
+    ]),
     ("Annotations and Polygons", [
         "TextAnnotation", "Polygon", "PolygonCollection",
         "RimPolygonAppearance", "RimPolygonContainer",
@@ -123,12 +127,13 @@ CATEGORIES = [
         "EnsembleStatisticsSurface",
     ]),
     ("Plots and Curves", [
-        "Plot", "PlotWindow", "PlotCurve", "SummaryPlot",
-        "SummaryPlotCollection", "HistogramPlot",
+        "Plot", "PlotWindow", "PlotCurve", "MultiPlot",
+        "SummaryPlot", "MultiSummaryPlot", "SummaryPlotCollection",
+        "HistogramPlot",
     ]),
     ("Data Containers and Statistics", [
-        "DataContainerFloat", "DataContainerString",
-        "DataContainerTime", "ResampleData",
+        "DataContainerEnum", "DataContainerFloat",
+        "DataContainerString", "DataContainerTime", "ResampleData",
         "RimStatisticalCalculation",
     ]),
     ("Base Classes", [
