@@ -101,6 +101,11 @@ class LengthAndDepth(StrEnum):
     INC = "INC"
     ABS = "ABS"
 
+class NameConflictPolicy(StrEnum):
+    FAIL = "FAIL"
+    AUTO_RENAME = "AUTO_RENAME"
+    OVERWRITE = "OVERWRITE"
+
 class NameSetting(StrEnum):
     FULL_CASE_NAME = "FULL_CASE_NAME"
     SHORT_CASE_NAME = "SHORT_CASE_NAME"
@@ -1070,16 +1075,17 @@ class PdmNestedCollectionBase(PdmObjectBase):
         if PdmNestedCollectionBase.__custom_init__ is not None:
             PdmNestedCollectionBase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def add_folder(self, folder_name: str="Folder") -> PdmNestedCollectionBase:
+    def add_folder(self, folder_name: str="Folder", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> PdmNestedCollectionBase:
         """
         Add a new folder
 
         Arguments:
             folder_name (str): New folder name
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
         Returns:
             PdmNestedCollectionBase
         """
-        return self._call_pdm_method_return_value("AddFolder", PdmNestedCollectionBase, folder_name=folder_name)
+        return self._call_pdm_method_return_value("AddFolder", PdmNestedCollectionBase, folder_name=folder_name, on_name_conflict=on_name_conflict)
 
 
 class SurfaceCollection(PdmNestedCollectionBase):
@@ -1095,24 +1101,26 @@ class SurfaceCollection(PdmNestedCollectionBase):
         if SurfaceCollection.__custom_init__ is not None:
             SurfaceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def import_surface(self, file_name: str="") -> Surface:
+    def import_surface(self, file_name: str="", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> Surface:
         """
         Import a new surface from file
 
         Arguments:
             file_name (str): Filename to import surface from
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
         Returns:
             Surface
         """
-        return self._call_pdm_method_return_value("ImportSurface", Surface, file_name=file_name)
+        return self._call_pdm_method_return_value("ImportSurface", Surface, file_name=file_name, on_name_conflict=on_name_conflict)
 
 
-    def new_regular_surface(self, name: str="", origin_x: float=0.000000000000000e+00, origin_y: float=0.000000000000000e+00, depth: float=0.000000000000000e+00, nx: int=10, ny: int=10, increment_x: float=2.000000000000000e+01, increment_y: float=2.000000000000000e+01, rotation: float=0.000000000000000e+00) -> RegularSurface:
+    def new_regular_surface(self, name: str="", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL, origin_x: float=0.000000000000000e+00, origin_y: float=0.000000000000000e+00, depth: float=0.000000000000000e+00, nx: int=10, ny: int=10, increment_x: float=2.000000000000000e+01, increment_y: float=2.000000000000000e+01, rotation: float=0.000000000000000e+00) -> RegularSurface:
         """
         Create a new regular surface
 
         Arguments:
             name (str): 
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
             origin_x (float): 
             origin_y (float): 
             depth (float): 
@@ -1124,7 +1132,7 @@ class SurfaceCollection(PdmNestedCollectionBase):
         Returns:
             RegularSurface
         """
-        return self._call_pdm_method_return_value("NewRegularSurface", RegularSurface, name=name, origin_x=origin_x, origin_y=origin_y, depth=depth, nx=nx, ny=ny, increment_x=increment_x, increment_y=increment_y, rotation=rotation)
+        return self._call_pdm_method_return_value("NewRegularSurface", RegularSurface, name=name, on_name_conflict=on_name_conflict, origin_x=origin_x, origin_y=origin_y, depth=depth, nx=nx, ny=ny, increment_x=increment_x, increment_y=increment_y, rotation=rotation)
 
 
     def new_surface(self, case: Optional[Case]=None, k_index: int=0) -> GridCaseSurface:
@@ -2265,17 +2273,18 @@ class PolygonCollection(RimPolygonContainer):
         if PolygonCollection.__custom_init__ is not None:
             PolygonCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def create_polygon(self, name: str="", coordinates: List[List[float]]=[]) -> Polygon:
+    def create_polygon(self, name: str="", coordinates: List[List[float]]=[], on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> Polygon:
         """
         Create and Add New Polygon
 
         Arguments:
             name (str): 
             coordinates (List[List[float]]): 
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
         Returns:
             Polygon
         """
-        return self._call_pdm_method_return_value("CreatePolygon", Polygon, name=name, coordinates=coordinates)
+        return self._call_pdm_method_return_value("CreatePolygon", Polygon, name=name, coordinates=coordinates, on_name_conflict=on_name_conflict)
 
 
     def polygons(self) -> List[Polygon]:
