@@ -3893,6 +3893,30 @@ class WellEventPerf(WellEvent):
         if WellEventPerf.__custom_init__ is not None:
             WellEventPerf.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_filter(self, filter: Optional[CellFilter]=None) -> None:
+        """
+        Set the cell filter associated with this perforation event (replaces any existing filter)
+
+        Arguments:
+            filter (Optional[CellFilter]): Cell Filter
+        Returns:
+            
+        """
+        self._call_pdm_method_void("AddFilter", filter=filter)
+
+
+    def cell_filter(self, ) -> Optional[CellFilter]:
+        """
+        Cell filter associated with this perforation event, or null if none
+
+        Arguments:
+            
+        Returns:
+            CellFilter
+        """
+        return self._call_pdm_method_return_optional_value("cell_filter", CellFilter)
+
+
 class WellEventState(WellEvent):
     """
     WellEventState
