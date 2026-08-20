@@ -227,11 +227,6 @@ class TestParsing:
         assert filter_attr.quoted is True
         assert doc.wells[0].events[0].attributes["MDEND"].value == 2
 
-    def test_perfid_attribute_parses(self):
-        text = 'ORIONEVENTS 2.0\nWELL "W"\n  @2018-01-01 PERFORATION MDSTART=1 MDEND=2 PERFID=Valysar\n'
-        doc = parse_orion_events(text)
-        assert doc.wells[0].events[0].attributes["PERFID"].value == "Valysar"
-
     def test_trailing_comment_ignored_but_not_inside_quotes(self):
         text = (
             'ORIONEVENTS 2.0\nWELL "W"\n'
@@ -388,7 +383,7 @@ class TestParsing:
             "  @2024-01-01 WCONHIST STATUS=OPEN\n"
             "SCHEDULE\n"
             "  @2024-01-01 RPTRST BASIC=2 FREQ=1\n"
-            "  @2024-01-01 GRUPTREE CHILD=OP PARENT=FIELD\n"
+            "  @2024-01-01 GRUPTREE CHILD_GROUP=OP PARENT_GROUP=FIELD\n"
             'WELL "W"\n'
             "  @2024-02-01 WELTARG CMODE=ORAT VALUE=5000\n"
         )
@@ -398,9 +393,92 @@ class TestParsing:
         # WELL after SCHEDULE switches the sink back to the well block.
         assert [len(w.events) for w in doc.wells] == [1, 1]
 
+    def test_group_blocks_parse_and_switch_event_sink(self):
+        text = (
+            'ORIONEVENTS 2.0\nGROUP "OP"\n'
+            "  @2020-07-01 GEFAC FACTOR=1.0 TRANSFER=YES\n"
+            "  @2020-07-01 GCONPROD CMODE=LRAT LRAT=20000\n"
+            'GROUP "WI"\n'
+            "  @2020-07-01 GCONINJE TYPE=WATER CMODE=RATE RATE=16000\n"
+            "SCHEDULE\n"
+            "  @2020-07-01 RPTRST BASIC=2\n"
+        )
+        doc = parse_orion_events(text)
+        assert [group.group_name for group in doc.groups] == ["OP", "WI"]
+        assert [event.event_type for event in doc.groups[0].events] == [
+            "GEFAC",
+            "GCONPROD",
+        ]
+        assert [event.event_type for event in doc.groups[1].events] == ["GCONINJE"]
+        assert [event.event_type for event in doc.schedule_events] == ["RPTRST"]
+
+    def test_empty_group_block_ok(self):
+        doc = parse_orion_events('ORIONEVENTS 2.0\nGROUP "OP"\n')
+        assert doc.groups[0].group_name == "OP"
+        assert doc.groups[0].events == []
+
+    def test_malformed_group_line_rejected(self):
+        with pytest.raises(OrionParseError, match="Malformed GROUP line"):
+            parse_orion_events("ORIONEVENTS 2.0\nGROUP OP\n")
+
+    def test_boolean_attributes_are_typed_unless_quoted(self):
+        text = (
+            "ORIONEVENTS 2.0\n"
+            "SCHEDULE\n"
+            '  @2024-01-01 RPTRST DEN=True ROCKC=FALSE LABEL="True"\n'
+        )
+        attributes = parse_orion_events(text).schedule_events[0].attributes
+
+        assert attributes["DEN"].value is True
+        assert attributes["ROCKC"].value is False
+        assert attributes["LABEL"].value == "True"
+        assert isinstance(attributes["LABEL"].value, str)
+
     def test_schedule_line_with_arguments_rejected(self):
         with pytest.raises(OrionParseError, match="SCHEDULE takes no arguments"):
             parse_orion_events("ORIONEVENTS 2.0\nSCHEDULE NOW\n")
+
+    def test_report_lines_parse(self):
+        text = (
+            "ORIONEVENTS 2.0\n"
+            "DATE START = 2024-01-01\n"
+            "REPORT 2024-06-01\n"
+            "REPORT START + 31\n"
+        )
+        doc = parse_orion_events(text)
+        assert doc.report_dates == [
+            datetime.date(2024, 6, 1),
+            datetime.date(2024, 2, 1),
+        ]
+
+    def test_report_keeps_duplicates_and_file_order(self):
+        text = "ORIONEVENTS 2.0\nREPORT 2024-06-01\nREPORT 2024-06-01\n"
+        doc = parse_orion_events(text)
+        assert doc.report_dates == [datetime.date(2024, 6, 1)] * 2
+
+    def test_report_inside_block_does_not_close_it(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "W"\n'
+            "  @2024-01-01 WCONHIST STATUS=OPEN\n"
+            "REPORT 2024-06-01\n"
+            "  @2024-02-01 WELTARG CMODE=ORAT VALUE=5000\n"
+        )
+        doc = parse_orion_events(text)
+        assert [len(w.events) for w in doc.wells] == [2]
+        assert doc.report_dates == [datetime.date(2024, 6, 1)]
+
+    def test_report_with_undeclared_variable_raises(self):
+        with pytest.raises(OrionParseError, match="NOPE"):
+            parse_orion_events("ORIONEVENTS 2.0\nREPORT NOPE + 1\n")
+
+    def test_malformed_report_line_raises(self):
+        with pytest.raises(OrionParseError, match="Malformed REPORT line"):
+            parse_orion_events("ORIONEVENTS 2.0\nREPORT\n")
+
+    def test_report_with_datetime_literal(self):
+        text = "ORIONEVENTS 2.0\nREPORT 2024-06-01T14:45:30.500\n"
+        doc = parse_orion_events(text)
+        assert doc.report_dates == [datetime.datetime(2024, 6, 1, 14, 45, 30, 500000)]
 
     def test_datetime_literal_event(self):
         text = (
@@ -710,26 +788,45 @@ class TestApplying:
         assert data["NEW_VALUE"] == 50  # VALUE -> NEW_VALUE
         assert data["CMODE"] == "BHP"
 
-    def test_dshift_is_ignored_with_warning(self):
+    def test_keyword_attributes_forward_without_special_casing(self):
+        # DSHIFT is not part of the format; it forwards unchanged like any
+        # other attribute instead of being stripped.
         text = (
             'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
             "  @2018-01-01 WCONHIST STATUS=OPEN CMODE=ORAT DSHIFT=10\n"
         )
         timeline, report = self._apply(text)
         data = timeline.keyword_calls[0]["keyword_data"]
-        assert "DSHIFT" not in data
-        # Event date is NOT shifted.
+        assert data["DSHIFT"] == 10
         assert timeline.keyword_calls[0]["event_date"] == "2018-01-01"
-        assert any("DSHIFT" in w for w in report.warnings)
+        assert not report.warnings
 
-    def test_perfid_on_perforation_warns_and_applies(self):
+    def test_report_dates_on_apply_report(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
+            "  @2018-01-01 WCONHIST STATUS=OPEN\n"
+            "REPORT 2018-07-01\n"
+            "REPORT 2018-03-01\n"
+            "REPORT 2018-07-01\n"
+        )
+        timeline, report = self._apply(text)
+        # Sorted, deduplicated ISO strings ready for
+        # generate_schedule_text(additional_dates=...). No timeline events.
+        assert report.report_dates == ["2018-03-01", "2018-07-01"]
+        assert report.events_applied == 1
+
+    def test_perfid_on_perforation_is_unknown_attribute_error(self):
+        # PERFID is not part of the format; it is rejected like any other
+        # unknown completion attribute.
         text = (
             'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
             "  @2018-01-01 PERFORATION MDSTART=1 MDEND=2 PERFID=Valysar\n"
         )
         timeline, report = self._apply(text)
-        assert report.events_applied == 1
-        assert any("PERFID" in w for w in report.warnings)
+        assert report.events_applied == 0
+        assert report.events_skipped == 1
+        assert any("PERFID" in e for e in report.errors)
+        assert not timeline.perf_calls
 
     def test_filter_on_keyword_event_warns_and_applies(self):
         text = (
@@ -849,6 +946,29 @@ class TestApplying:
         assert rptrst["keyword_name"] == "RPTRST"
         assert rptrst["keyword_data"] == {"BASIC": 2, "FREQ": 1}
         assert "WELL" not in rptrst["keyword_data"]
+
+    def test_group_events_inject_group_name(self):
+        text = (
+            'ORIONEVENTS 2.0\nGROUP "OP"\n'
+            "  @2020-07-01 GEFAC EFFICIENCY_FACTOR=1.0 USE_GEFAC_IN_NETWORK=YES\n"
+            "  @2020-07-01 GCONPROD CONTROL_MODE=LRAT LIQUID_TARGET=20000 WATER_TARGET=20000 OIL_TARGET=20000\n"
+            'GROUP "WI"\n'
+            "  @2020-07-01 GCONINJE PHASE=WATER CONTROL_MODE=RATE SURFACE_TARGET=16000\n"
+        )
+        timeline, report = self._apply(text)
+        assert report.events_applied == 3
+        assert [call["keyword_name"] for call in timeline.schedule_keyword_calls] == [
+            "GEFAC",
+            "GCONPROD",
+            "GCONINJE",
+        ]
+        assert timeline.schedule_keyword_calls[0]["keyword_data"] == {
+            "GROUP": "OP",
+            "EFFICIENCY_FACTOR": 1.0,
+            "USE_GEFAC_IN_NETWORK": "YES",
+        }
+        assert timeline.schedule_keyword_calls[1]["keyword_data"]["GROUP"] == "OP"
+        assert timeline.schedule_keyword_calls[2]["keyword_data"]["GROUP"] == "WI"
 
     def test_completion_event_in_schedule_block_is_error(self):
         text = (
@@ -1036,6 +1156,88 @@ class TestOrionEventsIntegration:
         well_path_coll = project.descendants(rips.WellPathCollection)[0]
         return project, case, well_path_coll.event_timeline()
 
+    def test_compdat_invalid_item_names_report_valid_names(
+        self, project_with_case_and_wells
+    ):
+        """Invalid COMPDAT items produce an actionable error (issue #14535)."""
+        project, _case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2024-01-01 COMPDAT STATUS=OPEN TRANSMISSIBILITY=1.0\n"
+        )
+
+        with pytest.raises(rips.RipsError) as exc_info:
+            apply_orion_document(document, timeline, project)
+
+        error_msg = str(exc_info.value)
+        assert "Keyword 'COMPDAT' contains invalid item names" in error_msg
+        assert "STATUS, TRANSMISSIBILITY" in error_msg
+        assert (
+            "Valid item names are: WELL, I, J, K1, K2, STATE, SAT_TABLE, "
+            "CONNECTION_TRANSMISSIBILITY_FACTOR, DIAMETER, Kh, SKIN, D_FACTOR, "
+            "DIR, PR"
+        ) in error_msg
+
+    def test_rptrst_boolean_values_emit_bare_mnemonics(
+        self, project_with_case_and_wells
+    ):
+        project, case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2024-01-01 WCONHIST STATUS=OPEN\n"
+            "SCHEDULE\n"
+            "  @2024-01-01 RPTRST BASIC=2 DEN=True ROCKC=True RPORV=True "
+            "RFIP=True FLOWS=True FLORES=True NORST=False\n"
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        assert report.events_applied == 2
+
+        schedule = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[]
+        )
+        rptrst_block = schedule.split("RPTRST", 1)[1].split("/", 1)[0]
+        tokens = rptrst_block.split()
+
+        assert "BASIC=2" in tokens
+        for flag in ("DEN", "ROCKC", "RPORV", "RFIP", "FLOWS", "FLORES"):
+            assert flag in tokens
+            assert f"{flag}=True" not in rptrst_block
+        assert "NORST" not in tokens
+
+    def test_group_sections_generate_group_keywords(self, project_with_case_and_wells):
+        project, case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2020-07-01 WCONHIST STATUS=OPEN CMODE=ORAT\n"
+            'GROUP "OP"\n'
+            "  @2020-07-01 GEFAC EFFICIENCY_FACTOR=1.0 USE_GEFAC_IN_NETWORK=YES\n"
+            "  @2020-07-01 GCONPROD CONTROL_MODE=LRAT LIQUID_TARGET=20000 "
+            "WATER_TARGET=20000 OIL_TARGET=20000\n"
+            'GROUP "WI"\n'
+            "  @2020-07-01 GCONINJE PHASE=WATER CONTROL_MODE=RATE "
+            "SURFACE_TARGET=16000\n"
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        assert report.errors == []
+        assert report.events_applied == 4
+
+        schedule = timeline.generate_schedule_text(
+            eclipse_case=case, export_msw_for_wells=[]
+        )
+        assert "GEFAC" in schedule
+        assert "GCONPROD" in schedule
+        assert "GCONINJE" in schedule
+        assert "'OP'" in schedule
+        assert "'WI'" in schedule
+
     def test_apply_creates_perforations_and_schedule(self, project_with_case_and_wells):
         """End-to-end: parse -> apply -> set_timestamp -> generate schedule."""
         project, case, timeline = project_with_case_and_wells
@@ -1051,11 +1253,13 @@ class TestOrionEventsIntegration:
             "  @START         PERFORATION  MDSTART=2000  MDEND=2200  RADIUS=0.05  SKIN=0.5  COMPLETION_NUMBER=1\n"
             "  @START + RAMP  WCONHIST     STATUS=OPEN  CMODE=ORAT  VFP=1\n"
             "  @START + RAMP  WELTARG      CMODE=BHP  VALUE=50\n"
+            "REPORT 2024-07-01\n"
         )
         document = parse_orion_events(text)
         report = apply_orion_document(document, timeline, project)
         assert report.errors == []
         assert report.events_applied == 3
+        assert report.report_dates == ["2024-07-01"]
 
         # Materialize completions from the perforation event.
         timeline.set_timestamp(timestamp="2024-01-15")
@@ -1066,13 +1270,19 @@ class TestOrionEventsIntegration:
         assert abs(perf.start_measured_depth - 2000.0) < 1.0
         assert abs(perf.end_measured_depth - 2200.0) < 1.0
 
-        # The generated schedule should carry the mapped keywords.
+        # The generated schedule should carry the mapped keywords, and the
+        # REPORT date should appear as a bare DATES entry (issue #14514).
         schedule = timeline.generate_schedule_text(
-            eclipse_case=case, export_msw_for_wells=[]
+            eclipse_case=case,
+            export_msw_for_wells=[],
+            additional_dates=report.report_dates,
         )
         assert "COMPDAT" in schedule
         assert "WCONHIST" in schedule
         assert "WELTARG" in schedule
+        assert "1 'JUL' 2024" in schedule, (
+            "REPORT date should be emitted as a DATES entry"
+        )
 
     def test_apply_full_event_coverage_and_schedule(self, project_with_case_and_wells):
         """All event kinds from well_event_schedule.py expressed as ORIONEVENTS."""
@@ -1095,7 +1305,7 @@ class TestOrionEventsIntegration:
             "  @2024-06-01      WRFTPLT      OUTPUT_RFT=YES  OUTPUT_PLT=NO  OUTPUT_SEGMENT=NO\n"
             "SCHEDULE\n"
             "  @STARTUP  RPTRST    BASIC=2  FREQ=1\n"
-            "  @STARTUP  GRUPTREE  CHILD=OP  PARENT=FIELD\n"
+            "  @STARTUP  GRUPTREE  CHILD_GROUP=OP  PARENT_GROUP=FIELD\n"
             "  @STARTUP  TUNING    TSINIT=1  TSMAXZ=30  NEWTMX=12\n"
         )
         document = parse_orion_events(text)
