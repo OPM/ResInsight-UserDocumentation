@@ -1582,6 +1582,45 @@ class View(ViewWindow):
         if View.__custom_init__ is not None:
             View.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def set_polygon_visible(self, polygon: Optional[Polygon]=None, visible: bool=True) -> None:
+        """
+        Set polygon visibility in this view
+
+        Arguments:
+            polygon (Optional[Polygon]): 
+            visible (bool): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("set_polygon_visible", polygon=polygon, visible=visible)
+
+
+    def set_surface_property(self, surface: Optional[SurfaceInterface]=None, property_name: str="") -> None:
+        """
+        Set the surface property shown in this view
+
+        Arguments:
+            surface (Optional[SurfaceInterface]): 
+            property_name (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("set_surface_property", surface=surface, property_name=property_name)
+
+
+    def set_surface_visible(self, surface: Optional[SurfaceInterface]=None, visible: bool=True) -> None:
+        """
+        Set surface visibility in this view
+
+        Arguments:
+            surface (Optional[SurfaceInterface]): 
+            visible (bool): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("set_surface_visible", surface=surface, visible=visible)
+
+
 class GeoMechView(View):
     """
     The Geomechanical 3d View
@@ -4079,7 +4118,7 @@ class WellEventTimeline(PdmObjectBase):
         return self.children("Events", WellEvent)
 
 
-    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[], first_date_as_comment: bool=True, align_columns: bool=False) -> DataContainerString:
+    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[], first_date_as_comment: bool=True, align_columns: bool=False, additional_dates: List[str]=[]) -> DataContainerString:
         """
         Generate Eclipse schedule text for all wells in the collection
 
@@ -4088,10 +4127,11 @@ class WellEventTimeline(PdmObjectBase):
             export_msw_for_wells (List[WellPath]): Wells for which multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD) are exported
             first_date_as_comment (bool): Emit the first (simulation-start) date as a comment instead of a DATES keyword
             align_columns (bool): Emit a column-header comment and right-aligned, fixed-width columns instead of the compact form
+            additional_dates (List[str]): Additional dates (YYYY-MM-DD or full ISO timestamp) emitted as DATES keywords, e.g. to force summary reports at those dates
         Returns:
             DataContainerString
         """
-        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells, first_date_as_comment=first_date_as_comment, align_columns=align_columns)
+        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells, first_date_as_comment=first_date_as_comment, align_columns=align_columns, additional_dates=additional_dates)
 
 
     def set_timestamp(self, timestamp: str="2024-01-01") -> None:
