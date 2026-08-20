@@ -184,8 +184,8 @@ def main():
         event_date="2024-01-01",
         keyword_name="GRUPTREE",
         keyword_data={
-            "CHILD": "OP",
-            "PARENT": "FIELD",
+            "CHILD_GROUP": "OP",
+            "PARENT_GROUP": "FIELD",
         },
     )
     print("   Added GRUPTREE event on 2024-01-01 (group tree definition)")
@@ -251,8 +251,12 @@ def main():
 
         # Generate schedule text. Pass the wells that should get multi-segment-well
         # keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD); an empty list omits them.
+        # additional_dates are emitted as bare DATES keywords even when no events
+        # fall on them - in Eclipse/Flow a DATES entry ensures a summary report.
         schedule_text = timeline.generate_schedule_text(
-            eclipse_case=case, export_msw_for_wells=[well_path]
+            eclipse_case=case,
+            export_msw_for_wells=[well_path],
+            additional_dates=["2024-07-01"],
         )
 
         # Generate the same schedule with align_columns=True, which adds a "--"-prefixed
