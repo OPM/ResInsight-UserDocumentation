@@ -25,6 +25,7 @@ from rips.orion_events import (  # noqa: E402
     OrionParseError,
     _cli,
     apply_orion_document,
+    coalesce_orion_document,
     parse_orion_events,
 )
 
@@ -54,9 +55,38 @@ WELL "55_33-A-2"
 # ---------------------------------------------------------------------------
 
 
+class FakeCompletionSettings:
+    def __init__(self):
+        self.group_name_for_export = "FIELD"
+        self.allow_well_cross_flow = True
+        self.reference_depth_for_export = None
+        self.well_type_for_export = "OIL"
+        self.custom_segment_calls = []
+
+    def add_custom_segment_interval(self, **kwargs):
+        self.custom_segment_calls.append(kwargs)
+
+
+class FakeMswSettings:
+    def __init__(self):
+        self.pressure_drop = "HF-"
+        self.update_calls = 0
+
+    def update(self):
+        self.update_calls += 1
+
+
 class FakeWellPath:
     def __init__(self, name):
         self.name = name
+        self._completion_settings = FakeCompletionSettings()
+        self._msw_settings = FakeMswSettings()
+
+    def completion_settings(self):
+        return self._completion_settings
+
+    def msw_settings(self):
+        return self._msw_settings
 
 
 class FakeProject:
@@ -126,10 +156,20 @@ class FakeCase:
         return self._data_filter_collection
 
 
-class FakePerfEvent:
+class FakeTimelineEvent:
+    def __init__(self):
+        self.comment = ""
+        self.update_calls = 0
+
+    def update(self):
+        self.update_calls += 1
+
+
+class FakePerfEvent(FakeTimelineEvent):
     """The object returned by add_perf_event; records attached filters."""
 
     def __init__(self):
+        super().__init__()
         self.filters = []
 
     def add_filter(self, filter):
@@ -146,7 +186,9 @@ class FakeTimeline:
         self.tubing_calls = []
         self.valve_calls = []
         self.state_calls = []
+        self.wellspec_calls = []
         self.schedule_keyword_calls = []
+        self.created_events = []
 
     def add_perf_event(self, **kwargs):
         self.perf_calls.append(kwargs)
@@ -154,20 +196,34 @@ class FakeTimeline:
         self.perf_events.append(perf_event)
         return perf_event
 
+    def _new_event(self):
+        event = FakeTimelineEvent()
+        self.created_events.append(event)
+        return event
+
     def add_well_keyword_event(self, **kwargs):
         self.keyword_calls.append(kwargs)
+        return self._new_event()
 
     def add_tubing_event(self, **kwargs):
         self.tubing_calls.append(kwargs)
+        return self._new_event()
 
     def add_valve_event(self, **kwargs):
         self.valve_calls.append(kwargs)
+        return self._new_event()
 
     def add_state_event(self, **kwargs):
         self.state_calls.append(kwargs)
+        return self._new_event()
+
+    def add_wellspec_event(self, **kwargs):
+        self.wellspec_calls.append(kwargs)
+        return self._new_event()
 
     def add_keyword_event(self, **kwargs):
         self.schedule_keyword_calls.append(kwargs)
+        return self._new_event()
 
 
 # ---------------------------------------------------------------------------
@@ -226,6 +282,15 @@ class TestParsing:
         assert filter_attr.value == "SOIL > 0.8 AND PERMX > 200"
         assert filter_attr.quoted is True
         assert doc.wells[0].events[0].attributes["MDEND"].value == 2
+
+    def test_comment_attribute_is_preserved(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "W"\n'
+            '  @2018-01-01 WCONHIST STATUS=OPEN COMMENT="Startup target"\n'
+        )
+        event = parse_orion_events(text).wells[0].events[0]
+        assert event.attributes["COMMENT"].value == "Startup target"
+        assert event.attributes["COMMENT"].quoted is True
 
     def test_trailing_comment_ignored_but_not_inside_quotes(self):
         text = (
@@ -421,6 +486,25 @@ class TestParsing:
         with pytest.raises(OrionParseError, match="Malformed GROUP line"):
             parse_orion_events("ORIONEVENTS 2.0\nGROUP OP\n")
 
+    def test_duplicate_wellspec_for_well_and_date_is_rejected(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "W"\n'
+            "  @2024-01-01 WELLSPEC GROUP=A\n"
+            'WELL "W"\n'
+            "  @2024-01-01 WELLSPEC PHASE=GAS\n"
+        )
+        with pytest.raises(OrionParseError, match="WELLSPEC already defined.*line 3"):
+            parse_orion_events(text)
+
+    def test_wellspec_same_date_for_different_wells_is_allowed(self):
+        document = parse_orion_events(
+            'ORIONEVENTS 2.0\nWELL "A"\n'
+            "  @2024-01-01 WELLSPEC GROUP=GA\n"
+            'WELL "B"\n'
+            "  @2024-01-01 WELLSPEC GROUP=GB\n"
+        )
+        assert [len(well.events) for well in document.wells] == [1, 1]
+
     def test_boolean_attributes_are_typed_unless_quoted(self):
         text = (
             "ORIONEVENTS 2.0\n"
@@ -433,6 +517,41 @@ class TestParsing:
         assert attributes["ROCKC"].value is False
         assert attributes["LABEL"].value == "True"
         assert isinstance(attributes["LABEL"].value, str)
+
+    def test_single_restart_event_parses(self):
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\nSCHEDULE\n  @2024-02-01 RESTART\n"
+        )
+        restart = document.schedule_events[0]
+        assert restart.event_type == "RESTART"
+        assert restart.attributes == {}
+
+    @pytest.mark.parametrize(
+        "text,expected_error",
+        [
+            (
+                'ORIONEVENTS 2.0\nWELL "W"\n  @2024-01-01 RESTART\n',
+                "only valid in a SCHEDULE block",
+            ),
+            (
+                'ORIONEVENTS 2.0\nGROUP "G"\n  @2024-01-01 RESTART\n',
+                "only valid in a SCHEDULE block",
+            ),
+            (
+                "ORIONEVENTS 2.0\nSCHEDULE\n  @2024-01-01 RESTART VALUE=1\n",
+                "takes no attributes",
+            ),
+            (
+                "ORIONEVENTS 2.0\nSCHEDULE\n"
+                "  @2024-01-01 RESTART\n"
+                "  @2024-02-01 RESTART\n",
+                "Only one RESTART event",
+            ),
+        ],
+    )
+    def test_invalid_restart_event_rejected(self, text, expected_error):
+        with pytest.raises(OrionParseError, match=expected_error):
+            parse_orion_events(text)
 
     def test_schedule_line_with_arguments_rejected(self):
         with pytest.raises(OrionParseError, match="SCHEDULE takes no arguments"):
@@ -755,6 +874,64 @@ class TestApplying:
         report = apply_orion_document(doc, timeline, project, **opts)
         return timeline, report
 
+    def test_same_owner_type_and_date_events_are_merged(self):
+        text = (
+            "ORIONEVENTS 2.0\n"
+            'WELL "55_33-A-1"\n'
+            "  @2018-01-01 WCONHIST STATUS=OPEN ORAT=100\n"
+            'WELL "55_33-A-1"\n'
+            "  @2018-01-01 wconhist STATUS=SHUT CMODE=ORAT\n"
+            "  @2018-01-02 WCONHIST STATUS=OPEN\n"
+            'WELL "55_33-A-2"\n'
+            "  @2018-01-01 WCONHIST STATUS=OPEN\n"
+        )
+        document = parse_orion_events(text)
+        merged = coalesce_orion_document(document)
+
+        # Normalization does not mutate the parsed source representation.
+        assert len(document.wells) == 3
+        assert len(merged.wells) == 2
+        assert len(merged.wells[0].events) == 2
+
+        merged_event = merged.wells[0].events[0]
+        assert merged_event.event_type == "WCONHIST"
+        assert merged_event.attributes["STATUS"].value == "SHUT"
+        assert merged_event.attributes["ORAT"].value == 100
+        assert merged_event.attributes["CMODE"].value == "ORAT"
+
+        timeline, report = self._apply(text)
+        assert report.events_applied == 3
+        assert len(timeline.keyword_calls) == 3
+        assert timeline.keyword_calls[0]["keyword_data"]["STATUS"] == "SHUT"
+        assert timeline.keyword_calls[0]["keyword_data"]["ORAT"] == 100
+        assert timeline.keyword_calls[0]["keyword_data"]["CMODE"] == "ORAT"
+
+    def test_group_and_schedule_events_merge_only_within_owner(self):
+        text = (
+            "ORIONEVENTS 2.0\n"
+            'GROUP "OP"\n'
+            "  @2018-01-01 GCONPROD CONTROL_MODE=ORAT\n"
+            'GROUP "OP"\n'
+            "  @2018-01-01 GCONPROD OIL_TARGET=100\n"
+            'GROUP "OTHER"\n'
+            "  @2018-01-01 GCONPROD OIL_TARGET=200\n"
+            "SCHEDULE\n"
+            "  @2018-01-01 RPTRST BASIC=1\n"
+            "SCHEDULE\n"
+            "  @2018-01-01 RPTRST FREQ=2\n"
+        )
+        merged = coalesce_orion_document(parse_orion_events(text))
+
+        assert len(merged.groups) == 2
+        assert len(merged.groups[0].events) == 1
+        assert set(merged.groups[0].events[0].attributes) == {
+            "CONTROL_MODE",
+            "OIL_TARGET",
+        }
+        assert len(merged.groups[1].events) == 1
+        assert len(merged.schedule_events) == 1
+        assert set(merged.schedule_events[0].attributes) == {"BASIC", "FREQ"}
+
     def test_perforation_mapping_radius_to_diameter(self):
         timeline, report = self._apply(SAMPLE)
         assert report.events_applied == 4  # 2 perfs + WCONHIST + WELTARG
@@ -778,6 +955,29 @@ class TestApplying:
         assert data["CMODE"] == "ORAT"
         assert data["VFP_TABLE"] == 1  # VFP -> VFP_TABLE
         assert "VFP" not in data
+
+    def test_comment_is_applied_to_timeline_event_not_keyword_data(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
+            '  @2018-01-01 WCONHIST STATUS=OPEN COMMENT="Startup target"\n'
+        )
+        timeline, report = self._apply(text)
+
+        assert report.errors == []
+        assert "COMMENT" not in timeline.keyword_calls[0]["keyword_data"]
+        assert timeline.created_events[0].comment == "Startup target"
+        assert timeline.created_events[0].update_calls == 1
+
+    def test_perforation_comment_is_applied(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
+            "  @2018-01-01 PERFORATION MDSTART=1 MDEND=2 COMMENT=Interval\n"
+        )
+        timeline, report = self._apply(text)
+
+        assert report.errors == []
+        assert timeline.perf_events[0].comment == "Interval"
+        assert timeline.perf_events[0].update_calls == 1
 
     def test_weltarg_value_translation(self):
         timeline, _ = self._apply(SAMPLE)
@@ -872,10 +1072,56 @@ class TestApplying:
         assert report.events_skipped == 1
         assert any("ZZZ" in e for e in report.errors)
 
-    def test_tubing_mapping(self):
+    def test_wellspec_partial_updates_are_cumulative_by_date(self):
         text = (
             'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
-            "  @2024-01-01 TUBING MDSTART=0 MDEND=2500 INNER_DIAMETER=0.15 ROUGHNESS=1.0e-5\n"
+            "  @2019-01-01 WELLSPEC CROSSFLOW=False PHASE=gas\n"
+            "  @2018-01-01 WELLSPEC GROUP=my_group REFDEPTH=1002 PHASE=water\n"
+        )
+        timeline, report = self._apply(text)
+
+        assert report.errors == []
+        assert report.events_applied == 2
+        # Calls retain source order, but snapshots are resolved chronologically.
+        assert timeline.wellspec_calls[0] == {
+            "event_date": "2019-01-01",
+            "well_path": timeline.wellspec_calls[0]["well_path"],
+            "group_name": "my_group",
+            "allow_cross_flow": False,
+            "reference_depth": 1002.0,
+            "well_type": "GAS",
+        }
+        assert timeline.wellspec_calls[1]["group_name"] == "my_group"
+        assert timeline.wellspec_calls[1]["allow_cross_flow"] is True
+        assert timeline.wellspec_calls[1]["well_type"] == "WATER"
+
+    @pytest.mark.parametrize(
+        "attributes,expected_error",
+        [
+            ("CROSSFLOW=YES", "CROSSFLOW must be True or False"),
+            ("REFDEPTH=deep", "REFDEPTH must be numeric"),
+            ("PHASE=steam", "PHASE must be OIL, GAS, WATER, or LIQUID"),
+            ("GROUP=1", "GROUP must be a non-empty string"),
+            ("UNKNOWN=1", "unknown WELLSPEC attribute"),
+            ("COMMENT=empty", "needs at least one setting attribute"),
+        ],
+    )
+    def test_invalid_wellspec_is_reported_and_skipped(self, attributes, expected_error):
+        text = (
+            f'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n  @2018-01-01 WELLSPEC {attributes}\n'
+        )
+        timeline, report = self._apply(text)
+
+        assert report.events_applied == 0
+        assert report.events_skipped == 1
+        assert expected_error in report.errors[0]
+        assert timeline.wellspec_calls == []
+
+    def test_segment_mapping_creates_custom_interval_and_sets_pressure_drop(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
+            "  @2024-01-01 SEGMENT MDSTART=0 MDEND=2500 INNER_DIAMETER=0.15 "
+            "ROUGHNESS=1.0e-5 PRESSURE_COMPONENTS=HFA\n"
         )
         timeline, report = self._apply(text)
         assert report.events_applied == 1
@@ -884,6 +1130,37 @@ class TestApplying:
         assert call["end_md"] == 2500.0
         assert call["inner_diameter"] == 0.15
         assert call["roughness"] == pytest.approx(1.0e-5)
+
+        well = call["well_path"]
+        assert well.completion_settings().custom_segment_calls == [
+            {"start_md": 0.0, "end_md": 2500.0}
+        ]
+        assert well.msw_settings().pressure_drop == "HFA"
+        assert well.msw_settings().update_calls == 1
+
+    def test_segment_rejects_invalid_pressure_components(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
+            "  @2024-01-01 SEGMENT MDSTART=0 MDEND=2500 "
+            "PRESSURE_COMPONENTS=INVALID\n"
+        )
+        timeline, report = self._apply(text)
+
+        assert report.events_applied == 0
+        assert report.events_skipped == 1
+        assert "PRESSURE_COMPONENTS must be H--, HF-, or HFA" in report.errors[0]
+        assert timeline.tubing_calls == []
+
+    def test_tubing_is_reported_as_renamed_event(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
+            "  @2024-01-01 TUBING MDSTART=0 MDEND=2500\n"
+        )
+        timeline, report = self._apply(text)
+
+        assert report.events_skipped == 1
+        assert timeline.keyword_calls == []
+        assert any("did you mean 'SEGMENT'" in warning for warning in report.warnings)
 
     def test_valve_mapping(self):
         text = (
@@ -947,6 +1224,20 @@ class TestApplying:
         assert rptrst["keyword_data"] == {"BASIC": 2, "FREQ": 1}
         assert "WELL" not in rptrst["keyword_data"]
 
+    def test_restart_event_creates_non_emitting_timeline_marker(self):
+        text = "ORIONEVENTS 2.0\nSCHEDULE\n  @2024-02-01 RESTART\n"
+        timeline, report = self._apply(text)
+
+        assert report.events_applied == 1
+        assert report.errors == []
+        assert timeline.schedule_keyword_calls == [
+            {
+                "event_date": "2024-02-01",
+                "keyword_name": "RESTART",
+                "keyword_data": {},
+            }
+        ]
+
     def test_group_events_inject_group_name(self):
         text = (
             'ORIONEVENTS 2.0\nGROUP "OP"\n'
@@ -969,6 +1260,50 @@ class TestApplying:
         }
         assert timeline.schedule_keyword_calls[1]["keyword_data"]["GROUP"] == "OP"
         assert timeline.schedule_keyword_calls[2]["keyword_data"]["GROUP"] == "WI"
+
+    def test_member_event_expands_to_unique_grouptree_events(self):
+        text = (
+            'ORIONEVENTS 2.0\nGROUP "PRODUCERS"\n'
+            '  @2024-01-01 MEMBER MEMBERS="WELL_A, WELL_B,WELL_A" '
+            'COMMENT="Group membership"\n'
+        )
+        timeline, report = self._apply(text)
+
+        assert report.events_applied == 2
+        assert report.errors == []
+        assert [call["keyword_data"] for call in timeline.schedule_keyword_calls] == [
+            {"CHILD_GROUP": "WELL_A", "PARENT_GROUP": "PRODUCERS"},
+            {"CHILD_GROUP": "WELL_B", "PARENT_GROUP": "PRODUCERS"},
+        ]
+        assert all(
+            event.comment == "Group membership" for event in timeline.created_events
+        )
+
+    @pytest.mark.parametrize(
+        "block,event,expected_error",
+        [
+            ("SCHEDULE", 'MEMBER MEMBERS="A"', "needs a GROUP block"),
+            ('GROUP "G"', "MEMBER", "missing required attribute"),
+            (
+                'GROUP "G"',
+                'MEMBER MEMBERS="A,,B"',
+                "non-empty names",
+            ),
+            (
+                'GROUP "G"',
+                'MEMBER MEMBERS="A" EXTRA=1',
+                "unknown MEMBER attribute",
+            ),
+        ],
+    )
+    def test_invalid_member_event_is_skipped(self, block, event, expected_error):
+        text = f"ORIONEVENTS 2.0\n{block}\n  @2024-01-01 {event}\n"
+        timeline, report = self._apply(text)
+
+        assert report.events_applied == 0
+        assert report.events_skipped == 1
+        assert timeline.schedule_keyword_calls == []
+        assert expected_error in report.errors[0]
 
     def test_completion_event_in_schedule_block_is_error(self):
         text = (
@@ -1012,8 +1347,8 @@ class TestFilterApplying:
 
     def _perf_text(self, decls, *filter_values):
         events = "".join(
-            f"  @2018-01-01 PERFORATION MDSTART=1 MDEND=2 FILTER={value}\n"
-            for value in filter_values
+            f"  @2018-01-{index:02d} PERFORATION MDSTART=1 MDEND=2 FILTER={value}\n"
+            for index, value in enumerate(filter_values, start=1)
         )
         return "ORIONEVENTS 2.0\n" + decls + 'WELL "55_33-A-1"\n' + events
 
@@ -1209,6 +1544,24 @@ class TestOrionEventsIntegration:
             assert f"{flag}=True" not in rptrst_block
         assert "NORST" not in tokens
 
+    def test_event_comment_precedes_generated_keyword(
+        self, project_with_case_and_wells
+    ):
+        project, case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            '  @2024-01-01 WCONHIST STATUS=OPEN COMMENT="Startup target"\n'
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        assert report.errors == []
+
+        schedule = timeline.generate_schedule_text(eclipse_case=case)
+        assert "-- Startup target\nWCONHIST\n" in schedule
+        assert "COMMENT" not in schedule
+
     def test_group_sections_generate_group_keywords(self, project_with_case_and_wells):
         project, case, timeline = project_with_case_and_wells
         well = project.well_paths()[0]
@@ -1237,6 +1590,109 @@ class TestOrionEventsIntegration:
         assert "GCONINJE" in schedule
         assert "'OP'" in schedule
         assert "'WI'" in schedule
+
+    def test_member_event_generates_grouptree(self, project_with_case_and_wells):
+        project, case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2024-01-01 WCONHIST STATUS=OPEN\n"
+            'GROUP "PRODUCERS"\n'
+            '  @2024-01-01 MEMBER MEMBERS="WELL_A,WELL_B"\n'
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        assert report.errors == []
+        assert report.events_applied == 3
+
+        schedule = timeline.generate_schedule_text(eclipse_case=case)
+        grouptree_block = schedule.split("GRUPTREE", 1)[1].split("\n/\n", 1)[0]
+        normalized_block = " ".join(grouptree_block.split())
+        assert "'WELL_A' 'PRODUCERS'" in normalized_block
+        assert "'WELL_B' 'PRODUCERS'" in normalized_block
+
+    def test_wellspec_updates_settings_and_generates_cumulative_welspecs(
+        self, project_with_case_and_wells
+    ):
+        project, case, timeline = project_with_case_and_wells
+        well = next(wp for wp in project.well_paths() if "A" in wp.name)
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2018-01-01 WELLSPEC GROUP=my_group REFDEPTH=1002 PHASE=water\n"
+            "  @2019-01-01 WELLSPEC CROSSFLOW=False REFDEPTH=1000 PHASE=oil\n"
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        assert report.errors == []
+        assert report.events_applied == 2
+
+        schedule = timeline.generate_schedule_text(
+            eclipse_case=case, first_date_as_comment=False, align_columns=True
+        )
+        assert schedule.count("WELSPECS\n") == 2
+        blocks = schedule.split("WELSPECS\n")[1:]
+        first_record = " ".join(blocks[0].split("\n/\n", 1)[0].split())
+        second_record = " ".join(blocks[1].split("\n/\n", 1)[0].split())
+
+        assert "'my_group'" in first_record
+        assert "1002" in first_record
+        assert "'WATER'" in first_record
+        assert "'YES'" in first_record
+        assert "1*" not in first_record.split("'my_group'", 1)[1].split("1002", 1)[0]
+
+        assert "'my_group'" in second_record
+        assert "1000" in second_record
+        assert "'OIL'" in second_record
+        assert "'NO'" in second_record
+
+        timeline.set_timestamp(timestamp="2018-06-01")
+        settings = well.completion_settings()
+        assert settings.group_name_for_export == "my_group"
+        assert settings.allow_well_cross_flow is True
+        assert settings.reference_depth_for_export == 1002
+        assert settings.well_type_for_export == "WATER"
+
+        timeline.set_timestamp(timestamp="2019-06-01")
+        settings = well.completion_settings()
+        assert settings.group_name_for_export == "my_group"
+        assert settings.allow_well_cross_flow is False
+        assert settings.reference_depth_for_export == 1000
+        assert settings.well_type_for_export == "OIL"
+
+    def test_restart_truncates_generated_schedule(self, project_with_case_and_wells):
+        project, case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2024-01-01 WCONHIST STATUS=OPEN CMODE=ORAT ORAT=100\n"
+            "  @2024-02-01 WCONHIST STATUS=OPEN CMODE=ORAT ORAT=200\n"
+            "  @2024-03-01 WCONHIST STATUS=OPEN CMODE=ORAT ORAT=300\n"
+            "REPORT 2024-01-15\n"
+            "REPORT 2024-04-01\n"
+            "SCHEDULE\n"
+            "  @2024-02-01 RESTART\n"
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        assert report.errors == []
+
+        schedule = timeline.generate_schedule_text(
+            eclipse_case=case,
+            first_date_as_comment=False,
+            additional_dates=report.report_dates,
+        )
+        assert "1 'JAN' 2024" not in schedule
+        assert "15 'JAN' 2024" not in schedule
+        assert "1 'FEB' 2024" in schedule
+        assert "1 'MAR' 2024" in schedule
+        assert "1 'APR' 2024" in schedule
+        assert " 100" not in schedule
+        assert " 200" in schedule
+        assert " 300" in schedule
+        assert "RESTART\n" not in schedule
 
     def test_apply_creates_perforations_and_schedule(self, project_with_case_and_wells):
         """End-to-end: parse -> apply -> set_timestamp -> generate schedule."""
@@ -1295,7 +1751,7 @@ class TestOrionEventsIntegration:
             "DATE STARTUP = 2024-01-01\n"
             "DURATION RAMP = 31 DAYS\n"
             f'WELL "{well.name}"\n'
-            "  @STARTUP         TUBING       MDSTART=0  MDEND=2500  INNER_DIAMETER=0.15  ROUGHNESS=1.0e-5\n"
+            "  @STARTUP         SEGMENT      MDSTART=0  MDEND=2500  INNER_DIAMETER=0.15  ROUGHNESS=1.0e-5 PRESSURE_COMPONENTS=HFA\n"
             "  @STARTUP + RAMP  PERFORATION  MDSTART=2000  MDEND=2200  RADIUS=0.05  SKIN=0.5  COMPLETION_NUMBER=1\n"
             "  @2024-05-15T14:45:30.500  PERFORATION  MDSTART=2300  MDEND=2350  RADIUS=0.05  SKIN=0.4  COMPLETION_NUMBER=2\n"
             "  @2024-03-01      VALVE        MD=2100  TYPE=ICV  STATE=OPEN  CV=0.7  AREA=0.0001\n"
@@ -1313,6 +1769,13 @@ class TestOrionEventsIntegration:
         assert report.errors == []
         assert report.warnings == []
         assert report.events_applied == 11
+
+        custom_segments = well.descendants(rips.CustomSegmentInterval)
+        assert any(
+            segment.start_md == 0.0 and segment.end_md == 2500.0
+            for segment in custom_segments
+        )
+        assert well.msw_settings().pressure_drop == "HFA"
 
         timeline.set_timestamp(timestamp="2024-12-24")
         schedule = timeline.generate_schedule_text(

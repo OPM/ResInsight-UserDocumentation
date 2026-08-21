@@ -79,6 +79,10 @@ Notes on the grammar:
   group name is injected as the ``GROUP`` item when each event is applied.
   A bare ``SCHEDULE`` line opens a block of schedule-level keyword events not
   tied to any well (RPTRST, GRUPTREE, TUNING, ...). Empty blocks are legal.
+  ``MEMBER MEMBERS="A,B"`` inside a GROUP block is shorthand for one GRUPTREE
+  record per unique member, with the enclosing group as parent. A schedule may
+  contain one attribute-free ``RESTART`` event; it truncates generated schedule
+  output before its timestamp and is not itself emitted as a keyword.
 * ``REPORT <date_expr>`` (one date per line, anywhere after the header) names
   a date that should appear as a bare ``DATES`` keyword in the generated
   schedule even when no events fall on it — in Eclipse/Flow a ``DATES`` entry
@@ -91,11 +95,18 @@ Notes on the grammar:
   attribute values, e.g. ``FILTER="SOIL > 0.8 AND PERMX > 200"``.
 * Every attribute is ``KEY=VALUE``; bare positional tokens are rejected.
 * Event types inside a WELL block are either the built-in completion events
-  ``PERFORATION``, ``TUBING``, ``VALVE`` and ``STATE``, or any Eclipse well
-  keyword (``WCONHIST``, ``WELTARG``, ``WRFTPLT``, ``WCONPROD``, ...), which
+  ``PERFORATION``, ``SEGMENT``, ``VALVE``, ``STATE`` and ``WELLSPEC``, or any
+  Eclipse well keyword (``WCONHIST``, ``WELTARG``, ``WRFTPLT``, ``WCONPROD``,
+  ...), which
   is passed through generically with the well name injected as WELL. Event
-  types inside a GROUP block are Eclipse group keywords with the group name
-  injected as GROUP. Event types inside a SCHEDULE block are Eclipse schedule
+  ``WELLSPEC`` accepts partial updates to ``GROUP``, ``CROSSFLOW``, ``REFDEPTH``
+  and ``PHASE`` (OIL/GAS/WATER/LIQUID). Omitted values inherit the previous
+  WELLSPEC state, initially using the well's completion export settings. There
+  may be multiple WELLSPEC events for a well, but not at the same timestamp.
+  Each emits a WELSPECS record with the cumulative state. Event values are
+  materialized back onto completion settings by ``timeline.set_timestamp()``.
+  Event types inside a GROUP block are Eclipse group keywords with the group
+  name injected as GROUP. Event types inside a SCHEDULE block are Eclipse schedule
   keywords passed through as-is. An event type that closely resembles a built-in
   is treated as a typo per the ``on_unknown_event`` policy instead of being
   passed through.
@@ -119,6 +130,7 @@ Notes on the grammar:
 
 from __future__ import annotations
 
+import copy
 import datetime
 import difflib
 import os
@@ -246,6 +258,16 @@ class AttrValue:
 
 
 @dataclass
+class WellSpecState:
+    """Fully resolved cumulative state for one WELLSPEC event."""
+
+    group: str
+    crossflow: bool
+    refdepth: Optional[float]
+    phase: str
+
+
+@dataclass
 class OrionEvent:
     """One event line in an enclosing WELL, GROUP or SCHEDULE block."""
 
@@ -254,6 +276,7 @@ class OrionEvent:
     attributes: Dict[str, AttrValue]
     loc: SourceLoc
     filter: Optional[EventFilter] = None
+    well_spec: Optional[WellSpecState] = None
 
 
 @dataclass
@@ -411,6 +434,8 @@ def parse_orion_events(text: str) -> OrionDocument:
     if version is None:
         raise OrionParseError("Empty file: missing 'ORIONEVENTS' header")
 
+    errors.extend(_restart_validation_issues(wells, groups, schedule_events))
+    errors.extend(_wellspec_validation_issues(wells))
     if errors:
         raise OrionParseError(errors=errors)
 
@@ -424,6 +449,62 @@ def parse_orion_events(text: str) -> OrionDocument:
         report_dates=report_dates,
         warnings=warnings,
     )
+
+
+def _restart_validation_issues(
+    wells: List[WellBlock],
+    groups: List[GroupBlock],
+    schedule_events: List[OrionEvent],
+) -> List[ParseIssue]:
+    """Validate placement, cardinality and shape of RESTART events."""
+    issues: List[ParseIssue] = []
+    for well_block in wells:
+        for event in well_block.events:
+            if event.event_type.upper() == "RESTART":
+                issues.append(
+                    ParseIssue("RESTART is only valid in a SCHEDULE block", event.loc)
+                )
+    for group_block in groups:
+        for event in group_block.events:
+            if event.event_type.upper() == "RESTART":
+                issues.append(
+                    ParseIssue("RESTART is only valid in a SCHEDULE block", event.loc)
+                )
+
+    restart_events = [
+        event for event in schedule_events if event.event_type.upper() == "RESTART"
+    ]
+    for event in restart_events:
+        if event.attributes:
+            issues.append(ParseIssue("RESTART takes no attributes", event.loc))
+    for event in restart_events[1:]:
+        issues.append(
+            ParseIssue("Only one RESTART event is allowed per schedule", event.loc)
+        )
+    return issues
+
+
+def _wellspec_validation_issues(wells: List[WellBlock]) -> List[ParseIssue]:
+    """Reject multiple WELLSPEC events for one well at the same timestamp."""
+    seen: Dict[Tuple[str, Union[datetime.date, datetime.datetime]], OrionEvent] = {}
+    issues: List[ParseIssue] = []
+    for well in wells:
+        for event in well.events:
+            if event.event_type.upper() != "WELLSPEC":
+                continue
+            key = (well.well_name, event.event_date)
+            previous = seen.get(key)
+            if previous is not None:
+                issues.append(
+                    ParseIssue(
+                        f"WELLSPEC already defined for well '{well.well_name}' "
+                        f"at this date (line {previous.loc.line})",
+                        event.loc,
+                    )
+                )
+            else:
+                seen[key] = event
+    return issues
 
 
 def _check_version(version: str, loc: SourceLoc) -> None:
@@ -897,11 +978,27 @@ _IGNORED_KEYWORD_ATTRS = {"FILTER"}
 # FILTER is applied on PERFORATION events; it is accepted on the other
 # completion events but ignored with a warning.
 _PERF_REQUIRED = ("MDSTART", "MDEND")
-_PERF_KNOWN = {"MDSTART", "MDEND", "RADIUS", "SKIN", "COMPLETION_NUMBER", "FILTER"}
-_TUBING_REQUIRED = ("MDSTART", "MDEND")
-_TUBING_KNOWN = {"MDSTART", "MDEND", "INNER_DIAMETER", "ROUGHNESS"}
+_PERF_KNOWN = {
+    "MDSTART",
+    "MDEND",
+    "RADIUS",
+    "SKIN",
+    "COMPLETION_NUMBER",
+    "FILTER",
+    "COMMENT",
+}
+_SEGMENT_REQUIRED = ("MDSTART", "MDEND")
+_SEGMENT_KNOWN = {
+    "MDSTART",
+    "MDEND",
+    "INNER_DIAMETER",
+    "ROUGHNESS",
+    "PRESSURE_COMPONENTS",
+    "COMMENT",
+}
+_PRESSURE_COMPONENTS = {"H--", "HF-", "HFA"}
 _VALVE_REQUIRED = ("MD", "TYPE")
-_VALVE_KNOWN = {"MD", "TYPE", "STATE", "CV", "AREA"} | {
+_VALVE_KNOWN = {"MD", "TYPE", "STATE", "CV", "AREA", "COMMENT"} | {
     "AICD_STRENGTH",
     "AICD_DENSITY_CALIB_FLUID",
     "AICD_VISCOSITY_CALIB_FLUID",
@@ -909,7 +1006,9 @@ _VALVE_KNOWN = {"MD", "TYPE", "STATE", "CV", "AREA"} | {
     "AICD_VISC_FUNC_EXP",
 }
 _STATE_REQUIRED = ("STATE",)
-_STATE_KNOWN = {"STATE"}
+_STATE_KNOWN = {"STATE", "COMMENT"}
+_WELLSPEC_KNOWN = {"GROUP", "CROSSFLOW", "REFDEPTH", "PHASE", "COMMENT"}
+_WELLSPEC_PHASES = {"OIL", "GAS", "WATER", "LIQUID"}
 _COMPLETION_IGNORED = {"FILTER"}
 _PERF_IGNORED = _COMPLETION_IGNORED  # backwards-compatible alias
 
@@ -927,6 +1026,15 @@ def _iso_event_date(event_date: Union[datetime.date, datetime.datetime]) -> str:
     return event_date.isoformat()
 
 
+def _apply_event_comment(event: OrionEvent, timeline_event: Any) -> None:
+    """Copy an optional COMMENT attribute to the created timeline event."""
+    comment = event.attributes.get("COMMENT")
+    if comment is None:
+        return
+    timeline_event.comment = str(comment.value)
+    timeline_event.update()
+
+
 def apply_orion_events_file(
     path: Union[str, "os.PathLike[str]"],
     timeline: Any,
@@ -938,6 +1046,145 @@ def apply_orion_events_file(
     """Parse an ORIONEVENTS file and apply it to ``timeline``."""
     document = parse_orion_events_file(path)
     return apply_orion_document(document, timeline, project, case=case, **options)
+
+
+def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
+    """Return a copy with same-owner/type/timestamp events merged.
+
+    The first event retains its position. Attributes from later matching events
+    are applied in source order, adding missing values and overriding repeated
+    values. Owners are matched by well name, group name, or the global SCHEDULE
+    scope.
+    """
+    result = copy.deepcopy(document)
+
+    def merge_events(events: List[OrionEvent]) -> List[OrionEvent]:
+        merged: List[OrionEvent] = []
+        by_key: Dict[
+            Tuple[Union[datetime.date, datetime.datetime], str], OrionEvent
+        ] = {}
+        for event in events:
+            key = (event.event_date, event.event_type.upper())
+            existing = by_key.get(key)
+            if existing is None:
+                by_key[key] = event
+                merged.append(event)
+                continue
+
+            existing.attributes.update(event.attributes)
+            if "FILTER" in event.attributes:
+                existing.filter = event.filter
+            existing.loc = event.loc
+        return merged
+
+    def merge_well_blocks(blocks: List[WellBlock]) -> List[WellBlock]:
+        merged_blocks: List[WellBlock] = []
+        by_name: Dict[str, WellBlock] = {}
+        for block in blocks:
+            block_events = block.events
+            existing = by_name.get(block.well_name)
+            if existing is None:
+                block.events = []
+                by_name[block.well_name] = block
+                merged_blocks.append(block)
+            by_name[block.well_name].events.extend(block_events)
+        for block in merged_blocks:
+            block.events = merge_events(block.events)
+        return merged_blocks
+
+    def merge_group_blocks(blocks: List[GroupBlock]) -> List[GroupBlock]:
+        merged_blocks: List[GroupBlock] = []
+        by_name: Dict[str, GroupBlock] = {}
+        for block in blocks:
+            block_events = block.events
+            existing = by_name.get(block.group_name)
+            if existing is None:
+                block.events = []
+                by_name[block.group_name] = block
+                merged_blocks.append(block)
+            by_name[block.group_name].events.extend(block_events)
+        for block in merged_blocks:
+            block.events = merge_events(block.events)
+        return merged_blocks
+
+    result.wells = merge_well_blocks(result.wells)
+    result.groups = merge_group_blocks(result.groups)
+    result.schedule_events = merge_events(result.schedule_events)
+    return result
+
+
+def _enum_text(value: Any) -> str:
+    """Return the serialized text of a generated enum or plain string."""
+    return str(getattr(value, "value", value)).upper()
+
+
+def _prepare_wellspec_events(
+    events: List[OrionEvent], completion_settings: Any, report: ApplyReport
+) -> None:
+    """Validate WELLSPEC attributes and resolve partial updates chronologically."""
+    state = WellSpecState(
+        group=str(completion_settings.group_name_for_export),
+        crossflow=bool(completion_settings.allow_well_cross_flow),
+        refdepth=completion_settings.reference_depth_for_export,
+        phase=_enum_text(completion_settings.well_type_for_export),
+    )
+
+    wellspecs = sorted(
+        (event for event in events if event.event_type.upper() == "WELLSPEC"),
+        key=lambda event: event.event_date,
+    )
+    for event in wellspecs:
+        attrs = event.attributes
+        unknown = set(attrs) - _WELLSPEC_KNOWN
+        if unknown:
+            report.errors.append(
+                f"Line {event.loc.line}: unknown WELLSPEC attribute(s): "
+                f"{', '.join(sorted(unknown))}"
+            )
+            report.events_skipped += 1
+            continue
+        if not (set(attrs) - {"COMMENT"}):
+            report.errors.append(
+                f"Line {event.loc.line}: WELLSPEC needs at least one setting attribute"
+            )
+            report.events_skipped += 1
+            continue
+
+        next_state = copy.copy(state)
+        errors: List[str] = []
+        if "GROUP" in attrs:
+            value = attrs["GROUP"].value
+            if not isinstance(value, str) or not value:
+                errors.append("GROUP must be a non-empty string")
+            else:
+                next_state.group = value
+        if "CROSSFLOW" in attrs:
+            value = attrs["CROSSFLOW"].value
+            if not isinstance(value, bool):
+                errors.append("CROSSFLOW must be True or False")
+            else:
+                next_state.crossflow = value
+        if "REFDEPTH" in attrs:
+            value = attrs["REFDEPTH"].value
+            if isinstance(value, bool) or not isinstance(value, (int, float)):
+                errors.append("REFDEPTH must be numeric")
+            else:
+                next_state.refdepth = float(value)
+        if "PHASE" in attrs:
+            value = attrs["PHASE"].value
+            phase = value.upper() if isinstance(value, str) else ""
+            if phase not in _WELLSPEC_PHASES:
+                errors.append("PHASE must be OIL, GAS, WATER, or LIQUID")
+            else:
+                next_state.phase = phase
+
+        if errors:
+            report.errors.extend(f"Line {event.loc.line}: {error}" for error in errors)
+            report.events_skipped += 1
+            continue
+
+        state = next_state
+        event.well_spec = copy.copy(state)
 
 
 def apply_orion_document(
@@ -976,6 +1223,7 @@ def apply_orion_document(
     """
     _validate_policy(on_unknown_well, "on_unknown_well")
     _validate_policy(on_unknown_event, "on_unknown_event")
+    document = coalesce_orion_document(document)
     report = ApplyReport()
     report.report_dates = sorted({d.isoformat() for d in document.report_dates})
 
@@ -991,6 +1239,8 @@ def apply_orion_document(
                 report.warnings.append(message)
             report.events_skipped += len(well.events)
             continue
+
+        _prepare_wellspec_events(well.events, well_path.completion_settings(), report)
 
         for event in well.events:
             event_type = event.event_type.upper()
@@ -1147,8 +1397,58 @@ def _materialize_filter(ctx: _FilterContext, event_filter: EventFilter) -> Any:
 
 def _suspected_typo(event_type: str) -> Optional[str]:
     """Return the built-in event type this one looks like a misspelling of."""
+    if event_type == "TUBING":
+        return "SEGMENT"
     close = difflib.get_close_matches(event_type, _EVENT_DISPATCH, n=1, cutoff=0.8)
     return close[0] if close else None
+
+
+def _apply_member_event(
+    event: OrionEvent,
+    timeline: Any,
+    report: ApplyReport,
+    group_name: Optional[str],
+) -> None:
+    """Expand a GROUP MEMBER event into one GRUPTREE event per member."""
+    if group_name is None:
+        report.errors.append(f"Line {event.loc.line}: MEMBER needs a GROUP block")
+        report.events_skipped += 1
+        return
+
+    unknown = set(event.attributes) - {"MEMBERS", "COMMENT"}
+    if unknown:
+        report.errors.append(
+            f"Line {event.loc.line}: unknown MEMBER attribute(s): "
+            f"{', '.join(sorted(unknown))}"
+        )
+        report.events_skipped += 1
+        return
+    if "MEMBERS" not in event.attributes:
+        report.errors.append(
+            f"Line {event.loc.line}: MEMBER missing required attribute: MEMBERS"
+        )
+        report.events_skipped += 1
+        return
+
+    raw_members = str(event.attributes["MEMBERS"].value)
+    members = [member.strip() for member in raw_members.split(",")]
+    if not members or any(not member for member in members):
+        report.errors.append(
+            f"Line {event.loc.line}: MEMBERS must be a comma-delimited list of "
+            "non-empty names"
+        )
+        report.events_skipped += 1
+        return
+
+    unique_members = list(dict.fromkeys(members))
+    for member in unique_members:
+        timeline_event = timeline.add_keyword_event(
+            event_date=_iso_event_date(event.event_date),
+            keyword_name="GRUPTREE",
+            keyword_data={"CHILD_GROUP": member, "PARENT_GROUP": group_name},
+        )
+        _apply_event_comment(event, timeline_event)
+        report.events_applied += 1
 
 
 def _apply_schedule_event(
@@ -1159,6 +1459,17 @@ def _apply_schedule_event(
 ) -> None:
     """Apply one GROUP- or SCHEDULE-block event as an Eclipse keyword."""
     event_type = event.event_type.upper()
+    if event_type == "RESTART":
+        timeline.add_keyword_event(
+            event_date=_iso_event_date(event.event_date),
+            keyword_name="RESTART",
+            keyword_data={},
+        )
+        report.events_applied += 1
+        return
+    if event_type == "MEMBER":
+        _apply_member_event(event, timeline, report, group_name)
+        return
     if event_type in _COMPLETION_EVENT_TYPES:
         report.errors.append(
             f"Line {event.loc.line}: {event_type} is a completion event and "
@@ -1169,6 +1480,8 @@ def _apply_schedule_event(
 
     keyword_data: Dict[str, Any] = {}
     for key, attr in event.attributes.items():
+        if key == "COMMENT":
+            continue
         if key in _IGNORED_KEYWORD_ATTRS:
             report.warnings.append(
                 f"Line {event.loc.line}: attribute '{key}' on {event_type} "
@@ -1179,11 +1492,12 @@ def _apply_schedule_event(
     if group_name is not None:
         keyword_data["GROUP"] = group_name
 
-    timeline.add_keyword_event(
+    timeline_event = timeline.add_keyword_event(
         event_date=_iso_event_date(event.event_date),
         keyword_name=event_type,
         keyword_data=keyword_data,
     )
+    _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
 
@@ -1265,10 +1579,11 @@ def _apply_perforation(
     perf_event = timeline.add_perf_event(**kwargs)
     if event.filter is not None and ctx is not None:
         perf_event.add_filter(filter=_materialize_filter(ctx, event.filter))
+    _apply_event_comment(event, perf_event)
     report.events_applied += 1
 
 
-def _apply_tubing(
+def _apply_segment(
     event: OrionEvent,
     well_path: Any,
     timeline: Any,
@@ -1276,17 +1591,19 @@ def _apply_tubing(
     ctx: Optional[_FilterContext] = None,
 ) -> None:
     if not _check_completion_attrs(
-        event, "TUBING", _TUBING_KNOWN, _TUBING_REQUIRED, report
+        event, "SEGMENT", _SEGMENT_KNOWN, _SEGMENT_REQUIRED, report
     ):
         return
 
     attrs = event.attributes
     try:
+        start_md = float(_as_number(attrs["MDSTART"], event.loc))
+        end_md = float(_as_number(attrs["MDEND"], event.loc))
         kwargs: Dict[str, Any] = {
             "event_date": _iso_event_date(event.event_date),
             "well_path": well_path,
-            "start_md": float(_as_number(attrs["MDSTART"], event.loc)),
-            "end_md": float(_as_number(attrs["MDEND"], event.loc)),
+            "start_md": start_md,
+            "end_md": end_md,
         }
         if "INNER_DIAMETER" in attrs:
             kwargs["inner_diameter"] = float(
@@ -1294,12 +1611,27 @@ def _apply_tubing(
             )
         if "ROUGHNESS" in attrs:
             kwargs["roughness"] = float(_as_number(attrs["ROUGHNESS"], event.loc))
+        pressure_components = None
+        if "PRESSURE_COMPONENTS" in attrs:
+            pressure_components = str(attrs["PRESSURE_COMPONENTS"].value).upper()
+            if pressure_components not in _PRESSURE_COMPONENTS:
+                raise OrionParseError(
+                    "PRESSURE_COMPONENTS must be H--, HF-, or HFA", event.loc
+                )
     except OrionParseError as exc:
         report.errors.append(str(exc))
         report.events_skipped += 1
         return
 
-    timeline.add_tubing_event(**kwargs)
+    timeline_event = timeline.add_tubing_event(**kwargs)
+    well_path.completion_settings().add_custom_segment_interval(
+        start_md=start_md, end_md=end_md
+    )
+    if pressure_components is not None:
+        msw_settings = well_path.msw_settings()
+        msw_settings.pressure_drop = pressure_components
+        msw_settings.update()
+    _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
 
@@ -1345,7 +1677,8 @@ def _apply_valve(
         report.events_skipped += 1
         return
 
-    timeline.add_valve_event(**kwargs)
+    timeline_event = timeline.add_valve_event(**kwargs)
+    _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
 
@@ -1361,11 +1694,35 @@ def _apply_state(
     ):
         return
 
-    timeline.add_state_event(
+    timeline_event = timeline.add_state_event(
         event_date=_iso_event_date(event.event_date),
         well_path=well_path,
         well_state=str(event.attributes["STATE"].value),
     )
+    _apply_event_comment(event, timeline_event)
+    report.events_applied += 1
+
+
+def _apply_wellspec(
+    event: OrionEvent,
+    well_path: Any,
+    timeline: Any,
+    report: ApplyReport,
+    ctx: Optional[_FilterContext] = None,
+) -> None:
+    if event.well_spec is None:
+        return
+
+    state = event.well_spec
+    timeline_event = timeline.add_wellspec_event(
+        event_date=_iso_event_date(event.event_date),
+        well_path=well_path,
+        group_name=state.group,
+        allow_cross_flow=state.crossflow,
+        reference_depth=state.refdepth,
+        well_type=state.phase,
+    )
+    _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
 
@@ -1379,6 +1736,8 @@ def _apply_keyword(
 ) -> None:
     keyword_data: Dict[str, Any] = {"WELL": well_path.name}
     for key, attr in event.attributes.items():
+        if key == "COMMENT":
+            continue
         if key in _IGNORED_KEYWORD_ATTRS:
             report.warnings.append(
                 f"Line {event.loc.line}: attribute '{key}' on {keyword_name} "
@@ -1387,12 +1746,13 @@ def _apply_keyword(
             continue
         keyword_data[field_map.get(key, key)] = attr.value
 
-    timeline.add_well_keyword_event(
+    timeline_event = timeline.add_well_keyword_event(
         event_date=_iso_event_date(event.event_date),
         well_path=well_path,
         keyword_name=keyword_name,
         keyword_data=keyword_data,
     )
+    _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
 
@@ -1441,16 +1801,23 @@ _EventDispatch = Callable[
 # built-in, which is governed by the on_unknown_event policy).
 _EVENT_DISPATCH: Dict[str, _EventDispatch] = {
     "PERFORATION": _apply_perforation,
-    "TUBING": _apply_tubing,
+    "SEGMENT": _apply_segment,
     "VALVE": _apply_valve,
     "STATE": _apply_state,
+    "WELLSPEC": _apply_wellspec,
     "WCONHIST": _apply_wconhist,
     "WELTARG": _apply_weltarg,
 }
 
 # Completion event types that require a well and cannot appear in a SCHEDULE
 # block or be emitted as Eclipse keywords.
-_COMPLETION_EVENT_TYPES = ("PERFORATION", "TUBING", "VALVE", "STATE")
+_COMPLETION_EVENT_TYPES = (
+    "PERFORATION",
+    "SEGMENT",
+    "VALVE",
+    "STATE",
+    "WELLSPEC",
+)
 
 
 # ---------------------------------------------------------------------------
