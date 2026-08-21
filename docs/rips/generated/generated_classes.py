@@ -278,17 +278,17 @@ class WellStatus(StrEnum):
     STOP = "STOP"
 
 class WellType(StrEnum):
+    OIL = "OIL"
+    GAS = "GAS"
+    WATER = "WATER"
+    LIQUID = "LIQUID"
+
+class WellType2(StrEnum):
     OIL_PRODUCER = "OIL_PRODUCER"
     GAS_PRODUCER = "GAS_PRODUCER"
     WATER_PRODUCER = "WATER_PRODUCER"
     WATER_INJECTOR = "WATER_INJECTOR"
     GAS_INJECTOR = "GAS_INJECTOR"
-
-class WellTypeForExport(StrEnum):
-    OIL = "OIL"
-    GAS = "GAS"
-    WATER = "WATER"
-    LIQUID = "LIQUID"
 
 class CellFilterCollection(PdmObjectBase):
     """
@@ -1773,11 +1773,13 @@ class WellEvent(PdmObjectBase):
     WellEvent
 
     Attributes:
+        comment (str): Comment
         well_path (Optional[WellPath]): Well Path
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.comment: str = ""
         self.well_path: Optional[WellPath] = None
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellEvent.__custom_init__ is not None:
@@ -4109,6 +4111,23 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("AddWellKeywordEventInternal", WellEventKeyword, event_date=event_date, well_path=well_path, keyword_name=keyword_name, item_names=item_names, item_types=item_types, item_values=item_values)
 
 
+    def add_wellspec_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, group_name: str="", allow_cross_flow: bool=True, reference_depth: Optional[Optional[float]]=None, well_type: WellType=WellType.OIL) -> WellEventWellSpec:
+        """
+        Add a WELLSPEC event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            group_name (str): Group Name
+            allow_cross_flow (bool): Allow Well Cross-Flow
+            reference_depth (Optional[Optional[float]]): Reference Depth
+            well_type (WellType): One of [OIL, GAS, WATER, LIQUID]
+        Returns:
+            WellEventWellSpec
+        """
+        return self._call_pdm_method_return_value("AddWellspecEvent", WellEventWellSpec, event_date=event_date, well_path=well_path, group_name=group_name, allow_cross_flow=allow_cross_flow, reference_depth=reference_depth, well_type=well_type)
+
+
     def events(self) -> List[WellEvent]:
         """Events
 
@@ -4172,12 +4191,12 @@ class WellEventType(WellEvent):
     WellEventType
 
     Attributes:
-        well_type (WellType): One of [OIL_PRODUCER, GAS_PRODUCER, WATER_PRODUCER, WATER_INJECTOR, GAS_INJECTOR]
+        well_type (WellType2): One of [OIL_PRODUCER, GAS_PRODUCER, WATER_PRODUCER, WATER_INJECTOR, GAS_INJECTOR]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.well_type: WellType = WellType.OIL_PRODUCER
+        self.well_type: WellType2 = WellType2.OIL_PRODUCER
         WellEvent.__init__(self, pb2_object, channel)
         if WellEventType.__custom_init__ is not None:
             WellEventType.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -4216,6 +4235,27 @@ class WellEventValve(WellEvent):
         WellEvent.__init__(self, pb2_object, channel)
         if WellEventValve.__custom_init__ is not None:
             WellEventValve.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellEventWellSpec(WellEvent):
+    """
+    WellEventWellSpec
+
+    Attributes:
+        allow_cross_flow (bool): Allow Cross-Flow
+        group_name (str): Group Name
+        reference_depth (Optional[float]): Reference Depth
+        well_type (WellType): One of [OIL, GAS, WATER, LIQUID]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.allow_cross_flow: bool = True
+        self.group_name: str = ""
+        self.reference_depth: Optional[float] = None
+        self.well_type: WellType = WellType.OIL
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventWellSpec.__custom_init__ is not None:
+            WellEventWellSpec.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class PlotCurve(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -4326,18 +4366,6 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -4381,6 +4409,18 @@ class WellPathAicdParameters(PdmObjectBase):
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathCompletionSettings(PdmObjectBase):
     """
     Attributes:
@@ -4396,7 +4436,7 @@ class WellPathCompletionSettings(PdmObjectBase):
         reference_depth_for_export (Optional[float]): BHP Reference Depth
         well_bore_fluid_pvt_table (int): Wellbore Fluid PVT table
         well_name_for_export (str): Well Name
-        well_type_for_export (WellTypeForExport): One of [OIL, GAS, WATER, LIQUID]
+        well_type_for_export (WellType): One of [OIL, GAS, WATER, LIQUID]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -4413,7 +4453,7 @@ class WellPathCompletionSettings(PdmObjectBase):
         self.reference_depth_for_export: Optional[float] = None
         self.well_bore_fluid_pvt_table: int = 0
         self.well_name_for_export: str = ""
-        self.well_type_for_export: WellTypeForExport = WellTypeForExport.OIL
+        self.well_type_for_export: WellType = WellType.OIL
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathCompletionSettings.__custom_init__ is not None:
             WellPathCompletionSettings.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -4857,6 +4897,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellEventTubing'] = WellEventTubing
     classes['WellEventType'] = WellEventType
     classes['WellEventValve'] = WellEventValve
+    classes['WellEventWellSpec'] = WellEventWellSpec
     classes['WellLog'] = WellLog
     classes['WellLogExtractionCurve'] = WellLogExtractionCurve
     classes['WellLogFileInterface'] = WellLogFileInterface
