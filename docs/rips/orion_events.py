@@ -23,7 +23,8 @@ File format grammar, version 2.0 (EBNF-ish)::
     document        = header , { statement } ;
     header          = "ORIONEVENTS" , "2.0" ;           (* first meaningful line *)
     statement       = unit_directive | declaration | report_line | well_block_open
-                    | group_block_open | schedule_block_open | event_line ;
+                    | group_block_open | schedule_block_open | event_line
+                    | raw_text_event ;
     unit_directive  = "UNIT" , ( "METRIC" | "FIELD" | "LAB" ) ;
     report_line     = "REPORT" , date_expr ;            (* REPORT 2024-06-01 *)
 
@@ -42,6 +43,12 @@ File format grammar, version 2.0 (EBNF-ish)::
     group_block_open    = "GROUP" , quoted_string ;     (* group keyword events *)
     schedule_block_open = "SCHEDULE" ;                  (* well-less keyword events *)
     event_line      = "@" , date_expr , event_type , { attribute } ;
+    raw_text_event  = "@" , date_expr , "RAW_TEXT" , raw_text_attributes , newline,
+                      { raw_line , newline } , "END_RAW_TEXT" ;
+    raw_text_attributes = "PLACEMENT=" ,
+                          ( "AFTER_DATE" | "BEFORE_KEYWORD" |
+                            "AFTER_KEYWORD" | "END_OF_DATE" ) ,
+                          [ "ANCHOR=" , ident ] , [ "PRIORITY=" , integer ] ;
 
     date_expr       = ( iso_date | iso_datetime | date_ident ) , { sign , term } ;
     duration_expr   = ( integer | dur_ident ) , { sign , term } , [ "DAYS" | "days" ] ;
@@ -91,18 +98,25 @@ Notes on the grammar:
   strings on :attr:`ApplyReport.report_dates`, ready to pass to
   ``WellEventTimeline.generate_schedule_text(additional_dates=...)``. A
   ``REPORT`` line is not tied to any well and does not close an open block.
+* ``RAW_TEXT`` is valid only inside a ``SCHEDULE`` block. Its body is copied
+  without parsing or formatting through the mandatory standalone
+  ``END_RAW_TEXT`` line. ``PLACEMENT`` is ``AFTER_DATE``, ``BEFORE_KEYWORD``,
+  ``AFTER_KEYWORD`` or ``END_OF_DATE``. Before/after-keyword placement requires
+  ``ANCHOR=<Eclipse keyword>``; the other placements forbid it. ``PRIORITY`` is
+  an optional integer (default 0); lower values are emitted first and source
+  order breaks ties.
 * Double quotes are used everywhere: well names, filter expressions and
   attribute values, e.g. ``FILTER="SOIL > 0.8 AND PERMX > 200"``.
 * Every attribute is ``KEY=VALUE``; bare positional tokens are rejected.
 * Event types inside a WELL block are either the built-in completion events
-  ``PERFORATION``, ``SEGMENT``, ``VALVE``, ``STATE`` and ``WELLSPEC``, or any
+  ``PERFORATION``, ``SEGMENT``, ``VALVE``, ``STATE`` and ``WELSPECS``, or any
   Eclipse well keyword (``WCONHIST``, ``WELTARG``, ``WRFTPLT``, ``WCONPROD``,
   ...), which
   is passed through generically with the well name injected as WELL. Event
-  ``WELLSPEC`` accepts partial updates to ``GROUP``, ``CROSSFLOW``, ``REFDEPTH``
+  ``WELSPECS`` accepts partial updates to ``GROUP``, ``CROSSFLOW``, ``REFDEPTH``
   and ``PHASE`` (OIL/GAS/WATER/LIQUID). Omitted values inherit the previous
-  WELLSPEC state, initially using the well's completion export settings. There
-  may be multiple WELLSPEC events for a well, but not at the same timestamp.
+  WELSPECS state, initially using the well's completion export settings. There
+  may be multiple WELSPECS events for a well, but not at the same timestamp.
   Each emits a WELSPECS record with the cumulative state. Event values are
   materialized back onto completion settings by ``timeline.set_timestamp()``.
   Event types inside a GROUP block are Eclipse group keywords with the group
@@ -259,7 +273,7 @@ class AttrValue:
 
 @dataclass
 class WellSpecState:
-    """Fully resolved cumulative state for one WELLSPEC event."""
+    """Fully resolved cumulative state for one WELSPECS event."""
 
     group: str
     crossflow: bool
@@ -277,6 +291,12 @@ class OrionEvent:
     loc: SourceLoc
     filter: Optional[EventFilter] = None
     well_spec: Optional[WellSpecState] = None
+    raw_text: Optional[str] = None
+    raw_placement: Optional[str] = None
+    raw_anchor: Optional[str] = None
+    raw_priority: int = 0
+    scope: str = "SCHEDULE"
+    scope_name: Optional[str] = None
 
 
 @dataclass
@@ -311,6 +331,47 @@ class OrionDocument:
         default_factory=list
     )
     warnings: List[ParseWarning] = field(default_factory=list)
+
+
+def _iso_event_date(event_date: Union[datetime.date, datetime.datetime]) -> str:
+    """Format an event date for the timeline API, keeping ms time-of-day."""
+    if isinstance(event_date, datetime.datetime):
+        if event_date.microsecond:
+            return event_date.isoformat(timespec="milliseconds")
+        return event_date.isoformat()
+    return event_date.isoformat()
+
+
+def _event_context(event: OrionEvent) -> str:
+    """Return the source scope and timestamp identifying an event."""
+    scope = event.scope
+    if event.scope_name is not None:
+        scope += f' "{event.scope_name}"'
+    return f"[{scope}, date {_iso_event_date(event.event_date)}]"
+
+
+def _event_message(event: OrionEvent, message: str) -> str:
+    """Add source line, scope and timestamp to an event-level message."""
+    return f"Line {event.loc.line} {_event_context(event)}: {message}"
+
+
+def _set_event_scopes(
+    wells: List[WellBlock],
+    groups: List[GroupBlock],
+    schedule_events: List[OrionEvent],
+) -> None:
+    """Attach enclosing block information to parsed events."""
+    for well in wells:
+        for event in well.events:
+            event.scope = "WELL"
+            event.scope_name = well.well_name
+    for group in groups:
+        for event in group.events:
+            event.scope = "GROUP"
+            event.scope_name = group.group_name
+    for event in schedule_events:
+        event.scope = "SCHEDULE"
+        event.scope_name = None
 
 
 # ---------------------------------------------------------------------------
@@ -391,9 +452,13 @@ def parse_orion_events(text: str) -> OrionDocument:
     # document-level schedule_events list.
     current_events: Optional[List[OrionEvent]] = None
 
-    for lineno, raw_line in enumerate(text.splitlines(), start=1):
-        loc = SourceLoc(line=lineno, text=raw_line)
+    source_lines = text.splitlines()
+    line_index = 0
+    while line_index < len(source_lines):
+        raw_line = source_lines[line_index]
+        loc = SourceLoc(line=line_index + 1, text=raw_line)
         line = _strip_comment(raw_line).strip()
+        line_index += 1
         if not line:
             continue
 
@@ -407,6 +472,31 @@ def parse_orion_events(text: str) -> OrionDocument:
                 )
             version = match.group("version")
             _check_version(version, loc)
+            continue
+
+        if _is_raw_text_header(line):
+            end_index = line_index
+            while (
+                end_index < len(source_lines)
+                and source_lines[end_index].strip() != "END_RAW_TEXT"
+            ):
+                end_index += 1
+            if end_index == len(source_lines):
+                errors.append(ParseIssue("Unterminated RAW_TEXT block", loc))
+                break
+
+            body_lines = source_lines[line_index:end_index]
+            line_index = end_index + 1
+            try:
+                if current_events is not schedule_events:
+                    raise OrionParseError(
+                        "RAW_TEXT is only valid in a SCHEDULE block", loc
+                    )
+                current_events.append(
+                    _parse_raw_text_event(line, body_lines, variables, loc)
+                )
+            except OrionParseError as exc:
+                errors.extend(exc.errors)
             continue
 
         try:
@@ -434,6 +524,7 @@ def parse_orion_events(text: str) -> OrionDocument:
     if version is None:
         raise OrionParseError("Empty file: missing 'ORIONEVENTS' header")
 
+    _set_event_scopes(wells, groups, schedule_events)
     errors.extend(_restart_validation_issues(wells, groups, schedule_events))
     errors.extend(_wellspec_validation_issues(wells))
     if errors:
@@ -462,13 +553,21 @@ def _restart_validation_issues(
         for event in well_block.events:
             if event.event_type.upper() == "RESTART":
                 issues.append(
-                    ParseIssue("RESTART is only valid in a SCHEDULE block", event.loc)
+                    ParseIssue(
+                        f"{_event_context(event)}: RESTART is only valid in a "
+                        "SCHEDULE block",
+                        event.loc,
+                    )
                 )
     for group_block in groups:
         for event in group_block.events:
             if event.event_type.upper() == "RESTART":
                 issues.append(
-                    ParseIssue("RESTART is only valid in a SCHEDULE block", event.loc)
+                    ParseIssue(
+                        f"{_event_context(event)}: RESTART is only valid in a "
+                        "SCHEDULE block",
+                        event.loc,
+                    )
                 )
 
     restart_events = [
@@ -476,29 +575,37 @@ def _restart_validation_issues(
     ]
     for event in restart_events:
         if event.attributes:
-            issues.append(ParseIssue("RESTART takes no attributes", event.loc))
+            issues.append(
+                ParseIssue(
+                    f"{_event_context(event)}: RESTART takes no attributes", event.loc
+                )
+            )
     for event in restart_events[1:]:
         issues.append(
-            ParseIssue("Only one RESTART event is allowed per schedule", event.loc)
+            ParseIssue(
+                f"{_event_context(event)}: Only one RESTART event is allowed per "
+                "schedule",
+                event.loc,
+            )
         )
     return issues
 
 
 def _wellspec_validation_issues(wells: List[WellBlock]) -> List[ParseIssue]:
-    """Reject multiple WELLSPEC events for one well at the same timestamp."""
+    """Reject multiple WELSPECS events for one well at the same timestamp."""
     seen: Dict[Tuple[str, Union[datetime.date, datetime.datetime]], OrionEvent] = {}
     issues: List[ParseIssue] = []
     for well in wells:
         for event in well.events:
-            if event.event_type.upper() != "WELLSPEC":
+            if event.event_type.upper() != "WELSPECS":
                 continue
             key = (well.well_name, event.event_date)
             previous = seen.get(key)
             if previous is not None:
                 issues.append(
                     ParseIssue(
-                        f"WELLSPEC already defined for well '{well.well_name}' "
-                        f"at this date (line {previous.loc.line})",
+                        f"{_event_context(event)}: WELSPECS already defined "
+                        f"(first definition on line {previous.loc.line})",
                         event.loc,
                     )
                 )
@@ -864,6 +971,81 @@ def _strip_comment(line: str) -> str:
     return "".join(result)
 
 
+def _is_raw_text_header(line: str) -> bool:
+    """Return whether an event line starts a multiline RAW_TEXT block."""
+    match = _EVENT_RE.match(line)
+    if match is None:
+        return False
+    return match.group("rest").split(None, 1)[0].upper() == "RAW_TEXT"
+
+
+def _parse_raw_text_event(
+    line: str,
+    body_lines: List[str],
+    variables: Dict[str, OrionValue],
+    loc: SourceLoc,
+) -> OrionEvent:
+    """Parse and validate a RAW_TEXT header and attach its unparsed body."""
+    event = _parse_event_line(line, variables, loc)
+    allowed = {"PLACEMENT", "ANCHOR", "PRIORITY"}
+    unknown = set(event.attributes) - allowed
+    if unknown:
+        raise OrionParseError(
+            f"Unknown RAW_TEXT attribute(s): {', '.join(sorted(unknown))}", loc
+        )
+    if "PLACEMENT" not in event.attributes:
+        raise OrionParseError("RAW_TEXT requires PLACEMENT", loc)
+    if not body_lines:
+        raise OrionParseError("RAW_TEXT body must not be empty", loc)
+
+    placement_value = event.attributes["PLACEMENT"].value
+    placement = placement_value.upper() if isinstance(placement_value, str) else ""
+    valid_placements = {
+        "AFTER_DATE",
+        "BEFORE_KEYWORD",
+        "AFTER_KEYWORD",
+        "END_OF_DATE",
+    }
+    if placement not in valid_placements:
+        raise OrionParseError(
+            "RAW_TEXT PLACEMENT must be AFTER_DATE, BEFORE_KEYWORD, "
+            "AFTER_KEYWORD, or END_OF_DATE",
+            loc,
+        )
+
+    anchor: Optional[str] = None
+    if "ANCHOR" in event.attributes:
+        anchor_value = event.attributes["ANCHOR"].value
+        if not isinstance(anchor_value, str) or not anchor_value.strip():
+            raise OrionParseError("RAW_TEXT ANCHOR must be a keyword name", loc)
+        anchor = anchor_value.strip().upper()
+
+    anchored = placement in {"BEFORE_KEYWORD", "AFTER_KEYWORD"}
+    if anchored and anchor is None:
+        raise OrionParseError(
+            "RAW_TEXT ANCHOR is required for BEFORE_KEYWORD and AFTER_KEYWORD",
+            loc,
+        )
+    if not anchored and anchor is not None:
+        raise OrionParseError(
+            "RAW_TEXT ANCHOR is only valid for BEFORE_KEYWORD and AFTER_KEYWORD",
+            loc,
+        )
+
+    priority = 0
+    if "PRIORITY" in event.attributes:
+        priority_value = event.attributes["PRIORITY"].value
+        if isinstance(priority_value, bool) or not isinstance(priority_value, int):
+            raise OrionParseError("RAW_TEXT PRIORITY must be an integer", loc)
+        priority = priority_value
+
+    event.raw_text = "\n".join(body_lines) + "\n"
+    event.raw_placement = placement
+    event.raw_anchor = anchor
+    event.raw_priority = priority
+    return event
+
+
 def _parse_event_line(
     line: str, variables: Dict[str, OrionValue], loc: SourceLoc
 ) -> OrionEvent:
@@ -968,6 +1150,23 @@ class ApplyReport:
     errors: List[str] = field(default_factory=list)
 
 
+def _record_event_exception(
+    event: OrionEvent, error: Exception, report: ApplyReport
+) -> None:
+    """Record an event failure with its Orion source context."""
+    report.errors.append(_event_message(event, str(error)))
+    report.events_skipped += 1
+
+
+def _record_event_parse_error(
+    event: OrionEvent, error: OrionParseError, report: ApplyReport
+) -> None:
+    """Record parser-style event failures without duplicating their line number."""
+    for issue in error.errors:
+        report.errors.append(_event_message(event, issue.message))
+    report.events_skipped += 1
+
+
 # Policies for handling unresolved references: skip silently, warn, or raise.
 _POLICIES = ("warn", "error", "skip")
 
@@ -1017,15 +1216,6 @@ _WCONHIST_FIELD_MAP = {"VFP": "VFP_TABLE"}
 _WELTARG_FIELD_MAP = {"VALUE": "NEW_VALUE"}
 
 
-def _iso_event_date(event_date: Union[datetime.date, datetime.datetime]) -> str:
-    """Format an event date for the timeline API, keeping ms time-of-day."""
-    if isinstance(event_date, datetime.datetime):
-        if event_date.microsecond:
-            return event_date.isoformat(timespec="milliseconds")
-        return event_date.isoformat()
-    return event_date.isoformat()
-
-
 def _apply_event_comment(event: OrionEvent, timeline_event: Any) -> None:
     """Copy an optional COMMENT attribute to the created timeline event."""
     comment = event.attributes.get("COMMENT")
@@ -1048,13 +1238,25 @@ def apply_orion_events_file(
     return apply_orion_document(document, timeline, project, case=case, **options)
 
 
-def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
-    """Return a copy with same-owner/type/timestamp events merged.
+_NON_COALESCING_EVENT_TYPES = {
+    "MEMBER",
+    "PERFORATION",
+    "RAW_TEXT",
+    "RESTART",
+    "SEGMENT",
+    "STATE",
+    "VALVE",
+    "WELSPECS",
+}
 
-    The first event retains its position. Attributes from later matching events
-    are applied in source order, adding missing values and overriding repeated
-    values. Owners are matched by well name, group name, or the global SCHEDULE
-    scope.
+
+def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
+    """Return a copy with matching keyword events merged.
+
+    Keyword events with the same owner, type and timestamp are merged. The first
+    event retains its position, and attributes from later matching events are
+    applied in source order. Events that create or expand domain objects are
+    kept separate so, for example, same-date perforation intervals are not lost.
     """
     result = copy.deepcopy(document)
 
@@ -1064,7 +1266,12 @@ def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
             Tuple[Union[datetime.date, datetime.datetime], str], OrionEvent
         ] = {}
         for event in events:
-            key = (event.event_date, event.event_type.upper())
+            event_type = event.event_type.upper()
+            if event_type in _NON_COALESCING_EVENT_TYPES:
+                merged.append(event)
+                continue
+
+            key = (event.event_date, event_type)
             existing = by_key.get(key)
             if existing is None:
                 by_key[key] = event
@@ -1121,7 +1328,7 @@ def _enum_text(value: Any) -> str:
 def _prepare_wellspec_events(
     events: List[OrionEvent], completion_settings: Any, report: ApplyReport
 ) -> None:
-    """Validate WELLSPEC attributes and resolve partial updates chronologically."""
+    """Validate WELSPECS attributes and resolve partial updates chronologically."""
     state = WellSpecState(
         group=str(completion_settings.group_name_for_export),
         crossflow=bool(completion_settings.allow_well_cross_flow),
@@ -1130,7 +1337,7 @@ def _prepare_wellspec_events(
     )
 
     wellspecs = sorted(
-        (event for event in events if event.event_type.upper() == "WELLSPEC"),
+        (event for event in events if event.event_type.upper() == "WELSPECS"),
         key=lambda event: event.event_date,
     )
     for event in wellspecs:
@@ -1138,14 +1345,16 @@ def _prepare_wellspec_events(
         unknown = set(attrs) - _WELLSPEC_KNOWN
         if unknown:
             report.errors.append(
-                f"Line {event.loc.line}: unknown WELLSPEC attribute(s): "
-                f"{', '.join(sorted(unknown))}"
+                _event_message(
+                    event,
+                    f"unknown WELSPECS attribute(s): {', '.join(sorted(unknown))}",
+                )
             )
             report.events_skipped += 1
             continue
         if not (set(attrs) - {"COMMENT"}):
             report.errors.append(
-                f"Line {event.loc.line}: WELLSPEC needs at least one setting attribute"
+                _event_message(event, "WELSPECS needs at least one setting attribute")
             )
             report.events_skipped += 1
             continue
@@ -1179,7 +1388,7 @@ def _prepare_wellspec_events(
                 next_state.phase = phase
 
         if errors:
-            report.errors.extend(f"Line {event.loc.line}: {error}" for error in errors)
+            report.errors.extend(_event_message(event, error) for error in errors)
             report.events_skipped += 1
             continue
 
@@ -1248,9 +1457,10 @@ def apply_orion_document(
             if dispatch is None:
                 typo_of = _suspected_typo(event_type)
                 if typo_of is not None:
-                    message = (
-                        f"Unknown event type '{event.event_type}' "
-                        f"(line {event.loc.line}); did you mean '{typo_of}'?"
+                    message = _event_message(
+                        event,
+                        f"Unknown event type '{event.event_type}'; "
+                        f"did you mean '{typo_of}'?",
                     )
                     if on_unknown_event == "error":
                         raise RipsError(message)
@@ -1334,15 +1544,19 @@ def _prepare_filter_context(
                 continue
             if term.result_type is not None:
                 missing.append(
-                    f"Line {event.loc.line}: filter '{label}': result "
-                    f"'{term.result_name}' not found among "
-                    f"{term.result_type} results"
+                    _event_message(
+                        event,
+                        f"filter '{label}': result '{term.result_name}' not found "
+                        f"among {term.result_type} results",
+                    )
                 )
             else:
                 missing.append(
-                    f"Line {event.loc.line}: filter '{label}': result "
-                    f"'{term.result_name}' not found (searched "
-                    f"{', '.join(_UNQUALIFIED_RESULT_SEARCH_ORDER)})"
+                    _event_message(
+                        event,
+                        f"filter '{label}': result '{term.result_name}' not found "
+                        f"(searched {', '.join(_UNQUALIFIED_RESULT_SEARCH_ORDER)})",
+                    )
                 )
     if missing:
         raise RipsError("\n".join(missing))
@@ -1411,21 +1625,23 @@ def _apply_member_event(
 ) -> None:
     """Expand a GROUP MEMBER event into one GRUPTREE event per member."""
     if group_name is None:
-        report.errors.append(f"Line {event.loc.line}: MEMBER needs a GROUP block")
+        report.errors.append(_event_message(event, "MEMBER needs a GROUP block"))
         report.events_skipped += 1
         return
 
     unknown = set(event.attributes) - {"MEMBERS", "COMMENT"}
     if unknown:
         report.errors.append(
-            f"Line {event.loc.line}: unknown MEMBER attribute(s): "
-            f"{', '.join(sorted(unknown))}"
+            _event_message(
+                event,
+                f"unknown MEMBER attribute(s): {', '.join(sorted(unknown))}",
+            )
         )
         report.events_skipped += 1
         return
     if "MEMBERS" not in event.attributes:
         report.errors.append(
-            f"Line {event.loc.line}: MEMBER missing required attribute: MEMBERS"
+            _event_message(event, "MEMBER missing required attribute: MEMBERS")
         )
         report.events_skipped += 1
         return
@@ -1434,8 +1650,9 @@ def _apply_member_event(
     members = [member.strip() for member in raw_members.split(",")]
     if not members or any(not member for member in members):
         report.errors.append(
-            f"Line {event.loc.line}: MEMBERS must be a comma-delimited list of "
-            "non-empty names"
+            _event_message(
+                event, "MEMBERS must be a comma-delimited list of non-empty names"
+            )
         )
         report.events_skipped += 1
         return
@@ -1459,6 +1676,16 @@ def _apply_schedule_event(
 ) -> None:
     """Apply one GROUP- or SCHEDULE-block event as an Eclipse keyword."""
     event_type = event.event_type.upper()
+    if event_type == "RAW_TEXT":
+        timeline.add_raw_text_event(
+            event_date=_iso_event_date(event.event_date),
+            text=event.raw_text,
+            placement=event.raw_placement,
+            anchor_keyword=event.raw_anchor or "",
+            priority=event.raw_priority,
+        )
+        report.events_applied += 1
+        return
     if event_type == "RESTART":
         timeline.add_keyword_event(
             event_date=_iso_event_date(event.event_date),
@@ -1472,8 +1699,11 @@ def _apply_schedule_event(
         return
     if event_type in _COMPLETION_EVENT_TYPES:
         report.errors.append(
-            f"Line {event.loc.line}: {event_type} is a completion event and "
-            "needs a WELL block, not GROUP or SCHEDULE"
+            _event_message(
+                event,
+                f"{event_type} is a completion event and needs a WELL block, "
+                "not GROUP or SCHEDULE",
+            )
         )
         report.events_skipped += 1
         return
@@ -1484,19 +1714,25 @@ def _apply_schedule_event(
             continue
         if key in _IGNORED_KEYWORD_ATTRS:
             report.warnings.append(
-                f"Line {event.loc.line}: attribute '{key}' on {event_type} "
-                "is ignored (not yet supported)"
+                _event_message(
+                    event,
+                    f"attribute '{key}' on {event_type} is ignored (not yet supported)",
+                )
             )
             continue
         keyword_data[key] = attr.value
     if group_name is not None:
         keyword_data["GROUP"] = group_name
 
-    timeline_event = timeline.add_keyword_event(
-        event_date=_iso_event_date(event.event_date),
-        keyword_name=event_type,
-        keyword_data=keyword_data,
-    )
+    try:
+        timeline_event = timeline.add_keyword_event(
+            event_date=_iso_event_date(event.event_date),
+            keyword_name=event_type,
+            keyword_data=keyword_data,
+        )
+    except RipsError as exc:
+        _record_event_exception(event, exc, report)
+        return
     _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
@@ -1519,23 +1755,29 @@ def _check_completion_attrs(
     unknown = set(attrs) - known - ignored
     if unknown:
         report.errors.append(
-            f"Line {event.loc.line}: unknown {type_name} attribute(s): "
-            f"{', '.join(sorted(unknown))}"
+            _event_message(
+                event,
+                f"unknown {type_name} attribute(s): {', '.join(sorted(unknown))}",
+            )
         )
         report.events_skipped += 1
         return False
 
     for key in sorted(ignored & set(attrs)):
         report.warnings.append(
-            f"Line {event.loc.line}: attribute '{key}' on {type_name} "
-            "is ignored (not yet supported)"
+            _event_message(
+                event,
+                f"attribute '{key}' on {type_name} is ignored (not yet supported)",
+            )
         )
 
     missing = [name for name in required if name not in attrs]
     if missing:
         report.errors.append(
-            f"Line {event.loc.line}: {type_name} missing required "
-            f"attribute(s): {', '.join(missing)}"
+            _event_message(
+                event,
+                f"{type_name} missing required attribute(s): {', '.join(missing)}",
+            )
         )
         report.events_skipped += 1
         return False
@@ -1572,8 +1814,7 @@ def _apply_perforation(
                 _as_number(attrs["COMPLETION_NUMBER"], event.loc)
             )
     except OrionParseError as exc:
-        report.errors.append(str(exc))
-        report.events_skipped += 1
+        _record_event_parse_error(event, exc, report)
         return
 
     perf_event = timeline.add_perf_event(**kwargs)
@@ -1619,8 +1860,7 @@ def _apply_segment(
                     "PRESSURE_COMPONENTS must be H--, HF-, or HFA", event.loc
                 )
     except OrionParseError as exc:
-        report.errors.append(str(exc))
-        report.events_skipped += 1
+        _record_event_parse_error(event, exc, report)
         return
 
     timeline_event = timeline.add_tubing_event(**kwargs)
@@ -1673,8 +1913,7 @@ def _apply_valve(
             if attr_name in attrs:
                 kwargs[kwarg_name] = float(_as_number(attrs[attr_name], event.loc))
     except OrionParseError as exc:
-        report.errors.append(str(exc))
-        report.events_skipped += 1
+        _record_event_parse_error(event, exc, report)
         return
 
     timeline_event = timeline.add_valve_event(**kwargs)
@@ -1740,18 +1979,25 @@ def _apply_keyword(
             continue
         if key in _IGNORED_KEYWORD_ATTRS:
             report.warnings.append(
-                f"Line {event.loc.line}: attribute '{key}' on {keyword_name} "
-                "is ignored (not yet supported)"
+                _event_message(
+                    event,
+                    f"attribute '{key}' on {keyword_name} is ignored "
+                    "(not yet supported)",
+                )
             )
             continue
         keyword_data[field_map.get(key, key)] = attr.value
 
-    timeline_event = timeline.add_well_keyword_event(
-        event_date=_iso_event_date(event.event_date),
-        well_path=well_path,
-        keyword_name=keyword_name,
-        keyword_data=keyword_data,
-    )
+    try:
+        timeline_event = timeline.add_well_keyword_event(
+            event_date=_iso_event_date(event.event_date),
+            well_path=well_path,
+            keyword_name=keyword_name,
+            keyword_data=keyword_data,
+        )
+    except RipsError as exc:
+        _record_event_exception(event, exc, report)
+        return
     _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
@@ -1804,7 +2050,7 @@ _EVENT_DISPATCH: Dict[str, _EventDispatch] = {
     "SEGMENT": _apply_segment,
     "VALVE": _apply_valve,
     "STATE": _apply_state,
-    "WELLSPEC": _apply_wellspec,
+    "WELSPECS": _apply_wellspec,
     "WCONHIST": _apply_wconhist,
     "WELTARG": _apply_weltarg,
 }
@@ -1816,7 +2062,7 @@ _COMPLETION_EVENT_TYPES = (
     "SEGMENT",
     "VALVE",
     "STATE",
-    "WELLSPEC",
+    "WELSPECS",
 )
 
 

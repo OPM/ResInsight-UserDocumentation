@@ -147,6 +147,12 @@ class PhaseSelection(StrEnum):
     PHASE_GAS = "PHASE_GAS"
     PHASE_WAT = "PHASE_WAT"
 
+class Placement(StrEnum):
+    AFTER_DATE = "AFTER_DATE"
+    BEFORE_KEYWORD = "BEFORE_KEYWORD"
+    AFTER_KEYWORD = "AFTER_KEYWORD"
+    END_OF_DATE = "END_OF_DATE"
+
 class PorePressureReservoirSource(StrEnum):
     GRID = "GRID"
     LAS_FILE = "LAS_FILE"
@@ -2399,6 +2405,27 @@ class PressureTableItem(PdmObjectBase):
         if PressureTableItem.__custom_init__ is not None:
             PressureTableItem.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class RawTextEvent(WellEvent):
+    """
+    RawTextEvent
+
+    Attributes:
+        anchor_keyword (str): Anchor Keyword
+        placement (Placement): One of [AFTER_DATE, BEFORE_KEYWORD, AFTER_KEYWORD, END_OF_DATE]
+        priority (int): Priority
+        text (str): Text
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.anchor_keyword: str = ""
+        self.placement: Placement = Placement.AFTER_DATE
+        self.priority: int = 0
+        self.text: str = ""
+        WellEvent.__init__(self, pb2_object, channel)
+        if RawTextEvent.__custom_init__ is not None:
+            RawTextEvent.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class RegularSurface(SurfaceInterface):
     """
     Attributes:
@@ -2549,6 +2576,18 @@ class Project(PdmObjectBase):
         return self._call_pdm_method_return_value("importSummaryCase", FileSummaryCase, file_name=file_name)
 
 
+    def link_views(self, views: List[View]=[]) -> None:
+        """
+        Link the specified 3D views
+
+        Arguments:
+            views (List[View]): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("linkViews", views=views)
+
+
     def summary_case(self, case_id: int=-1) -> Optional[FileSummaryCase]:
         """
         Find Summary Case
@@ -2571,6 +2610,30 @@ class Project(PdmObjectBase):
             SurfaceCollection
         """
         return self._call_pdm_method_return_value("surfaceFolder", SurfaceCollection, folder_name=folder_name)
+
+
+    def tile_views(self, ) -> None:
+        """
+        Tile all visible 3D view windows
+
+        Arguments:
+            
+        Returns:
+            
+        """
+        self._call_pdm_method_void("tileViews")
+
+
+    def unlink_views(self, views: List[View]=[]) -> None:
+        """
+        Unlink the specified 3D views
+
+        Arguments:
+            views (List[View]): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("unlinkViews", views=views)
 
 
     def valve_templates(self, ) -> ValveTemplateCollection:
@@ -4040,6 +4103,22 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("AddPerfEvent", WellEventPerf, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, diameter=diameter, skin_factor=skin_factor, state=state, completion_number=completion_number)
 
 
+    def add_raw_text_event_internal(self, event_date: str="2024-01-01", text: str="", placement: Placement=Placement.AFTER_DATE, anchor_keyword: str="", priority: int=0) -> RawTextEvent:
+        """
+        Add raw text at a specific position in a dated schedule section
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            text (str): Raw schedule text
+            placement (Placement): One of [AFTER_DATE, BEFORE_KEYWORD, AFTER_KEYWORD, END_OF_DATE]
+            anchor_keyword (str): Keyword used for before/after placement
+            priority (int): Ascending order among raw text events at the same position
+        Returns:
+            RawTextEvent
+        """
+        return self._call_pdm_method_return_value("AddRawTextEventInternal", RawTextEvent, event_date=event_date, text=text, placement=placement, anchor_keyword=anchor_keyword, priority=priority)
+
+
     def add_state_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, well_state: WellState=WellState.OPEN) -> WellEventState:
         """
         Add a well state event to the timeline
@@ -4366,6 +4445,18 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -4408,18 +4499,6 @@ class WellPathAicdParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -4853,6 +4932,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['PressureTableItem'] = PressureTableItem
     classes['Project'] = Project
     classes['PropertyFilter'] = PropertyFilter
+    classes['RawTextEvent'] = RawTextEvent
     classes['RegularFileSurface'] = RegularFileSurface
     classes['RegularSurface'] = RegularSurface
     classes['ResampleData'] = ResampleData
