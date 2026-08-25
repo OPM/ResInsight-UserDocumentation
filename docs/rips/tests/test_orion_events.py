@@ -188,6 +188,7 @@ class FakeTimeline:
         self.state_calls = []
         self.wellspec_calls = []
         self.schedule_keyword_calls = []
+        self.raw_text_calls = []
         self.created_events = []
 
     def add_perf_event(self, **kwargs):
@@ -223,6 +224,10 @@ class FakeTimeline:
 
     def add_keyword_event(self, **kwargs):
         self.schedule_keyword_calls.append(kwargs)
+        return self._new_event()
+
+    def add_raw_text_event(self, **kwargs):
+        self.raw_text_calls.append(kwargs)
         return self._new_event()
 
 
@@ -489,19 +494,19 @@ class TestParsing:
     def test_duplicate_wellspec_for_well_and_date_is_rejected(self):
         text = (
             'ORIONEVENTS 2.0\nWELL "W"\n'
-            "  @2024-01-01 WELLSPEC GROUP=A\n"
+            "  @2024-01-01 WELSPECS GROUP=A\n"
             'WELL "W"\n'
-            "  @2024-01-01 WELLSPEC PHASE=GAS\n"
+            "  @2024-01-01 WELSPECS PHASE=GAS\n"
         )
-        with pytest.raises(OrionParseError, match="WELLSPEC already defined.*line 3"):
+        with pytest.raises(OrionParseError, match="WELSPECS already defined.*line 3"):
             parse_orion_events(text)
 
     def test_wellspec_same_date_for_different_wells_is_allowed(self):
         document = parse_orion_events(
             'ORIONEVENTS 2.0\nWELL "A"\n'
-            "  @2024-01-01 WELLSPEC GROUP=GA\n"
+            "  @2024-01-01 WELSPECS GROUP=GA\n"
             'WELL "B"\n'
-            "  @2024-01-01 WELLSPEC GROUP=GB\n"
+            "  @2024-01-01 WELSPECS GROUP=GB\n"
         )
         assert [len(well.events) for well in document.wells] == [1, 1]
 
@@ -556,6 +561,69 @@ class TestParsing:
     def test_schedule_line_with_arguments_rejected(self):
         with pytest.raises(OrionParseError, match="SCHEDULE takes no arguments"):
             parse_orion_events("ORIONEVENTS 2.0\nSCHEDULE NOW\n")
+
+    def test_raw_text_block_preserves_body_and_attributes(self):
+        text = (
+            "ORIONEVENTS 2.0\nSCHEDULE\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=BEFORE_KEYWORD "
+            "ANCHOR=COMPDAT PRIORITY=-2\n"
+            "# not an ORION comment\n"
+            "  @this is raw too\n"
+            "END\n"
+            "END_RAW_TEXT\n"
+        )
+        event = parse_orion_events(text).schedule_events[0]
+
+        assert event.event_type == "RAW_TEXT"
+        assert event.raw_text == "# not an ORION comment\n  @this is raw too\nEND\n"
+        assert event.raw_placement == "BEFORE_KEYWORD"
+        assert event.raw_anchor == "COMPDAT"
+        assert event.raw_priority == -2
+
+    @pytest.mark.parametrize(
+        "header,error",
+        [
+            ("RAW_TEXT", "requires PLACEMENT"),
+            ("RAW_TEXT PLACEMENT=NOPE", "PLACEMENT must be"),
+            (
+                "RAW_TEXT PLACEMENT=BEFORE_KEYWORD",
+                "ANCHOR is required",
+            ),
+            (
+                "RAW_TEXT PLACEMENT=AFTER_DATE ANCHOR=COMPDAT",
+                "ANCHOR is only valid",
+            ),
+            (
+                'RAW_TEXT PLACEMENT=END_OF_DATE PRIORITY="1"',
+                "PRIORITY must be an integer",
+            ),
+            (
+                "RAW_TEXT PLACEMENT=END_OF_DATE EXTRA=1",
+                "Unknown RAW_TEXT attribute",
+            ),
+        ],
+    )
+    def test_invalid_raw_text_header_rejected(self, header, error):
+        text = f"ORIONEVENTS 2.0\nSCHEDULE\n  @2024-01-01 {header}\nx\nEND_RAW_TEXT\n"
+        with pytest.raises(OrionParseError, match=error):
+            parse_orion_events(text)
+
+    def test_raw_text_outside_schedule_rejected(self):
+        text = (
+            'ORIONEVENTS 2.0\nWELL "W"\n'
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_DATE\n"
+            "x\nEND_RAW_TEXT\n"
+        )
+        with pytest.raises(OrionParseError, match="only valid in a SCHEDULE"):
+            parse_orion_events(text)
+
+    def test_unterminated_raw_text_rejected(self):
+        text = (
+            "ORIONEVENTS 2.0\nSCHEDULE\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_DATE\ntext\n"
+        )
+        with pytest.raises(OrionParseError, match="Unterminated RAW_TEXT"):
+            parse_orion_events(text)
 
     def test_report_lines_parse(self):
         text = (
@@ -906,6 +974,28 @@ class TestApplying:
         assert timeline.keyword_calls[0]["keyword_data"]["ORAT"] == 100
         assert timeline.keyword_calls[0]["keyword_data"]["CMODE"] == "ORAT"
 
+    def test_same_date_perforations_are_not_merged(self):
+        text = (
+            "ORIONEVENTS 2.0\n"
+            'WELL "55_33-A-1"\n'
+            "  @2018-01-01 PERFORATION MDSTART=1000 MDEND=1100 COMPLETION_NUMBER=1\n"
+            "  @2018-01-01 PERFORATION MDSTART=1200 MDEND=1300 COMPLETION_NUMBER=2\n"
+        )
+
+        document = parse_orion_events(text)
+        merged = coalesce_orion_document(document)
+
+        assert len(merged.wells[0].events) == 2
+
+        timeline, report = self._apply(text)
+        assert report.events_applied == 2
+        assert report.events_skipped == 0
+        assert [(call["start_md"], call["end_md"]) for call in timeline.perf_calls] == [
+            (1000.0, 1100.0),
+            (1200.0, 1300.0),
+        ]
+        assert [call["completion_number"] for call in timeline.perf_calls] == [1, 2]
+
     def test_group_and_schedule_events_merge_only_within_owner(self):
         text = (
             "ORIONEVENTS 2.0\n"
@@ -1065,6 +1155,7 @@ class TestApplying:
         _, report = self._apply(text)
         assert report.events_skipped == 1
         assert any("MDEND" in e for e in report.errors)
+        assert 'Line 3 [WELL "55_33-A-1", date 2018-01-01]' in report.errors[0]
 
     def test_perforation_unknown_attr_is_error(self):
         text = 'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n  @2018-01-01 PERFORATION MDSTART=1 MDEND=2 ZZZ=3\n'
@@ -1075,8 +1166,8 @@ class TestApplying:
     def test_wellspec_partial_updates_are_cumulative_by_date(self):
         text = (
             'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n'
-            "  @2019-01-01 WELLSPEC CROSSFLOW=False PHASE=gas\n"
-            "  @2018-01-01 WELLSPEC GROUP=my_group REFDEPTH=1002 PHASE=water\n"
+            "  @2019-01-01 WELSPECS CROSSFLOW=False PHASE=gas\n"
+            "  @2018-01-01 WELSPECS GROUP=my_group REFDEPTH=1002 PHASE=water\n"
         )
         timeline, report = self._apply(text)
 
@@ -1102,13 +1193,13 @@ class TestApplying:
             ("REFDEPTH=deep", "REFDEPTH must be numeric"),
             ("PHASE=steam", "PHASE must be OIL, GAS, WATER, or LIQUID"),
             ("GROUP=1", "GROUP must be a non-empty string"),
-            ("UNKNOWN=1", "unknown WELLSPEC attribute"),
+            ("UNKNOWN=1", "unknown WELSPECS attribute"),
             ("COMMENT=empty", "needs at least one setting attribute"),
         ],
     )
     def test_invalid_wellspec_is_reported_and_skipped(self, attributes, expected_error):
         text = (
-            f'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n  @2018-01-01 WELLSPEC {attributes}\n'
+            f'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n  @2018-01-01 WELSPECS {attributes}\n'
         )
         timeline, report = self._apply(text)
 
@@ -1161,6 +1252,14 @@ class TestApplying:
         assert report.events_skipped == 1
         assert timeline.keyword_calls == []
         assert any("did you mean 'SEGMENT'" in warning for warning in report.warnings)
+
+    def test_wellspec_is_reported_as_renamed_event(self):
+        text = 'ORIONEVENTS 2.0\nWELL "55_33-A-1"\n  @2024-01-01 WELLSPEC GROUP=FIELD\n'
+        timeline, report = self._apply(text)
+
+        assert report.events_skipped == 1
+        assert timeline.wellspec_calls == []
+        assert any("did you mean 'WELSPECS'" in warning for warning in report.warnings)
 
     def test_valve_mapping(self):
         text = (
@@ -1238,6 +1337,29 @@ class TestApplying:
             }
         ]
 
+    def test_raw_text_event_is_applied_without_coalescing(self):
+        text = (
+            "ORIONEVENTS 2.0\nSCHEDULE\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_DATE PRIORITY=2\n"
+            "first\nEND_RAW_TEXT\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_DATE PRIORITY=1\n"
+            "second\nEND_RAW_TEXT\n"
+        )
+        timeline, report = self._apply(text)
+
+        assert report.events_applied == 2
+        assert [call["text"] for call in timeline.raw_text_calls] == [
+            "first\n",
+            "second\n",
+        ]
+        assert timeline.raw_text_calls[0] == {
+            "event_date": "2024-01-01",
+            "text": "first\n",
+            "placement": "AFTER_DATE",
+            "anchor_keyword": "",
+            "priority": 2,
+        }
+
     def test_group_events_inject_group_name(self):
         text = (
             'ORIONEVENTS 2.0\nGROUP "OP"\n'
@@ -1304,6 +1426,8 @@ class TestApplying:
         assert report.events_skipped == 1
         assert timeline.schedule_keyword_calls == []
         assert expected_error in report.errors[0]
+        expected_scope = 'GROUP "G"' if block.startswith("GROUP") else "SCHEDULE"
+        assert f"[{expected_scope}, date 2024-01-01]" in report.errors[0]
 
     def test_completion_event_in_schedule_block_is_error(self):
         text = (
@@ -1491,29 +1615,49 @@ class TestOrionEventsIntegration:
         well_path_coll = project.descendants(rips.WellPathCollection)[0]
         return project, case, well_path_coll.event_timeline()
 
-    def test_compdat_invalid_item_names_report_valid_names(
+    def test_wconhist_invalid_item_names_report_context_and_valid_names(
         self, project_with_case_and_wells
     ):
-        """Invalid COMPDAT items produce an actionable error (issue #14535)."""
         project, _case, timeline = project_with_case_and_wells
         well = project.well_paths()[0]
         document = parse_orion_events(
             "ORIONEVENTS 2.0\n"
             f'WELL "{well.name}"\n'
-            "  @2024-01-01 COMPDAT STATUS=OPEN TRANSMISSIBILITY=1.0\n"
+            "  @2024-01-01 WCONHIST STATUS=OPEN INVALID_FIELD=1.0\n"
         )
 
-        with pytest.raises(rips.RipsError) as exc_info:
-            apply_orion_document(document, timeline, project)
+        report = apply_orion_document(document, timeline, project)
 
-        error_msg = str(exc_info.value)
-        assert "Keyword 'COMPDAT' contains invalid item names" in error_msg
-        assert "STATUS, TRANSMISSIBILITY" in error_msg
+        assert report.events_applied == 0
+        assert report.events_skipped == 1
+        assert len(report.errors) == 1
+        error_msg = report.errors[0]
+        assert f'Line 3 [WELL "{well.name}", date 2024-01-01]' in error_msg
         assert (
-            "Valid item names are: WELL, I, J, K1, K2, STATE, SAT_TABLE, "
-            "CONNECTION_TRANSMISSIBILITY_FACTOR, DIAMETER, Kh, SKIN, D_FACTOR, "
-            "DIR, PR"
-        ) in error_msg
+            "Keyword 'WCONHIST' contains invalid item names: INVALID_FIELD" in error_msg
+        )
+        assert "Valid item names are:" in error_msg
+
+    def test_unknown_keyword_reports_context_and_continues(
+        self, project_with_case_and_wells
+    ):
+        project, _case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2024-01-01 NOT_A_KEYWORD VALUE=1\n"
+            "  @2024-01-02 WCONHIST STATUS=OPEN\n"
+        )
+
+        report = apply_orion_document(document, timeline, project)
+
+        assert report.events_applied == 1
+        assert report.events_skipped == 1
+        assert len(report.errors) == 1
+        error_msg = report.errors[0]
+        assert f'Line 3 [WELL "{well.name}", date 2024-01-01]' in error_msg
+        assert "Keyword 'NOT_A_KEYWORD' is not recognized by opm-common" in error_msg
 
     def test_rptrst_boolean_values_emit_bare_mnemonics(
         self, project_with_case_and_wells
@@ -1543,6 +1687,78 @@ class TestOrionEventsIntegration:
             assert flag in tokens
             assert f"{flag}=True" not in rptrst_block
         assert "NORST" not in tokens
+
+    def test_raw_text_placement_and_priority(self, project_with_case_and_wells):
+        project, case, timeline = project_with_case_and_wells
+        well = project.well_paths()[0]
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\n"
+            f'WELL "{well.name}"\n'
+            "  @2024-01-01 WCONHIST STATUS=OPEN\n"
+            "SCHEDULE\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_DATE PRIORITY=5\n"
+            "-- after-date-late\nEND_RAW_TEXT\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_DATE PRIORITY=-1\n"
+            "-- after-date-early\nEND_RAW_TEXT\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=BEFORE_KEYWORD ANCHOR=WCONHIST\n"
+            "-- before-wconhist\nEND_RAW_TEXT\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_KEYWORD ANCHOR=WCONHIST\n"
+            "-- after-wconhist\nEND_RAW_TEXT\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=END_OF_DATE\n"
+            "-- end-of-date\nEND_RAW_TEXT\n"
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        assert report.errors == []
+        schedule = timeline.generate_schedule_text(
+            eclipse_case=case, first_date_as_comment=False
+        )
+
+        positions = [
+            schedule.index(marker)
+            for marker in (
+                "DATES",
+                "-- after-date-early",
+                "-- after-date-late",
+                "-- before-wconhist",
+                "WCONHIST",
+                "-- after-wconhist",
+                "-- end-of-date",
+            )
+        ]
+        assert positions == sorted(positions)
+
+    def test_raw_text_only_schedule_is_generated(self, project_with_case_and_wells):
+        project, case, timeline = project_with_case_and_wells
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\nSCHEDULE\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=AFTER_DATE\n"
+            "-- raw-only\nEND_RAW_TEXT\n"
+        )
+
+        apply_orion_document(document, timeline, project)
+        schedule = timeline.generate_schedule_text(
+            eclipse_case=case, first_date_as_comment=False
+        )
+        assert "DATES" in schedule
+        assert "-- raw-only\n" in schedule
+
+        schedule_with_date_comment = timeline.generate_schedule_text(eclipse_case=case)
+        assert "-- Date: 1 JAN 2024\n-- raw-only\n" in schedule_with_date_comment
+
+    def test_raw_text_missing_anchor_fails_generation(
+        self, project_with_case_and_wells
+    ):
+        project, case, timeline = project_with_case_and_wells
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\nSCHEDULE\n"
+            "  @2024-01-01 RAW_TEXT PLACEMENT=BEFORE_KEYWORD ANCHOR=COMPDAT\n"
+            "text\nEND_RAW_TEXT\n"
+        )
+
+        apply_orion_document(document, timeline, project)
+        with pytest.raises(rips.RipsError, match="COMPDAT.*not emitted"):
+            timeline.generate_schedule_text(eclipse_case=case)
 
     def test_event_comment_precedes_generated_keyword(
         self, project_with_case_and_wells
@@ -1620,8 +1836,8 @@ class TestOrionEventsIntegration:
         document = parse_orion_events(
             "ORIONEVENTS 2.0\n"
             f'WELL "{well.name}"\n'
-            "  @2018-01-01 WELLSPEC GROUP=my_group REFDEPTH=1002 PHASE=water\n"
-            "  @2019-01-01 WELLSPEC CROSSFLOW=False REFDEPTH=1000 PHASE=oil\n"
+            "  @2018-01-01 WELSPECS GROUP=my_group REFDEPTH=1002 PHASE=water\n"
+            "  @2019-01-01 WELSPECS CROSSFLOW=False REFDEPTH=1000 PHASE=oil\n"
         )
 
         report = apply_orion_document(document, timeline, project)
@@ -1693,6 +1909,24 @@ class TestOrionEventsIntegration:
         assert " 200" in schedule
         assert " 300" in schedule
         assert "RESTART\n" not in schedule
+
+    def test_report_only_document_generates_schedule(self, project_with_case_and_wells):
+        project, case, timeline = project_with_case_and_wells
+        document = parse_orion_events(
+            "ORIONEVENTS 2.0\nREPORT 2024-02-01\nREPORT 2024-06-01\n"
+        )
+
+        report = apply_orion_document(document, timeline, project)
+        schedule = timeline.generate_schedule_text(
+            eclipse_case=case,
+            first_date_as_comment=False,
+            additional_dates=report.report_dates,
+        )
+
+        assert report.events_applied == 0
+        assert report.report_dates == ["2024-02-01", "2024-06-01"]
+        assert "1 'FEB' 2024" in schedule
+        assert "1 'JUN' 2024" in schedule
 
     def test_apply_creates_perforations_and_schedule(self, project_with_case_and_wells):
         """End-to-end: parse -> apply -> set_timestamp -> generate schedule."""
