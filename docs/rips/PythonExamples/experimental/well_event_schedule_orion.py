@@ -17,15 +17,16 @@ It demonstrates the full event coverage of the format:
    materialized as a case-level combined data filter
 4. COMMENT attributes preserved on timeline events and emitted before their
    generated schedule keywords
-5. Same-owner/type/date WCONHIST lines merged into one event, while same-date
-   perforations remain separate
+5. Same-owner/type/date WCONHIST lines merged with conflict diagnostics, and
+   historical keyword values carried forward to later partial events, while
+   same-date perforations remain separate
 6. Well keyword events: WCONHIST and WELTARG (with attribute translation) and
    WRFTPLT (generic Eclipse well keyword pass-through)
 7. A GROUP-level MEMBER event expanded to one GRUPTREE record per member
 8. SCHEDULE-level keyword events not tied to a well: RPTRST, GRUPTREE, TUNING
 9. Multiline RAW_TEXT inserted at a chosen position without parsing its contents
-10. REPORT dates, passed to generate_schedule_text(additional_dates=...) so
-   they appear as bare DATES keywords (summary-report triggers)
+10. Recurring REPORT dates with explicit and implicit end dates, passed to
+    generate_schedule_text(additional_dates=...) as summary-report triggers
 11. Schedule metadata, COMPORD generation and aligned-column output
 
 The ORIONEVENTS text is built inline with the name of the first well path in
@@ -80,10 +81,15 @@ WELL W1
   @2024-03-01      VALVE        MD=2100  TYPE=ICV  STATE=OPEN  CV=0.7  AREA=0.0001
   @2024-02-15      STATE        STATE=OPEN
 
-  # Matching owner/type/date lines merge. The second line extends the first;
-  # repeated attributes would use the value from the later line.
-  @2024-01-15      WCONHIST     STATUS=OPEN  CMODE=RESV  COMMENT="Start production history controls"
+  # Matching owner/type/date lines merge. The second line extends the first.
+  # Conflicting GRAT values produce a warning, and the later value wins.
+  @2024-01-15      WCONHIST     STATUS=OPEN  CMODE=RESV  GRAT=4756545.5  COMMENT="Start production history controls"
   @2024-01-15      WCONHIST     ORAT=3999.99  WRAT=0.01  GRAT=550678.44  VFP=1
+
+  # Later partial keyword events inherit historical values for the same well
+  # and keyword. This event overrides WRAT and inherits STATUS, CMODE, ORAT,
+  # GRAT and VFP from January 15; COMMENT is event-local and is not inherited.
+  @2024-01-20      WCONHIST     WRAT=0.03
 
   # WRFTPLT is passed through as a generic Eclipse keyword.
   @2024-05-01      WELTARG      CMODE=ORAT  VALUE=5000.0
@@ -108,10 +114,10 @@ WTRACER
 /
 END_RAW_TEXT
 
-# Report dates: emitted as bare DATES keywords so Eclipse/Flow writes a
-# summary report at these dates even though no events fall on them.
-REPORT 2024-07-01
-REPORT STARTUP + 365
+# Recurring report dates become bare DATES keywords. The first series ends at
+# the last @ event; the second uses an explicit inclusive end date.
+REPORT STARTUP EVERY MONTH
+REPORT 2024-07-01 EVERY 3 MONTHS UNTIL STARTUP + 365
 """
 
 
