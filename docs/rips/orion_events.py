@@ -26,7 +26,10 @@ File format grammar, version 2.0 (EBNF-ish)::
                     | group_block_open | schedule_block_open | event_line
                     | raw_text_event ;
     unit_directive  = "UNIT" , ( "METRIC" | "FIELD" | "LAB" ) ;
-    report_line     = "REPORT" , date_expr ;            (* REPORT 2024-06-01 *)
+    report_line     = "REPORT" , date_expr , [ recurrence ] ;
+    recurrence      = "EVERY" , [ positive_integer ] , period ,
+                      [ "UNTIL" , date_expr ] ;
+    period          = "DAY" | "DAYS" | "MONTH" | "MONTHS" | "YEAR" | "YEARS" ;
 
     declaration     = date_decl | duration_decl | well_decl | filter_decl ;
     date_decl       = "DATE" , ident , "=" , date_expr ;         (* DATE X = 2018-03-01 + 9 *)
@@ -65,7 +68,7 @@ Notes on the grammar:
 
 * The format is line-oriented; every non-blank line is dispatched on its first
   token: ``ORIONEVENTS`` (once), ``UNIT``, ``DATE``, ``DURATION``, ``WELL``,
-  ``GROUP``, ``SCHEDULE`` or ``@``. Anything else is an error. Keywords are
+  ``GROUP``, ``SCHEDULE``, ``REPORT`` or ``@``. Anything else is an error. Keywords are
   uppercase and case-sensitive (the ``DAYS`` suffix is also accepted as ``days``).
 * Comments start with ``#`` (outside of double quotes) and run to end of line.
 * Variables are **typed**: ``DATE``, ``DURATION`` (whole days), ``WELL``
@@ -90,12 +93,16 @@ Notes on the grammar:
   record per unique member, with the enclosing group as parent. A schedule may
   contain one attribute-free ``RESTART`` event; it truncates generated schedule
   output before its timestamp and is not itself emitted as a keyword.
-* ``REPORT <date_expr>`` (one date per line, anywhere after the header) names
-  a date that should appear as a bare ``DATES`` keyword in the generated
-  schedule even when no events fall on it — in Eclipse/Flow a ``DATES`` entry
-  ensures a summary report at that date. The dates are collected on
-  :attr:`OrionDocument.report_dates` and surfaced by the applier as sorted ISO
-  strings on :attr:`ApplyReport.report_dates`, ready to pass to
+* ``REPORT <date_expr>`` (anywhere after the header) names a date that should
+  appear as a bare ``DATES`` keyword in the generated schedule even when no
+  events fall on it — in Eclipse/Flow a ``DATES`` entry ensures a summary
+  report at that date. ``EVERY [n] DAYS|MONTHS|YEARS`` makes it recurring and
+  an inclusive ``UNTIL <date_expr>`` sets the end date. When ``UNTIL`` is
+  omitted, the latest ``@`` event date is used. Monthly and yearly recurrences
+  stay anchored to the initial calendar day, clamping to the end of shorter
+  months. The dates are collected on :attr:`OrionDocument.report_dates` and
+  surfaced by the applier as sorted ISO strings on
+  :attr:`ApplyReport.report_dates`, ready to pass to
   ``WellEventTimeline.generate_schedule_text(additional_dates=...)``. A
   ``REPORT`` line is not tied to any well and does not close an open block.
 * ``RAW_TEXT`` is valid only inside a ``SCHEDULE`` block. Its body is copied
@@ -144,6 +151,7 @@ Notes on the grammar:
 
 from __future__ import annotations
 
+import calendar
 import copy
 import datetime
 import difflib
@@ -317,6 +325,17 @@ class GroupBlock:
     loc: SourceLoc = SourceLoc(0, "")
 
 
+@dataclass(frozen=True)
+class _ReportSpec:
+    """One REPORT declaration, expanded after all event dates are known."""
+
+    start: Union[datetime.date, datetime.datetime]
+    interval: Optional[int]
+    period: Optional[str]
+    end: Optional[Union[datetime.date, datetime.datetime]]
+    loc: SourceLoc
+
+
 @dataclass
 class OrionDocument:
     """Parsed, lossless representation of an ORIONEVENTS file."""
@@ -403,7 +422,14 @@ _DURATION_DECL_RE = re.compile(
     r"(?:\s+(?:DAYS|days))?$"
 )
 _WELL_DECL_RE = re.compile(rf'^WELL\s+(?P<name>{_IDENT})\s*=\s*"(?P<well>[^"]*)"$')
-_REPORT_RE = re.compile(rf"^REPORT\s+{_DATE_BASE}{_TERMS}$")
+_REPORT_RE = re.compile(
+    rf"^REPORT\s+{_DATE_BASE}{_TERMS}"
+    rf"(?:\s+EVERY\s+(?:(?P<count>\d+)\s+)?"
+    rf"(?P<period>DAY|DAYS|MONTH|MONTHS|YEAR|YEARS)"
+    rf"(?:\s+UNTIL\s+(?P<end_base>{_ISO_DATE}|{_IDENT})"
+    rf"(?P<end_terms>(?:\s*[-+]\s*(?:\d+|{_IDENT}))*)"
+    rf")?)?$"
+)
 _FILTER_DECL_RE = re.compile(rf'^FILTER\s+(?P<name>{_IDENT})\s*=\s*"(?P<expr>[^"]*)"$')
 _FILTER_SPLIT_RE = re.compile(r"\s+(AND|OR)\s+")
 _NUMBER = r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?"
@@ -445,7 +471,7 @@ def parse_orion_events(text: str) -> OrionDocument:
     wells: List[WellBlock] = []
     groups: List[GroupBlock] = []
     schedule_events: List[OrionEvent] = []
-    report_dates: List[Union[datetime.date, datetime.datetime]] = []
+    report_specs: List[_ReportSpec] = []
     warnings: List[ParseWarning] = []
     errors: List[ParseIssue] = []
     # Event lines append to the current sink: a WellBlock's event list or the
@@ -507,7 +533,7 @@ def parse_orion_events(text: str) -> OrionDocument:
                 wells,
                 groups,
                 schedule_events,
-                report_dates,
+                report_specs,
                 warnings,
                 current_events,
                 unit_holder,
@@ -527,6 +553,10 @@ def parse_orion_events(text: str) -> OrionDocument:
     _set_event_scopes(wells, groups, schedule_events)
     errors.extend(_restart_validation_issues(wells, groups, schedule_events))
     errors.extend(_wellspec_validation_issues(wells))
+    report_dates, report_errors = _expand_report_specs(
+        report_specs, wells, groups, schedule_events
+    )
+    errors.extend(report_errors)
     if errors:
         raise OrionParseError(errors=errors)
 
@@ -540,6 +570,92 @@ def parse_orion_events(text: str) -> OrionDocument:
         report_dates=report_dates,
         warnings=warnings,
     )
+
+
+def _as_datetime(value: Union[datetime.date, datetime.datetime]) -> datetime.datetime:
+    if isinstance(value, datetime.datetime):
+        return value
+    return datetime.datetime.combine(value, datetime.time.min)
+
+
+def _report_occurrence(
+    start: Union[datetime.date, datetime.datetime],
+    interval: int,
+    period: str,
+    occurrence: int,
+) -> Union[datetime.date, datetime.datetime]:
+    offset = interval * occurrence
+    if period == "DAY":
+        return start + datetime.timedelta(days=offset)
+
+    if period == "MONTH":
+        month_index = start.year * 12 + start.month - 1 + offset
+        year, zero_based_month = divmod(month_index, 12)
+        month = zero_based_month + 1
+    else:
+        year = start.year + offset
+        month = start.month
+
+    day = min(start.day, calendar.monthrange(year, month)[1])
+    return start.replace(year=year, month=month, day=day)
+
+
+def _expand_report_specs(
+    report_specs: List[_ReportSpec],
+    wells: List[WellBlock],
+    groups: List[GroupBlock],
+    schedule_events: List[OrionEvent],
+) -> Tuple[
+    List[Union[datetime.date, datetime.datetime]],
+    List[ParseIssue],
+]:
+    event_dates = [event.event_date for well in wells for event in well.events]
+    event_dates.extend(event.event_date for group in groups for event in group.events)
+    event_dates.extend(event.event_date for event in schedule_events)
+    last_event_date = max(event_dates, key=_as_datetime) if event_dates else None
+
+    dates: List[Union[datetime.date, datetime.datetime]] = []
+    issues: List[ParseIssue] = []
+    for spec in report_specs:
+        if spec.period is None:
+            dates.append(spec.start)
+            continue
+
+        if spec.interval is None or spec.interval <= 0:
+            issues.append(
+                ParseIssue("REPORT interval must be greater than zero", spec.loc)
+            )
+            continue
+
+        end = spec.end if spec.end is not None else last_event_date
+        if end is None:
+            issues.append(
+                ParseIssue(
+                    "Recurring REPORT without UNTIL requires at least one event",
+                    spec.loc,
+                )
+            )
+            continue
+        if _as_datetime(end) < _as_datetime(spec.start):
+            issues.append(
+                ParseIssue("REPORT end date must not precede its start date", spec.loc)
+            )
+            continue
+
+        occurrence = 0
+        while True:
+            try:
+                value = _report_occurrence(
+                    spec.start, spec.interval, spec.period, occurrence
+                )
+            except (OverflowError, ValueError):
+                break
+            if _as_datetime(value) > _as_datetime(end):
+                break
+            dates.append(value)
+            occurrence += 1
+
+    return dates, issues
 
 
 def _restart_validation_issues(
@@ -638,7 +754,7 @@ def _parse_line(
     wells: List[WellBlock],
     groups: List[GroupBlock],
     schedule_events: List[OrionEvent],
-    report_dates: List[Union[datetime.date, datetime.datetime]],
+    report_specs: List[_ReportSpec],
     warnings: List[ParseWarning],
     current_events: Optional[List[OrionEvent]],
     unit_holder: List[str],
@@ -686,11 +802,28 @@ def _parse_line(
         if match is None:
             raise OrionParseError(
                 f"Malformed REPORT line: {line!r} "
-                "(expected REPORT <iso-date|DATE-var> [+|- <days|DURATION-var> ...])",
+                "(expected REPORT <date-expr> [EVERY [count] "
+                "DAYS|MONTHS|YEARS [UNTIL <date-expr>]])",
                 loc,
             )
-        report_dates.append(
-            _eval_date_expr(match.group("base"), match.group("terms"), variables, loc)
+        start = _eval_date_expr(
+            match.group("base"), match.group("terms"), variables, loc
+        )
+        period = match.group("period")
+        end_base = match.group("end_base")
+        end = (
+            _eval_date_expr(end_base, match.group("end_terms"), variables, loc)
+            if end_base is not None
+            else None
+        )
+        report_specs.append(
+            _ReportSpec(
+                start=start,
+                interval=int(match.group("count") or 1) if period else None,
+                period=period.rstrip("S") if period else None,
+                end=end,
+                loc=loc,
+            )
         )
         return current_events
 
@@ -1248,6 +1381,7 @@ _NON_COALESCING_EVENT_TYPES = {
     "VALVE",
     "WELSPECS",
 }
+_NON_HISTORICAL_KEYWORD_ATTRS = {"COMMENT", "FILTER"}
 
 
 def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
@@ -1255,15 +1389,22 @@ def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
 
     Keyword events with the same owner, type and timestamp are merged. The first
     event retains its position, and attributes from later matching events are
-    applied in source order. Events that create or expand domain objects are
-    kept separate so, for example, same-date perforation intervals are not lost.
+    applied in source order. Well keyword attributes are then carried forward
+    chronologically to later events of the same type. Events that create or
+    expand domain objects are kept separate so, for example, same-date
+    perforation intervals are not lost.
     """
     result = copy.deepcopy(document)
 
-    def merge_events(events: List[OrionEvent]) -> List[OrionEvent]:
+    def merge_events(
+        events: List[OrionEvent], *, inherit_history: bool = False
+    ) -> List[OrionEvent]:
         merged: List[OrionEvent] = []
         by_key: Dict[
             Tuple[Union[datetime.date, datetime.datetime], str], OrionEvent
+        ] = {}
+        attribute_locs: Dict[
+            Tuple[Union[datetime.date, datetime.datetime], str], Dict[str, SourceLoc]
         ] = {}
         for event in events:
             event_type = event.event_type.upper()
@@ -1275,13 +1416,50 @@ def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
             existing = by_key.get(key)
             if existing is None:
                 by_key[key] = event
+                attribute_locs[key] = {name: event.loc for name in event.attributes}
                 merged.append(event)
                 continue
 
+            repeated = (
+                set(existing.attributes)
+                & set(event.attributes) - _NON_HISTORICAL_KEYWORD_ATTRS
+            )
+            for name in sorted(repeated):
+                previous = existing.attributes[name]
+                replacement = event.attributes[name]
+                if previous.value != replacement.value:
+                    result.warnings.append(
+                        ParseWarning(
+                            f"{_event_context(event)}: conflicting {event_type} "
+                            f"attribute '{name}' (previous value on line "
+                            f"{attribute_locs[key][name].line}); using "
+                            f"{replacement.raw!r}",
+                            event.loc,
+                        )
+                    )
+
             existing.attributes.update(event.attributes)
+            attribute_locs[key].update({name: event.loc for name in event.attributes})
             if "FILTER" in event.attributes:
                 existing.filter = event.filter
             existing.loc = event.loc
+
+        if inherit_history:
+            history: Dict[str, Dict[str, AttrValue]] = {}
+            for event in sorted(merged, key=lambda item: _as_datetime(item.event_date)):
+                event_type = event.event_type.upper()
+                if event_type in _NON_COALESCING_EVENT_TYPES:
+                    continue
+
+                attributes = history.get(event_type, {}).copy()
+                attributes.update(event.attributes)
+                event.attributes = attributes
+                history[event_type] = {
+                    name: value
+                    for name, value in attributes.items()
+                    if name not in _NON_HISTORICAL_KEYWORD_ATTRS
+                }
+
         return merged
 
     def merge_well_blocks(blocks: List[WellBlock]) -> List[WellBlock]:
@@ -1296,7 +1474,7 @@ def coalesce_orion_document(document: OrionDocument) -> OrionDocument:
                 merged_blocks.append(block)
             by_name[block.well_name].events.extend(block_events)
         for block in merged_blocks:
-            block.events = merge_events(block.events)
+            block.events = merge_events(block.events, inherit_history=True)
         return merged_blocks
 
     def merge_group_blocks(blocks: List[GroupBlock]) -> List[GroupBlock]:
@@ -1435,6 +1613,9 @@ def apply_orion_document(
     document = coalesce_orion_document(document)
     report = ApplyReport()
     report.report_dates = sorted({d.isoformat() for d in document.report_dates})
+    report.warnings.extend(
+        f"Line {warning.loc.line}: {warning.message}" for warning in document.warnings
+    )
 
     ctx = _prepare_filter_context(document, project, case)
 
@@ -2108,7 +2289,8 @@ def _cli(argv: Optional[List[str]] = None) -> int:
         f"{len(document.schedule_events)} schedule event(s), "
         f"{len(document.report_dates)} report date(s)"
     )
-    for warning in document.warnings:
+    normalized = coalesce_orion_document(document)
+    for warning in normalized.warnings:
         print(f"  Warning line {warning.loc.line}: {warning.message}")
     return 0
 
