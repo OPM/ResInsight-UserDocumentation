@@ -37,3 +37,9 @@ To create a Histogram Plot, right-click on Histogram object in **Plot Project Tr
 
 Histogram plots can also be created from the right-click menu of summary plots and ensemble parameter plots.
 
+## Logarithmic Display
+
+To display histogram values on a logarithmic axis, enable **Logarithmic Scale** in the histogram plot's **Property Editor**. Logarithmic display is useful for properties with values spanning several orders of magnitude, such as permeability (PERM).
+
+Logarithmic display requires positive values. Values that are zero or negative are not shown.
+
