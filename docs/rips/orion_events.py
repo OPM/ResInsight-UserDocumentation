@@ -22,11 +22,11 @@ File format grammar, version 2.0 (EBNF-ish)::
 
     document        = header , { statement } ;
     header          = "ORIONEVENTS" , "2.0" ;           (* first meaningful line *)
-    statement       = unit_directive | declaration | report_line | well_block_open
+    statement       = unit_directive | declaration | insert_date_line | well_block_open
                     | group_block_open | schedule_block_open | event_line
                     | raw_text_event ;
     unit_directive  = "UNIT" , ( "METRIC" | "FIELD" | "LAB" ) ;
-    report_line     = "REPORT" , date_expr , [ recurrence ] ;
+    insert_date_line = "INSERT_DATE" , date_expr , [ recurrence ] ;
     recurrence      = "EVERY" , [ positive_integer ] , period ,
                       [ "UNTIL" , date_expr ] ;
     period          = "DAY" | "DAYS" | "MONTH" | "MONTHS" | "YEAR" | "YEARS" ;
@@ -45,8 +45,8 @@ File format grammar, version 2.0 (EBNF-ish)::
     well_block_open     = "WELL" , ( quoted_string | ident ) ;   (* no "=" present *)
     group_block_open    = "GROUP" , quoted_string ;     (* group keyword events *)
     schedule_block_open = "SCHEDULE" ;                  (* well-less keyword events *)
-    event_line      = "@" , date_expr , event_type , { attribute } ;
-    raw_text_event  = "@" , date_expr , "RAW_TEXT" , raw_text_attributes , newline,
+    event_line      = date_expr , event_type , { attribute } ;
+    raw_text_event  = date_expr , "RAW_TEXT" , raw_text_attributes , newline,
                       { raw_line , newline } , "END_RAW_TEXT" ;
     raw_text_attributes = "PLACEMENT=" ,
                           ( "AFTER_DATE" | "BEFORE_KEYWORD" |
@@ -55,7 +55,7 @@ File format grammar, version 2.0 (EBNF-ish)::
 
     date_expr       = ( iso_date | iso_datetime | date_ident ) , { sign , term } ;
     duration_expr   = ( integer | dur_ident ) , { sign , term } , [ "DAYS" | "days" ] ;
-    term            = integer | dur_ident ;             (* whole days *)
+    term            = signed_integer | dur_ident ;      (* whole days, e.g. 2 or -2 *)
     sign            = "+" | "-" ;
     iso_date        = 4digit , "-" , 2digit , "-" , 2digit ;
     iso_datetime    = iso_date , "T" , 2digit , ":" , 2digit , ":" , 2digit ,
@@ -68,7 +68,8 @@ Notes on the grammar:
 
 * The format is line-oriented; every non-blank line is dispatched on its first
   token: ``ORIONEVENTS`` (once), ``UNIT``, ``DATE``, ``DURATION``, ``WELL``,
-  ``GROUP``, ``SCHEDULE``, ``REPORT`` or ``@``. Anything else is an error. Keywords are
+  ``GROUP``, ``SCHEDULE``, ``INSERT_DATE`` or an event date. Anything else is an
+  error. Keywords are
   uppercase and case-sensitive (the ``DAYS`` suffix is also accepted as ``days``).
 * Comments start with ``#`` (outside of double quotes) and run to end of line.
 * Variables are **typed**: ``DATE``, ``DURATION`` (whole days), ``WELL``
@@ -78,9 +79,11 @@ Notes on the grammar:
   the declaration site. Redeclaring a name with the same type warns and the
   last value wins; redeclaring with a different type is an error.
 * Date arithmetic is a chain of signed whole-day terms, each an integer or a
-  ``DURATION`` variable: ``@START + RAMP - 2``. Whitespace around ``+``/``-``
-  is optional but conventional. An event date may carry a time-of-day
-  (``@2024-05-15T14:45:30.500``), which the schedule generator preserves as
+  ``DURATION`` variable: ``START + RAMP - 2``. An operand may carry its own
+  sign, so ``START + -2`` is accepted and means the same as ``START - 2``.
+  Whitespace around ``+``/``-`` is optional but conventional. An event date
+  may carry a time-of-day
+  (``2024-05-15T14:45:30.500``), which the schedule generator preserves as
   the optional TIME field of the DATES keyword.
 * ``WELL <ident>`` opens an event block for a declared ``WELL`` alias;
   ``WELL "<name>"`` opens a block for the literal well name and never consults
@@ -93,18 +96,18 @@ Notes on the grammar:
   record per unique member, with the enclosing group as parent. A schedule may
   contain one attribute-free ``RESTART`` event; it truncates generated schedule
   output before its timestamp and is not itself emitted as a keyword.
-* ``REPORT <date_expr>`` (anywhere after the header) names a date that should
-  appear as a bare ``DATES`` keyword in the generated schedule even when no
+* ``INSERT_DATE <date_expr>`` inside a ``SCHEDULE`` block names a date that
+  should appear as a bare ``DATES`` keyword in the generated schedule even when no
   events fall on it — in Eclipse/Flow a ``DATES`` entry ensures a summary
   report at that date. ``EVERY [n] DAYS|MONTHS|YEARS`` makes it recurring and
   an inclusive ``UNTIL <date_expr>`` sets the end date. When ``UNTIL`` is
-  omitted, the latest ``@`` event date is used. Monthly and yearly recurrences
+  omitted, the latest event date is used. Monthly and yearly recurrences
   stay anchored to the initial calendar day, clamping to the end of shorter
   months. The dates are collected on :attr:`OrionDocument.report_dates` and
   surfaced by the applier as sorted ISO strings on
   :attr:`ApplyReport.report_dates`, ready to pass to
   ``WellEventTimeline.generate_schedule_text(additional_dates=...)``. A
-  ``REPORT`` line is not tied to any well and does not close an open block.
+  ``INSERT_DATE`` line is not tied to any well.
 * ``RAW_TEXT`` is valid only inside a ``SCHEDULE`` block. Its body is copied
   without parsing or formatting through the mandatory standalone
   ``END_RAW_TEXT`` line. ``PLACEMENT`` is ``AFTER_DATE``, ``BEFORE_KEYWORD``,
@@ -327,7 +330,7 @@ class GroupBlock:
 
 @dataclass(frozen=True)
 class _ReportSpec:
-    """One REPORT declaration, expanded after all event dates are known."""
+    """One INSERT_DATE declaration, expanded after all event dates are known."""
 
     start: Union[datetime.date, datetime.datetime]
     interval: Optional[int]
@@ -406,13 +409,16 @@ _KEYWORDS = (
     "FILTER",
     "GROUP",
     "SCHEDULE",
-    "REPORT",
+    "INSERT_DATE",
 )
 
 _IDENT = r"[A-Za-z_]\w*"
 _ISO_DATE = r"\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?)?"
 _DATE_BASE = rf"(?P<base>{_ISO_DATE}|{_IDENT})"
-_TERMS = rf"(?P<terms>(?:\s*[-+]\s*(?:\d+|{_IDENT}))*)"
+# A term operand may carry its own sign, so "START + -2" subtracts two days.
+_SIGNED_INT = r"[-+]?\d+"
+_TERMS_BODY = rf"(?:\s*[-+]\s*(?:{_SIGNED_INT}|{_IDENT}))*"
+_TERMS = rf"(?P<terms>{_TERMS_BODY})"
 
 _HEADER_RE = re.compile(r"^ORIONEVENTS\s+(?P<version>\d+\.\d+)$")
 _UNIT_RE = re.compile(r"^UNIT\s+(?P<unit>METRIC|FIELD|LAB)$")
@@ -422,12 +428,12 @@ _DURATION_DECL_RE = re.compile(
     r"(?:\s+(?:DAYS|days))?$"
 )
 _WELL_DECL_RE = re.compile(rf'^WELL\s+(?P<name>{_IDENT})\s*=\s*"(?P<well>[^"]*)"$')
-_REPORT_RE = re.compile(
-    rf"^REPORT\s+{_DATE_BASE}{_TERMS}"
+_INSERT_DATE_RE = re.compile(
+    rf"^INSERT_DATE\s+{_DATE_BASE}{_TERMS}"
     rf"(?:\s+EVERY\s+(?:(?P<count>\d+)\s+)?"
     rf"(?P<period>DAY|DAYS|MONTH|MONTHS|YEAR|YEARS)"
     rf"(?:\s+UNTIL\s+(?P<end_base>{_ISO_DATE}|{_IDENT})"
-    rf"(?P<end_terms>(?:\s*[-+]\s*(?:\d+|{_IDENT}))*)"
+    rf"(?P<end_terms>{_TERMS_BODY})"
     rf")?)?$"
 )
 _FILTER_DECL_RE = re.compile(rf'^FILTER\s+(?P<name>{_IDENT})\s*=\s*"(?P<expr>[^"]*)"$')
@@ -447,8 +453,8 @@ _RESULT_TYPE_ALIASES = {
 }
 _WELL_BLOCK_RE = re.compile(rf'^WELL\s+(?:"(?P<qname>[^"]*)"|(?P<ref>{_IDENT}))$')
 _GROUP_BLOCK_RE = re.compile(r'^GROUP\s+"(?P<name>[^"]*)"$')
-_EVENT_RE = re.compile(rf"^@\s*{_DATE_BASE}{_TERMS}\s+(?P<rest>.+)$")
-_TERM_RE = re.compile(rf"([-+])\s*(\d+|{_IDENT})")
+_EVENT_RE = re.compile(rf"^{_DATE_BASE}{_TERMS}\s+(?P<rest>.+)$")
+_TERM_RE = re.compile(rf"([-+])\s*({_SIGNED_INT}|{_IDENT})")
 _ATTR_RE = re.compile(r'(?P<key>[A-Za-z_]\w*)\s*=\s*(?:"(?P<qval>[^"]*)"|(?P<val>\S+))')
 
 
@@ -541,7 +547,7 @@ def parse_orion_events(text: str) -> OrionDocument:
         except OrionParseError as exc:
             errors.extend(exc.errors)
             if line.split(None, 1)[0] in ("WELL", "GROUP", "SCHEDULE") or (
-                line.startswith("@") and current_events is None
+                _EVENT_RE.match(line) is not None and current_events is None
             ):
                 # Suppress cascading errors from lines belonging to a broken
                 # (or missing) block: swallow them into a discarded list.
@@ -623,7 +629,7 @@ def _expand_report_specs(
 
         if spec.interval is None or spec.interval <= 0:
             issues.append(
-                ParseIssue("REPORT interval must be greater than zero", spec.loc)
+                ParseIssue("INSERT_DATE interval must be greater than zero", spec.loc)
             )
             continue
 
@@ -631,14 +637,16 @@ def _expand_report_specs(
         if end is None:
             issues.append(
                 ParseIssue(
-                    "Recurring REPORT without UNTIL requires at least one event",
+                    "Recurring INSERT_DATE without UNTIL requires at least one event",
                     spec.loc,
                 )
             )
             continue
         if _as_datetime(end) < _as_datetime(spec.start):
             issues.append(
-                ParseIssue("REPORT end date must not precede its start date", spec.loc)
+                ParseIssue(
+                    "INSERT_DATE end date must not precede its start date", spec.loc
+                )
             )
             continue
 
@@ -760,14 +768,6 @@ def _parse_line(
     unit_holder: List[str],
 ) -> Optional[List[OrionEvent]]:
     """Dispatch one non-header line; returns the current event sink."""
-    if line.startswith("@"):
-        if current_events is None:
-            raise OrionParseError(
-                "Event line found before any WELL or SCHEDULE block", loc
-            )
-        current_events.append(_parse_event_line(line, variables, loc))
-        return current_events
-
     first = line.split(None, 1)[0]
 
     if first == "UNIT":
@@ -797,12 +797,14 @@ def _parse_line(
             )
         return schedule_events
 
-    if first == "REPORT":
-        match = _REPORT_RE.match(line)
+    if first == "INSERT_DATE":
+        if current_events is not schedule_events:
+            raise OrionParseError("INSERT_DATE is only valid in a SCHEDULE block", loc)
+        match = _INSERT_DATE_RE.match(line)
         if match is None:
             raise OrionParseError(
-                f"Malformed REPORT line: {line!r} "
-                "(expected REPORT <date-expr> [EVERY [count] "
+                f"Malformed INSERT_DATE line: {line!r} "
+                "(expected INSERT_DATE <date-expr> [EVERY [count] "
                 "DAYS|MONTHS|YEARS [UNTIL <date-expr>]])",
                 loc,
             )
@@ -912,6 +914,19 @@ def _parse_line(
         wells.append(new_well)
         return new_well.events
 
+    if first == "REPORT":
+        raise OrionParseError(
+            "REPORT has been renamed to INSERT_DATE and is only valid in a "
+            "SCHEDULE block",
+            loc,
+        )
+
+    if current_events is not None and _EVENT_RE.match(line):
+        current_events.append(_parse_event_line(line, variables, loc))
+        return current_events
+    if first[0].isdigit() and _EVENT_RE.match(line):
+        raise OrionParseError("Event line found before any WELL or SCHEDULE block", loc)
+
     raise OrionParseError(_unrecognized_line_message(line, first), loc)
 
 
@@ -983,7 +998,9 @@ def _eval_terms(terms: str, variables: Dict[str, OrionValue], loc: SourceLoc) ->
     total = 0
     for match in _TERM_RE.finditer(terms):
         sign, term = match.groups()
-        if term.isdigit():
+        # An operand may be signed itself ("+ -2"); identifiers never start with
+        # a sign or a digit, so this stays unambiguous.
+        if term.lstrip("+-").isdigit():
             days = int(term)
         else:
             value = _lookup_var(term, "DURATION", variables, loc).value
@@ -1313,7 +1330,7 @@ _PERF_REQUIRED = ("MDSTART", "MDEND")
 _PERF_KNOWN = {
     "MDSTART",
     "MDEND",
-    "RADIUS",
+    "DIAMETER",
     "SKIN",
     "COMPLETION_NUMBER",
     "FILTER",
@@ -1602,7 +1619,7 @@ def apply_orion_document(
             event types are passed through as generic Eclipse keywords.
 
     Returns:
-        ApplyReport: counts plus collected warnings/errors. ``REPORT`` dates
+        ApplyReport: counts plus collected warnings/errors. ``INSERT_DATE`` dates
             from the document are returned as sorted, deduplicated ISO strings
             on ``report_dates`` — they do not create timeline events; pass them
             to ``timeline.generate_schedule_text(additional_dates=...)`` to
@@ -1986,8 +2003,8 @@ def _apply_perforation(
             "end_md": float(_as_number(attrs["MDEND"], event.loc)),
             "state": "OPEN",
         }
-        if "RADIUS" in attrs:
-            kwargs["diameter"] = 2.0 * float(_as_number(attrs["RADIUS"], event.loc))
+        if "DIAMETER" in attrs:
+            kwargs["diameter"] = float(_as_number(attrs["DIAMETER"], event.loc))
         if "SKIN" in attrs:
             kwargs["skin_factor"] = float(_as_number(attrs["SKIN"], event.loc))
         if "COMPLETION_NUMBER" in attrs:
