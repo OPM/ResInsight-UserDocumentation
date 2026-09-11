@@ -2997,6 +2997,24 @@ class ReservoirGridEnsemble(NamedObject):
         if ReservoirGridEnsemble.__custom_init__ is not None:
             ReservoirGridEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def data_filter_collection(self) -> Optional[DataFilterCollection]:
+        """Data Filters
+
+        Returns:
+             DataFilterCollection
+        """
+        children = self.children("DataFilterCollection", DataFilterCollection)
+        return children[0] if len(children) > 0 else None
+
+
+class RimRoffCaseSumo(Reservoir):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        Reservoir.__init__(self, pb2_object, channel)
+        if RimRoffCaseSumo.__custom_init__ is not None:
+            RimRoffCaseSumo.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class RimStatisticalCalculation(Reservoir):
     """
     Attributes:
@@ -4940,6 +4958,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['ReservoirGridEnsemble'] = ReservoirGridEnsemble
     classes['RimPolygonAppearance'] = RimPolygonAppearance
     classes['RimPolygonContainer'] = RimPolygonContainer
+    classes['RimRoffCaseSumo'] = RimRoffCaseSumo
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RoffCase'] = RoffCase
     classes['SimulationWell'] = SimulationWell
