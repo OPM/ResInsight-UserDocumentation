@@ -50,10 +50,6 @@ class DepthUnit(StrEnum):
     UNIT_FEET = "UNIT_FEET"
     UNIT_NONE = "UNIT_NONE"
 
-class DiameterRoughnessMode(StrEnum):
-    Uniform = "Uniform"
-    Intervals = "Intervals"
-
 class DrillingType(StrEnum):
     STANDARD = "STANDARD"
     EXTENDED = "EXTENDED"
@@ -98,6 +94,10 @@ class HydrostaticDensity(StrEnum):
     AVG = "AVG"
 
 class LengthAndDepth(StrEnum):
+    INC = "INC"
+    ABS = "ABS"
+
+class LengthAndDepth2(StrEnum):
     INC = "INC"
     ABS = "ABS"
 
@@ -172,6 +172,11 @@ class PressureDrop(StrEnum):
     HF_ = "HF-"
     HFA = "HFA"
 
+class PressureDrop2(StrEnum):
+    H__ = "H--"
+    HF_ = "HF-"
+    HFA = "HFA"
+
 class Property(StrEnum):
     UNDEFINED = "UNDEFINED"
     FACIES = "FACIES"
@@ -221,6 +226,10 @@ class PropertyType(StrEnum):
     INJECTION_FLOODING = "INJECTION_FLOODING"
 
 class ReferenceMdType(StrEnum):
+    GridEntryPoint = "GridEntryPoint"
+    UserDefined = "UserDefined"
+
+class ReferenceMdType2(StrEnum):
     GridEntryPoint = "GridEntryPoint"
     UserDefined = "UserDefined"
 
@@ -1974,18 +1983,6 @@ class WellPath(PdmObjectBase):
         self._call_pdm_method_void("ExtractWellPathPropertiesInternal", resampling_interval=resampling_interval, coordinate_x=coordinate_x, coordinate_y=coordinate_y, coordinate_z=coordinate_z, measured_depth=measured_depth, azimuth=azimuth, inclination=inclination, dogleg=dogleg)
 
 
-    def msw_settings(self, ) -> Optional[MswSettings]:
-        """
-        Multi Segment Well Settings
-
-        Arguments:
-            
-        Returns:
-            RimMswCompletionParameters
-        """
-        return self._call_pdm_method_return_optional_value("MswSettings", MswSettings)
-
-
     def parent_branch(self, ) -> Optional[WellPath]:
         """
         Parent Branch
@@ -1996,6 +1993,18 @@ class WellPath(PdmObjectBase):
             WellPathBase
         """
         return self._call_pdm_method_return_optional_value("ParentBranch", WellPath)
+
+
+    def segment_collection(self, ) -> Optional[SegmentCollection]:
+        """
+        Segment Collection
+
+        Arguments:
+            
+        Returns:
+            SegmentCollection
+        """
+        return self._call_pdm_method_return_optional_value("SegmentCollection", SegmentCollection)
 
 
     def tie_in(self, ) -> Optional[WellPathTimeIn]:
@@ -2918,7 +2927,6 @@ class MswSettings(PdmObjectBase):
 
     Attributes:
         custom_values_for_lateral (bool): Custom Values for Lateral
-        diameter_roughness_mode (DiameterRoughnessMode): One of [Uniform, Intervals]
         enforce_max_segment_length (bool): Enforce Max Segment Length
         length_and_depth (LengthAndDepth): One of [INC, ABS]
         liner_diameter (float): Liner Inner Diameter
@@ -2932,7 +2940,6 @@ class MswSettings(PdmObjectBase):
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.custom_values_for_lateral: bool = False
-        self.diameter_roughness_mode: DiameterRoughnessMode = DiameterRoughnessMode.Uniform
         self.enforce_max_segment_length: bool = False
         self.length_and_depth: LengthAndDepth = LengthAndDepth.ABS
         self.liner_diameter: float = 1.520000000000000e-01
@@ -3135,6 +3142,82 @@ class RoffCase(Reservoir):
         Reservoir.__init__(self, pb2_object, channel)
         if RoffCase.__custom_init__ is not None:
             RoffCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class SegmentCollection(PdmObjectBase):
+    """
+    SegmentCollection
+
+    Attributes:
+        custom_values_for_lateral (bool): Custom Values for Lateral
+        enforce_max_segment_length (bool): Enforce Max Segment Length
+        length_and_depth (LengthAndDepth2): One of [INC, ABS]
+        liner_diameter (float): Liner Inner Diameter
+        max_segment_length (float): Max Segment Length
+        pressure_drop (PressureDrop2): One of [H--, HF-, HFA]
+        reference_md_type (ReferenceMdType2): One of [GridEntryPoint, UserDefined]
+        roughness_factor (float): Roughness Factor
+        user_defined_reference_md (float): User Defined Reference MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.custom_values_for_lateral: bool = False
+        self.enforce_max_segment_length: bool = False
+        self.length_and_depth: LengthAndDepth2 = LengthAndDepth2.ABS
+        self.liner_diameter: float = 1.520000000000000e-01
+        self.max_segment_length: float = 2.000000000000000e+02
+        self.pressure_drop: PressureDrop2 = PressureDrop2.HF_
+        self.reference_md_type: ReferenceMdType2 = ReferenceMdType2.GridEntryPoint
+        self.roughness_factor: float = 1.000000000000000e-05
+        self.user_defined_reference_md: float = 0.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if SegmentCollection.__custom_init__ is not None:
+            SegmentCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_segment_interval(self, start_md: float=0.000000000000000e+00, end_md: float=1.000000000000000e+02, diameter: float=1.520000000000000e-01, roughness_factor: float=1.000000000000000e-05) -> SegmentInterval:
+        """
+        
+
+        Arguments:
+            start_md (float): 
+            end_md (float): 
+            diameter (float): 
+            roughness_factor (float): 
+        Returns:
+            SegmentInterval
+        """
+        return self._call_pdm_method_return_value("AddSegmentInterval", SegmentInterval, start_md=start_md, end_md=end_md, diameter=diameter, roughness_factor=roughness_factor)
+
+
+    def intervals(self) -> List[SegmentInterval]:
+        """Segment Intervals
+
+        Returns:
+             List[SegmentInterval]
+        """
+        return self.children("Intervals", SegmentInterval)
+
+
+class SegmentInterval(PdmObjectBase):
+    """
+    SegmentInterval
+
+    Attributes:
+        diameter (float): Diameter
+        end_md (float): End MD
+        roughness_factor (float): Roughness Factor
+        start_md (float): Start MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.diameter: float = 1.520000000000000e-01
+        self.end_md: float = 0.000000000000000e+00
+        self.roughness_factor: float = 1.000000000000000e-05
+        self.start_md: float = 0.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if SegmentInterval.__custom_init__ is not None:
+            SegmentInterval.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class FractureTemplate(PdmObjectBase):
     """
@@ -4528,8 +4611,6 @@ class WellPathCompletionSettings(PdmObjectBase):
         gas_inflow_eq (GasInflowEq): One of [STD, R-G, P-P, GPP]
         group_name_for_export (str): Group Name
         hydrostatic_density (HydrostaticDensity): One of [SEG, AVG]
-        msw_liner_diameter (float): MSW Liner Diameter
-        msw_roughness (float): MSW Roughness
         reference_depth_for_export (Optional[float]): BHP Reference Depth
         well_bore_fluid_pvt_table (int): Wellbore Fluid PVT table
         well_name_for_export (str): Well Name
@@ -4545,8 +4626,6 @@ class WellPathCompletionSettings(PdmObjectBase):
         self.gas_inflow_eq: GasInflowEq = GasInflowEq.STD
         self.group_name_for_export: str = ""
         self.hydrostatic_density: HydrostaticDensity = HydrostaticDensity.SEG
-        self.msw_liner_diameter: float = 1.520000000000000e-01
-        self.msw_roughness: float = 1.000000000000000e-05
         self.reference_depth_for_export: Optional[float] = None
         self.well_bore_fluid_pvt_table: int = 0
         self.well_name_for_export: str = ""
@@ -4554,34 +4633,6 @@ class WellPathCompletionSettings(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathCompletionSettings.__custom_init__ is not None:
             WellPathCompletionSettings.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-    def add_custom_segment_interval(self, start_md: float=0.000000000000000e+00, end_md: float=1.000000000000000e+02) -> CustomSegmentInterval:
-        """
-        
-
-        Arguments:
-            start_md (float): 
-            end_md (float): 
-        Returns:
-            CustomSegmentInterval
-        """
-        return self._call_pdm_method_return_value("AddCustomSegmentInterval", CustomSegmentInterval, start_md=start_md, end_md=end_md)
-
-
-    def add_diameter_roughness_interval(self, start_md: float=0.000000000000000e+00, end_md: float=1.000000000000000e+02, diameter: float=1.520000000000000e-01, roughness_factor: float=1.000000000000000e-05) -> DiameterRoughnessInterval:
-        """
-        
-
-        Arguments:
-            start_md (float): 
-            end_md (float): 
-            diameter (float): 
-            roughness_factor (float): 
-        Returns:
-            DiameterRoughnessInterval
-        """
-        return self._call_pdm_method_return_value("AddDiameterRoughnessInterval", DiameterRoughnessInterval, start_md=start_md, end_md=end_md, diameter=diameter, roughness_factor=roughness_factor)
-
 
 class WellPathCompletions(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -4608,6 +4659,16 @@ class WellPathCompletions(PdmObjectBase):
              PerforationCollection
         """
         children = self.children("Perforations", PerforationCollection)
+        return children[0] if len(children) > 0 else None
+
+
+    def segments(self) -> Optional[SegmentCollection]:
+        """Segments
+
+        Returns:
+             SegmentCollection
+        """
+        children = self.children("Segments", SegmentCollection)
         return children[0] if len(children) > 0 else None
 
 
@@ -4961,6 +5022,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['RimRoffCaseSumo'] = RimRoffCaseSumo
     classes['RimStatisticalCalculation'] = RimStatisticalCalculation
     classes['RoffCase'] = RoffCase
+    classes['SegmentCollection'] = SegmentCollection
+    classes['SegmentInterval'] = SegmentInterval
     classes['SimulationWell'] = SimulationWell
     classes['StimPlanFractureTemplate'] = StimPlanFractureTemplate
     classes['StimPlanModel'] = StimPlanModel
