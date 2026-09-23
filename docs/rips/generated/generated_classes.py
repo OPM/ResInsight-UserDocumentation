@@ -17,6 +17,14 @@ class CombineMode(StrEnum):
     AND = "AND"
     OR = "OR"
 
+class CompdatExportType(StrEnum):
+    TRANSMISSIBILITIES = "TRANSMISSIBILITIES"
+    WPIMULT_AND_DEFAULT_CONNECTION_FACTORS = "WPIMULT_AND_DEFAULT_CONNECTION_FACTORS"
+
+class CompletionExportSplit(StrEnum):
+    UNIFIED_FILE = "UNIFIED_FILE"
+    SPLIT_ON_WELL = "SPLIT_ON_WELL"
+
 class CompletionType(StrEnum):
     ICD = "ICD"
     ICV = "ICV"
@@ -100,6 +108,15 @@ class LengthAndDepth(StrEnum):
 class LengthAndDepth2(StrEnum):
     INC = "INC"
     ABS = "ABS"
+
+class LgrSplitType(StrEnum):
+    LGR_PER_CELL = "LGR_PER_CELL"
+    LGR_PER_COMPLETION = "LGR_PER_COMPLETION"
+    LGR_PER_WELL = "LGR_PER_WELL"
+
+class MultipleFracturesAction(StrEnum):
+    APPEND_FRACTURES = "APPEND_FRACTURES"
+    REPLACE_FRACTURES = "REPLACE_FRACTURES"
 
 class NameConflictPolicy(StrEnum):
     FAIL = "FAIL"
@@ -244,6 +261,15 @@ class ShowDepthGridLines(StrEnum):
     GRID_X_MAJOR = "GRID_X_MAJOR"
     GRID_X_MAJOR_AND_MINOR = "GRID_X_MAJOR_AND_MINOR"
 
+class SnapshotContentType(StrEnum):
+    ALL = "ALL"
+    VIEWS = "VIEWS"
+    PLOTS = "PLOTS"
+
+class SnapshotFileFormat(StrEnum):
+    PNG = "PNG"
+    PDF = "PDF"
+
 class State(StrEnum):
     OPEN = "OPEN"
     SHUT = "SHUT"
@@ -265,6 +291,10 @@ class SubsOrientationMode(StrEnum):
     FIXED = "FIXED"
     RANDOM = "RANDOM"
 
+class TransScalingWbhpSource(StrEnum):
+    WBHP_SUMMARY = "WBHP_SUMMARY"
+    WBHP_USER_DEFINED = "WBHP_USER_DEFINED"
+
 class Type2(StrEnum):
     CS_WELL_PATH = "CS_WELL_PATH"
     CS_SIMULATION_WELL = "CS_SIMULATION_WELL"
@@ -281,6 +311,11 @@ class ValveUnits(StrEnum):
     UNITS_METRIC = "UNITS_METRIC"
     UNITS_FIELD = "UNITS_FIELD"
     UNITS_UNKNOWN = "UNITS_UNKNOWN"
+
+class VisibleCellsExportKeyword(StrEnum):
+    FLUXNUM = "FLUXNUM"
+    MULTNUM = "MULTNUM"
+    ACTNUM = "ACTNUM"
 
 class WellState(StrEnum):
     OPEN = "OPEN"
@@ -629,6 +664,43 @@ class Case(PdmObjectBase):
         if Case.__custom_init__ is not None:
             Case.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def create_view(self, ) -> View:
+        """
+        Create a new 3D view in the case
+
+        Arguments:
+            
+        Returns:
+            View
+        """
+        return self._call_pdm_method_return_value("createView", View)
+
+
+    def replace_grid(self, new_grid_file: str="", project_file: str="") -> None:
+        """
+        Replace the grid file of the case and reload the project
+
+        Arguments:
+            new_grid_file (str): Path to the new grid file (EGRID, GRID, GRDECL or ODB)
+            project_file (str): Optional project file to reload. Defaults to the current project file.
+        Returns:
+            
+        """
+        self._call_pdm_method_void("replaceGrid", new_grid_file=new_grid_file, project_file=project_file)
+
+
+    def set_formation_names(self, formation_names: Optional[FormationNames]=None) -> None:
+        """
+        Set the active formation names of the case
+
+        Arguments:
+            formation_names (Optional[FormationNames]): Formation names object, e.g. from Project.import_formation_names()
+        Returns:
+            
+        """
+        self._call_pdm_method_void("setFormationNames", formation_names=formation_names)
+
+
 class Reservoir(Case):
     """
     Abstract base class for Eclipse Cases
@@ -666,6 +738,42 @@ class Reservoir(Case):
         self._call_pdm_method_void("clear_result_aliases")
 
 
+    def create_lgr_for_completions(self, well_paths: List[WellPath]=[], time_step: int=0, refinement_i: int=1, refinement_j: int=1, refinement_k: int=1, split_type: LgrSplitType=LgrSplitType.LGR_PER_COMPLETION) -> None:
+        """
+        Create temporary local grid refinements around the completions of the given well paths
+
+        Arguments:
+            well_paths (List[WellPath]): Well paths to create LGRs for
+            time_step (int): Zero-based time step index
+            refinement_i (int): Number of refined cells in I direction
+            refinement_j (int): Number of refined cells in J direction
+            refinement_k (int): Number of refined cells in K direction
+            split_type (LgrSplitType): One of [LGR_PER_CELL, LGR_PER_COMPLETION, LGR_PER_WELL]
+        Returns:
+            
+        """
+        self._call_pdm_method_void("createLgrForCompletions", well_paths=well_paths, time_step=time_step, refinement_i=refinement_i, refinement_j=refinement_j, refinement_k=refinement_k, split_type=split_type)
+
+
+    def create_multiple_fractures(self, well_paths: List[WellPath]=[], fracture_template: Optional[FractureTemplate]=None, min_dist_from_well_td: float=1.000000000000000e+02, max_fractures_per_well: int=100, top_layer: int=-1, base_layer: int=-1, spacing: float=3.000000000000000e+02, action: MultipleFracturesAction=MultipleFracturesAction.APPEND_FRACTURES) -> None:
+        """
+        Create multiple fractures along the given well paths using a fracture template
+
+        Arguments:
+            well_paths (List[WellPath]): Well paths to create fractures for
+            fracture_template (Optional[FractureTemplate]): Template used for the created fractures
+            min_dist_from_well_td (float): Minimum distance from the well total depth
+            max_fractures_per_well (int): 
+            top_layer (int): Zero-based K index of the top layer. -1 uses the top of the grid.
+            base_layer (int): Zero-based K index of the base layer. -1 uses the bottom of the grid.
+            spacing (float): Distance between fractures
+            action (MultipleFracturesAction): One of [APPEND_FRACTURES, REPLACE_FRACTURES]
+        Returns:
+            
+        """
+        self._call_pdm_method_void("createMultipleFractures", well_paths=well_paths, fracture_template=fracture_template, min_dist_from_well_td=min_dist_from_well_td, max_fractures_per_well=max_fractures_per_well, top_layer=top_layer, base_layer=base_layer, spacing=spacing, action=action)
+
+
     def data_filter_collection(self) -> Optional[DataFilterCollection]:
         """Data Filters
 
@@ -674,6 +782,35 @@ class Reservoir(Case):
         """
         children = self.children("DataFilterCollection", DataFilterCollection)
         return children[0] if len(children) > 0 else None
+
+
+    def export_completions(self, well_paths: List[WellPath]=[], time_step: int=0, export_folder: str="", custom_file_name: str="", file_split: CompletionExportSplit=CompletionExportSplit.SPLIT_ON_WELL, compdat_export: CompdatExportType=CompdatExportType.TRANSMISSIBILITIES, include_msw: bool=True, use_ntg_horizontally: bool=False, include_perforations: bool=True, include_fishbones: bool=True, include_fractures: bool=True, exclude_main_bore_for_fishbones: bool=False, perform_trans_scaling: bool=False, trans_scaling_time_step: int=0, trans_scaling_wbhp_source: TransScalingWbhpSource=TransScalingWbhpSource.WBHP_SUMMARY, trans_scaling_wbhp: float=2.000000000000000e+02, export_comments: bool=True, export_welspec: bool=True) -> None:
+        """
+        Export completion data (COMPDAT, WELSPECS, MSW keywords etc.) for well paths in this case
+
+        Arguments:
+            well_paths (List[WellPath]): Well paths to export. Empty list exports all visible well paths.
+            time_step (int): Zero-based time step index
+            export_folder (str): Folder to write the export files to
+            custom_file_name (str): Optional file name (without folder) used when FileSplit is UNIFIED_FILE
+            file_split (CompletionExportSplit): One of [UNIFIED_FILE, SPLIT_ON_WELL]
+            compdat_export (CompdatExportType): One of [TRANSMISSIBILITIES, WPIMULT_AND_DEFAULT_CONNECTION_FACTORS]
+            include_msw (bool): Export Multi Segment Well model
+            use_ntg_horizontally (bool): 
+            include_perforations (bool): 
+            include_fishbones (bool): 
+            include_fractures (bool): 
+            exclude_main_bore_for_fishbones (bool): 
+            perform_trans_scaling (bool): 
+            trans_scaling_time_step (int): 
+            trans_scaling_wbhp_source (TransScalingWbhpSource): One of [WBHP_SUMMARY, WBHP_USER_DEFINED]
+            trans_scaling_wbhp (float): 
+            export_comments (bool): Export data source as comments
+            export_welspec (bool): Export WELSPEC keyword
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportCompletions", well_paths=well_paths, time_step=time_step, export_folder=export_folder, custom_file_name=custom_file_name, file_split=file_split, compdat_export=compdat_export, include_msw=include_msw, use_ntg_horizontally=use_ntg_horizontally, include_perforations=include_perforations, include_fishbones=include_fishbones, include_fractures=include_fractures, exclude_main_bore_for_fishbones=exclude_main_bore_for_fishbones, perform_trans_scaling=perform_trans_scaling, trans_scaling_time_step=trans_scaling_time_step, trans_scaling_wbhp_source=trans_scaling_wbhp_source, trans_scaling_wbhp=trans_scaling_wbhp, export_comments=export_comments, export_welspec=export_welspec)
 
 
     def export_corner_point_grid_internal(self, zcorn_key: str="", coord_key: str="", actnum_key: str="") -> None:
@@ -688,6 +825,57 @@ class Reservoir(Case):
             
         """
         self._call_pdm_method_void("export_corner_point_grid_internal", zcorn_key=zcorn_key, coord_key=coord_key, actnum_key=actnum_key)
+
+
+    def export_lgr_for_completions(self, well_paths: List[WellPath]=[], time_step: int=0, export_folder: str="", refinement_i: int=1, refinement_j: int=1, refinement_k: int=1, split_type: LgrSplitType=LgrSplitType.LGR_PER_COMPLETION) -> None:
+        """
+        Export local grid refinements around the completions of the given well paths to CARFIN files
+
+        Arguments:
+            well_paths (List[WellPath]): Well paths to export LGRs for
+            time_step (int): Zero-based time step index
+            export_folder (str): Folder to write the export files to
+            refinement_i (int): Number of refined cells in I direction
+            refinement_j (int): Number of refined cells in J direction
+            refinement_k (int): Number of refined cells in K direction
+            split_type (LgrSplitType): One of [LGR_PER_CELL, LGR_PER_COMPLETION, LGR_PER_WELL]
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportLgrForCompletions", well_paths=well_paths, time_step=time_step, export_folder=export_folder, refinement_i=refinement_i, refinement_j=refinement_j, refinement_k=refinement_k, split_type=split_type)
+
+
+    def export_msw_completions(self, well_paths: List[WellPath]=[], export_folder: str="", file_split: CompletionExportSplit=CompletionExportSplit.SPLIT_ON_WELL, include_perforations: bool=True, include_fishbones: bool=True, include_fractures: bool=True) -> None:
+        """
+        Export the Multi Segment Well model keywords for well paths in this case
+
+        Arguments:
+            well_paths (List[WellPath]): Well paths to export
+            export_folder (str): Folder to write the export files to
+            file_split (CompletionExportSplit): One of [UNIFIED_FILE, SPLIT_ON_WELL]
+            include_perforations (bool): 
+            include_fishbones (bool): 
+            include_fractures (bool): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportMswCompletions", well_paths=well_paths, export_folder=export_folder, file_split=file_split, include_perforations=include_perforations, include_fishbones=include_fishbones, include_fractures=include_fractures)
+
+
+    def export_property(self, time_step: int=-1, property_name: str="", eclipse_keyword: str="", undefined_value: float=0.000000000000000e+00, export_file: str="") -> None:
+        """
+        Export a cell property of the case to a GRDECL style text file
+
+        Arguments:
+            time_step (int): Zero-based time step index. Ignored for static properties.
+            property_name (str): Name of the property to export
+            eclipse_keyword (str): Keyword written to the file header. Defaults to the property name.
+            undefined_value (float): Value written for undefined cells
+            export_file (str): Full path of the file to write
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportProperty", time_step=time_step, property_name=property_name, eclipse_keyword=eclipse_keyword, undefined_value=undefined_value, export_file=export_file)
 
 
     def export_values_internal(self, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", result_key: str="", property_type: str="", property_name: str="", time_step: int=0, porosity_model: str="") -> None:
@@ -987,6 +1175,35 @@ class EclipseCase(Reservoir):
         Reservoir.__init__(self, pb2_object, channel)
         if EclipseCase.__custom_init__ is not None:
             EclipseCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def create_saturation_pressure_plots(self, time_step: int=0) -> None:
+        """
+        Create saturation pressure plots (PRESSURE vs PBUB/PDEW per EQUIL region) for the case
+
+        Arguments:
+            time_step (int): Zero-based time step index
+        Returns:
+            
+        """
+        self._call_pdm_method_void("createSaturationPressurePlots", time_step=time_step)
+
+
+    def export_flow_characteristics(self, time_steps: List[int]=[], injectors: List[str]=[], producers: List[str]=[], file_name: str="", minimum_communication: float=0.000000000000000e+00, aquifer_cell_threshold: float=1.000000000000000e-01) -> None:
+        """
+        Export flow characteristics computed by flow diagnostics to a text file
+
+        Arguments:
+            time_steps (List[int]): Zero-based time step indices
+            injectors (List[str]): Injector well names
+            producers (List[str]): Producer well names
+            file_name (str): File to write. Relative paths are resolved against the project folder.
+            minimum_communication (float): 
+            aquifer_cell_threshold (float): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportFlowCharacteristics", time_steps=time_steps, injectors=injectors, producers=producers, file_name=file_name, minimum_communication=minimum_communication, aquifer_cell_threshold=aquifer_cell_threshold)
+
 
 class ElasticProperties(PdmObjectBase):
     """
@@ -1484,6 +1701,21 @@ class Fishbones(PdmObjectBase):
         if Fishbones.__custom_init__ is not None:
             Fishbones.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class FormationNames(PdmObjectBase):
+    """
+    Formation names imported from a .lyr or similar file
+
+    Attributes:
+        formation_names_file_name (Optional[str]): File Name
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.formation_names_file_name: Optional[str] = None
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if FormationNames.__custom_init__ is not None:
+            FormationNames.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class FractureSurface(SurfaceInterface):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1566,6 +1798,22 @@ class ViewWindow(PdmObjectBase):
         if ViewWindow.__custom_init__ is not None:
             ViewWindow.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def export_snapshot(self, export_folder: str="", prefix: str="", width: int=-1, height: int=-1, file_format: SnapshotFileFormat=SnapshotFileFormat.PNG) -> None:
+        """
+        Export a snapshot of the view or plot to a file
+
+        Arguments:
+            export_folder (str): Folder to export to. Defaults to the 'snapshots' folder next to the project file.
+            prefix (str): Prefix for the generated file name
+            width (int): Image width in pixels. Use -1 for the current size.
+            height (int): Image height in pixels. Use -1 for the current size.
+            file_format (SnapshotFileFormat): One of [PNG, PDF]
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportSnapshot", export_folder=export_folder, prefix=prefix, width=width, height=height, file_format=file_format)
+
+
 class View(ViewWindow):
     """
     Attributes:
@@ -1596,6 +1844,33 @@ class View(ViewWindow):
         ViewWindow.__init__(self, pb2_object, channel)
         if View.__custom_init__ is not None:
             View.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def clone(self, ) -> View:
+        """
+        Clone the view and add the copy to the same case
+
+        Arguments:
+            
+        Returns:
+            View
+        """
+        return self._call_pdm_method_return_value("clone", View)
+
+
+    def export_contour_map_to_text(self, export_file_name: str="", export_local_coordinates: bool=False, undefined_value_label: str="NaN", exclude_undefined_values: bool=False) -> None:
+        """
+        Export the contour map of a contour map view to a text file
+
+        Arguments:
+            export_file_name (str): Full path of the file to write
+            export_local_coordinates (bool): Export local coordinates instead of UTM
+            undefined_value_label (str): Text written for undefined values
+            exclude_undefined_values (bool): Skip undefined values
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportContourMapToText", export_file_name=export_file_name, export_local_coordinates=export_local_coordinates, undefined_value_label=undefined_value_label, exclude_undefined_values=exclude_undefined_values)
+
 
     def set_polygon_visible(self, polygon: Optional[Polygon]=None, visible: bool=True) -> None:
         """
@@ -1634,6 +1909,18 @@ class View(ViewWindow):
             
         """
         self._call_pdm_method_void("set_surface_visible", surface=surface, visible=visible)
+
+
+    def set_time_step(self, time_step: int=0) -> None:
+        """
+        Set the current time step of the view
+
+        Arguments:
+            time_step (int): Zero-based time step index
+        Returns:
+            
+        """
+        self._call_pdm_method_void("setTimeStep", time_step=time_step)
 
 
 class GeoMechView(View):
@@ -1962,6 +2249,19 @@ class WellPath(PdmObjectBase):
             WellPathValve
         """
         return self._call_pdm_method_return_optional_value("EnableOutletValve", WellPathValve, enable=enable, icv_template=icv_template, use_custom_valve_md=use_custom_valve_md, custom_valve_md=custom_valve_md)
+
+
+    def export_geometry(self, export_folder: str="", md_step_size: float=5.000000000000000e+00) -> None:
+        """
+        Export the well path geometry to a .dev file named after the well path
+
+        Arguments:
+            export_folder (str): Folder to write the .dev file to. Created if it does not exist.
+            md_step_size (float): Resolution of the exported well path along measured depth
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportGeometry", export_folder=export_folder, md_step_size=md_step_size)
 
 
     def extract_well_path_properties_internal(self, resampling_interval: float=1.000000000000000e+01, coordinate_x: str="", coordinate_y: str="", coordinate_z: str="", measured_depth: str="", azimuth: str="", inclination: str="", dogleg: str="") -> None:
@@ -2534,6 +2834,19 @@ class GeoMechCase(Case):
         if GeoMechCase.__custom_init__ is not None:
             GeoMechCase.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def create_well_bore_stability_plot(self, well_path: Optional[WellPath]=None, time_step: int=0) -> WellBoreStabilityPlot:
+        """
+        Create a Well Bore Stability plot for a well path in this case
+
+        Arguments:
+            well_path (Optional[WellPath]): Well path to create the plot for
+            time_step (int): Zero-based time step index
+        Returns:
+            WellBoreStabilityPlot
+        """
+        return self._call_pdm_method_return_value("createWellBoreStabilityPlot", WellBoreStabilityPlot, well_path=well_path, time_step=time_step)
+
+
     def views(self) -> List[GeoMechView]:
         """All GeoMech Views in the Case
 
@@ -2555,6 +2868,18 @@ class Project(PdmObjectBase):
         if Project.__custom_init__ is not None:
             Project.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def create_grid_case_group(self, case_paths: List[str]=[]) -> GridCaseGroup:
+        """
+        Create a grid case group from a list of grid files with identical grids
+
+        Arguments:
+            case_paths (List[str]): Paths to the grid files
+        Returns:
+            RimIdenticalGridCaseGroup
+        """
+        return self._call_pdm_method_return_value("createGridCaseGroup", GridCaseGroup, case_paths=case_paths)
+
+
     def create_grid_from_key_values(self, name: str="", nx: int=0, ny: int=0, nz: int=0, coord_key: str="", zcorn_key: str="", actnum_key: str="") -> CornerPointCase:
         """
         Create Grid From Key Values
@@ -2571,6 +2896,35 @@ class Project(PdmObjectBase):
             CornerPointCase
         """
         return self._call_pdm_method_return_value("createGridFromKeyValues", CornerPointCase, name=name, nx=nx, ny=ny, nz=nz, coord_key=coord_key, zcorn_key=zcorn_key, actnum_key=actnum_key)
+
+
+    def export_snapshots(self, content_type: SnapshotContentType=SnapshotContentType.ALL, export_folder: str="", prefix: str="", width: int=-1, height: int=-1, plot_file_format: SnapshotFileFormat=SnapshotFileFormat.PNG) -> None:
+        """
+        Export snapshots of all 3D views and/or plots in the project
+
+        Arguments:
+            content_type (SnapshotContentType): One of [ALL, VIEWS, PLOTS]
+            export_folder (str): Folder to export to. Defaults to the 'snapshots' folder next to the project file.
+            prefix (str): Prefix for the generated file names
+            width (int): Image width in pixels. Use -1 for the current size.
+            height (int): Image height in pixels. Use -1 for the current size.
+            plot_file_format (SnapshotFileFormat): One of [PNG, PDF]
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportSnapshots", content_type=content_type, export_folder=export_folder, prefix=prefix, width=width, height=height, plot_file_format=plot_file_format)
+
+
+    def import_formation_names(self, formation_files: List[str]=[]) -> FormationNames:
+        """
+        Import formation names from files and return the formation names object
+
+        Arguments:
+            formation_files (List[str]): Formation files to import (.lyr, .fmu, ...)
+        Returns:
+            FormationNames
+        """
+        return self._call_pdm_method_return_value("importFormationNames", FormationNames, formation_files=formation_files)
 
 
     def import_summary_case(self, file_name: str="") -> FileSummaryCase:
@@ -2595,6 +2949,32 @@ class Project(PdmObjectBase):
             
         """
         self._call_pdm_method_void("linkViews", views=views)
+
+
+    def load_case(self, path: str="", grid_only: bool=False) -> Case:
+        """
+        Load a grid case from file and add it to the project
+
+        Arguments:
+            path (str): Path to the grid file (EGRID, GRID, GRDECL or ROFF)
+            grid_only (bool): Load the grid geometry only, without results
+        Returns:
+            Case
+        """
+        return self._call_pdm_method_return_value("loadCase", Case, path=path, grid_only=grid_only)
+
+
+    def run_octave_script(self, path: str="", cases: List[Case]=[]) -> None:
+        """
+        Run an Octave script once per case. Empty case list means all Eclipse cases.
+
+        Arguments:
+            path (str): Path to the Octave script
+            cases (List[Case]): Cases to run the script for. Empty means all Eclipse cases.
+        Returns:
+            
+        """
+        self._call_pdm_method_void("runOctaveScript", path=path, cases=cases)
 
 
     def summary_case(self, case_id: int=-1) -> Optional[FileSummaryCase]:
@@ -2720,6 +3100,35 @@ class EclipseView(View):
         """
         children = self.children("CellResult", CellColors)
         return children[0] if len(children) > 0 else None
+
+
+    def export_current_property(self, export_file: str="", undefined_value: float=0.000000000000000e+00) -> None:
+        """
+        Export the cell result currently shown in the view to a GRDECL style text file
+
+        Arguments:
+            export_file (str): Full path of the file to write
+            undefined_value (float): Value written for undefined cells
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportCurrentProperty", export_file=export_file, undefined_value=undefined_value)
+
+
+    def export_visible_cells(self, export_file: str="", export_keyword: VisibleCellsExportKeyword=VisibleCellsExportKeyword.FLUXNUM, visible_active_cells_value: int=1, hidden_active_cells_value: int=0, inactive_cells_value: int=0) -> None:
+        """
+        Export a GRDECL keyword with one value per cell based on cell visibility in the view
+
+        Arguments:
+            export_file (str): Full path of the file to write
+            export_keyword (VisibleCellsExportKeyword): One of [FLUXNUM, MULTNUM, ACTNUM]
+            visible_active_cells_value (int): Value for visible active cells
+            hidden_active_cells_value (int): Value for hidden active cells
+            inactive_cells_value (int): Value for inactive cells
+        Returns:
+            
+        """
+        self._call_pdm_method_void("exportVisibleCells", export_file=export_file, export_keyword=export_keyword, visible_active_cells_value=visible_active_cells_value, hidden_active_cells_value=hidden_active_cells_value, inactive_cells_value=inactive_cells_value)
 
 
     def fault_collection(self) -> Optional[FaultInViewCollection]:
@@ -2909,16 +3318,29 @@ class GridCaseGroup(PdmObjectBase):
         if GridCaseGroup.__custom_init__ is not None:
             GridCaseGroup.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def create_statistics_case(self, ) -> RimStatisticalCalculation:
+    def create_statistics_case(self, populate_result_selection: bool=False) -> RimStatisticalCalculation:
         """
-        The Abstract Base Class for the Project Data Model
+        Create a new statistics case in the grid case group
 
         Arguments:
-            
+            populate_result_selection (bool): Select all available source properties for statistics. When false, no properties are selected and set_source_properties() must be called before compute_statistics().
         Returns:
             RimStatisticalCalculation
         """
-        return self._call_pdm_method_return_value("create_statistics_case", RimStatisticalCalculation)
+        return self._call_pdm_method_return_value("create_statistics_case", RimStatisticalCalculation, populate_result_selection=populate_result_selection)
+
+
+    def replace_source_cases(self, grid_files: List[str]=[], project_file: str="") -> None:
+        """
+        Replace all source cases of the group with the given grid files and reload the project
+
+        Arguments:
+            grid_files (List[str]): Paths to the new grid files
+            project_file (str): Optional project file to reload. Defaults to the current project file.
+        Returns:
+            
+        """
+        self._call_pdm_method_void("replaceSourceCases", grid_files=grid_files, project_file=project_file)
 
 
 class MswSettings(PdmObjectBase):
@@ -3081,16 +3503,16 @@ class RimStatisticalCalculation(Reservoir):
         self._call_pdm_method_void("clear_source_properties")
 
 
-    def compute_statistics(self, ) -> None:
+    def compute_statistics(self, update_views: bool=False) -> None:
         """
-        The Abstract Base Class for the Project Data Model
+        Compute statistics for the selected source properties
 
         Arguments:
-            
+            update_views (bool): Update the 3D views of the case after computing, and create a view if none exists
         Returns:
             
         """
-        self._call_pdm_method_void("compute_statistics")
+        self._call_pdm_method_void("compute_statistics", update_views=update_views)
 
 
     def set_source_properties(self, property_type: str="", property_names: List[str]=[]) -> None:
@@ -3232,6 +3654,7 @@ class FractureTemplate(PdmObjectBase):
         fracture_width_type (FractureWidthType): One of [UserDefinedWidth, FractureWidth]
         gas_viscosity (float): <html>Gas Viscosity (&mu;)</html> [cP]
         height_scale_factor (float): Height
+        id (int): ID
         inertial_coefficient (float): <html>Inertial Coefficient (&beta;)</html> [Forch. unit]
         non_darcy_flow_type (NonDarcyFlowType2): One of [None, Computed, UserDefined]
         orientation (Orientation): One of [Azimuth, Longitudinal, Transverse]
@@ -3257,6 +3680,7 @@ class FractureTemplate(PdmObjectBase):
         self.fracture_width_type: FractureWidthType = FractureWidthType.FractureWidth
         self.gas_viscosity: float = 2.000000000000000e-02
         self.height_scale_factor: float = 1.000000000000000e+00
+        self.id: int = -1
         self.inertial_coefficient: float = 6.083236000000000e-03
         self.non_darcy_flow_type: NonDarcyFlowType2 = NonDarcyFlowType2.None_
         self.orientation: Orientation = Orientation.Transverse
@@ -3271,6 +3695,19 @@ class FractureTemplate(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if FractureTemplate.__custom_init__ is not None:
             FractureTemplate.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def set_containment(self, top_layer: int=-1, base_layer: int=-1) -> None:
+        """
+        Set the K layer range fractures from this template are contained within
+
+        Arguments:
+            top_layer (int): Zero-based K index of the top layer
+            base_layer (int): Zero-based K index of the base layer
+        Returns:
+            
+        """
+        self._call_pdm_method_void("setContainment", top_layer=top_layer, base_layer=base_layer)
+
 
     def set_scale_factors(self, half_length: float=1.000000000000000e+00, height: float=1.000000000000000e+00, d_factor: float=1.000000000000000e+00, conductivity: float=1.000000000000000e+00) -> None:
         """
@@ -3988,6 +4425,37 @@ class WellLogPlot(DepthTrackPlot):
         DepthTrackPlot.__init__(self, pb2_object, channel)
         if WellLogPlot.__custom_init__ is not None:
             WellLogPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def export_data_as_ascii(self, export_folder: str="", file_prefix: str="", capitalize_file_names: bool=False) -> DataContainerString:
+        """
+        Export the curves of the plot to a single ASCII file and return the file name
+
+        Arguments:
+            export_folder (str): Folder to write the file to. Must exist.
+            file_prefix (str): Prefix for the generated file name
+            capitalize_file_names (bool): Make the file name upper case
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("exportDataAsAscii", DataContainerString, export_folder=export_folder, file_prefix=file_prefix, capitalize_file_names=capitalize_file_names)
+
+
+    def export_data_as_las(self, export_folder: str="", file_prefix: str="", export_tvd_rkb: bool=False, capitalize_file_names: bool=False, resample_interval: float=0.000000000000000e+00, convert_to_standard_units: bool=False) -> DataContainerString:
+        """
+        Export the curves of the plot to LAS files and return the exported file names
+
+        Arguments:
+            export_folder (str): Folder to write the LAS files to. Must exist.
+            file_prefix (str): Prefix for the generated file names
+            export_tvd_rkb (bool): Export in TVD-RKB format
+            capitalize_file_names (bool): Make all file names upper case
+            resample_interval (float): If > 0.0 the curves are resampled with this interval
+            convert_to_standard_units (bool): Convert curve units to standard units
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("exportDataAsLas", DataContainerString, export_folder=export_folder, file_prefix=file_prefix, export_tvd_rkb=export_tvd_rkb, capitalize_file_names=capitalize_file_names, resample_interval=resample_interval, convert_to_standard_units=convert_to_standard_units)
+
 
     def new_well_log_track(self, title: str="", case: Optional[Reservoir]=None, well_path: Optional[WellPath]=None) -> WellLogPlotTrack:
         """
@@ -4874,6 +5342,19 @@ class WellPathCollection(PdmObjectBase):
         return children[0] if len(children) > 0 else None
 
 
+    def import_well_log_files(self, well_log_files: List[str]=[], well_log_folder: str="") -> DataContainerString:
+        """
+        Import LAS files and attach them to the well paths with matching names
+
+        Arguments:
+            well_log_files (List[str]): Well log files to import
+            well_log_folder (str): Folder to import all well log files from. Also used to resolve relative file paths.
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("importWellLogFiles", DataContainerString, well_log_files=well_log_files, well_log_folder=well_log_folder)
+
+
     def import_well_path(self, file_name: str="") -> WellPath:
         """
         
@@ -4899,6 +5380,19 @@ class WellPathCollection(PdmObjectBase):
             PointBasedWellPath
         """
         return self._call_pdm_method_return_value("ImportWellPathFromPointsInternal", PointBasedWellPath, name=name, coordinate_x_key=coordinate_x_key, coordinate_y_key=coordinate_y_key, coordinate_z_key=coordinate_z_key)
+
+
+    def import_well_paths(self, well_path_files: List[str]=[], well_path_folder: str="") -> DataContainerString:
+        """
+        Import well paths from files and/or all well path files in a folder
+
+        Arguments:
+            well_path_files (List[str]): Well path files to import
+            well_path_folder (str): Folder to import all well path files from. Also used to resolve relative file paths.
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("importWellPaths", DataContainerString, well_path_files=well_path_files, well_path_folder=well_path_folder)
 
 
     def set_msw_name_grouping(self, msw_name_grouping: str="") -> None:
@@ -4970,6 +5464,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['FileWellPath'] = FileWellPath
     classes['Fishbones'] = Fishbones
     classes['FishbonesCollection'] = FishbonesCollection
+    classes['FormationNames'] = FormationNames
     classes['Fracture'] = Fracture
     classes['FractureSurface'] = FractureSurface
     classes['FractureTemplate'] = FractureTemplate
