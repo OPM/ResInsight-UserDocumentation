@@ -17,7 +17,7 @@ If you have several reservoir simulations with different input parameters availa
 
 ### From Files
 The easiest way to create a **Grid Case Group** is to use the Import command:
-**File->Import->Eclipse Cases->Create Grid Case Group**
+**File->Import->More->Create Grid Case Group**
 
 This command will display the recursive file import dialog described on the [Summary Plots page]({{% relref "ensemblefiledialog" %}}#ensemble-file-import).
 
