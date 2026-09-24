@@ -17,7 +17,7 @@ Right-click the imported grid ensemble in the **Project Tree** and select **New 
 
 ## Creating Contour Maps (obsolete from version 2026.09)
 
-Import grid models using the **Import->Eclipse Cases->Create Grid Case Ensemble**. The grid models can have individually specified geometry. For grids with equal geometry, consider using [Grid Case Group]({{% relref "casegroupsandstatistics" %}}). The formation information is imported for each grid.
+Import grid models using the **File->Import->More->Create Grid Case Ensemble**. The grid models can have individually specified geometry. For grids with equal geometry, consider using [Grid Case Group]({{% relref "casegroupsandstatistics" %}}). The formation information is imported for each grid.
 
 ![](/images/3d-main-window/import-grid-case-ensemble.png)
 

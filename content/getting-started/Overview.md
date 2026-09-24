@@ -76,18 +76,13 @@ ResInsight stores all views and settings in a [Project File]({{% relref "project
 A *Case* in ResInsight means a Grid model with a particular set of results or property data. There are three different types of reservoir simulation cases and one type of Geomechanical cases.
 
 #### Eclipse Cases
-The following Eclipse cases can be imported into ResInsight via the **File->Import->Eclipse Cases** menu, 
+The following Eclipse cases can be imported into ResInsight via the **File->Import->Import Grid Models** menu, 
 see [Import Eclipse Cases]({{% ref "eclipsecases.md" %}}): 
 
 **Result Case {{< image-in-text src="images/getting-started/Case24x24.png" >}}**
 
 This is a Case based on the results of a reservoir simulation, read from a grid file together with static and restart data. Multiple Cases can be selected and read from a folder.
 
-**Input Case {{< image-in-text src="images/getting-started/EclipseInput24x24.png" >}}**
-
-This Case type is based on a _`*.GRDECL`_ file, or a part of a reservoir simulation input file. This Case type supports loading single ASCII files defining reservoir simulation properties, and also to export modified property sets to ASCII files.
-Each of the reservoir simulation properties are listed as separate entities in the **Project Tree**, and can be renamed and exported.
-See [ Grid Import and Property Export ]({{% relref "eclipsecases" %}})
 
 **Statistics Case {{< image-in-text src="images/getting-started/Histogram24x24.png" >}}**
 

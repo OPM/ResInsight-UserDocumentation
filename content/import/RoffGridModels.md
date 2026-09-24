@@ -11,6 +11,6 @@ ResInsight supports the following type of **ROFF** input data:
 
 ## Roff Data
 
-Roff Data can be imported from **File->Import->Roff Grid Models->Import Roff Case** menu. Select a grid file and additional files with properties in the import dialog. The grid will be displayed and used in the same way as a reservoir simulation grid model.
+Roff data can be imported from the grid model import dialog opened with **File->Import->Import Grid Models**. Select **Roff Grid Models (`*.ROFF` `*.ROFFASC`)** from the file type list, then select a grid file and any additional files with properties. The grid will be displayed and used in the same way as a reservoir simulation grid model.
 
-[Operations on 3D Grid Models]({{% ref "3dviews" %}})   
+[Operations on 3D Grid Models]({{% relref "3dviews" %}})   
