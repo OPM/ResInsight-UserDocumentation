@@ -5,7 +5,7 @@ Example: the well_event_schedule.py timeline expressed as a SIMEVENTS file.
 
 This is the SIMEVENTS counterpart to well_event_schedule.py: instead of
 calling the WellEventTimeline API methods one by one, the same events are
-written as SIMEVENTS 1.1 text (see rips/simulator_events.py for the grammar) and
+written as SIMEVENTS 1.2 text (see rips/simulator_events.py for the grammar) and
 applied in one go with rips.simulator_events.apply_simulator_events_document().
 
 It demonstrates the full event coverage of the format:
@@ -25,8 +25,8 @@ It demonstrates the full event coverage of the format:
 7. A GROUP-level MEMBER event expanded to one GRUPTREE record per member
 8. SCHEDULE-level keyword events not tied to a well: RPTRST, GRUPTREE, TUNING
 9. Multiline RAW_TEXT inserted at a chosen position without parsing its contents
-10. Recurring INSERT_DATE directives with explicit and implicit end dates, passed to
-    generate_schedule_text(additional_dates=...) as summary-report triggers
+10. Recurring INSERT_DATE events with explicit and implicit end dates, expanded
+    into commented insert-date events acting as summary-report triggers
 11. Schedule metadata, COMPORD generation and aligned-column output
 
 The SIMEVENTS text is built inline with the name of the first well path in
@@ -40,7 +40,7 @@ import rips
 import rips.simulator_events
 
 
-def build_simulator_events_text(well_name, with_filter):
+def build_simulator_events_text(well_name: str, with_filter: bool) -> str:
     # 'static.PORO' restricts the result lookup to STATIC_NATIVE results; an
     # unqualified name would search STATIC_NATIVE, DYNAMIC_NATIVE, GENERATED.
     filter_decl = 'FILTER   HIPORO  = "static.PORO > 0.15"\n' if with_filter else ""
@@ -51,7 +51,7 @@ def build_simulator_events_text(well_name, with_filter):
     )
     filter_ref = "  FILTER=HIPORO" if with_filter else ""
     return f"""\
-SIMEVENTS 1.1
+SIMEVENTS 1.2
 UNIT METRIC
 
 # Typed declarations
@@ -114,14 +114,15 @@ WTRACER
 /
 END_RAW_TEXT
 
-# Recurring inserted dates become bare DATES keywords. The first series ends at
-# the last event; the second uses an explicit inclusive end date.
-INSERT_DATE STARTUP EVERY MONTH
-INSERT_DATE 2024-07-01 EVERY 3 MONTHS UNTIL STARTUP + 365d
+# Recurring inserted dates become bare DATES keywords, each with the COMMENT of
+# its statement. The first series ends at the last event; the second uses an
+# explicit inclusive end date.
+  STARTUP     INSERT_DATE  EVERY=1mon   COMMENT="Monthly report"
+  2024-07-01  INSERT_DATE  EVERY=3mon  UNTIL="STARTUP + 365d"
 """
 
 
-def main():
+def main() -> None:
     resinsight = rips.Instance.find()
     project = resinsight.project
 
@@ -179,7 +180,7 @@ def main():
     )
     print(f"   Events applied: {report.events_applied}")
     print(f"   Events skipped: {report.events_skipped}")
-    print(f"   Inserted dates: {report.report_dates}")
+    print(f"   Inserted dates: {len(document.insert_date_events)}")
     for warning in report.warnings:
         print(f"   WARNING: {warning}")
     for error in report.errors:
@@ -212,13 +213,12 @@ def main():
     if case is None:
         print("   No Eclipse case loaded - skipping schedule generation.")
         return
-    # INSERT_DATE values become bare DATES keywords via additional_dates. Aligned output
+    # INSERT_DATE events become bare DATES keywords with their comment. Aligned output
     # adds column-title comments; the schedule header identifies its timestamp and
     # user, and each generated WELSPECS record has a matching COMPORD INPUT record.
     schedule_text = timeline.generate_schedule_text(
         eclipse_case=case,
         export_msw_for_wells=[well_path],
-        additional_dates=report.report_dates,
         align_columns=True,
     )
     if schedule_text:
