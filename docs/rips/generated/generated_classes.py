@@ -2062,14 +2062,6 @@ class ImportedWellLog(WellLog):
         if ImportedWellLog.__custom_init__ is not None:
             ImportedWellLog.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-class IntersectionCollection(PdmObjectBase):
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        PdmObjectBase.__init__(self, pb2_object, channel)
-        if IntersectionCollection.__custom_init__ is not None:
-            IntersectionCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class WellEvent(PdmObjectBase):
     """
     WellEvent
@@ -2086,6 +2078,26 @@ class WellEvent(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellEvent.__custom_init__ is not None:
             WellEvent.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class InsertDateEvent(WellEvent):
+    """
+    InsertDateEvent
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellEvent.__init__(self, pb2_object, channel)
+        if InsertDateEvent.__custom_init__ is not None:
+            InsertDateEvent.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class IntersectionCollection(PdmObjectBase):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if IntersectionCollection.__custom_init__ is not None:
+            IntersectionCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class KeywordEvent(WellEvent):
     """
@@ -4637,6 +4649,19 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("AddControlEvent", WellEventControl, event_date=event_date, well_path=well_path, control_mode=control_mode, control_value=control_value, bhp_limit=bhp_limit, oil_rate=oil_rate, water_rate=water_rate, gas_rate=gas_rate, is_producer=is_producer)
 
 
+    def add_insert_date_event_internal(self, event_date: str="2024-01-01", comment: str="") -> InsertDateEvent:
+        """
+        Add a date that is emitted as a DATES keyword even when no other event falls on it
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            comment (str): Comment emitted below the generated date
+        Returns:
+            InsertDateEvent
+        """
+        return self._call_pdm_method_return_value("AddInsertDateEventInternal", InsertDateEvent, event_date=event_date, comment=comment)
+
+
     def add_keyword_event_internal(self, event_date: str="2024-01-01", keyword_name: str="", item_names: List[str]=[], item_types: List[str]=[], item_values: List[str]=[]) -> KeywordEvent:
         """
         Add a schedule-level keyword event to the timeline (not tied to a well)
@@ -4785,7 +4810,7 @@ class WellEventTimeline(PdmObjectBase):
         return self.children("Events", WellEvent)
 
 
-    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[], first_date_as_comment: bool=True, align_columns: bool=False, additional_dates: List[str]=[]) -> DataContainerString:
+    def generate_schedule(self, eclipse_case: Optional[Reservoir]=None, export_msw_for_wells: List[WellPath]=[], first_date_as_comment: bool=True, align_columns: bool=False) -> DataContainerString:
         """
         Generate Eclipse schedule text for all wells in the collection
 
@@ -4794,11 +4819,10 @@ class WellEventTimeline(PdmObjectBase):
             export_msw_for_wells (List[WellPath]): Wells for which multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD) are exported
             first_date_as_comment (bool): Emit the first (simulation-start) date as a comment instead of a DATES keyword
             align_columns (bool): Emit a column-header comment and right-aligned, fixed-width columns instead of the compact form
-            additional_dates (List[str]): Additional dates (YYYY-MM-DD or full ISO timestamp) emitted as DATES keywords, e.g. to force summary reports at those dates
         Returns:
             DataContainerString
         """
-        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells, first_date_as_comment=first_date_as_comment, align_columns=align_columns, additional_dates=additional_dates)
+        return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells, first_date_as_comment=first_date_as_comment, align_columns=align_columns)
 
 
     def set_timestamp(self, timestamp: str="2024-01-01") -> None:
@@ -5014,18 +5038,6 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -5068,6 +5080,18 @@ class WellPathAicdParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -5479,6 +5503,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['GridSummaryCase'] = GridSummaryCase
     classes['HistogramPlot'] = HistogramPlot
     classes['ImportedWellLog'] = ImportedWellLog
+    classes['InsertDateEvent'] = InsertDateEvent
     classes['IntersectionCollection'] = IntersectionCollection
     classes['KeywordEvent'] = KeywordEvent
     classes['MeshFractureTemplate'] = MeshFractureTemplate
