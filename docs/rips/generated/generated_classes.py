@@ -2880,6 +2880,18 @@ class Project(PdmObjectBase):
         if Project.__custom_init__ is not None:
             Project.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def create_generic_view(self, name: str="") -> GenericView:
+        """
+        Create a case-less 3D view
+
+        Arguments:
+            name (str): 
+        Returns:
+            RimGeneric3dView
+        """
+        return self._call_pdm_method_return_value("createGenericView", GenericView, name=name)
+
+
     def create_grid_case_group(self, case_paths: List[str]=[]) -> GridCaseGroup:
         """
         Create a grid case group from a list of grid files with identical grids
@@ -3300,6 +3312,18 @@ class FaultDistanceCollection(PdmObjectBase):
         """
         return self.children("FaultDistances", FaultDistance)
 
+
+class GenericView(View):
+    """
+    A 3D view not tied to any grid case
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        View.__init__(self, pb2_object, channel)
+        if GenericView.__custom_init__ is not None:
+            GenericView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class GeoMechContourMap(GeoMechView):
     """
@@ -5038,6 +5062,18 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -5080,18 +5116,6 @@ class WellPathAicdParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -5493,6 +5517,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['FractureSurface'] = FractureSurface
     classes['FractureTemplate'] = FractureTemplate
     classes['FractureTemplateCollection'] = FractureTemplateCollection
+    classes['GenericView'] = GenericView
     classes['GeoMechCase'] = GeoMechCase
     classes['GeoMechContourMap'] = GeoMechContourMap
     classes['GeoMechPart'] = GeoMechPart
