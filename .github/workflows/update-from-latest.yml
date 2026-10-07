@@ -15,15 +15,11 @@ jobs:
         uses: actions/checkout@v6
         
       - name: Download ResInsight binaries and Python package
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download dev-latest \
-            --repo CeetronSolutions/resinsight-builds \
-            --pattern 'ResInsight-Ubuntu.zip' \
-            --pattern 'rips.tar.gz' \
-            --dir downloaded_artifacts
-          gh release view dev-latest --repo CeetronSolutions/resinsight-builds --json body --jq .body
+          RELEASE_URL=https://github.com/CeetronSolutions/resinsight-builds/releases/download/dev-latest
+          mkdir -p downloaded_artifacts
+          curl -fsSL "$RELEASE_URL/ResInsight-Ubuntu.zip" -o downloaded_artifacts/ResInsight-Ubuntu.zip
+          curl -fsSL "$RELEASE_URL/rips.tar.gz" -o downloaded_artifacts/rips.tar.gz
           unzip -q downloaded_artifacts/ResInsight-Ubuntu.zip -d resinsight_build
           chmod +x resinsight_build/bin/ResInsight
           echo "RESINSIGHT_EXECUTABLE=$GITHUB_WORKSPACE/resinsight_build/bin/ResInsight" >> $GITHUB_ENV
