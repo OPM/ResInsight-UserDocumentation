@@ -10,7 +10,7 @@ jobs:
   codespell-check:
     # Only check on pull requests
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v6
       - uses: codespell-project/actions-codespell@v2.2
@@ -21,7 +21,7 @@ jobs:
   codespell-fix:
     # Auto-fix and create PR on schedule or manual trigger
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       contents: write
       pull-requests: write
