@@ -14,52 +14,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         
-      - name: Set up authentication
+      - name: Download ResInsight binaries and Python package
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Authenticated with PAT"
+          gh release download dev-latest \
+            --repo CeetronSolutions/resinsight-builds \
+            --pattern 'ResInsight-Ubuntu.zip' \
+            --pattern 'rips.tar.gz' \
+            --dir downloaded_artifacts
+          gh release view dev-latest --repo CeetronSolutions/resinsight-builds --json body --jq .body
+          unzip -q downloaded_artifacts/ResInsight-Ubuntu.zip -d resinsight_build
+          chmod +x resinsight_build/bin/ResInsight
+          echo "RESINSIGHT_EXECUTABLE=$GITHUB_WORKSPACE/resinsight_build/bin/ResInsight" >> $GITHUB_ENV
 
-      - name: Get latest successful workflow run
-        id: get_run
+      - name: Update docs/rips folder from downloaded Python package
         run: |
-          curl -H "Authorization: token ${{ secrets.PAT }}" \
-          "https://api.github.com/repos/OPM/ResInsight/actions/workflows/ResInsightWithCache.yml/runs?branch=dev&status=completed&per_page=100" \
-          | jq '.workflow_runs[] | select(.conclusion=="success") | .id' \
-          | head -n 1 > run_id.txt
-          echo "run_id=$(cat run_id.txt)" >> $GITHUB_ENV
-
-      - name: Download artifact metadata, find url for 'python-distribution'
-        id: get_artifact
-        run: |
-          mkdir -p downloaded_artifacts
-          
-          curl -H "Authorization: token ${{ secrets.PAT }}" \
-          -L https://api.github.com/repos/OPM/ResInsight/actions/runs/${{ env.run_id }}/artifacts \
-          -o downloaded_artifacts/artifacts.json
-          
-          # Find artifact with name python-distribution
-          ARTIFACT_URL=$(jq -r '.artifacts[] | select(.name=="python-distribution") | .archive_download_url' downloaded_artifacts/artifacts.json)
-          echo "artifact_url=$ARTIFACT_URL" >> $GITHUB_ENV
-
-      - name: Download artifact file
-        run: |
-          curl -H "Authorization: token ${{ secrets.PAT }}" \
-          -L "${{ env.artifact_url }}" \
-          -o downloaded_artifacts/artifact.zip
-
-      - name: Update docs/rips folder from downloaded artifacts
-        run: |
-          echo "Downloaded files:"
-          cd downloaded_artifacts
-          unzip artifact.zip
-          cd ..
           mkdir upstream_rips
-          tar -xzf downloaded_artifacts/rips*.tar.gz -C upstream_rips
-          # ls upstream_rips/rips*
+          tar -xzf downloaded_artifacts/rips.tar.gz -C upstream_rips
           rm -rf ./docs/rips
           cp -r upstream_rips/rips*/rips ./docs/
-          # ls -R ./docs/rips
 
       - name: Download proto files from ResInsight repository
         run: |
