@@ -31,13 +31,13 @@ Launch the application using the command `ResInsight`
 
 The **apt-get** package does not contain **Python** support due to build server issues. Consider using the latest nightly build for Ubuntu from the development branch for Python support. Please note that this is a development version, and is not as stable as the public release.
 
-1. Download the binary file
+1. Download the binary file from https://github.com/CeetronSolutions/resinsight-builds/releases/tag/dev-latest, or use
 ```txt
-curl -L -O "https://nightly.link/OPM/ResInsight/workflows/ResInsightWithCache/dev/ResInsight-Ubuntu%2024.04%20gcc.zip"
+curl -L -O "https://github.com/CeetronSolutions/resinsight-builds/releases/download/dev-latest/ResInsight-Ubuntu.zip"
 ```
 2. Unzip the binary
 ```txt
-unzip "ResInsight-Ubuntu%2024.04%20gcc.zip"
+unzip ResInsight-Ubuntu.zip
 ```
 3. Launch ResInsight from the bin folder
 ```txt
