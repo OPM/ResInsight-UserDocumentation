@@ -47,7 +47,7 @@ Use Hugo shortcodes for internal links — never hardcode paths:
 After every documentation change, build the site and verify the generated output:
 
 ```powershell
-& 'f:\tools\hugo\hugo_0.142.0\hugo.exe' --minify
+& 'f:\tools\hugo\hugo_0.167.0\hugo.exe' --minify
 ```
 
 Check the build output for errors and inspect the generated page when the change affects shortcodes, links, images, or layout. Do not consider a documentation change complete until the build succeeds and the changed output is verified.
