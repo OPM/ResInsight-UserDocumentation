@@ -32,6 +32,10 @@ class CompletionType(StrEnum):
     SICD = "SICD"
     UNDEFINED = "UNDEFINED"
 
+class CompsegsSegmentNumber(StrEnum):
+    AssignedBySimulator = "AssignedBySimulator"
+    Exported = "Exported"
+
 class ConductivityType(StrEnum):
     InfiniteConductivity = "InfiniteConductivity"
     FiniteConductivity = "FiniteConductivity"
@@ -3606,6 +3610,7 @@ class SegmentCollection(PdmObjectBase):
     SegmentCollection
 
     Attributes:
+        compsegs_segment_number (CompsegsSegmentNumber): One of [AssignedBySimulator, Exported]
         custom_values_for_lateral (bool): Custom Values for Lateral
         enforce_max_segment_length (bool): Enforce Max Segment Length
         length_and_depth (LengthAndDepth2): One of [INC, ABS]
@@ -3614,11 +3619,14 @@ class SegmentCollection(PdmObjectBase):
         pressure_drop (PressureDrop2): One of [H--, HF-, HFA]
         reference_md_type (ReferenceMdType2): One of [GridEntryPoint, UserDefined]
         roughness_factor (float): Roughness Factor
+        single_segment_after_last_perforation (bool): Single Segment After Last Perforation
+        single_segment_before_first_perforation (bool): Single Segment Before First Perforation
         user_defined_reference_md (float): User Defined Reference MD
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.compsegs_segment_number: CompsegsSegmentNumber = CompsegsSegmentNumber.AssignedBySimulator
         self.custom_values_for_lateral: bool = False
         self.enforce_max_segment_length: bool = False
         self.length_and_depth: LengthAndDepth2 = LengthAndDepth2.ABS
@@ -3627,6 +3635,8 @@ class SegmentCollection(PdmObjectBase):
         self.pressure_drop: PressureDrop2 = PressureDrop2.HF_
         self.reference_md_type: ReferenceMdType2 = ReferenceMdType2.GridEntryPoint
         self.roughness_factor: float = 1.000000000000000e-05
+        self.single_segment_after_last_perforation: bool = False
+        self.single_segment_before_first_perforation: bool = False
         self.user_defined_reference_md: float = 0.000000000000000e+00
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SegmentCollection.__custom_init__ is not None:
@@ -3663,6 +3673,9 @@ class SegmentInterval(PdmObjectBase):
     Attributes:
         diameter (float): Diameter
         end_md (float): End MD
+        fixed_segment_length (Tuple[bool, float]): Fixed Segment Length
+        max_segment_length (Tuple[bool, float]): Max Segment Length
+        min_segment_length (Tuple[bool, float]): Min Segment Length
         roughness_factor (float): Roughness Factor
         start_md (float): Start MD
     """
@@ -3671,11 +3684,53 @@ class SegmentInterval(PdmObjectBase):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.diameter: float = 1.520000000000000e-01
         self.end_md: float = 0.000000000000000e+00
+        self.fixed_segment_length: Tuple[bool, float] = (False, 5.000000000000000e+01)
+        self.max_segment_length: Tuple[bool, float] = (False, 1.000000000000000e+02)
+        self.min_segment_length: Tuple[bool, float] = (False, 1.000000000000000e+01)
         self.roughness_factor: float = 1.000000000000000e-05
         self.start_md: float = 0.000000000000000e+00
         PdmObjectBase.__init__(self, pb2_object, channel)
         if SegmentInterval.__custom_init__ is not None:
             SegmentInterval.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def set_fixed_segment_length(self, length: float=5.000000000000000e+01, enable: bool=True) -> SegmentInterval:
+        """
+        
+
+        Arguments:
+            length (float): 
+            enable (bool): 
+        Returns:
+            SegmentInterval
+        """
+        return self._call_pdm_method_return_value("SetFixedSegmentLength", SegmentInterval, length=length, enable=enable)
+
+
+    def set_max_segment_length(self, length: float=5.000000000000000e+01, enable: bool=True) -> SegmentInterval:
+        """
+        
+
+        Arguments:
+            length (float): 
+            enable (bool): 
+        Returns:
+            SegmentInterval
+        """
+        return self._call_pdm_method_return_value("SetMaxSegmentLength", SegmentInterval, length=length, enable=enable)
+
+
+    def set_min_segment_length(self, length: float=5.000000000000000e+01, enable: bool=True) -> SegmentInterval:
+        """
+        
+
+        Arguments:
+            length (float): 
+            enable (bool): 
+        Returns:
+            SegmentInterval
+        """
+        return self._call_pdm_method_return_value("SetMinSegmentLength", SegmentInterval, length=length, enable=enable)
+
 
 class FractureTemplate(PdmObjectBase):
     """
