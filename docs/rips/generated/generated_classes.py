@@ -1626,7 +1626,7 @@ class FishbonesCollection(CheckableNamedObject):
             sub_locations (List[float]): 
             drilling_type (DrillingType): One of [STANDARD, EXTENDED, ACID_JETTING]
         Returns:
-            FishbonesMultipleSubs
+            Fishbones
         """
         return self._call_pdm_method_return_value("AppendFishbones", Fishbones, sub_locations=sub_locations, drilling_type=drilling_type)
 
@@ -2200,7 +2200,7 @@ class WellPath(PdmObjectBase):
             sub_locations (List[float]): 
             drilling_type (DrillingType): One of [STANDARD, EXTENDED, ACID_JETTING]
         Returns:
-            FishbonesMultipleSubs
+            Fishbones
         """
         return self._call_pdm_method_return_optional_value("AppendFishbones", Fishbones, sub_locations=sub_locations, drilling_type=drilling_type)
 
@@ -2306,7 +2306,7 @@ class WellPath(PdmObjectBase):
         Arguments:
             
         Returns:
-            WellPathBase
+            WellPath
         """
         return self._call_pdm_method_return_optional_value("ParentBranch", WellPath)
 
@@ -2330,7 +2330,7 @@ class WellPath(PdmObjectBase):
         Arguments:
             
         Returns:
-            RimWellPathTieIn
+            WellPathTimeIn
         """
         return self._call_pdm_method_return_optional_value("TieIn", WellPathTimeIn)
 
@@ -2413,6 +2413,20 @@ class MultiSummaryPlot(MultiPlot):
         MultiPlot.__init__(self, pb2_object, channel)
         if MultiSummaryPlot.__custom_init__ is not None:
             MultiSummaryPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def append_subplot(self, summary_cases: List[SummaryCase]=[], ensembles: List[SummaryEnsemble]=[], address: str="") -> SummaryPlot:
+        """
+        Append a new subplot to the summary plot
+
+        Arguments:
+            summary_cases (List[SummaryCase]): Summary Cases
+            ensembles (List[SummaryEnsemble]): Ensembles plotted together in the subplot
+            address (str): Formatted address string specifying the plot options
+        Returns:
+            SummaryPlot
+        """
+        return self._call_pdm_method_return_value("AppendSubplot", SummaryPlot, summary_cases=summary_cases, ensembles=ensembles, address=address)
+
 
 class NonDarcyPerforationParameters(PdmObjectBase):
     """
@@ -2891,7 +2905,7 @@ class Project(PdmObjectBase):
         Arguments:
             name (str): 
         Returns:
-            RimGeneric3dView
+            GenericView
         """
         return self._call_pdm_method_return_value("createGenericView", GenericView, name=name)
 
@@ -2903,7 +2917,7 @@ class Project(PdmObjectBase):
         Arguments:
             case_paths (List[str]): Paths to the grid files
         Returns:
-            RimIdenticalGridCaseGroup
+            GridCaseGroup
         """
         return self._call_pdm_method_return_value("createGridCaseGroup", GridCaseGroup, case_paths=case_paths)
 
@@ -2967,6 +2981,19 @@ class Project(PdmObjectBase):
         return self._call_pdm_method_return_value("importSummaryCase", FileSummaryCase, file_name=file_name)
 
 
+    def import_summary_ensemble(self, file_names: List[str]=[], ensemble_name: str="") -> SummaryEnsemble:
+        """
+        Import summary files as one ensemble
+
+        Arguments:
+            file_names (List[str]): Summary files (SMSPEC), one for each realization
+            ensemble_name (str): Ensemble name. Automatically generated if empty
+        Returns:
+            SummaryEnsemble
+        """
+        return self._call_pdm_method_return_value("importSummaryEnsemble", SummaryEnsemble, file_names=file_names, ensemble_name=ensemble_name)
+
+
     def link_views(self, views: List[View]=[]) -> None:
         """
         Link the specified 3D views
@@ -2984,7 +3011,7 @@ class Project(PdmObjectBase):
         Load a grid case from file and add it to the project
 
         Arguments:
-            path (str): Path to the grid file (EGRID, GRID, GRDECL or ROFF)
+            path (str): Path to the grid file (EGRID, GRID, GRDECL or ROFF) or geomechanical case (ODB, INP or PVD)
             grid_only (bool): Load the grid geometry only, without results
         Returns:
             Case
@@ -3072,7 +3099,7 @@ class Project(PdmObjectBase):
         Arguments:
             
         Returns:
-            WellPaths
+            WellPathCollection
         """
         return self._call_pdm_method_return_value("wellPathCollection", WellPathCollection)
 
@@ -3115,7 +3142,7 @@ class EclipseView(View):
             name (str): 
             faults (List[FaultInView]): 
         Returns:
-            RimFaultDistance
+            FaultDistance
         """
         return self._call_pdm_method_return_value("add_fault_distance", FaultDistance, name=name, faults=faults)
 
@@ -3280,6 +3307,39 @@ class EclipseCaseEnsemble(NamedObject):
         NamedObject.__init__(self, pb2_object, channel)
         if EclipseCaseEnsemble.__custom_init__ is not None:
             EclipseCaseEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class EnsembleCurveSet(PdmObjectBase):
+    """
+    A curve set for a summary ensemble
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if EnsembleCurveSet.__custom_init__ is not None:
+            EnsembleCurveSet.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class EnsembleCurveSetCollection(PdmObjectBase):
+    """
+    A collection of ensemble curve sets
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if EnsembleCurveSetCollection.__custom_init__ is not None:
+            EnsembleCurveSetCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def ensemble_curve_sets(self) -> List[EnsembleCurveSet]:
+        """Ensemble Curve Sets
+
+        Returns:
+             List[EnsembleCurveSet]
+        """
+        return self.children("EnsembleCurveSets", EnsembleCurveSet)
+
 
 class FaultDistance(PdmObjectBase):
     """
@@ -4193,8 +4253,10 @@ class StimPlanModelTemplateCollection(PdmObjectBase):
         return self.children("StimPlanModelTemplates", StimPlanModelTemplate)
 
 
-class SummaryCaseSubCollection(PdmObjectBase):
+class SummaryEnsemble(PdmObjectBase):
     """
+    A group of summary cases, typically an ensemble
+
     Attributes:
         create_auto_name (bool): Auto Name
         id (int): Ensemble ID
@@ -4217,8 +4279,17 @@ class SummaryCaseSubCollection(PdmObjectBase):
         self.use_key1: bool = False
         self.use_key2: bool = False
         PdmObjectBase.__init__(self, pb2_object, channel)
-        if SummaryCaseSubCollection.__custom_init__ is not None:
-            SummaryCaseSubCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+        if SummaryEnsemble.__custom_init__ is not None:
+            SummaryEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def summary_cases(self) -> List[SummaryCase]:
+        """
+
+        Returns:
+             List[SummaryCase]
+        """
+        return self.children("SummaryCases", SummaryCase)
+
 
 class SummaryCaseSumo(SummaryCase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -4247,6 +4318,16 @@ class SummaryPlot(Plot):
         if SummaryPlot.__custom_init__ is not None:
             SummaryPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def ensemble_curve_set_collection(self) -> Optional[EnsembleCurveSetCollection]:
+        """
+
+        Returns:
+             EnsembleCurveSetCollection
+        """
+        children = self.children("EnsembleCurveSetCollection", EnsembleCurveSetCollection)
+        return children[0] if len(children) > 0 else None
+
+
 class SummaryPlotCollection(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -4255,18 +4336,33 @@ class SummaryPlotCollection(PdmObjectBase):
         if SummaryPlotCollection.__custom_init__ is not None:
             SummaryPlotCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
-    def new_summary_plot(self, summary_cases: List[SummaryCase]=[], ensemble: Optional[SummaryCaseSubCollection]=None, address: str="") -> SummaryPlot:
+    def new_summary_multi_plot(self, summary_cases: List[SummaryCase]=[], ensembles: List[SummaryEnsemble]=[], addresses: List[str]=[]) -> MultiSummaryPlot:
+        """
+        Create a new multi plot with one subplot for each address
+
+        Arguments:
+            summary_cases (List[SummaryCase]): Summary Cases
+            ensembles (List[SummaryEnsemble]): Ensembles plotted together in each subplot
+            addresses (List[str]): One formatted address string for each subplot
+        Returns:
+            MultiSummaryPlot
+        """
+        return self._call_pdm_method_return_value("NewSummaryMultiPlot", MultiSummaryPlot, summary_cases=summary_cases, ensembles=ensembles, addresses=addresses)
+
+
+    def new_summary_plot(self, summary_cases: List[SummaryCase]=[], ensemble: Optional[SummaryEnsemble]=None, ensembles: List[SummaryEnsemble]=[], address: str="") -> SummaryPlot:
         """
         Create a new Summary Plot
 
         Arguments:
             summary_cases (List[SummaryCase]): Summary Cases
-            ensemble (Optional[SummaryCaseSubCollection]): Ensemble
+            ensemble (Optional[SummaryEnsemble]): Ensemble
+            ensembles (List[SummaryEnsemble]): Ensembles plotted together in the same plot
             address (str): Formatted address string specifying the plot options
         Returns:
             SummaryPlot
         """
-        return self._call_pdm_method_return_value("NewSummaryPlot", SummaryPlot, summary_cases=summary_cases, ensemble=ensemble, address=address)
+        return self._call_pdm_method_return_value("NewSummaryPlot", SummaryPlot, summary_cases=summary_cases, ensemble=ensemble, ensembles=ensembles, address=address)
 
 
 class Surface(SurfaceInterface):
@@ -5117,18 +5213,6 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -5171,6 +5255,18 @@ class WellPathAicdParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -5465,7 +5561,7 @@ class WellPathCollection(PdmObjectBase):
         Arguments:
             file_name (str): 
         Returns:
-            WellPathBase
+            WellPath
         """
         return self._call_pdm_method_return_value("ImportWellPath", WellPath, file_name=file_name)
 
@@ -5554,6 +5650,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['ElasticPropertyScaling'] = ElasticPropertyScaling
     classes['ElasticPropertyScalingCollection'] = ElasticPropertyScalingCollection
     classes['EmCase'] = EmCase
+    classes['EnsembleCurveSet'] = EnsembleCurveSet
+    classes['EnsembleCurveSetCollection'] = EnsembleCurveSetCollection
     classes['EnsembleStatisticsSurface'] = EnsembleStatisticsSurface
     classes['EnsembleSurface'] = EnsembleSurface
     classes['EnsembleWellLogs'] = EnsembleWellLogs
@@ -5633,8 +5731,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['StimPlanModelTemplate'] = StimPlanModelTemplate
     classes['StimPlanModelTemplateCollection'] = StimPlanModelTemplateCollection
     classes['SummaryCase'] = SummaryCase
-    classes['SummaryCaseSubCollection'] = SummaryCaseSubCollection
     classes['SummaryCaseSumo'] = SummaryCaseSumo
+    classes['SummaryEnsemble'] = SummaryEnsemble
     classes['SummaryPlot'] = SummaryPlot
     classes['SummaryPlotCollection'] = SummaryPlotCollection
     classes['Surface'] = Surface
