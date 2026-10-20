@@ -151,8 +151,9 @@ Notes on the grammar:
   Eclipse well keyword (``WCONHIST``, ``WELTARG``, ``WRFTPLT``, ``WCONPROD``,
   ...), which
   is passed through generically with the well name injected as WELL. Event
-  ``WELSPECS`` accepts partial updates to ``GROUP``, ``CROSSFLOW``, ``REFDEPTH``
-  and ``PHASE`` (OIL/GAS/WATER/LIQUID). Omitted values inherit the previous
+  ``WELSPECS`` accepts partial updates to ``GROUP``, ``CROSSFLOW``, ``REFDEPTH``,
+  ``PHASE`` (OIL/GAS/WATER/LIQUID) and ``PRESSURE_COMPONENTS`` (H--/HF-/HFA,
+  the WELSEGS pressure drop components). Omitted values inherit the previous
   WELSPECS state, initially using the well's completion export settings. There
   may be multiple WELSPECS events for a well, but not at the same timestamp.
   Each emits a WELSPECS record with the cumulative state. Event values are
@@ -426,6 +427,7 @@ class WellSpecState:
     crossflow: bool
     refdepth: Optional[float]
     phase: str
+    pressure_components: str
 
 
 @dataclass
@@ -499,6 +501,138 @@ class SimulatorEventsDocument:
     def insert_dates(self) -> List[datetime.datetime]:
         """The dates of the expanded ``INSERT_DATE`` events, in document order."""
         return [event.event_date for event in self.insert_date_events]
+
+    def events(
+        self,
+        start_date: Optional[datetime.datetime] = None,
+        end_date: Optional[datetime.datetime] = None,
+        wells: Optional[List[str]] = None,
+        groups: Optional[List[str]] = None,
+        event_types: Optional[List[str]] = None,
+    ) -> List[SimulatorEvent]:
+        """Return events for the selected owners, filtered by date and type.
+
+        Events are sorted by date. Equal dates keep their document order (WELL
+        blocks, GROUP blocks, SCHEDULE events, then INSERT_DATE events).
+        When both ``wells`` and ``groups`` are given, matching WELL and GROUP
+        events are combined (union). Date and type filters apply to that union.
+
+        Arguments:
+            start_date: Earliest event date to include (inclusive). ``None``
+                leaves the range open.
+            end_date: Latest event date to include (inclusive). ``None``
+                leaves the range open.
+            wells: Well names. Only events in matching WELL blocks are
+                included.
+            groups: Group names. Only events in matching GROUP blocks are
+                included. When ``wells`` and/or ``groups`` is given, SCHEDULE
+                and INSERT_DATE events are excluded.
+            event_types: Event types (``SEGMENT``, ``PERFORATION``,
+                ``INSERT_DATE``, ...) or keyword names (``WCONHIST``,
+                ``RPTRST``, ...), matched case-insensitively.
+
+        An empty list or ``None`` disables the corresponding filter.
+        """
+        well_names = set(wells or [])
+        group_names = set(groups or [])
+        type_names = {name.upper() for name in event_types or []}
+
+        candidates: List[SimulatorEvent] = []
+        if not group_names or well_names:
+            for well in self.wells:
+                if not well_names or well.well_name in well_names:
+                    candidates.extend(well.events)
+        if not well_names or group_names:
+            for group in self.groups:
+                if not group_names or group.group_name in group_names:
+                    candidates.extend(group.events)
+        if not well_names and not group_names:
+            candidates.extend(self.schedule_events)
+            candidates.extend(self.insert_date_events)
+
+        selected = [
+            event
+            for event in candidates
+            if (start_date is None or event.event_date >= start_date)
+            and (end_date is None or event.event_date <= end_date)
+            and (not type_names or event.event_type.upper() in type_names)
+        ]
+        return sorted(selected, key=lambda event: event.event_date)
+
+    def event_dates(self, **filters: Any) -> List[datetime.datetime]:
+        """Return the sorted, unique dates of the events matching ``filters``.
+
+        Accepts the same keyword arguments as :meth:`events`.
+        """
+        return sorted({event.event_date for event in self.events(**filters)})
+
+    def earliest_event_date(self, **filters: Any) -> Optional[datetime.datetime]:
+        """Return the earliest date of the events matching ``filters``, or
+        ``None`` when no event matches. Accepts the arguments of :meth:`events`.
+        """
+        dates = self.event_dates(**filters)
+        return dates[0] if dates else None
+
+    def latest_event_date(self, **filters: Any) -> Optional[datetime.datetime]:
+        """Return the latest date of the events matching ``filters``, or
+        ``None`` when no event matches. Accepts the arguments of :meth:`events`.
+        """
+        dates = self.event_dates(**filters)
+        return dates[-1] if dates else None
+
+    def wells_with_events(
+        self,
+        start_date: Optional[datetime.datetime] = None,
+        end_date: Optional[datetime.datetime] = None,
+        event_types: Optional[List[str]] = None,
+    ) -> List[str]:
+        """Return the sorted names of the wells with events matching the filters.
+
+        See :meth:`events` for the filter semantics.
+        """
+        return sorted(
+            {
+                well.well_name
+                for well in self.wells
+                if self.events(
+                    start_date=start_date,
+                    end_date=end_date,
+                    wells=[well.well_name],
+                    event_types=event_types,
+                )
+            }
+        )
+
+    def wells_with_msw_events(self) -> List[str]:
+        """Return the sorted names of wells with ``SEGMENT`` or ``VALVE`` events.
+
+        Use these names to build ``export_msw_for_wells``. Wells with only
+        ``PERFORATION`` events are not included, even if segments were configured
+        directly on their well paths; add such MSW wells explicitly.
+        """
+        return self.wells_with_events(event_types=["SEGMENT", "VALVE"])
+
+    def groups_with_events(
+        self,
+        start_date: Optional[datetime.datetime] = None,
+        end_date: Optional[datetime.datetime] = None,
+        event_types: Optional[List[str]] = None,
+    ) -> List[str]:
+        """Return the sorted names of the groups with events matching the
+        filters. See :meth:`events` for the filter semantics.
+        """
+        return sorted(
+            {
+                group.group_name
+                for group in self.groups
+                if self.events(
+                    start_date=start_date,
+                    end_date=end_date,
+                    groups=[group.group_name],
+                    event_types=event_types,
+                )
+            }
+        )
 
 
 def _iso_event_date(event_date: datetime.datetime) -> str:
@@ -742,6 +876,7 @@ def merge_simulator_events_documents(
         result.wells, result.groups, result.schedule_events
     )
     errors.extend(_wellspec_validation_issues(result.wells))
+    errors.extend(_segment_validation_issues(result.wells))
     if errors:
         raise SimulatorEventsParseError(errors=errors)
     return result
@@ -847,6 +982,7 @@ def parse_simulator_events(
     _set_event_scopes(wells, groups, schedule_events)
     errors.extend(_restart_validation_issues(wells, groups, schedule_events))
     errors.extend(_wellspec_validation_issues(wells))
+    errors.extend(_segment_validation_issues(wells))
     insert_date_events, report_errors = _expand_report_specs(
         report_specs, wells, groups, schedule_events
     )
@@ -1011,6 +1147,70 @@ def _wellspec_validation_issues(wells: List[WellBlock]) -> List[ParseIssue]:
                 )
             else:
                 seen[key] = event
+    return issues
+
+
+def _segment_validation_issues(wells: List[WellBlock]) -> List[ParseIssue]:
+    """Validate the segment-length attributes of SEGMENT events.
+
+    Lengths must be positive numbers, a fixed length cannot be combined with
+    min/max lengths, and the min length cannot exceed the max length.
+    """
+    issues: List[ParseIssue] = []
+    for well in wells:
+        for event in well.events:
+            if event.event_type.upper() != "SEGMENT":
+                continue
+            lengths: Dict[str, float] = {}
+            for name in _SEGMENT_LENGTH_KWARGS:
+                attr = event.attributes.get(name)
+                if attr is None:
+                    continue
+                value = attr.value
+                if isinstance(value, bool) or not isinstance(value, (int, float)):
+                    issues.append(
+                        ParseIssue(
+                            f"{_event_context(event)}: {name} must be a number, "
+                            f"got {attr.raw!r}",
+                            event.loc,
+                        )
+                    )
+                elif value <= 0:
+                    issues.append(
+                        ParseIssue(
+                            f"{_event_context(event)}: {name} must be greater "
+                            f"than zero, got {attr.raw}",
+                            event.loc,
+                        )
+                    )
+                else:
+                    lengths[name] = float(value)
+
+            present = [
+                name for name in _SEGMENT_LENGTH_KWARGS if name in event.attributes
+            ]
+            if "FIXED_SEGMENT_LENGTH" in present and len(present) > 1:
+                issues.append(
+                    ParseIssue(
+                        f"{_event_context(event)}: FIXED_SEGMENT_LENGTH cannot be "
+                        "combined with MIN_SEGMENT_LENGTH or MAX_SEGMENT_LENGTH",
+                        event.loc,
+                    )
+                )
+            min_length = lengths.get("MIN_SEGMENT_LENGTH")
+            max_length = lengths.get("MAX_SEGMENT_LENGTH")
+            if (
+                min_length is not None
+                and max_length is not None
+                and min_length > max_length
+            ):
+                issues.append(
+                    ParseIssue(
+                        f"{_event_context(event)}: MIN_SEGMENT_LENGTH ({min_length:g}) "
+                        f"exceeds MAX_SEGMENT_LENGTH ({max_length:g})",
+                        event.loc,
+                    )
+                )
     return issues
 
 
@@ -1786,8 +1986,16 @@ _SEGMENT_KNOWN = {
     "MDEND",
     "INNER_DIAMETER",
     "ROUGHNESS",
-    "PRESSURE_COMPONENTS",
+    "FIXED_SEGMENT_LENGTH",
+    "MIN_SEGMENT_LENGTH",
+    "MAX_SEGMENT_LENGTH",
     "COMMENT",
+}
+# SEGMENT length attribute -> add_segment_event keyword-argument name.
+_SEGMENT_LENGTH_KWARGS = {
+    "FIXED_SEGMENT_LENGTH": "fixed_segment_length",
+    "MIN_SEGMENT_LENGTH": "min_segment_length",
+    "MAX_SEGMENT_LENGTH": "max_segment_length",
 }
 _PRESSURE_COMPONENTS = {"H--", "HF-", "HFA"}
 _VALVE_REQUIRED = ("MD", "TYPE")
@@ -1800,7 +2008,14 @@ _VALVE_KNOWN = {"MD", "TYPE", "STATE", "CV", "AREA", "COMMENT"} | {
 }
 _STATE_REQUIRED = ("STATE",)
 _STATE_KNOWN = {"STATE", "COMMENT"}
-_WELLSPEC_KNOWN = {"GROUP", "CROSSFLOW", "REFDEPTH", "PHASE", "COMMENT"}
+_WELLSPEC_KNOWN = {
+    "GROUP",
+    "CROSSFLOW",
+    "REFDEPTH",
+    "PHASE",
+    "PRESSURE_COMPONENTS",
+    "COMMENT",
+}
 _WELLSPEC_PHASES = {"OIL", "GAS", "WATER", "LIQUID"}
 _COMPLETION_IGNORED = {"FILTER"}
 _PERF_IGNORED = _COMPLETION_IGNORED  # backwards-compatible alias
@@ -2007,6 +2222,7 @@ def _prepare_wellspec_events(
         crossflow=bool(completion_settings.allow_well_cross_flow),
         refdepth=completion_settings.reference_depth_for_export,
         phase=_enum_text(completion_settings.well_type_for_export),
+        pressure_components=_enum_text(completion_settings.pressure_drop),
     )
 
     wellspecs = sorted(
@@ -2059,6 +2275,13 @@ def _prepare_wellspec_events(
                 errors.append("PHASE must be OIL, GAS, WATER, or LIQUID")
             else:
                 next_state.phase = phase
+        if "PRESSURE_COMPONENTS" in attrs:
+            value = attrs["PRESSURE_COMPONENTS"].value
+            components = value.upper() if isinstance(value, str) else ""
+            if components not in _PRESSURE_COMPONENTS:
+                errors.append("PRESSURE_COMPONENTS must be H--, HF-, or HFA")
+            else:
+                next_state.pressure_components = components
 
         if errors:
             report.errors.extend(_event_message(event, error) for error in errors)
@@ -2543,28 +2766,34 @@ def _apply_segment(
             )
         if "ROUGHNESS" in attrs:
             kwargs["roughness"] = float(_as_number(attrs["ROUGHNESS"], event.loc))
-        pressure_components = None
-        if "PRESSURE_COMPONENTS" in attrs:
-            pressure_components = str(attrs["PRESSURE_COMPONENTS"].value).upper()
-            if pressure_components not in _PRESSURE_COMPONENTS:
-                raise SimulatorEventsParseError(
-                    "PRESSURE_COMPONENTS must be H--, HF-, or HFA", event.loc
-                )
+        lengths: Dict[str, float] = {}
+        for name, kwarg in _SEGMENT_LENGTH_KWARGS.items():
+            if name in attrs:
+                lengths[kwarg] = float(_as_number(attrs[name], event.loc))
     except SimulatorEventsParseError as exc:
         _record_event_parse_error(event, exc, report)
         return
 
-    timeline_event = timeline.add_tubing_event(**kwargs)
-    well_path.segment_collection().add_segment_interval(
+    timeline_event = timeline.add_segment_event(**kwargs, **lengths)
+    segment_collection = well_path.segment_collection()
+    interval = segment_collection.add_segment_interval(
         start_md=start_md,
         end_md=end_md,
         diameter=kwargs.get("inner_diameter", 0.152),
         roughness_factor=kwargs.get("roughness", 1.0e-5),
     )
-    if pressure_components is not None:
-        msw_settings = well_path.segment_collection()
-        msw_settings.pressure_drop = pressure_components
-        msw_settings.update()
+    if "min_segment_length" in lengths:
+        interval.set_min_segment_length(length=lengths["min_segment_length"])
+    if "max_segment_length" in lengths:
+        interval.set_max_segment_length(length=lengths["max_segment_length"])
+    if "fixed_segment_length" in lengths:
+        interval.set_fixed_segment_length(length=lengths["fixed_segment_length"])
+    # WELSEGS TOP_LENGTH is the reference MD: use the start of the first segment.
+    segment_collection.reference_md_type = "UserDefined"
+    segment_collection.user_defined_reference_md = min(
+        i.start_md for i in segment_collection.intervals()
+    )
+    segment_collection.update()
     _apply_event_comment(event, timeline_event)
     report.events_applied += 1
 
@@ -2654,6 +2883,7 @@ def _apply_wellspec(
         allow_cross_flow=state.crossflow,
         reference_depth=state.refdepth,
         well_type=state.phase,
+        pressure_drop=state.pressure_components,
     )
     _apply_event_comment(event, timeline_event)
     report.events_applied += 1

@@ -3672,11 +3672,7 @@ class SegmentCollection(PdmObjectBase):
     Attributes:
         compsegs_segment_number (CompsegsSegmentNumber): One of [AssignedBySimulator, Exported]
         custom_values_for_lateral (bool): Custom Values for Lateral
-        enforce_max_segment_length (bool): Enforce Max Segment Length
-        length_and_depth (LengthAndDepth2): One of [INC, ABS]
         liner_diameter (float): Liner Inner Diameter
-        max_segment_length (float): Max Segment Length
-        pressure_drop (PressureDrop2): One of [H--, HF-, HFA]
         reference_md_type (ReferenceMdType2): One of [GridEntryPoint, UserDefined]
         roughness_factor (float): Roughness Factor
         single_segment_after_last_perforation (bool): Single Segment After Last Perforation
@@ -3688,11 +3684,7 @@ class SegmentCollection(PdmObjectBase):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.compsegs_segment_number: CompsegsSegmentNumber = CompsegsSegmentNumber.AssignedBySimulator
         self.custom_values_for_lateral: bool = False
-        self.enforce_max_segment_length: bool = False
-        self.length_and_depth: LengthAndDepth2 = LengthAndDepth2.ABS
         self.liner_diameter: float = 1.520000000000000e-01
-        self.max_segment_length: float = 2.000000000000000e+02
-        self.pressure_drop: PressureDrop2 = PressureDrop2.HF_
         self.reference_md_type: ReferenceMdType2 = ReferenceMdType2.GridEntryPoint
         self.roughness_factor: float = 1.000000000000000e-05
         self.single_segment_after_last_perforation: bool = False
@@ -4777,6 +4769,33 @@ class WellEventPerf(WellEvent):
         return self._call_pdm_method_return_optional_value("cell_filter", CellFilter)
 
 
+class WellEventSegment(WellEvent):
+    """
+    WellEventSegment
+
+    Attributes:
+        end_md (float): End MD
+        fixed_segment_length (Tuple[bool, float]): Fixed Segment Length
+        inner_diameter (float): Inner Diameter [m]
+        max_segment_length (Tuple[bool, float]): Max Segment Length
+        min_segment_length (Tuple[bool, float]): Min Segment Length
+        roughness (float): Roughness [m]
+        start_md (float): Start MD
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.end_md: float = 0.000000000000000e+00
+        self.fixed_segment_length: Tuple[bool, float] = (False, 5.000000000000000e+01)
+        self.inner_diameter: float = 1.500000000000000e-01
+        self.max_segment_length: Tuple[bool, float] = (False, 1.000000000000000e+02)
+        self.min_segment_length: Tuple[bool, float] = (False, 1.000000000000000e+01)
+        self.roughness: float = 1.000000000000000e-05
+        self.start_md: float = 0.000000000000000e+00
+        WellEvent.__init__(self, pb2_object, channel)
+        if WellEventSegment.__custom_init__ is not None:
+            WellEventSegment.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellEventState(WellEvent):
     """
     WellEventState
@@ -4888,6 +4907,26 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("AddRawTextEventInternal", RawTextEvent, event_date=event_date, text=text, placement=placement, anchor_keyword=anchor_keyword, priority=priority)
 
 
+    def add_segment_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, inner_diameter: float=1.500000000000000e-01, roughness: float=1.000000000000000e-05, fixed_segment_length: float=0.000000000000000e+00, min_segment_length: float=0.000000000000000e+00, max_segment_length: float=0.000000000000000e+00) -> WellEventSegment:
+        """
+        Add a segment event to the timeline
+
+        Arguments:
+            event_date (str): Event Date (YYYY-MM-DD)
+            well_path (Optional[WellPath]): Well Path
+            start_md (float): Start Measured Depth
+            end_md (float): End Measured Depth
+            inner_diameter (float): Inner Diameter [m]
+            roughness (float): Roughness [m]
+            fixed_segment_length (float): Fixed Segment Length [m] (0 = not set)
+            min_segment_length (float): Min Segment Length [m] (0 = not set)
+            max_segment_length (float): Max Segment Length [m] (0 = not set)
+        Returns:
+            WellEventSegment
+        """
+        return self._call_pdm_method_return_value("AddSegmentEvent", WellEventSegment, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, inner_diameter=inner_diameter, roughness=roughness, fixed_segment_length=fixed_segment_length, min_segment_length=min_segment_length, max_segment_length=max_segment_length)
+
+
     def add_state_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, well_state: WellState=WellState.OPEN) -> WellEventState:
         """
         Add a well state event to the timeline
@@ -4900,23 +4939,6 @@ class WellEventTimeline(PdmObjectBase):
             WellEventState
         """
         return self._call_pdm_method_return_value("AddStateEvent", WellEventState, event_date=event_date, well_path=well_path, well_state=well_state)
-
-
-    def add_tubing_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, start_md: float=0.000000000000000e+00, end_md: float=0.000000000000000e+00, inner_diameter: float=1.500000000000000e-01, roughness: float=1.000000000000000e-05) -> WellEventTubing:
-        """
-        Add a tubing event to the timeline
-
-        Arguments:
-            event_date (str): Event Date (YYYY-MM-DD)
-            well_path (Optional[WellPath]): Well Path
-            start_md (float): Start Measured Depth
-            end_md (float): End Measured Depth
-            inner_diameter (float): Inner Diameter [m]
-            roughness (float): Roughness [m]
-        Returns:
-            WellEventTubing
-        """
-        return self._call_pdm_method_return_value("AddTubingEvent", WellEventTubing, event_date=event_date, well_path=well_path, start_md=start_md, end_md=end_md, inner_diameter=inner_diameter, roughness=roughness)
 
 
     def add_valve_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, measured_depth: float=0.000000000000000e+00, valve_type: ValveType=ValveType.ICV, state: State2=State2.OPEN, flow_coefficient: float=7.000000000000000e-01, area: float=1.000000000000000e-04, aicd_strength: float=2.100000000000000e-04, aicd_density_calib_fluid: float=1.000000000000000e+03, aicd_viscosity_calib_fluid: float=1.000000000000000e+00, aicd_vol_flow_exp: float=2.100000000000000e+00, aicd_visc_func_exp: float=5.000000000000000e-01) -> WellEventValve:
@@ -4959,7 +4981,7 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("AddWellKeywordEventInternal", WellEventKeyword, event_date=event_date, well_path=well_path, keyword_name=keyword_name, item_names=item_names, item_types=item_types, item_values=item_values)
 
 
-    def add_wellspec_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, group_name: str="", allow_cross_flow: bool=True, reference_depth: Optional[Optional[float]]=None, well_type: WellTypeForExport=WellTypeForExport.OIL) -> WellEventWellSpec:
+    def add_wellspec_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, group_name: str="", allow_cross_flow: bool=True, reference_depth: Optional[Optional[float]]=None, well_type: WellTypeForExport=WellTypeForExport.OIL, pressure_drop: str="") -> WellEventWellSpec:
         """
         Add a WELLSPEC event to the timeline
 
@@ -4970,10 +4992,11 @@ class WellEventTimeline(PdmObjectBase):
             allow_cross_flow (bool): Allow Well Cross-Flow
             reference_depth (Optional[Optional[float]]): Reference Depth
             well_type (WellTypeForExport): One of [OIL, GAS, WATER, LIQUID]
+            pressure_drop (str): WELSEGS pressure drop components (H--, HF- or HFA). Empty keeps the current completion setting
         Returns:
             WellEventWellSpec
         """
-        return self._call_pdm_method_return_value("AddWellspecEvent", WellEventWellSpec, event_date=event_date, well_path=well_path, group_name=group_name, allow_cross_flow=allow_cross_flow, reference_depth=reference_depth, well_type=well_type)
+        return self._call_pdm_method_return_value("AddWellspecEvent", WellEventWellSpec, event_date=event_date, well_path=well_path, group_name=group_name, allow_cross_flow=allow_cross_flow, reference_depth=reference_depth, well_type=well_type, pressure_drop=pressure_drop)
 
 
     def events(self) -> List[WellEvent]:
@@ -4990,7 +5013,7 @@ class WellEventTimeline(PdmObjectBase):
         Generate Eclipse schedule text for all wells in the collection
 
         Arguments:
-            eclipse_case (Optional[Reservoir]): Eclipse Case
+            eclipse_case (Optional[Reservoir]): Optional grid case (Eclipse, Roff or corner point). Without a case, the grid-dependent keywords (WELSPECS, COMPORD, COMPDAT, COMPLUMP, WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD) are skipped and reported as WARNING comments in the schedule header
             export_msw_for_wells (List[WellPath]): Wells for which multi-segment-well keywords (WELSEGS, COMPSEGS, WSEGVALV, WSEGAICD) are exported
             first_date_as_comment (bool): Emit the first (simulation-start) date as a comment instead of a DATES keyword
             align_columns (bool): Emit a column-header comment and right-aligned, fixed-width columns instead of the compact form
@@ -4998,6 +5021,35 @@ class WellEventTimeline(PdmObjectBase):
             DataContainerString
         """
         return self._call_pdm_method_return_value("GenerateSchedule", DataContainerString, eclipse_case=eclipse_case, export_msw_for_wells=export_msw_for_wells, first_date_as_comment=first_date_as_comment, align_columns=align_columns)
+
+
+    def query_event_dates(self, start_date: str="", end_date: str="", well_paths: List[WellPath]=[], event_types: List[str]=[]) -> DataContainerString:
+        """
+        Sorted, unique dates of the events matching the filters, as ISO date-time strings
+
+        Arguments:
+            start_date (str): Earliest date to include (inclusive). Empty: no limit
+            end_date (str): Latest date to include (inclusive). A date-only value means midnight, excluding events later that day. Empty: no limit
+            well_paths (List[WellPath]): Only include events for these wells. Empty: events for all wells and schedule events
+            event_types (List[str]): Event types (SEGMENT, PERF, VALVE, ...) or keyword names (WCONHIST, ...). Empty: all events
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("QueryEventDates", DataContainerString, start_date=start_date, end_date=end_date, well_paths=well_paths, event_types=event_types)
+
+
+    def query_wells_with_events(self, start_date: str="", end_date: str="", event_types: List[str]=[]) -> DataContainerString:
+        """
+        Sorted names of the well paths with events matching the filters. Well path names must be unique within the well path collection
+
+        Arguments:
+            start_date (str): Earliest date to include (inclusive). Empty: no limit
+            end_date (str): Latest date to include (inclusive). A date-only value means midnight, excluding events later that day. Empty: no limit
+            event_types (List[str]): Event types (SEGMENT, PERF, VALVE, ...) or keyword names (WCONHIST, ...). Empty: all events
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("QueryWellsWithEvents", DataContainerString, start_date=start_date, end_date=end_date, event_types=event_types)
 
 
     def set_timestamp(self, timestamp: str="2024-01-01") -> None:
@@ -5011,27 +5063,6 @@ class WellEventTimeline(PdmObjectBase):
         """
         self._call_pdm_method_void("SetTimestamp", timestamp=timestamp)
 
-
-class WellEventTubing(WellEvent):
-    """
-    WellEventTubing
-
-    Attributes:
-        end_md (float): End MD
-        inner_diameter (float): Inner Diameter [m]
-        roughness (float): Roughness [m]
-        start_md (float): Start MD
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        self.end_md: float = 0.000000000000000e+00
-        self.inner_diameter: float = 1.500000000000000e-01
-        self.roughness: float = 1.000000000000000e-05
-        self.start_md: float = 0.000000000000000e+00
-        WellEvent.__init__(self, pb2_object, channel)
-        if WellEventTubing.__custom_init__ is not None:
-            WellEventTubing.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellEventType(WellEvent):
     """
@@ -5090,6 +5121,7 @@ class WellEventWellSpec(WellEvent):
     Attributes:
         allow_cross_flow (bool): Allow Cross-Flow
         group_name (str): Group Name
+        pressure_drop (PressureDrop2): One of [H--, HF-, HFA]
         reference_depth (Optional[float]): Reference Depth
         well_type (WellTypeForExport): One of [OIL, GAS, WATER, LIQUID]
     """
@@ -5098,6 +5130,7 @@ class WellEventWellSpec(WellEvent):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.allow_cross_flow: bool = True
         self.group_name: str = ""
+        self.pressure_drop: PressureDrop2 = PressureDrop2.HF_
         self.reference_depth: Optional[float] = None
         self.well_type: WellTypeForExport = WellTypeForExport.OIL
         WellEvent.__init__(self, pb2_object, channel)
@@ -5278,6 +5311,8 @@ class WellPathCompletionSettings(PdmObjectBase):
         gas_inflow_eq (GasInflowEq): One of [STD, R-G, P-P, GPP]
         group_name_for_export (str): Group Name
         hydrostatic_density (HydrostaticDensity): One of [SEG, AVG]
+        length_and_depth (LengthAndDepth2): One of [INC, ABS]
+        pressure_drop (PressureDrop2): One of [H--, HF-, HFA]
         reference_depth_for_export (Optional[float]): BHP Reference Depth
         well_bore_fluid_pvt_table (int): Wellbore Fluid PVT table
         well_name_for_export (str): Well Name
@@ -5293,6 +5328,8 @@ class WellPathCompletionSettings(PdmObjectBase):
         self.gas_inflow_eq: GasInflowEq = GasInflowEq.STD
         self.group_name_for_export: str = ""
         self.hydrostatic_density: HydrostaticDensity = HydrostaticDensity.SEG
+        self.length_and_depth: LengthAndDepth2 = LengthAndDepth2.ABS
+        self.pressure_drop: PressureDrop2 = PressureDrop2.HF_
         self.reference_depth_for_export: Optional[float] = None
         self.well_bore_fluid_pvt_table: int = 0
         self.well_name_for_export: str = ""
@@ -5752,9 +5789,9 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellEventControl'] = WellEventControl
     classes['WellEventKeyword'] = WellEventKeyword
     classes['WellEventPerf'] = WellEventPerf
+    classes['WellEventSegment'] = WellEventSegment
     classes['WellEventState'] = WellEventState
     classes['WellEventTimeline'] = WellEventTimeline
-    classes['WellEventTubing'] = WellEventTubing
     classes['WellEventType'] = WellEventType
     classes['WellEventValve'] = WellEventValve
     classes['WellEventWellSpec'] = WellEventWellSpec
