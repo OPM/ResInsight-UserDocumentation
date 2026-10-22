@@ -78,6 +78,35 @@ grep -rn "Old Menu Name" content/
 
 Images go in the matching `assets/images/<section>/` folder.
 
+### Collect screenshots from the issue
+
+Screenshots for the documentation are attached to the ResInsight issue, so they can be fetched automatically. When a feature is done, the developer adds the **Documentation** label and posts one comment starting with `### Documentation`:
+
+```markdown
+### Documentation
+
+Page: plot-window/SummaryPlots.md
+
+<img width="1278" alt="plot-window/SummaryPlotCommonLegend.png" src="https://github.com/user-attachments/assets/..." />
+Common legend shown once for all subplots.
+```
+
+- **Alt text is the target path** below `assets/images/`: an existing section folder, PascalCase name, lowercase `.png` or `.jpg`. GitHub sets `alt="Image"` on paste; replace it with the path.
+- **Reusing an existing name replaces that image**, so pages that link to it stay valid.
+- **The first paragraph below an image** is its caption. **`Page:`** (optional) names the page to update.
+- **Use a comment, not the issue description.** The description shows the problem; the comment shows the finished state. The newest `### Documentation` comment wins.
+- **Images with other alt text are ignored**, so discussion screenshots are never picked up.
+
+Fetch the images:
+
+```powershell
+$env:GITHUB_TOKEN = gh auth token
+python scripts/fetch_issue_images.py --dry-run        # all issues labelled Documentation + PendingRelease
+python scripts/fetch_issue_images.py 14891 14878      # specific issues
+```
+
+The script saves images to `assets/images/`, compresses PNG files when `pngquant` or `oxipng` is on `PATH`, and writes `issue-images.json` (ignored by git) listing issue, path, caption, page and whether the image is new or a replacement. Give the manifest to the `docs-writer` agent as input. Invalid paths are reported and skipped.
+
 ### Write the update
 
 Use the `docs-writer` agent (see [`docs-writer.md`](docs-writer.md)) for all page edits. It holds the frontmatter, cross-reference, image and terminology rules.
