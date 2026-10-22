@@ -18,3 +18,5 @@ ResInsight handle OPM Flow simulation runs as "Jobs", allowing you to:
 Both grid results and summary results from a simulation job could be automatically loaded and displayed in ResInsight after a run.
 
 A sector model can be exported from an existing grid and directly connected to a new OPM Flow simulation job. See [Sector Model Export]({{% relref "SectorModelExport" %}}) for details.
+
+OPM Flow simulations could be run locally on the same computer as ResInsight (optionally using WSL on Windows), or ResInsight can submit simulation jobs to a batch scheduler such as IBM Spectrum LSF or [Slurm](https://slurm.schedmd.com/overview.html).
