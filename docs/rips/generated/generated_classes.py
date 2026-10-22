@@ -254,6 +254,16 @@ class ReferenceMdType2(StrEnum):
     GridEntryPoint = "GridEntryPoint"
     UserDefined = "UserDefined"
 
+class ResultPositionType(StrEnum):
+    NODAL = "NODAL"
+    ELEMENT_NODAL = "ELEMENT_NODAL"
+    INTEGRATION_POINT = "INTEGRATION_POINT"
+    ELEMENT_NODAL_FACE = "ELEMENT_NODAL_FACE"
+    FORMATION_NAMES = "FORMATION_NAMES"
+    ELEMENT = "ELEMENT"
+    WELLPATH_DERIVED = "WELLPATH_DERIVED"
+    DIFFERENTIALS = "DIFFERENTIALS"
+
 class RowsPerPage(StrEnum):
     _1 = "1"
     _2 = "2"
@@ -1669,6 +1679,7 @@ class Fishbones(PdmObjectBase):
     Fishbones is a completion type used to add multiple short laterals to the main well bore.
 
     Attributes:
+        fixed_installation_rotation_angle (float):   Fixed Angle [deg]
         icd_count (int): ICDs per Sub
         icd_flow_coefficient (float): ICD Flow Coefficient
         icd_orifice_diameter (float): ICD Orifice Diameter [mm]
@@ -1687,6 +1698,7 @@ class Fishbones(PdmObjectBase):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.fixed_installation_rotation_angle: float = 0.000000000000000e+00
         self.icd_count: int = 2
         self.icd_flow_coefficient: float = 1.500000000000000e+00
         self.icd_orifice_diameter: float = 7.000000000000000e+00
@@ -1789,6 +1801,37 @@ class GeoMechPartCollection(PdmObjectBase):
         """
         return self.children("Parts", GeoMechPart)
 
+
+class GeoMechResult(PdmObjectBase):
+    """
+    A geomechanical result definition
+
+    Attributes:
+        result_component_name (str): Component
+        result_field_name (str): Field Name
+        result_position_type (ResultPositionType): One of [NODAL, ELEMENT_NODAL, INTEGRATION_POINT, ELEMENT_NODAL_FACE, FORMATION_NAMES, ELEMENT, WELLPATH_DERIVED, DIFFERENTIALS]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.result_component_name: str = ""
+        self.result_field_name: str = ""
+        self.result_position_type: ResultPositionType = ResultPositionType.NODAL
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if GeoMechResult.__custom_init__ is not None:
+            GeoMechResult.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class GeoMechCellColors(GeoMechResult):
+    """
+    Geomechanical cell colors
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        GeoMechResult.__init__(self, pb2_object, channel)
+        if GeoMechCellColors.__custom_init__ is not None:
+            GeoMechCellColors.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class ViewWindow(PdmObjectBase):
     """
@@ -1938,6 +1981,16 @@ class GeoMechView(View):
         View.__init__(self, pb2_object, channel)
         if GeoMechView.__custom_init__ is not None:
             GeoMechView.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def cell_result(self) -> Optional[GeoMechCellColors]:
+        """Color Result
+
+        Returns:
+             GeoMechCellColors
+        """
+        children = self.children("CellResult", GeoMechCellColors)
+        return children[0] if len(children) > 0 else None
+
 
 class GridCaseSurface(SurfaceInterface):
     """
@@ -5246,6 +5299,18 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -5288,18 +5353,6 @@ class WellPathAicdParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -5709,9 +5762,11 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['FractureTemplateCollection'] = FractureTemplateCollection
     classes['GenericView'] = GenericView
     classes['GeoMechCase'] = GeoMechCase
+    classes['GeoMechCellColors'] = GeoMechCellColors
     classes['GeoMechContourMap'] = GeoMechContourMap
     classes['GeoMechPart'] = GeoMechPart
     classes['GeoMechPartCollection'] = GeoMechPartCollection
+    classes['GeoMechResult'] = GeoMechResult
     classes['GeoMechView'] = GeoMechView
     classes['GridCaseGroup'] = GridCaseGroup
     classes['GridCaseSurface'] = GridCaseSurface
