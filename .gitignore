@@ -11,3 +11,5 @@ downloaded_artifacts
 upstream_rips
 resinsight_build
 run_id.txt
+issue-images.json
+__pycache__/
