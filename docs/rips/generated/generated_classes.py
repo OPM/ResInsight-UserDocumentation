@@ -50,6 +50,13 @@ class ControlMode(StrEnum):
     BHP = "BHP"
     THP = "THP"
 
+class CrossSectionType(StrEnum):
+    CS_WELL_PATH = "CS_WELL_PATH"
+    CS_SIMULATION_WELL = "CS_SIMULATION_WELL"
+    CS_POLYLINE = "CS_POLYLINE"
+    CS_AZIMUTHLINE = "CS_AZIMUTHLINE"
+    CS_POLYGON = "CS_POLYGON"
+
 class DepthType(StrEnum):
     MEASURED_DEPTH = "MEASURED_DEPTH"
     TRUE_VERTICAL_DEPTH = "TRUE_VERTICAL_DEPTH"
@@ -97,6 +104,16 @@ class GasInflowEq(StrEnum):
     P_P = "P-P"
     GPP = "GPP"
 
+class GeoMechResultPosition(StrEnum):
+    NODAL = "NODAL"
+    ELEMENT_NODAL = "ELEMENT_NODAL"
+    INTEGRATION_POINT = "INTEGRATION_POINT"
+    ELEMENT_NODAL_FACE = "ELEMENT_NODAL_FACE"
+    FORMATION_NAMES = "FORMATION_NAMES"
+    ELEMENT = "ELEMENT"
+    WELLPATH_DERIVED = "WELLPATH_DERIVED"
+    DIFFERENTIALS = "DIFFERENTIALS"
+
 class GeometryType(StrEnum):
     FULL_3D = "FULL_3D"
     PROJECTED_TO_PLANE = "PROJECTED_TO_PLANE"
@@ -106,10 +123,6 @@ class HydrostaticDensity(StrEnum):
     AVG = "AVG"
 
 class LengthAndDepth(StrEnum):
-    INC = "INC"
-    ABS = "ABS"
-
-class LengthAndDepth2(StrEnum):
     INC = "INC"
     ABS = "ABS"
 
@@ -133,11 +146,6 @@ class NameSetting(StrEnum):
     CUSTOM_NAME = "CUSTOM_NAME"
 
 class NonDarcyFlowType(StrEnum):
-    None_ = "None"
-    Computed = "Computed"
-    UserDefined = "UserDefined"
-
-class NonDarcyFlowType2(StrEnum):
     None_ = "None"
     Computed = "Computed"
     UserDefined = "UserDefined"
@@ -189,11 +197,6 @@ class PorosityModelType(StrEnum):
     FRACTURE_MODEL = "FRACTURE_MODEL"
 
 class PressureDrop(StrEnum):
-    H__ = "H--"
-    HF_ = "HF-"
-    HFA = "HFA"
-
-class PressureDrop2(StrEnum):
     H__ = "H--"
     HF_ = "HF-"
     HFA = "HFA"
@@ -250,20 +253,6 @@ class ReferenceMdType(StrEnum):
     GridEntryPoint = "GridEntryPoint"
     UserDefined = "UserDefined"
 
-class ReferenceMdType2(StrEnum):
-    GridEntryPoint = "GridEntryPoint"
-    UserDefined = "UserDefined"
-
-class ResultPositionType(StrEnum):
-    NODAL = "NODAL"
-    ELEMENT_NODAL = "ELEMENT_NODAL"
-    INTEGRATION_POINT = "INTEGRATION_POINT"
-    ELEMENT_NODAL_FACE = "ELEMENT_NODAL_FACE"
-    FORMATION_NAMES = "FORMATION_NAMES"
-    ELEMENT = "ELEMENT"
-    WELLPATH_DERIVED = "WELLPATH_DERIVED"
-    DIFFERENTIALS = "DIFFERENTIALS"
-
 class RowsPerPage(StrEnum):
     _1 = "1"
     _2 = "2"
@@ -288,10 +277,6 @@ class State(StrEnum):
     OPEN = "OPEN"
     SHUT = "SHUT"
 
-class State2(StrEnum):
-    OPEN = "OPEN"
-    SHUT = "SHUT"
-
 class SubTitleFontSize(StrEnum):
     XX_Small = "XX_Small"
     X_Small = "X_Small"
@@ -308,13 +293,6 @@ class SubsOrientationMode(StrEnum):
 class TransScalingWbhpSource(StrEnum):
     WBHP_SUMMARY = "WBHP_SUMMARY"
     WBHP_USER_DEFINED = "WBHP_USER_DEFINED"
-
-class Type2(StrEnum):
-    CS_WELL_PATH = "CS_WELL_PATH"
-    CS_SIMULATION_WELL = "CS_SIMULATION_WELL"
-    CS_POLYLINE = "CS_POLYLINE"
-    CS_AZIMUTHLINE = "CS_AZIMUTHLINE"
-    CS_POLYGON = "CS_POLYGON"
 
 class ValveType(StrEnum):
     ICV = "ICV"
@@ -984,7 +962,7 @@ class CurveIntersection(PdmObjectBase):
         name (str): Name
         points (List[List[float]]): Points
         simulation_well (Optional[SimulationWell]): Simulation Well
-        type (Type2): One of [CS_WELL_PATH, CS_SIMULATION_WELL, CS_POLYLINE, CS_AZIMUTHLINE, CS_POLYGON]
+        type (CrossSectionType): One of [CS_WELL_PATH, CS_SIMULATION_WELL, CS_POLYLINE, CS_AZIMUTHLINE, CS_POLYGON]
         well_path (Optional[WellPath]): Well Path        
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
@@ -993,7 +971,7 @@ class CurveIntersection(PdmObjectBase):
         self.name: str = "Intersection Name"
         self.points: List[List[float]] = []
         self.simulation_well: Optional[SimulationWell] = None
-        self.type: Type2 = Type2.CS_POLYLINE
+        self.type: CrossSectionType = CrossSectionType.CS_POLYLINE
         self.well_path: Optional[WellPath] = None
         PdmObjectBase.__init__(self, pb2_object, channel)
         if CurveIntersection.__custom_init__ is not None:
@@ -1809,14 +1787,14 @@ class GeoMechResult(PdmObjectBase):
     Attributes:
         result_component_name (str): Component
         result_field_name (str): Field Name
-        result_position_type (ResultPositionType): One of [NODAL, ELEMENT_NODAL, INTEGRATION_POINT, ELEMENT_NODAL_FACE, FORMATION_NAMES, ELEMENT, WELLPATH_DERIVED, DIFFERENTIALS]
+        result_position_type (GeoMechResultPosition): One of [NODAL, ELEMENT_NODAL, INTEGRATION_POINT, ELEMENT_NODAL_FACE, FORMATION_NAMES, ELEMENT, WELLPATH_DERIVED, DIFFERENTIALS]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.result_component_name: str = ""
         self.result_field_name: str = ""
-        self.result_position_type: ResultPositionType = ResultPositionType.NODAL
+        self.result_position_type: GeoMechResultPosition = GeoMechResultPosition.NODAL
         PdmObjectBase.__init__(self, pb2_object, channel)
         if GeoMechResult.__custom_init__ is not None:
             GeoMechResult.__custom_init__(self, pb2_object=pb2_object, channel=channel)
@@ -2930,6 +2908,47 @@ class GeoMechCase(Case):
         return self._call_pdm_method_return_value("createWellBoreStabilityPlot", WellBoreStabilityPlot, well_path=well_path, time_step=time_step)
 
 
+    def read_result_values_internal(self, result_position: GeoMechResultPosition=GeoMechResultPosition.ELEMENT_NODAL, field_name: str="", component_name: str="", time_step: int=0, frame_index: int=-1, key: str="") -> None:
+        """
+        Read GeoMech result values
+
+        Arguments:
+            result_position (GeoMechResultPosition): One of [NODAL, ELEMENT_NODAL, INTEGRATION_POINT, ELEMENT_NODAL_FACE, FORMATION_NAMES, ELEMENT, WELLPATH_DERIVED, DIFFERENTIALS]
+            field_name (str): 
+            component_name (str): 
+            time_step (int): Zero-based time step index
+            frame_index (int): Zero-based frame index. Negative selects the last frame
+            key (str): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("ReadResultValuesInternal", result_position=result_position, field_name=field_name, component_name=component_name, time_step=time_step, frame_index=frame_index, key=key)
+
+
+    def result_names_internal(self, result_position: GeoMechResultPosition=GeoMechResultPosition.ELEMENT_NODAL) -> DataContainerString:
+        """
+        Result names for this case.
+
+        Arguments:
+            result_position (GeoMechResultPosition): One of [NODAL, ELEMENT_NODAL, INTEGRATION_POINT, ELEMENT_NODAL_FACE, FORMATION_NAMES, ELEMENT, WELLPATH_DERIVED, DIFFERENTIALS]
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("ResultNamesInternal", DataContainerString, result_position=result_position)
+
+
+    def time_step_strings_internal(self, ) -> DataContainerString:
+        """
+        Time step strings for this case.
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("TimeStepStringsInternal", DataContainerString)
+
+
     def views(self) -> List[GeoMechView]:
         """All GeoMech Views in the Case
 
@@ -3726,7 +3745,7 @@ class SegmentCollection(PdmObjectBase):
         compsegs_segment_number (CompsegsSegmentNumber): One of [AssignedBySimulator, Exported]
         custom_values_for_lateral (bool): Custom Values for Lateral
         liner_diameter (float): Liner Inner Diameter
-        reference_md_type (ReferenceMdType2): One of [GridEntryPoint, UserDefined]
+        reference_md_type (ReferenceMdType): One of [GridEntryPoint, UserDefined]
         roughness_factor (float): Roughness Factor
         single_segment_after_last_perforation (bool): Single Segment After Last Perforation
         single_segment_before_first_perforation (bool): Single Segment Before First Perforation
@@ -3738,7 +3757,7 @@ class SegmentCollection(PdmObjectBase):
         self.compsegs_segment_number: CompsegsSegmentNumber = CompsegsSegmentNumber.AssignedBySimulator
         self.custom_values_for_lateral: bool = False
         self.liner_diameter: float = 1.520000000000000e-01
-        self.reference_md_type: ReferenceMdType2 = ReferenceMdType2.GridEntryPoint
+        self.reference_md_type: ReferenceMdType = ReferenceMdType.GridEntryPoint
         self.roughness_factor: float = 1.000000000000000e-05
         self.single_segment_after_last_perforation: bool = False
         self.single_segment_before_first_perforation: bool = False
@@ -3852,7 +3871,7 @@ class FractureTemplate(PdmObjectBase):
         height_scale_factor (float): Height
         id (int): ID
         inertial_coefficient (float): <html>Inertial Coefficient (&beta;)</html> [Forch. unit]
-        non_darcy_flow_type (NonDarcyFlowType2): One of [None, Computed, UserDefined]
+        non_darcy_flow_type (NonDarcyFlowType): One of [None, Computed, UserDefined]
         orientation (Orientation): One of [Azimuth, Longitudinal, Transverse]
         perforation_length (float): Perforation Length
         permeability_type (PermeabilityType): One of [UserDefinedPermeability, FractureConductivity]
@@ -3878,7 +3897,7 @@ class FractureTemplate(PdmObjectBase):
         self.height_scale_factor: float = 1.000000000000000e+00
         self.id: int = -1
         self.inertial_coefficient: float = 6.083236000000000e-03
-        self.non_darcy_flow_type: NonDarcyFlowType2 = NonDarcyFlowType2.None_
+        self.non_darcy_flow_type: NonDarcyFlowType = NonDarcyFlowType.None_
         self.orientation: Orientation = Orientation.Transverse
         self.perforation_length: float = 1.000000000000000e+00
         self.permeability_type: PermeabilityType = PermeabilityType.FractureConductivity
@@ -4994,7 +5013,7 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("AddStateEvent", WellEventState, event_date=event_date, well_path=well_path, well_state=well_state)
 
 
-    def add_valve_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, measured_depth: float=0.000000000000000e+00, valve_type: ValveType=ValveType.ICV, state: State2=State2.OPEN, flow_coefficient: float=7.000000000000000e-01, area: float=1.000000000000000e-04, aicd_strength: float=2.100000000000000e-04, aicd_density_calib_fluid: float=1.000000000000000e+03, aicd_viscosity_calib_fluid: float=1.000000000000000e+00, aicd_vol_flow_exp: float=2.100000000000000e+00, aicd_visc_func_exp: float=5.000000000000000e-01) -> WellEventValve:
+    def add_valve_event(self, event_date: str="2024-01-01", well_path: Optional[WellPath]=None, measured_depth: float=0.000000000000000e+00, valve_type: ValveType=ValveType.ICV, state: State=State.OPEN, flow_coefficient: float=7.000000000000000e-01, area: float=1.000000000000000e-04, aicd_strength: float=2.100000000000000e-04, aicd_density_calib_fluid: float=1.000000000000000e+03, aicd_viscosity_calib_fluid: float=1.000000000000000e+00, aicd_vol_flow_exp: float=2.100000000000000e+00, aicd_visc_func_exp: float=5.000000000000000e-01) -> WellEventValve:
         """
         Add a valve event to the timeline
 
@@ -5003,7 +5022,7 @@ class WellEventTimeline(PdmObjectBase):
             well_path (Optional[WellPath]): Well Path
             measured_depth (float): Measured Depth
             valve_type (ValveType): One of [ICV, ICD, AICD]
-            state (State2): One of [OPEN, SHUT]
+            state (State): One of [OPEN, SHUT]
             flow_coefficient (float): Flow Coefficient
             area (float): Area [m2]
             aicd_strength (float): AICD Strength
@@ -5145,7 +5164,7 @@ class WellEventValve(WellEvent):
         area (float): Area [m2]
         flow_coefficient (float): Flow Coefficient
         measured_depth (float): Measured Depth
-        state (State2): One of [OPEN, SHUT]
+        state (State): One of [OPEN, SHUT]
         valve_template (Optional[ValveTemplate]): Valve Template
         valve_type (ValveType): One of [ICV, ICD, AICD]
     """
@@ -5160,7 +5179,7 @@ class WellEventValve(WellEvent):
         self.area: float = 1.000000000000000e-04
         self.flow_coefficient: float = 7.000000000000000e-01
         self.measured_depth: float = 0.000000000000000e+00
-        self.state: State2 = State2.OPEN
+        self.state: State = State.OPEN
         self.valve_template: Optional[ValveTemplate] = None
         self.valve_type: ValveType = ValveType.ICV
         WellEvent.__init__(self, pb2_object, channel)
@@ -5174,7 +5193,7 @@ class WellEventWellSpec(WellEvent):
     Attributes:
         allow_cross_flow (bool): Allow Cross-Flow
         group_name (str): Group Name
-        pressure_drop (PressureDrop2): One of [H--, HF-, HFA]
+        pressure_drop (PressureDrop): One of [H--, HF-, HFA]
         reference_depth (Optional[float]): Reference Depth
         well_type (WellTypeForExport): One of [OIL, GAS, WATER, LIQUID]
     """
@@ -5183,7 +5202,7 @@ class WellEventWellSpec(WellEvent):
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.allow_cross_flow: bool = True
         self.group_name: str = ""
-        self.pressure_drop: PressureDrop2 = PressureDrop2.HF_
+        self.pressure_drop: PressureDrop = PressureDrop.HF_
         self.reference_depth: Optional[float] = None
         self.well_type: WellTypeForExport = WellTypeForExport.OIL
         WellEvent.__init__(self, pb2_object, channel)
@@ -5364,8 +5383,8 @@ class WellPathCompletionSettings(PdmObjectBase):
         gas_inflow_eq (GasInflowEq): One of [STD, R-G, P-P, GPP]
         group_name_for_export (str): Group Name
         hydrostatic_density (HydrostaticDensity): One of [SEG, AVG]
-        length_and_depth (LengthAndDepth2): One of [INC, ABS]
-        pressure_drop (PressureDrop2): One of [H--, HF-, HFA]
+        length_and_depth (LengthAndDepth): One of [INC, ABS]
+        pressure_drop (PressureDrop): One of [H--, HF-, HFA]
         reference_depth_for_export (Optional[float]): BHP Reference Depth
         well_bore_fluid_pvt_table (int): Wellbore Fluid PVT table
         well_name_for_export (str): Well Name
@@ -5381,8 +5400,8 @@ class WellPathCompletionSettings(PdmObjectBase):
         self.gas_inflow_eq: GasInflowEq = GasInflowEq.STD
         self.group_name_for_export: str = ""
         self.hydrostatic_density: HydrostaticDensity = HydrostaticDensity.SEG
-        self.length_and_depth: LengthAndDepth2 = LengthAndDepth2.ABS
-        self.pressure_drop: PressureDrop2 = PressureDrop2.HF_
+        self.length_and_depth: LengthAndDepth = LengthAndDepth.ABS
+        self.pressure_drop: PressureDrop = PressureDrop.HF_
         self.reference_depth_for_export: Optional[float] = None
         self.well_bore_fluid_pvt_table: int = 0
         self.well_name_for_export: str = ""
