@@ -19,14 +19,15 @@ To use this functionality you will need to :
 
 ### Import of Formation Names Files
 
-Formation Names files can be imported by using the command: **File->Import->Import Formation Names**.
+Formation Names files can be imported by using the command: **File->Import->Import Formations**.
 
 Supported Formation Names files are: 
 
 - Formation Names description files (_`*.lyr`_)
+- FMU Zone Ranges (_`zonation_ecl_map.yml`_ or _`zonation_ecl_map.yaml`_)
 - FMU Layer Zone Table (_`layer_zone_table.txt`_)
 
-To select the appropriate file type, use the button to the right of file name in the *Import Formation Names* dialog. 
+To select the appropriate file type, use the button to the right of file name in the *Import Formations* dialog. 
 The imported Formation Names files are then listed in the **Project Tree** in a folder named **Formations**. 
 
 
@@ -65,9 +66,52 @@ Below is an example of a _`layer_zone_table.txt`_ file:
 14  LowerReek
 ```
 
+#### FMU Zone Ranges (_`zonation_ecl_map.yml`_)
+The FMU Zone Ranges file defines a one-based k-layer range for each zone in a `zranges` section. Both the _`.yml`_ and _`.yaml`_ file extensions are supported. Below is an example of a _`zonation_ecl_map.yml`_ file:
 
+```yaml
+zranges:
+  - Valysar: [1, 20]
+  - Therys: [21, 54]
+  - Volon: [55, 69]
+```
 
+Only files named _`zonation_ecl_map`_ are read as zone ranges. Other yaml files are ignored.
 
+#### Zone Colors from _`stratigraphy.json`_
+When an FMU Zone Ranges file or an FMU Layer Zone Table is imported, ResInsight looks for a _`stratigraphy.json`_ file in the same folder and uses it to color the zones. A zone name is matched against the subzone names first; the color of a parent zone is used only when no subzone has the same name. If the file is missing or invalid, the zones are imported with default colors and a warning is written to the log.
+
+```json
+[
+    {
+        "name": "TopVolantis_BaseVolantis",
+        "color": "#6EA35A",
+        "subzones": [
+            { "name": "Valysar", "color": "#6EA35A" },
+            { "name": "Therys",  "color": "#EDAF4C" },
+            { "name": "Volon",   "color": "#CA413D" }
+        ]
+    }
+]
+```
+
+In a typical FMU setup, these files are located in _`rms/output/zone/`_ of each realization.
+
+### Automatic Import for Grid Case Ensembles
+When a grid case ensemble is created, or a project containing one is opened, ResInsight automatically imports the formations for each realization. The search starts in the folder of the grid file and checks these folders in order:
+
+1. _`../../rms/output/zone/`_
+2. _`../../`_
+
+The first folder that contains a supported formation file is used. If a folder contains several supported files, the file type with the highest priority is imported:
+
+1. Formation Names description file (_`*.lyr`_) -- may also contain formation colors
+2. FMU Zone Ranges (_`zonation_ecl_map.yml`_ or _`zonation_ecl_map.yaml`_) -- colors from _`stratigraphy.json`_
+3. FMU Layer Zone Table (_`layer_zone_table.txt`_) -- colors from _`stratigraphy.json`_
+
+If more than one file of the same type is found, the first one is used and a warning is written to the log.
+
+The formations are available in ensemble contour maps, for example to filter on **FORMATION_NAMES**. See [Ensemble Contour Maps]({{% relref "EnsembleContourMap" %}}).
 
 ### Select the Formation File in a Case
 
