@@ -134,6 +134,18 @@ Right-click a composite plot in **Plots** and select **Split Into Single Curve P
 
 ![](/images/plot-window/SummaryPlotSplitIntoSingleCurvePlots.png)
 
+### Common legend for subplots
+Instead of one legend in each subplot, a single legend can be shown above the subplots. Select the summary plot in **Plots** and check **Use Common Legend** in the **Legends** group of the Property Editor. Identical legend entries from the subplots are merged into one entry.
+
+When the curve color is given by one summary dimension (case, vector, or object such as well, group or region) and the curve symbol by another, the legend is split in two:
+
+- **Color legend** -- one entry per color, labeled with the value of the dimension that gives the color
+- **Symbol legend** -- one entry per symbol, labeled with the value of the dimension that gives the symbol
+
+In the example below, the color identifies the well and the symbol identifies the case. The common legend is also included when the plot is exported.
+
+![](/images/plot-window/SummaryPlotCommonLegend.png)
+
 
 ### Accessing Plot Data
 Right-clicking a plot in **Plots** window and selecting **Show Plot Data** will open a window containing the plot data as text columns. 
