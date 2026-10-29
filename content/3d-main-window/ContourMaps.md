@@ -80,6 +80,22 @@ underneath the actual **Contour Map** in the project tree. This will display the
 
 Polygons of visible contour map areas can be created from the *"Create Polygons from Contour Map"* in the right-click menu.
 
+## Contour Map Peaks
+
+**Compute Contour Map Peaks** in the right-click menu of a contour map view finds the most significant local maxima in the map. The peaks are listed under **Contour Map Peaks** in the project tree, below the contour map projection, and shown as markers in the view.
+
+Peaks are selected by topographic prominence, which is how far a peak rises above the highest saddle connecting it to a higher peak. Peaks at the edge of the map, next to undefined cells, or outside the [value filter](#value-filtering) are ignored. The resulting peaks are ranked by value, highest first, and named **Peak 1**, **Peak 2** and so on.
+
+Select **Contour Map Peaks** to change the settings, then click **Compute** to recompute the peaks:
+
+- **Maximum Number of Peaks** -- The maximum number of peaks to find, from 1 to 20
+- **Minimum Distance** -- The minimum distance between two peaks
+- **Minimum Prominence** -- Ignore peaks rising less than this value above the highest saddle to a higher peak
+
+Each peak shows its **Rank**, **Value**, **Prominence** and **Position**. If the result, time step or value filter of the contour map changes, the collection is marked **(Outdated)** until the peaks are recomputed.
+
+Each peak marker is a single-point polygon in the [polygon collection]({{% relref "polygons" %}}). It can be used as a [polygon cell filter]({{% relref "polygons" %}}#create-intersection-and-polygon-cell-filter) to select the cell column below the peak.
+
 ## Contour Maps in 3D Views
 
 A contour map can be shown inside a regular 3D view, together with the grid, wells, surfaces and other objects. This applies to both reservoir and geomechanical 3D views, and to statistics contour maps from [Ensemble Contour Map]({{% relref "ensemblecontourmap" %}}).
