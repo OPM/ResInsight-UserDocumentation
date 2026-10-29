@@ -44,7 +44,7 @@ If a history vector is given as summary vector when creating a correlation repor
 The Correlation Plots property editor allows the user to specify an extensive number of settings dependent on the actual type of correlation plot. The complete set of settings are listed below according to the individual sections of the property editor.
 
 ### Correlation Factor Settings
-This section of the property editor allows for setting correlation factor to either *Pearson Correlation Coefficient* or *Spearman's Rank Correlation Coefficient* as basis for Correlation Plots and to select ensemble parameter(s) of choice.
+Correlation Plots use the *Pearson Correlation Coefficient*. This section of the property editor allows for selecting ensemble parameter(s) of choice.
 Being irrelevant, please note that the section will not display for *Correlation Cross Plots* and that the field *Sort Matrix by Values* will not display for tornado plots.
 
 ![](/images/plot-window/CorrelationPlotsCorrFactorSettings.png)
