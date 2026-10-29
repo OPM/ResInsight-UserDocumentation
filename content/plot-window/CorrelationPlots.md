@@ -30,6 +30,9 @@ A new ensemble can be created based on the filtered cases in the right-click men
 
 ![](/images/plot-window/CorrelationPlotsCreateEnsemble.png)
 
+## Selecting Parameters in a Correlation Report
+In a correlation report, click a bar in the tornado plot to select that ensemble parameter. The other plots in the report are updated: the parameter is highlighted in the correlation matrix, and the cross plot shows the selected parameter against the summary vector. Clicking a cell in the correlation matrix selects the parameter and summary vector in the same way.
+
 ## History Values
 When the selected summary vector has a matching history vector in the ensemble (e.g. `WOPRH` for `WOPR`), the history data is shown together with the simulated results:
 
