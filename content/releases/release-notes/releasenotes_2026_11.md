@@ -66,7 +66,7 @@ Previous versions of a project file can be restored from the project backup data
 ## Additional Fixes and Improvements
 - Flow diagnostics is supported for grids imported with the opm-common reader.
 - Polygon intersections can be created from a polygon digitized in the 3D view.
-- Ensemble contour maps support filtering, including formation selection.
+- Ensemble contour maps can be filtered by an ensemble data filter, for example on formations or a property value range. See [Ensemble Contour Maps]({{% relref "EnsembleContourMap" %}}#data-filter).
 - Ensemble well logs can be created directly from a well path, with default import of EGRID files and improved handling of file names that do not match the ensemble pattern. See [Ensemble Well Log]({{% relref "EnsembleWellLog" %}}).
 - **Compute Contour Map Peaks** detects the locations of local maxima in a contour map. See [Contour Map Peaks]({{% relref "ContourMaps" %}}#contour-map-peaks).
 - MSW export supports optional minimum and maximum segment length per segment interval.

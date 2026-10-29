@@ -35,9 +35,27 @@ The grid case model defined by *"Primary Case"* is used for fault and simulation
 
 Select the time steps to compute the contour map for.
 
-### Formation Selection
+### Data Filter
 
-Select the formations to compute the contour map for.
+Select a **Data Filter** to compute the contour map from a subset of the grid cells, for example a set of formations or a property value range. Only cells accepted by the filter are used. The **Data Filter** group is shown when the grid ensemble has at least one data filter.
+
+The filter is evaluated for each realization, so a property filter or a formation filter can select different cells in each realization. If the filter is based on a dynamic property, the cells are selected per time step, also when the contour map shows a static property.
+
+Click **Compute** to apply a changed filter selection. The name of the active filter is shown as overlay text in the contour map view.
+
+#### Create Data Filters
+
+Data filters are defined on the grid ensemble and can be shared by several ensemble contour maps. Right-click the grid ensemble in the **Project Tree** and select a filter from the **Data Filters** sub menu:
+
+- **New Property Filter** -- select cells by property value or category. Use the **Formation Names** result type to filter on formations. See [Property Filters]({{% relref "filters" %}}#property-filters).
+- **Polygon Filter** -- select cells inside a polygon.
+- **Range Filter** -- select cells in an I, J or K range.
+
+The filters are listed in a **Data Filters** folder under the grid ensemble. The formations for each realization are imported automatically, see [Automatic Import for Grid Case Ensembles]({{% relref "formations" %}}#automatic-import-for-grid-case-ensembles).
+
+{{% notice note %}}
+The **Formation Selection** group used in earlier versions has been replaced by data filters. A formation selection stored in a project from version 2026.09 or older is no longer applied, and a warning is shown in the log when the project is opened. Create a property filter on formation names to get the same result.
+{{% /notice %}}
 
 ### Result Definition
 
