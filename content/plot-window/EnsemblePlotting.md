@@ -93,6 +93,13 @@ Statistics curves may be toggled on or off in the curve set's property editor.
 
 In addition to the default P10, P50, and P90 curves, custom percentile values can be defined in the curve set's property editor. Enter one or more percentile values (0–100) separated by commas. ResInsight will compute and display a statistics curve for each specified value.
 
+### History curves
+History vectors (e.g. `WOPRH`) are identical in all realizations of an ensemble. A curve set for a history vector therefore plots a single curve from the first realization containing the vector, and no statistics curves are computed. The history curve is drawn on top of realization and statistics curves using the main ensemble color at full opacity, and cannot be selected by clicking in the plot.
+
+The line thickness of the history curve is set by **Line Thickness** in the **Appearance** group of the curve set's property editor.
+
+All realizations are checked when the curve is plotted. If the history vector is missing in some realizations, or has values different from the plotted realization, a warning listing these realizations is written to the message window.
+
 ## Delta Ensemble
 A new ensemble can be created based on calculations on two or more ensembles. 
 Such an ensemble is called an **Delta Ensemble**. 

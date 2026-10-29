@@ -30,6 +30,16 @@ A new ensemble can be created based on the filtered cases in the right-click men
 
 ![](/images/plot-window/CorrelationPlotsCreateEnsemble.png)
 
+## History Values
+When the selected summary vector has a matching history vector in the ensemble (e.g. `WOPRH` for `WOPR`), the history data is shown together with the simulated results:
+
+- **Cross plot** -- A dashed horizontal line marks the history value at the selected time step. The y-axis range is extended to include the line.
+- **Correlation report** -- The history curve is added to the summary plot, and is updated when another summary vector is selected in the report. Hovering over the summary plot shows dashed lines with the time and value at the cursor position.
+
+If a history vector is given as summary vector when creating a correlation report, the corresponding simulated vector is used instead.
+
+![](/images/plot-window/CorrelationPlotsHistoryValues.png)
+
 ## Specifying Setup and Settings
 The Correlation Plots property editor allows the user to specify an extensive number of settings dependent on the actual type of correlation plot. The complete set of settings are listed below according to the individual sections of the property editor.
 
