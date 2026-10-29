@@ -80,6 +80,33 @@ underneath the actual **Contour Map** in the project tree. This will display the
 
 Polygons of visible contour map areas can be created from the *"Create Polygons from Contour Map"* in the right-click menu.
 
+## Contour Maps in 3D Views
+
+A contour map can be shown inside a regular 3D view, together with the grid, wells, surfaces and other objects. This applies to both reservoir and geomechanical 3D views, and to statistics contour maps from [Ensemble Contour Map]({{% relref "ensemblecontourmap" %}}).
+
+All contour maps in the project are listed under the **Contour Maps** item in the project tree of each 3D view. New contour maps are hidden by default; check a contour map to show it in the 3D view.
+
+![](/images/3d-main-window/ContourMapIn3dView.png)
+
+The contour map uses the time step of its source contour map, not the time step of the 3D view. Click **Go to Contour Map** to select the source contour map in the project tree. Clicking the contour map in the 3D view selects it in the project tree.
+
+### Position
+- **Map Position** -- Place the map at **Top of Case**, **Bottom of Case**, or at a **User Defined Depth**
+- **Depth** -- The depth of the map when **User Defined Depth** is selected
+- **Depth Offset** -- Moves the map vertically. Positive values move the map upwards.
+
+### Map Surface
+- **Show Map Surface** -- Show the colored map surface
+- **Project Surface on Geometry** -- Drape the map surface onto the top of the visible geometry instead of drawing it on a flat plane
+
+### Contour Lines
+- **Show Contour Lines** -- Show the contour lines
+- **Project Lines on Geometry** -- Drape the contour lines onto the top of the visible geometry instead of drawing them on a flat plane
+- **Line Color Mode** -- **Contrast to Map** gives each contour level a color contrasting the map underneath it. **Single Color** uses the color given by **Line Color**.
+- **Line Thickness** -- Thickness of the contour lines
+- **Show Contour Labels** -- Show the value of each contour line
+- **Label Font Size** -- Font size of the contour labels
+
 ## Contour Map Export
 
 ResInsight is able to [export a contour map]({{% relref "contourmapexport" %}}) to a text file. 
