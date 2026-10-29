@@ -6,37 +6,6 @@ search_ignore = true
 aliases = ["/releases/release-notes/latest/"]
 +++
 
-## Generic View
-A generic view can display well paths, surfaces, polygons and annotations without a loaded grid model. A generic view is created automatically when well paths or surfaces are imported into a project without 3D views.
-
-![](/images/3d-main-window/GenericView.png?width=500px)
-
-[Generic View]({{% relref "GenericView" %}})
-
-## Contour Maps in 3D Views
-Contour maps, including ensemble contour maps, can be shown inside a regular 3D view together with the grid, wells and surfaces. The map surface and contour lines can be drawn on a flat plane, or draped onto the top of the visible geometry.
-
-![](/images/3d-main-window/ContourMapIn3dView.png?width=500px)
-
-[Contour Maps in 3D Views]({{% relref "ContourMaps" %}}#contour-maps-in-3d-views)
-
-## Ensemble Well Log
-Ensemble well logs can be created directly from a well path, with default import of EGRID files and improved handling of file names that do not match the ensemble pattern.
-
-![](/images/workflows/well_log_ensemble_plot_depth_eq.png?width=500px)
-
-[Ensemble Well Log]({{% relref "EnsembleWellLog" %}})
-
-## Summary Plots
-- A common legend can be shown above the subplots of a summary plot. When the curve color and symbol are given by different summary dimensions, the legend is split into a color legend and a symbol legend.
-- Ensemble history vectors are plotted from the first realization only, without statistics, and drawn on top of the realization curves.
-
-![](/images/plot-window/SummaryPlotCommonLegend.png?width=500px)
-
-[Common legend for subplots]({{% relref "SummaryPlots" %}}#common-legend-for-subplots)
-
-[History curves]({{% relref "EnsemblePlotting" %}}#history-curves)
-
 ## Correlation Plots
 - The correlation report shows the history curve in the summary plot, and the cross plot shows the history value at the selected time step.
 - Clicking a bar in the tornado plot updates the other plots in the correlation report.
@@ -58,6 +27,30 @@ Ensemble well logs can be created directly from a well path, with default import
 
 [Decline Curve Analysis]({{% relref "DeclineCurveAnalysis" %}})
 
+## Contour Maps in 3D Views
+Contour maps, including ensemble contour maps, can be shown inside a regular 3D view together with the grid, wells and surfaces. The map surface and contour lines can be drawn on a flat plane, or draped onto the top of the visible geometry.
+
+![](/images/3d-main-window/ContourMapIn3dView.png?width=500px)
+
+[Contour Maps in 3D Views]({{% relref "ContourMaps" %}}#contour-maps-in-3d-views)
+
+## Summary Plots
+- A common legend can be shown above the subplots of a summary plot. When the curve color and symbol are given by different summary dimensions, the legend is split into a color legend and a symbol legend.
+- Ensemble history vectors are plotted from the first realization only, without statistics, and drawn on top of the realization curves.
+
+![](/images/plot-window/SummaryPlotCommonLegend.png?width=500px)
+
+[Common legend for subplots]({{% relref "SummaryPlots" %}}#common-legend-for-subplots)
+
+[History curves]({{% relref "EnsemblePlotting" %}}#history-curves)
+
+## Generic View
+A generic view can display well paths, surfaces, polygons and annotations without a loaded grid model. A generic view is created automatically when well paths or surfaces are imported into a project without 3D views.
+
+![](/images/3d-main-window/GenericView.png?width=500px)
+
+[Generic View]({{% relref "GenericView" %}})
+
 ## Restore Previous Project Versions
 Previous versions of a project file can be restored from the project backup database using **File > Restore Previous Project Versions...**. This replaces the standalone restore tool.
 
@@ -67,7 +60,8 @@ Previous versions of a project file can be restored from the project backup data
 - Flow diagnostics is supported for grids imported with the opm-common reader.
 - Polygon intersections can be created from a polygon digitized in the 3D view.
 - Ensemble contour maps support filtering, including formation selection.
-- **Compute Contour Map Peaks** detects the locations of local maxima in a contour map.
+- Ensemble well logs can be created directly from a well path, with default import of EGRID files and improved handling of file names that do not match the ensemble pattern. See [Ensemble Well Log]({{% relref "EnsembleWellLog" %}}).
+- **Compute Contour Map Peaks** detects the locations of local maxima in a contour map. See [Contour Map Peaks]({{% relref "ContourMaps" %}}#contour-map-peaks).
 - MSW export supports optional minimum and maximum segment length per segment interval.
 - Relative permeability plots can show 1-SGAS on the x-axis.
 - Grid models can be reordered in the project tree.
