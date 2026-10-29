@@ -2427,12 +2427,14 @@ class MultiPlot(PlotWindow):
     Attributes:
         number_of_columns (NumberOfColumns): One of [1, 2, 3, 4]
         rows_per_page (RowsPerPage): One of [1, 2, 3, 4]
+        use_common_legend (bool): Use Common Legend
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
     def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
         self.number_of_columns: NumberOfColumns = NumberOfColumns._2
         self.rows_per_page: RowsPerPage = RowsPerPage._2
+        self.use_common_legend: bool = False
         PlotWindow.__init__(self, pb2_object, channel)
         if MultiPlot.__custom_init__ is not None:
             MultiPlot.__custom_init__(self, pb2_object=pb2_object, channel=channel)
