@@ -56,6 +56,13 @@ Previous versions of a project file can be restored from the project backup data
 
 [Project File Revisions]({{% relref "ProjectFileRevisions" %}})
 
+## Formations
+- Formation zones can be imported from an FMU zone range file (`zonation_ecl_map.yml`), in addition to `.lyr` files and `layer_zone_table.txt`.
+- Zone colors are read from an FMU `stratigraphy.json` file located next to the zone file.
+- Formations are imported automatically for each realization in a grid case ensemble. When several formation files are present, `.lyr` files take priority over `zonation_ecl_map.yml`, followed by `layer_zone_table.txt`.
+
+[Zonations/Formations]({{% relref "Formations" %}})
+
 ## Additional Fixes and Improvements
 - Flow diagnostics is supported for grids imported with the opm-common reader.
 - Polygon intersections can be created from a polygon digitized in the 3D view.
@@ -65,7 +72,6 @@ Previous versions of a project file can be restored from the project backup data
 - MSW export supports optional minimum and maximum segment length per segment interval.
 - Relative permeability plots can show 1-SGAS on the x-axis.
 - Grid models can be reordered in the project tree.
-- Formation zone colors can be imported from a JSON file.
 - Recently used folders are shown when selecting a folder.
 - Ensemble parameters can be exported to file.
 - User-defined plot axis ranges are kept when summary cases and ensembles are added, reloaded or replaced.
