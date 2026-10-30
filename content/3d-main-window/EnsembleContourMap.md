@@ -51,7 +51,7 @@ Data filters are defined on the grid ensemble and can be shared by several ensem
 - **Polygon Filter** -- select cells inside a polygon.
 - **Range Filter** -- select cells in an I, J or K range.
 
-The filters are listed in a **Data Filters** folder under the grid ensemble. The formations for each realization are imported automatically, see [Automatic Import for Grid Case Ensembles]({{% relref "formations" %}}#automatic-import-for-grid-case-ensembles).
+The filters are listed in a **Data Filters** folder under the grid ensemble. The formations for each realization are imported automatically, see [Automatic Import for Grid Case Ensembles]({{% relref "FormationImport" %}}#automatic-import-for-grid-case-ensembles).
 
 {{% notice note %}}
 The **Formation Selection** group used in earlier versions has been replaced by data filters. A formation selection stored in a project from version 2026.09 or older is no longer applied, and a warning is shown in the log when the project is opened. Create a property filter on formation names to get the same result.

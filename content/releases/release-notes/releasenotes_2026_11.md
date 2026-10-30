@@ -61,7 +61,7 @@ Previous versions of a project file can be restored from the project backup data
 - Zone colors are read from an FMU `stratigraphy.json` file located next to the zone file.
 - Formations are imported automatically for each realization in a grid case ensemble. When several formation files are present, `.lyr` files take priority over `zonation_ecl_map.yml`, followed by `layer_zone_table.txt`.
 
-[Zonations/Formations]({{% relref "Formations" %}})
+[Formations and Well Picks]({{% relref "FormationImport" %}})
 
 ## Additional Fixes and Improvements
 - Flow diagnostics is supported for grids imported with the opm-common reader.
