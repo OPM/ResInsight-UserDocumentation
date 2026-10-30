@@ -55,11 +55,13 @@ It is also possible to save the ascii data to a file by selecting a Well Log Plo
 
 Tracks can be created by right-clicking a **Well Log Plot** and select **New Track**.
 
-The settings of each Track is controlled by the Property Editor. The figure below shows settings for the middle Track shown in the figure at top of this page which is annotated by [Formations]({{% relref "formations" %}}) in *Category colors*. For GeoMechanical models, adding formations will also indicate the sea level.
+The settings of each Track is controlled by the Property Editor. The figure below shows settings for the middle Track shown in the figure at top of this page.
 
 ![](/images/plot-window/TrackProperties.png)
 
 A track controls the x-axis range of the display which is set in the property panel. In addition to the range, logarithmic display is controlled by checking **Logarithmic Scale**, grid lines are controlled by the **Show Grid Lines** option.
+
+A track can show formations as annotated depth regions. See [Formations in Well Log Plots]({{% relref "WellLogFormations" %}}).
 
 It is also possible to visualize [Well Attributes]({{% relref "wellpaths" %}}#casing-design) such as casing and liners. The following images show some of the possibilities in which the first track shows cross sections of a well and the second track shows a radial view labeled with formations.
 
