@@ -149,7 +149,7 @@ The file must have the columns "Well name", "Unit name" (i.e. formation name), "
 
 The three unit names *OIL*, *GAS* and *WATER* are interpreted as *fluids*. Other unit names with only capital letters are *groups*. A unit name without an index is simply a *formation*. Unit names with one number is a *formation 1*, unit names with *one* punctuation is a *formation 2*, two punctuations, *formation 3* and so on. Indentions in column name will be ignored.
 
-See [Well Picks]({{% relref "formations" %}}#well-picks) for how to show the well picks in plots.
+See [Well Picks]({{% relref "WellLogFormations" %}}#well-picks) for how to show the well picks in plots.
 
 ### FMU Well Formations (_`formations.csv`_)
 
@@ -165,4 +165,4 @@ X_UTME,Y_UTMN,TOP_TVD,TOP_MD,ZONE_CODE,WELL,BASE_TVD,BASE_MD,ZONE
 
 The columns **WELL**, **ZONE**, **TOP_MD**, **BASE_MD**, **TOP_TVD** and **BASE_TVD** are used. Other columns are ignored.
 
-In well log tracks, select **Well Picks (no trajectory)** as **Zonation/Formation Names** source, then select the **Formations File** and the **Well**. The **Add Well Picks** button imports a file and selects it in one step. RFT plots select this source automatically when the well has no well path and a matching well formations file is found. See [RFT Correlation Plot]({{% relref "RftCorrelationPlot" %}}#well-formations).
+See [Well Picks Without a Trajectory]({{% relref "WellLogFormations" %}}#well-picks-without-a-trajectory) for how to show the zones in plots, and [RFT Correlation Plot]({{% relref "RftCorrelationPlot" %}}#well-formations) for formation filtering.

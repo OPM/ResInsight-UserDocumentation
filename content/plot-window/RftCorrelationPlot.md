@@ -24,17 +24,9 @@ The first numeric ensemble parameter is selected by default, and the RFT curves 
 
 ## Well Formations
 
-Formation filtering uses depth-based well picks in the FMU `formations.csv` format. Each row defines the top and base of a zone in a well:
+Formation filtering uses depth-based well picks from an FMU _`formations.csv`_ file. See [FMU Well Formations]({{% relref "FormationImport" %}}#fmu-well-formations-formationscsv) for the file format and import.
 
-```
-X_UTME,Y_UTMN,TOP_TVD,TOP_MD,ZONE_CODE,WELL,BASE_TVD,BASE_MD,ZONE
-460994.9,5933813.29,1644.0,1693.0,1,R_A2,1662.0,1711.0,Valysar
-460994.9,5933813.29,1662.0,1711.0,2,R_A2,1678.0,1727.0,Therys
-```
-
-To import a file, right-click **Well Picks (Formations)** under **Data Sources** in the **Plot Project Tree** and select **Import Well Formations...**. Selecting an imported file shows its content as a table in the **Property Editor**.
-
-Well picks are independent of K-layer based formation names (`.lyr` files) and do not require a well path trajectory. The RFT track in the correlation plot uses the **Well Picks (no trajectory)** formation source, which looks up the zones in the file by well name and shows them as colored formation shading. The **Add Well Picks** button in the track's formation settings imports a file and selects it in one step.
+The well picks do not require a well path trajectory. The RFT track in the correlation plot uses the **Well Picks (no trajectory)** formation source, which shows the zones as colored formation shading. See [Well Picks Without a Trajectory]({{% relref "WellLogFormations" %}}#well-picks-without-a-trajectory).
 
 ## Property Editor
 

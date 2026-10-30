@@ -49,11 +49,7 @@ Formation can be used to annotate the following plot types:
 - [RFT Plots]({{% relref "rftplot" %}})
 - [PLT Plots]({{% relref "pltplot" %}})
 
-For RFT and PLT Plots, **Zonation/Formation Names** can be found in the plot's **Property Editor**. Tick "Show Formations" and choose the case with the desired formations. 
-
-In Well Log Plots and Well Allocation Plots, **Zonation/Formation Names** can be found in the **Property Editor** for a **Track** or **Branch**. In addition to choosing case, the path to show formations for must also be selected, as each track can have curves with data from more than one path.
-
-![](/images/3d-main-window/caseFormationsPropEditor.PNG)
+See [Formations in Well Log Plots]({{% relref "WellLogFormations" %}}) for the formation settings. RFT, PLT and Well Allocation Plots use the same settings.
 
 ## Well Picks
 
@@ -66,12 +62,4 @@ Well Pick files are imported by using the command: **File->Import->Well Data->Im
 See [Formations and Well Picks]({{% relref "FormationImport" %}}#well-picks) for file formats.
 
 ### Viewing the Well Picks
-See [Annotations on plots](#annotations-on-plots). Annotations are added to plots in the same way as for k-layered formations, but the source is different.
-
-![](/images/3d-main-window/wellFormationsPropEditor.PNG)
-
-In the **Property Editor**, choose **Well Path** as **Source**, and all well paths with formations will be shown in the drop-down list below. All disjoint well picks for the chosen well path is shown on default. To reduce the number of annotations, the **Well Pick Filter** can be used.
-
-![](/images/3d-main-window/wellPickFilter.png)
-
-The **Well Pick Filter** will show formations down to the specified level. If more there are more than one formation within 0.1m of an MD, only the lowermost formation is shown. Well picks interpreted as *Fluids* are only shown by ticking the **Show Fluids** mark.
+See [Well Picks]({{% relref "WellLogFormations" %}}#well-picks) in Formations in Well Log Plots.

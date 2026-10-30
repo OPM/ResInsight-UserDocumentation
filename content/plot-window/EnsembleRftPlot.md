@@ -64,7 +64,7 @@ More than one letter for one single time step, means that the time step comes fr
 
 ### Zonation/Formation Names
 The display of formations lines is controlled in the same manner as for [RFT plots]({{% relref "RftPlot" %}}#zonationformation-names).
-Please see the [full documentation]({{% relref "formations" %}}) of the formations property editor for details about formations.
+Please see the [full documentation]({{% relref "WellLogFormations" %}}) of the formations property editor for details about formations.
 
 ### Legend and Axis
 Visual properties of legend and axes is controlled in the same manner as for [RFT plots]({{% relref "RftPlot" %}}#legend-and-axis).
@@ -96,25 +96,7 @@ The purpose and format of the data files is explained below.
 #### Correlation of grid and formations
 
 The file *layer_zone_table.txt* can be used to correlate each grid k-layer with a formation name. 
-This file is identical for all cases in the same ensemble.
-
-Example file *layer_zone_table.txt*:
-```txt
-1   UpperReek
-2   UpperReek
-3   UpperReek
-4   UpperReek
-5   UpperReek
-6   MidReek
-7   MidReek
-8   MidReek
-9   MidReek
-10  MidReek
-11  LowerReek
-12  LowerReek
-13  LowerReek
-14  LowerReek
-```
+This file is identical for all cases in the same ensemble. See [FMU Layer Zone Table]({{% relref "FormationImport" %}}#fmu-layer-zone-table-layer_zone_tabletxt) for the file format.
 
 #### Observed pressure and error
 For a given well name, the file *\<well_name>.obs* is a data file containing two columns to specify observed pressure and error. 

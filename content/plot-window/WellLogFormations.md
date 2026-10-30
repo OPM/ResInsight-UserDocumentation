@@ -48,12 +48,12 @@ Set **Source** to **Well Picks for Well Path** to show well picks imported with 
 ![](/images/3d-main-window/wellFormationsPropEditor.PNG)
 
 - **Well Path** -- the well path to show well picks for. Only well paths with well picks are listed.
-- **Well Pick Filter** -- the deepest formation level to show, for example **Formation Group**, **Formation** or **Formation 1**. **All** shows every level.
+- **Well Pick Filter** -- the deepest formation level to show, for example **Formation Group**, **Formation** or **Formation 1**. **All** shows every level. Use the filter to reduce the number of annotations.
 - **Show Fluids** -- also show well picks interpreted as fluids (*OIL*, *GAS* and *WATER*).
 
 ![](/images/3d-main-window/wellPickFilter.png)
 
-See [Well Picks]({{% relref "formations" %}}#well-picks) for how the levels are interpreted.
+If more than one formation starts within 0.1 m of the same measured depth, only the lowermost formation is shown. See [Well Pick Files for Well Paths]({{% relref "FormationImport" %}}#well-pick-files-for-well-paths) for how unit names are interpreted as groups, formation levels and fluids.
 
 ### Well Picks Without a Trajectory
 
