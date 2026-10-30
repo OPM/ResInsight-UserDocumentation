@@ -15,10 +15,7 @@ An ensemble RFT plot can also be used as the basis for an [RFT Correlation Plot]
 ## Create New Ensemble RFT Plot
 
 When a [summary ensemble has been imported]({{% relref "ensembleplotting" %}}#import),
-observed FMU data can be imported via right-clicking **Observed Data** in the **Plot Project Tree**, 
-and selecting **Import Observed FMU Data**.
-
-![](/images/plot-window/EnsembleRftImportObservedData.png)
+observed FMU data can be imported. See [Observed FMU RFT Data]({{% relref "ObservedFmuRftData" %}}).
 
 To create ensemble RFT plot, right-click **RFT Plots** and select **New RFT Plot**.
 
@@ -39,7 +36,7 @@ Select the well to display in the plot. Wells postfixed by _'(Well Path)'_ have 
 Subsequent to selecting a well in the Well Name field, the relevant sources for that well will appear in the **Sources** field. The sources for this particular case are: 
 
 - **Ensembles with RFT Data** -- List of ensembles which contain RFT data with check-boxes to activate display.
-- **Observed FMU data** -- Observed data imported from a FMU run.
+- **Observed FMU data** -- Observed data imported from a FMU run, see [Observed FMU RFT Data]({{% relref "ObservedFmuRftData" %}}).
 
 When the user selects one or more sources, a selection of their time steps appears in the **Time Steps** field.
 
@@ -74,109 +71,3 @@ One ensemble parameter is selected to control coloring. The ensemble parameter v
 
 
 ![](/images/plot-window/EnsembleRftPlotColors.png)
-
-
-## Import of Observed Ensemble RFT data from FMU  
-Observed RFT data as part of a FMU run is presupposed to be located in a folder which contains the following four file types: 
-
-- layer_zone_table.txt
-- \<*well_name*>.obs 
-- \<*well_name*>.txt
-- well_date_rft.txt
-
-The purpose and format of the data files is explained below.
-
-{{% notice note %}}
-  The data file *well_date_rft.txt* is required. If missing, no Observed FMU data will be imported.
-{{% /notice %}}
-
-
-
-
-#### Correlation of grid and formations
-
-The file *layer_zone_table.txt* can be used to correlate each grid k-layer with a formation name. 
-This file is identical for all cases in the same ensemble. See [FMU Layer Zone Table]({{% relref "FormationImport" %}}#fmu-layer-zone-table-layer_zone_tabletxt) for the file format.
-
-#### Observed pressure and error
-For a given well name, the file *\<well_name>.obs* is a data file containing two columns to specify observed pressure and error. 
-Column one contains observed pressure and column two contains error. The observation data is valid for one and only one layer/formation.
-
-Example file  for well *OP_1*, i.e. *OP_1.obs*:
-```txt
-303.000   3.000
-304.000   3.000
-305.000   3.000
-```
-
-#### Observed pressure and error - multiple observations for a well
-If there are multiple observations for a well at different dates, the naming of the files include a measurement ID
-
-Example file *well_date_rft.txt*:
-```txt
-R_A2 2018-03-01 1
-R_A2 2019-03-01 2
-```
-
-Measurement ID is the last column. The corresponding observations files are named as follows, the measurement ID is appended to the well name.
-```txt
-R_A2_1.obs
-R_A2_1.txt
-R_A2_2.obs
-R_A2_2.txt
-```
-
-#### Reservoir zone name
-For a given well name, the file *\<well_name>.txt* is a data file containing five columns that specify its correlation with reservoir zones. 
-Each line of data must contain:
-
-- Utmx: x-coordinate in UTM
-- Utmy: y-coordinate in UTM
-- Measured Depth relative to the Kelly Bushing (MDRKB) 
-- True Vertical Depth referenced to Mean Sea Level (TVDMSL) 
-- Reservoir zone name
-
-Example file for well *OP_1*, i.e. *OP_1.txt*:
-```txt
-461288.719   5933415.000   1816.200   1611.692   UpperReek
-461288.685   5933415.027   1824.560   1620.052   MidReek
-461288.683   5933415.029   1840.000   1635.492   LowerReek
-```
-
-#### Well measurements - date format 1
-The data file *well_date_rft.txt* contains well measurements. The file contains four columns for each well measurement:
-
-- Well Name
-- Date in two digit form \<DD>
-- Month in two digit form \<MM> 
-- Year in four digit form \<YYYY>
-- Measurement index
-
-There can be multiple measurement for each well.
-
-Example file *well_date_rft.txt*:
-```txt
-OP_1   01 02 2000   1
-OP_2   01 02 2000   1
-OP_4   01 01 2001   1
-WI_1   01 02 2000   1
-WI_3   01 03 2001   1
-```
-
-#### Well measurements - date format 2
-The data file *well_date_rft.txt* contains well measurements. The file contains four columns for each well measurement:
-
-- Well Name
-- Date on the format \<YYYY-MM-DD>
-- Measurement index
-
-There can be multiple measurement for each well.
-
-Example file *well_date_rft.txt*:
-```txt
-R_A2 2018-03-01 1
-R_A2 2019-03-01 2
-R_A6 2018-11-07 1
-R_A6 2018-11-07 2
-R_A6 2018-11-07 3
-```
