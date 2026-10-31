@@ -1,5 +1,5 @@
 +++
-title = "Using a batch scheduler"
+title = "Using a batch scheduler (BETA)"
 
 weight = 60
 +++
@@ -8,8 +8,8 @@ weight = 60
 
 ResInsight can launch OPM Flow simulation jobs using three different options:
 1. Run the simulation jobs on the local computer
-2. Submit the simulation jobs to a HPC cluster using IBM Spectrum LSF
-3. Submit the simulation jobs to a HPC cluster using Slurm workload manager
+2. Submit the simulation jobs to a HPC cluster using IBM Spectrum LSF (BETA functionality)
+3. Submit the simulation jobs to a HPC cluster using Slurm workload manager (BETA functionality)
 
 To choose which method ResInsight should use, go to the ResInsight preferences and select the Batch Scheduler page:
 
