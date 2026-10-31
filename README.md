@@ -25,7 +25,7 @@ It is also possible to install Hugo using package managers
     sudo apt install hugo
 
 **Last known working version is **
-https://github.com/gohugoio/hugo/releases/tag/v0.142.0
+https://github.com/gohugoio/hugo/releases/tag/v0.169.0
 
 The **next-major-release** branch is intended to represent the new features not yet released. The content of this branch is automatically published to **gh-pages** of this repository. This website can be reached by https://beta.resinsight.org
 
