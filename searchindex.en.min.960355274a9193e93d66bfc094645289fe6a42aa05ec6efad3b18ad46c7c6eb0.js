@@ -1490,7 +1490,7 @@ Realizations - Choose which realizations from the input ensemble ResInsight shou
 New Well Settings Group The Add a new well page describes how to use these settings. The same settings are used for all realizations.
 The OPM Flow settings are the same as for a single OPM Flow Job..
 Running an Ensemble Job To run the job, click the Run button, or right-click the job and choose Run….
-ResInsight will create an OPM Flow job for each selected realization and run those. Depending on the batch scheduler setup, ResInsight will run one or more sub-jobs in parallell on the local computer, or submit the sub-jobs to a cluster.
+ResInsight will create an OPM Flow job for each selected realization and run those. Depending on the batch scheduler setup, ResInsight will run one or more sub-jobs in parallel on the local computer, or submit the sub-jobs to a cluster.
 Once all sub-jobs have completed, ResInsight will automatically load/refresh the results, if selected by the user.`,description:`NOTE: This functionality is still under development and might change in upcoming releases.
 Overview Just like a single OPM Flow job could be created from a grid case, an ensemble job can be created from an existing grid ensemble loaded in ResInsight.
 Right-click an existing grid ensemble in the 3d view project tree, and choose “New Ensemble Job…”`,tags:[],title:"Ensemble jobs (BETA)",uri:"/ResInsight-UserDocumentation/opm-flow-integration/ensemblejobs/index.html"},{breadcrumb:"ResInsight > 3D Main Window",content:`Intersections are cross sections of a grid model that cut the grid in various ways to display grid cell values. There are two main types of intersections:
