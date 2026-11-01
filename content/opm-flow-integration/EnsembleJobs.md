@@ -42,7 +42,7 @@ The OPM Flow settings are the same as for a single [OPM Flow Job.]({{% relref "J
 
 To run the job, click the *Run* button, or right-click the job and choose *Run...*. 
 
-ResInsight will create an OPM Flow job for each selected realization and run those. Depending on the [batch scheduler setup]({{% relref "RunningBatchScheduler" %}}), ResInsight will run one or more sub-jobs in parallell on the local computer, or submit the sub-jobs to a cluster. 
+ResInsight will create an OPM Flow job for each selected realization and run those. Depending on the [batch scheduler setup]({{% relref "RunningBatchScheduler" %}}), ResInsight will run one or more sub-jobs in parallel on the local computer, or submit the sub-jobs to a cluster. 
 
 Once all sub-jobs have completed, ResInsight will automatically load/refresh the results, if selected by the user.
 
