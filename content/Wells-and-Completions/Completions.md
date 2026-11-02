@@ -176,6 +176,32 @@ Here is an example:
     "SOH"   perforation 4340 4369 0.212 0   -- target Garn 2, 29 m prodint (update 290915)
     01 SEP 2006   perforation 5060 6185 0.212 0   -- target Tilje 3, 1125 m prodint
 
+## Multi-Segment Well Segments
+
+The **Segments** folder under a well path in the **Project Tree** controls the segments created for the main bore in the multi-segment well export (WELSEGS and COMPSEGS). The folder is shown when the well path has completions or segment intervals.
+
+- **Liner Inner Diameter** -- Diameter used for segments outside any segment interval.
+- **Roughness Factor** -- Roughness used for segments outside any segment interval.
+- **COMPSEGS Segment Number (ISEG)** -- Select **Exported** to write the segment number of each connection to COMPSEGS, or **Assigned by Simulator (1\*)** to let the simulator assign it.
+- **Single Segment Before First Perforation** -- Use one segment from the start of the well to the first perforation.
+- **Single Segment After Last Perforation** -- Use one segment from the last perforation to the end of the well.
+
+For a lateral, the values are taken from the top level well path unless **Custom Values for Lateral** is checked.
+
+### Segment Intervals
+
+A segment interval defines diameter, roughness and segment length for a measured depth range of the well. Right-click the **Segments** folder and select **Create Segment Interval** to add an interval. Segments outside all intervals use the values of the **Segments** folder.
+
+- **Start MD**, **End MD** -- Measured depth range of the interval. Overlapping intervals are highlighted in the **Project Tree**.
+- **Diameter**, **Roughness Factor** -- Values exported for the segments in the interval.
+- **Fixed Segment Length** -- Split the interval into segments of this length, independent of the grid cells.
+- **Min Segment Length** -- Merge segments shorter than this length. If the interval is shorter than the min length, the interval is exported as one segment.
+- **Max Segment Length** -- Split segments longer than this length into segments of equal length.
+
+By default, one segment is created for each grid cell along the well. **Fixed Segment Length** cannot be combined with the other two options, and checking it clears **Min Segment Length** and **Max Segment Length**. **Min Segment Length** and **Max Segment Length** can be used together. If the min length is set larger than the max length, the other value is adjusted to match the one just edited.
+
+The interval name in the **Project Tree** shows the MD range and the active length options, for example *1000 - 1500 (min 10) (max 100)*.
+
 ## Fishbones
 
 Fishbones are completions created by drilling or by jetting a set of small lateral holes with a high deviation from the main bore.

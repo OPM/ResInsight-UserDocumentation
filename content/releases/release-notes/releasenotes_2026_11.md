@@ -70,7 +70,7 @@ Previous versions of a project file can be restored from the project backup data
 - Grid property calculations can be limited to the cells of a data filter. See [Grid Property Calculator]({{% relref "GridPropertyCalculator" %}}#data-filter).
 - Ensemble well logs can be created directly from a well path, with default import of EGRID files and improved handling of file names that do not match the ensemble pattern. See [Ensemble Well Log]({{% relref "EnsembleWellLog" %}}).
 - **Compute Contour Map Peaks** detects the locations of local maxima in a contour map. See [Contour Map Peaks]({{% relref "ContourMaps" %}}#contour-map-peaks).
-- MSW export supports optional minimum and maximum segment length per segment interval.
+- MSW export supports optional minimum and maximum segment length per segment interval. See [Segment Intervals]({{% relref "Completions" %}}#segment-intervals).
 - Relative permeability plots can show 1-SGAS on the x-axis.
 - Grid models can be reordered in the project tree.
 - Recently used folders are shown when selecting a folder.
