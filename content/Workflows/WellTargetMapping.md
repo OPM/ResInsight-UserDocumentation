@@ -31,7 +31,17 @@ Click **Generate** button to compute well target candidates for the grid model. 
   - Surface Volumes (SFIPOIL, SFIPGAS)
   - Surface Volumes (FIPOIL, FIPGAS)
 
+**Data Filters**
 
+Data filters restrict which cells are used, independent of the cells visible in any view. The filters are selected from the **Data Filters** defined on the grid model or grid ensemble, see [Create Data Filters]({{% relref "EnsembleContourMap" %}}#create-data-filters).
+
+- **Start Data Filter**: Limits where starting cells for the clusters are searched for. If empty, the **Grow Data Filter** is used.
+- **Grow Data Filter**: Limits where clusters can grow. If empty, clusters can grow anywhere in the model.
+- **Avoid Growing Across Faults**: Do not grow clusters across fault faces or fault NNCs. A result with the number of fault faces per cell is also generated.
+
+{{% notice note %}}
+The **Filter By View** option used in version 2026.09 and older has been replaced by data filters. A view filter stored in an older project is not applied. Create a data filter to get the same result.
+{{% /notice %}}
 
 **Minimum Cell Values**
 

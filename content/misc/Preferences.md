@@ -41,7 +41,7 @@ When changing the preferences, any default color, font or Z-scale Factor that ha
 
 - Behaviour When Loading Data
   - **Compute DEPTH Related Properties** -- If not present, compute DEPTH, DX, DY, DZ, TOP, BOTTOM when loading new cases.
-  - **Load and Show SOIL** -- Control if SOIL is loaded and applied to grid per default.
+  - **Default Dynamic Result to Show** -- The dynamic result that is loaded and shown in new views, if available in the case. Select *SOIL*, *SGAS*, *SWAT* or *PRESSURE*, or type another result name. Select *None* to not show a dynamic result by default.
 
 - Fault Import
   - **Import Faults** -- Controls import of Faults.
@@ -113,6 +113,13 @@ Please consider the location and folders of your templates with care to cater fo
 - **Script Files**:
   - **Shared Script Folder(s)** -- Defines the search paths for octave scripts
   - **Script Editor** -- The text editor to invoke when editing scripts
+
+
+## RI Cloud API
+
+- **Python Environment**
+  - **Enable for Dedicated ri-cloud-api Environment** -- Use a separate Python interpreter for the cloud API service. When disabled, the **Python Executable Location** from the **Scripting** tab is used.
+  - **Python Executable Location** -- The Python interpreter for the cloud API service. Only shown when the dedicated environment is enabled.
 
 
 ## Import/Export
