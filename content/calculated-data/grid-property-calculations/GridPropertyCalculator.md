@@ -66,5 +66,27 @@ The calculated result is accessible via **Property Editor** as **Type** ***Gener
 
 ![](/images/3d-main-window/GridPropertyCalculatorSolo.png)
 
+## Cell Filter
+
+Use the **Cell Filter** group to calculate the expression only for a subset of the grid cells. **Filter Type** has the following options:
+
+- **None** -- all cells are calculated.
+- **Cell Filter View** -- only cells visible in the selected view are calculated. The visible cells of the view are reused for all cases, so all cases must have the same grid size.
+- **Data Filter** -- only cells accepted by the selected data filter are calculated.
+
+When a filter is selected, **Non-visible Cell Value** controls the value assigned to cells outside the filter:
+
+- **Infinity** -- cells are assigned an undefined value.
+- **Property Value** -- cells are assigned the value of the selected property. Click **Edit** to select the property.
+- **User Defined Custom Value** -- cells are assigned the value given in **Custom Value**.
+
+### Data Filter
+
+A data filter selects cells independent of the cells visible in any view. The **Data Filter** list contains the data filters defined on the destination case, and the data filters of the grid ensemble the destination case belongs to. Ensemble filters are listed as *Ensemble name : Filter name*.
+
+The filter is evaluated for each calculated case and time step, using the active cells and result values of that case. A property filter or a formation filter can therefore select different cells in each case, and a filter on a dynamic property can select different cells for each time step.
+
+Data filters are created by right-clicking a grid model or a grid ensemble in the **Project Tree** and selecting a filter from the **Data Filters** sub menu, see [Create Data Filters]({{% relref "EnsembleContourMap" %}}#create-data-filters).
+
 ## Storage of Expressions to File
 Use **Import Calculations** and **Export Calculations** to store and load expressions to and from a file.
