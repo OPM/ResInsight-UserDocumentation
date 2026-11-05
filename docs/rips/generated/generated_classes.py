@@ -3118,7 +3118,7 @@ class Project(PdmObjectBase):
         return self._call_pdm_method_return_optional_value("summaryCase", FileSummaryCase, case_id=case_id)
 
 
-    def surface_folder(self, folder_name: str="") -> SurfaceCollection:
+    def surface_folder(self, folder_name: str="") -> Optional[SurfaceCollection]:
         """
         Get Surface Folder
 
@@ -3127,7 +3127,7 @@ class Project(PdmObjectBase):
         Returns:
             SurfaceCollection
         """
-        return self._call_pdm_method_return_value("surfaceFolder", SurfaceCollection, folder_name=folder_name)
+        return self._call_pdm_method_return_optional_value("surfaceFolder", SurfaceCollection, folder_name=folder_name)
 
 
     def tile_views(self, ) -> None:
