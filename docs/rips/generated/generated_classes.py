@@ -1301,7 +1301,7 @@ class PdmNestedCollectionBase(PdmObjectBase):
 
     def add_folder(self, folder_name: str="Folder", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> PdmNestedCollectionBase:
         """
-        Add a new folder
+        Add a new folder. Raises an error on a folder that cannot hold folders: an imported polygon file, or a cloud polygon source, folder or address
 
         Arguments:
             folder_name (str): New folder name
@@ -1310,6 +1310,18 @@ class PdmNestedCollectionBase(PdmObjectBase):
             PdmNestedCollectionBase
         """
         return self._call_pdm_method_return_value("AddFolder", PdmNestedCollectionBase, folder_name=folder_name, on_name_conflict=on_name_conflict)
+
+
+    def collection_name_internal(self, ) -> DataContainerString:
+        """
+        Name of the folder
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("CollectionNameInternal", DataContainerString)
 
 
 class SurfaceCollection(PdmNestedCollectionBase):
@@ -1324,6 +1336,19 @@ class SurfaceCollection(PdmNestedCollectionBase):
         PdmNestedCollectionBase.__init__(self, pb2_object, channel)
         if SurfaceCollection.__custom_init__ is not None:
             SurfaceCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def add_folder(self, folder_name: str="Folder", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> SurfaceCollection:
+        """
+        Add a new folder. Raises an error on a folder that cannot hold folders: an imported polygon file, or a cloud polygon source, folder or address
+
+        Arguments:
+            folder_name (str): New folder name
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
+        Returns:
+            SurfaceCollection
+        """
+        return self._call_pdm_method_return_value("AddFolder", SurfaceCollection, folder_name=folder_name, on_name_conflict=on_name_conflict)
+
 
     def import_surface(self, file_name: str="", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> Surface:
         """
@@ -2692,6 +2717,19 @@ class PolygonCollection(RimPolygonContainer):
         if PolygonCollection.__custom_init__ is not None:
             PolygonCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_folder(self, folder_name: str="Folder", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> PolygonCollection:
+        """
+        Add a new folder. Raises an error on a folder that cannot hold folders: an imported polygon file, or a cloud polygon source, folder or address
+
+        Arguments:
+            folder_name (str): New folder name
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
+        Returns:
+            PolygonCollection
+        """
+        return self._call_pdm_method_return_value("AddFolder", PolygonCollection, folder_name=folder_name, on_name_conflict=on_name_conflict)
+
+
     def create_polygon(self, name: str="", coordinates: List[List[float]]=[], on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> Polygon:
         """
         Create and Add New Polygon
@@ -3120,10 +3158,10 @@ class Project(PdmObjectBase):
 
     def surface_folder(self, folder_name: str="") -> Optional[SurfaceCollection]:
         """
-        Get Surface Folder
+        Get the top surface folder, or one of its direct sub folders by name. Nested sub folders are not searched. Returns None if no direct sub folder has the given name.
 
         Arguments:
-            folder_name (str): 
+            folder_name (str): Name of a direct sub folder of the top surface folder. Empty returns the top folder.
         Returns:
             SurfaceCollection
         """
