@@ -131,6 +131,11 @@ class LgrSplitType(StrEnum):
     LGR_PER_COMPLETION = "LGR_PER_COMPLETION"
     LGR_PER_WELL = "LGR_PER_WELL"
 
+class MeshMode(StrEnum):
+    FULL_MESH = "FULL_MESH"
+    FAULTS_MESH = "FAULTS_MESH"
+    NO_MESH = "NO_MESH"
+
 class MultipleFracturesAction(StrEnum):
     APPEND_FRACTURES = "APPEND_FRACTURES"
     REPLACE_FRACTURES = "REPLACE_FRACTURES"
@@ -289,6 +294,11 @@ class SubTitleFontSize(StrEnum):
 class SubsOrientationMode(StrEnum):
     FIXED = "FIXED"
     RANDOM = "RANDOM"
+
+class SurfaceMode(StrEnum):
+    SURFACE = "SURFACE"
+    FAULTS = "FAULTS"
+    NO_SURFACE = "NO_SURFACE"
 
 class TransScalingWbhpSource(StrEnum):
     WBHP_SUMMARY = "WBHP_SUMMARY"
@@ -1874,9 +1884,11 @@ class View(ViewWindow):
         disable_lighting (bool): Disable Results Lighting
         grid_z_scale (float): Z Scale
         id (int): View ID
+        mesh_mode (MeshMode): One of [FULL_MESH, FAULTS_MESH, NO_MESH]
         perspective_projection (bool): Perspective Projection
         show_grid_box (bool): Show Grid Box
         show_z_scale (bool): Show Z Scale Label
+        surface_mode (SurfaceMode): One of [SURFACE, FAULTS, NO_SURFACE]
     """
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -1888,9 +1900,11 @@ class View(ViewWindow):
         self.disable_lighting: bool = False
         self.grid_z_scale: float = 5.000000000000000e+00
         self.id: int = -1
+        self.mesh_mode: MeshMode = MeshMode.FULL_MESH
         self.perspective_projection: bool = True
         self.show_grid_box: bool = True
         self.show_z_scale: bool = True
+        self.surface_mode: SurfaceMode = SurfaceMode.SURFACE
         ViewWindow.__init__(self, pb2_object, channel)
         if View.__custom_init__ is not None:
             View.__custom_init__(self, pb2_object=pb2_object, channel=channel)
