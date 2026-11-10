@@ -1407,6 +1407,19 @@ class SurfaceCollection(PdmNestedCollectionBase):
         return self._call_pdm_method_return_value("NewSurface", GridCaseSurface, case=case, k_index=k_index)
 
 
+    def new_triangulated_surface(self, name: str="", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> TriangulatedSurface:
+        """
+        Create a new triangulated surface
+
+        Arguments:
+            name (str): 
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
+        Returns:
+            TriangulatedSurface
+        """
+        return self._call_pdm_method_return_value("NewTriangulatedSurface", TriangulatedSurface, name=name, on_name_conflict=on_name_conflict)
+
+
     def sub_collections(self) -> List[SurfaceCollection]:
         """Surfaces
 
@@ -4570,6 +4583,65 @@ class TriangleGeometry(PdmObjectBase):
         if TriangleGeometry.__custom_init__ is not None:
             TriangleGeometry.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class TriangulatedSurface(SurfaceInterface):
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        SurfaceInterface.__init__(self, pb2_object, channel)
+        if TriangulatedSurface.__custom_init__ is not None:
+            TriangulatedSurface.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def get_property_to_key(self, name: str="", value_key: str="") -> None:
+        """
+        Get property to key.
+
+        Arguments:
+            name (str): Name
+            value_key (str): Key Value
+        Returns:
+            
+        """
+        self._call_pdm_method_void("GetPropertyToKey", name=name, value_key=value_key)
+
+
+    def property_names(self, ) -> DataContainerString:
+        """
+        Property Names.
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("PropertyNames", DataContainerString)
+
+
+    def set_geometry_from_keys(self, vertices_key: str="", triangles_key: str="") -> None:
+        """
+        Set geometry from keys.
+
+        Arguments:
+            vertices_key (str): Key for x, y and depth of each vertex
+            triangles_key (str): Key for three vertex indices per triangle
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetGeometryFromKeys", vertices_key=vertices_key, triangles_key=triangles_key)
+
+
+    def set_property_from_key(self, name: str="", value_key: str="") -> None:
+        """
+        Set property from key.
+
+        Arguments:
+            name (str): Name
+            value_key (str): Key Value
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetPropertyFromKey", name=name, value_key=value_key)
+
+
 class ValveCollection(CheckableNamedObject):
     __custom_init__ = None #: Assign a custom init routine to be run at __init__
 
@@ -5906,6 +5978,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['TextAnnotation'] = TextAnnotation
     classes['ThermalFractureTemplate'] = ThermalFractureTemplate
     classes['TriangleGeometry'] = TriangleGeometry
+    classes['TriangulatedSurface'] = TriangulatedSurface
     classes['ValveCollection'] = ValveCollection
     classes['ValveTemplate'] = ValveTemplate
     classes['ValveTemplateCollection'] = ValveTemplateCollection
