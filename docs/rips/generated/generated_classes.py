@@ -253,6 +253,7 @@ class PropertyType(StrEnum):
     ALLAN_DIAGRAMS = "ALLAN_DIAGRAMS"
     FLOW_DIAGNOSTICS = "FLOW_DIAGNOSTICS"
     INJECTION_FLOODING = "INJECTION_FLOODING"
+    QUALITY_CONTROL = "QUALITY_CONTROL"
 
 class ReferenceMdType(StrEnum):
     GridEntryPoint = "GridEntryPoint"
@@ -931,7 +932,7 @@ class Reservoir(Case):
         Get the data type (FLOAT or INTEGER) of a grid property
 
         Arguments:
-            property_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+            property_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING, QUALITY_CONTROL]
             property_name (str): 
             porosity_model (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
         Returns:
@@ -3356,7 +3357,7 @@ class EclipseResult(PdmObjectBase):
         flow_tracer_selection_mode (FlowTracerSelectionMode): One of [FLOW_TR_INJ_AND_PROD, FLOW_TR_PRODUCERS, FLOW_TR_INJECTORS, FLOW_TR_BY_SELECTION]
         phase_selection (PhaseSelection): One of [PHASE_ALL, PHASE_OIL, PHASE_GAS, PHASE_WAT]
         porosity_model_type (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
-        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING, QUALITY_CONTROL]
         result_variable (str): Variable
         selected_injector_tracers (List[str]): Injector Tracers
         selected_producer_tracers (List[str]): Producer Tracers
@@ -3699,7 +3700,7 @@ class RimStatisticalCalculation(Reservoir):
         mid_percentile (float): Mid
         percentile_calculation_type (PercentileCalculationType): One of [NearestObservationPercentile, HistogramEstimatedPercentile, InterpolatedObservationPercentile]
         porosity_model (PorosityModelType): One of [MATRIX_MODEL, FRACTURE_MODEL]
-        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING]
+        result_type (PropertyType): One of [DYNAMIC_NATIVE, STATIC_NATIVE, SOURSIMRL, GENERATED, INPUT_PROPERTY, FORMATION_NAMES, ALLAN_DIAGRAMS, FLOW_DIAGNOSTICS, INJECTION_FLOODING, QUALITY_CONTROL]
         selected_time_steps (List[int]): Time Step Selection
         static_properties_to_calculate (List[str]): Stat Prop
         use_zero_as_inactive_cell_value (bool): Use Zero as Inactive Cell Value
