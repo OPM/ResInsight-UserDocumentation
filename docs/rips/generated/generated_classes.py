@@ -5802,7 +5802,7 @@ class WellPathCollection(PdmObjectBase):
         return self._call_pdm_method_return_value("ImportWellPath", WellPath, file_name=file_name)
 
 
-    def import_well_path_from_points_internal(self, name: str="", coordinate_x_key: str="", coordinate_y_key: str="", coordinate_z_key: str="") -> PointBasedWellPath:
+    def import_well_path_from_points_internal(self, name: str="", coordinate_x_key: str="", coordinate_y_key: str="", coordinate_z_key: str="", coordinate_md_key: str="") -> PointBasedWellPath:
         """
         
 
@@ -5811,10 +5811,11 @@ class WellPathCollection(PdmObjectBase):
             coordinate_x_key (str): 
             coordinate_y_key (str): 
             coordinate_z_key (str): 
+            coordinate_md_key (str): 
         Returns:
             PointBasedWellPath
         """
-        return self._call_pdm_method_return_value("ImportWellPathFromPointsInternal", PointBasedWellPath, name=name, coordinate_x_key=coordinate_x_key, coordinate_y_key=coordinate_y_key, coordinate_z_key=coordinate_z_key)
+        return self._call_pdm_method_return_value("ImportWellPathFromPointsInternal", PointBasedWellPath, name=name, coordinate_x_key=coordinate_x_key, coordinate_y_key=coordinate_y_key, coordinate_z_key=coordinate_z_key, coordinate_md_key=coordinate_md_key)
 
 
     def import_well_paths(self, well_path_files: List[str]=[], well_path_folder: str="") -> DataContainerString:
