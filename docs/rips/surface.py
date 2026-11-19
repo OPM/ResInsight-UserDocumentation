@@ -1,4 +1,5 @@
 import inspect
+import operator
 import uuid
 from collections.abc import Iterable
 
@@ -12,9 +13,10 @@ from .resinsight_classes import (
     SurfaceInterface,
     TriangulatedSurface,
 )
-from typing import List, Optional, Sequence, Type, TypeVar, Union
+from typing import Any, Callable, List, Optional, Sequence, Type, TypeVar, Union
 
 SurfaceT = TypeVar("SurfaceT", bound=SurfaceInterface)
+ValueT = TypeVar("ValueT")
 
 
 @add_method(RegularSurface)
@@ -73,14 +75,30 @@ def get_property(self: RegularSurface, name: str) -> List[float]:
             pass
 
 
-def _flatten(values: Sequence[Union[float, Iterable[float]]]) -> List[float]:
-    flat: List[float] = []
+def _flatten(
+    values: Sequence[Union[Any, Iterable[Any]]], convert: Callable[[Any], ValueT]
+) -> List[ValueT]:
+    flat: List[ValueT] = []
     for value in values:
         if isinstance(value, Iterable):
-            flat.extend(float(v) for v in value)
+            flat.extend(convert(v) for v in value)
         else:
-            flat.append(float(value))
+            flat.append(convert(value))
     return flat
+
+
+def _triangle_index(value: Any) -> int:
+    # Whole-number floats such as 2.0, also numpy floats, are accepted as indices
+    try:
+        index = operator.index(value)
+    except TypeError:
+        number = float(value)
+        if not number.is_integer():
+            raise RipsError("Invalid triangle index {}".format(value))
+        index = int(number)
+    if index < 0:
+        raise RipsError("Invalid triangle index {}".format(value))
+    return index
 
 
 @add_method(TriangulatedSurface)
@@ -95,9 +113,9 @@ def set_geometry(
 
     Arguments:
         vertices (List[List[float]]): x, y and depth of each vertex, depth positive
-          downwards (float32). A flat list of x, y, depth values is also accepted.
-        triangles (List[List[int]]): Three vertex indices per triangle, zero based.
-          A flat list of indices is also accepted.
+          downwards (float64). A flat list of x, y, depth values is also accepted.
+        triangles (List[List[int]]): Three vertex indices per triangle, zero based
+          (uint32). A flat list of indices is also accepted.
     """
     project = self.ancestor(Project)
     if not project:
@@ -106,8 +124,15 @@ def set_geometry(
     vertices_key = "{}_{}".format(uuid.uuid4(), "triangulated_surface_vertices")
     triangles_key = "{}_{}".format(uuid.uuid4(), "triangulated_surface_triangles")
 
-    project.set_key_values(vertices_key, _flatten(vertices))
-    project.set_key_values(triangles_key, _flatten(triangles))
+    vertex_values = _flatten(vertices, float)
+    indices = _flatten(triangles, _triangle_index)
+
+    project.set_key_values(vertices_key, vertex_values, dtype="float64")
+    try:
+        project.set_key_values(triangles_key, indices, dtype="uint32")
+    except Exception:
+        project.remove_key_values(vertices_key)
+        raise
     self.set_geometry_from_keys(vertices_key=vertices_key, triangles_key=triangles_key)
 
 
