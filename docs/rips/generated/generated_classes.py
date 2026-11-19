@@ -2772,6 +2772,20 @@ class PolygonCollection(RimPolygonContainer):
         return self._call_pdm_method_return_value("CreatePolygon", Polygon, name=name, coordinates=coordinates, on_name_conflict=on_name_conflict)
 
 
+    def import_polygon_file(self, file_name: str="", name: str="", on_name_conflict: NameConflictPolicy=NameConflictPolicy.FAIL) -> Polygon:
+        """
+        Import polygons from file into a new folder. The folder is named after the file unless a name is given. Returns the first polygon in the file
+
+        Arguments:
+            file_name (str): Polygon file (*.pol, *.dat, *.txt, *.csv)
+            name (str): Name of the new folder. A file with a single polygon also gives the polygon this name. Defaults to the file name
+            on_name_conflict (NameConflictPolicy): One of [FAIL, AUTO_RENAME, OVERWRITE]
+        Returns:
+            Polygon
+        """
+        return self._call_pdm_method_return_value("ImportPolygonFile", Polygon, file_name=file_name, name=name, on_name_conflict=on_name_conflict)
+
+
     def polygons(self) -> List[Polygon]:
         """Polygons
 
@@ -4622,8 +4636,8 @@ class TriangulatedSurface(SurfaceInterface):
         Set geometry from keys.
 
         Arguments:
-            vertices_key (str): Key for x, y and depth of each vertex
-            triangles_key (str): Key for three vertex indices per triangle
+            vertices_key (str): Key for x, y and depth of each vertex (float64)
+            triangles_key (str): Key for three vertex indices per triangle (uint32)
         Returns:
             
         """

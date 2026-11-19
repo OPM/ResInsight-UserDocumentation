@@ -25,25 +25,27 @@ _sym_db = _symbol_database.Default()
 import Definitions_pb2 as Definitions__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13KeyValueStore.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"\x94\x01\n\x17KeyValueStoreInputChunk\x12\x33\n\nparameters\x18\x01 \x01(\x0b\x32\x1d.rips.KeyValueInputParametersH\x00\x12*\n\x06values\x18\x02 \x01(\x0b\x32\x18.rips.KeyValueStoreChunkH\x00\x42\x18\n\x16KeyValueStoreChunkType\"=\n\x17KeyValueInputParameters\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0cnum_elements\x18\x02 \x01(\x03\"$\n\x12KeyValueStoreChunk\x12\x0e\n\x06values\x18\x01 \x03(\x02\"*\n\x1aKeyValueStoreOutputRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"*\n\x18KeyValueStoreOutputChunk\x12\x0e\n\x06values\x18\x01 \x03(\x02\"*\n\x1aKeyValueStoreRemoveRequest\x12\x0c\n\x04name\x18\x01 \x01(\t2\xf1\x01\n\rKeyValueStore\x12N\n\x08SetValue\x12\x1d.rips.KeyValueStoreInputChunk\x1a\x1f.rips.ClientToServerStreamReply\"\x00(\x01\x12P\n\x08GetValue\x12 .rips.KeyValueStoreOutputRequest\x1a\x1e.rips.KeyValueStoreOutputChunk\"\x00\x30\x01\x12>\n\x0bRemoveValue\x12 .rips.KeyValueStoreRemoveRequest\x1a\x0b.rips.Empty\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13KeyValueStore.proto\x12\x04rips\x1a\x11\x44\x65\x66initions.proto\"\x94\x01\n\x17KeyValueStoreInputChunk\x12\x33\n\nparameters\x18\x01 \x01(\x0b\x32\x1d.rips.KeyValueInputParametersH\x00\x12*\n\x06values\x18\x02 \x01(\x0b\x32\x18.rips.KeyValueStoreChunkH\x00\x42\x18\n\x16KeyValueStoreChunkType\"n\n\x17KeyValueInputParameters\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0cnum_elements\x18\x02 \x01(\x03\x12/\n\x0c\x65lement_type\x18\x03 \x01(\x0e\x32\x19.rips.KeyValueElementType\"d\n\x12KeyValueStoreChunk\x12\x0e\n\x06values\x18\x01 \x03(\x02\x12\x15\n\rdouble_values\x18\x02 \x03(\x01\x12\x12\n\nint_values\x18\x03 \x03(\x12\x12\x13\n\x0buint_values\x18\x04 \x03(\x04\"[\n\x1aKeyValueStoreOutputRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12/\n\x0c\x65lement_type\x18\x02 \x01(\x0e\x32\x19.rips.KeyValueElementType\"j\n\x18KeyValueStoreOutputChunk\x12\x0e\n\x06values\x18\x01 \x03(\x02\x12\x15\n\rdouble_values\x18\x02 \x03(\x01\x12\x12\n\nint_values\x18\x03 \x03(\x12\x12\x13\n\x0buint_values\x18\x04 \x03(\x04\"*\n\x1aKeyValueStoreRemoveRequest\x12\x0c\n\x04name\x18\x01 \x01(\t*\xe7\x01\n\x13KeyValueElementType\x12\"\n\x1eKEY_VALUE_ELEMENT_TYPE_FLOAT32\x10\x00\x12\"\n\x1eKEY_VALUE_ELEMENT_TYPE_FLOAT64\x10\x01\x12 \n\x1cKEY_VALUE_ELEMENT_TYPE_INT32\x10\x02\x12 \n\x1cKEY_VALUE_ELEMENT_TYPE_INT64\x10\x03\x12!\n\x1dKEY_VALUE_ELEMENT_TYPE_UINT32\x10\x04\x12!\n\x1dKEY_VALUE_ELEMENT_TYPE_UINT64\x10\x05\x32\xf1\x01\n\rKeyValueStore\x12N\n\x08SetValue\x12\x1d.rips.KeyValueStoreInputChunk\x1a\x1f.rips.ClientToServerStreamReply\"\x00(\x01\x12P\n\x08GetValue\x12 .rips.KeyValueStoreOutputRequest\x1a\x1e.rips.KeyValueStoreOutputChunk\"\x00\x30\x01\x12>\n\x0bRemoveValue\x12 .rips.KeyValueStoreRemoveRequest\x1a\x0b.rips.Empty\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'KeyValueStore_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
+  _globals['_KEYVALUEELEMENTTYPE']._serialized_start=659
+  _globals['_KEYVALUEELEMENTTYPE']._serialized_end=890
   _globals['_KEYVALUESTOREINPUTCHUNK']._serialized_start=49
   _globals['_KEYVALUESTOREINPUTCHUNK']._serialized_end=197
   _globals['_KEYVALUEINPUTPARAMETERS']._serialized_start=199
-  _globals['_KEYVALUEINPUTPARAMETERS']._serialized_end=260
-  _globals['_KEYVALUESTORECHUNK']._serialized_start=262
-  _globals['_KEYVALUESTORECHUNK']._serialized_end=298
-  _globals['_KEYVALUESTOREOUTPUTREQUEST']._serialized_start=300
-  _globals['_KEYVALUESTOREOUTPUTREQUEST']._serialized_end=342
-  _globals['_KEYVALUESTOREOUTPUTCHUNK']._serialized_start=344
-  _globals['_KEYVALUESTOREOUTPUTCHUNK']._serialized_end=386
-  _globals['_KEYVALUESTOREREMOVEREQUEST']._serialized_start=388
-  _globals['_KEYVALUESTOREREMOVEREQUEST']._serialized_end=430
-  _globals['_KEYVALUESTORE']._serialized_start=433
-  _globals['_KEYVALUESTORE']._serialized_end=674
+  _globals['_KEYVALUEINPUTPARAMETERS']._serialized_end=309
+  _globals['_KEYVALUESTORECHUNK']._serialized_start=311
+  _globals['_KEYVALUESTORECHUNK']._serialized_end=411
+  _globals['_KEYVALUESTOREOUTPUTREQUEST']._serialized_start=413
+  _globals['_KEYVALUESTOREOUTPUTREQUEST']._serialized_end=504
+  _globals['_KEYVALUESTOREOUTPUTCHUNK']._serialized_start=506
+  _globals['_KEYVALUESTOREOUTPUTCHUNK']._serialized_end=612
+  _globals['_KEYVALUESTOREREMOVEREQUEST']._serialized_start=614
+  _globals['_KEYVALUESTOREREMOVEREQUEST']._serialized_end=656
+  _globals['_KEYVALUESTORE']._serialized_start=893
+  _globals['_KEYVALUESTORE']._serialized_end=1134
 # @@protoc_insertion_point(module_scope)
