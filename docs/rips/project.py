@@ -5,6 +5,7 @@ The ResInsight project module
 """
 
 import grpc
+import operator
 import uuid
 import warnings
 
@@ -526,9 +527,9 @@ def create_corner_point_grid(
     zcorn_key = "{}_{}".format(uuid.uuid4(), "zcorn")
     actnum_key = "{}_{}".format(uuid.uuid4(), "actnum")
 
-    self.set_key_values(coord_key, coord)
-    self.set_key_values(zcorn_key, zcorn)
-    self.set_key_values(actnum_key, actnum)
+    self._set_corner_point_grid_key_values(
+        coord_key, coord, zcorn_key, zcorn, actnum_key, actnum
+    )
     return self.create_grid_from_key_values(
         name=name,
         nx=nx,
@@ -540,6 +541,38 @@ def create_corner_point_grid(
     )
 
 
+def _actnum_value(value: object) -> int:
+    # Whole-number floats such as 1.0, also numpy floats, are accepted as ACTNUM values
+    try:
+        return operator.index(value)  # type: ignore[arg-type]
+    except TypeError:
+        number = float(value)  # type: ignore[arg-type]
+        if not number.is_integer():
+            raise RipsError("Invalid ACTNUM value {}".format(value))
+        return int(number)
+
+
+@add_method(Project)
+def _set_corner_point_grid_key_values(
+    self, coord_key, coord, zcorn_key, zcorn, actnum_key, actnum
+):
+    # COORD and ZCORN travel as float64 and ACTNUM as int32. The keys are removed again if
+    # one of the uploads fails.
+    stored_keys = []
+    try:
+        self.set_key_values(coord_key, [float(v) for v in coord], dtype="float64")
+        stored_keys.append(coord_key)
+        self.set_key_values(zcorn_key, [float(v) for v in zcorn], dtype="float64")
+        stored_keys.append(zcorn_key)
+        self.set_key_values(
+            actnum_key, [_actnum_value(v) for v in actnum], dtype="int32"
+        )
+    except Exception:
+        for key in stored_keys:
+            self.remove_key_values(key)
+        raise
+
+
 # Element type and chunk field for each numpy dtype name the key-value store transports
 _KEY_VALUE_ELEMENT_TYPES = {
     "float32": (KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_FLOAT32, "values"),
@@ -548,6 +581,12 @@ _KEY_VALUE_ELEMENT_TYPES = {
     "int64": (KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_INT64, "int_values"),
     "uint32": (KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_UINT32, "uint_values"),
     "uint64": (KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_UINT64, "uint_values"),
+}
+
+_KEY_VALUE_EIGHT_BYTE_ELEMENT_TYPES = {
+    KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_FLOAT64,
+    KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_INT64,
+    KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_UINT64,
 }
 
 
@@ -582,7 +621,11 @@ def set_key_values(self, key, values, dtype="float32"):
     )
     reply = self.__key_value_store_stub.SetValue(request_iterator)
     if reply.accepted_value_count < len(values):
-        raise IndexError
+        raise RipsError(
+            "ResInsight accepted {} of {} values for key {}".format(
+                reply.accepted_value_count, len(values), key
+            )
+        )
 
 
 @add_method(Project)
@@ -593,6 +636,12 @@ def __generate_key_value_store_input_chunks(
     element_type=KeyValueStore_pb2.KEY_VALUE_ELEMENT_TYPE_FLOAT32,
     field="values",
 ):
+    # chunk_size counts float32 values. Element types of eight bytes send half as many
+    # values per chunk, so a chunk keeps the same size in bytes.
+    values_per_chunk = self.chunk_size
+    if element_type in _KEY_VALUE_EIGHT_BYTE_ELEMENT_TYPES:
+        values_per_chunk = max(1, self.chunk_size // 2)
+
     index = -1
     while index < len(array):
         chunk = KeyValueStore_pb2.KeyValueStoreInputChunk()
@@ -603,7 +652,7 @@ def __generate_key_value_store_input_chunks(
             chunk.parameters.CopyFrom(parameters)
             index += 1
         else:
-            actual_chunk_size = min(len(array) - index + 1, self.chunk_size)
+            actual_chunk_size = min(len(array) - index, values_per_chunk)
             chunk.values.CopyFrom(
                 KeyValueStore_pb2.KeyValueStoreChunk(
                     **{field: array[index : index + actual_chunk_size]}
