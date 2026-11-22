@@ -83,6 +83,11 @@ class FilterCakePressureDrop(StrEnum):
     Relative = "Relative"
     Absolute = "Absolute"
 
+class FloodingType(StrEnum):
+    WATER_FLOODING = "WATER_FLOODING"
+    GAS_FLOODING = "GAS_FLOODING"
+    USER_DEFINED = "USER_DEFINED"
+
 class FlowTracerSelectionMode(StrEnum):
     FLOW_TR_INJ_AND_PROD = "FLOW_TR_INJ_AND_PROD"
     FLOW_TR_PRODUCERS = "FLOW_TR_PRODUCERS"
@@ -117,6 +122,12 @@ class GeoMechResultPosition(StrEnum):
 class GeometryType(StrEnum):
     FULL_3D = "FULL_3D"
     PROJECTED_TO_PLANE = "PROJECTED_TO_PLANE"
+
+class GroupingMode(StrEnum):
+    FMU_FOLDER_MODE = "FMU_FOLDER_MODE"
+    EVEREST_FOLDER_MODE = "EVEREST_FOLDER_MODE"
+    None_ = "None"
+    RESINSIGHTOPM_FOLDER_MODE = "RESINSIGHTOPM_FOLDER_MODE"
 
 class HydrostaticDensity(StrEnum):
     SEG = "SEG"
@@ -319,6 +330,21 @@ class VisibleCellsExportKeyword(StrEnum):
     FLUXNUM = "FLUXNUM"
     MULTNUM = "MULTNUM"
     ACTNUM = "ACTNUM"
+
+class VolumeResultType(StrEnum):
+    MOBILE = "MOBILE"
+    TOTAL = "TOTAL"
+
+class VolumeType(StrEnum):
+    OIL = "OIL"
+    GAS = "GAS"
+    HYDROCARBON = "HYDROCARBON"
+
+class VolumesType(StrEnum):
+    RESERVOIR_VOLUMES = "RESERVOIR_VOLUMES"
+    SURFACE_VOLUMES_SFIP = "SURFACE_VOLUMES_SFIP"
+    SURFACE_VOLUMES_FIP = "SURFACE_VOLUMES_FIP"
+    RESERVOIR_VOLUMES_COMPUTED = "RESERVOIR_VOLUMES_COMPUTED"
 
 class WellState(StrEnum):
     OPEN = "OPEN"
@@ -729,6 +755,18 @@ class Reservoir(Case):
         self._call_pdm_method_void("add_result_alias", result_name=result_name, alias_name=alias_name)
 
 
+    def add_well_target_mapping(self, name: str="") -> WellTargetMapping:
+        """
+        Create a well target mapping with the same defaults as the user interface. Set fields on the returned object, call update() and then compute().
+
+        Arguments:
+            name (str): Name of the well target mapping. Automatically generated if empty
+        Returns:
+            WellTargetMapping
+        """
+        return self._call_pdm_method_return_value("AddWellTargetMapping", WellTargetMapping, name=name)
+
+
     def clear_result_aliases(self, ) -> None:
         """
         Clear Result Aliases
@@ -775,6 +813,16 @@ class Reservoir(Case):
             
         """
         self._call_pdm_method_void("createMultipleFractures", well_paths=well_paths, fracture_template=fracture_template, min_dist_from_well_td=min_dist_from_well_td, max_fractures_per_well=max_fractures_per_well, top_layer=top_layer, base_layer=base_layer, spacing=spacing, action=action)
+
+
+    def data_analytics_collection(self) -> Optional[DataAnalyticsCollection]:
+        """Data Analytics
+
+        Returns:
+             DataAnalyticsCollection
+        """
+        children = self.children("DataAnalyticsCollection", DataAnalyticsCollection)
+        return children[0] if len(children) > 0 else None
 
 
     def data_filter_collection(self) -> Optional[DataFilterCollection]:
@@ -1028,6 +1076,27 @@ class CustomSegmentInterval(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if CustomSegmentInterval.__custom_init__ is not None:
             CustomSegmentInterval.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class DataAnalyticsCollection(PdmObjectBase):
+    """
+    Data analytics objects of a case
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if DataAnalyticsCollection.__custom_init__ is not None:
+            DataAnalyticsCollection.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def well_target_mappings(self) -> List[WellTargetMapping]:
+        """Well Target Mappings
+
+        Returns:
+             List[WellTargetMapping]
+        """
+        return self.children("WellTargetMappings", WellTargetMapping)
+
 
 class DataContainerEnum(PdmObjectBase):
     """
@@ -3094,6 +3163,19 @@ class Project(PdmObjectBase):
         return self._call_pdm_method_return_value("createGridFromKeyValues", CornerPointCase, name=name, nx=nx, ny=ny, nz=nz, coord_key=coord_key, zcorn_key=zcorn_key, actnum_key=actnum_key)
 
 
+    def create_reservoir_grid_ensemble(self, file_names: List[str]=[], grouping_mode: GroupingMode=GroupingMode.FMU_FOLDER_MODE) -> ReservoirGridEnsemble:
+        """
+        Create a reservoir grid ensemble from grid files, one for each realization
+
+        Arguments:
+            file_names (List[str]): Grid files (EGRID), one for each realization
+            grouping_mode (GroupingMode): One of [FMU_FOLDER_MODE, EVEREST_FOLDER_MODE, None, RESINSIGHTOPM_FOLDER_MODE]
+        Returns:
+            ReservoirGridEnsemble
+        """
+        return self._call_pdm_method_return_value("createReservoirGridEnsemble", ReservoirGridEnsemble, file_names=file_names, grouping_mode=grouping_mode)
+
+
     def export_snapshots(self, content_type: SnapshotContentType=SnapshotContentType.ALL, export_folder: str="", prefix: str="", width: int=-1, height: int=-1, plot_file_format: SnapshotFileFormat=SnapshotFileFormat.PNG) -> None:
         """
         Export snapshots of all 3D views and/or plots in the project
@@ -3680,6 +3762,18 @@ class ReservoirGridEnsemble(NamedObject):
         if ReservoirGridEnsemble.__custom_init__ is not None:
             ReservoirGridEnsemble.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_well_target_mapping(self, name: str="") -> WellTargetMapping:
+        """
+        Create a well target mapping with the same defaults as the user interface. Set fields on the returned object, call update() and then compute().
+
+        Arguments:
+            name (str): Name of the well target mapping. Automatically generated if empty
+        Returns:
+            WellTargetMapping
+        """
+        return self._call_pdm_method_return_value("AddWellTargetMapping", WellTargetMapping, name=name)
+
+
     def data_filter_collection(self) -> Optional[DataFilterCollection]:
         """Data Filters
 
@@ -3688,6 +3782,15 @@ class ReservoirGridEnsemble(NamedObject):
         """
         children = self.children("DataFilterCollection", DataFilterCollection)
         return children[0] if len(children) > 0 else None
+
+
+    def well_target_mappings(self) -> List[WellTargetMapping]:
+        """Well Target Mappings
+
+        Returns:
+             List[WellTargetMapping]
+        """
+        return self.children("WellTargetMappings", WellTargetMapping)
 
 
 class RimRoffCaseSumo(Reservoir):
@@ -3808,6 +3911,135 @@ class WellPathTimeIn(PdmObjectBase):
              WellPathValve
         """
         children = self.children("Valve", WellPathValve)
+        return children[0] if len(children) > 0 else None
+
+
+class WellTargetClusterStatistics(PdmObjectBase):
+    """
+    Statistics for one cluster found by a well target mapping. Totals are infinite when the case does not have the result.
+
+    Attributes:
+        cluster_id (int): Cluster Id. Value of WELL_TARGET_NUM in the cluster cells
+        num_cells (int): Number of Cells
+        permeability (float): Permeability. Pore volume weighted mean of PERMX
+        pressure (float): Pressure. Pore volume weighted mean of PRESSURE
+        total_fip_gas (float): Total FIPGAS
+        total_fip_oil (float): Total FIPOIL
+        total_porv_sgas (float): Total PORV*SGAS
+        total_porv_soil (float): Total PORV*SOIL
+        total_porv_soil_and_sgas (float): Total PORV*(SOIL+SGAS)
+        total_rfip_gas (float): Total RFIPGAS
+        total_rfip_oil (float): Total RFIPOIL
+        total_sfip_gas (float): Total SFIPGAS
+        total_sfip_oil (float): Total SFIPOIL
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.cluster_id: int = -1
+        self.num_cells: int = 0
+        self.permeability: float = 0.000000000000000e+00
+        self.pressure: float = 0.000000000000000e+00
+        self.total_fip_gas: float = 0.000000000000000e+00
+        self.total_fip_oil: float = 0.000000000000000e+00
+        self.total_porv_sgas: float = 0.000000000000000e+00
+        self.total_porv_soil: float = 0.000000000000000e+00
+        self.total_porv_soil_and_sgas: float = 0.000000000000000e+00
+        self.total_rfip_gas: float = 0.000000000000000e+00
+        self.total_rfip_oil: float = 0.000000000000000e+00
+        self.total_sfip_gas: float = 0.000000000000000e+00
+        self.total_sfip_oil: float = 0.000000000000000e+00
+        PdmObjectBase.__init__(self, pb2_object, channel)
+        if WellTargetClusterStatistics.__custom_init__ is not None:
+            WellTargetClusterStatistics.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class WellTargetMapping(NamedObject):
+    """
+    Finds well target candidates as clusters of cells. Call compute() after changing fields.
+
+    Attributes:
+        avoid_faults (bool): Avoid Growing Across Faults
+        cell_count_i (int): Cell Count I
+        cell_count_j (int): Cell Count J
+        cell_count_k (int): Cell Count K
+        expand_bounding_box_xy_percent (float): Expand Bounding Box XY [%]
+        expand_bounding_box_z_percent (float): Expand Bounding Box Z [%]
+        gas_flooding_type (FloodingType): One of [WATER_FLOODING, GAS_FLOODING, USER_DEFINED]
+        grow_data_filter (Optional[CellFilter]): Grow Data Filter
+        max_iterations (int): Max Iterations
+        max_num_targets (int): Maximum Number of Well Targets
+        minimum_permeability (float): Permeability [K<sub>h</sub>]. Minimum PERMX for cells in a cluster
+        minimum_pressure (float): Pressure. Minimum PRESSURE for cells in a cluster
+        minimum_saturation_gas (float): Saturation Gas. Minimum SGAS for cells in a cluster
+        minimum_saturation_oil (float): Saturation Oil. Minimum SOIL for cells in a cluster
+        minimum_transmissibility (float): Transmissibility. Minimum transmissibility between cells in a cluster
+        oil_flooding_type (FloodingType): One of [WATER_FLOODING, GAS_FLOODING, USER_DEFINED]
+        start_data_filter (Optional[CellFilter]): Start Data Filter
+        time_step (int): Time Step
+        user_defined_flooding_gas (float): Residual oil-in-gas saturation used when gas_flooding_type is USER_DEFINED
+        user_defined_flooding_oil (float): Residual oil saturation used when oil_flooding_type is USER_DEFINED
+        volume_result_type (VolumeResultType): One of [MOBILE, TOTAL]
+        volume_type (VolumeType): One of [OIL, GAS, HYDROCARBON]
+        volumes_type (VolumesType): One of [RESERVOIR_VOLUMES, SURFACE_VOLUMES_SFIP, SURFACE_VOLUMES_FIP, RESERVOIR_VOLUMES_COMPUTED]
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        self.avoid_faults: bool = False
+        self.cell_count_i: int = 100
+        self.cell_count_j: int = 100
+        self.cell_count_k: int = 10
+        self.expand_bounding_box_xy_percent: float = 5.000000000000000e+00
+        self.expand_bounding_box_z_percent: float = 1.000000000000000e+01
+        self.gas_flooding_type: FloodingType = FloodingType.GAS_FLOODING
+        self.grow_data_filter: Optional[CellFilter] = None
+        self.max_iterations: int = 100000
+        self.max_num_targets: int = 5
+        self.minimum_permeability: float = 0.000000000000000e+00
+        self.minimum_pressure: float = 0.000000000000000e+00
+        self.minimum_saturation_gas: float = 0.000000000000000e+00
+        self.minimum_saturation_oil: float = 0.000000000000000e+00
+        self.minimum_transmissibility: float = 0.000000000000000e+00
+        self.oil_flooding_type: FloodingType = FloodingType.WATER_FLOODING
+        self.start_data_filter: Optional[CellFilter] = None
+        self.time_step: int = 0
+        self.user_defined_flooding_gas: float = 0.000000000000000e+00
+        self.user_defined_flooding_oil: float = 0.000000000000000e+00
+        self.volume_result_type: VolumeResultType = VolumeResultType.TOTAL
+        self.volume_type: VolumeType = VolumeType.OIL
+        self.volumes_type: VolumesType = VolumesType.RESERVOIR_VOLUMES_COMPUTED
+        NamedObject.__init__(self, pb2_object, channel)
+        if WellTargetMapping.__custom_init__ is not None:
+            WellTargetMapping.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def cluster_statistics(self) -> List[WellTargetClusterStatistics]:
+        """Cluster Statistics. Statistics per cluster from the last computation. Empty for ensembles.
+
+        Returns:
+             List[WellTargetClusterStatistics]
+        """
+        return self.children("ClusterStatistics", WellTargetClusterStatistics)
+
+
+    def compute(self, ) -> None:
+        """
+        Compute the well target mapping using the current settings
+
+        Arguments:
+            
+        Returns:
+            
+        """
+        self._call_pdm_method_void("Compute")
+
+
+    def ensemble_statistics_case(self) -> Optional[Reservoir]:
+        """Ensemble Statistics Case. Statistics grid case created when computing for an ensemble
+
+        Returns:
+             Reservoir
+        """
+        children = self.children("EnsembleStatisticsCase", Reservoir)
         return children[0] if len(children) > 0 else None
 
 
@@ -5265,12 +5497,12 @@ class WellEventTimeline(PdmObjectBase):
         return self._call_pdm_method_return_value("QueryWellsWithEvents", DataContainerString, start_date=start_date, end_date=end_date, event_types=event_types)
 
 
-    def set_timestamp(self, timestamp: str="2024-01-01") -> None:
+    def set_timestamp(self, timestamp: str="") -> None:
         """
         Apply well events up to a given timestamp
 
         Arguments:
-            timestamp (str): Timestamp (YYYY-MM-DD)
+            timestamp (str): Timestamp (YYYY-MM-DD). Empty: the date of the last event
         Returns:
             
         """
@@ -5459,18 +5691,6 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -5513,6 +5733,18 @@ class WellPathAicdParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -5884,6 +6116,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['CornerPointCase'] = CornerPointCase
     classes['CurveIntersection'] = CurveIntersection
     classes['CustomSegmentInterval'] = CustomSegmentInterval
+    classes['DataAnalyticsCollection'] = DataAnalyticsCollection
     classes['DataContainerEnum'] = DataContainerEnum
     classes['DataContainerFloat'] = DataContainerFloat
     classes['DataContainerString'] = DataContainerString
@@ -6031,6 +6264,8 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['WellPathTarget'] = WellPathTarget
     classes['WellPathTimeIn'] = WellPathTimeIn
     classes['WellPathValve'] = WellPathValve
+    classes['WellTargetClusterStatistics'] = WellTargetClusterStatistics
+    classes['WellTargetMapping'] = WellTargetMapping
     return classes
 
 def class_from_keyword(class_keyword : str) -> Optional[Type[PdmObjectBase]]:
