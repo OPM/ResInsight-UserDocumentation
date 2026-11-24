@@ -326,6 +326,14 @@ class ValveUnits(StrEnum):
     UNITS_FIELD = "UNITS_FIELD"
     UNITS_UNKNOWN = "UNITS_UNKNOWN"
 
+class ViewFrom(StrEnum):
+    NORTH = "NORTH"
+    SOUTH = "SOUTH"
+    EAST = "EAST"
+    WEST = "WEST"
+    TOP = "TOP"
+    BOTTOM = "BOTTOM"
+
 class VisibleCellsExportKeyword(StrEnum):
     FLUXNUM = "FLUXNUM"
     MULTNUM = "MULTNUM"
@@ -1743,7 +1751,7 @@ class FishbonesCollection(CheckableNamedObject):
         Returns:
              List[Fishbones]
         """
-        return self.children("fishbones", Fishbones)
+        return self.children("Fishbones", Fishbones)
 
 
     def set_fixed_end_location(self, location: float=0.000000000000000e+00) -> None:
@@ -2019,6 +2027,32 @@ class View(ViewWindow):
         self._call_pdm_method_void("exportContourMapToText", export_file_name=export_file_name, export_local_coordinates=export_local_coordinates, undefined_value_label=undefined_value_label, exclude_undefined_values=exclude_undefined_values)
 
 
+    def fly_to_object(self, object: Optional[PdmObjectBase]=None) -> None:
+        """
+        Move the camera to an object, like Fly to Object in the GUI
+
+        Arguments:
+            object (Optional[PdmObjectBase]): Object to fly to, such as a surface, a simulation well, a fracture or a perforation interval
+        Returns:
+            
+        """
+        self._call_pdm_method_void("flyToObject", object=object)
+
+
+    def set_camera(self, azimuth: float=0.000000000000000e+00, tilt: float=0.000000000000000e+00, zoom: float=1.000000000000000e+00) -> None:
+        """
+        Orbit the camera around the center of the view (point of interest) with the given azimuth, tilt and zoom
+
+        Arguments:
+            azimuth (float): Compass bearing of the viewing direction in degrees, from 0 to 360 (0 = looking north, 90 = looking east)
+            tilt (float): Angle in degrees between the viewing direction and straight down, from 0 to 180 (0 = looking down, 90 = horizontal)
+            zoom (float): Zoom factor from 0.001 to 1000 relative to the current distance to the center of the view. 1 keeps the distance, larger values move the camera closer
+        Returns:
+            
+        """
+        self._call_pdm_method_void("setCamera", azimuth=azimuth, tilt=tilt, zoom=zoom)
+
+
     def set_polygon_visible(self, polygon: Optional[Polygon]=None, visible: bool=True) -> None:
         """
         Set polygon visibility in this view
@@ -2068,6 +2102,30 @@ class View(ViewWindow):
             
         """
         self._call_pdm_method_void("setTimeStep", time_step=time_step)
+
+
+    def set_view_from(self, view_from: ViewFrom=ViewFrom.TOP) -> None:
+        """
+        Look at the center of the model from a standard side, like the View From commands in the GUI
+
+        Arguments:
+            view_from (ViewFrom): One of [NORTH, SOUTH, EAST, WEST, TOP, BOTTOM]
+        Returns:
+            
+        """
+        self._call_pdm_method_void("setViewFrom", view_from=view_from)
+
+
+    def zoom_all(self, ) -> None:
+        """
+        Move the camera so that the whole model is visible
+
+        Arguments:
+            
+        Returns:
+            
+        """
+        self._call_pdm_method_void("zoomAll")
 
 
 class GeoMechView(View):
