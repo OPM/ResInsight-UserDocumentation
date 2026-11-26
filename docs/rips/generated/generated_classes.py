@@ -622,6 +622,19 @@ class CombinedFilter(CellFilter):
         if CombinedFilter.__custom_init__ is not None:
             CombinedFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+    def add_formation_filter(self, formation_names: List[str]=[], filter_mode: str="INCLUDE") -> FormationFilter:
+        """
+        Add a new formation filter as a child of this combined filter. Formation names are resolved against the filter case, which is the main case for an ensemble
+
+        Arguments:
+            formation_names (List[str]): Formations to select. Empty selects all
+            filter_mode (str): INCLUDE or EXCLUDE
+        Returns:
+            FormationFilter
+        """
+        return self._call_pdm_method_return_value("AddFormationFilter", FormationFilter, formation_names=formation_names, filter_mode=filter_mode)
+
+
     def add_property_filter(self, result_variable: str="", result_type: str="") -> CellPropertyFilter:
         """
         Add a new property filter as a child of this combined filter
@@ -1177,6 +1190,19 @@ class DataFilterCollection(PdmObjectBase):
             CombinedFilter
         """
         return self._call_pdm_method_return_value("AddCombinedFilter", CombinedFilter, name=name, combine_mode=combine_mode)
+
+
+    def add_formation_filter(self, formation_names: List[str]=[], filter_mode: str="INCLUDE") -> FormationFilter:
+        """
+        Add a new formation filter to the data filter collection. Formation names are resolved against the filter case, which is the main case for an ensemble
+
+        Arguments:
+            formation_names (List[str]): Formations to select. Empty selects all
+            filter_mode (str): INCLUDE or EXCLUDE
+        Returns:
+            FormationFilter
+        """
+        return self._call_pdm_method_return_value("AddFormationFilter", FormationFilter, formation_names=formation_names, filter_mode=filter_mode)
 
 
     def filters(self) -> List[CellFilter]:
@@ -1821,6 +1847,42 @@ class Fishbones(PdmObjectBase):
         if Fishbones.__custom_init__ is not None:
             Fishbones.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
+class FormationFilter(CellPropertyFilter):
+    """
+    A cell filter selecting cells in the chosen formations
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        CellPropertyFilter.__init__(self, pb2_object, channel)
+        if FormationFilter.__custom_init__ is not None:
+            FormationFilter.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
+    def selected_formation_names_internal(self, ) -> DataContainerString:
+        """
+        Names of the selected formations
+
+        Arguments:
+            
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("SelectedFormationNamesInternal", DataContainerString)
+
+
+    def set_selected_formation_names(self, formation_names: List[str]=[]) -> None:
+        """
+        Select formations by name. Empty selects all
+
+        Arguments:
+            formation_names (List[str]): Formations to select. Empty selects all
+        Returns:
+            
+        """
+        self._call_pdm_method_void("SetSelectedFormationNames", formation_names=formation_names)
+
+
 class FormationNames(PdmObjectBase):
     """
     Formation names imported from a .lyr or similar file
@@ -2051,6 +2113,18 @@ class View(ViewWindow):
             
         """
         self._call_pdm_method_void("setCamera", azimuth=azimuth, tilt=tilt, zoom=zoom)
+
+
+    def set_grid_cells_visible(self, visible: bool=True) -> None:
+        """
+        Show or hide the grid cells in this view
+
+        Arguments:
+            visible (bool): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("set_grid_cells_visible", visible=visible)
 
 
     def set_polygon_visible(self, polygon: Optional[Polygon]=None, visible: bool=True) -> None:
@@ -3490,6 +3564,18 @@ class EclipseView(View):
         return children[0] if len(children) > 0 else None
 
 
+    def set_faults_visible(self, visible: bool=True) -> None:
+        """
+        Show or hide the faults in this view
+
+        Arguments:
+            visible (bool): 
+        Returns:
+            
+        """
+        self._call_pdm_method_void("set_faults_visible", visible=visible)
+
+
     def visible_cells_internal(self, visibility_key: str="", time_step: int=0) -> None:
         """
         Visible Cells Internal
@@ -3840,6 +3926,18 @@ class ReservoirGridEnsemble(NamedObject):
         """
         children = self.children("DataFilterCollection", DataFilterCollection)
         return children[0] if len(children) > 0 else None
+
+
+    def formation_names_internal(self, union: bool=False) -> DataContainerString:
+        """
+        Formation names of the main case, or of all realizations
+
+        Arguments:
+            union (bool): Return the union of the formation names of all realizations
+        Returns:
+            DataContainerString
+        """
+        return self._call_pdm_method_return_value("FormationNamesInternal", DataContainerString, union=union)
 
 
     def well_target_mappings(self) -> List[WellTargetMapping]:
@@ -5749,6 +5847,18 @@ class WellLogPlotTrack(Plot):
         return self._call_pdm_method_return_value("AddExtractionCurve", WellLogExtractionCurve, case=case, well_path=well_path, property_type=property_type, property_name=property_name, time_step=time_step)
 
 
+class FileWellPath(WellPath):
+    """
+    Well Paths Loaded From File
+
+    """
+    __custom_init__ = None #: Assign a custom init routine to be run at __init__
+
+    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
+        WellPath.__init__(self, pb2_object, channel)
+        if FileWellPath.__custom_init__ is not None:
+            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
+
 class WellPathAicdParameters(PdmObjectBase):
     """
     Attributes:
@@ -5791,18 +5901,6 @@ class WellPathAicdParameters(PdmObjectBase):
         PdmObjectBase.__init__(self, pb2_object, channel)
         if WellPathAicdParameters.__custom_init__ is not None:
             WellPathAicdParameters.__custom_init__(self, pb2_object=pb2_object, channel=channel)
-
-class FileWellPath(WellPath):
-    """
-    Well Paths Loaded From File
-
-    """
-    __custom_init__ = None #: Assign a custom init routine to be run at __init__
-
-    def __init__(self, pb2_object: Optional[PdmObject_pb2.PdmObject]=None, channel: Optional[grpc.Channel]=None) -> None:
-        WellPath.__init__(self, pb2_object, channel)
-        if FileWellPath.__custom_init__ is not None:
-            FileWellPath.__custom_init__(self, pb2_object=pb2_object, channel=channel)
 
 class WellPathCompletionSettings(PdmObjectBase):
     """
@@ -6207,6 +6305,7 @@ def class_dict() -> Dict[str, Type[PdmObjectBase]]:
     classes['FileWellPath'] = FileWellPath
     classes['Fishbones'] = Fishbones
     classes['FishbonesCollection'] = FishbonesCollection
+    classes['FormationFilter'] = FormationFilter
     classes['FormationNames'] = FormationNames
     classes['Fracture'] = Fracture
     classes['FractureSurface'] = FractureSurface
